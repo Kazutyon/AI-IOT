@@ -29,6 +29,7 @@ const fallbackCurriculum = {
       href: "fe/technology/network/index.html",
       items: [
         { title: "ネットワークの基本とデータ伝送", href: "fe/technology/network/network-basic.html", status: "done" },
+        { title: "プロトコルとOSI/TCP/IP階層モデル", href: "fe/technology/network/network-protocol.html", status: "done" },
         { title: "IPアドレス・サブネット", href: "fe/technology/network/ip-subnet.html", status: "planned" }
       ]
     },
@@ -121,7 +122,11 @@ async function loadCurriculum() {
 }
 
 function countByStatus(sections, status) {
-  return sections.filter((section) => section.status === status).length;
+  const items = sections.flatMap((s) => s.items || []);
+  if (status === "in-progress") {
+    return items.filter((item) => item.status === "in-progress" || item.status === "draft").length;
+  }
+  return items.filter((item) => item.status === status).length;
 }
 
 function renderMetrics() {
