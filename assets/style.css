@@ -23,7 +23,9 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
   line-height: 1.7;
+  overflow-x: hidden;
 }
 
 .site-header {
@@ -131,6 +133,7 @@ main {
 }
 
 .filter {
+  min-height: 44px;
   border: 1px solid var(--line);
   background: #fff;
   color: var(--ink);
@@ -247,6 +250,9 @@ main {
 
 .card a,
 .list-item a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
   color: var(--blue);
   font-weight: 800;
   text-decoration: none;
@@ -291,6 +297,9 @@ main {
 
 .table-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: 8px;
 }
 
 table {
@@ -314,26 +323,117 @@ th {
 }
 
 @media (max-width: 760px) {
+  body {
+    font-size: 15px;
+  }
+
   .header-inner,
   .toolbar,
   .two-column {
     grid-template-columns: 1fr;
   }
 
+  .header-inner {
+    gap: 18px;
+    padding: 26px 16px 24px;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .study-map {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .study-map span {
+    min-height: 42px;
+    padding: 6px;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  main {
+    padding: 18px 12px 40px;
+  }
+
   .toolbar {
     display: grid;
+    padding: 16px;
+  }
+
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .filter {
+    width: 100%;
+    padding: 9px 8px;
+    text-align: center;
   }
 
   .overview {
     grid-template-columns: 1fr;
+    margin-bottom: 22px;
   }
 
   .metric {
+    padding: 14px 16px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
   }
 
   .metric:last-child {
     border-bottom: 0;
+  }
+
+  .section-heading {
+    margin: 22px 0 10px;
+  }
+
+  .section-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card {
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .card-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .two-column > div,
+  .source-map {
+    padding: 1px 14px 14px;
+  }
+
+  table {
+    min-width: 620px;
+  }
+
+  th,
+  td {
+    padding: 9px 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .study-map {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    grid-template-columns: 1fr;
   }
 }
