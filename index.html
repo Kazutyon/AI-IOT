@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">AI-IOT / FE Study Portal</p>
+        <h1>基本情報技術者試験 対策ポータル</h1>
+        <p class="lead">教材PDFを分野別に整理し、復習しやすい試験対策ページへ育てていくための入口です。</p>
+      </div>
+      <div class="study-map" aria-label="学習分野マップ">
+        <span>基礎理論</span>
+        <span>アルゴリズム</span>
+        <span>ネットワーク</span>
+        <span>セキュリティ</span>
+        <span>マネジメント</span>
+        <span>ストラテジ</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="toolbar" aria-label="教材フィルター">
+      <div>
+        <h2>学習ロードマップ</h2>
+        <p>作成済み・作成中・未作成をまとめて表示します。</p>
+      </div>
+      <div class="filters" role="group" aria-label="表示切替">
+        <button class="filter is-active" type="button" data-filter="all">すべて</button>
+        <button class="filter" type="button" data-filter="done">作成済み</button>
+        <button class="filter" type="button" data-filter="in-progress">作成中</button>
+        <button class="filter" type="button" data-filter="planned">未作成</button>
+      </div>
+    </section>
+
+    <section class="overview" aria-label="進捗サマリー">
+      <div class="metric">
+        <span id="done-count">0</span>
+        <p>作成済み</p>
+      </div>
+      <div class="metric">
+        <span id="progress-count">0</span>
+        <p>作成中</p>
+      </div>
+      <div class="metric">
+        <span id="planned-count">0</span>
+        <p>未作成</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <h2>分野別教材</h2>
+        <p>各分野のページは、教材が増えても同じカード形式で追加します。</p>
+      </div>
+      <div id="section-grid" class="section-grid"></div>
+    </section>
+
+    <section class="two-column">
+      <div>
+        <div class="section-heading">
+          <h2>最近追加した教材</h2>
+          <p>新しくHTML化したページをここに出します。</p>
+        </div>
+        <div id="recent-list" class="list"></div>
+      </div>
+      <div>
+        <div class="section-heading">
+          <h2>次に作る候補</h2>
+          <p>DeepSeekに小分割で渡す対象です。</p>
+        </div>
+        <div id="next-list" class="list"></div>
+      </div>
+    </section>
+
+    <section class="source-map">
+      <div class="section-heading">
+        <h2>教材PDF対応表</h2>
+        <p>元PDFと作成予定ページの対応を残します。</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>PDF</th>
+              <th>主な分野</th>
+              <th>状態</th>
+              <th>次の作業</th>
+            </tr>
+          </thead>
+          <tbody id="source-table"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
