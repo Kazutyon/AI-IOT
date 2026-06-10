@@ -174,28 +174,39 @@
         </article>
       </div>
       <figure class="wide-diagram">
-        <figcaption>伝送方式の分類</figcaption>
+        <figcaption>伝送方式の分類 1</figcaption>
         <pre class="mermaid">flowchart TD
     A[データ伝送] --> B[シリアル伝送]
-    A --> C[パラレル伝送]
-    B --> D[非同期通信]
-    B --> E[同期通信]
-    D --> D1[スタート/ストップビット]
-    E --> E1[クロック信号]
-    C --> C1[短距離向き]</pre>
+    B --> C[1本の信号線で1ビットずつ送信]
+    C --> D[長距離通信向き]
+    D --> E[USB・SATA・LAN]</pre>
+      </figure>
+      <figure class="wide-diagram">
+        <figcaption>伝送方式の分類 2</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[シリアル伝送] --> B[非同期通信]
+    A --> C[同期通信]
+    B --> B1[スタート/ストップビット]
+    C --> C1[クロック信号]
+    B1 --> D[低速通信向き]
+    C1 --> E[大量データ向き]</pre>
       </figure>
     </section>
 
     <section id="calculation" class="lesson-section">
       <h2>計算・手順</h2>
       <figure class="wide-diagram">
-        <figcaption>伝送時間・伝送効率の計算手順</figcaption>
+        <figcaption>伝送時間の計算手順</figcaption>
         <pre class="mermaid">flowchart TD
     A[データ量 バイト] --> B[ビットへ換算 ×8]
     B --> C[伝送速度 bps で割る]
-    C --> D[伝送時間 秒]
-    E[有効データ量] --> F[総データ量 ヘッダ込み]
-    F --> G[伝送効率 %]</pre>
+    C --> D[伝送時間 秒]</pre>
+      </figure>
+      <figure class="wide-diagram">
+        <figcaption>伝送効率の計算手順</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[有効データ量] --> B[総データ量 ヘッダ込み]
+    B --> C[伝送効率 %]</pre>
       </figure>
       <article class="formula-box">
         <h3>伝送時間</h3>
