@@ -48,6 +48,11 @@
           "status": "done"
         },
         {
+          "title": "DHCP・NAT/NAPT・ルーティング・デフォルトGW",
+          "href": "fe/technology/network/dhcp-nat-routing.html",
+          "status": "done"
+        },
+        {
           "title": "IPアドレス・サブネット",
           "href": "fe/technology/network/ip-subnet.html",
           "status": "planned"

@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DHCP・NAT/NAPT・ルーティング・デフォルトゲートウェイ | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#eef4f8",
+        primaryTextColor: "#182230",
+        primaryBorderColor: "#8aa4bf",
+        lineColor: "#2563eb",
+        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
+      },
+      flowchart: {
+        curve: "basis",
+        nodeSpacing: 34,
+        rankSpacing: 42
+      }
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>DHCP・NAT/NAPT・ルーティング・デフォルトゲートウェイ</h1>
+        <p class="lead">DHCP（DORAシーケンス）によるIPアドレス自動割り当て、NAT/NAPTによるアドレス変換、IGP/EGPのルーティングプロトコル分類（RIP・OSPF・BGP）、デフォルトゲートウェイの動作を基本情報技術者試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#dhcp">DHCP</a>
+        <a href="#nat">NAT/NAPT</a>
+        <a href="#routing">ルーティング</a>
+        <a href="#gw">デフォルトGW</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <span>ネットワーク</span>
+      <span>DHCP・NAT/NAPT・ルーティング</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li><strong>DHCPのDORAシーケンス</strong> — Discover→Offer→Request→Ackの順序と各ステップの役割</li>
+          <li><strong>NATとNAPTの違い</strong> — NAT（1対1）とNAPT（多対1・IPマスカレード）の使い分け</li>
+          <li><strong>ルーティングプロトコルの分類</strong> — IGP（AS内）とEGP（AS間）の区別</li>
+          <li><strong>RIP・OSPF・BGPの特徴</strong> — ディスタンスベクタ型、リンクステート型、パスベクタ型</li>
+          <li><strong>デフォルトゲートウェイの役割</strong> — 未知のパケットの転送先。未設定ならパケット破棄</li>
+          <li><strong>リース期間によるIPアドレス再利用</strong> — 有効期限で効率的に再割り当て</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>DHCP DORAシーケンスの順序と各ステップ</dd></div>
+          <div><dt>高</dt><dd>NATとNAPTの違い（1対1 vs 多対1）</dd></div>
+          <div><dt>高</dt><dd>ルーティングプロトコルの分類（RIP/OSPF/BGP）</dd></div>
+          <div><dt>中</dt><dd>デフォルトゲートウェイの役割と未設定時の挙動</dd></div>
+          <div><dt>中</dt><dd>DHCPのリース期間と利点</dd></div>
+          <div><dt>低</dt><dd>EIGRP（Cisco独自ハイブリッド型）</dd></div>
+        </dl>
+        <p>読了目安: 約22分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>DHCP</td><td>IPアドレスを自動割り当てするプロトコル</td></tr>
+            <tr><td>2</td><td>DHCP Discover</td><td>クライアントがサーバーを探索する最初のブロードキャスト</td></tr>
+            <tr><td>3</td><td>DHCP Offer</td><td>サーバーが利用可能なIPアドレスを提案</td></tr>
+            <tr><td>4</td><td>DHCP Request</td><td>クライアントが正式に割り当てを要求</td></tr>
+            <tr><td>5</td><td>DHCP Ack</td><td>サーバーが割り当てを確定する最終メッセージ</td></tr>
+            <tr><td>6</td><td>リース期間</td><td>DHCPで割り当てられたIPアドレスの有効期限</td></tr>
+            <tr><td>7</td><td>NAT</td><td>プライベートIPとグローバルIPを1対1で変換</td></tr>
+            <tr><td>8</td><td>NAPT（IPマスカレード）</td><td>1つのグローバルIPで複数機器をポート番号で区別</td></tr>
+            <tr><td>9</td><td>変換表</td><td>NAT/NAPTがアドレス対応を管理するテーブル</td></tr>
+            <tr><td>10</td><td>ルーティング</td><td>パケットの最適経路を選択する技術</td></tr>
+            <tr><td>11</td><td>ルーティングテーブル</td><td>経路情報を管理する表</td></tr>
+            <tr><td>12</td><td>メトリック</td><td>経路選択の指標（ホップ数、回線速度など）</td></tr>
+            <tr><td>13</td><td>AS（自律システム）</td><td>同じ管理ポリシーで運用されるネットワーク群</td></tr>
+            <tr><td>14</td><td>IGP</td><td>同一AS内のルーティングプロトコル（RIP/OSPF/EIGRP）</td></tr>
+            <tr><td>15</td><td>EGP</td><td>異なるAS間のルーティングプロトコル（BGP）</td></tr>
+            <tr><td>16</td><td>RIP</td><td>ホップ数で最短経路を決めるディスタンスベクタ型IGP</td></tr>
+            <tr><td>17</td><td>OSPF</td><td>ネットワーク全体の状態を把握するリンクステート型IGP</td></tr>
+            <tr><td>18</td><td>BGP</td><td>インターネット全体の標準ルーティングプロトコル（EGP）</td></tr>
+            <tr><td>19</td><td>デフォルトゲートウェイ</td><td>経路不明パケットの転送先ルーター</td></tr>
+            <tr><td>20</td><td>未知のパケット</td><td>ルーターが経路を知らないパケット</td></tr>
+            <tr><td>21</td><td>ブロードキャスト（DHCP）</td><td>DHCP Discover送信時の通信方式（255.255.255.255）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="dhcp" class="lesson-section">
+      <h2>DHCP（Dynamic Host Configuration Protocol）</h2>
+      <p>ネットワークに機器を接続した瞬間、IPアドレスはどのように決まるのか。DHCPは、LAN内の機器にIPアドレス・サブネットマスク・デフォルトゲートウェイ・DNSサーバーなどの情報を<strong>自動的に割り当てる</strong>プロトコルである。</p>
+      <p>手動設定では設定ミスや重複が起きやすく、大規模ネットワークでは管理が破綻する。DHCPサーバー（通常はルーターや高機能スイッチが兼任）がアドレスプールを一元管理することで、接続するだけで通信可能になる。</p>
+
+      <h3>DHCPのDORAシーケンス</h3>
+      <p>DHCPクライアントとサーバー間の4ステップのやり取りを<strong>DORA</strong>と呼ぶ。午前試験では「正しい順序はどれか」という形式で頻出。</p>
+      <ol>
+        <li><strong>DHCP Discover</strong>（クライアント→ブロードキャスト）: DHCPサーバーを探索。宛先は<code>255.255.255.255</code></li>
+        <li><strong>DHCP Offer</strong>（サーバー→クライアント）: 利用可能なIPアドレスを提案</li>
+        <li><strong>DHCP Request</strong>（クライアント→サーバー）: 特定のサーバーに正式に割り当てを要求（複数Offerが来た場合も1つだけ選択）</li>
+        <li><strong>DHCP Ack</strong>（サーバー→クライアント）: IPアドレス確定。サブネットマスク・デフォルトゲートウェイ・DNSもここで確定</li>
+      </ol>
+      <p class="hint">頻出：「DORAの正しい順序は？」→ <strong>Discover→Offer→Request→Ack</strong>。「DHCPクライアントが最初に送るメッセージは？」→ <strong>DHCP Discover（ブロードキャスト）</strong></p>
+
+      <figure class="wide-diagram">
+        <figcaption>DHCPのDORAシーケンス</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[クライアント] -->|DHCP Discover ブロードキャスト| B[DHCPサーバー]
+    B -->|DHCP Offer IP提案| A
+    A -->|DHCP Request 正式要求| B
+    B -->|DHCP Ack 割当確定| A
+    A --> C[IP・ゲートウェイ・DNS 確定]</pre>
+      </figure>
+
+      <h3>リース期間</h3>
+      <p>DHCPで割り当てられるIPアドレスには<strong>有効期限（リース期間）</strong>がある。期限が切れると再割り当てが発生するため、IPアドレスを効率的に再利用できる。大規模ネットワークや一時接続が多い環境でDHCPが有効な理由のひとつ。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>DHCPによる自動設定の流れ</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[端末 ネットワーク接続] --> B[DHCPサーバーを探索]
+    B --> C[DORAシーケンスでIP取得]
+    C --> D[サブネットマスク 設定]
+    C --> E[デフォルトゲートウェイ 設定]
+    C --> F[DNSサーバー 設定]
+    D --> G[即 通信可能]
+    E --> G
+    F --> G</pre>
+      </figure>
+    </section>
+
+    <section id="nat" class="lesson-section">
+      <h2>NAT / NAPT</h2>
+      <p>LAN内の機器には<strong>プライベートIPアドレス</strong>（例: 192.168.0.x）が割り当てられる。しかしプライベートIPはインターネット上では使えない。インターネットに出るには、<strong>グローバルIPアドレス</strong>に変換する仕組みが必要。これがNAT/NAPTである。</p>
+
+      <h3>NAT（Network Address Translation）</h3>
+      <ul>
+        <li>プライベートIPアドレスとグローバルIPアドレスを<strong>1対1</strong>で変換</li>
+        <li>変換表（プライベートIP⇔グローバルIPの対応表）で管理</li>
+        <li>内部機器ごとに異なるグローバルIPが必要→企業ネットワーク向け</li>
+      </ul>
+
+      <h3>NAPT（Network Address Port Translation）</h3>
+      <ul>
+        <li>NATに加えて<strong>TCP/UDPの送信元ポート番号</strong>も変換に使用</li>
+        <li><strong>1つのグローバルIPで複数の内部機器を同時接続</strong>可能</li>
+        <li>ポート番号で「どの機器からの通信か」を識別</li>
+        <li><strong>IPマスカレード</strong>とも呼ばれ、<strong>家庭用ルーターの標準機能</strong></li>
+        <li>返信パケットもポート番号を見て適切な内部機器に届ける</li>
+      </ul>
+      <p class="hint">頻出：「NATとNAPTの違いは？」→ <strong>NATはIPのみ1対1変換、NAPTはIPとポート番号を使い多対1変換</strong>。「家庭用ルーターで使われる技術は？」→ <strong>NAPT（IPマスカレード）</strong></p>
+
+      <figure class="wide-diagram">
+        <figcaption>NATとNAPTの違い</figcaption>
+        <pre class="mermaid">flowchart TD
+    subgraph NAT方式
+    A1[PC1 プライベートIP] -->|1対1変換| B1[グローバルIP A]
+    A2[PC2 プライベートIP] -->|1対1変換| B2[グローバルIP B]
+    end
+    subgraph NAPT方式
+    C1[PC1 プライベートIP] -->|ポート番号で区別| D[1つのグローバルIP]
+    C2[PC2 プライベートIP] -->|ポート番号で区別| D
+    end
+    B1 --> E[インターネット]
+    B2 --> E
+    D --> E</pre>
+      </figure>
+    </section>
+
+    <section id="routing" class="lesson-section">
+      <h2>ルーティング</h2>
+      <p>インターネットは世界中のLANを相互接続した巨大なネットワーク。宛先まで適切な経路を選ぶ技術が<strong>ルーティング</strong>である。ルーターは受信パケットを調べ、自分が管理するLAN宛てなら直接届け、それ以外は別のルーターに転送する。</p>
+      <p>経路選択の指標を<strong>メトリック</strong>（ホップ数、回線速度、料金など）と呼び、経路情報は<strong>ルーティングテーブル</strong>に管理される。</p>
+
+      <h3>ルーティングプロトコルの分類（IGP / EGP）</h3>
+      <p>ルーター同士が経路情報を交換する通信規則をルーティングプロトコルといい、適用範囲によって<strong>IGP</strong>と<strong>EGP</strong>に大別される。</p>
+
+      <p><strong>IGP（Interior Gateway Protocol）</strong>：同一AS（自律システム）内で使う</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>プロトコル</th><th>分類</th><th>メトリック</th><th>特徴</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>RIP</td><td>ディスタンスベクタ型</td><td>ホップ数のみ</td><td>最大15ホップ。小規模向け。シンプルだが大規模では非効率</td></tr>
+            <tr><td>OSPF</td><td>リンクステート型</td><td>回線速度（コスト）</td><td>ネットワーク全体の状態を把握。大規模向け。信頼性高い</td></tr>
+            <tr><td>EIGRP</td><td>ハイブリッド型</td><td>複合</td><td>Cisco独自。RIPとOSPFの利点を組み合わせ</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>EGP（Exterior Gateway Protocol）</strong>：異なるAS間で使う</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>プロトコル</th><th>分類</th><th>特徴</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>BGP</td><td>パスベクタ型</td><td>AS番号のリストで経路決定。インターネット全体の標準。経済性・ポリシーを考慮</td></tr>
+            <tr><td>旧EGP</td><td>ディスタンスベクタ型</td><td>現在はほぼ使われていない。BGPに置き換え済み</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">頻出：「RIPの分類は？」→ <strong>ディスタンスベクタ型（ホップ数）</strong>。「OSPFの分類は？」→ <strong>リンクステート型（大規模向け）</strong>。「インターネット全体の標準プロトコルは？」→ <strong>BGP（EGP・パスベクタ型）</strong></p>
+
+      <figure class="wide-diagram">
+        <figcaption>ルーティングプロトコルの分類</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[ルーティングプロトコル] --> B[IGP AS内]
+    A --> C[EGP AS間]
+    B --> D[ディスタンスベクタ型: RIP]
+    B --> E[リンクステート型: OSPF]
+    B --> F[ハイブリッド型: EIGRP]
+    C --> G[パスベクタ型: BGP]</pre>
+      </figure>
+    </section>
+
+    <section id="gw" class="lesson-section">
+      <h2>デフォルトゲートウェイ</h2>
+      <p>ルーターはルーティングテーブルに経路情報があるパケットは転送できるが、<strong>経路情報のないパケット（未知のパケット）</strong>は通常破棄してしまう。</p>
+      <p><strong>デフォルトゲートウェイ</strong>は、こうした「どの経路を通れば届くか分からないパケット」の<strong>デフォルトの転送先</strong>となるルーターである。LAN内の各機器に、そのLANを管理するルーターのIPアドレスをデフォルトゲートウェイとして設定することで、インターネット上のWebサイトへのアクセスなど、LAN外への通信が可能になる。</p>
+      <ul>
+        <li>デフォルトゲートウェイ設定あり → 未知のパケットはデフォルトゲートウェイへ転送 → 上位ネットワークへ</li>
+        <li>デフォルトゲートウェイ設定なし → 未知のパケットは<strong>破棄</strong> → 通信不能</li>
+      </ul>
+      <p class="hint">頻出：「デフォルトゲートウェイが未設定の場合、未知パケットは？」→ <strong>破棄される</strong>。「デフォルトゲートウェイに指定するIPアドレスは？」→ <strong>そのLANを管理するルーターのIPアドレス</strong></p>
+
+      <figure class="wide-diagram">
+        <figcaption>デフォルトゲートウェイの動作フロー</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[パケット受信] --> B{ルーティングテーブルに経路あり?}
+    B -->|あり| C[該当ルーターへ転送]
+    B -->|なし| D{デフォルトGW設定あり?}
+    D -->|あり| E[デフォルトゲートウェイへ転送]
+    D -->|なし| F[パケット破棄]
+    E --> G[上位ネットワークへ]</pre>
+      </figure>
+    </section>
+
+    <section class="lesson-section">
+      <h2>比較表まとめ</h2>
+
+      <h3>NATとNAPTの比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>NAT</th><th>NAPT（IPマスカレード）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>変換方式</td><td>プライベートIP⇔グローバルIP（1対1）</td><td>プライベートIP⇔グローバルIP（多対1）</td></tr>
+            <tr><td>使用する情報</td><td>IPアドレスのみ</td><td>IPアドレス＋TCP/UDPポート番号</td></tr>
+            <tr><td>必要なグローバルIP数</td><td>内部機器と同数</td><td>1つ</td></tr>
+            <tr><td>同時接続可能機器数</td><td>グローバルIP数に制限</td><td>ポート番号の範囲内で多数</td></tr>
+            <tr><td>主な用途</td><td>企業ネットワーク</td><td>家庭用ブロードバンドルーター</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ルーティングプロトコル（IGP）の比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>プロトコル</th><th>分類</th><th>経路決定方式</th><th>メトリック</th><th>特徴</th><th>適する規模</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>RIP</td><td>ディスタンスベクタ型</td><td>ホップ数のみ</td><td>ホップ数（最大15）</td><td>シンプル。定期的に全経路情報を交換</td><td>小規模</td></tr>
+            <tr><td>OSPF</td><td>リンクステート型</td><td>ネットワーク全体のトポロジーを把握</td><td>回線速度（コスト）</td><td>信頼性高い。変化時のみ差分更新</td><td>大規模</td></tr>
+            <tr><td>EIGRP</td><td>ハイブリッド型</td><td>ディスタンス＋リンクステート</td><td>複合（帯域幅・遅延など）</td><td>Cisco独自。高速収束</td><td>中〜大規模</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>IGPとEGPの比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>IGP</th><th>EGP</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>適用範囲</td><td>同一AS内</td><td>異なるAS間</td></tr>
+            <tr><td>管理ポリシー</td><td>同一組織</td><td>異なる組織間</td></tr>
+            <tr><td>主なプロトコル</td><td>RIP、OSPF、EIGRP</td><td>BGP</td></tr>
+            <tr><td>経路決定の考え方</td><td>最短経路（メトリック最小）</td><td>ポリシー・経済性も考慮</td></tr>
+            <tr><td>用途</td><td>企業内・キャンパスネットワーク</td><td>インターネットバックボーン、ISP間接続</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>DHCP DORAシーケンスの4ステップ</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ステップ</th><th>方向</th><th>通信方式</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>DHCP Discover</td><td>クライアント→サーバー</td><td>ブロードキャスト（255.255.255.255）</td><td>DHCPサーバーを探索</td></tr>
+            <tr><td>DHCP Offer</td><td>サーバー→クライアント</td><td>ユニキャスト</td><td>利用可能なIPアドレスを提案</td></tr>
+            <tr><td>DHCP Request</td><td>クライアント→サーバー</td><td>ブロードキャスト</td><td>正式に割り当てを要求（複数Offerから1つ選択）</td></tr>
+            <tr><td>DHCP Ack</td><td>サーバー→クライアント</td><td>ユニキャスト</td><td>IP・サブネットマスク・GW・DNSを確定</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>DHCP自動設定と手動設定の比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>DHCP（自動割り当て）</th><th>手動設定</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>設定方法</td><td>接続するだけで自動取得</td><td>1台ずつ手入力</td></tr>
+            <tr><td>設定ミスのリスク</td><td>低い（サーバーが一元管理）</td><td>高い（打ち間違い・重複の恐れ）</td></tr>
+            <tr><td>管理負担</td><td>低い</td><td>高い（台数に比例して増大）</td></tr>
+            <tr><td>IP重複防止</td><td>自動（サーバーが管理）</td><td>管理者が注意する必要あり</td></tr>
+            <tr><td>大規模ネットワーク適性</td><td>高い</td><td>低い（事実上不可能）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>DORAの順序</strong>：「Discover→Offer→Request→Ack」が正しい。「Requestが先」や「OfferとRequestが逆」という選択肢に注意。DORA（ドラ）と覚える。</li>
+        <li><strong>NATとNAPTの混同</strong>：NATは「1対1」、NAPTは「多対1でポート番号を使う」。NAPT＝IPマスカレード、家庭用ルーター＝NAPTと紐付ける。</li>
+        <li><strong>RIPとOSPFの取り違え</strong>：「ディスタンスベクタ＝RIP」「リンクステート＝OSPF」の組み合わせを暗記。RIPはホップ数のみ（最大15）、OSPFは回線速度も考慮。</li>
+        <li><strong>IGPとEGPの境界</strong>：IGP＝AS内、EGP＝AS間。BGPはEGPなので「AS間」。インターネット全体＝BGP。</li>
+        <li><strong>デフォルトゲートウェイ未設定の結果</strong>：「パケットは破棄される」が正解。「自動で別ルーターに転送」や「エラーが返る」ではない。</li>
+        <li><strong>DHCP Discoverの宛先</strong>：宛先IPアドレスは「255.255.255.255」（ブロードキャスト）。FF:FF:FF:FF:FF:FFはMACアドレスのブロードキャストで混同しやすい。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. DHCPの説明として適切なものはどれか。<br>A) ドメイン名をIPアドレスに変換するプロトコルである　B) IPアドレスを自動的に割り当てるプロトコルである　C) IPアドレスからMACアドレスを求めるプロトコルである　D) プライベートIPアドレスをグローバルIPアドレスに変換するプロトコルである</summary>
+        <p>答え: <strong>B</strong>。DHCP（Dynamic Host Configuration Protocol）はIPアドレスを自動割り当てする。AはDNS、CはARP、DはNAT/NAPT。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. NAT（Network Address Translation）の説明として適切なものはどれか。<br>A) MACアドレスをIPアドレスに変換する　B) プライベートIPアドレスとグローバルIPアドレスを1対1で変換する　C) 1つのグローバルIPアドレスで複数の内部機器をポート番号で区別する　D) 経路情報を管理するルーティングテーブルを作成する</summary>
+        <p>答え: <strong>B</strong>。NATはプライベートIPアドレスをグローバルIPアドレスに1対1で変換する。CはNAPT（IPマスカレード）の説明。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ルーティングテーブルに経路が存在しないパケットの転送先として指定されるものはどれか。<br>A) DNSサーバー　B) DHCPサーバー　C) デフォルトゲートウェイ　D) プロキシサーバー</summary>
+        <p>答え: <strong>C</strong>。デフォルトゲートウェイは、未知の宛先パケットの転送先となるルーター。設定されていない場合、パケットは破棄される。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. DHCPにおけるメッセージのやり取りの正しい順序はどれか。<br>A) Request → Discover → Offer → Ack　B) Discover → Offer → Request → Ack　C) Offer → Discover → Ack → Request　D) Discover → Request → Offer → Ack</summary>
+        <p>答え: <strong>B</strong>。DORA（Discover→Offer→Request→Ack）の順。まずクライアントがサーバーを探索（Discover）、サーバーが提案（Offer）、クライアントが要求（Request）、サーバーが確定（Ack）。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. NAPT（IPマスカレード）がNATと異なる点として正しいものはどれか。<br>A) プライベートIPアドレスを使わない　B) 1つのグローバルIPアドレスで複数の内部機器を同時にインターネット接続できる　C) MACアドレスも変換に使用する　D) ルーティングプロトコルを自動選択する</summary>
+        <p>答え: <strong>B</strong>。NAPTはTCP/UDPの送信元ポート番号で内部機器を区別するため、1つのグローバルIPアドレスで複数機器の同時接続が可能。NATは1対1変換のためグローバルIPが複数必要。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. ディスタンスベクタ型のルーティングプロトコルはどれか。<br>A) OSPF　B) BGP　C) RIP　D) EIGRP</summary>
+        <p>答え: <strong>C</strong>。RIP（Routing Information Protocol）はホップ数（経由ルーター数）で最短経路を決めるディスタンスベクタ型。OSPFはリンクステート型、BGPはパスベクタ型（EGP）、EIGRPはハイブリッド型。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. インターネット全体で標準的に使われているルーティングプロトコルはどれか。<br>A) RIP　B) OSPF　C) EIGRP　D) BGP</summary>
+        <p>答え: <strong>D</strong>。BGP（Border Gateway Protocol）はAS間のルーティングに使われるEGPで、インターネット全体の標準プロトコル。AS番号のリストで経路を決定し、経済性やポリシーも考慮可能。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. DHCP Discoverメッセージの宛先として使われるアドレスはどれか。<br>A) 192.168.0.1　B) FF:FF:FF:FF:FF:FF　C) 255.255.255.255　D) 127.0.0.1</summary>
+        <p>答え: <strong>C</strong>。DHCP DiscoverはブロードキャストでDHCPサーバーを探索するため、宛先IPアドレスは255.255.255.255（ブロードキャストアドレス）。BはMACアドレスのブロードキャスト、Dはループバックアドレス。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. IGP（Interior Gateway Protocol）の説明として正しいものはどれか。<br>A) 異なるAS間で経路情報を交換するプロトコルである　B) インターネット全体の経路制御に使われる標準プロトコルである　C) 同一AS内でルーター同士が経路情報を交換するプロトコルである　D) プライベートIPアドレスとグローバルIPアドレスを変換するプロトコルである</summary>
+        <p>答え: <strong>C</strong>。IGPは同一AS（自律システム）内のルーティングに使う。AとBはEGP（BGP）の説明。DはNAT/NAPT。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. デフォルトゲートウェイが設定されていない場合、ルーティングテーブルに存在しない宛先のパケットはどうなるか。<br>A) 自動的に最も近いルーターに転送される　B) 送信元にエラーメッセージが返される　C) パケットは破棄される　D) ブロードキャストで全ルーターに送信される</summary>
+        <p>答え: <strong>C</strong>。デフォルトゲートウェイが未設定の場合、ルーターは未知の宛先パケットを破棄する。デフォルトゲートウェイを設定することで、こうしたパケットも適切に転送できるようになる。</p>
+      </details>
+    </section>
+
+    <section class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p><code>1_ネットワーク基礎.pdf</code></p>
+      <ul>
+        <li>ch19 DHCP: p86〜p88</li>
+        <li>ch20 NAT・NAPT: p89〜p93</li>
+        <li>ch21 ルーティング: p94〜p98</li>
+        <li>ch22 デフォルトゲートウェイ: p99〜p102</li>
+      </ul>
+      <p>前のページ: <a href="network-ip-mac.html">IPアドレスとMACアドレス（ch09〜ch12）</a></p>
+    </section>
+  </main>
+</body>
+</html>

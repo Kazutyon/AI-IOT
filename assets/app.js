@@ -31,6 +31,7 @@ const fallbackCurriculum = {
         { title: "ネットワークの基本とデータ伝送", href: "fe/technology/network/network-basic.html", status: "done" },
         { title: "プロトコルとOSI/TCP/IP階層モデル", href: "fe/technology/network/network-protocol.html", status: "done" },
         { title: "IPアドレスとMACアドレス", href: "fe/technology/network/network-ip-mac.html", status: "done" },
+        { title: "DHCP・NAT/NAPT・ルーティング・デフォルトGW", href: "fe/technology/network/dhcp-nat-routing.html", status: "done" },
         { title: "IPアドレス・サブネット", href: "fe/technology/network/ip-subnet.html", status: "planned" }
       ]
     },
