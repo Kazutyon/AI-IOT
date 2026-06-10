@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>プロトコルとOSI/TCP/IP階層モデル | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#eef4f8",
+        primaryTextColor: "#182230",
+        primaryBorderColor: "#8aa4bf",
+        lineColor: "#2563eb",
+        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
+      },
+      flowchart: {
+        curve: "basis",
+        nodeSpacing: 34,
+        rankSpacing: 42
+      }
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>プロトコルとOSI/TCP/IP階層モデル</h1>
+        <p class="lead">プロトコルの定義、OSI参照モデル7層、TCP/IPモデル4層の対応、IP・UDP・TCPの違いを基本情報技術者試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#protocol">プロトコル</a>
+        <a href="#osi">OSI参照モデル</a>
+        <a href="#tcpip">TCP/IPモデル</a>
+        <a href="#ip-udp-tcp">IP・UDP・TCP</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <span>ネットワーク</span>
+      <span>プロトコルとOSI/TCP/IP</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>プロトコルの定義と標準化機関（ISO・IEEE・IETF）</li>
+          <li>階層化の目的とカプセル化・ヘッダー・ペイロード</li>
+          <li>OSI参照モデル7層の役割と代表プロトコル</li>
+          <li>TCP/IPモデル4層とOSI参照モデルの対応関係</li>
+          <li>IP・UDP・TCPの役割・信頼性・用途の違い</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>OSI 7層の役割と代表プロトコル、TCP/IP対応、IP/UDP/TCP比較</dd></div>
+          <div><dt>中</dt><dd>プロトコル・階層化の基本概念</dd></div>
+          <div><dt>低</dt><dd>標準化機関の組合せ</dd></div>
+        </dl>
+        <p>読了目安: 約22分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>プロトコル</td><td>通信を正しく行うための約束事・規約</td></tr>
+            <tr><td>2</td><td>プロトコルスタック</td><td>複数のプロトコルを階層的に組み合わせたもの</td></tr>
+            <tr><td>3</td><td>ヘッダー</td><td>宛先や通信制御情報が入る部分（封筒の宛名）</td></tr>
+            <tr><td>4</td><td>ペイロード</td><td>実際に運ばれるデータ本体（手紙の中身）</td></tr>
+            <tr><td>5</td><td>カプセル化</td><td>上位層のデータを下位層が包み込み、ヘッダーを付加する仕組み</td></tr>
+            <tr><td>6</td><td>OSI参照モデル</td><td>ISOが策定した7階層の通信モデル（考え方の枠組み）</td></tr>
+            <tr><td>7</td><td>TCP/IPモデル</td><td>インターネットで使われる4階層の通信モデル</td></tr>
+            <tr><td>8</td><td>物理層（第1層）</td><td>信号伝送・ケーブル・コネクタなど物理媒体を扱う</td></tr>
+            <tr><td>9</td><td>データリンク層（第2層）</td><td>LAN内通信・フレーム送受信・MACアドレスで宛先判断</td></tr>
+            <tr><td>10</td><td>ネットワーク層（第3層）</td><td>IPによる経路決定・パケット送受信（ルーターが動作）</td></tr>
+            <tr><td>11</td><td>トランスポート層（第4層）</td><td>データ分割・再送制御・信頼性確保（TCP/UDP）</td></tr>
+            <tr><td>12</td><td>セッション層（第5層）</td><td>通信対象との接続状態（セッション）管理</td></tr>
+            <tr><td>13</td><td>プレゼンテーション層（第6層）</td><td>データ形式の変換・暗号化・圧縮</td></tr>
+            <tr><td>14</td><td>アプリケーション層（第7層）</td><td>アプリケーションレベルの通信規約・データ処理</td></tr>
+            <tr><td>15</td><td>IP（Internet Protocol）</td><td>送信元と宛先をIPアドレスで識別し経路を決定。ベストエフォート型</td></tr>
+            <tr><td>16</td><td>UDP（User Datagram Protocol）</td><td>軽量・高速なデータ送信。受信確認・再送なし。データグラム</td></tr>
+            <tr><td>17</td><td>TCP（Transmission Control Protocol）</td><td>信頼性の高い通信。セッション管理・再送制御・順序保証</td></tr>
+            <tr><td>18</td><td>ポート番号</td><td>どのアプリケーションにデータを渡すかを指定する番号</td></tr>
+            <tr><td>19</td><td>データグラム</td><td>UDPで使われる「確認なしで送るデータ単位」</td></tr>
+            <tr><td>20</td><td>ISO</td><td>国際標準化機構。OSI参照モデルを策定</td></tr>
+            <tr><td>21</td><td>IEEE</td><td>米国電気電子学会。IEEE 802.3/802.11などLAN規格を策定</td></tr>
+            <tr><td>22</td><td>IETF</td><td>Internet Engineering Task Force。RFCとしてインターネット標準を公開</td></tr>
+            <tr><td>23</td><td>RFC</td><td>IETFが発行するインターネット技術標準文書</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="protocol" class="lesson-section">
+      <h2>プロトコルとは</h2>
+      <p><strong>プロトコル（Protocol）</strong>とは、ネットワーク通信を正しく行うための<strong>「約束事」や「規約」</strong>のことです。プロトコルが異なる機器同士は正しく通信できません。人間の「共通言語」にあたります。</p>
+      <p>プロトコルが規定する内容：宛先・送信元の情報、データ本体、確認や再送ルール、送信順序・形式。</p>
+      <p class="hint">試験対策：「プロトコルとは通信の約束事・規約である」という定義が穴埋めで出る。</p>
+
+      <h3>標準化機関</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>機関</th><th>正式名称</th><th>主な標準化対象</th><th>代表的な策定物</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ISO</td><td>国際標準化機構</td><td>通信モデル全般</td><td>OSI参照モデル</td></tr>
+            <tr><td>IEEE</td><td>米国電気電子学会</td><td>LAN関連規格</td><td>IEEE 802.3（イーサネット）、IEEE 802.11（無線LAN）</td></tr>
+            <tr><td>IETF</td><td>Internet Engineering Task Force</td><td>インターネット技術標準</td><td>TCP/IP、HTTP（RFCとして公開）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">試験対策：「RFCを発行する組織は？」→ <strong>IETF</strong>。「OSI参照モデルを策定した組織は？」→ <strong>ISO</strong></p>
+
+      <h3>ネットワークの階層化とカプセル化</h3>
+      <p>ネットワーク通信は<strong>階層（レイヤー）</strong>に分けて設計されています。これにより「役割分担・変更の局所化・異なる機器間の相互接続性確保」が実現します。</p>
+      <p>データは<strong>ヘッダー</strong>（封筒の宛名）と<strong>ペイロード</strong>（手紙の中身）で構成されます。階層を下るごとに各層のヘッダーが付加されます。この仕組みを<strong>カプセル化</strong>と呼びます。</p>
+      <figure class="wide-diagram">
+        <figcaption>カプセル化フロー（送信時）</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[アプリケーション層: データ作成] --> B[トランスポート層: TCPヘッダー追加]
+    B --> C[ネットワーク層: IPヘッダー追加]
+    C --> D[データリンク層: MACヘッダー+FCS追加]
+    D --> E[物理層: ビット信号に変換して伝送]</pre>
+      </figure>
+      <p class="hint">試験対策：「下位層が付加する制御情報を何と呼ぶか」→ <strong>ヘッダー</strong>。「上位層のデータを下位層が包み込むことを何と呼ぶか」→ <strong>カプセル化</strong></p>
+    </section>
+
+    <section id="osi" class="lesson-section">
+      <h2>OSI参照モデル（7層）</h2>
+      <p>OSI（Open Systems Interconnection）参照モデルは、<strong>ISO</strong>が策定した<strong>7階層</strong>の通信モデルです。現在、これを完全実装した機器はほぼ存在しませんが、階層構造の<strong>考え方の枠組み</strong>として広く使われています。</p>
+      <p>7層の覚え方：<strong>「ア・プレ・セ・ト・ネ・デ・ブ（物）」</strong>（上から：アプリケーション・プレゼンテーション・セッション・トランスポート・ネットワーク・データリンク・物理）</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>層番号</th><th>層名</th><th>主な役割</th><th>代表プロトコル・規格</th><th>TCP/IP対応</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>第7層</td><td>アプリケーション層</td><td>アプリの通信処理</td><td>HTTP、SMTP、POP、DNS、FTP</td><td>アプリケーション層</td></tr>
+            <tr><td>第6層</td><td>プレゼンテーション層</td><td>データ形式変換・暗号化・圧縮</td><td>SSL/TLS（暗号化部分）、文字コード変換</td><td>アプリケーション層</td></tr>
+            <tr><td>第5層</td><td>セッション層</td><td>接続状態（セッション）管理</td><td>TLS</td><td>アプリケーション層</td></tr>
+            <tr><td>第4層</td><td>トランスポート層</td><td>データ分割・再送制御・信頼性確保</td><td>TCP、UDP</td><td>トランスポート層</td></tr>
+            <tr><td>第3層</td><td>ネットワーク層</td><td>IPによる経路決定・パケット送受信</td><td>IP、ARP、ICMP</td><td>インターネット層</td></tr>
+            <tr><td>第2層</td><td>データリンク層</td><td>LAN内通信・フレーム送受信</td><td>PPP、IEEE 802.3（イーサネット）、IEEE 802.11</td><td>ネットワークインターフェイス層</td></tr>
+            <tr><td>第1層</td><td>物理層</td><td>信号伝送・ケーブル・コネクタ</td><td>RS-232C、カテゴリケーブル、光ファイバー</td><td>ネットワークインターフェイス層</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">頻出：「経路選択を行う層は？」→ <strong>第3層ネットワーク層</strong>。「データの暗号化を行う層は？」→ <strong>第6層プレゼンテーション層</strong>。「物理的な信号伝送を扱う層は？」→ <strong>第1層物理層</strong></p>
+
+      <figure class="wide-diagram">
+        <figcaption>OSI参照モデル7層 役割早見</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[第7層 アプリケーション層: 通信処理] --> B[第6層 プレゼンテーション層: 変換・暗号化]
+    B --> C[第5層 セッション層: 接続管理]
+    C --> D[第4層 トランスポート層: 分割・再送制御]
+    D --> E[第3層 ネットワーク層: 経路決定]
+    E --> F[第2層 データリンク層: LAN内通信]
+    F --> G[第1層 物理層: 信号伝送]</pre>
+      </figure>
+    </section>
+
+    <section id="tcpip" class="lesson-section">
+      <h2>TCP/IPモデル（4層）</h2>
+      <p>インターネットでは<strong>TCP/IPモデル</strong>という<strong>4階層</strong>のモデルが実際に使われています。OSI参照モデルの7層を簡素化・統合した構成です。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>層番号</th><th>層名</th><th>主な役割</th><th>対応するOSI層</th><th>代表プロトコル</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>第4層</td><td>アプリケーション層</td><td>アプリケーションの通信処理</td><td>第5・6・7層（セッション・プレゼンテーション・アプリケーション）</td><td>HTTP、SMTP、DNS、FTP</td></tr>
+            <tr><td>第3層</td><td>トランスポート層</td><td>データの信頼性・順序制御</td><td>第4層（トランスポート）</td><td>TCP、UDP</td></tr>
+            <tr><td>第2層</td><td>インターネット層</td><td>IPによる通信経路決定</td><td>第3層（ネットワーク）</td><td>IP、ARP、ICMP</td></tr>
+            <tr><td>第1層</td><td>ネットワークインターフェイス層</td><td>物理的な接続と信号処理</td><td>第1・2層（物理・データリンク）</td><td>イーサネット、Wi-Fi</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">頻出：「TCP/IPモデルでOSIの第5〜7層をまとめた層は？」→ <strong>アプリケーション層</strong>。「TCP/IPモデルのインターネット層に対応するOSI層は？」→ <strong>ネットワーク層（第3層）</strong>。「TCP/IPモデルは何層構成か」→ <strong>4層</strong></p>
+
+      <figure class="wide-diagram">
+        <figcaption>OSI参照モデルとTCP/IPモデルの対応</figcaption>
+        <pre class="mermaid">flowchart TD
+    subgraph OSI["OSI参照モデル（7層）"]
+        A7[第7層 アプリケーション層]
+        A6[第6層 プレゼンテーション層]
+        A5[第5層 セッション層]
+        A4[第4層 トランスポート層]
+        A3[第3層 ネットワーク層]
+        A2[第2層 データリンク層]
+        A1[第1層 物理層]
+    end
+    subgraph TCPIP["TCP/IPモデル（4層）"]
+        B4[アプリケーション層]
+        B3[トランスポート層]
+        B2[インターネット層]
+        B1[ネットワークインターフェイス層]
+    end
+    A7 --> B4
+    A6 --> B4
+    A5 --> B4
+    A4 --> B3
+    A3 --> B2
+    A2 --> B1
+    A1 --> B1</pre>
+      </figure>
+    </section>
+
+    <section id="ip-udp-tcp" class="lesson-section">
+      <h2>IP・UDP・TCPの違い</h2>
+      <p>TCP/IPモデルの中核をなす3つのプロトコルです。役割と信頼性が大きく異なります。</p>
+
+      <div class="compare-grid">
+        <article>
+          <h3>IP（Internet Protocol）</h3>
+          <p>送信元と宛先をIPアドレスで識別し、経路を決定します。<strong>ベストエフォート</strong>型で、届ける努力はしますが確実な配送は保証しません。信頼性確保は上位層（TCP）に任せます。</p>
+        </article>
+        <article>
+          <h3>UDP（User Datagram Protocol）</h3>
+          <p>軽量・高速なデータ送信を提供します。受信確認・再送処理を行いません。データ単位は<strong>データグラム</strong>。動画ストリーミング・音声通話など、多少の欠落より<strong>リアルタイム性</strong>を優先する用途に使われます。</p>
+        </article>
+        <article>
+          <h3>TCP（Transmission Control Protocol）</h3>
+          <p>信頼性の高い通信を提供します。<strong>3ウェイハンドシェイク</strong>（SYN → SYN+ACK → ACK）で接続を確立し、再送制御・順序保証・フロー制御を行います。Web閲覧・メール・ファイル転送など、確実な送受信が必要な用途に使われます。</p>
+        </article>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>プロトコル</th><th>主な役割</th><th>信頼性</th><th>データ単位</th><th>ヘッダー主要情報</th><th>主な用途</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>IP</td><td>経路決定・宛先識別</td><td>なし（ベストエフォート）</td><td>パケット</td><td>送信元/宛先IPアドレス</td><td>全インターネット通信の基盤</td></tr>
+            <tr><td>UDP</td><td>軽量・高速データ送信</td><td>なし（確認・再送なし）</td><td>データグラム</td><td>ポート番号</td><td>動画・音声・DNS</td></tr>
+            <tr><td>TCP</td><td>信頼性の高い通信</td><td>高い（確認・再送あり）</td><td>セグメント</td><td>ポート番号、シーケンス番号、応答番号、セッションフラグ</td><td>Web・メール・ファイル転送</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">頻出：「信頼性の高い通信を提供するプロトコルは？」→ <strong>TCP</strong>。「受信確認や再送処理を行わないプロトコルは？」→ <strong>UDP</strong>。「ベストエフォート型で経路決定のみ行うプロトコルは？」→ <strong>IP</strong></p>
+
+      <div class="diagram-grid">
+        <figure>
+          <figcaption>IP・UDP・TCPの特徴</figcaption>
+          <pre class="mermaid">flowchart TD
+    A[IP: 経路決定のみ] --> B[UDP: 軽量・高速]
+    B --> C[TCP: 信頼性重視]
+    A -->|特徴| A1[ベストエフォート型]
+    B -->|特徴| B1[データグラム・再送なし]
+    C -->|特徴| C1[3ウェイハンドシェイク]</pre>
+        </figure>
+        <figure>
+          <figcaption>TCPの3ウェイハンドシェイク</figcaption>
+          <pre class="mermaid">flowchart TD
+    Client[クライアント] -->|1. SYN送信| Server[サーバー]
+    Server -->|2. SYN+ACK応答| Client
+    Client -->|3. ACK送信| Server
+    Server --> Connected[接続確立・データ通信開始]</pre>
+        </figure>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li>「7層はOSI参照モデル、4層はTCP/IPモデル」を混同しない。</li>
+        <li>OSI参照モデル7層の順番は上から「ア・プレ・セ・ト・ネ・デ・ブ（物）」で覚える。</li>
+        <li>TCP/IPのアプリケーション層はOSIの第5・6・7層の3層分を統合している。</li>
+        <li>IPはベストエフォート型（配送保証なし）。信頼性確保はTCPが担う。</li>
+        <li>UDPは「使われない」ではなく、動画・音声・DNSなどでリアルタイム性のために積極的に使われる。</li>
+        <li>ポート番号はTCPだけでなくUDPにも含まれる。TCPだけの情報はシーケンス番号・応答番号・セッションフラグ。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. ネットワーク通信を正しく行うための「約束事」や「規約」を何と呼ぶか。</summary>
+        <p>答え: <strong>プロトコル</strong>。プロトコルが異なる機器同士は通信できない。プロトコルスタックは複数のプロトコルを階層的に組み合わせたもの。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. OSI参照モデルで、経路選択（ルーティング）を行う層はどれか。</summary>
+        <p>答え: <strong>第3層 ネットワーク層</strong>。IPアドレスによる経路決定とパケット送受信を行う。ルーターがこの層で動作する。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. TCP/IPモデルの階層数はいくつか。</summary>
+        <p>答え: <strong>4層</strong>。ネットワークインターフェイス層・インターネット層・トランスポート層・アプリケーション層。7層はOSI参照モデル。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 上位層のデータ全体が下位層のデータ本体となる仕組みを何と呼ぶか。</summary>
+        <p>答え: <strong>カプセル化</strong>。階層を下るごとに各層のヘッダーが付加され、上位層のデータ全体が下位層のペイロードとなる。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. OSI参照モデルのプレゼンテーション層（第6層）の主な役割として正しいものはどれか。<br>A) 経路選択　B) データ形式の変換や暗号化　C) 物理的な信号伝送　D) セッション管理</summary>
+        <p>答え: <strong>B（データ形式の変換や暗号化）</strong>。A は第3層ネットワーク層、C は第1層物理層、D は第5層セッション層の役割。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. TCPとUDPに共通して含まれるヘッダー情報はどれか。<br>A) シーケンス番号　B) 応答番号　C) ポート番号　D) セッションフラグ</summary>
+        <p>答え: <strong>C（ポート番号）</strong>。ポート番号はTCP・UDP両方に含まれる。A・B・D はTCPのヘッダーにのみ含まれる。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. IPの説明として最も適切なものはどれか。<br>A) 信頼性の高い通信を提供し再送制御を行う　B) リアルタイム通信に最適　C) 経路を決定するが信頼性チェックは行わない　D) ドメイン名をIPアドレスに変換する</summary>
+        <p>答え: <strong>C</strong>。IPは「ベストエフォート」型で経路決定のみ行い、信頼性確保はTCPに任せる。A はTCP、B はUDP、D はDNS の説明。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. TCP/IPモデルのアプリケーション層にまとめられているOSI参照モデルの層の組合せはどれか。<br>A) 第1〜3層　B) 第3〜4層　C) 第5〜7層　D) 第1〜2層</summary>
+        <p>答え: <strong>C（第5〜7層）</strong>。TCP/IPのアプリケーション層は、OSIのセッション層（第5層）・プレゼンテーション層（第6層）・アプリケーション層（第7層）を統合したもの。</p>
+      </details>
+    </section>
+
+    <section class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p><code>1_ネットワーク基礎.pdf</code> ch05〜ch08 p28〜p43</p>
+      <p>前のページ: <a href="network-basic.html">ネットワークの基本とデータ伝送（ch01〜ch04）</a></p>
+    </section>
+  </main>
+</body>
+</html>
