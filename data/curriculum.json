@@ -28,14 +28,14 @@
       "id": "network",
       "title": "ネットワーク",
       "category": "technology",
-      "status": "in-progress",
+      "status": "done",
       "description": "OSI/TCP-IP、IPアドレス、DNS、Web、無線、ネットワークセキュリティ。",
       "href": "fe/technology/network/index.html",
       "items": [
         {
-          "title": "ネットワーク基礎",
+          "title": "ネットワークの基本とデータ伝送",
           "href": "fe/technology/network/network-basic.html",
-          "status": "planned"
+          "status": "done"
         },
         {
           "title": "IPアドレス・サブネット",
@@ -91,8 +91,8 @@
     {
       "title": "1_ネットワーク基礎.pdf",
       "category": "ネットワーク",
-      "status": "次に試作",
-      "next": "Step0で章・ページ範囲を抽出"
+      "status": "一部HTML化済み",
+      "next": "TCP/IP、IPアドレス、DNS/Web/メールを章ごとに精読"
     },
     {
       "title": "2_クラウド基礎.pdf",

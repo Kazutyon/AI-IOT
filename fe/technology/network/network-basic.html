@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ネットワークの基本とデータ伝送 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>ネットワークの基本とデータ伝送</h1>
+        <p class="lead">トポロジー、ネットワーク機器、伝送方式、伝送時間計算を基本情報技術者試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#topology">トポロジー</a>
+        <a href="#devices">機器</a>
+        <a href="#transmission">伝送</a>
+        <a href="#calculation">計算</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <span>ネットワーク</span>
+      <span>ネットワーク基礎</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>ノード、リンク、セグメントの基本概念</li>
+          <li>6種類のネットワークトポロジーの特徴</li>
+          <li>ハブ、スイッチ、ルーターの役割とOSI層</li>
+          <li>シリアル/パラレル、非同期/同期、半二重/全二重</li>
+          <li>伝送時間と伝送効率の計算</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>トポロジー、機器とOSI層、伝送時間計算</dd></div>
+          <div><dt>中</dt><dd>伝送方式の分類</dd></div>
+          <div><dt>低</dt><dd>伝送遅延の種類</dd></div>
+        </dl>
+        <p>読了目安: 約20分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>ノード</td><td>ネットワーク上のつながる対象</td></tr>
+            <tr><td>2</td><td>リンク</td><td>ノード同士をつなぐ通信経路</td></tr>
+            <tr><td>3</td><td>セグメント</td><td>LANを分けて考える単位</td></tr>
+            <tr><td>4</td><td>スター型</td><td>中心にハブやスイッチを置く現在主流の形</td></tr>
+            <tr><td>5</td><td>メッシュ型</td><td>複数経路を持ち、耐障害性が高い形</td></tr>
+            <tr><td>6</td><td>スイッチ</td><td>MACアドレスで宛先ポートだけに転送するL2機器</td></tr>
+            <tr><td>7</td><td>ルーター</td><td>IPアドレスで経路判断するL3機器</td></tr>
+            <tr><td>8</td><td>シリアル伝送</td><td>1本の信号線で1ビットずつ送る方式</td></tr>
+            <tr><td>9</td><td>伝送時間</td><td>データ量を伝送速度で割って求める時間</td></tr>
+            <tr><td>10</td><td>伝送効率</td><td>総データ量のうち有効データが占める割合</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="topology" class="lesson-section">
+      <h2>ネットワークトポロジー</h2>
+      <p>ネットワークトポロジーは、ノード同士の接続形態です。基本情報技術者試験では、形の名前よりも「障害時の影響」「現在よく使われる構成」「耐障害性」が問われます。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>トポロジー</th><th>特徴</th><th>試験ポイント</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ライン型</td><td>直線状に接続する</td><td>途中故障で全体に影響しやすい</td></tr>
+            <tr><td>リング型</td><td>輪状に接続し、データは一定方向に流れる</td><td>1ノード故障で全体停止しやすい</td></tr>
+            <tr><td>スター型</td><td>中心のハブ/スイッチへ各ノードが接続する</td><td>現在のLANで主流。中心装置故障に注意</td></tr>
+            <tr><td>バス型</td><td>1本の共通ケーブルに全ノードを接続する</td><td>古い方式。衝突が起こりやすい</td></tr>
+            <tr><td>ツリー型</td><td>階層的に接続する</td><td>DNSやディレクトリ構造のイメージ</td></tr>
+            <tr><td>メッシュ型</td><td>各ノードが複数ノードと直接接続する</td><td>障害に最も強い。フルメッシュも頻出</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="diagram-grid">
+        <figure>
+          <figcaption>トポロジー前半</figcaption>
+          <pre class="mermaid-text">ライン型 → リング型 → スター型
+途中故障   1ノード故障   中心装置故障</pre>
+        </figure>
+        <figure>
+          <figcaption>トポロジー後半</figcaption>
+          <pre class="mermaid-text">バス型 → ツリー型 → メッシュ型
+衝突多い   階層構造     耐障害性が高い</pre>
+        </figure>
+      </div>
+    </section>
+
+    <section id="devices" class="lesson-section">
+      <h2>ネットワーク機器とOSI層</h2>
+      <p>ハブ、スイッチ、ルーターは役割とOSI層をセットで覚えます。特にスイッチはMACアドレス、ルーターはIPアドレスで判断する点が頻出です。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>機器</th><th>役割</th><th>OSI層</th><th>判断材料</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>リピータ</td><td>信号を増幅して中継</td><td>第1層</td><td>電気信号</td></tr>
+            <tr><td>ハブ</td><td>受信データを全ポートへ同報</td><td>第1層</td><td>電気信号</td></tr>
+            <tr><td>ブリッジ</td><td>セグメント間を接続</td><td>第2層</td><td>MACアドレス</td></tr>
+            <tr><td>スイッチ</td><td>宛先ポートだけに転送</td><td>第2層</td><td>MACアドレス</td></tr>
+            <tr><td>ルーター</td><td>LAN間接続と経路選択</td><td>第3層</td><td>IPアドレス</td></tr>
+            <tr><td>ゲートウェイ</td><td>異なるプロトコルを変換</td><td>第4〜7層</td><td>アプリケーション情報など</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="transmission" class="lesson-section">
+      <h2>データ伝送の分類</h2>
+      <div class="compare-grid">
+        <article>
+          <h3>シリアル伝送 vs パラレル伝送</h3>
+          <p>シリアル伝送は1本の信号線で1ビットずつ送るため長距離向きです。パラレル伝送は複数本の信号線で同時に送れますが、長距離では信号ズレやノイズが問題になります。</p>
+        </article>
+        <article>
+          <h3>非同期通信 vs 同期通信</h3>
+          <p>非同期通信はスタートビットとストップビットで区切ります。同期通信はクロック信号に合わせるため効率が高く、大量データに向きます。</p>
+        </article>
+        <article>
+          <h3>半二重通信 vs 全二重通信</h3>
+          <p>半二重は送信と受信を交互に行います。全二重は同時に送受信できます。トランシーバーは半二重、電話回線は全二重の例です。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="calculation" class="lesson-section">
+      <h2>計算・手順</h2>
+      <article class="formula-box">
+        <h3>伝送時間</h3>
+        <p><strong>伝送時間 = データ量（ビット） ÷ 伝送速度（bps）</strong></p>
+        <pre><code>10MB = 10 × 1,000,000 バイト
+10,000,000 × 8 = 80,000,000 ビット
+80,000,000 ÷ 100,000,000 = 0.8 秒</code></pre>
+        <p>10MBのファイルを100Mbpsで送る理論時間は <strong>0.8秒</strong> です。</p>
+      </article>
+      <article class="formula-box">
+        <h3>伝送効率</h3>
+        <p><strong>伝送効率 = 有効データ量 ÷ 総データ量 × 100</strong></p>
+        <pre><code>有効データ: 100バイト
+ヘッダ: 20バイト
+総データ量 = 120バイト
+100 ÷ 120 × 100 = 83.3%</code></pre>
+        <p>ヘッダが増えるほど、伝送効率は下がります。</p>
+      </article>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li>現在のLANで主流なのはバス型ではなくスター型。</li>
+        <li>長距離向きなのはパラレル伝送ではなくシリアル伝送。</li>
+        <li>伝送時間計算ではバイトをビットへ変換する。</li>
+        <li>伝搬遅延は信号が伝わる時間、伝送遅延はデータを送り出す時間。</li>
+        <li>ハブは同報、スイッチはMACアドレスで宛先だけに送る。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. 中心にハブやスイッチを置く接続形態はどれか。</summary>
+        <p>答え: <strong>スター型</strong>。現在のLANで最も一般的な構成です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. 1本の信号線で1ビットずつ送信する方式はどれか。</summary>
+        <p>答え: <strong>シリアル伝送</strong>。長距離通信に適しています。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. 10MBを100Mbpsで送る理論上の伝送時間は何秒か。</summary>
+        <p>答え: <strong>0.8秒</strong>。10MB = 80Mbit、80Mbit ÷ 100Mbps = 0.8秒です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. 障害に最も強いトポロジーはどれか。</summary>
+        <p>答え: <strong>メッシュ型</strong>。複数経路を持つため、別経路で通信を継続しやすいです。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. スタートビットとストップビットで区切る通信方式はどれか。</summary>
+        <p>答え: <strong>非同期通信（調歩同期通信）</strong>。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q6. IPアドレスで経路判断する機器はどれか。</summary>
+        <p>答え: <strong>ルーター</strong>。OSI第3層で動作します。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q7. 電気信号や光信号が伝わる時間を指す遅延はどれか。</summary>
+        <p>答え: <strong>伝搬遅延</strong>。ケーブル長に比例します。</p>
+      </details>
+    </section>
+
+    <section class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>`1_ネットワーク基礎.pdf` ch01〜ch04 p1〜p27</p>
+    </section>
+  </main>
+</body>
+</html>
