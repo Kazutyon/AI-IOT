@@ -110,7 +110,7 @@
             <tr><td>スター型</td><td>中心のハブ/スイッチへ各ノードが接続する</td><td>現在のLANで主流。中心装置故障に注意</td></tr>
             <tr><td>バス型</td><td>1本の共通ケーブルに全ノードを接続する</td><td>古い方式。衝突が起こりやすい</td></tr>
             <tr><td>ツリー型</td><td>階層的に接続する</td><td>DNSやディレクトリ構造のイメージ</td></tr>
-            <tr><td>メッシュ型</td><td>各ノードが複数ノードと直接接続する</td><td>障害に最も強い。フルメッシュも頻出</td></tr>
+            <tr><td>メッシュ型</td><td>各ノードが複数ノードと直接接続する</td><td>障害に最も強い。フルメッシュの接続数 = n(n-1)/2</td></tr>
           </tbody>
         </table>
       </div>
@@ -230,6 +230,7 @@
     <section class="lesson-section">
       <h2>間違えやすいポイント</h2>
       <ul class="mistake-list">
+        <li>フルメッシュの接続数は <strong>n(n-1)/2</strong>。5台なら 5×4÷2 = <strong>10本</strong>。</li>
         <li>現在のLANで主流なのはバス型ではなくスター型。</li>
         <li>長距離向きなのはパラレル伝送ではなくシリアル伝送。</li>
         <li>伝送時間計算ではバイトをビットへ変換する。</li>
@@ -255,6 +256,10 @@
       <details class="quiz-card">
         <summary>Q4. 障害に最も強いトポロジーはどれか。</summary>
         <p>答え: <strong>メッシュ型</strong>。複数経路を持つため、別経路で通信を継続しやすいです。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4-2. フルメッシュ型で6台のノードを接続する場合、必要なリンク数はいくつか。</summary>
+        <p>答え: <strong>15本</strong>。フルメッシュの接続数 = n(n-1)/2。6×5÷2 = 15本。n=5なら10本、n=4なら6本。</p>
       </details>
       <details class="quiz-card">
         <summary>Q5. スタートビットとストップビットで区切る通信方式はどれか。</summary>

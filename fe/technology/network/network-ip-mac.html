@@ -139,6 +139,22 @@
       <h3>IPv6</h3>
       <p>IPv4のアドレス枯渇問題を解消するために設計された次世代プロトコルです。<strong>128ビット</strong>（16オクテット）で構成され、約3.4×10³⁸個のアドレスを表現できます。IPv4とIPv6は<strong>互換性がなく</strong>、現在は両方が混在しています（デュアルスタック）。</p>
       <p class="hint">頻出：「IPv6のアドレス長は？」→ <strong>128ビット</strong>。「IPv4→IPv6移行の理由は？」→ <strong>アドレス枯渇問題の解消</strong></p>
+
+      <h3>IPv6のアドレス種別</h3>
+      <p>IPv6では3種類のアドレスが定義されています。IPv4にあった<strong>ブロードキャストは存在しません</strong>。代わりにマルチキャストを使います。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>種別</th><th>説明</th><th>IPv4との対応</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ユニキャスト</strong></td><td>1対1の通信。特定の1台に送信</td><td>通常のIPアドレスと同じ</td></tr>
+            <tr><td><strong>マルチキャスト</strong></td><td>1対多の通信。特定グループ全員に送信</td><td>IPv4のブロードキャストの役割も担う</td></tr>
+            <tr><td><strong>エニーキャスト</strong></td><td>1対最近接の通信。同じアドレスを持つ中で最も近い1台に送信</td><td>IPv4には存在しない</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">頻出：「IPv6にはないアドレス種別は？」→ <strong>ブロードキャスト</strong>。「IPv6でIPv4のブロードキャストに相当するのは？」→ <strong>マルチキャスト</strong>。「IPv6のみに存在するアドレス種別は？」→ <strong>エニーキャスト</strong></p>
     </section>
 
     <section id="mac" class="lesson-section">
@@ -311,6 +327,8 @@
         <li>ARP要求：<strong>ブロードキャスト</strong>（FF:FF:FF:FF:FF:FF）。ARP応答：<strong>ユニキャスト</strong>。逆に覚えない。</li>
         <li>DNSのポート番号53番は<strong>UDP</strong>（TCPではない）。HTTP=TCP/80、HTTPS=TCP/443、SMTP=TCP/25。</li>
         <li>ウェルノウンポートは<strong>0〜1023</strong>。「1024以上は登録済みポート」と区別する。</li>
+        <li><strong>IPv6にはブロードキャストアドレスが存在しない</strong>。ブロードキャストはIPv4のみの概念。IPv6では代わりにマルチキャストを使う。</li>
+        <li>IPv6のアドレス種別は<strong>ユニキャスト・マルチキャスト・エニーキャスト</strong>の3種類。エニーキャストはIPv4には存在しない。</li>
       </ul>
     </section>
 
