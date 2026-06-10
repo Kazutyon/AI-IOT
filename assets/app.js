@@ -24,7 +24,7 @@ const fallbackCurriculum = {
       id: "network",
       title: "ネットワーク",
       category: "technology",
-      status: "done",
+      status: "in-progress",
       description: "OSI/TCP-IP、IPアドレス、DNS、Web、無線、ネットワークセキュリティ。",
       href: "fe/technology/network/index.html",
       items: [
@@ -80,10 +80,16 @@ const fallbackCurriculum = {
       next: "既存HTMLを参考に、共通テンプレートへ再構成"
     },
     {
+      title: "1_2(2)進数のお話.pdf",
+      category: "基礎理論",
+      status: "未作成",
+      next: "基数変換ページへ統合するか、補助ページとして切り出す"
+    },
+    {
       title: "1_ネットワーク基礎.pdf",
       category: "ネットワーク",
       status: "一部HTML化済み",
-      next: "TCP/IP、IPアドレス、DNS/Web/メールを章ごとに精読"
+      next: "サブネット計算、DNS/Web/メール、無線/セキュリティを章ごとに精読"
     },
     {
       title: "2_クラウド基礎.pdf",
@@ -96,6 +102,48 @@ const fallbackCurriculum = {
       category: "セキュリティ",
       status: "未作成",
       next: "章ごとに精読メモ化"
+    },
+    {
+      title: "1_2_AIの_IoTセキュリティー.pdf",
+      category: "セキュリティ / IoT",
+      status: "未作成",
+      next: "情報セキュリティ本編と重複を整理してIoTセキュリティページ化"
+    },
+    {
+      title: "コンピュータ概論.pdf",
+      category: "テクノロジ基礎",
+      status: "未作成",
+      next: "FE出題範囲に合わせてコンピュータ構成・OS・ソフトウェアへ分割"
+    },
+    {
+      title: "2_アルゴリズムとデータ構造.pdf",
+      category: "アルゴリズム",
+      status: "未作成",
+      next: "データ構造、探索、整列、計算量、擬似言語へ分割"
+    },
+    {
+      title: "1_マネジメント.pdf",
+      category: "マネジメント",
+      status: "未作成",
+      next: "PMBOK、サービスマネジメント、監査に分けて精読"
+    },
+    {
+      title: "3_経営・戦略.pdf",
+      category: "ストラテジ",
+      status: "未作成",
+      next: "経営戦略、技術戦略、システム戦略、会計へ分割"
+    },
+    {
+      title: "2_関連法令・契約.pdf",
+      category: "ストラテジ / 法務",
+      status: "未作成",
+      next: "知的財産、個人情報保護、セキュリティ関連法規へ分割"
+    },
+    {
+      title: "3_デジタル社会の形成について.pdf",
+      category: "ストラテジ / デジタル社会",
+      status: "未作成",
+      next: "デジタル庁、標準化、ガバメントクラウド、法制度を試験向けに整理"
     }
   ]
 };
