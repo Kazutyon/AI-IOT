@@ -464,7 +464,7 @@ th {
   font-weight: 800;
 }
 
-.mermaid-text,
+.mermaid,
 .formula-box pre {
   overflow-x: auto;
   margin: 0;
@@ -473,6 +473,25 @@ th {
   background: #102033;
   color: #eef8ff;
   font: 0.92rem/1.6 ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
+.mermaid {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.wide-diagram {
+  margin: 16px 0 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcff;
+}
+
+.wide-diagram figcaption {
+  margin-bottom: 8px;
+  font-weight: 800;
 }
 
 .formula-box {

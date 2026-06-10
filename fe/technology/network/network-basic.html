@@ -5,6 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ネットワークの基本とデータ伝送 | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#eef4f8",
+        primaryTextColor: "#182230",
+        primaryBorderColor: "#8aa4bf",
+        lineColor: "#2563eb",
+        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
+      },
+      flowchart: {
+        curve: "basis",
+        nodeSpacing: 34,
+        rankSpacing: 42
+      }
+    });
+  </script>
 </head>
 <body>
   <header class="site-header lesson-header">
@@ -98,13 +117,22 @@
       <div class="diagram-grid">
         <figure>
           <figcaption>トポロジー前半</figcaption>
-          <pre class="mermaid-text">ライン型 → リング型 → スター型
-途中故障   1ノード故障   中心装置故障</pre>
+          <pre class="mermaid">flowchart TD
+    A[ライン型<br>直線状に接続] --> B[リング型<br>輪状に接続]
+    B --> C[スター型<br>中心装置に接続]
+    A --> A1[途中故障で全体に影響]
+    B --> B1[1ノード故障で全体停止]
+    C --> C1[中心装置故障で全体停止]</pre>
         </figure>
         <figure>
           <figcaption>トポロジー後半</figcaption>
-          <pre class="mermaid-text">バス型 → ツリー型 → メッシュ型
-衝突多い   階層構造     耐障害性が高い</pre>
+          <pre class="mermaid">flowchart TD
+    D[バス型<br>共通ケーブル] --> E[ツリー型<br>階層構造]
+    E --> F[メッシュ型<br>複数経路]
+    D --> D1[衝突が起こりやすい]
+    E --> E1[DNSやディレクトリ構造]
+    F --> F1[耐障害性が高い]
+    F --> F2[フルメッシュ]</pre>
         </figure>
       </div>
     </section>
@@ -145,10 +173,30 @@
           <p>半二重は送信と受信を交互に行います。全二重は同時に送受信できます。トランシーバーは半二重、電話回線は全二重の例です。</p>
         </article>
       </div>
+      <figure class="wide-diagram">
+        <figcaption>伝送方式の分類</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[データ伝送] --> B[シリアル伝送]
+    A --> C[パラレル伝送]
+    B --> D[非同期通信]
+    B --> E[同期通信]
+    D --> D1[スタート/ストップビット]
+    E --> E1[クロック信号]
+    C --> C1[短距離向き]</pre>
+      </figure>
     </section>
 
     <section id="calculation" class="lesson-section">
       <h2>計算・手順</h2>
+      <figure class="wide-diagram">
+        <figcaption>伝送時間・伝送効率の計算手順</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[データ量 バイト] --> B[ビットへ換算 ×8]
+    B --> C[伝送速度 bps で割る]
+    C --> D[伝送時間 秒]
+    E[有効データ量] --> F[総データ量 ヘッダ込み]
+    F --> G[伝送効率 %]</pre>
+      </figure>
       <article class="formula-box">
         <h3>伝送時間</h3>
         <p><strong>伝送時間 = データ量（ビット） ÷ 伝送速度（bps）</strong></p>
