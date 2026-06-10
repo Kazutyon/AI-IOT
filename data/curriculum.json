@@ -43,6 +43,11 @@
           "status": "done"
         },
         {
+          "title": "IPアドレスとMACアドレス",
+          "href": "fe/technology/network/network-ip-mac.html",
+          "status": "done"
+        },
+        {
           "title": "IPアドレス・サブネット",
           "href": "fe/technology/network/ip-subnet.html",
           "status": "planned"

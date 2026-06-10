@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IPアドレスとMACアドレス | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#eef4f8",
+        primaryTextColor: "#182230",
+        primaryBorderColor: "#8aa4bf",
+        lineColor: "#2563eb",
+        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
+      },
+      flowchart: {
+        curve: "basis",
+        nodeSpacing: 34,
+        rankSpacing: 42
+      }
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>IPアドレスとMACアドレス</h1>
+        <p class="lead">IPv4の構造、グローバルIP/プライベートIPの使い分け、MACアドレスとIPアドレスの違い、ARPの動作、ポート番号とウェルノウンポートを基本情報技術者試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#ip">IPアドレス</a>
+        <a href="#mac">MACアドレス</a>
+        <a href="#arp">ARP</a>
+        <a href="#port">ポート番号</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <span>ネットワーク</span>
+      <span>IPアドレスとMACアドレス</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li><strong>IPv4アドレスの構造</strong> — 32ビット＝4オクテット。約43億個のアドレス空間</li>
+          <li><strong>グローバルIPとプライベートIPの使い分け</strong> — インターネット用とLAN用の違い。NAT/NAPTで相互変換</li>
+          <li><strong>IPv6の基本</strong> — 128ビット。アドレス枯渇問題の解消。IPv4とは互換性なし</li>
+          <li><strong>MACアドレスの構造</strong> — 48ビット。上位24ビット＝OUI（ベンダーコード）、下位24ビット＝ノード番号</li>
+          <li><strong>MACアドレスとIPアドレスの違い</strong> — OSI層、識別対象、管理団体、割り当て方法の比較</li>
+          <li><strong>ARPの動作</strong> — IPアドレス→MACアドレスの変換。要求はブロードキャスト、応答はユニキャスト</li>
+          <li><strong>ポート番号とウェルノウンポート</strong> — アプリ識別子。HTTP=80、HTTPS=443、DNS=53など暗記必須</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>IPv4の構造、グローバルvsプライベートIP、MACvsIPアドレス比較、ARPの動作、ウェルノウンポート</dd></div>
+          <div><dt>中</dt><dd>IPv6の基本（アドレス長・IPv4との違い）</dd></div>
+        </dl>
+        <p>読了目安: 約23分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>IPアドレス</td><td>ネットワーク上の「住所」。送信元と宛先を特定</td></tr>
+            <tr><td>2</td><td>IPv4</td><td>32ビット（4オクテット）。約43億個</td></tr>
+            <tr><td>3</td><td>オクテット</td><td>IPv4の8ビット単位。4つで32ビット</td></tr>
+            <tr><td>4</td><td>グローバルIPアドレス</td><td>インターネットで一意。世界中から通信可能</td></tr>
+            <tr><td>5</td><td>プライベートIPアドレス</td><td>LAN内で使用。異なるLAN間では重複可</td></tr>
+            <tr><td>6</td><td>IPv6</td><td>128ビット。アドレス枯渇解消。IPv4と互換性なし</td></tr>
+            <tr><td>7</td><td>MACアドレス</td><td>機器固有の48ビット識別番号。OSI第2層</td></tr>
+            <tr><td>8</td><td>OUI（ベンダーコード）</td><td>MACアドレス上位24ビット。IEEEが管理</td></tr>
+            <tr><td>9</td><td>ブロードキャストアドレス</td><td>FF:FF:FF:FF:FF:FF。同一ネットワーク全機器向け</td></tr>
+            <tr><td>10</td><td>ARP</td><td>IPアドレス→MACアドレスの変換プロトコル</td></tr>
+            <tr><td>11</td><td>ARPテーブル</td><td>取得したMACアドレスを一時保存するキャッシュ</td></tr>
+            <tr><td>12</td><td>ポート番号</td><td>TCP/UDPヘッダーの16ビット。アプリ識別子</td></tr>
+            <tr><td>13</td><td>ウェルノウンポート</td><td>0〜1023番。HTTP=80, HTTPS=443, DNS=53, SMTP=25</td></tr>
+            <tr><td>14</td><td>宛先ポート番号</td><td>サーバー側の待受番号（どのアプリに送るか）</td></tr>
+            <tr><td>15</td><td>送信元ポート番号</td><td>クライアント側の動的割当（50000番台など）</td></tr>
+            <tr><td>16</td><td>NAT/NAPT</td><td>プライベートIPをグローバルIPに変換する技術</td></tr>
+            <tr><td>17</td><td>IANA</td><td>IPアドレスのグローバル割り当て管理団体</td></tr>
+            <tr><td>18</td><td>DHCP</td><td>IPアドレスを自動割り当て。サーバー67番/クライアント68番</td></tr>
+            <tr><td>19</td><td>DNS</td><td>ドメイン名→IPアドレスの変換。ポート53番（UDP）</td></tr>
+            <tr><td>20</td><td>IEEE</td><td>MACアドレスのOUIを管理。IEEE 802.3/802.11も策定</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="ip" class="lesson-section">
+      <h2>IPアドレス</h2>
+
+      <h3>IPv4アドレスの構造</h3>
+      <p>IPアドレスはTCP/IPネットワークにおいて送信元や宛先を特定するための「住所」のようなデータです。IPv4アドレスは<strong>32ビット</strong>のデータで構成されます。32ビットを<strong>8ビットずつ4つ</strong>に分け、それぞれを10進数で表し、ピリオドで区切ります。</p>
+      <p>8ビット（=1バイト）の単位を<strong>オクテット</strong>と呼びます。IPv4は「4オクテット」で構成され、約43億個（2³²）のアドレスを表せます。</p>
+      <p class="hint">頻出：「IPv4アドレスのビット数は？」→ <strong>32ビット</strong>。「8ビット単位を何と呼ぶか？」→ <strong>オクテット</strong></p>
+
+      <figure class="wide-diagram">
+        <figcaption>IPv4アドレスの構造（32ビット→4オクテット）</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[IPv4アドレス: 32ビット] --> B[8ビット×4 に分割]
+    B --> C[各オクテットを10進数に変換]
+    C --> D[ピリオドで区切る]
+    D --> E[例: 192.168.0.1]</pre>
+      </figure>
+
+      <h3>グローバルIPアドレスとプライベートIPアドレス</h3>
+      <p>プライベートIPアドレスはLAN内でのみ有効で、そのままではインターネットに出られません。インターネットに接続する際は、<strong>NAT</strong>または<strong>NAPT（IPマスカレード）</strong>によってグローバルIPアドレスに変換されます。</p>
+      <p class="hint">頻出：「インターネットで一意に識別されるIPアドレスは？」→ <strong>グローバルIPアドレス</strong>。「LAN内で使用するIPアドレスは？」→ <strong>プライベートIPアドレス</strong></p>
+
+      <figure class="wide-diagram">
+        <figcaption>グローバルIPとプライベートIPの使い分け</figcaption>
+        <pre class="mermaid">flowchart TD
+    PC[PC: プライベートIP] --> NAT[NAT/NAPT: アドレス変換]
+    NAT --> Internet[インターネット: グローバルIP]
+    Internet --> Server[Webサーバー]</pre>
+      </figure>
+
+      <h3>IPv6</h3>
+      <p>IPv4のアドレス枯渇問題を解消するために設計された次世代プロトコルです。<strong>128ビット</strong>（16オクテット）で構成され、約3.4×10³⁸個のアドレスを表現できます。IPv4とIPv6は<strong>互換性がなく</strong>、現在は両方が混在しています（デュアルスタック）。</p>
+      <p class="hint">頻出：「IPv6のアドレス長は？」→ <strong>128ビット</strong>。「IPv4→IPv6移行の理由は？」→ <strong>アドレス枯渇問題の解消</strong></p>
+    </section>
+
+    <section id="mac" class="lesson-section">
+      <h2>MACアドレス</h2>
+      <p>MACアドレスは、ネットワークに接続される各機器が持つ<strong>固有の48ビット識別番号</strong>です。OSI参照モデルの<strong>第2層（データリンク層）</strong>で使用されます。</p>
+
+      <h3>MACアドレスの構造</h3>
+      <p>48ビットは<strong>上位24ビット</strong>と<strong>下位24ビット</strong>に分かれます。</p>
+      <ul>
+        <li><strong>上位24ビット</strong>：<strong>OUI（ベンダーコード）</strong>。機器メーカーを識別。<strong>IEEE</strong>が管理。</li>
+        <li><strong>下位24ビット</strong>：<strong>ノード番号</strong>。各メーカーが機器ごとに割り当て。</li>
+      </ul>
+      <p class="hint">頻出：「MACアドレスは何ビットか？」→ <strong>48ビット</strong>。「上位24ビットを何と呼ぶか？」→ <strong>OUI（ベンダーコード）</strong>。「MACアドレスを管理する組織は？」→ <strong>IEEE</strong></p>
+
+      <figure class="wide-diagram">
+        <figcaption>MACアドレスの構造（48ビット→OUI＋ノード番号）</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[MACアドレス: 48ビット] --> B[上位24ビット: OUI]
+    A --> C[下位24ビット: ノード番号]
+    B -->|IEEEが管理| B1[メーカーを識別]
+    C -->|メーカーが管理| C1[機器ごとに割当]</pre>
+      </figure>
+
+      <h3>特別なMACアドレス</h3>
+      <ul>
+        <li><strong>ブロードキャストアドレス</strong>：<code>FF:FF:FF:FF:FF:FF</code>。同一ネットワーク上の全機器に送信。ARP要求で使われます。</li>
+        <li><strong>マルチキャストアドレス</strong>：特定グループ機器への一斉送信。IPv4マルチキャストは <code>01-00-5E</code> で始まります。</li>
+      </ul>
+      <p class="hint">頻出：「FF:FF:FF:FF:FF:FFは何アドレスか？」→ <strong>ブロードキャストアドレス</strong></p>
+    </section>
+
+    <section id="arp" class="lesson-section">
+      <h2>ARP（Address Resolution Protocol）</h2>
+      <p>ARPは、<strong>IPアドレスからMACアドレスを求めるプロトコル</strong>です。LAN内で実際にデータを送信するにはMACアドレスが必要ですが、アプリケーションはIPアドレスしか扱いません。このギャップを埋めるのがARPの役割です。</p>
+
+      <h3>ARPの動作の流れ</h3>
+      <ol>
+        <li><strong>ARP要求（Request）</strong>：送信元が「このIPのMACアドレスを知りたい」と<strong>ブロードキャスト</strong>（<code>FF:FF:FF:FF:FF:FF</code>）でネットワーク全体に問い合わせる</li>
+        <li><strong>ARP応答（Reply）</strong>：該当するIPアドレスを持つ機器が、自分のMACアドレスを<strong>ユニキャスト</strong>で返信する</li>
+        <li><strong>キャッシュ登録</strong>：送信元は得られたMACアドレスを<strong>ARPテーブル</strong>に一時保存し、次回から問い合わせを省略する</li>
+      </ol>
+      <p class="hint">頻出：「IPアドレスからMACアドレスを求めるプロトコルは？」→ <strong>ARP</strong>。「ARP要求の宛先MACアドレスは？」→ <strong>FF:FF:FF:FF:FF:FF（ブロードキャスト）</strong></p>
+
+      <figure class="wide-diagram">
+        <figcaption>ARPの動作フロー</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[送信元: このIPのMACが知りたい] -->|ARP要求 ブロードキャスト| B[FF:FF:FF:FF:FF:FF]
+    B --> C[該当機器が自分のMACアドレスを返信]
+    C -->|ARP応答 ユニキャスト| D[送信元: MACアドレスを取得]
+    D --> E[ARPテーブルにキャッシュ]</pre>
+      </figure>
+    </section>
+
+    <section id="port" class="lesson-section">
+      <h2>ポート番号とウェルノウンポート</h2>
+      <p>ポート番号はTCP/UDPヘッダーに含まれる<strong>16ビット</strong>の識別子で、IPアドレスだけでは特定できない「どのアプリケーションにデータを渡すか」を指定します。範囲は<strong>0〜65535</strong>です。</p>
+      <ul>
+        <li><strong>宛先ポート番号</strong>：サーバー側で待ち受ける番号（例：Webサーバーは80番）</li>
+        <li><strong>送信元ポート番号</strong>：クライアント側で動的に割り当てられる番号（例：50000番台）</li>
+      </ul>
+      <p>1台のサーバーでWeb（80）、メール（25）、DNS（53）を同時に動かせるのは、ポート番号でアプリケーションを区別しているからです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>ポート番号の役割イメージ</figcaption>
+        <pre class="mermaid">flowchart TD
+    Client[クライアント: 送信元ポート 50000番台] -->|パケット| Server[サーバー]
+    Server -->|宛先ポート80| Web[Webアプリ]
+    Server -->|宛先ポート25| Mail[メールアプリ]
+    Server -->|宛先ポート53| DNS[DNSアプリ]</pre>
+      </figure>
+
+      <h3>暗記必須のウェルノウンポート</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ポート番号</th><th>プロトコル</th><th>サービス</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>20</td><td>TCP</td><td>FTP（データ）</td><td>ファイル送受信用</td></tr>
+            <tr><td>21</td><td>TCP</td><td>FTP（制御）</td><td>制御・ログイン処理</td></tr>
+            <tr><td>22</td><td>TCP</td><td>SSH</td><td>暗号化リモートログイン</td></tr>
+            <tr><td>25</td><td>TCP</td><td>SMTP</td><td>メール送信</td></tr>
+            <tr><td><strong>53</strong></td><td><strong>UDP</strong></td><td><strong>DNS</strong></td><td>IPアドレス問い合わせ</td></tr>
+            <tr><td>67</td><td>UDP</td><td>DHCP（サーバー）</td><td>IPアドレス自動割当管理</td></tr>
+            <tr><td>68</td><td>UDP</td><td>DHCP（クライアント）</td><td>IPアドレス自動取得</td></tr>
+            <tr><td><strong>80</strong></td><td><strong>TCP</strong></td><td><strong>HTTP</strong></td><td>Web通信</td></tr>
+            <tr><td>110</td><td>TCP</td><td>POP3</td><td>メール取得</td></tr>
+            <tr><td><strong>443</strong></td><td><strong>TCP</strong></td><td><strong>HTTPS</strong></td><td>暗号化Web通信</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">頻出：HTTP=<strong>80</strong>、HTTPS=<strong>443</strong>、DNS=<strong>53（UDP）</strong>、SMTP=<strong>25</strong>、FTP=<strong>20/21</strong>、SSH=<strong>22</strong>は暗記必須</p>
+    </section>
+
+    <section class="lesson-section">
+      <h2>比較表まとめ</h2>
+
+      <h3>IPv4とIPv6の比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>IPv4</th><th>IPv6</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>アドレス長</td><td>32ビット（4オクテット）</td><td>128ビット（16オクテット）</td></tr>
+            <tr><td>定義可能アドレス数</td><td>約43億個（2³²）</td><td>約3.4×10³⁸個（2¹²⁸）</td></tr>
+            <tr><td>互換性</td><td>IPv6と互換性なし</td><td>IPv4と互換性なし</td></tr>
+            <tr><td>暗号化</td><td>アプリ側で対応</td><td>プロトコルレベルで規定</td></tr>
+            <tr><td>ヘッダー</td><td>複雑</td><td>シンプルで処理容易</td></tr>
+            <tr><td>アドレス表記例</td><td>192.168.0.1</td><td>2001:db8::1</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>MACアドレスとIPアドレスの比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>比較項目</th><th>MACアドレス</th><th>IPアドレス（IPv4）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>OSI層</td><td>第2層（データリンク層）</td><td>第3層（ネットワーク層）</td></tr>
+            <tr><td>プロトコル</td><td>イーサネット</td><td>TCP/IP</td></tr>
+            <tr><td>識別対象</td><td>端末（機器そのもの）</td><td>ネットワーク上のホスト</td></tr>
+            <tr><td>サイズ</td><td>48ビット</td><td>32ビット</td></tr>
+            <tr><td>管理団体</td><td>IEEE</td><td>IANA</td></tr>
+            <tr><td>割り当て方法</td><td>製造時にROM書込み（固定）</td><td>ネットワーク接続時に動的割当</td></tr>
+            <tr><td>主な利用目的</td><td>同一ネットワーク内通信</td><td>ネットワーク間通信</td></tr>
+            <tr><td>形式例</td><td>00:1A:92:3F:4B:7C</td><td>192.168.1.10</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>グローバルIPアドレスとプライベートIPアドレスの比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>グローバルIPアドレス</th><th>プライベートIPアドレス</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>利用範囲</td><td>インターネット全体</td><td>LAN内のみ</td></tr>
+            <tr><td>一意性</td><td>世界中で一意</td><td>異なるLAN間では重複可</td></tr>
+            <tr><td>インターネット接続</td><td>直接接続可能</td><td>NAT/NAPTで変換が必要</td></tr>
+            <tr><td>割当管理</td><td>IANA→地域レジストリ→ISP</td><td>ネットワーク管理者が自由に割当</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ポート番号の3区分</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>区分</th><th>範囲</th><th>主な用途</th><th>例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ウェルノウンポート</strong></td><td>0〜1023</td><td>標準的なアプリ・サービス</td><td>HTTP=80, HTTPS=443, DNS=53, SMTP=25</td></tr>
+            <tr><td>登録済みポート</td><td>1024〜49151</td><td>既存アプリの補助的使用</td><td>独自サービス、追加アプリ</td></tr>
+            <tr><td>ダイナミック/プライベートポート</td><td>49152〜65535</td><td>個人・企業が自由に使用</td><td>一時的な接続に割当（50000番台など）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li>IPv4のビット数（32）とMACアドレスのビット数（48）を逆に覚えない。<strong>MACの方が長い（48&gt;32）</strong>と覚える。</li>
+        <li>MACアドレス＝<strong>第2層（データリンク層）</strong>、IPアドレス＝<strong>第3層（ネットワーク層）</strong>。OSI層を逆にしない。</li>
+        <li>ARPの方向は<strong>IPアドレス→MACアドレス</strong>。MAC→IPではない。ドメイン名→IPアドレスはDNSの役割。</li>
+        <li>ARP要求：<strong>ブロードキャスト</strong>（FF:FF:FF:FF:FF:FF）。ARP応答：<strong>ユニキャスト</strong>。逆に覚えない。</li>
+        <li>DNSのポート番号53番は<strong>UDP</strong>（TCPではない）。HTTP=TCP/80、HTTPS=TCP/443、SMTP=TCP/25。</li>
+        <li>ウェルノウンポートは<strong>0〜1023</strong>。「1024以上は登録済みポート」と区別する。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. IPv4アドレスのビット数として正しいものはどれか。<br>A) 16ビット　B) 32ビット　C) 48ビット　D) 128ビット</summary>
+        <p>答え: <strong>B（32ビット）</strong>。IPv4は32ビット（4オクテット）。48ビットはMACアドレス、128ビットはIPv6、16ビットはポート番号のビット数。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. IPアドレスからMACアドレスを求めるプロトコルはどれか。<br>A) DNS　B) DHCP　C) ARP　D) NAT</summary>
+        <p>答え: <strong>C（ARP）</strong>。ARP（Address Resolution Protocol）はIPアドレス→MACアドレスの解決を行う。AのDNSはドメイン名→IPアドレス、BのDHCPはIPアドレス自動割り当て、DのNATはアドレス変換。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. HTTP（Web通信）で使用されるウェルノウンポート番号はどれか。<br>A) 25　B) 53　C) 80　D) 443</summary>
+        <p>答え: <strong>C（80）</strong>。HTTPは80番。25はSMTP（メール送信）、53はDNS、443はHTTPS（暗号化Web通信）。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. MACアドレスの説明として適切なものはどれか。<br>A) OSI第3層で使用される48ビットのアドレス　B) 上位24ビットはIEEEが管理するOUIである　C) ネットワーク接続のたびに動的に割り当てられる　D) IPv4アドレスをMACアドレスに変換するプロトコル</summary>
+        <p>答え: <strong>B</strong>。MACアドレスはOSI第2層（データリンク層）で使用。上位24ビット＝OUI（IEEE管理）、下位24ビット＝ノード番号。通常ROMに書き込まれ変更不可。DはARPの説明。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. ARP要求の宛先MACアドレスとして使われるアドレスはどれか。<br>A) 00:00:00:00:00:00　B) FF:FF:FF:FF:FF:FF　C) 01:00:5E:00:00:01　D) 192.168.0.1</summary>
+        <p>答え: <strong>B</strong>。FF:FF:FF:FF:FF:FFはブロードキャストアドレス。ARP要求はネットワーク全体に問い合わせるためにブロードキャストを使う。Cはマルチキャストアドレスの例。DはIPアドレス。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. IPv6のアドレス長として正しいものはどれか。<br>A) 32ビット　B) 48ビット　C) 64ビット　D) 128ビット</summary>
+        <p>答え: <strong>D（128ビット）</strong>。IPv6は128ビット（16オクテット）。約3.4×10³⁸個のアドレスを表現可能。32ビットはIPv4、48ビットはMACアドレス。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. プライベートIPアドレスの説明として正しいものはどれか。<br>A) 世界中で一意でインターネットから直接通信できる　B) LAN内で使用し異なるLAN間では重複しても問題ない　C) 機器のROMに書き込まれており変更できない　D) 128ビットで表現される次世代アドレス</summary>
+        <p>答え: <strong>B</strong>。プライベートIPアドレスはLAN内で使用。異なるLAN間では重複可。インターネット接続時はNAT/NAPTでグローバルIPに変換。AはグローバルIP、CはMACアドレス、DはIPv6の説明。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 次のポート番号のうち、DNSで使用されるものはどれか。<br>A) 25　B) 53　C) 80　D) 110</summary>
+        <p>答え: <strong>B（53）</strong>。DNSは53番（UDP）。25はSMTP、80はHTTP、110はPOP3。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ARPテーブルの役割として最も適切なものはどれか。<br>A) ドメイン名とIPアドレスの対応を保存する　B) 取得したMACアドレスを一時保存し次回のARP問い合わせを省略する　C) プライベートIPとグローバルIPの変換情報を保持する　D) ファイアウォールのフィルタリングルールを管理する</summary>
+        <p>答え: <strong>B</strong>。ARPテーブルはARPで取得したIPアドレスとMACアドレスの対応をキャッシュし、次回以降のブロードキャスト問い合わせを省略する。AはDNSキャッシュ、CはNATテーブルの役割。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. NAT/NAPTの説明として最も適切なものはどれか。<br>A) ドメイン名をIPアドレスに変換する　B) IPアドレスからMACアドレスを求める　C) プライベートIPアドレスをグローバルIPアドレスに変換する　D) IPアドレスを自動的に割り当てる</summary>
+        <p>答え: <strong>C</strong>。NAT/NAPTはプライベートIPアドレスをグローバルIPアドレスに変換し、LAN内の機器がインターネットに接続できるようにする技術。AはDNS、BはARP、DはDHCPの役割。</p>
+      </details>
+    </section>
+
+    <section class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p><code>1_ネットワーク基礎.pdf</code></p>
+      <ul>
+        <li>ch09 IPアドレス（IPv4 / IPv6）: p44〜p49</li>
+        <li>ch10 MACアドレス: p50〜p53</li>
+        <li>ch11 ARP: p54〜p57</li>
+        <li>ch12 ポート番号: p58〜p60</li>
+      </ul>
+      <p>前のページ: <a href="network-protocol.html">プロトコルとOSI/TCP/IP階層モデル（ch05〜ch08）</a></p>
+    </section>
+  </main>
+</body>
+</html>
