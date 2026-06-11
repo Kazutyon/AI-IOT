@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ネットワーク機器とパケット交換 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#eef4f8",
+        primaryTextColor: "#182230",
+        primaryBorderColor: "#8aa4bf",
+        lineColor: "#2563eb",
+        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
+      },
+      flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 }
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>ネットワーク機器とパケット交換</h1>
+        <p class="lead">パケット交換方式、ルーター、アクセスポイント、ハブとスイッチ、ネットワークケーブル・コネクタまで、ネットワーク機器の基礎を整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#packet">パケット交換</a>
+        <a href="#router">ルーター</a>
+        <a href="#ap">アクセスポイント</a>
+        <a href="#switch">ハブとスイッチ</a>
+        <a href="#cable">ケーブル</a>
+        <a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">ネットワーク</a>
+      <span>ネットワーク機器とパケット交換</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>パケット交換方式の仕組み（ヘッダー＋ペイロード、回線交換方式との違い）</li>
+          <li>ルーターの役割（IPアドレスで経路判断、エッジルーター）</li>
+          <li>アクセスポイントの接続形態（インフラストラクチャ/アドホック）</li>
+          <li>ハブとスイッチの違い（L2スイッチ/L3スイッチ）</li>
+          <li>ネットワークケーブルの種類とコネクタ（RJ-45、光ファイバー）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>パケット交換vs回線交換、L2/L3スイッチの違い</dd></div>
+          <div><dt>中</dt><dd>ルーターの役割、APの2モード、光ファイバーの種類</dd></div>
+          <div><dt>低</dt><dd>USB Type-C詳細スペック、RS-232Cコネクタ</dd></div>
+        </dl>
+        <p>読了目安: 約20分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>パケット交換方式</td><td>データをパケットに分割し、回線を共有して送受信する方式</td></tr>
+            <tr><td>2</td><td>ヘッダー</td><td>パケット先頭の制御情報（宛先・送信元・プロトコル）</td></tr>
+            <tr><td>3</td><td>ペイロード</td><td>パケットのデータ本体</td></tr>
+            <tr><td>4</td><td>回線交換方式</td><td>通信前に回線を専有する方式（固定電話）</td></tr>
+            <tr><td>5</td><td>ルーター</td><td>IPアドレスで経路判断し、ネットワーク間を中継するL3機器</td></tr>
+            <tr><td>6</td><td>エッジルーター</td><td>LANとインターネットの境界に設置されるルーター</td></tr>
+            <tr><td>7</td><td>アクセスポイント（AP）</td><td>Wi-Fiで端末を無線接続する機器</td></tr>
+            <tr><td>8</td><td>インフラストラクチャモード</td><td>APを介して端末を接続する無線LAN形態</td></tr>
+            <tr><td>9</td><td>アドホックモード</td><td>APなしで端末同士が直接無線通信する形態</td></tr>
+            <tr><td>10</td><td>L2スイッチ</td><td>データリンク層で動作。MACアドレスで同一LAN内の通信を管理</td></tr>
+            <tr><td>11</td><td>L3スイッチ</td><td>ネットワーク層まで処理。IPアドレスでルーティング可能。高速</td></tr>
+            <tr><td>12</td><td>LANケーブル</td><td>イーサネット用ツイストペアケーブル。RJ-45コネクタ使用</td></tr>
+            <tr><td>13</td><td>光ファイバー</td><td>光信号で超高速・長距離通信。シングル/マルチモード</td></tr>
+            <tr><td>14</td><td>シングルモード</td><td>コア径小・長距離用の光ファイバー（OS1/OS2）</td></tr>
+            <tr><td>15</td><td>マルチモード</td><td>コア径大・短距離高速用の光ファイバー（OM1〜OM5）</td></tr>
+            <tr><td>16</td><td>RJ-45</td><td>LANケーブル用8ピンコネクタ</td></tr>
+            <tr><td>17</td><td>SFPトランシーバ</td><td>電気信号⇔光信号を変換するモジュール</td></tr>
+            <tr><td>18</td><td>USB Type-C</td><td>表裏なし・PD給電・映像出力対応の最新USBコネクタ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="packet" class="lesson-section">
+      <h2>パケット交換方式</h2>
+      <p>パケット交換方式は、通信データを「パケット」と呼ばれる小さな単位に分割して送受信する方式です。各パケットには<strong>ヘッダー</strong>（宛先・送信元・プロトコル・順序番号などの制御情報）と<strong>ペイロード</strong>（データ本体）が含まれます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>パケット交換方式の流れ</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[送信データ] --> B[パケットに分割]
+    B --> C[ヘッダーを付与]
+    C --> D[ネットワークへ送出]
+    D --> E{経路選択}
+    E -->|通常経路| F[ルーター中継]
+    E -->|障害発生| G[別経路で迂回]
+    F --> H[宛先で受信]
+    G --> H
+    H --> I[パケットを再構成]
+    I --> J[元のデータを復元]</pre>
+      </figure>
+
+      <h3>利点</h3>
+      <ul>
+        <li>回線を専有せず、複数の通信が同時に行える</li>
+        <li>障害時は別経路で迂回可能</li>
+        <li>異なるプロトコルのパケットが混在できる</li>
+      </ul>
+
+      <h3>注意点</h3>
+      <ul>
+        <li>パケットが送信順に届くとは限らない（TCPで順序保証）</li>
+        <li>パケットが消失することがある（TCPで再送）</li>
+        <li>ヘッダー処理によるオーバーヘッドがある</li>
+        <li>リアルタイム通信には不向き（遅延の保証なし）</li>
+      </ul>
+
+      <h3>回線交換方式との比較</h3>
+      <figure class="wide-diagram">
+        <figcaption>パケット交換方式と回線交換方式</figcaption>
+        <pre class="mermaid">flowchart TD
+    subgraph パケット交換
+        P1[データ分割] --> P2[各パケット独立転送]
+        P2 --> P3[複数通信が混在]
+        P3 --> P4[宛先で再構成]
+    end
+    subgraph 回線交換
+        C1[通信前に回線確保] --> C2[1対1の専有回線]
+        C2 --> C3[安定した通信]
+        C3 --> C4[同時通信不可]
+    end</pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>比較項目</th><th>パケット交換方式</th><th>回線交換方式</th></tr></thead>
+          <tbody>
+            <tr><td>回線の使い方</td><td>複数通信で共有</td><td>1対1で専有</td></tr>
+            <tr><td>同時通信</td><td>可能</td><td>不可</td></tr>
+            <tr><td>障害耐性</td><td>別経路で迂回可能</td><td>回線断で通信不可</td></tr>
+            <tr><td>遅延</td><td>変動あり（保証なし）</td><td>安定（一定）</td></tr>
+            <tr><td>主な用途</td><td>インターネット、LAN</td><td>固定電話、専用線</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="router" class="lesson-section">
+      <h2>ルーター</h2>
+      <p>ルーターはOSI参照モデルの<strong>第3層（ネットワーク層）</strong>で動作し、IPアドレスを参照してパケットの経路を判断します。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>ルーターの動作</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[パケット受信] --> B[宛先IPアドレスを確認]
+    B --> C{自LAN内の宛先?}
+    C -->|Yes| D[宛先機器に直接配送]
+    C -->|No| E[隣接ルーターへ転送]
+    E --> F[次のルーターで同様に判断]
+    F --> C</pre>
+      </figure>
+
+      <p><strong>エッジルーター</strong>: LANとインターネットの境界に設置され、WAN側でグローバルIPアドレスを使用します。</p>
+    </section>
+
+    <section id="ap" class="lesson-section">
+      <h2>アクセスポイント</h2>
+      <p>アクセスポイント（AP）はIEEE 802.11（Wi-Fi）規格に基づき、端末を無線でネットワークに接続する機器です。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>インフラストラクチャモード</th><th>アドホックモード</th></tr></thead>
+          <tbody>
+            <tr><td>APの要否</td><td>必要</td><td>不要</td></tr>
+            <tr><td>通信形態</td><td>端末→AP→端末</td><td>端末↔端末（直接）</td></tr>
+            <tr><td>用途</td><td>企業LAN、公衆Wi-Fi</td><td>PC↔プリンタ等の一時接続</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>APとWi-Fiルーターの違い</strong>: AP単体ではインターネットに接続できない。Wi-Fiルーターはルーター機能を内蔵しているため単独でインターネット接続が可能。</p>
+    </section>
+
+    <section id="switch" class="lesson-section">
+      <h2>ハブとスイッチ</h2>
+
+      <h3>ハブ（集線装置）</h3>
+      <p>複数の回線を束ねる装置。現在の製品は<strong>リピータ機能</strong>（信号増幅・波形整形）と<strong>スイッチ機能</strong>を内蔵しているのが主流。</p>
+
+      <h3>スイッチ（スイッチングハブ）</h3>
+      <p>スイッチはMACアドレスで宛先ポートを判断するL2機器で、通信効率がハブより格段に高いです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>L2スイッチとL3スイッチの動作比較</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[フレーム受信] --> B{動作層は?}
+    B -->|L2スイッチ| C[MACアドレスで転送先決定]
+    C --> D[該当ポートへ転送]
+    D --> E[同一LAN内通信]
+    B -->|L3スイッチ| F[IPアドレスで経路判断]
+    F --> G[ルーティング実行]
+    G --> H[異なるネットワーク間通信]</pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>L2スイッチ</th><th>L3スイッチ</th><th>ルーター</th></tr></thead>
+          <tbody>
+            <tr><td>動作層</td><td>第2層（データリンク層）</td><td>第3層（ネットワーク層）</td><td>第3層</td></tr>
+            <tr><td>参照アドレス</td><td>MACアドレス</td><td>IPアドレス</td><td>IPアドレス</td></tr>
+            <tr><td>通信範囲</td><td>同一LAN内</td><td>異なるネットワーク間</td><td>異なるネットワーク間</td></tr>
+            <tr><td>処理方式</td><td>ハードウェア（高速）</td><td>ハードウェア（高速）</td><td>ソフトウェア（汎用的）</td></tr>
+            <tr><td>ポート数</td><td>24/48ポート</td><td>24/48ポート</td><td>数ポート</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cable" class="lesson-section">
+      <h2>ケーブルとコネクタ</h2>
+
+      <h3>伝送方式</h3>
+      <ul>
+        <li><strong>シリアル伝送</strong>: 1ビットずつ送信。長距離向き。現在の主流。</li>
+        <li><strong>パラレル伝送</strong>: 複数ビット同時送信。短距離向き。古いプリンター等。</li>
+      </ul>
+
+      <h3>主なケーブル規格</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>規格</th><th>種類</th><th>主な用途</th></tr></thead>
+          <tbody>
+            <tr><td>RS-232C</td><td>シリアル</td><td>コンソール接続（設定用）</td></tr>
+            <tr><td>イーサネット（IEEE802.3）</td><td>ツイストペア</td><td>有線LAN（1000BASE-T等）</td></tr>
+            <tr><td>光ファイバー</td><td>光信号</td><td>データセンター、幹線</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>光ファイバーの種類</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>シングルモード（OS1/OS2）</th><th>マルチモード（OM1〜OM5）</th></tr></thead>
+          <tbody>
+            <tr><td>コア径</td><td>小（約9μm）</td><td>大（50/62.5μm）</td></tr>
+            <tr><td>伝送距離</td><td>長距離（〜数十km）</td><td>短距離（〜数百m）</td></tr>
+            <tr><td>用途</td><td>長距離幹線、WAN</td><td>データセンター内、建物内</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>コネクタ</h3>
+      <ul>
+        <li><strong>RJ-45</strong>: LANケーブル用8ピンコネクタ。電話線のRJ-11（4/6ピン）と混同注意。</li>
+        <li><strong>SFPトランシーバ</strong>: 光ファイバー用。電気信号⇔光信号を変換。高速スイッチ/ルーターのSFPポートに挿入。</li>
+      </ul>
+
+      <h3>USB Type-C</h3>
+      <ul>
+        <li>表裏の区別なし（どちら向きでも挿入可）</li>
+        <li>USB PD（Power Delivery）: 最大240Wの電力供給</li>
+        <li>DisplayPort Alt Mode: 映像出力にも対応</li>
+        <li>USB4では最大40〜80Gbps</li>
+      </ul>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>パケット交換 ≠ 回線交換</strong>: 「回線を専有する」のは回線交換方式。パケット交換は回線を共有する。</li>
+        <li><strong>L2スイッチはMACアドレス、L3スイッチはIPアドレス</strong>: 参照するアドレスが異なる。L2は同一LAN内、L3は異なるネットワーク間。</li>
+        <li><strong>APだけではインターネット不可</strong>: Wi-FiルーターはAP＋ルーター。AP単体では別途ルーターが必要。</li>
+        <li><strong>RJ-45 ≠ RJ-11</strong>: RJ-45は8ピン（LAN）、RJ-11は4/6ピン（電話線）。互換性なし。</li>
+        <li><strong>シングルモードとマルチモードの逆転注意</strong>: シングル＝コア径小・長距離、マルチ＝コア径大・短距離。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. パケット交換方式の説明として、最も適切なものはどれか。</summary>
+        <p>ア）通信前に回線を確保し、通信が終わるまで専有する<br>
+        イ）データを小さなパケットに分割し、各パケットが独立してネットワークを経由する<br>
+        ウ）1本の回線で1つの通信だけを扱う<br>
+        エ）すべてのパケットが必ず同じ経路を通る</p>
+        <p>答え: <strong>イ</strong> — パケット交換方式ではデータをパケットに分割し、回線を共有して複数通信を同時に扱う。ア・ウは回線交換方式の特徴。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. L2スイッチの動作説明として、最も適切なものはどれか。</summary>
+        <p>ア）IPアドレスを参照し、異なるネットワーク間でパケットを中継する<br>
+        イ）MACアドレスを参照し、同一ネットワーク内でフレームを転送する<br>
+        ウ）電波を使って端末を無線接続する<br>
+        エ）光信号と電気信号を相互に変換する</p>
+        <p>答え: <strong>イ</strong> — L2スイッチはデータリンク層で動作し、MACアドレスで転送先を決定する。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. 無線LANのインフラストラクチャモードの説明として、最も適切なものはどれか。</summary>
+        <p>ア）端末同士が直接無線通信する<br>
+        イ）アクセスポイントを介して端末を接続する<br>
+        ウ）有線LANケーブルで全ての端末を接続する<br>
+        エ）ルーターを使わずにインターネットに接続する</p>
+        <p>答え: <strong>イ</strong> — インフラストラクチャモードはAPを介する。アはアドホックモードの説明。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. 回線交換方式とパケット交換方式の比較として、正しいものはどれか。</summary>
+        <p>ア）回線交換方式は複数通信を同時に扱える<br>
+        イ）パケット交換方式は通信中に回線を専有する<br>
+        ウ）パケット交換方式は障害時に別経路で迂回できる<br>
+        エ）回線交換方式はヘッダーによるオーバーヘッドが大きい</p>
+        <p>答え: <strong>ウ</strong> — パケット交換は障害時に別経路へ迂回可能。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. ルーターの役割として、適切でないものはどれか。</summary>
+        <p>ア）IPアドレスを参照してパケットの経路を判断する<br>
+        イ）異なるネットワーク間でパケットを中継する<br>
+        ウ）MACアドレスを参照して同一LAN内のフレームを転送する<br>
+        エ）インターネットとLANの境界でエッジルーターとして機能する</p>
+        <p>答え: <strong>ウ</strong> — MACアドレスで同一LAN内を転送するのはL2スイッチの役割。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q6. L3スイッチとルーターの違いとして、正しいものはどれか。</summary>
+        <p>ア）L3スイッチはMACアドレスのみを参照する<br>
+        イ）ルーターはL3スイッチよりポート数が多い<br>
+        ウ）L3スイッチはハードウェア処理で高速、ポート数が多い<br>
+        エ）ルーターはデータリンク層で動作する</p>
+        <p>答え: <strong>ウ</strong> — L3スイッチはハードウェアで高速処理し、24/48ポートと多数。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q7. 光ファイバーのシングルモードとマルチモードの違いとして、正しいものはどれか。</summary>
+        <p>ア）シングルモードはコア径が大きく短距離向き<br>
+        イ）マルチモードはコア径が小さく長距離向き<br>
+        ウ）シングルモードはコア径が小さく長距離通信用<br>
+        エ）両者に性能差はなく、コネクタ形状のみが異なる</p>
+        <p>答え: <strong>ウ</strong> — シングルモードはコア径小（約9μm）で長距離、マルチモードはコア径大で短距離高速。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q8. RJ-45コネクタの説明として、最も適切なものはどれか。</summary>
+        <p>ア）電話線用の4ピンコネクタ<br>
+        イ）光ファイバー用のコネクタ<br>
+        ウ）LANケーブル用の8ピンコネクタ<br>
+        エ）USB機器接続用のコネクタ</p>
+        <p>答え: <strong>ウ</strong> — RJ-45はイーサネットLANケーブル用8ピンコネクタ。アはRJ-11（電話線）。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q9. USB Type-Cの特徴として、誤っているものはどれか。</summary>
+        <p>ア）コネクタに表裏の区別がない<br>
+        イ）USB PDにより最大240Wの電力供給が可能<br>
+        ウ）DisplayPort Alt Modeで映像出力に対応<br>
+        エ）USB 2.0までの速度にしか対応していない</p>
+        <p>答え: <strong>エ</strong> — USB Type-CはUSB4（最大40〜80Gbps）まで対応。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q10. ハブとスイッチの違いとして、正しいものはどれか。</summary>
+        <p>ア）ハブはMACアドレスを参照して転送先を判断する<br>
+        イ）スイッチは受信した信号をすべてのポートに転送する<br>
+        ウ）スイッチはMACアドレスで転送先ポートを判断し、通信効率が高い<br>
+        エ）ハブとスイッチは全く同じ機能を持つ</p>
+        <p>答え: <strong>ウ</strong> — スイッチはMACアドレスで特定ポートにのみ転送するため効率的。</p>
+      </details>
+    </section>
+
+    <section class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>1_ネットワーク基礎.pdf ch13-ch18（p61-p85）: パケット交換方式、ルーター、アクセスポイント、ハブ、スイッチ、ケーブルとコネクタ</p>
+    </section>
+  </main>
+</body>
+</html>
