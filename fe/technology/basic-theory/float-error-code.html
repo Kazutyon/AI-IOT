@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>浮動小数点・誤差・文字コード | 基礎理論 | FE対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Basic Theory</p>
+        <h1>浮動小数点・誤差・文字コード</h1>
+        <p class="lead">IEEE 754の構造、3大誤差（丸め・桁落ち・情報落ち）、ASCII/Unicode/UTF-8の違いをFE試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="このページの見出し">
+        <a href="#terms">用語</a>
+        <a href="#fixed-float">固定/浮動</a>
+        <a href="#ieee754">IEEE 754</a>
+        <a href="#errors">3大誤差</a>
+        <a href="#charcode">文字コード</a>
+        <a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <span>›</span>
+      <a href="index.html">基礎理論</a>
+      <span>›</span>
+      <span>浮動小数点・誤差・文字コード</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>IEEE 754 単精度の符号部・指数部・仮数部のビット配分</li>
+          <li>バイアス付き指数と隠れた1（hidden bit）の仕組み</li>
+          <li>丸め誤差・桁落ち・情報落ちの発生条件と対策</li>
+          <li>ASCII / JIS / Unicode / UTF-8 の違いとバイト数</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>FE頻出ランク</h2>
+        <dl>
+          <div><dt>最頻出</dt><dd>IEEE 754ビット構成</dd></div>
+          <div><dt>頻出</dt><dd>3大誤差の分類</dd></div>
+          <div><dt>頻出</dt><dd>UTF-8バイト数</dd></div>
+        </dl>
+        <p>出典: 1_基礎理論 p26-p47</p>
+      </aside>
+    </section>
+
+    <!-- 重要用語 -->
+    <section id="terms" class="lesson-section">
+      <h2>重要用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>固定小数点数</td><td>小数点の位置をあらかじめ固定した表現</td><td>計算が速い・範囲が狭い・誤差が起きにくい</td></tr>
+            <tr><td>浮動小数点数</td><td>符号部・指数部・仮数部で構成。指数で小数点を動かす</td><td>IEEE 754形式。広範囲だが誤差あり</td></tr>
+            <tr><td>IEEE 754</td><td>浮動小数点の国際規格。単精度32bit/倍精度64bit</td><td>単精度＝符号1+指数8+仮数23</td></tr>
+            <tr><td>仮数部（mantissa）</td><td>数値の有効桁を表す部分</td><td>正規化で1.XXXの形。先頭1は省略（hidden bit）</td></tr>
+            <tr><td>指数部（exponent）</td><td>小数点の位置（スケール）を決める</td><td>単精度バイアス127。E_stored − 127 ＝ 実際の指数</td></tr>
+            <tr><td>正規化</td><td>仮数部を 1.XXX の形に揃える操作</td><td>先頭1省略で仮数部23bitが実質24bit精度になる</td></tr>
+            <tr><td>バイアス値</td><td>指数部を符号なし整数で保存するためのオフセット</td><td>単精度127・倍精度1023。負指数も表現できる</td></tr>
+            <tr><td>丸め誤差</td><td>有限ビットで正確に表せない誤差</td><td>0.1は2進数で無限循環。0.1+0.2≠0.3</td></tr>
+            <tr><td>桁落ち</td><td>近い値の引き算で有効桁が失われる現象</td><td>1.234567−1.234566 → 有効桁が6桁から1桁に激減</td></tr>
+            <tr><td>情報落ち</td><td>大きな数＋小さな数で小さな数が無視される現象</td><td>指数差で仮数部から溢れる。1.0×10²⁰+1.0</td></tr>
+            <tr><td>打切り誤差</td><td>無限級数を有限項で打ち切ることで生じる誤差</td><td>テイラー展開など数値計算で発生</td></tr>
+            <tr><td>オーバーフロー</td><td>表現可能な最大値を超えること</td><td>指数部が最大値＋1以上。結果が ∞ になる</td></tr>
+            <tr><td>アンダーフロー</td><td>表現可能な最小正規化数より小さくなること</td><td>指数部が最小値−1以下。0または非正規化数になる</td></tr>
+            <tr><td>ASCII</td><td>英数字・基本記号の7ビット文字コード（0x00〜0x7F）</td><td>数字0x30〜、大文字0x41〜、小文字0x61〜</td></tr>
+            <tr><td>JISコード</td><td>日本語用文字コード（JIS X 0208）</td><td>派生：シフトJIS・EUC-JP。2バイト</td></tr>
+            <tr><td>Unicode</td><td>世界中の文字に一意の番号（コードポイント）を割り当てる文字集合</td><td>保存形式ではない。U+0041=A、U+3042=あ</td></tr>
+            <tr><td>UTF-8</td><td>Unicodeコードポイントを可変長バイト列に変換するエンコード方式</td><td>ASCII互換。英1B・日本語3B・絵文字4B</td></tr>
+            <tr><td>コードポイント</td><td>Unicodeで文字に割り当てられた一意の番号</td><td>U+から始まる16進数表記</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 固定小数点と浮動小数点 -->
+    <section id="fixed-float" class="lesson-section">
+      <h2>固定小数点と浮動小数点</h2>
+
+      <h3>固定小数点数の仕組み</h3>
+      <p>小数点の位置をあらかじめ決めた表現方式。例として16ビット中、上位8ビットを整数部・下位8ビットを小数部に割り当てる。</p>
+      <p>小数部のビット重みは左から 2⁻¹、2⁻²、2⁻³… と続く。</p>
+
+      <div class="formula-box">
+        <article>
+          <h4>固定小数点 計算例（16ビット）</h4>
+          <pre>
+ 00000001  10000000
+ ────────  ────────
+  整数部    小数部
+    1     +  2⁻¹ = 0.5
+
+→ 全体の値: 1 + 0.5 = 1.5</pre>
+        </article>
+      </div>
+
+      <h3>固定小数点 vs 浮動小数点 比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>固定小数点</th><th>浮動小数点（IEEE 754 単精度）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ビット構成</td><td>整数部＋小数部（任意）</td><td>符号1＋指数8＋仮数23</td></tr>
+            <tr><td>小数点の位置</td><td>形式で固定</td><td>指数部で動的</td></tr>
+            <tr><td>表現範囲</td><td>狭い</td><td>広い（±約3.4×10³⁸）</td></tr>
+            <tr><td>計算速度</td><td>速い（整数演算）</td><td>やや遅い（専用FPU）</td></tr>
+            <tr><td>誤差</td><td>ほぼなし</td><td>必ず発生</td></tr>
+            <tr><td>主な用途</td><td>組込み・制御・DSP</td><td>科学計算・3DCG・一般アプリ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- IEEE 754 -->
+    <section id="ieee754" class="lesson-section">
+      <h2>IEEE 754 単精度の構造</h2>
+
+      <p>IEEE 754 は浮動小数点数の国際規格。<strong>単精度（32ビット）</strong>と<strong>倍精度（64ビット）</strong>が試験に出る。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>領域</th><th>ビット数</th><th>役割</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>符号部</td><td>1ビット</td><td>0＝正、1＝負</td></tr>
+            <tr><td>指数部</td><td>8ビット</td><td>バイアス127付き。E＝E_stored − 127</td></tr>
+            <tr><td>仮数部</td><td>23ビット</td><td>正規化で先頭1省略（hidden bit）。実質24ビット精度</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>IEEE 754 単精度（32ビット）ビット構造</figcaption>
+        <pre>
+ 1ビット      8ビット             23ビット
+┌──────┬────────────┬────────────────────────┐
+│ 符号 │   指数部   │   仮数部（正規化・先頭1省略）│
+├──────┼────────────┼────────────────────────┤
+│  0   │ 10000001  │ 10000000000000000000000 │
+│  正  │ 129→2²の指数│ 1.1₂ = 1.5（実質）       │
+└──────┴────────────┴────────────────────────┘
+値 = (−1)⁰ × 1.5 × 2² = 6.0</pre>
+      </figure>
+
+      <h3>バイアス付き指数</h3>
+      <p>指数部は「バイアス値127を加えた値」として保存する。これにより、負の指数（−127〜0）を符号なし整数で表現できる。</p>
+      <ul>
+        <li>指数部が 10000001₂ = 129 → 実際の指数 = 129 − 127 = <strong>2</strong></li>
+        <li>指数部が 01111110₂ = 126 → 実際の指数 = 126 − 127 = <strong>−1</strong></li>
+      </ul>
+
+      <h3>隠れた1（hidden bit）</h3>
+      <p>正規化数では仮数部は常に <code>1.XXXXX…</code> の形になる。先頭の "1" は必ず1なので省略できる。これにより、仮数部23ビットで<strong>実質24ビット分の精度</strong>を得る。</p>
+
+      <div class="formula-box">
+        <article>
+          <h4>IEEE 754 単精度 解釈手順</h4>
+          <pre>
+[手順]
+1. 先頭1ビット → 符号（0=正、1=負）
+2. 次の8ビット → 指数部の保存値
+3. バイアス127を引く → 実際の指数
+4. 残り23ビット → 仮数部（先頭に "1." を付ける）
+5. 値 = (−1)^符号 × 仮数 × 2^指数
+
+[練習]
+01000001001000000000000000000000
+符号 = 0（正）
+指数 = 10000010₂ = 130 → 130 − 127 = 3
+仮数 = 1.0100…₂ = 1 + 0.25 = 1.25
+値 = +1 × 1.25 × 2³ = 10.0</pre>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3大誤差 -->
+    <section id="errors" class="lesson-section">
+      <h2>3大誤差</h2>
+
+      <p>浮動小数点の誤差は<strong>バグではなく本質的な性質</strong>。仮数部が有限ビットである以上、誤差は避けられない。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>誤差の種類</th><th>発生条件</th><th>具体例</th><th>対策</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>丸め誤差</td><td>値を有限ビットで表せない</td><td>0.1（2進：循環小数）→ 0.1+0.2≠0.3</td><td>ε比較・10進演算ライブラリ</td></tr>
+            <tr><td>桁落ち</td><td>近い値同士の引き算</td><td>1.234567−1.234566 → 有効桁が6桁→1桁</td><td>式変形（有理化・因数分解）</td></tr>
+            <tr><td>情報落ち</td><td>大きな数＋小さな数</td><td>1.0×10²⁰+1.0 → +1が無視される</td><td>小さい数から先に加算</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>丸め誤差のメカニズム</h3>
+      <figure class="wide-diagram">
+        <figcaption>0.1 を2進数で表すと無限循環になる</figcaption>
+        <pre>
+0.1 を2進数に変換すると:
+0.0001100110011001100110011… （無限循環）
+         │← 仮数部23ビット →│
+         ↓ ここで打ち切る
+→ 0.1 は内部では近似値として保存される
+→ 0.1 + 0.2 = 0.30000000000000004 ≠ 0.3</pre>
+      </figure>
+
+      <h3>誤差の判定手順</h3>
+      <div class="formula-box">
+        <article>
+          <h4>計算式から誤差を分類する</h4>
+          <pre>
+[判定の手がかり]
+  近い値の引き算      → 桁落ち
+  大きな数 ＋ 小さな数 → 情報落ち
+  小数を2進変換       → 丸め誤差
+  無限級数を有限回で打切り → 打切り誤差
+
+[例]
+  1000000.0 − 999999.9 → 桁落ち
+  1.0×10¹⁰ + 1.0      → 情報落ち
+  0.1 + 0.2            → 丸め誤差</pre>
+        </article>
+      </div>
+
+      <h3>間違えやすいポイント</h3>
+      <ul>
+        <li><strong>丸め誤差はバグではない</strong>: 有限ビットで実数を表すことの本質的制約。</li>
+        <li><strong>誤差の分類を混同しない</strong>: 「近い値の引き算→桁落ち」「大+小→情報落ち」「小数2進変換→丸め誤差」</li>
+        <li><strong>オーバーフロー vs アンダーフロー</strong>: オーバーは最大値超え（∞）、アンダーは最小正規化数未満（0）</li>
+      </ul>
+    </section>
+
+    <!-- 文字コード -->
+    <section id="charcode" class="lesson-section">
+      <h2>文字コード</h2>
+
+      <p>コンピュータは0/1のみ扱う。「どの文字にどの番号を割り当てるか」がルールが文字コードと文字集合の役割。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>文字コード</th><th>種類</th><th>ビット数</th><th>日本語</th><th>英語</th><th>特徴</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ASCII</td><td>文字コード</td><td>7ビット（1B）</td><td>×</td><td>1B/文字</td><td>英数字128文字のみ</td></tr>
+            <tr><td>JIS（シフトJIS）</td><td>文字コード</td><td>1〜2B</td><td>2B</td><td>1B</td><td>日本独自。2バイト目に注意</td></tr>
+            <tr><td>Unicode</td><td>文字集合</td><td>最大21ビット</td><td>U+3042など</td><td>U+0041など</td><td>保存形式ではない</td></tr>
+            <tr><td>UTF-8</td><td>エンコード方式</td><td>1〜4B</td><td>3B</td><td>1B</td><td>ASCII互換。Web標準</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ASCII の主なコード値</h3>
+      <ul>
+        <li>数字 '0'〜'9': <strong>0x30〜0x39</strong></li>
+        <li>大文字 'A'〜'Z': <strong>0x41〜0x5A</strong></li>
+        <li>小文字 'a'〜'z': <strong>0x61〜0x7A</strong></li>
+      </ul>
+
+      <h3>Unicode と UTF-8 の違い</h3>
+      <p><strong>Unicode</strong> は「文字集合（カタログ）」— 文字に番号（コードポイント）を割り当てるルール。保存形式ではない。</p>
+      <p><strong>UTF-8</strong> は「エンコード方式（保存形式）」— Unicodeコードポイントをバイト列に変換する方法。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>バイト数</th><th>先頭ビットパターン</th><th>対象</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1バイト</td><td><code>0xxxxxxx</code></td><td>ASCII（0〜127）</td></tr>
+            <tr><td>2バイト</td><td><code>110xxxxx 10xxxxxx</code></td><td>ラテン文字拡張など</td></tr>
+            <tr><td>3バイト</td><td><code>1110xxxx 10xxxxxx 10xxxxxx</code></td><td>日本語・中国語など</td></tr>
+            <tr><td>4バイト</td><td><code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code></td><td>絵文字など</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>「あ」（U+3042）の UTF-8 エンコード例</figcaption>
+        <pre>
+U+3042 = 0011 0000 0100 0010₂
+
+UTF-8 3バイト形式: 1110xxxx 10xxxxxx 10xxxxxx
+ビットを埋め込む:
+  1110{0011} 10{000001} 10{000010}
+= 1110 0011  1000 0001  1000 0010
+= 0xE3       0x81       0x82</pre>
+      </figure>
+
+      <h3>間違えやすいポイント</h3>
+      <ul>
+        <li><strong>Unicode ≠ UTF-8</strong>: Unicodeは「文字集合」、UTF-8は「エンコード方式」。混同しない。</li>
+        <li><strong>ASCII互換の範囲</strong>: UTF-8でASCIIと互換なのは0〜127（1バイト文字）のみ。</li>
+        <li><strong>シフトJISの注意</strong>: 2バイト目にASCIIと同じ範囲の値を使うため、バイト単位処理で文字化けを起こす。</li>
+      </ul>
+    </section>
+
+    <!-- 確認問題 -->
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. IEEE 754 単精度（32ビット）の符号部・指数部・仮数部のビット数はどれか。<br>
+          A) 符号1・指数7・仮数24 &nbsp; B) 符号1・指数8・仮数23 &nbsp; C) 符号2・指数8・仮数22 &nbsp; D) 符号1・指数11・仮数20</summary>
+        <p><strong>答え: B) 符号1・指数8・仮数23</strong></p>
+        <p>合計32ビット。倍精度は符号1・指数11・仮数52で合計64ビット。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 浮動小数点の正規化で仮数部の先頭ビットが省略される理由はどれか。<br>
+          A) 省略しないと2バイトになるから &nbsp; B) 正規化で先頭が常に1になるため &nbsp; C) 先頭ビットは壊れやすいから &nbsp; D) 省略しないとCPUが遅くなるから</summary>
+        <p><strong>答え: B) 正規化で先頭が常に1になるため</strong></p>
+        <p>正規化すると仮数部は必ず 1.XXX の形になる。先頭の1は必ず1なので省略できる（hidden bit）。これで23ビットが実質24ビット精度になる。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. Unicodeに関する説明として正しいものはどれか。<br>
+          A) 1文字を常に2バイトで表現する &nbsp; B) 世界中の文字に一意の番号を割り当てる文字集合である &nbsp; C) 日本独自の文字コードである &nbsp; D) 英数字のみを扱う7ビットの文字コードである</summary>
+        <p><strong>答え: B) 世界中の文字に一意の番号を割り当てる文字集合である</strong></p>
+        <p>Unicodeは「文字集合（番号表）」であり保存形式ではない。UTF-8・UTF-16などがエンコード方式。Dは ASCII の説明。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. IEEE 754 単精度でバイアス値（127）を指数部に加える理由はどれか。<br>
+          A) 計算を速くするため &nbsp; B) 負の指数を符号なし整数で表現するため &nbsp; C) オーバーフローを防ぐため &nbsp; D) 丸め誤差を減らすため</summary>
+        <p><strong>答え: B) 負の指数を符号なし整数で表現するため</strong></p>
+        <p>指数が負の値（−127〜0）をとる場合でも、符号なし整数として保存するためにバイアス127を加える。読み出す時は格納値から127を引く。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 丸め誤差が発生する根本原因はどれか。<br>
+          A) CPUの計算が遅いため &nbsp; B) 仮数部が有限ビットのため &nbsp; C) メモリが不足しているため &nbsp; D) プログラムのバグのため</summary>
+        <p><strong>答え: B) 仮数部が有限ビットのため</strong></p>
+        <p>仮数部のビット数が有限なので、無限小数は途中で打ち切らざるを得ない。これはバグではなく浮動小数点の本質的性質。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 1.234567 − 1.234566 で発生する主な誤差はどれか。<br>
+          A) 丸め誤差 &nbsp; B) 桁落ち &nbsp; C) 情報落ち &nbsp; D) 打切り誤差</summary>
+        <p><strong>答え: B) 桁落ち</strong></p>
+        <p>近い値同士の引き算で上位桁が相殺され、有効桁数が激減する現象。1.234567−1.234566=0.000001 で有効桁が6桁→1桁に。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 1.0×10²⁰ + 1.0 で発生する主な誤差はどれか。<br>
+          A) 丸め誤差 &nbsp; B) 桁落ち &nbsp; C) 情報落ち &nbsp; D) オーバーフロー</summary>
+        <p><strong>答え: C) 情報落ち</strong></p>
+        <p>指数的に大きな差があるため、＋1.0が仮数部から溢れて無視される。対策は小さい数から先に加算するか、Kahanの総和アルゴリズムを使う。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. UTF-8の特徴として正しいものはどれか。<br>
+          A) すべての文字を2バイトで表現する &nbsp; B) ASCIIと互換性がない &nbsp; C) 可変長で英数字1B・日本語3B・絵文字4B &nbsp; D) 7ビット固定長の文字コードである</summary>
+        <p><strong>答え: C) 可変長で英数字1B・日本語3B・絵文字4B</strong></p>
+        <p>UTF-8は可変長（1〜4バイト）でASCIIと完全互換。Aは誤り（UTF-16の誤解）。Dは ASCII の説明。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 固定小数点数と浮動小数点数の違いとして正しいものはどれか。<br>
+          A) 浮動小数点のほうが計算が速い &nbsp; B) 固定小数点のほうが表現範囲が広い &nbsp; C) 浮動小数点は誤差が発生せず正確である &nbsp; D) 固定小数点は小数点の位置が固定で範囲は狭いが誤差が起きにくい</summary>
+        <p><strong>答え: D) 固定小数点は小数点の位置が固定で範囲は狭いが誤差が起きにくい</strong></p>
+        <p>固定小数点は整数演算に近く速いが範囲が狭い。浮動小数点は広範囲を扱えるが誤差が必ず発生する。</p>
+      </details>
+    </section>
+
+    <section id="sources" class="lesson-section source-note">
+      <h2>出典</h2>
+      <ul>
+        <li>本体PDF: <strong>1_基礎理論（数学・論理・情報理論99）.pdf</strong> p26-p47</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

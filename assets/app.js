@@ -5,10 +5,11 @@ const fallbackCurriculum = {
       title: "基礎理論",
       category: "technology",
       status: "in-progress",
-      description: "進数、論理、確率、情報理論、オートマトンを扱う土台の分野。進数・補数ページを作成済み。",
+      description: "進数、論理、確率、情報理論、オートマトンを扱う土台の分野。進数・補数・浮動小数点ページを作成済み。",
       href: "fe/technology/basic-theory/index.html",
       items: [
-        { title: "進数・基数変換と補数表現", href: "fe/technology/basic-theory/radix-complement.html", status: "done" }
+        { title: "進数・基数変換と補数表現", href: "fe/technology/basic-theory/radix-complement.html", status: "done" },
+        { title: "浮動小数点・誤差・文字コード", href: "fe/technology/basic-theory/float-error-code.html", status: "done" }
       ]
     },
     {
