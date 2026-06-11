@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ネットワーク接続方式とイーサネット | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#eef4f8",
+        primaryTextColor: "#182230",
+        primaryBorderColor: "#8aa4bf",
+        lineColor: "#2563eb",
+        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
+      },
+      flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 }
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>ネットワーク接続方式とイーサネット</h1>
+        <p class="lead">クライアントサーバー型とP2Pの違い、イーサネットのCSMA/CD・CSMA/CA、フレーム構造を基本情報技術者試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#cs">クライアントサーバー型</a>
+        <a href="#p2p">P2P</a>
+        <a href="#ethernet">イーサネット</a>
+        <a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">ネットワーク</a>
+      <span>ネットワーク接続方式とイーサネット</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>クライアントサーバー型のメリット・デメリット</li>
+          <li>ピアツーピア型（P2P）のメリット・デメリット</li>
+          <li>イーサネットの基本（CSMA/CD vs CSMA/CA）</li>
+          <li>イーサネットフレームの構造（宛先/送信元MAC、タイプ、ペイロード、FCS）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>CSMA/CDとCSMA/CAの違い、クライアントサーバー型vs P2P</dd></div>
+          <div><dt>中</dt><dd>イーサネットフレームのフィールド構成</dd></div>
+          <div><dt>低</dt><dd>バス型とスター型の変遷</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>クライアントサーバー型</td><td>サーバーがサービスを提供し、クライアントが利用する方式</td></tr>
+            <tr><td>2</td><td>ピアツーピア型（P2P）</td><td>端末同士が直接通信し、サーバーを介さない方式</td></tr>
+            <tr><td>3</td><td>イーサネット</td><td>現在のLANで標準的に使われる規格（IEEE 802.3）</td></tr>
+            <tr><td>4</td><td>CSMA/CD</td><td>衝突検知方式。有線LANで使用。衝突を検知して再送</td></tr>
+            <tr><td>5</td><td>CSMA/CA</td><td>衝突回避方式。無線LANで使用。衝突そのものを回避</td></tr>
+            <tr><td>6</td><td>ランダムアクセス方式</td><td>送信時に他機器の通信を確認し、空いていれば送信する方式</td></tr>
+            <tr><td>7</td><td>イーサネットフレーム</td><td>イーサネットでやり取りされるデータ単位</td></tr>
+            <tr><td>8</td><td>FCS</td><td>フレーム末尾の誤り検出コード（チェックサム）</td></tr>
+            <tr><td>9</td><td>スター型</td><td>スイッチを中心に各機器を接続するトポロジー。現在の主流</td></tr>
+            <tr><td>10</td><td>バス型</td><td>1本の回線に全機器を接続するトポロジー。イーサネット初期に使用</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cs" class="lesson-section">
+      <h2>クライアントサーバー型</h2>
+      <p><strong>サービスを提供する側をサーバー、サービスを利用する側をクライアント</strong>と呼びます。業務アプリケーションやネットワークサービスの中心としてサーバーが存在し、クライアントはネットワーク経由でサーバーからデータや機能を取得します。</p>
+
+      <h3>具体例</h3>
+      <ul>
+        <li>メールサーバーとメールクライアント</li>
+        <li>ファイルサーバーと業務端末</li>
+        <li>監視カメラ（IoT機器）がサーバーとして映像を提供し、クライアント端末が受信</li>
+      </ul>
+
+      <h3>メリット</h3>
+      <ul>
+        <li>中央集約型で管理が容易</li>
+        <li>セキュリティやバックアップが集中管理できる</li>
+      </ul>
+
+      <h3>デメリット</h3>
+      <ul>
+        <li>サーバーに負荷が集中すると全体に影響</li>
+        <li>サーバーが停止するとサービスが利用できなくなる（単一障害点）</li>
+      </ul>
+    </section>
+
+    <section id="p2p" class="lesson-section">
+      <h2>ピアツーピア型（P2P）</h2>
+      <p>端末同士が<strong>直接通信</strong>し、サーバーを介さずデータやサービスを共有する方式です。IPアドレスや専用アプリを利用して端末同士を接続します。</p>
+
+      <h3>具体例</h3>
+      <ul>
+        <li>ファイル共有ソフト（P2Pネットワーク）</li>
+        <li>リアルタイム動画配信での直接配信</li>
+        <li>ゲーム端末同士の通信</li>
+      </ul>
+
+      <h3>メリット</h3>
+      <ul>
+        <li>サーバー不要でコスト削減</li>
+        <li>端末間で負荷を分散できる</li>
+        <li>リアルタイム性が高い通信に向く</li>
+      </ul>
+
+      <h3>デメリット</h3>
+      <ul>
+        <li>管理が分散的でセキュリティ管理が難しい</li>
+        <li>端末が停止すると通信に影響が出る</li>
+      </ul>
+
+      <h3>比較表</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>クライアントサーバー型</th><th>ピアツーピア型</th></tr></thead>
+          <tbody>
+            <tr><td>中心機器</td><td>サーバーが必要</td><td>不要（端末同士で直接）</td></tr>
+            <tr><td>管理</td><td>集中管理（容易）</td><td>分散管理（困難）</td></tr>
+            <tr><td>コスト</td><td>サーバー費用あり</td><td>低コスト</td></tr>
+            <tr><td>単一障害点</td><td>あり（サーバー）</td><td>なし（各端末が独立）</td></tr>
+            <tr><td>負荷分散</td><td>サーバーに集中</td><td>端末間で分散</td></tr>
+            <tr><td>主な用途</td><td>企業システム、Webサービス</td><td>ファイル共有、動画配信、ゲーム</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="ethernet" class="lesson-section">
+      <h2>イーサネット</h2>
+      <p>現在のLANのほとんどはイーサネット規格（IEEE 802.3）を利用しています。イーサネットは、回線の使用状況を検知して通信の開始や待機を判断する<strong>ランダムアクセス方式</strong>を採用しています。</p>
+
+      <h3>基本原理</h3>
+      <ul>
+        <li><strong>目的</strong>：複数の機器が同じ回線を共有しても衝突を避けながら通信できるようにする</li>
+        <li><strong>通信方式</strong>：ランダムアクセス方式 — 送信時に他の機器が通信中なら待機し、再送信を試みる</li>
+      </ul>
+
+      <h3>CSMA/CD（衝突検知方式）</h3>
+      <p><strong>有線LAN</strong>で使用される方式です。</p>
+      <ul>
+        <li>送信前に回線が空いているか確認（Carrier Sense）</li>
+        <li>空いていれば送信開始</li>
+        <li><strong>衝突が発生したら検知（Collision Detection）</strong>し、ランダム時間待機後に再送</li>
+      </ul>
+
+      <h3>CSMA/CA（衝突回避方式）</h3>
+      <p><strong>無線LAN</strong>で使用される方式です。</p>
+      <ul>
+        <li>送信前に回線が空いているか確認</li>
+        <li>空いていてもすぐ送信せず、ランダム時間待機（衝突そのものを回避）</li>
+        <li>無線では衝突検知が困難なため、<strong>事前に回避（Collision Avoidance）</strong>する</li>
+      </ul>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>CSMA/CD</th><th>CSMA/CA</th></tr></thead>
+          <tbody>
+            <tr><td>方式</td><td>衝突検知（Detection）</td><td>衝突回避（Avoidance）</td></tr>
+            <tr><td>使用環境</td><td>有線LAN</td><td>無線LAN（Wi-Fi）</td></tr>
+            <tr><td>衝突対応</td><td>発生後に検知→再送</td><td>発生そのものを回避</td></tr>
+            <tr><td>理由</td><td>有線では衝突検知が容易</td><td>無線では衝突検知が困難</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>イーサネットフレームの構造</h3>
+      <p>イーサネットでやり取りされるデータの単位を<strong>イーサネットフレーム</strong>と呼びます。スイッチングハブはMACアドレスを参照して転送先ポートを判断します。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>フィールド名</th><th>内容</th><th>サイズ</th></tr></thead>
+          <tbody>
+            <tr><td>宛先MACアドレス</td><td>パケットの受信先の識別子</td><td>6バイト</td></tr>
+            <tr><td>送信元MACアドレス</td><td>パケットの送信元の識別子</td><td>6バイト</td></tr>
+            <tr><td>タイプフィールド</td><td>ペイロードのプロトコル種別（IP、ARPなど）</td><td>2バイト</td></tr>
+            <tr><td>ペイロード</td><td>実際のデータ（IPパケットなど）</td><td>46〜1,500バイト</td></tr>
+            <tr><td>チェックサム（FCS）</td><td>データの誤り検出コード</td><td>4バイト</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ネットワーク形態の変化</h3>
+      <ul>
+        <li>開発当初は<strong>バス型</strong>（各機器が1本の回線に接続）</li>
+        <li>高速伝送（100Mbps以上）では衝突が発生しやすいため、現在は<strong>スター型</strong>＋スイッチングハブを利用</li>
+        <li>スイッチが宛先ごとにパケットを切り替えるため、衝突が起きにくい</li>
+      </ul>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>CSMA/CDは有線、CSMA/CAは無線</strong>：よく入れ替えて出題される。CD=衝突検知（有線）、CA=衝突回避（無線）。</li>
+        <li><strong>クライアントサーバー型の弱点はサーバー障害</strong>：サーバー1台が止まると全クライアントが影響を受ける。これを単一障害点という。</li>
+        <li><strong>P2Pはサーバーレスだが管理が難しい</strong>：コストは低いがセキュリティ管理が分散的になる。</li>
+        <li><strong>FCSは誤り検出用、誤り訂正ではない</strong>：フレームの破損を検出するだけで、自動修復は行わない。</li>
+        <li><strong>スイッチの普及でCSMA/CDの衝突は減少</strong>：現在のスター型＋スイッチ構成では、全二重通信が可能で衝突が起きにくい。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. クライアントサーバー型のデメリットとして適切なものはどれか。</summary>
+        <p>ア）端末間で負荷を分散できる<br>イ）サーバーが停止するとサービス全体が利用できなくなる<br>ウ）管理が分散的でセキュリティ管理が難しい<br>エ）サーバー不要でコストが削減できる</p>
+        <p>答え: <strong>イ</strong> — サーバーが単一障害点になる。ア・エはP2Pのメリット。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. CSMA/CDの説明として正しいものはどれか。</summary>
+        <p>ア）無線LANで使用され、衝突そのものを回避する<br>イ）有線LANで使用され、衝突を検知して再送する<br>ウ）すべての通信をサーバー経由で行う<br>エ）送信前に必ず受信確認のACKを待つ</p>
+        <p>答え: <strong>イ</strong> — CSMA/CD（Collision Detection）は有線LAN用。衝突を検知して再送する。アはCSMA/CAの説明。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. ピアツーピア型の特徴として誤っているものはどれか。</summary>
+        <p>ア）サーバーを介さず端末同士が直接通信する<br>イ）ファイル共有やゲーム通信に利用される<br>ウ）中央集約型で管理が容易である<br>エ）端末間で負荷を分散できる</p>
+        <p>答え: <strong>ウ</strong> — 中央集約型で管理が容易なのはクライアントサーバー型。P2Pは分散管理で難しい。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. イーサネットフレームのFCS（Frame Check Sequence）の役割として正しいものはどれか。</summary>
+        <p>ア）宛先のIPアドレスを指定する<br>イ）ペイロードのプロトコル種別を示す<br>ウ）データが正しく届いたかを確認する誤り検出<br>エ）フレームの優先順位を決定する</p>
+        <p>答え: <strong>ウ</strong> — FCSはチェックサムによる誤り検出用。アはIPヘッダー、イはタイプフィールドの役割。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. CSMA/CAがCSMA/CDと異なる点として正しいものはどれか。</summary>
+        <p>ア）CSMA/CAは有線LANで使用される<br>イ）CSMA/CAは衝突が発生してから検知する<br>ウ）CSMA/CAは無線LANで使用され、衝突そのものを回避する<br>エ）CSMA/CAは送信前に回線確認を行わない</p>
+        <p>答え: <strong>ウ</strong> — CSMA/CA（Collision Avoidance）は無線LAN用。衝突を事前に回避する。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q6. イーサネットでバス型からスター型へ移行した理由として適切なものはどれか。</summary>
+        <p>ア）バス型の方が配線コストが安いため<br>イ）高速伝送ではバス型で衝突が発生しやすいため<br>ウ）スター型ではすべての端末が1本の回線を共有するため<br>エ）バス型の方が管理が容易なため</p>
+        <p>答え: <strong>イ</strong> — 高速伝送ではバス型の衝突が問題となり、スター型＋スイッチに移行した。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q7. イーサネットフレームのペイロード部分に格納されるものとして適切なものはどれか。</summary>
+        <p>ア）宛先MACアドレス<br>イ）FCS<br>ウ）IPパケット<br>エ）プリアンブル</p>
+        <p>答え: <strong>ウ</strong> — ペイロードには上位層のデータ（IPパケットなど）が格納される。ア・イ・エはフレームのヘッダー/トレーラ部分。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q8. クライアントサーバー型とP2P型の比較として正しいものはどれか。</summary>
+        <p>ア）P2P型はサーバーが必要で、管理が集中化される<br>イ）クライアントサーバー型はサーバーが不要で低コスト<br>ウ）P2P型は端末同士が直接通信し、リアルタイム性が高い通信に向く<br>エ）クライアントサーバー型は端末間で負荷が分散される</p>
+        <p>答え: <strong>ウ</strong> — P2Pはサーバーレスで端末同士が直接通信。リアルタイム性の高い通信（動画配信・ゲーム）に向く。</p>
+      </details>
+    </section>
+
+    <section class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>1_ネットワーク基礎.pdf ch24-ch25（p108-p116）: ネットワーク接続方式（クライアントサーバー型/P2P）、イーサネット（CSMA/CD・CSMA/CA・フレーム構造）</p>
+    </section>
+  </main>
+</body>
+</html>
