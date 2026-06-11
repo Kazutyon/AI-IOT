@@ -27,6 +27,11 @@
           "title": "集合と関係",
           "href": "fe/technology/basic-theory/sets-relations.html",
           "status": "done"
+        },
+        {
+          "title": "確率の基礎と期待値",
+          "href": "fe/technology/basic-theory/probability-statistics.html",
+          "status": "done"
         }
       ]
     },

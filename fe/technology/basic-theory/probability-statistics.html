@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>確率の基礎と期待値 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Basic Theory</p>
+        <h1>確率の基礎と期待値</h1>
+        <p class="lead">標本空間・事象・加法法則・乗法法則・期待値をFE試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#basics">確率の基本</a>
+        <a href="#sample-space">標本空間と事象</a>
+        <a href="#additive">加法法則</a>
+        <a href="#expected">期待値</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">基礎理論</a>
+      <span>確率と期待値</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>確率 = 目的の事象数 ÷ 全体の事象数（割合の計算）</li>
+          <li>標本空間（起こりうる結果の全体）と事象（条件を満たす部分集合）</li>
+          <li>加法法則: P(A∪B) = P(A) + P(B) − P(A∩B)</li>
+          <li>乗法法則: 独立事象なら P(A∩B) = P(A) × P(B)</li>
+          <li>期待値 = Σ(結果 × 確率)。長期的な平均値</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>加法法則、期待値の計算</dd></div>
+          <div><dt>中</dt><dd>標本空間と事象の定義、乗法法則</dd></div>
+          <div><dt>低</dt><dd>大数の法則、確率変数</dd></div>
+        </dl>
+        <p>読了目安: 約18分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>確率</td><td>目的の事象数÷全体の事象数。0〜1の値</td></tr>
+            <tr><td>2</td><td>標本空間 S</td><td>起こりうる結果の全体集合。確率の分母</td></tr>
+            <tr><td>3</td><td>事象 E</td><td>標本空間の部分集合。条件を満たす結果だけを集めたもの</td></tr>
+            <tr><td>4</td><td>加法法則</td><td>P(A∪B)=P(A)+P(B)−P(A∩B)。重複を引く</td></tr>
+            <tr><td>5</td><td>乗法法則</td><td>独立事象なら P(A∩B)=P(A)×P(B)</td></tr>
+            <tr><td>6</td><td>期待値</td><td>Σ(結果×確率)。長期的な平均値</td></tr>
+            <tr><td>7</td><td>大数の法則</td><td>試行回数が多いほど平均が期待値に近づく</td></tr>
+            <tr><td>8</td><td>確率変数</td><td>事象を数値に対応させる変数（例: 表→1, 裏→0）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="basics" class="lesson-section">
+      <h2>確率とは</h2>
+      <p>確率とは、「起こりうる結果のうち、目的の結果が占める<strong>割合</strong>」を数値で表したものです。予言ではなく、<strong>長期的に見たときの割合</strong>です。</p>
+      <article class="formula-box">
+        <h3>確率の定義</h3>
+        <p>確率 = 目的の事象数 ÷ 全体の事象数</p>
+        <p>例: サイコロで3が出る確率 → 全体6通り、目的1通り → 1/6</p>
+      </article>
+      <p>確率の値は必ず<strong>0〜1</strong>の間の数になります。0は絶対に起こらない、1は絶対に起こる、0.5は半分の割合です。確率は割合なので、1を超えたり負の値になったりすることはありません。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>概念</th><th>意味</th><th>記号</th><th>例（サイコロ）</th><th>要素数</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>標本空間</td><td>起こりうる結果の全体</td><td>S</td><td>{1,2,3,4,5,6}</td><td>6</td></tr>
+            <tr><td>事象</td><td>条件を満たす結果の集合</td><td>E</td><td>{2,4,6}（偶数）</td><td>3</td></tr>
+            <tr><td>確率</td><td>事象の割合</td><td>P(E)</td><td>P(偶数)=3/6</td><td>1/2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="sample-space" class="lesson-section">
+      <h2>標本空間と事象</h2>
+      <p>確率の分母になるのが<strong>標本空間 S</strong>（起こりうる結果の全体集合）です。標本空間の定義を誤ると、すべての確率計算が破綻します。</p>
+
+      <div class="compare-grid">
+        <article>
+          <h3>標本空間の作り方（3ステップ）</h3>
+          <ol>
+            <li><strong>実験を明確にする</strong>（例: サイコロを1回振る）</li>
+            <li><strong>起こりうる結果をすべて列挙する</strong>（例: 1〜6）</li>
+            <li><strong>重複なし・漏れなしで集合にする</strong>（例: {1,2,3,4,5,6}）</li>
+          </ol>
+        </article>
+        <article>
+          <h3>事象 E</h3>
+          <p>標本空間の<strong>部分集合</strong>。条件を満たす結果だけを集めたものです。</p>
+          <p>P(E) = |E| / |S|</p>
+          <p>例: コイン2枚 → 標本空間は {(表,表),(表,裏),(裏,表),(裏,裏)} の4通り</p>
+        </article>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>標本空間と事象の関係</figcaption>
+        <pre><code>標本空間 S = {1,2,3,4,5,6}  ← 起こりうる結果の全体（分母）
+    ┌─────────────────┐
+    │  1  2  3  4  5  6 │
+    │      ██████       │
+    │      █事象E█       │  E = {2,4,6}（偶数）
+    │      ██████       │
+    └─────────────────┘
+確率 P(E) = |E| / |S| = 3/6 = 1/2</code></pre>
+      </figure>
+    </section>
+
+    <section id="additive" class="lesson-section">
+      <h2>確率の計算（加法法則・乗法法則）</h2>
+      <p>確率の計算は、「事象をどう組み合わせるか」によって決まります。</p>
+
+      <div class="compare-grid">
+        <article>
+          <h3>加法法則（OR）</h3>
+          <p><strong>A または B が起こる確率</strong>を求めるときに使います。</p>
+          <p class="formula">P(A∪B) = P(A) + P(B) − P(A∩B)</p>
+          <p>なぜ引くのか: AとBを単純に足すと、A∩B（両方に属する部分）を2回数えてしまうため、1回分を引きます。集合の和集合と同じ構造です。</p>
+        </article>
+        <article>
+          <h3>乗法法則（AND）</h3>
+          <p><strong>A かつ B が起こる確率</strong>を求めるときに使います。</p>
+          <p class="formula">P(A∩B) = P(A) × P(B)</p>
+          <p>前提: 事象AとBが<strong>独立</strong>（互いに影響しない）であること。</p>
+          <p>例: サイコロ2回とも偶数 → 1/2 × 1/2 = 1/4</p>
+        </article>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>加法法則のイメージ（重複を引く理由）</figcaption>
+        <pre><code>     A = {2,4,6}        B = {3,6}
+    ┌───┐             ┌───┐
+    │ 2 │             │ 3 │
+    │ 4 │    ┌───┐    │   │
+    │   │    │ 6 │    │   │
+    └───┘    └───┘    └───┘
+              ↑
+          A∩B = {6}
+          ← 2回数えてしまうので1回分を引く
+
+P(A∪B) = 3/6 + 2/6 − 1/6 = 4/6 = 2/3</code></pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>加法法則</th><th>乗法法則</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>対応する論理</td><td>OR（AまたはB）</td><td>AND（AかつB）</td></tr>
+            <tr><td>式</td><td>P(A∪B)=P(A)+P(B)−P(A∩B)</td><td>P(A∩B)=P(A)×P(B)</td></tr>
+            <tr><td>注意点</td><td>重複部分を引くのを忘れない</td><td>独立かどうかの確認が必要</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <article class="formula-box">
+        <h3>例題: サイコロの確率（加法法則）</h3>
+        <p>サイコロ1回で「偶数または3の倍数」が出る確率</p>
+        <p>A（偶数）= {2,4,6}, B（3の倍数）= {3,6}</p>
+        <p>A∪B = {2,3,4,6} → P = 4/6 = <strong>2/3</strong></p>
+        <p>検算: P(A)+P(B)−P(A∩B) = 3/6+2/6−1/6 = 4/6</p>
+      </article>
+    </section>
+
+    <section id="expected" class="lesson-section">
+      <h2>期待値（長期的な平均）</h2>
+      <p>期待値とは、「長期的に見たときに平均として得られる値」です。<strong>1回の結果を予言するものではありません。</strong></p>
+      <article class="formula-box">
+        <h3>期待値の定義</h3>
+        <p>E(X) = Σ(結果 × その確率)</p>
+        <p>内部動作: ①起こりうる結果を列挙 ②それぞれに確率を掛ける ③すべて足し合わせる</p>
+      </article>
+
+      <figure class="wide-diagram">
+        <figcaption>期待値の計算構造（サイコロの例）</figcaption>
+        <pre><code>  結果   確率    結果×確率
+  1   ×  1/6  =  1/6
+  2   ×  1/6  =  2/6
+  3   ×  1/6  =  3/6
+  4   ×  1/6  =  4/6
+  5   ×  1/6  =  5/6
+  6   ×  1/6  =  6/6
+                ─────
+         合計 = 21/6 = 3.5  ← 期待値（長期的な平均）</code></pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>例</th><th>結果と確率</th><th>計算</th><th>期待値</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>サイコロ</td><td>1〜6 各1/6</td><td>(1+2+3+4+5+6)/6</td><td>3.5</td></tr>
+            <tr><td>コイン（表=1,裏=0）</td><td>1×1/2, 0×1/2</td><td>1/2+0</td><td>0.5</td></tr>
+            <tr><td>くじ（100円/0円）</td><td>100×0.2, 0×0.8</td><td>20+0</td><td>20円</td></tr>
+            <tr><td>ゲーム得点</td><td>1×0.5, 5×0.3, 10×0.2</td><td>0.5+1.5+2.0</td><td>4点</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <article class="formula-box">
+        <h3>期待値の例題</h3>
+        <p><strong>くじ引き</strong>: 当たり100円（確率0.2）、ハズレ0円（確率0.8）</p>
+        <p>E = 100×0.2 + 0×0.8 = <strong>20円</strong></p>
+        <p>意味: このくじを大量に引くと、1回あたり平均20円の価値。</p>
+      </article>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>標本空間の定義ミス</strong>: コイン2枚で標本空間を{表,裏}や3通りと間違える。全組み合わせを漏れなく列挙すること。</li>
+        <li><strong>加法法則の重複引き忘れ</strong>: P(A)+P(B)で済ませてしまう。A∩Bが空でない限り必ず重複を引く。</li>
+        <li><strong>乗法法則の前提条件</strong>: 事象が独立な場合のみ P(A∩B)=P(A)×P(B)。独立でない場合は条件付き確率が必要。</li>
+        <li><strong>期待値を1回の結果と誤解</strong>: サイコロの期待値3.5は1回では出ない。期待値は長期的な平均値。</li>
+        <li><strong>確率が1を超える計算</strong>: P(A)+P(B)が1を超えてもP(A∪B)は最大1。重複を引かないと1を超える誤答に。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. サイコロを1回振るとき、3が出る確率は？</summary>
+        <p>答え: <strong>1/6</strong>。全体6通り、目的1通りです。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. コインを2枚同時に投げるとき、標本空間の要素数は？</summary>
+        <p>答え: <strong>4</strong>。（表,表）（表,裏）（裏,表）（裏,裏）の4通りです。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. サイコロ1回で「偶数または3の倍数」が出る確率は？</summary>
+        <p>答え: <strong>2/3</strong>。偶数={2,4,6}, 3の倍数={3,6}, A∪B={2,3,4,6}, P=4/6=2/3。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. P(A∪B)=P(A)+P(B)−P(A∩B) で P(A∩B) を引く理由は？</summary>
+        <p>答え: <strong>AとBを単純に足すと重複部分を2回数えるから</strong>。1回分を引いて補正します。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. サイコロを2回振るとき、2回とも偶数が出る確率は？</summary>
+        <p>答え: <strong>1/4</strong>。1回目偶数=1/2, 2回目偶数=1/2, 独立なので 1/2×1/2=1/4。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q6. サイコロ1回の出目の期待値は？</summary>
+        <p>答え: <strong>3.5</strong>。(1+2+3+4+5+6)/6 = 3.5。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q7. 当たり200円（確率0.3）、ハズレ0円のくじの期待値は？</summary>
+        <p>答え: <strong>60円</strong>。200×0.3 + 0×0.7 = 60円。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q8. サイコロの期待値が3.5であることの正しい解釈は？</summary>
+        <p>答え: <strong>大量に振ったときの出目の平均が約3.5になる</strong>。期待値は長期的な平均で、1回の結果ではない。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q9. サイコロ1回で「4以上」または「偶数」が出る確率は？</summary>
+        <p>答え: <strong>2/3</strong>。4以上={4,5,6}, 偶数={2,4,6}, A∩B={4,6}, P(A∪B)=3/6+3/6−2/6=4/6=2/3。</p>
+      </details>
+    </section>
+
+    <section class="lesson-section source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <ul>
+        <li>本体PDF: <strong>1_基礎理論（数学・論理・情報理論99）.pdf</strong> p88-p109（第4章 確率と統計の基礎 前半）</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
