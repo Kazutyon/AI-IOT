@@ -633,3 +633,45 @@ th {
     grid-template-columns: 1fr;
   }
 }
+
+/* ポータル トップ用カード */
+.section-card {
+  display: block;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px 22px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: box-shadow .15s, border-color .15s;
+}
+
+.section-card h3 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+}
+
+.section-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+a.section-card.is-done:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--teal);
+}
+
+a.section-card.is-done h3 {
+  color: var(--blue);
+}
+
+div.section-card.is-planned {
+  opacity: 0.45;
+  cursor: default;
+}
+
+div.section-card.is-planned h3 {
+  color: var(--muted);
+}

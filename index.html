@@ -5,98 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="assets/style.css">
-  <script defer src="assets/app.js"></script>
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
       <div>
-        <p class="eyebrow">AI-IOT / FE Study Portal</p>
+        <p class="eyebrow">FE Study Portal</p>
         <h1>基本情報技術者試験 対策ポータル</h1>
-        <p class="lead">教材PDFを分野別に整理し、復習しやすい試験対策ページへ育てていくための入口です。</p>
-      </div>
-      <div class="study-map" aria-label="学習分野マップ">
-        <span>基礎理論</span>
-        <span>アルゴリズム</span>
-        <span>ネットワーク</span>
-        <span>セキュリティ</span>
-        <span>マネジメント</span>
-        <span>ストラテジ</span>
+        <p class="lead">分野を選んで教材を開いてください。</p>
       </div>
     </div>
   </header>
 
   <main>
-    <section class="toolbar" aria-label="教材フィルター">
-      <div>
-        <h2>学習ロードマップ</h2>
-        <p>作成済み・作成中・未作成をまとめて表示します。</p>
+    <section>
+      <div class="section-heading">
+        <h2>テクノロジ系</h2>
       </div>
-      <div class="filters" role="group" aria-label="表示切替">
-        <button class="filter is-active" type="button" data-filter="all">すべて</button>
-        <button class="filter" type="button" data-filter="done">作成済み</button>
-        <button class="filter" type="button" data-filter="in-progress">作成中</button>
-        <button class="filter" type="button" data-filter="planned">未作成</button>
-      </div>
-    </section>
+      <div class="section-grid">
 
-    <section class="overview" aria-label="進捗サマリー">
-      <div class="metric">
-        <span id="done-count">0</span>
-        <p>作成済み</p>
-      </div>
-      <div class="metric">
-        <span id="progress-count">0</span>
-        <p>作成中</p>
-      </div>
-      <div class="metric">
-        <span id="planned-count">0</span>
-        <p>未作成</p>
+        <a class="section-card is-done" href="fe/technology/basic-theory/index.html">
+          <h3>基礎理論</h3>
+          <p>進数・補数・浮動小数点・誤差・文字コード・論理演算・集合・確率</p>
+        </a>
+
+        <a class="section-card is-done" href="fe/technology/network/index.html">
+          <h3>ネットワーク</h3>
+          <p>OSI/TCP-IP・IPアドレス・DNS・Web・メール・無線・セキュリティ</p>
+        </a>
+
+        <a class="section-card is-done" href="fe/technology/cloud/index.html">
+          <h3>クラウド</h3>
+          <p>SaaS/PaaS/IaaS・仮想化・信頼性設計・クラウドセキュリティ</p>
+        </a>
+
+        <div class="section-card is-planned">
+          <h3>アルゴリズム</h3>
+          <p>データ構造・探索・整列・計算量・擬似言語問題</p>
+        </div>
+
+        <div class="section-card is-planned">
+          <h3>セキュリティ</h3>
+          <p>認証・暗号・脆弱性・攻撃手法・組織的対策</p>
+        </div>
+
+        <div class="section-card is-planned">
+          <h3>データベース</h3>
+          <p>関係DB・SQL・正規化・トランザクション</p>
+        </div>
+
       </div>
     </section>
 
     <section>
       <div class="section-heading">
-        <h2>分野別教材</h2>
-        <p>各分野のページは、教材が増えても同じカード形式で追加します。</p>
+        <h2>マネジメント・ストラテジ系</h2>
       </div>
-      <div id="section-grid" class="section-grid"></div>
-    </section>
+      <div class="section-grid">
 
-    <section class="two-column">
-      <div>
-        <div class="section-heading">
-          <h2>最近追加した教材</h2>
-          <p>新しくHTML化したページをここに出します。</p>
+        <div class="section-card is-planned">
+          <h3>マネジメント</h3>
+          <p>PMBOK・サービスマネジメント・システム監査</p>
         </div>
-        <div id="recent-list" class="list"></div>
-      </div>
-      <div>
-        <div class="section-heading">
-          <h2>次に作る候補</h2>
-          <p>DeepSeekに小分割で渡す対象です。</p>
-        </div>
-        <div id="next-list" class="list"></div>
-      </div>
-    </section>
 
-    <section class="source-map">
-      <div class="section-heading">
-        <h2>教材PDF対応表</h2>
-        <p>元PDFと作成予定ページの対応を残します。</p>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>PDF</th>
-              <th>主な分野</th>
-              <th>状態</th>
-              <th>次の作業</th>
-            </tr>
-          </thead>
-          <tbody id="source-table"></tbody>
-        </table>
+        <div class="section-card is-planned">
+          <h3>ストラテジ</h3>
+          <p>経営戦略・法務・標準化・デジタル社会</p>
+        </div>
+
       </div>
     </section>
   </main>
