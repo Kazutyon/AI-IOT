@@ -121,7 +121,7 @@ const fallbackCurriculum = {
       title: "2_クラウド基礎.pdf",
       category: "ネットワーク / システム構成",
       status: "HTML化済み",
-      next: "全9ページGitHub Pages反映済み。旧HTMLのcloud_basic_10は変換対象外（現時点で公開予定なし）"
+      next: "全9ページGitHub Pages反映済み"
     },
     {
       title: "1_情報セキュリティー.pdf",
