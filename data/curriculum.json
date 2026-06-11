@@ -37,6 +37,11 @@
           "title": "分散・標準偏差・頻度分布",
           "href": "fe/technology/basic-theory/variance-statistics.html",
           "status": "done"
+        },
+        {
+          "title": "情報量とエントロピー",
+          "href": "fe/technology/basic-theory/information-entropy.html",
+          "status": "done"
         }
       ]
     },

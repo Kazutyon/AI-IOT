@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>情報量とエントロピー | 基礎理論 | FE対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Basic Theory</p>
+        <h1>情報量とエントロピー</h1>
+        <p class="lead">情報の「驚き」を数値化する −log₂P の仕組みと、情報源の不確実性を表すエントロピーをFE試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="このページの見出し">
+        <a href="#terms">用語</a>
+        <a href="#info-amount">情報量</a>
+        <a href="#entropy">エントロピー</a>
+        <a href="#compression">圧縮との関係</a>
+        <a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <span>›</span>
+      <a href="index.html">基礎理論</a>
+      <span>›</span>
+      <span>情報量とエントロピー</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>情報量 I(x) = −log₂ P(x)（確率が小さいほど情報量大）</li>
+          <li>エントロピー H = −Σ Pᵢ log₂ Pᵢ（情報量の期待値）</li>
+          <li>エントロピー最大: 均等確率のとき log₂n bit</li>
+          <li>エントロピー最小: 1つに確率集中のとき 0 bit</li>
+          <li>エントロピー大→圧縮しにくい、小→圧縮しやすい</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>FE頻出ランク</h2>
+        <dl>
+          <div><dt>最頻出</dt><dd>情報量の計算（−log₂P）</dd></div>
+          <div><dt>最頻出</dt><dd>エントロピーの最大・最小条件</dd></div>
+          <div><dt>頻出</dt><dd>エントロピーの計算</dd></div>
+          <div><dt>頻出</dt><dd>圧縮との関係</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <!-- 重要用語 -->
+    <section id="terms" class="lesson-section">
+      <h2>重要用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>情報量 I(x)</td><td>ある出来事の「驚きの大きさ」。I = −log₂ P(x)</td><td>確率が小さいほど情報量大。単位はbit</td></tr>
+            <tr><td>bit</td><td>情報量の単位。「はい/いいえ」で区別できる情報量</td><td>コインの表裏 = 1 bit</td></tr>
+            <tr><td>エントロピー H</td><td>情報源の平均情報量。H = −Σ Pᵢ log₂ Pᵢ</td><td>期待値と同じ構造。不確実性の尺度</td></tr>
+            <tr><td>情報源</td><td>情報を発生する源。コイン・サイコロ・文字列など</td><td>エントロピー計算の対象</td></tr>
+            <tr><td>対数 log₂</td><td>底が2の対数。情報量をbitで測る数学的基盤</td><td>log₂(1/2) = −1 → −log₂(1/2) = 1</td></tr>
+            <tr><td>最大エントロピー</td><td>すべての結果が均等な確率のとき最大。値は log₂n</td><td>公平なサイコロ = log₂6 ≈ 2.58 bit</td></tr>
+            <tr><td>最小エントロピー</td><td>1つの結果に確率が集中するとき最小。値は0</td><td>完全に予測可能な情報源</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 情報量 -->
+    <section id="info-amount" class="lesson-section">
+      <h2>情報量とは</h2>
+      <p>情報とは「不確実性が減る量」です。起こりやすいことが起きても驚かない（情報量小）、めったに起きないことが起きると驚く（情報量大）という直感を数式で表します。</p>
+
+      <article class="formula-box">
+        <h3>情報量の定義</h3>
+        <pre>I(x) = −log₂ P(x)
+
+  P(x): 出来事xの確率
+  底が2の対数: 情報をbitで測るため
+  マイナス符号: 確率が小さいほど値が大きくなるよう正にする
+
+  コイン表（確率 1/2） → I = −log₂(1/2) = 1 bit
+  サイコロ出目（確率 1/6） → I = −log₂(1/6) ≈ 2.58 bit</pre>
+      </article>
+
+      <figure class="wide-diagram">
+        <figcaption>確率と情報量の対応</figcaption>
+        <pre>
+確率 P(x)   情報量 I(x) = −log₂ P(x)
+────────────────────────────────────
+  1/2    →   1     bit  （コインの表）
+  1/4    →   2     bit  （コイン2回とも表）
+  1/6    →  約2.58 bit  （サイコロの出目）
+  1/10   →  約3.3  bit
+  1/100  →  約6.6  bit
+  1/1000 →  約10   bit
+
+← 確率が小さいほど情報量は大きい →
+        </pre>
+      </figure>
+
+      <h3>情報量の性質</h3>
+      <ul class="check-list">
+        <li>確率が小さいほど情報量は大きい</li>
+        <li>情報量は常に 0 以上</li>
+        <li><strong>独立な出来事は足し算</strong>（コイン2回 = 1 + 1 = 2 bit）</li>
+        <li>確率が 1/10 になるごとに情報量は約 3.3 bit 増加</li>
+      </ul>
+    </section>
+
+    <!-- エントロピー -->
+    <section id="entropy" class="lesson-section">
+      <h2>エントロピー（情報量の平均）</h2>
+      <p>情報量が「1回の驚き」なら、エントロピーは「この情報源から情報を受け取るたびに、平均してどれだけ驚くか」を表します。期待値と同じ構造で計算します。</p>
+
+      <article class="formula-box">
+        <h3>エントロピーの定義</h3>
+        <pre>H = −Σ Pᵢ log₂ Pᵢ
+  = Σ Pᵢ × I(xᵢ)   ← 情報量の期待値
+
+公平なコイン（表0.5, 裏0.5）:
+  H = −0.5×log₂0.5 − 0.5×log₂0.5
+    = −0.5×(−1) − 0.5×(−1)
+    = 0.5 + 0.5 = 1 bit
+
+偏ったコイン（表0.9, 裏0.1）:
+  H = −0.9×log₂0.9 − 0.1×log₂0.1
+    ≈ 0.137 + 0.332 ≈ 0.47 bit  ← 予測しやすいので小さい</pre>
+      </article>
+
+      <figure class="wide-diagram">
+        <figcaption>エントロピーの最大値・最小値</figcaption>
+        <pre>
+最小値 = 0 bit
+  ┌───────────────────────────────┐
+  │  毎回必ず「表」が出るコイン    │
+  │  確率: 表=1, 裏=0             │
+  │  → 完全に予測可能 → H = 0    │
+  └───────────────────────────────┘
+
+最大値 = log₂n bit（均等なとき）
+  ┌───────────────────────────────┐
+  │  公平なコイン  (n=2):  1 bit  │
+  │  公平なサイコロ(n=6): ≈2.58 bit│
+  │  トランプ1枚  (n=52): ≈5.70 bit│
+  └───────────────────────────────┘
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>情報量 I(x)</th><th>エントロピー H</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>定義</td><td>−log₂ P(x)</td><td>−Σ Pᵢ log₂ Pᵢ</td></tr>
+            <tr><td>対象</td><td>1つの出来事</td><td>情報源全体</td></tr>
+            <tr><td>意味</td><td>その出来事の「驚き」</td><td>平均的な「驚き」（不確実性）</td></tr>
+            <tr><td>単位</td><td>bit</td><td>bit</td></tr>
+            <tr><td>計算に使う確率</td><td>1つ</td><td>全結果の確率を総和</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>エントロピー</th><th>意味</th><th>実例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>大</td><td>不確実性が高い・予測しにくい</td><td>公平なサイコロ（≈2.58 bit）</td></tr>
+            <tr><td>小</td><td>不確実性が低い・予測しやすい</td><td>偏ったコイン（≈0.47 bit）</td></tr>
+            <tr><td>0</td><td>完全に予測可能</td><td>毎回同じ結果が出る情報源</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 圧縮との関係 -->
+    <section id="compression" class="lesson-section">
+      <h2>エントロピーとデータ圧縮</h2>
+      <p>エントロピーは「データをどこまで圧縮できるかの理論的限界」を示します。ZIP・PNG・MP3 などの圧縮技術はすべてこの原理に基づきます。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>エントロピー</th><th>圧縮のしやすさ</th><th>理由</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>大（高い不確実性）</td><td>圧縮しにくい</td><td>パターンがなく規則性が低い</td></tr>
+            <tr><td>小（低い不確実性）</td><td>圧縮しやすい</td><td>同じパターンが繰り返し出現する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>間違えやすいポイント</h3>
+      <ul class="check-list">
+        <li><strong>log₂ の計算</strong> — log₂(1/2) = −1 なので −log₂(1/2) = 1。「2の何乗か」で考える</li>
+        <li><strong>情報量とエントロピーの混同</strong> — 情報量は1つの出来事、エントロピーは情報源全体の平均</li>
+        <li><strong>エントロピー最大の条件</strong> — 均等なとき最大（log₂n）。偏るほど小さくなる</li>
+        <li><strong>エントロピー最小 = 0</strong> — 1つの結果に確率が集中（完全予測可能）のとき</li>
+        <li><strong>単位は常にbit</strong> — 底が2の対数を使うため</li>
+      </ul>
+    </section>
+
+    <!-- 確認問題 -->
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 公平なコインの表が出る情報量は何 bit か。</summary>
+        <p><strong>正解: 1 bit</strong><br>
+        I = −log₂(1/2) = −(−1) = 1 bit。「2の何乗か」で考えると 2¹ = 2 なので 1/2 → 1 bit。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. サイコロの1の目が出る情報量は、コインの表裏よりどうなるか。</summary>
+        <p><strong>正解: 大きい</strong><br>
+        サイコロ: −log₂(1/6) ≈ 2.58 bit。コイン: 1 bit。確率 1/6 &lt; 1/2 なので情報量は大きい。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 公平なコイン（表0.5, 裏0.5）のエントロピーは何 bit か。</summary>
+        <p><strong>正解: 1 bit</strong><br>
+        H = −0.5×log₂0.5 − 0.5×log₂0.5 = 0.5 + 0.5 = 1 bit。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 公平なサイコロ（6面）のエントロピーはいくつか。</summary>
+        <p><strong>正解: log₂6 ≈ 2.58 bit</strong><br>
+        結果が均等（各1/6）のときエントロピーは最大で log₂n。n=6 なので log₂6 ≈ 2.58 bit。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. エントロピーが 0 になるのはどのような場合か。</summary>
+        <p><strong>正解: 1つの結果の確率が 1（完全に予測可能）</strong><br>
+        確率が1の結果しか出ない場合、不確実性はゼロ。−1×log₂1 = 0 bit。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 表0.9・裏0.1の偏ったコインのエントロピーは、公平なコインと比べてどうなるか。</summary>
+        <p><strong>正解: 小さい（約 0.47 bit）</strong><br>
+        偏っているほど予測しやすく、不確実性が低いためエントロピーは小さくなる。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. エントロピーが大きいデータの特徴として正しいものはどれか。</summary>
+        <p><strong>正解: 圧縮しにくい</strong><br>
+        エントロピーが大きい = 不確実性が高い = パターンがない = 圧縮困難。ZIP などの圧縮効率が低い。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. コインを2回独立に投げたとき、両方の結果の合計情報量はいくつか。</summary>
+        <p><strong>正解: 2 bit</strong><br>
+        独立な出来事の情報量は加算。1 bit + 1 bit = 2 bit。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 情報量 I(x) の式として正しいものはどれか。</summary>
+        <p><strong>正解: −log₂ P(x)</strong><br>
+        マイナス符号により確率が小さいほど正の値（情報量大）になる。底は2（単位: bit）。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 4つの結果が均等な確率（各1/4）の情報源のエントロピーはいくつか。</summary>
+        <p><strong>正解: 2 bit</strong><br>
+        均等なとき H = log₂n = log₂4 = 2 bit。または −4×(1/4×log₂(1/4)) = −(−2) = 2 bit。</p>
+      </details>
+    </section>
+
+    <!-- 出典 -->
+    <section id="sources" class="lesson-section source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <ul>
+        <li>本体PDF: <strong>1_基礎理論（数学・論理・情報理論99）.pdf</strong> p128-p142</li>
+        <li>対応章: 第5章 情報理論の基礎（前半）— 情報量・エントロピー</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

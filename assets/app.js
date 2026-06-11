@@ -13,7 +13,8 @@ const fallbackCurriculum = {
         { title: "論理演算と論理回路", href: "fe/technology/basic-theory/logic-circuit.html", status: "done" },
         { title: "集合と関係", href: "fe/technology/basic-theory/sets-relations.html", status: "done" },
         { title: "確率の基礎と期待値", href: "fe/technology/basic-theory/probability-statistics.html", status: "done" },
-        { title: "分散・標準偏差・頻度分布", href: "fe/technology/basic-theory/variance-statistics.html", status: "done" }
+        { title: "分散・標準偏差・頻度分布", href: "fe/technology/basic-theory/variance-statistics.html", status: "done" },
+        { title: "情報量とエントロピー", href: "fe/technology/basic-theory/information-entropy.html", status: "done" }
       ]
     },
     {
