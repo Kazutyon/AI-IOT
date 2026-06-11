@@ -8,49 +8,51 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="header-inner">
+    <div class="header-inner" style="grid-template-columns: 1fr;">
       <div>
         <p class="eyebrow">FE Study Portal</p>
-        <h1>基本情報技術者試験 対策ポータル</h1>
-        <p class="lead">分野を選んで教材を開いてください。</p>
+        <h1 style="font-size: clamp(1.5rem, 4vw, 2.4rem); margin: 0 0 8px;">基本情報技術者試験 対策ポータル</h1>
+        <p class="lead" style="margin: 0;">分野を選んで教材を開いてください。</p>
       </div>
     </div>
   </header>
 
-  <main>
-    <section>
-      <div class="section-heading">
-        <h2>テクノロジ系</h2>
-      </div>
-      <div class="section-grid">
+  <main style="max-width: 1100px; margin: 0 auto; padding: 32px 20px 60px;">
 
-        <a class="section-card is-done" href="fe/technology/basic-theory/index.html">
-          <h3>基礎理論</h3>
+    <section style="margin-bottom: 48px;">
+      <h2 class="portal-section-title">テクノロジ系</h2>
+      <div class="section-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;">
+
+        <a class="portal-card portal-card--done" href="fe/technology/basic-theory/index.html">
+          <span class="portal-card__label">基礎理論</span>
           <p>進数・補数・浮動小数点・誤差・文字コード・論理演算・集合・確率</p>
         </a>
 
-        <a class="section-card is-done" href="fe/technology/network/index.html">
-          <h3>ネットワーク</h3>
+        <a class="portal-card portal-card--done" href="fe/technology/network/index.html">
+          <span class="portal-card__label">ネットワーク</span>
           <p>OSI/TCP-IP・IPアドレス・DNS・Web・メール・無線・セキュリティ</p>
         </a>
 
-        <a class="section-card is-done" href="fe/technology/cloud/index.html">
-          <h3>クラウド</h3>
+        <a class="portal-card portal-card--done" href="fe/technology/cloud/index.html">
+          <span class="portal-card__label">クラウド</span>
           <p>SaaS/PaaS/IaaS・仮想化・信頼性設計・クラウドセキュリティ</p>
         </a>
 
-        <div class="section-card is-planned">
-          <h3>アルゴリズム</h3>
+        <div class="portal-card portal-card--planned">
+          <span class="portal-card__badge">準備中</span>
+          <span class="portal-card__label">アルゴリズム</span>
           <p>データ構造・探索・整列・計算量・擬似言語問題</p>
         </div>
 
-        <div class="section-card is-planned">
-          <h3>セキュリティ</h3>
+        <div class="portal-card portal-card--planned">
+          <span class="portal-card__badge">準備中</span>
+          <span class="portal-card__label">セキュリティ</span>
           <p>認証・暗号・脆弱性・攻撃手法・組織的対策</p>
         </div>
 
-        <div class="section-card is-planned">
-          <h3>データベース</h3>
+        <div class="portal-card portal-card--planned">
+          <span class="portal-card__badge">準備中</span>
+          <span class="portal-card__label">データベース</span>
           <p>関係DB・SQL・正規化・トランザクション</p>
         </div>
 
@@ -58,23 +60,24 @@
     </section>
 
     <section>
-      <div class="section-heading">
-        <h2>マネジメント・ストラテジ系</h2>
-      </div>
-      <div class="section-grid">
+      <h2 class="portal-section-title">マネジメント・ストラテジ系</h2>
+      <div class="section-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;">
 
-        <div class="section-card is-planned">
-          <h3>マネジメント</h3>
+        <div class="portal-card portal-card--planned">
+          <span class="portal-card__badge">準備中</span>
+          <span class="portal-card__label">マネジメント</span>
           <p>PMBOK・サービスマネジメント・システム監査</p>
         </div>
 
-        <div class="section-card is-planned">
-          <h3>ストラテジ</h3>
+        <div class="portal-card portal-card--planned">
+          <span class="portal-card__badge">準備中</span>
+          <span class="portal-card__label">ストラテジ</span>
           <p>経営戦略・法務・標準化・デジタル社会</p>
         </div>
 
       </div>
     </section>
+
   </main>
 </body>
 </html>

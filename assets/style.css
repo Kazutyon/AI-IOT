@@ -634,44 +634,86 @@ th {
   }
 }
 
+/* ポータル トップ用 見出し */
+.portal-section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
 /* ポータル トップ用カード */
-.section-card {
+.portal-card {
+  position: relative;
   display: block;
   background: var(--paper);
   border: 1px solid var(--line);
+  border-top: 4px solid var(--line);
   border-radius: 10px;
-  padding: 20px 22px;
+  padding: 20px 20px 18px;
   text-decoration: none;
   color: var(--ink);
-  transition: box-shadow .15s, border-color .15s;
 }
 
-.section-card h3 {
-  margin: 0 0 6px;
-  font-size: 1.05rem;
-}
-
-.section-card p {
-  margin: 0;
-  font-size: 0.88rem;
+.portal-card p {
+  margin: 6px 0 0;
+  font-size: 0.85rem;
   color: var(--muted);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
-a.section-card.is-done:hover {
+.portal-card__label {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.portal-card__badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+
+/* 作成済み */
+.portal-card--done {
+  border-top-color: var(--teal);
+  box-shadow: 0 2px 8px rgba(24,34,48,.06);
+  transition: box-shadow .15s, transform .15s;
+}
+.portal-card--done:hover {
   box-shadow: var(--shadow);
-  border-color: var(--teal);
+  transform: translateY(-2px);
 }
-
-a.section-card.is-done h3 {
+.portal-card--done .portal-card__label {
   color: var(--blue);
 }
 
-div.section-card.is-planned {
-  opacity: 0.45;
+/* 準備中 */
+.portal-card--planned {
+  background: #f8f9fb;
+  border-top-color: var(--line);
   cursor: default;
 }
-
-div.section-card.is-planned h3 {
-  color: var(--muted);
+.portal-card--planned .portal-card__label {
+  color: #9aa5b4;
 }
+.portal-card--planned p {
+  color: #b0bac5;
+}
+
+/* 旧クラス（後方互換） */
+.section-card { display: block; }
+a.section-card.is-done h3 { color: var(--blue); }
+div.section-card.is-planned { opacity: .45; cursor: default; }
