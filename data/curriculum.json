@@ -4,10 +4,16 @@
       "id": "basic-theory",
       "title": "基礎理論",
       "category": "technology",
-      "status": "planned",
-      "description": "進数、論理、確率、情報理論、オートマトンを扱う土台の分野。",
+      "status": "in-progress",
+      "description": "進数、論理、確率、情報理論、オートマトンを扱う土台の分野。進数・補数ページを作成済み。",
       "href": "fe/technology/basic-theory/index.html",
-      "items": []
+      "items": [
+        {
+          "title": "進数・基数変換と補数表現",
+          "href": "fe/technology/basic-theory/radix-complement.html",
+          "status": "done"
+        }
+      ]
     },
     {
       "id": "algorithm",
@@ -184,14 +190,14 @@
     {
       "title": "1_基礎理論（数学・論理・情報理論99）.pdf",
       "category": "基礎理論",
-      "status": "作成中",
-      "next": "既存HTMLを参考に、共通テンプレートへ再構成"
+      "status": "一部HTML化済み",
+      "next": "進数・基数変換・補数をGitHub Pages反映。次は浮動小数点・誤差・文字コード"
     },
     {
       "title": "1_2(2)進数のお話.pdf",
       "category": "基礎理論",
-      "status": "未作成",
-      "next": "基数変換ページへ統合するか、補助ページとして切り出す"
+      "status": "一部統合済み",
+      "next": "進数・基数変換と補数表現ページへ補助資料として統合済み"
     },
     {
       "title": "1_ネットワーク基礎.pdf",
