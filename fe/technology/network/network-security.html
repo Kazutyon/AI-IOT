@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ネットワークセキュリティ | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({startOnLoad:true,theme:"base",themeVariables:{primaryColor:"#eef4f8",primaryTextColor:"#182230",primaryBorderColor:"#8aa4bf",lineColor:"#2563eb",fontFamily:"system-ui, -apple-system, Segoe UI, sans-serif"},flowchart:{curve:"basis",nodeSpacing:34,rankSpacing:42}});
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header"><div class="header-inner"><div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>ネットワークセキュリティ</h1>
+        <p class="lead">共通鍵/公開鍵暗号方式、電子署名、認証局(CA)、SSL/TLS、ファイアウォール、DMZ、IDS/IPS、VPNを基本情報技術者試験向けに整理します。</p>
+      </div><nav class="study-map"><a href="#terms">用語</a><a href="#crypto">暗号</a><a href="#ca">CA/SSL</a><a href="#fw">FW/DMZ</a><a href="#ids">IDS/IPS</a><a href="#vpn">VPN</a><a href="#quiz">確認問題</a></nav></div></header>
+  <main class="lesson-page">
+    <nav class="breadcrumb"><a href="../../../index.html">ポータル</a><a href="index.html">ネットワーク</a><span>ネットワークセキュリティ</span></nav>
+    <section class="lesson-summary"><div><h2>このページで覚えること</h2><ul class="check-list">
+          <li>共通鍵暗号方式と公開鍵暗号方式の違い</li><li>電子署名の仕組みと認証局(CA)の役割</li>
+          <li>SSL/TLSハンドシェイクの流れ</li><li>ファイアウォールの種類（パケットフィルタリング/ゲートウェイ型）</li>
+          <li>DMZ・IDS/IPS・VPNの基本</li>
+        </ul></div><aside class="priority-box"><h2>出題優先度</h2><dl>
+          <div><dt>高</dt><dd>共通鍵vs公開鍵、SSL/TLS、ファイアウォール、DMZ</dd></div>
+          <div><dt>中</dt><dd>電子署名、認証局、IDSとIPSの違い、VPNトンネル</dd></div></dl><p>読了目安: 約20分</p></aside></section>
+
+    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+          <tr><td>1</td><td>共通鍵暗号方式</td><td>同じ鍵で暗号化・復号。AES/RC4。鍵共有が必要</td></tr>
+          <tr><td>2</td><td>公開鍵暗号方式</td><td>公開鍵で暗号化、秘密鍵で復号。RSA/DSA/ECDSA</td></tr>
+          <tr><td>3</td><td>電子署名</td><td>送信者の秘密鍵で暗号化→公開鍵で検証で本人証明</td></tr>
+          <tr><td>4</td><td>認証局(CA)</td><td>サーバー証明書を発行し、通信相手の正当性を保証</td></tr>
+          <tr><td>5</td><td>SSL/TLS</td><td>通信の暗号化プロトコル。現在はTLS 1.2/1.3が標準</td></tr>
+          <tr><td>6</td><td>ファイアウォール</td><td>ネットワーク境界で不正アクセスを遮断する防御システム</td></tr>
+          <tr><td>7</td><td>DMZ</td><td>外部と内部の間に設ける中間ネットワーク領域</td></tr>
+          <tr><td>8</td><td>IDS</td><td>不正侵入を検知して通知するシステム</td></tr>
+          <tr><td>9</td><td>IPS</td><td>不正侵入を検知して遮断するシステム</td></tr>
+          <tr><td>10</td><td>VPN</td><td>公開ネットワーク上に仮想専用線を構築。IPsec/SSL-VPN</td></tr>
+          <tr><td>11</td><td>ハッシュ関数</td><td>一方向性。パスワード保存・改ざん検知に使用</td></tr>
+        </tbody></table></div></section>
+
+    <section id="crypto" class="lesson-section"><h2>暗号化技術</h2>
+      <h3>暗号方式の比較</h3>
+      <div class="table-wrap"><table><thead><tr><th>項目</th><th>共通鍵暗号方式</th><th>公開鍵暗号方式</th><th>ハッシュ関数</th></tr></thead><tbody>
+            <tr><td>鍵</td><td>1つ（共通鍵）</td><td>2つ（公開鍵+秘密鍵）</td><td>鍵なし</td></tr>
+            <tr><td>暗号化/復号</td><td>同じ鍵</td><td>異なる鍵</td><td>復号不可（一方向）</td></tr>
+            <tr><td>主な用途</td><td>VPN、WPA2、SSL/TLS</td><td>HTTPS、電子署名</td><td>パスワード保存、改ざん検知</td></tr>
+            <tr><td>代表アルゴリズム</td><td>AES、RC4</td><td>RSA、DSA、ECDSA</td><td>SHA-256</td></tr>
+          </tbody></table></div>
+      <h3>電子署名</h3>
+      <p>送信者が<strong>自分の秘密鍵でデータを暗号化</strong>→受信者が<strong>送信者の公開鍵で復号</strong>。公開鍵で復号できること＝送信者が確かにそのデータを作成した証明になります。公開鍵の真正性は認証局(CA)が保証します。</p>
+    </section>
+
+    <section id="ca" class="lesson-section"><h2>サーバー証明書とSSL/TLS</h2>
+      <h3>認証局(CA)の役割</h3>
+      <ol><li>Webサイト運営者がCAに証明書発行を申請</li><li>CAが登記簿・ドメイン所有権などを確認</li><li>サーバー証明書を発行</li><li>Webブラウザが証明書を検証→信頼できるCA発行かチェック</li></ol>
+      <h3>SSL/TLSハンドシェイクの流れ</h3>
+      <ol><li>ブラウザ→サーバー：TLS通信要求＋使用可能暗号スイート提示</li><li>サーバー→ブラウザ：サーバー証明書＋公開鍵を送信</li><li>ブラウザ：証明書検証→公開鍵で共通鍵の元になる乱数を暗号化して送信</li><li>サーバー：秘密鍵で乱数を復号→共通鍵を生成</li><li>以降は共通鍵で暗号化通信（高速）</li></ol>
+      <p><strong>SSL→TLSの進化</strong>：SSLは旧式（脆弱性あり非推奨）。現在はTLS 1.2/1.3が標準。TLSは機密性・完全性・認証の3要素を保護。</p>
+    </section>
+
+    <section id="fw" class="lesson-section"><h2>ファイアウォールとDMZ</h2>
+      <h3>ファイアウォールの種類</h3>
+      <div class="table-wrap"><table><thead><tr><th>種類</th><th>検査対象</th><th>特徴</th></tr></thead><tbody>
+            <tr><td>パケットフィルタリング型</td><td>IPアドレス、ポート番号（ヘッダ）</td><td>高速。ステートフル型が主流</td></tr>
+            <tr><td>ゲートウェイ型（プロキシ型）</td><td>通信内容（アプリケーション層）まで</td><td>遅延あり。マルウェア防御可</td></tr>
+          </tbody></table></div>
+      <p><strong>ステートフル型</strong>：通信のセッション状態を監視し、不正な順序のパケットや異常通信を検知。</p>
+      <h3>DMZ</h3>
+      <p>インターネットと社内LANの<strong>中間領域</strong>。Webサーバーやメールサーバーなど外部公開サーバーを配置。DMZが侵害されても内部ネットワークは守られます。</p>
+    </section>
+
+    <section id="ids" class="lesson-section"><h2>IDS/IPS</h2>
+      <div class="table-wrap"><table><thead><tr><th>項目</th><th>IDS</th><th>IPS</th></tr></thead><tbody>
+            <tr><td>役割</td><td>不正侵入の<strong>検知と通知</strong></td><td>検知＋<strong>自動遮断</strong></td></tr>
+            <tr><td>設置形態</td><td>ホスト型/ネットワーク型</td><td>ホスト型/ネットワーク型</td></tr>
+          </tbody></table></div>
+      <p><strong>次世代型ファイアウォール(NGFW)</strong>：IP/ポートだけでなくパケットの中身やアプリ挙動も監視。WAF（SQLインジェクション/XSS防御）やUTM（統合脅威管理）と統合される。</p>
+    </section>
+
+    <section id="vpn" class="lesson-section"><h2>VPN</h2>
+      <p>公開ネットワーク上に<strong>仮想的な専用線（トンネル）</strong>を構築し、暗号化で通信を保護する技術。</p>
+      <div class="table-wrap"><table><thead><tr><th>プロトコル</th><th>特徴</th></tr></thead><tbody>
+            <tr><td>IPsec</td><td>認証＋暗号化。標準的VPNプロトコル</td></tr>
+            <tr><td>L2TP</td><td>経路構築のみ（暗号化なし）。IPsecと併用</td></tr>
+            <tr><td>SSL-VPN</td><td>HTTPS(SSL/TLS)で暗号化＋トンネル。Webブラウザで利用可</td></tr>
+          </tbody></table></div>
+    </section>
+
+    <section class="lesson-section"><h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>共通鍵=同じ鍵、公開鍵=異なる鍵</strong>：共通鍵は鍵共有が課題。公開鍵は公開鍵をネットワークで共有可能。</li>
+        <li><strong>電子署名の鍵の使い方が逆</strong>：暗号化通信は「受信者の公開鍵で暗号化」。電子署名は「送信者の秘密鍵で暗号化」。</li>
+        <li><strong>IDS=検知のみ、IPS=検知＋遮断</strong>：DetectionとPreventionの違い。</li>
+        <li><strong>DMZは外部と内部の間</strong>：公開サーバーをここに置き、内部LANを二重に保護。</li>
+        <li><strong>SSLは古い、TLSが現行</strong>：試験では「SSL/TLS」と併記されることが多い。</li>
+      </ul></section>
+
+    <section id="quiz" class="lesson-section"><h2>確認問題</h2>
+      <details class="quiz-card"><summary>Q1. 共通鍵暗号方式の説明として正しいものはどれか。</summary><p>ア）暗号化と復号で異なる鍵を使う<br>イ）公開鍵をネットワーク上で共有できる<br>ウ）同じ鍵で暗号化と復号を行う<br>エ）鍵を使わずに暗号化する</p><p>答え: <strong>ウ</strong> — 共通鍵暗号方式は同じ鍵で暗号化・復号。ア・イは公開鍵暗号方式。</p></details>
+      <details class="quiz-card"><summary>Q2. 電子署名の仕組みとして正しいものはどれか。</summary><p>ア）受信者の公開鍵で暗号化する<br>イ）送信者の秘密鍵で暗号化し、送信者の公開鍵で検証する<br>ウ）共通鍵で暗号化する<br>エ）認証局が代わりに署名する</p><p>答え: <strong>イ</strong> — 電子署名は送信者の秘密鍵で暗号化→送信者の公開鍵で復号検証。</p></details>
+      <details class="quiz-card"><summary>Q3. DMZの説明として正しいものはどれか。</summary><p>ア）内部ネットワークの最深部にある領域<br>イ）外部と内部の中間に設けられ、公開サーバーを配置する領域<br>ウ）すべての通信を遮断する領域<br>エ）無線LAN専用の暗号化領域</p><p>答え: <strong>イ</strong> — DMZは非武装地帯。外部公開サーバーを隔離し、内部ネットワークを保護。</p></details>
+      <details class="quiz-card"><summary>Q4. IDSとIPSの違いとして正しいものはどれか。</summary><p>ア）IDSは遮断、IPSは検知のみ<br>イ）IDSは検知と通知、IPSは検知と遮断<br>ウ）両者に機能差はない<br>エ）IDSはファイアウォールの別名</p><p>答え: <strong>イ</strong> — IDS(Detection)=検知・通知、IPS(Prevention)=検知・遮断。</p></details>
+      <details class="quiz-card"><summary>Q5. TLSハンドシェイクでサーバーがブラウザに最初に送るものはどれか。</summary><p>ア）共通鍵<br>イ）サーバー証明書と公開鍵<br>ウ）秘密鍵<br>エ）パスワード</p><p>答え: <strong>イ</strong> — サーバーは証明書＋公開鍵を送信。ブラウザはCAで検証後、公開鍵で乱数を暗号化して返す。</p></details>
+      <details class="quiz-card"><summary>Q6. ファイアウォールのパケットフィルタリング型が検査するものはどれか。</summary><p>ア）通信内容（アプリケーション層）<br>イ）IPアドレスとポート番号（ヘッダ情報）<br>ウ）電子署名の有無<br>エ）ファイルの内容</p><p>答え: <strong>イ</strong> — パケットフィルタリング型はヘッダ情報（IP/ポート）で判断。アはゲートウェイ型。</p></details>
+      <details class="quiz-card"><summary>Q7. VPNのトンネル技術の説明として正しいものはどれか。</summary><p>ア）通信を平文で高速化する技術<br>イ）異なるプロトコルのパケットを別プロトコルに載せて転送する技術<br>ウ）ネットワークを物理的に分割する技術<br>エ）無線LAN専用の接続技術</p><p>答え: <strong>イ</strong> — トンネルはカプセル化により異なるプロトコルのパケットを安全に転送する技術。</p></details>
+      <details class="quiz-card"><summary>Q8. 認証局(CA)の主な役割はどれか。</summary><p>ア）通信を暗号化する<br>イ）サーバー証明書を発行し、通信相手の正当性を保証する<br>ウ）ファイアウォールを設定する<br>エ）ウイルスを検知する</p><p>答え: <strong>イ</strong> — CAはサーバー証明書の発行と正当性保証を行う第三者機関。</p></details>
+    </section>
+    <section class="source-note"><h2>出典PDF・対応ページ</h2><p>1_ネットワーク基礎.pdf ch48-ch55（p212-p244）: 暗号化技術、共通鍵/公開鍵、CA、SSL/TLS、ファイアウォール、DMZ、IDS/IPS、VPN</p></section>
+  </main>
+</body>
+</html>

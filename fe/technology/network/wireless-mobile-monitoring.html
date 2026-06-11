@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>無線・モバイル通信とネットワーク監視 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({startOnLoad:true,theme:"base",themeVariables:{primaryColor:"#eef4f8",primaryTextColor:"#182230",primaryBorderColor:"#8aa4bf",lineColor:"#2563eb",fontFamily:"system-ui",fontSize:"16px"},flowchart:{curve:"basis",nodeSpacing:34,rankSpacing:42}});
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header"><div class="header-inner"><div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>無線・モバイル通信とネットワーク監視</h1>
+        <p class="lead">4G/5G、ローカル5G、移動体通信、LPWA、Bluetooth/NFC、センサーネットワーク、トラフィック監視、障害切り分けまでを整理します。</p>
+      </div><nav class="study-map"><a href="#terms">用語</a><a href="#mobile">モバイル</a><a href="#local5g">ローカル5G</a><a href="#wireless">無線技術</a><a href="#monitor">監視</a><a href="#quiz">確認問題</a></nav></div></header>
+  <main class="lesson-page">
+    <nav class="breadcrumb"><a href="../../../index.html">ポータル</a><a href="index.html">ネットワーク</a><span>無線・モバイル・監視</span></nav>
+    <section class="lesson-summary"><div><h2>このページで覚えること</h2><ul class="check-list">
+          <li>モバイル通信の世代（1G〜5G）と各世代の通信方式</li><li>4G(LTE)と5Gの特徴、eSIM</li>
+          <li>ローカル5Gの用途とメリット</li><li>LPWA、Bluetooth/NFC、センサーネットワーク</li>
+          <li>トラフィック監視とネットワーク障害の切り分け</li></ul></div>
+      <aside class="priority-box"><h2>出題優先度</h2><dl>
+          <div><dt>高</dt><dd>4G/5Gの特徴、LPWA、障害切り分け</dd></div>
+          <div><dt>中</dt><dd>ローカル5G、Bluetooth/NFC、センサーネットワーク</dd></div></dl><p>読了目安: 約22分</p></aside></section>
+    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+          <tr><td>1</td><td>ハンドオーバー</td><td>移動中に接続基地局を切り替える仕組み</td></tr>
+          <tr><td>2</td><td>LTE</td><td>4G通信規格。OFDMA使用。VoLTE対応</td></tr>
+          <tr><td>3</td><td>5G</td><td>第5世代。超高速10Gbps・1ms遅延・多数同時接続</td></tr>
+          <tr><td>4</td><td>Massive MIMO</td><td>5Gの多数アンテナ技術</td></tr>
+          <tr><td>5</td><td>eSIM</td><td>端末内蔵SIM。ソフトウェアで契約切替可能</td></tr>
+          <tr><td>6</td><td>ローカル5G</td><td>特定エリア専用の5Gネットワーク</td></tr>
+          <tr><td>7</td><td>MVNO</td><td>大手回線を借りて提供する格安SIM事業者</td></tr>
+          <tr><td>8</td><td>LPWA</td><td>低消費電力・広域のIoT向け無線通信</td></tr>
+          <tr><td>9</td><td>Bluetooth</td><td>近距離無線通信（2.4GHz）。省電力</td></tr>
+          <tr><td>10</td><td>NFC</td><td>数cmの近距離通信。交通系ICカード等</td></tr>
+          <tr><td>11</td><td>SNMP</td><td>ネットワーク機器の監視・管理プロトコル</td></tr></tbody></table></div></section>
+    <section id="mobile" class="lesson-section"><h2>モバイル通信</h2>
+      <h3>世代ごとの進化</h3>
+      <div class="table-wrap"><table><thead><tr><th>世代</th><th>通信方式</th><th>特徴</th></tr></thead><tbody>
+            <tr><td>1G</td><td>FDMA</td><td>アナログ。音声のみ</td></tr>
+            <tr><td>2G</td><td>TDMA/CDMA</td><td>デジタル化。SMS対応</td></tr>
+            <tr><td>3G</td><td>W-CDMA</td><td>パケット通信対応</td></tr>
+            <tr><td>4G(LTE)</td><td>OFDMA</td><td>高速・IPベース。VoLTE</td></tr>
+            <tr><td>5G</td><td>OFDMA+Massive MIMO</td><td>10Gbps超・1ms遅延・100万台/km²</td></tr></tbody></table></div>
+      <p><strong>eSIM</strong>：物理SIM不要で遠隔契約切替可。<strong>MVNO</strong>：MNO回線を借りた格安SIM。</p></section>
+    <section id="local5g" class="lesson-section"><h2>ローカル5G</h2>
+      <p>企業や自治体が<strong>特定エリア内で専用構築</strong>する5G。他ユーザーと分離され安定・低遅延。活用例：自動運転バス、遠隔医療、工場ロボット制御。</p></section>
+    <section id="wireless" class="lesson-section"><h2>無線技術</h2>
+      <h3>LPWA</h3><p><strong>低消費電力・広域</strong>のIoT向け。代表例：LoRa、Sigfox、NB-IoT。</p>
+      <h3>Bluetooth / NFC</h3>
+      <ul><li><strong>Bluetooth</strong>：2.4GHz帯。マウス・イヤホン・テザリング等。</li>
+        <li><strong>NFC</strong>：13.56MHz、数cm。交通系ICカード、電子マネー。</li></ul>
+      <h3>センサーネットワーク</h3><p>多数のセンサーを無線接続し環境データ収集。ZigBee、Z-Wave等。</p></section>
+    <section id="monitor" class="lesson-section"><h2>ネットワーク監視と障害対応</h2>
+      <h3>監視技術</h3>
+      <ul><li><strong>SNMP</strong>：機器の状態監視・管理</li><li><strong>パケットキャプチャ</strong>：通信内容を分析（Wireshark等）</li><li><strong>syslog</strong>：ログ一元管理</li></ul>
+      <h3>障害切り分けの基本手順</h3>
+      <ol><li>症状確認</li><li>物理層（ケーブル/LED/電源）</li><li>Ping疎通確認</li><li>traceroute経路確認</li><li>DNS確認（nslookup）</li><li>ポート開放確認</li><li>ルーティングテーブル確認</li></ol></section>
+    <section class="lesson-section"><h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>4G=LTE、5G=NR</strong>：LTEはOFDMA。5GはMassive MIMO+ミリ波。</li>
+        <li><strong>ローカル5G≠通常5G</strong>：エリア限定専用ネットワーク。</li>
+        <li><strong>LPWAはIoT向け</strong>：超低消費電力・広域。Wi-Fi/5Gと用途が異なる。</li>
+        <li><strong>障害切り分けは下位層から</strong>：L1(物理)→L2→L3→L4→L7。</li></ul></section>
+    <section id="quiz" class="lesson-section"><h2>確認問題</h2>
+      <details class="quiz-card"><summary>Q1. 5Gの特徴として誤っているものはどれか。</summary><p>ア）超高速通信<br>イ）超低遅延<br>ウ）多数同時接続<br>エ）アナログ音声通信</p><p>答え: <strong>エ</strong> — 5G含め2G以降はすべてデジタル通信。</p></details>
+      <details class="quiz-card"><summary>Q2. LPWAの説明として正しいものはどれか。</summary><p>ア）超高速通信向け<br>イ）低消費電力・広域のIoT向け<br>ウ）近距離通信専用<br>エ）有線LAN規格</p><p>答え: <strong>イ</strong> — LPWAは低消費電力・広域。LoRa/Sigfox等。</p></details>
+      <details class="quiz-card"><summary>Q3. eSIMの特徴として正しいものはどれか。</summary><p>ア）物理カード差し替えで契約変更<br>イ）端末内蔵で遠隔契約切替可能<br>ウ）物理SIMより通信速度が遅い<br>エ）5Gでは利用不可</p><p>答え: <strong>イ</strong> — eSIMは端末内蔵でソフトウェア切替。</p></details>
+      <details class="quiz-card"><summary>Q4. 障害切り分けで最初に確認すべき層はどれか。</summary><p>ア）アプリケーション層<br>イ）トランスポート層<br>ウ）物理層<br>エ）セッション層</p><p>答え: <strong>ウ</strong> — OSI下位層から順に確認。まず物理層。</p></details>
+      <details class="quiz-card"><summary>Q5. ハンドオーバーの説明として正しいものはどれか。</summary><p>ア）通信暗号化の仕組み<br>イ）移動中に基地局を切り替える仕組み<br>ウ）IPアドレス変換技術<br>エ）ファイル転送プロトコル</p><p>答え: <strong>イ</strong> — ハンドオーバーは基地局間の切り替え。</p></details>
+      <details class="quiz-card"><summary>Q6. SNMPの役割として正しいものはどれか。</summary><p>ア）メール送信<br>イ）機器の監視・管理<br>ウ）ファイル転送<br>エ）時刻同期</p><p>答え: <strong>イ</strong> — SNMPはネットワーク機器の状態監視・管理プロトコル。</p></details>
+      <details class="quiz-card"><summary>Q7. NFCの通信距離として最も近いものはどれか。</summary><p>ア）約100m<br>イ）約10m<br>ウ）約数cm<br>エ）約1km</p><p>答え: <strong>ウ</strong> — NFCは数cm。交通系ICカード等に利用。</p></details>
+      <details class="quiz-card"><summary>Q8. 4G(LTE)の通信方式として正しいものはどれか。</summary><p>ア）FDMA<br>イ）CDMA<br>ウ）OFDMA<br>エ）TDMA</p><p>答え: <strong>ウ</strong> — LTEはOFDMA。FDMA=1G、TDMA/CDMA=2G。</p></details></section>
+    <section class="source-note"><h2>出典PDF・対応ページ</h2><p>1_ネットワーク基礎.pdf ch56-ch64（p245-p296）: モバイル、ローカル5G、移動体通信、LPWA/Bluetooth/NFC、センサーネットワーク、監視、障害切り分け</p></section>
+  </main>
+</body>
+</html>

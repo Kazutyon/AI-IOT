@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ネットワークプロトコル詳細 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({startOnLoad:true,theme:"base",themeVariables:{primaryColor:"#eef4f8",primaryTextColor:"#182230",primaryBorderColor:"#8aa4bf",lineColor:"#2563eb",fontFamily:"system-ui, -apple-system, Segoe UI, sans-serif"},flowchart:{curve:"basis",nodeSpacing:34,rankSpacing:42}});
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header"><div class="header-inner"><div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>ネットワークプロトコル詳細</h1>
+        <p class="lead">ICMP、TELNET、SSH、FTP、NTPの役割と特徴、ポート番号、暗号化の有無を基本情報技術者試験向けに整理します。</p>
+      </div><nav class="study-map" aria-label="ページ内メニュー"><a href="#terms">用語</a><a href="#icmp">ICMP</a><a href="#telnet">TELNET</a><a href="#ssh">SSH</a><a href="#ftp">FTP</a><a href="#ntp">NTP</a><a href="#quiz">確認問題</a></nav></div></header>
+  <main class="lesson-page">
+    <nav class="breadcrumb"><a href="../../../index.html">ポータル</a><a href="index.html">ネットワーク</a><span>ネットワークプロトコル詳細</span></nav>
+    <section class="lesson-summary"><div><h2>このページで覚えること</h2><ul class="check-list">
+          <li>ICMPの役割（Ping、宛先不達通知、TTL超過）</li><li>TELNETとSSHの違い（暗号化の有無）</li>
+          <li>FTPのアクティブモード/パッシブモード、Anonymous FTP</li><li>NTPの階層構造（Stratum）</li>
+        </ul></div><aside class="priority-box"><h2>出題優先度</h2><dl>
+          <div><dt>高</dt><dd>ICMP（Ping/タイプ3/8/11）、SSHとTELNETの違い、FTPポート番号</dd></div>
+          <div><dt>中</dt><dd>NTP、FTPアクティブ/パッシブモード</dd></div></dl><p>読了目安: 約18分</p></aside></section>
+
+    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+          <tr><td>1</td><td>ICMP</td><td>通信のエラー通知や疎通確認を行うプロトコル</td></tr>
+          <tr><td>2</td><td>Ping</td><td>ICMP Echo Request/Replyでホストの死活確認</td></tr>
+          <tr><td>3</td><td>TELNET</td><td>リモートログインプロトコル。平文通信（TCP 23）</td></tr>
+          <tr><td>4</td><td>SSH</td><td>暗号化されたリモートログインプロトコル（TCP 22）</td></tr>
+          <tr><td>5</td><td>FTP</td><td>ファイル転送プロトコル（TCP 21制御/20データ）</td></tr>
+          <tr><td>6</td><td>SFTP</td><td>SSHベースの暗号化ファイル転送</td></tr>
+          <tr><td>7</td><td>NTP</td><td>ネットワーク時刻同期プロトコル（UDP 123）</td></tr>
+          <tr><td>8</td><td>Stratum</td><td>NTPサーバーの階層（1=最上位/原子時計）</td></tr>
+          <tr><td>9</td><td>公開鍵暗号方式</td><td>公開鍵で暗号化、秘密鍵で復号。SSH/HTTPSで使用</td></tr>
+        </tbody></table></div></section>
+
+    <section id="icmp" class="lesson-section"><h2>ICMP</h2>
+      <p>ICMPは<strong>通信のエラー通知や疎通確認</strong>を行うプロトコルです。IPパケットのペイロードに格納され、LAN内だけでなくインターネット上もルーター経由で流れます。</p>
+      <h3>主なタイプ</h3>
+      <div class="table-wrap"><table><thead><tr><th>タイプ</th><th>名称</th><th>用途</th></tr></thead><tbody>
+            <tr><td>0</td><td>Echo Reply</td><td>Pingの応答</td></tr>
+            <tr><td>3</td><td>Destination Unreachable</td><td>宛先不達（ネットワーク/ホスト/ポート）</td></tr>
+            <tr><td>8</td><td>Echo Request</td><td>Pingの要求</td></tr>
+            <tr><td>11</td><td>Time Exceeded</td><td>TTL超過（tracerouteで利用）</td></tr>
+          </tbody></table></div>
+      <p><strong>Ping</strong>：タイプ8（要求）→タイプ0（応答）でホストの死活確認。<strong>traceroute</strong>：TTLを1ずつ増やし、タイプ11（時間超過）を利用して経路を調べる。</p>
+    </section>
+
+    <section id="telnet" class="lesson-section"><h2>TELNET</h2>
+      <p>ネットワーク経由でサーバーやネットワーク機器にリモートログインするプロトコル。<strong>TCP 23番</strong>。最大の問題は<strong>通信が暗号化されず平文</strong>で流れること。現在はSSHに置き換えられています。</p>
+    </section>
+
+    <section id="ssh" class="lesson-section"><h2>SSH</h2>
+      <p>TELNETの後継。<strong>TCP 22番</strong>。<strong>公開鍵暗号方式</strong>で通信を暗号化し、安全にリモート操作が可能。</p>
+      <ul><li><strong>SSH1</strong>：サーバー公開鍵で共通鍵を暗号化して送信（古い・非推奨）</li>
+        <li><strong>SSH2</strong>：ディフィー・ヘルマン鍵共有方式。現在主流。HTTPS（TLS）でも同方式を利用</li></ul>
+      <p>SCP/SFTPによる暗号化ファイル転送も可能。代表ソフト：OpenSSH、PuTTY。</p>
+    </section>
+
+    <section id="ftp" class="lesson-section"><h2>FTP</h2>
+      <p>ファイル転送プロトコル。<strong>TCP 21</strong>（制御）+ <strong>TCP 20</strong>（データ）の2ポート使用。平文通信のため、現在はSFTP/FTPSが推奨。</p>
+      <h3>アクティブモードとパッシブモード</h3>
+      <div class="table-wrap"><table><thead><tr><th>モード</th><th>データ接続</th><th>特徴</th></tr></thead><tbody>
+            <tr><td>アクティブ</td><td>サーバー→クライアント（TCP 20）</td><td>FW越え困難</td></tr>
+            <tr><td>パッシブ</td><td>クライアント→サーバー（任意ポート）</td><td>FW越えに適する。現在主流</td></tr>
+          </tbody></table></div>
+      <p><strong>Anonymous FTP</strong>：ユーザー名anonymousで誰でもログイン可能。公開ファイル配布用。アップロード禁止が多い。</p>
+    </section>
+
+    <section id="ntp" class="lesson-section"><h2>NTP</h2>
+      <p>ネットワーク経由でコンピューターの<strong>時刻を同期</strong>するプロトコル。<strong>UDP 123番</strong>。ログの時刻整合、認証、金融取引の順序保証に必須。</p>
+      <p><strong>Stratum（階層）</strong>：Stratum 1=原子時計/GPS直結、Stratum 2=Stratum 1と同期、Stratum 3=Stratum 2と同期…と階層化。日本ではNICTが原子時計を管理。</p>
+    </section>
+
+    <section class="lesson-section"><h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>ICMPはIPのペイロードに格納</strong>：トランスポート層（TCP/UDP）ではなくネットワーク層で動作。</li>
+        <li><strong>TELNET=平文、SSH=暗号化</strong>：TELNET(TCP23)は安全でない。SSH(TCP22)を使う。</li>
+        <li><strong>FTPは制御21+データ20</strong>：2ポート使うのが特徴。SFTPはSSH1本で済む。</li>
+        <li><strong>NTPはUDP 123</strong>：TCPではない。時刻同期にTCPのオーバーヘッドは不要。</li>
+      </ul></section>
+
+    <section id="quiz" class="lesson-section"><h2>確認問題</h2>
+      <details class="quiz-card"><summary>Q1. ICMPのEcho Request（タイプ8）を用いて行う処理はどれか。</summary><p>ア）ファイル転送<br>イ）ホストの死活確認（Ping）<br>ウ）時刻同期<br>エ）メール送信</p><p>答え: <strong>イ</strong> — ICMP Echo Request/Replyを使うのがPing。</p></details>
+      <details class="quiz-card"><summary>Q2. TELNETとSSHの違いとして正しいものはどれか。</summary><p>ア）TELNETは暗号化通信、SSHは平文通信<br>イ）TELNETはTCP 22、SSHはTCP 23<br>ウ）TELNETは平文通信、SSHは暗号化通信<br>エ）両者に機能差はない</p><p>答え: <strong>ウ</strong> — TELNET=平文(TCP23)、SSH=暗号化(TCP22)。</p></details>
+      <details class="quiz-card"><summary>Q3. FTPの制御用ポート番号はどれか。</summary><p>ア）20<br>イ）21<br>ウ）22<br>エ）23</p><p>答え: <strong>イ</strong> — FTPはTCP 21（制御）+ 20（データ）。22=SSH、23=TELNET。</p></details>
+      <details class="quiz-card"><summary>Q4. NTPの説明として正しいものはどれか。</summary><p>ア）ファイル転送プロトコル<br>イ）ネットワーク上の時刻を同期するプロトコル<br>ウ）メール受信用プロトコル<br>エ）Webページを暗号化するプロトコル</p><p>答え: <strong>イ</strong> — NTP(Network Time Protocol)はUDP 123で時刻同期。</p></details>
+      <details class="quiz-card"><summary>Q5. SSHの公開鍵暗号方式の説明として正しいものはどれか。</summary><p>ア）同じ鍵で暗号化と復号を行う<br>イ）公開鍵で暗号化し、秘密鍵でのみ復号できる<br>ウ）秘密鍵で暗号化し、公開鍵で復号する<br>エ）鍵を一切使わない</p><p>答え: <strong>イ</strong> — 公開鍵暗号方式では公開鍵で暗号化→秘密鍵で復号。アは共通鍵暗号方式。</p></details>
+      <details class="quiz-card"><summary>Q6. FTPのパッシブモードの特徴として正しいものはどれか。</summary><p>ア）サーバーがクライアントにTCP 20で接続する<br>イ）クライアントがデータ接続を開始し、ファイアウォール越えに適する<br>ウ）制御とデータで同じポートを使う<br>エ）暗号化通信が必須</p><p>答え: <strong>イ</strong> — パッシブモードはクライアント側からデータ接続を開始。アはアクティブモード。</p></details>
+      <details class="quiz-card"><summary>Q7. ICMPタイプ3（Destination Unreachable）コード1の意味はどれか。</summary><p>ア）ネットワークに到達不能<br>イ）ホストに到達不能<br>ウ）ポートに到達不能<br>エ）通信が管理上禁止</p><p>答え: <strong>イ</strong> — コード0=ネットワーク、1=ホスト、3=ポート、13=管理上禁止。</p></details>
+      <details class="quiz-card"><summary>Q8. NTPサーバーの最上位階層（Stratum 1）の説明として正しいものはどれか。</summary><p>ア）一般のPCが参照するサーバー<br>イ）原子時計やGPSなどの標準時刻を直接参照するサーバー<br>ウ）Stratum 2より精度が低い<br>エ）インターネット上の任意のサーバー</p><p>答え: <strong>イ</strong> — Stratum 1は原子時計/GPSを直接参照する最上位。数字が小さいほど高精度。</p></details>
+    </section>
+
+    <section class="source-note"><h2>出典PDF・対応ページ</h2><p>1_ネットワーク基礎.pdf ch41-ch45（p182-p207）: ICMP、TELNET、SSH、FTP、NTP</p></section>
+  </main>
+</body>
+</html>
