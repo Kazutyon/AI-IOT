@@ -9,7 +9,9 @@ const fallbackCurriculum = {
       href: "fe/technology/basic-theory/index.html",
       items: [
         { title: "進数・基数変換と補数表現", href: "fe/technology/basic-theory/radix-complement.html", status: "done" },
-        { title: "浮動小数点・誤差・文字コード", href: "fe/technology/basic-theory/float-error-code.html", status: "done" }
+        { title: "浮動小数点・誤差・文字コード", href: "fe/technology/basic-theory/float-error-code.html", status: "done" },
+        { title: "論理演算と論理回路", href: "fe/technology/basic-theory/logic-circuit.html", status: "done" },
+        { title: "集合と関係", href: "fe/technology/basic-theory/sets-relations.html", status: "done" }
       ]
     },
     {

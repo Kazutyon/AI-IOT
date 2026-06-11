@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>集合と関係 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Basic Theory</p>
+        <h1>集合と関係</h1>
+        <p class="lead">集合の表し方・集合演算・ベン図・関係の性質をFE試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#basics">集合の基本</a>
+        <a href="#operations">集合演算</a>
+        <a href="#venn">ベン図</a>
+        <a href="#relation">関係</a>
+        <a href="#examples">例題</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">基礎理論</a>
+      <span>集合と関係</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>集合の外延的記法と内包的記法の違い</li>
+          <li>和集合・積集合・差集合・補集合の計算</li>
+          <li>ベン図で集合演算を視覚化できること</li>
+          <li>直積と関係（relation）の定義</li>
+          <li>反射律・対称律・推移律の判定</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>集合演算（和・積・差・補）、ベン図の読み取り</dd></div>
+          <div><dt>中</dt><dd>関係の性質判定（反射律・対称律・推移律）</dd></div>
+          <div><dt>低</dt><dd>反対称律（本範囲外。別途補足）</dd></div>
+        </dl>
+        <p>読了目安: 約20分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>集合</td><td>条件を満たす対象をひとまとめにしたもの</td></tr>
+            <tr><td>2</td><td>外延的表現</td><td>要素をすべて列挙する書き方 {1,2,3}</td></tr>
+            <tr><td>3</td><td>内包的表現</td><td>条件で集合を表す書き方 {x｜条件}</td></tr>
+            <tr><td>4</td><td>∈（属する）</td><td>要素が集合に含まれる</td></tr>
+            <tr><td>5</td><td>和集合 A∪B</td><td>AまたはBに属する要素全体（ORと対応）</td></tr>
+            <tr><td>6</td><td>積集合 A∩B</td><td>AかつBに属する要素全体（ANDと対応）</td></tr>
+            <tr><td>7</td><td>差集合 A−B</td><td>Aに属しBに属さない要素全体</td></tr>
+            <tr><td>8</td><td>補集合 A^c</td><td>全体集合Uの中でAに属さない要素全体（NOTと対応）</td></tr>
+            <tr><td>9</td><td>ベン図</td><td>集合を円で図示したもの</td></tr>
+            <tr><td>10</td><td>直積 A×B</td><td>Aの全要素とBの全要素の組み合わせ集合</td></tr>
+            <tr><td>11</td><td>関係 R</td><td>直積の部分集合。意味のある組だけを取り出したもの</td></tr>
+            <tr><td>12</td><td>反射律</td><td>すべてのaで(a,a)∈R（自分自身と関係がある）</td></tr>
+            <tr><td>13</td><td>対称律</td><td>(a,b)∈Rならば(b,a)∈R（逆向きも必ず関係がある）</td></tr>
+            <tr><td>14</td><td>推移律</td><td>(a,b)∈Rかつ(b,c)∈Rならば(a,c)∈R（間接的にもつながる）</td></tr>
+            <tr><td>15</td><td>全体集合 U</td><td>補集合を定義するために必要な全体集合</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="basics" class="lesson-section">
+      <h2>集合とは</h2>
+      <p>集合とは、「ある条件を満たす対象をひとまとめにしたもの」です。集合は「箱」ではなく、<strong>条件で決まる構造</strong>です。</p>
+
+      <div class="compare-grid">
+        <article>
+          <h3>基本性質</h3>
+          <ul>
+            <li><strong>順序を持たない</strong>：{1,2,3} と {3,2,1} は同じ</li>
+            <li><strong>重複を持たない</strong>：{1,1,1} は {1} と同じ</li>
+            <li><strong>要素が属するかどうかだけ</strong>が重要</li>
+          </ul>
+        </article>
+        <article>
+          <h3>所属記号</h3>
+          <ul>
+            <li>2 ∈ {1,2,3}：2は集合に属する</li>
+            <li>5 ∉ {1,2,3}：5は集合に属さない</li>
+          </ul>
+        </article>
+      </div>
+
+      <h3>集合の表し方</h3>
+      <div class="compare-grid">
+        <article>
+          <h3>外延的表現（列挙）</h3>
+          <p>要素をすべて書く方法。小さい集合向き。</p>
+          <p>A = {1, 2, 3, 4}</p>
+        </article>
+        <article>
+          <h3>内包的表現（条件）</h3>
+          <p>条件で集合を定義する方法。集合の本質的定義。</p>
+          <p>B = {x ｜ xは偶数で 1≤x≤10}</p>
+          <p>= {2, 4, 6, 8, 10}</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="operations" class="lesson-section">
+      <h2>集合演算</h2>
+      <p>集合演算は、第2章の論理演算と1対1対応しています。</p>
+
+      <div class="compare-grid">
+        <article>
+          <h3>和集合 A∪B = OR</h3>
+          <p>A∪B = {x｜x∈A または x∈B}</p>
+          <p>どちらかの集合に入っていればOK。</p>
+          <p>例: A={1,2,3,4}, B={3,4,5,6} → <strong>A∪B={1,2,3,4,5,6}</strong></p>
+        </article>
+        <article>
+          <h3>積集合 A∩B = AND</h3>
+          <p>A∩B = {x｜x∈A かつ x∈B}</p>
+          <p>両方の集合に入っている必要がある。</p>
+          <p>例: A={1,2,3,4}, B={3,4,5,6} → <strong>A∩B={3,4}</strong></p>
+        </article>
+        <article>
+          <h3>差集合 A−B</h3>
+          <p>A−B = {x｜x∈A かつ x∉B}</p>
+          <p>AにあってBにない要素だけを残す。<strong>非可換</strong>（A−B ≠ B−A）。</p>
+          <p>例: A={1,2,3,4}, B={3,4,5} → <strong>A−B={1,2}</strong></p>
+        </article>
+        <article>
+          <h3>補集合 A^c = NOT</h3>
+          <p>A^c = {x｜x∉A} = U − A</p>
+          <p>全体集合Uの中で、Aに属さないものすべて。</p>
+          <p>例: U={1,2,3,4,5,6}, A={2,4,6} → <strong>A^c={1,3,5}</strong></p>
+        </article>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>演算</th><th>記号</th><th>定義</th><th>論理対応</th><th>可換？</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>和集合</td><td>A∪B</td><td>x∈A または x∈B</td><td>OR</td><td>可換</td></tr>
+            <tr><td>積集合</td><td>A∩B</td><td>x∈A かつ x∈B</td><td>AND</td><td>可換</td></tr>
+            <tr><td>差集合</td><td>A−B</td><td>x∈A かつ x∉B</td><td>AND+NOT</td><td><strong>非可換</strong></td></tr>
+            <tr><td>補集合</td><td>A^c</td><td>x∉A（全体集合U内）</td><td>NOT</td><td>—（1項演算）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="venn" class="lesson-section">
+      <h2>ベン図による集合の視覚化</h2>
+      <p>集合は図で理解が完成します。</p>
+
+      <div class="compare-grid">
+        <article>
+          <h3>和集合 A∪B（全部）</h3>
+          <figure class="wide-diagram"><pre><code>    ┌───────────────────┐
+    │    全体集合 U       │
+    │  ┌───┐   ┌───┐  │
+    │  │ A │███│ B │  │
+    │  │   │███│   │  │
+    │  └───┘   └───┘  │
+    │    A∪B = 斜線部全体 │
+    └───────────────────┘</code></pre></figure>
+        </article>
+        <article>
+          <h3>積集合 A∩B（重なり）</h3>
+          <figure class="wide-diagram"><pre><code>    ┌───────────────────┐
+    │    全体集合 U       │
+    │  ┌───┐   ┌───┐  │
+    │  │   │███│   │  │
+    │  │ A │███│ B │  │
+    │  └───┘   └───┘  │
+    │   A∩B = 重なり部分  │
+    └───────────────────┘</code></pre></figure>
+        </article>
+        <article>
+          <h3>差集合 A−B（Aだけ）</h3>
+          <figure class="wide-diagram"><pre><code>    ┌───────────────────┐
+    │    全体集合 U       │
+    │  ┌───┐   ┌───┐  │
+    │  │███│   │   │  │
+    │  │███│   │ B │  │
+    │  └───┘   └───┘  │
+    │   A−B = Aだけの部分 │
+    └───────────────────┘</code></pre></figure>
+        </article>
+        <article>
+          <h3>補集合 A^c（Aの外側）</h3>
+          <figure class="wide-diagram"><pre><code>    ┌───────────────────┐
+    │███████████████████│
+    │███┌───┐███████████│
+    │███│ A │███████████│
+    │███│   │███████████│
+    │███└───┘███████████│
+    │███████████████████│
+    │ A^c = Aの外側全部(U内)│
+    └───────────────────┘</code></pre></figure>
+        </article>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>集合演算と論理演算の対応</figcaption>
+        <pre><code>集合演算           論理演算       記号
+───────────────────────────────────
+和集合 A∪B  ←→  OR（論理和）   ∪ vs +
+積集合 A∩B  ←→  AND（論理積）  ∩ vs ・
+補集合 A^c  ←→  NOT（否定）    ^c vs ¬
+差集合 A−B  ←→  (A AND NOT B)   − （複合）</code></pre>
+      </figure>
+    </section>
+
+    <section id="relation" class="lesson-section">
+      <h2>関係（relation）</h2>
+      <p>集合を学ぶ目的のひとつは、「要素同士の対応（つながり）を扱えるようにすること」です。その対応を数学的に表したものが<strong>関係（relation）</strong>です。</p>
+
+      <h3>直積 A×B</h3>
+      <p>Aの全要素とBの全要素の組み合わせ集合です。要素数は |A| × |B| です。</p>
+      <figure class="wide-diagram">
+        <figcaption>直積の例</figcaption>
+        <pre><code>A = {1, 2}    B = {x, y}
+
+直積 A×B = {(1,x), (1,y), (2,x), (2,y)}  ← 全組み合わせ（4通り）
+
+関係 R ⊆ A×B（部分集合）
+例: R = {(1,x), (2,y)}  ← 意味のある組だけ</code></pre>
+      </figure>
+
+      <h3>関係の定義</h3>
+      <p>関係とは、<strong>直積A×Bの中から「意味のある組だけ」を取り出した部分集合</strong>です。</p>
+      <p>R ⊆ A×B</p>
+      <ul>
+        <li>例1: 人→年齢の関係。R = {(太郎,15), (花子,18), (次郎,15)}</li>
+        <li>例2: 割り切れる関係。R = {(a,b)｜aがbを割り切る}。例: (2,6), (3,9), (5,10)</li>
+        <li>例3: 等しい関係。R = {(x,x)｜x∈A}</li>
+      </ul>
+
+      <h3>関係の性質</h3>
+      <div class="compare-grid">
+        <article>
+          <h3>反射律</h3>
+          <p>すべてのa∈Aで (a,a)∈R が成り立つ</p>
+          <p>「＝」「≤」は反射的。「＜」は反射的でない。</p>
+        </article>
+        <article>
+          <h3>対称律</h3>
+          <p>(a,b)∈R ならば (b,a)∈R</p>
+          <p>「同級生」「＝」は対称的。「≤」は対称的でない。</p>
+        </article>
+        <article>
+          <h3>推移律</h3>
+          <p>(a,b)∈R かつ (b,c)∈R ならば (a,c)∈R</p>
+          <p>「≤」「⊆」は推移的。「友達」は推移的でない。</p>
+        </article>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>性質</th><th>定義</th><th>満たす例</th><th>満たさない例</th><th>判定ポイント</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>反射律</td><td>∀a∈A, (a,a)∈R</td><td>＝, ≤, ⊆</td><td>＜, ⊂</td><td>全要素でループがあるか</td></tr>
+            <tr><td>対称律</td><td>(a,b)∈R ⇒ (b,a)∈R</td><td>＝, 同級生, 兄弟</td><td>≤, 親子</td><td>向きを反転してもR内にあるか</td></tr>
+            <tr><td>推移律</td><td>(a,b)∈R,(b,c)∈R ⇒ (a,c)∈R</td><td>≤, ⊆, ＝</td><td>友達, 1回勝った</td><td>間接的接続もR内にあるか</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>関係の3性質 判定チャート</figcaption>
+        <pre><code>反射律チェック: 全a∈Aについて(a,a)∈Rあるか？
+    ある → 反射的 ／ ない → 非反射的
+
+対称律チェック: (a,b)∈Rなら(b,a)∈Rあるか？
+    ある → 対称的 ／ ない → 非対称的
+
+推移律チェック: (a,b)∈Rかつ(b,c)∈Rなら(a,c)∈Rあるか？
+    ある → 推移的 ／ ない → 非推移的</code></pre>
+      </figure>
+    </section>
+
+    <section id="examples" class="lesson-section">
+      <h2>集合演算の例題</h2>
+
+      <article class="formula-box">
+        <h3>例題1: 和集合・積集合</h3>
+        <p>A={1,2,3,4}, B={3,4,5,6}</p>
+        <p>A∪B = {1,2,3,4,5,6}（どちらかに属する要素すべて）</p>
+        <p>A∩B = {3,4}（両方に属する要素）</p>
+        <p>A−B = {1,2}（AにあってBにない）</p>
+        <p>B−A = {5,6}（BにあってAにない）← <strong>非可換に注意！</strong></p>
+      </article>
+
+      <article class="formula-box">
+        <h3>例題2: 補集合</h3>
+        <p>U={1,2,3,4,5,6}, A={2,4,6}</p>
+        <p>A^c = U − A = {1,3,5}</p>
+        <p>※ 補集合には全体集合Uの明示が必須！</p>
+      </article>
+
+      <article class="formula-box">
+        <h3>例題3: 内包的記法→外延的記法</h3>
+        <p>A = {x｜xは偶数で 1≤x≤10}</p>
+        <p>条件を満たすxを順に列挙: A = {2,4,6,8,10}</p>
+      </article>
+
+      <article class="formula-box">
+        <h3>例題4: 関係の性質判定</h3>
+        <p>A={1,2,3}上の関係 R = {(1,1),(2,2),(3,3),(1,2)}</p>
+        <p>反射律: (1,1),(2,2),(3,3)がすべてある → <strong>満たす</strong></p>
+        <p>対称律: (1,2)はあるが(2,1)がない → <strong>満たさない</strong></p>
+        <p>推移律: (1,2)と(2,2)から(1,2)が必要だが既にある → <strong>満たす</strong></p>
+      </article>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>和集合∪と積集合∩の記号混同</strong>: ∪=カップ=「または」=OR=全部。∩=キャップ=「かつ」=AND=重なり。</li>
+        <li><strong>差集合は非可換</strong>: A−BとB−Aは一般に異なる。A={1,2}, B={2,3} → A−B={1}, B−A={3}。</li>
+        <li><strong>補集合には全体集合Uが必須</strong>: A^c = U−A。Uが定義されていないと補集合は決まらない。</li>
+        <li><strong>外延的記法と内包的記法の変換</strong>: 条件「偶数で1〜10」→ {2,4,6,8,10}。境界値（1と10を含むか）に注意。</li>
+        <li><strong>関係の3性質の判定</strong>: 反射律は全要素ループ必須。対称律は逆向き1つ欠けでNG。推移律は連鎖全パターン確認。</li>
+        <li><strong>「関係」は直積の部分集合</strong>: R ⊆ A×B。直積全体ではなく、意味のある組だけ。</li>
+        <li><strong>ベン図で補集合と差集合の見た目が異なる</strong>: A^cはAの外側すべて（U内）。A−BはAのうちBと重ならない部分（Aの内側の一部）。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. A={1,2,3,4}, B={3,4,5,6}のとき、A∪B はどれか。</summary>
+        <p>答え: <strong>{1,2,3,4,5,6}</strong>。和集合はどちらかに属する要素すべてです。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. A={1,2,3,4}, B={3,4,5,6}のとき、A∩B はどれか。</summary>
+        <p>答え: <strong>{3,4}</strong>。積集合は両方に属する要素です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. A={1,2,3,4}, B={3,4,5}のとき、A−B はどれか。</summary>
+        <p>答え: <strong>{1,2}</strong>。AにあってBにない要素を残します。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. U={1,2,3,4,5,6}, A={2,4,6}のとき、A^c はどれか。</summary>
+        <p>答え: <strong>{1,3,5}</strong>。Uの中でAに属さない要素すべてです。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. A={x｜xは偶数で 1≤x≤10} を外延的に書くとどれか。</summary>
+        <p>答え: <strong>{2,4,6,8,10}</strong>。条件を満たすxを1つずつ列挙します。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q6. A={a,b,c}, B={1,2}のとき、直積 A×B の要素数はいくつか。</summary>
+        <p>答え: <strong>6</strong>。|A|×|B| = 3×2 = 6です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q7. A={1,2,3}上の関係 R={(1,1),(2,2),(3,3)} は反射律を満たすか。</summary>
+        <p>答え: <strong>満たす</strong>。すべてのaで(a,a)があるため反射的です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q8. A={1,2,3}上の関係 R={(1,2)} は対称律を満たすか。</summary>
+        <p>答え: <strong>満たさない</strong>。(1,2)はあっても(2,1)がないため非対称的です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q9. A={1,2,3}上の関係 R={(1,2),(2,3),(1,3)} は推移律を満たすか。</summary>
+        <p>答え: <strong>満たす</strong>。(1,2)と(2,3)から(1,3)があり、推移的です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q10. ベン図で2つの円の重なり部分を表す集合演算はどれか。</summary>
+        <p>答え: <strong>積集合 A∩B</strong>。重なり部分が積集合です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q11. A={1,2}, B={2,3}のとき、A−B と B−A は等しいか。</summary>
+        <p>答え: <strong>等しくない</strong>。A−B={1}, B−A={3}で、差集合は非可換です。</p>
+      </details>
+    </section>
+
+    <section class="lesson-section source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <ul>
+        <li>本体PDF: <strong>1_基礎理論（数学・論理・情報理論99）.pdf</strong> p74-p87（第3章 集合と関係の基礎）</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

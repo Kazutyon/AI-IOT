@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>論理演算と論理回路 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Basic Theory</p>
+        <h1>論理演算と論理回路</h1>
+        <p class="lead">命題・真理値表・ド・モルガンの法則・基本ゲート・万能ゲートをFE試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#proposition">命題</a>
+        <a href="#truth-table">真理値表</a>
+        <a href="#demorgan">ド・モルガン</a>
+        <a href="#gates">ゲート</a>
+        <a href="#design">回路設計</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">基礎理論</a>
+      <span>論理演算・論理回路</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>命題とは真か偽に決まる文であること</li>
+          <li>AND/OR/NOT/XOR の真理値表</li>
+          <li>ド・モルガンの法則（2種類）</li>
+          <li>基本ゲートの記号・式・真理値表</li>
+          <li>NAND/NOR が万能ゲートであること</li>
+          <li>論理式から回路図を設計する手順</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>真理値表、ド・モルガンの法則、回路記号の読み取り</dd></div>
+          <div><dt>中</dt><dd>NANDの万能性、XORの構成</dd></div>
+          <div><dt>低</dt><dd>XNOR、半加算器・全加算器は別ページ</dd></div>
+        </dl>
+        <p>読了目安: 約22分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>命題</td><td>真か偽のどちらかに必ず決まる文</td></tr>
+            <tr><td>2</td><td>真理値</td><td>命題の真偽を表す値（TRUE=1, FALSE=0）</td></tr>
+            <tr><td>3</td><td>真理値表</td><td>命題変数の全組み合わせに対する出力を示す表</td></tr>
+            <tr><td>4</td><td>AND（論理積）</td><td>両方1のときだけ1（P・Q）</td></tr>
+            <tr><td>5</td><td>OR（論理和）</td><td>どちらか1なら1（P+Q）</td></tr>
+            <tr><td>6</td><td>NOT（否定）</td><td>入力を反転（¬P または Pバー）</td></tr>
+            <tr><td>7</td><td>XOR（排他的論理和）</td><td>異なるとき1、同じとき0（P⊕Q）</td></tr>
+            <tr><td>8</td><td>ド・モルガン第1法則</td><td>¬(P・Q) = ¬P + ¬Q（ANDの否定→ORの否定）</td></tr>
+            <tr><td>9</td><td>ド・モルガン第2法則</td><td>¬(P+Q) = ¬P・¬Q（ORの否定→ANDの否定）</td></tr>
+            <tr><td>10</td><td>論理回路</td><td>論理演算を電気的に実現したもの</td></tr>
+            <tr><td>11</td><td>ANDゲート</td><td>両入力1で出力1。記号：半円＋直線</td></tr>
+            <tr><td>12</td><td>ORゲート</td><td>どちらか1で出力1。記号：くさび形＋先丸</td></tr>
+            <tr><td>13</td><td>NOTゲート</td><td>入力を反転。記号：三角形＋小丸</td></tr>
+            <tr><td>14</td><td>XORゲート</td><td>入力が異なるとき1。AND+OR+NOTで構成可能</td></tr>
+            <tr><td>15</td><td>NAND</td><td>ANDの否定。万能ゲート（NANDだけですべて作れる）</td></tr>
+            <tr><td>16</td><td>NOR</td><td>ORの否定。NORだけでも全回路構成可能</td></tr>
+            <tr><td>17</td><td>XNOR</td><td>同じとき1（XORの否定）。等価比較に使う</td></tr>
+            <tr><td>18</td><td>回路設計手順</td><td>論理式を確認→ゲートを配置（式と回路は1対1対応）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="proposition" class="lesson-section">
+      <h2>命題とは</h2>
+      <p>命題とは、「真（TRUE）か偽（FALSE）」のどちらかに必ず決まる文のことです。</p>
+      <div class="compare-grid">
+        <article>
+          <h3>命題になる例</h3>
+          <ul>
+            <li>「今日は雨が降っている」→ 真か偽のどちらか</li>
+            <li>「3は偶数である」→ 偽</li>
+            <li>「名古屋は日本にある」→ 真</li>
+          </ul>
+        </article>
+        <article>
+          <h3>命題にならない例</h3>
+          <ul>
+            <li>「早くして！」（命令文）</li>
+            <li>「あなたは誰？」（疑問文）</li>
+            <li>「私は大きい」（基準が曖昧で真偽が決まらない）</li>
+          </ul>
+        </article>
+      </div>
+      <p>真理値は TRUE=1、FALSE=0 で表します。この表現は後に出てくる論理回路の HIGH(1) / LOW(0) と直接対応しています。</p>
+    </section>
+
+    <section id="truth-table" class="lesson-section">
+      <h2>真理値表と基本論理演算</h2>
+      <p>真理値表とは、命題変数が取り得るすべての値（1/0）に対して、論理式全体が1か0かを体系的に示した表です。変数n個で2<sup>n</sup>行になります。</p>
+
+      <div class="compare-grid">
+        <article>
+          <h3>AND（論理積：P・Q）</h3>
+          <p>両方が1のときだけ1。「PかつQ」</p>
+          <figure class="wide-diagram"><pre><code>P Q | P・Q
+---------
+0 0 |  0
+0 1 |  0
+1 0 |  0
+1 1 |  1</code></pre></figure>
+        </article>
+        <article>
+          <h3>OR（論理和：P+Q）</h3>
+          <p>どちらか1なら1。「PまたはQ」</p>
+          <figure class="wide-diagram"><pre><code>P Q | P+Q
+---------
+0 0 |  0
+0 1 |  1
+1 0 |  1
+1 1 |  1</code></pre></figure>
+        </article>
+        <article>
+          <h3>NOT（否定：¬P）</h3>
+          <p>入力を反転。「Pでない」</p>
+          <figure class="wide-diagram"><pre><code>P | ¬P
+------
+0 |  1
+1 |  0</code></pre></figure>
+        </article>
+        <article>
+          <h3>XOR（排他的論理和：P⊕Q）</h3>
+          <p>異なるとき1。一致比較やビット演算で重要</p>
+          <figure class="wide-diagram"><pre><code>P Q | P⊕Q
+---------
+0 0 |  0
+0 1 |  1
+1 0 |  1
+1 1 |  0</code></pre></figure>
+        </article>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>演算</th><th>記号</th><th>式</th><th>出力1の条件</th><th>直感的意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>AND</td><td>・</td><td>P・Q</td><td>両方1</td><td>「PかつQ」</td></tr>
+            <tr><td>OR</td><td>+</td><td>P+Q</td><td>どちらか1</td><td>「PまたはQ」</td></tr>
+            <tr><td>NOT</td><td>¬ または バー</td><td>¬P</td><td>入力が0</td><td>「Pでない」</td></tr>
+            <tr><td>XOR</td><td>⊕</td><td>P⊕Q</td><td>異なるとき</td><td>「どちらか一方だけ」</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="demorgan" class="lesson-section">
+      <h2>ド・モルガンの法則</h2>
+      <p>ド・モルガンの法則は、論理式を別の形に書き換えるための基本法則です。複雑な論理式の簡略化や論理回路の簡略化に不可欠です。</p>
+
+      <div class="compare-grid">
+        <article>
+          <h3>第1法則：¬(P・Q) = ¬P + ¬Q</h3>
+          <p>ANDの否定はORの否定に変わる。「両方必要」の否定は「どちらか欠けていればよい」</p>
+          <figure class="wide-diagram"><pre><code>P Q | P・Q | ¬(P・Q) | ¬P | ¬Q | ¬P+¬Q
+-----------------------------------------
+0 0 |  0   |    1     |  1  |  1  |   1
+0 1 |  0   |    1     |  1  |  0  |   1
+1 0 |  0   |    1     |  0  |  1  |   1
+1 1 |  1   |    0     |  0  |  0  |   0
+
+→ ¬(P・Q)列 と ¬P+¬Q列 が完全一致</code></pre></figure>
+        </article>
+        <article>
+          <h3>第2法則：¬(P+Q) = ¬P・¬Q</h3>
+          <p>ORの否定はANDの否定に変わる。「どちらかでよい」の否定は「両方ダメ」</p>
+          <figure class="wide-diagram"><pre><code>P Q | P+Q | ¬(P+Q) | ¬P | ¬Q | ¬P・¬Q
+-----------------------------------------
+0 0 |  0  |    1    |  1  |  1  |   1
+0 1 |  1  |    0    |  1  |  0  |   0
+1 0 |  1  |    0    |  0  |  1  |   0
+1 1 |  1  |    0    |  0  |  0  |   0
+
+→ ¬(P+Q)列 と ¬P・¬Q列 が完全一致</code></pre></figure>
+        </article>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>第1法則</th><th>第2法則</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>式</td><td>¬(P・Q) = ¬P + ¬Q</td><td>¬(P+Q) = ¬P・¬Q</td></tr>
+            <tr><td>意味</td><td>ANDの否定→ORの否定</td><td>ORの否定→ANDの否定</td></tr>
+            <tr><td>内部理解</td><td>両方必要の否定→どちらか欠ければよい</td><td>どちらかでよいの否定→両方ダメ</td></tr>
+            <tr><td>回路変換</td><td>NAND → OR + NOT</td><td>NOR → AND + NOT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="gates" class="lesson-section">
+      <h2>論理回路の基本ゲート</h2>
+      <p>論理回路は、論理演算を電気的に実現したものです。入力は1(HIGH)または0(LOW)で、出力も1または0です。</p>
+
+      <h3>基本ゲート一覧</h3>
+      <figure class="wide-diagram">
+        <figcaption>ANDゲート（両方1で1）</figcaption>
+        <pre><code>     ┌───┐
+P ──┤ & ├── P・Q
+Q ──┤   │
+     └───┘
+P Q | P・Q
+0 0 |  0
+0 1 |  0
+1 0 |  0
+1 1 |  1</code></pre>
+      </figure>
+      <figure class="wide-diagram">
+        <figcaption>ORゲート（どちらか1で1）</figcaption>
+        <pre><code>     ┌───┐
+P ──┤ ≥1├── P+Q
+Q ──┤   │
+     └───┘
+P Q | P+Q
+0 0 |  0
+0 1 |  1
+1 0 |  1
+1 1 |  1</code></pre>
+      </figure>
+      <figure class="wide-diagram">
+        <figcaption>NOTゲート（入力を反転）</figcaption>
+        <pre><code>     ┌───┐
+P ──┤ 1 │○── ¬P
+     └───┘
+P | ¬P
+0 |  1
+1 |  0</code></pre>
+      </figure>
+      <figure class="wide-diagram">
+        <figcaption>XORゲート（異なるとき1）</figcaption>
+        <pre><code>     ┌───┐
+P ──┤ =1├── P⊕Q
+Q ──┤   │
+     └───┘
+P Q | P⊕Q
+0 0 |  0
+0 1 |  1
+1 0 |  1
+1 1 |  0</code></pre>
+      </figure>
+
+      <h3>万能ゲート（NAND / NOR）</h3>
+      <p>NAND（ANDの否定）とNOR（ORの否定）は、この1種だけでAND・OR・NOT・XORなどすべての論理回路を構成できます。そのため「万能ゲート」と呼ばれます。</p>
+
+      <div class="compare-grid">
+        <article>
+          <h3>NAND</h3>
+          <figure class="wide-diagram"><pre><code>     ┌───┐
+P ──┤ & │○── ¬(P・Q)
+Q ──┤   │
+     └───┘
+P Q | ¬(P・Q)
+0 0 |   1
+0 1 |   1
+1 0 |   1
+1 1 |   0</code></pre></figure>
+        </article>
+        <article>
+          <h3>NOR</h3>
+          <figure class="wide-diagram"><pre><code>     ┌───┐
+P ──┤ ≥1│○── ¬(P+Q)
+Q ──┤   │
+     └───┘
+P Q | ¬(P+Q)
+0 0 |   1
+0 1 |   0
+1 0 |   0
+1 1 |   0</code></pre></figure>
+        </article>
+        <article>
+          <h3>XNOR</h3>
+          <figure class="wide-diagram"><pre><code>     ┌───┐
+P ──┤ =1│○── XNOR
+Q ──┤   │
+     └───┘
+P Q | XNOR
+0 0 |  1
+0 1 |  0
+1 0 |  0
+1 1 |  1</code></pre></figure>
+        </article>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ゲート</th><th>基本構成</th><th>真理値表の特徴</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>NAND</td><td>AND + NOT</td><td>ANDの出力を反転</td><td>万能ゲート（半導体回路の基本）</td></tr>
+            <tr><td>NOR</td><td>OR + NOT</td><td>ORの出力を反転</td><td>万能ゲート</td></tr>
+            <tr><td>XNOR</td><td>XOR + NOT</td><td>同じとき1</td><td>等価比較回路</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="design" class="lesson-section">
+      <h2>論理回路の設計</h2>
+      <p>論理回路の設計は、次の2ステップで行います。</p>
+      <ol>
+        <li><strong>論理式を確認する</strong></li>
+        <li><strong>論理式の構造に従ってゲートを配置する</strong></li>
+      </ol>
+      <p>AND（・）→ ANDゲート、OR（+）→ ORゲート、NOT（¬）→ NOTゲート。式と回路は1対1で対応するため、式を分解→ゲート配置の順で必ず設計できます。</p>
+
+      <div class="compare-grid">
+        <article>
+          <h3>例題1: Y = (P・Q) + R</h3>
+          <p>PとQをAND → その結果をRとOR</p>
+          <figure class="wide-diagram"><pre><code>P ──┐
+     ├─[AND]─┐
+Q ──┘        ├─[OR]── Y
+             │
+R ──────────┘</code></pre></figure>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>P</th><th>Q</th><th>R</th><th>Y</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                <tr><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+        <article>
+          <h3>例題2: Y = ¬P・(Q+R)</h3>
+          <p>PをNOT → QとRをOR → 両結果をAND</p>
+          <figure class="wide-diagram"><pre><code>P ──[NOT]──┐
+             ├─[AND]── Y
+Q ──┐        │
+     ├─[OR]──┘
+R ──┘</code></pre></figure>
+        </article>
+      </div>
+
+      <article class="formula-box">
+        <h3>例題3: XORをAND+OR+NOTで構成</h3>
+        <p>XORは (P+Q)・¬(P・Q) で構成できます。これは「PまたはQ」かつ「PかつQの否定」という意味です。</p>
+        <figure class="wide-diagram"><pre><code>P ──┬─[OR]──┐
+Q ──┘        ├─[AND]── P⊕Q
+              │
+P ──┬─[AND]─[NOT]─┘
+Q ──┘</code></pre></figure>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>P</th><th>Q</th><th>P+Q</th><th>P・Q</th><th>¬(P・Q)</th><th>P⊕Q</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+              <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>XORとORの混同</strong>: ORは1,1でも1。XORは1,1で0。「または」の日常語に注意。</li>
+        <li><strong>ド・モルガンの法則の向き</strong>: ¬(P・Q) → ¬P+¬Q（否定が外れて中がAND→OR反転）。¬(P+Q) → ¬P・¬Q（中がOR→AND反転）。</li>
+        <li><strong>NAND/NORとAND/ORの混同</strong>: NAND = ANDしてNOT。NOR = ORしてNOT。記号は基本ゲートの先端に小丸○。</li>
+        <li><strong>論理式と回路図の対応</strong>: AND(・)→ANDゲート、OR(+)→ORゲート、NOT(¬)→NOTゲート。式の構造をそのままゲート配置に変換すればよい。</li>
+        <li><strong>真理値表の行数</strong>: 変数n個で2<sup>n</sup>行。2変数=4行、3変数=8行、4変数=16行。並びは 00→01→10→11 が標準。</li>
+        <li><strong>半加算器・全加算器</strong>: 本ページのPDF範囲（p48-p73）には含まれていません。別ページで扱います。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. P=1, Q=0のとき、P・Q（AND）の出力は？</summary>
+        <p>答え: <strong>0</strong>。ANDは両方1のときだけ1です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. P=0, Q=0のとき、P+Q（OR）の出力は？</summary>
+        <p>答え: <strong>0</strong>。ORはどちらかが1なら1。両方0のときだけ0です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. P=1, Q=1のとき、P⊕Q（XOR）の出力は？</summary>
+        <p>答え: <strong>0</strong>。XORは異なるとき1、同じとき0です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. ¬(P・Q) と等価な式はどれか。A) ¬P・¬Q B) P+Q C) ¬P+¬Q D) P・Q</summary>
+        <p>答え: <strong>C) ¬P+¬Q</strong>。ド・モルガン第1法則により、ANDの否定はORの否定になります。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. ¬(P+Q) と等価な式はどれか。A) ¬P・¬Q B) ¬P+¬Q C) P+Q D) ¬P+Q</summary>
+        <p>答え: <strong>A) ¬P・¬Q</strong>。ド・モルガン第2法則により、ORの否定はANDの否定になります。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q6. ¬(A・B) をド・モルガンの法則で変形した結果は？</summary>
+        <p>答え: <strong>¬A + ¬B</strong>。¬(A・B) = ¬A + ¬B です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q7. 次の回路の出力Yを論理式で表すと？ P→[NOT]→┐ ┌→[AND]→Y, Q→────┘</summary>
+        <p>答え: <strong>¬P・Q</strong>。PをNOTしたものとQをANDしています。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q8. NANDゲートだけで作れないものはどれか。A) AND B) OR C) NOT D) 作れないものはない</summary>
+        <p>答え: <strong>D) 作れないものはない</strong>。NANDは万能ゲートで、AND/OR/NOT/XORすべて構成可能です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q9. XORをAND/OR/NOTで構成する正しい式は？ A) (P+Q)・¬(P・Q) B) (P・Q)+(P+Q) C) (P+Q)・P D) P+Q</summary>
+        <p>答え: <strong>A) (P+Q)・¬(P・Q)</strong>。「(PまたはQ)」かつ「(PかつQ)の否定」でXORになります。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q10. P=1, Q=0, R=1のとき、Y=(P・Q)+Rの出力は？</summary>
+        <p>答え: <strong>1</strong>。P・Q = 1・0 = 0、0+R = 0+1 = 1です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q11. 論理回路図で、三角形の先端に小丸○が付いているゲートは何か。</summary>
+        <p>答え: <strong>NOTゲート</strong>。三角形（バッファ）＋小丸（否定）でNOTを表します。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q12. P=1, Q=1のとき、XNORの出力は？</summary>
+        <p>答え: <strong>1</strong>。XNORはXORの否定で、同じとき1になります。</p>
+      </details>
+    </section>
+
+    <section class="lesson-section source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <ul>
+        <li>本体PDF: <strong>1_基礎理論（数学・論理・情報理論99）.pdf</strong> p48-p73（第2章 論理と論理演算）</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
