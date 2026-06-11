@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>サブネットとCIDR | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#eef4f8",
+        primaryTextColor: "#182230",
+        primaryBorderColor: "#8aa4bf",
+        lineColor: "#2563eb",
+        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
+      },
+      flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 }
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>サブネットとCIDR</h1>
+        <p class="lead">サブネット分割の目的、サブネットマスク、CIDR表記、利用可能ホスト数の計算方法を基本情報技術者試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#basics">サブネットとは</a>
+        <a href="#mask">サブネットマスク</a>
+        <a href="#cidr">CIDR</a>
+        <a href="#calc">計算問題</a>
+        <a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">ネットワーク</a>
+      <span>サブネットとCIDR</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>サブネット分割の目的（セキュリティ・トラフィック制御・効率的なIP利用）</li>
+          <li>ネットワーク部とホスト部の区別</li>
+          <li>サブネットマスクの意味とCIDR表記（プレフィックス表記）</li>
+          <li>利用可能ホスト数の計算（2<sup>n</sup> - 2）</li>
+          <li>IPv4クラスアドレス（クラスA/B/C）の構造</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>サブネットマスクとCIDR、利用可能ホスト数計算</dd></div>
+          <div><dt>中</dt><dd>ネットワーク部/ホスト部の区別、クラスアドレス</dd></div>
+          <div><dt>低</dt><dd>クラスD/E（マルチキャスト・実験用）</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>サブネット</td><td>1つのネットワークを分割した小さなセグメント</td></tr>
+            <tr><td>2</td><td>ネットワーク部</td><td>IPアドレスのうちネットワーク全体を表す部分</td></tr>
+            <tr><td>3</td><td>ホスト部</td><td>IPアドレスのうち個々の機器を識別する部分</td></tr>
+            <tr><td>4</td><td>サブネットマスク</td><td>ネットワーク部を1(255)、ホスト部を0で表す値</td></tr>
+            <tr><td>5</td><td>CIDR</td><td>クラスに縛られず自由にネットワーク分割する方式。プレフィックス表記</td></tr>
+            <tr><td>6</td><td>プレフィックス</td><td>スラッシュの後ろにネットワーク部のビット数を表す（例: /24）</td></tr>
+            <tr><td>7</td><td>クラスA</td><td>先頭ビット0、ネットワーク部8ビット、大規模ネットワーク向け</td></tr>
+            <tr><td>8</td><td>クラスB</td><td>先頭ビット10、ネットワーク部16ビット、中規模向け</td></tr>
+            <tr><td>9</td><td>クラスC</td><td>先頭ビット110、ネットワーク部24ビット、小規模向け</td></tr>
+            <tr><td>10</td><td>ブロードキャストアドレス</td><td>ホスト部が全て1のアドレス。そのネットワーク全体に一斉送信</td></tr>
+            <tr><td>11</td><td>ネットワークアドレス</td><td>ホスト部が全て0のアドレス。そのネットワーク自体を表す</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="basics" class="lesson-section">
+      <h2>サブネットとは</h2>
+      <p>サブネットとは、1つのネットワークを<strong>複数の小さなセグメントに分割</strong>したものです。分割された各セグメントを「サブネット」と呼びます。</p>
+
+      <h3>ネットワークを分割する理由</h3>
+      <ul>
+        <li>機器の種類や用途ごとに通信を分離したい</li>
+        <li>部署ごとに通信を管理したい</li>
+        <li>トラフィックの制御やセキュリティを向上させたい</li>
+        <li>IPアドレスを効率的に利用したい</li>
+      </ul>
+
+      <h3>IPアドレスの構造</h3>
+      <p>IPアドレスは<strong>ネットワーク部</strong>と<strong>ホスト部</strong>に分かれます。</p>
+      <ul>
+        <li><strong>ネットワーク部</strong>：ネットワーク全体を表す部分。サブネット内の全機器で共通。</li>
+        <li><strong>ホスト部</strong>：そのネットワーク内の個々の機器を識別する部分。</li>
+      </ul>
+
+      <p>例：クラスCのネットワーク <code>192.168.100.0/24</code> では<br>
+      ネットワーク部：<code>192.168.100</code>（上位24ビット）<br>
+      ホスト部：<code>0〜255</code>（下位8ビット、個々の機器に割り当て）</p>
+    </section>
+
+    <section id="mask" class="lesson-section">
+      <h2>サブネットマスク</h2>
+      <p>サブネットを定義するために使われるのが<strong>サブネットマスク（Subnet Mask）</strong>です。サブネットマスクは、IPアドレスのうちどの部分がネットワーク部かを示す値です。</p>
+
+      <ul>
+        <li>ネットワーク部 → ビットを <strong>1</strong>（255）にする</li>
+        <li>ホスト部 → ビットを <strong>0</strong> にする</li>
+      </ul>
+
+      <figure class="wide-diagram">
+        <figcaption>サブネットマスクの考え方</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[IPアドレス 32ビット] --> B[ネットワーク部]
+    A --> C[ホスト部]
+    B --> D[サブネットマスク: 1]
+    C --> E[サブネットマスク: 0]
+    D --> F[CIDR: /24 など]
+    E --> G[ホスト数: 2^n - 2]</pre>
+      </figure>
+
+      <h3>サブネットマスク早見表</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>サブネットマスク</th><th>意味</th><th>CIDR表記</th><th>利用可能ホスト数</th></tr></thead>
+          <tbody>
+            <tr><td>255.255.255.0</td><td>上位24ビットがネットワーク部</td><td>/24</td><td>254台</td></tr>
+            <tr><td>255.255.255.128</td><td>上位25ビットがネットワーク部</td><td>/25</td><td>126台</td></tr>
+            <tr><td>255.255.255.192</td><td>上位26ビットがネットワーク部</td><td>/26</td><td>62台</td></tr>
+            <tr><td>255.255.255.224</td><td>上位27ビットがネットワーク部</td><td>/27</td><td>30台</td></tr>
+            <tr><td>255.255.255.240</td><td>上位28ビットがネットワーク部</td><td>/28</td><td>14台</td></tr>
+            <tr><td>255.255.255.248</td><td>上位29ビットがネットワーク部</td><td>/29</td><td>6台</td></tr>
+            <tr><td>255.255.255.252</td><td>上位30ビットがネットワーク部</td><td>/30</td><td>2台</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cidr" class="lesson-section">
+      <h2>CIDR（Classless Inter-Domain Routing）</h2>
+      <p>CIDR方式では、IPアドレスの後ろにスラッシュで<strong>ネットワーク部のビット数</strong>を表します。これを<strong>プレフィックス表記</strong>と呼びます。</p>
+
+      <ul>
+        <li>例：<code>192.168.100.0/24</code> → 上位24ビットがネットワーク部</li>
+        <li>CIDRにより、IPアドレスのクラスに縛られず、自由にネットワークを分割可能</li>
+        <li>クラスに縛られないため、IPアドレスの無駄がなく効率的に利用できる</li>
+      </ul>
+
+      <h3>IPv4クラスアドレス</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>クラス</th><th>先頭ビット</th><th>ネットワーク部</th><th>アドレス範囲</th><th>用途</th></tr></thead>
+          <tbody>
+            <tr><td>クラスA</td><td>0</td><td>8ビット</td><td>1.0.0.0〜126.255.255.255</td><td>大規模ネットワーク</td></tr>
+            <tr><td>クラスB</td><td>10</td><td>16ビット</td><td>128.0.0.0〜191.255.255.255</td><td>中規模ネットワーク</td></tr>
+            <tr><td>クラスC</td><td>110</td><td>24ビット</td><td>192.0.0.0〜223.255.255.255</td><td>小規模ネットワーク</td></tr>
+            <tr><td>クラスD</td><td>1110</td><td>なし</td><td>224.0.0.0〜239.255.255.255</td><td>マルチキャスト</td></tr>
+            <tr><td>クラスE</td><td>11110</td><td>なし</td><td>240.0.0.0〜255.255.255.255</td><td>実験用</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>クラスDとクラスEはホスト部を持たない特殊用途アドレスです。</p>
+    </section>
+
+    <section id="calc" class="lesson-section">
+      <h2>計算問題の解き方</h2>
+
+      <h3>利用可能ホスト数の公式</h3>
+      <p><strong>2<sup>n</sup> - 2</strong>（n = ホスト部のビット数）</p>
+      <p>「-2」の理由：</p>
+      <ul>
+        <li>ホスト部が<strong>全て0</strong> → ネットワークアドレス（予約済み）</li>
+        <li>ホスト部が<strong>全て1</strong> → ブロードキャストアドレス（予約済み）</li>
+      </ul>
+
+      <h3>計算例</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>CIDR</th><th>ホスト部ビット数</th><th>計算式</th><th>利用可能ホスト数</th></tr></thead>
+          <tbody>
+            <tr><td>/24</td><td>8</td><td>2^8 - 2 = 256 - 2</td><td>254台</td></tr>
+            <tr><td>/25</td><td>7</td><td>2^7 - 2 = 128 - 2</td><td>126台</td></tr>
+            <tr><td>/26</td><td>6</td><td>2^6 - 2 = 64 - 2</td><td>62台</td></tr>
+            <tr><td>/27</td><td>5</td><td>2^5 - 2 = 32 - 2</td><td>30台</td></tr>
+            <tr><td>/28</td><td>4</td><td>2^4 - 2 = 16 - 2</td><td>14台</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>頻出パターン</strong>: 「/26で何台のホストが接続できるか」→ ホスト部 6ビット → 2^6 - 2 = 62台</p>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>2^n で計算し、-2を忘れない</strong>: ネットワークアドレスとブロードキャストアドレスはホストに割り当て不可。</li>
+        <li><strong>CIDRの数字はネットワーク部のビット数</strong>: /24 = 255.255.255.0。ホスト部は 32-24 = 8ビット。</li>
+        <li><strong>クラスC ≠ /24固定</strong>: CIDRではクラスCでも/25や/26に分割可能。</li>
+        <li><strong>サブネットマスクとCIDRは同じ情報の別表記</strong>: 255.255.255.0 = /24。どちらが出ても理解できるように。</li>
+        <li><strong>ホスト部が全て0または全て1のアドレスは使用不可</strong>: これが-2の理由。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. サブネットマスク 255.255.255.0 のCIDR表記として正しいものはどれか。</summary>
+        <p>ア）/8<br>イ）/16<br>ウ）/24<br>エ）/32</p>
+        <p>答え: <strong>ウ</strong> — 255.255.255.0 は上位24ビットが1なので/24。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. CIDR /26 のネットワークで利用可能なホスト数はいくつか。</summary>
+        <p>ア）62<br>イ）64<br>ウ）126<br>エ）128</p>
+        <p>答え: <strong>ア</strong> — ホスト部は 32-26 = 6ビット。2^6 - 2 = 64 - 2 = 62台。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. IPアドレス 192.168.1.100/24 のネットワークアドレスとして正しいものはどれか。</summary>
+        <p>ア）192.168.1.0<br>イ）192.168.1.255<br>ウ）192.168.1.100<br>エ）192.168.0.0</p>
+        <p>答え: <strong>ア</strong> — /24 は上位24ビットがネットワーク部なので、ホスト部（下位8ビット）を0にした 192.168.1.0 がネットワークアドレス。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. サブネット分割の目的として、適切でないものはどれか。</summary>
+        <p>ア）部署ごとに通信を管理する<br>イ）トラフィックの制御やセキュリティを向上させる<br>ウ）IPアドレスを効率的に利用する<br>エ）通信速度を上げるために回線を専有する</p>
+        <p>答え: <strong>エ</strong> — 回線専有は回線交換方式の特徴。サブネット分割は通信分離・管理・IP効率利用が目的。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. ホスト部に割り当て可能なアドレス数を求める式として正しいものはどれか。</summary>
+        <p>ア）2^n<br>イ）2^n - 1<br>ウ）2^n - 2<br>エ）2^(n-1)</p>
+        <p>答え: <strong>ウ</strong> — ネットワークアドレス（全0）とブロードキャストアドレス（全1）の2つを引く。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q6. クラスCのIPアドレスの先頭ビットパターンとして正しいものはどれか。</summary>
+        <p>ア）0<br>イ）10<br>ウ）110<br>エ）1110</p>
+        <p>答え: <strong>ウ</strong> — クラスA=0、クラスB=10、クラスC=110、クラスD=1110。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q7. CIDR /28 のサブネットマスクとして正しいものはどれか。</summary>
+        <p>ア）255.255.255.0<br>イ）255.255.255.192<br>ウ）255.255.255.240<br>エ）255.255.255.252</p>
+        <p>答え: <strong>ウ</strong> — /28 は上位28ビットが1。11111111.11111111.11111111.11110000 = 255.255.255.240。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q8. ブロードキャストアドレスの説明として正しいものはどれか。</summary>
+        <p>ア）ホスト部が全て0のアドレス<br>イ）ホスト部が全て1のアドレス<br>ウ）ネットワーク部が全て0のアドレス<br>エ）ネットワーク部が全て1のアドレス</p>
+        <p>答え: <strong>イ</strong> — ブロードキャストアドレスはホスト部が全て1。アはネットワークアドレスの説明。</p>
+      </details>
+    </section>
+
+    <section class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>1_ネットワーク基礎.pdf ch23（p103-p107）: サブネット、サブネットマスク、CIDR、IPv4クラスアドレス</p>
+    </section>
+  </main>
+</body>
+</html>

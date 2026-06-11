@@ -58,9 +58,9 @@
           "status": "done"
         },
         {
-          "title": "IPアドレス・サブネット",
+          "title": "サブネットとCIDR",
           "href": "fe/technology/network/ip-subnet.html",
-          "status": "planned"
+          "status": "done"
         }
       ]
     },
