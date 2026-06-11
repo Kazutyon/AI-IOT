@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>インターネット・メール・Webのしくみ | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#eef4f8",
+        primaryTextColor: "#182230",
+        primaryBorderColor: "#8aa4bf",
+        lineColor: "#2563eb",
+        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
+      },
+      flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 }
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>インターネット・メール・Webのしくみ</h1>
+        <p class="lead">インターネットの基本構造、メールプロトコル（SMTP/POP/IMAP）、HTTP/HTTPS、DNS名前解決、URLとURI、AjaxとREST APIまでを整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a><a href="#internet">インターネット</a><a href="#mail">メール</a><a href="#web">Web</a><a href="#dns">DNS</a><a href="#api">Ajax/REST</a><a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず"><a href="../../../index.html">ポータル</a><a href="index.html">ネットワーク</a><span>インターネット・メール・Web</span></nav>
+    <section class="lesson-summary"><div><h2>このページで覚えること</h2><ul class="check-list">
+          <li>インターネットの起源（ARPANET）とルーターの役割</li>
+          <li>メールプロトコル（SMTP送信 / POP受信 / IMAP受信）</li>
+          <li>HTTPとHTTPSの違い、ステートレス</li>
+          <li>DNSの名前解決の流れ（再帰問合せ/反復問合せ）</li>
+          <li>URLの構造、AjaxとREST APIの基本</li>
+        </ul></div>
+      <aside class="priority-box"><h2>出題優先度</h2><dl>
+          <div><dt>高</dt><dd>SMTP/POP/IMAPの使い分け、DNS名前解決、HTTPS</dd></div>
+          <div><dt>中</dt><dd>HTTPメソッド、URL構造、Ajax</dd></div>
+          <div><dt>低</dt><dd>ARPANETの歴史、REST API</dd></div></dl><p>読了目安: 約20分</p></aside></section>
+
+    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap"><table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+            <tr><td>1</td><td>ARPANET</td><td>1969年に稼働したインターネットの起源。TCP/IPもここで開発</td></tr>
+            <tr><td>2</td><td>ISP</td><td>インターネット接続サービスを提供する事業者</td></tr>
+            <tr><td>3</td><td>SMTP</td><td>メール送信用プロトコル（ポート25/587）</td></tr>
+            <tr><td>4</td><td>POP3</td><td>メール受信用プロトコル。サーバーから端末にダウンロード（ポート110）</td></tr>
+            <tr><td>5</td><td>IMAP</td><td>メール受信用プロトコル。サーバー上で管理（ポート143）</td></tr>
+            <tr><td>6</td><td>HTTP</td><td>Webページ転送プロトコル。ステートレス（ポート80）</td></tr>
+            <tr><td>7</td><td>HTTPS</td><td>HTTP over SSL/TLS。暗号化通信（ポート443）</td></tr>
+            <tr><td>8</td><td>DNS</td><td>ドメイン名をIPアドレスに変換するシステム</td></tr>
+            <tr><td>9</td><td>URL</td><td>Uniform Resource Locator。スキーム://ホスト/パス</td></tr>
+            <tr><td>10</td><td>Ajax</td><td>非同期通信でページ全体を再読み込みせずに画面更新</td></tr>
+            <tr><td>11</td><td>REST API</td><td>HTTPメソッドでリソース操作するWeb APIの設計スタイル</td></tr>
+          </tbody></table></div></section>
+
+    <section id="internet" class="lesson-section"><h2>インターネットの基本</h2>
+      <p>インターネットは、企業LANやISP、モバイルネットワークなど<strong>様々なネットワークを相互接続する広域ネットワーク</strong>です。起源は1967年のARPANET計画で、1969年にはアメリカの4大学・研究機関をつなぐネットワークが稼働しました。ARPANETの研究成果としてTCP/IPプロトコルも開発されました。</p>
+      <h3>ルーターの役割（再掲）</h3>
+      <ul><li>LAN内の通信は外部に出さない</li><li>自分のLAN宛でない通信は内部に入れない</li><li>自LAN宛でない通信はルーティングテーブルに従って適切に転送</li></ul>
+      <p><strong>ISP（インターネットサービスプロバイダ）</strong>：個人や企業にインターネット接続回線を提供する業者。代表例：NTT、KDDI、ソフトバンク。エッジルーター・ファイアウォール・ISPの3つが役割を分担して安全な通信を実現します。</p>
+    </section>
+
+    <section id="mail" class="lesson-section"><h2>メールのしくみ</h2>
+      <div class="table-wrap"><table><thead><tr><th>プロトコル</th><th>用途</th><th>ポート</th><th>特徴</th></tr></thead><tbody>
+            <tr><td>SMTP</td><td>メール送信</td><td>25 / 587</td><td>送信専用。サーバー間の転送にも使われる</td></tr>
+            <tr><td>POP3</td><td>メール受信</td><td>110</td><td>サーバーから端末にダウンロード。ダウンロード後はサーバーから削除されるのが基本</td></tr>
+            <tr><td>IMAP</td><td>メール受信</td><td>143</td><td>サーバー上でメールを管理。複数端末から同じメールボックスを参照可能</td></tr>
+          </tbody></table></div>
+      <p><strong>SMTPで送信、POP3またはIMAPで受信</strong>という役割分担が基本です。IMAPはサーバーにメールを残すため、スマホとPCで同じメールを読む場合に適しています。</p>
+    </section>
+
+    <section id="web" class="lesson-section"><h2>Webのしくみ</h2>
+      <h3>HTTP（Hypertext Transfer Protocol）</h3>
+      <p>Webページを転送するプロトコル。<strong>ステートレス</strong>（状態を持たない）が特徴で、各リクエストは独立して処理されます。ポート番号は<strong>80</strong>。</p>
+      <h3>HTTPS（HTTP Secure）</h3>
+      <p>HTTPをSSL/TLSで暗号化したもの。ポート番号は<strong>443</strong>。通信の盗聴・改ざん・なりすましを防止します。</p>
+      <h3>URLとURI</h3>
+      <p><strong>URL</strong>（Uniform Resource Locator）は「<code>スキーム://ホスト/パス</code>」の形式でリソースの場所を示します。例：<code>https://www.example.com/index.html</code></p>
+      <ul><li><strong>スキーム</strong>：http / https / ftp など</li><li><strong>ホスト</strong>：ドメイン名またはIPアドレス</li><li><strong>パス</strong>：サーバー上のファイル位置</li></ul>
+    </section>
+
+    <section id="dns" class="lesson-section"><h2>DNS（Domain Name System）</h2>
+      <p>DNSは<strong>ドメイン名をIPアドレスに変換するシステム</strong>です。人間が覚えやすい名前（例：www.example.com）をコンピューターが使うIPアドレスに変換します。</p>
+      <h3>名前解決の流れ</h3>
+      <ol><li>クライアントがDNSキャッシュサーバーに問合せ</li><li>キャッシュがあれば即応答、なければルートDNSサーバーへ</li><li>ルート→TLD（.comなど）→権威DNSサーバーと順に問合せ</li><li>解決したIPアドレスをクライアントに返す</li></ol>
+      <p><strong>再帰問合せ</strong>：DNSサーバーが代理で全部調べて結果だけ返す。<strong>反復問合せ</strong>：DNSサーバーが「次はここに聞け」と順に案内する。</p>
+    </section>
+
+    <section id="api" class="lesson-section"><h2>AjaxとREST API</h2>
+      <h3>Ajax（Asynchronous JavaScript + XML）</h3>
+      <p>ページ全体を再読み込みせず、<strong>非同期通信で必要なデータだけを取得して画面を部分的に更新</strong>する技術。Google Mapsのスクロールで新しい地図が読み込まれるのが代表例。</p>
+      <h3>REST API</h3>
+      <p>HTTPメソッド（GET/POST/PUT/DELETE）でリソースを操作するWeb APIの設計スタイル。URLでリソースを指定し、JSON形式でデータをやり取りするのが一般的です。</p>
+    </section>
+
+    <section class="lesson-section"><h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>SMTPは送信専用、POP3/IMAPは受信専用</strong>：送信と受信でプロトコルが分かれている。</li>
+        <li><strong>POP3とIMAPの違い</strong>：POP3=ダウンロード型（サーバーから消える）、IMAP=サーバー管理型（複数端末で同期）。</li>
+        <li><strong>HTTPは80番、HTTPSは443番</strong>：ポート番号の暗記必須。</li>
+        <li><strong>HTTPはステートレス</strong>：状態を保持しない。セッション管理はCookieなどで実現。</li>
+        <li><strong>DNSの再帰問合せと反復問合せ</strong>：再帰=全部任せる、反復=自分で順に聞く。</li>
+      </ul></section>
+
+    <section id="quiz" class="lesson-section"><h2>確認問題</h2>
+      <details class="quiz-card"><summary>Q1. メール送信に使われるプロトコルはどれか。</summary><p>ア）POP3<br>イ）IMAP<br>ウ）SMTP<br>エ）HTTP</p><p>答え: <strong>ウ</strong> — SMTPはメール送信用。POP3とIMAPは受信用。</p></details>
+      <details class="quiz-card"><summary>Q2. HTTPS通信で使用されるポート番号はどれか。</summary><p>ア）25<br>イ）80<br>ウ）110<br>エ）443</p><p>答え: <strong>エ</strong> — HTTP=80、HTTPS=443。SMTP=25、POP3=110。</p></details>
+      <details class="quiz-card"><summary>Q3. DNSの役割として正しいものはどれか。</summary><p>ア）メールを暗号化して送信する<br>イ）ドメイン名をIPアドレスに変換する<br>ウ）Webページの表示速度を向上させる<br>エ）ファイルを圧縮して転送する</p><p>答え: <strong>イ</strong> — DNSはDomain Name System。ドメイン名→IPアドレスの名前解決を行う。</p></details>
+      <details class="quiz-card"><summary>Q4. IMAPとPOP3の違いとして正しいものはどれか。</summary><p>ア）IMAPはメール送信に使われる<br>イ）POP3はサーバー上にメールを残す<br>ウ）IMAPはサーバー上でメールを管理し、複数端末から参照できる<br>エ）POP3とIMAPに機能差はない</p><p>答え: <strong>ウ</strong> — IMAPはサーバー管理型で複数端末同期可能。POP3は基本的にダウンロード後削除。</p></details>
+      <details class="quiz-card"><summary>Q5. HTTPの特徴として正しいものはどれか。</summary><p>ア）ステートフル（状態を保持する）<br>イ）ステートレス（状態を保持しない）<br>ウ）メール送信に使われる<br>エ）通信が常に暗号化される</p><p>答え: <strong>イ</strong> — HTTPはステートレス。各リクエストは独立。セッション管理はCookie等で実現。</p></details>
+      <details class="quiz-card"><summary>Q6. Ajaxの説明として正しいものはどれか。</summary><p>ア）ページ全体を再読み込みして画面を更新する<br>イ）非同期通信で必要なデータだけを取得し、画面を部分的に更新する<br>ウ）サーバー側でHTMLを生成して返す<br>エ）メールを暗号化する技術</p><p>答え: <strong>イ</strong> — Ajaxは非同期通信で部分更新。Google Mapsなどが代表例。</p></details>
+      <details class="quiz-card"><summary>Q7. URLの「スキーム」部分の例として正しいものはどれか。</summary><p>ア）www.example.com<br>イ）/index.html<br>ウ）https<br>エ）#section1</p><p>答え: <strong>ウ</strong> — httpsがスキーム。アはホスト、イはパス、エはフラグメント。</p></details>
+      <details class="quiz-card"><summary>Q8. インターネットの起源となったプロジェクトはどれか。</summary><p>ア）ARPANET<br>イ）イーサネット<br>ウ）ワールドワイドウェブ<br>エ）TCP/IP</p><p>答え: <strong>ア</strong> — ARPANET（1969年稼働）がインターネットの起源。TCP/IPもARPANETで開発された。</p></details>
+    </section>
+
+    <section class="source-note"><h2>出典PDF・対応ページ</h2><p>1_ネットワーク基礎.pdf ch35-ch40 + ch46-ch47（p155-p181, p208-p211）: インターネットの仕組み、メール、Web、HTTP/HTTPS、URL、DNS、Ajax、REST API</p></section>
+  </main>
+</body>
+</html>
