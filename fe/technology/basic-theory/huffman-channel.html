@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ハフマン符号と通信路容量 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Basic Theory</p>
+        <h1>ハフマン符号と通信路容量</h1>
+        <p class="lead">データ圧縮のアルゴリズム（ハフマン符号）と通信の情報理論（シャノンモデル・通信路容量）をFE試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#huffman">ハフマン符号</a>
+        <a href="#tree">木の構築</a>
+        <a href="#shannon">通信モデル</a>
+        <a href="#capacity">通信路容量</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">基礎理論</a>
+      <span>ハフマン符号</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>ハフマン符号: よく出る記号に短い符号、出にくい記号に長い符号を割り当てる圧縮方式</li>
+          <li>ハフマン木の構築手順（最小頻度の2つから繰り返し統合）</li>
+          <li>シャノンの通信モデル（送信者→符号化→通信路→復号→受信者）</li>
+          <li>誤り訂正のための冗長性（パリティ/CRC/ハミング/LDPC/ターボ符号）</li>
+          <li>通信路容量: 1秒間に送れる情報量の理論的限界</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ハフマン木の構築手順、平均符号長</dd></div>
+          <div><dt>中</dt><dd>シャノンの通信モデル、通信路容量</dd></div>
+          <div><dt>低</dt><dd>誤り訂正符号の種類</dd></div>
+        </dl>
+        <p>読了目安: 約20分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>ハフマン符号</td><td>よく出る記号に短い符号を割り当てる最適符号化</td></tr>
+            <tr><td>2</td><td>ハフマン木</td><td>符号を構築する二分木。左枝=0、右枝=1</td></tr>
+            <tr><td>3</td><td>プレフィックス符号</td><td>どの符号語も他符号語の接頭辞にならない符号</td></tr>
+            <tr><td>4</td><td>平均符号長</td><td>各符号長×出現確率の総和。圧縮効率の指標</td></tr>
+            <tr><td>5</td><td>シャノンの通信モデル</td><td>送信者→符号化→通信路→復号→受信者</td></tr>
+            <tr><td>6</td><td>通信路</td><td>ビット列を送る経路。必ずノイズが存在する</td></tr>
+            <tr><td>7</td><td>冗長性</td><td>誤り検出・訂正のために追加する余分なビット</td></tr>
+            <tr><td>8</td><td>通信路容量</td><td>1秒間に送れる情報量の理論的限界</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="huffman" class="lesson-section">
+      <h2>ハフマン符号の原理</h2>
+      <p>ハフマン符号は、データをできるだけ短いビット列で表す<strong>圧縮技術</strong>です。ZIP、PNG、MP3、GZIP、PDFテキスト圧縮など、多くの圧縮形式で使われています。</p>
+      <article class="formula-box">
+        <h3>基本思想</h3>
+        <p><strong>よく出る記号 → 短い符号 / めったに出ない記号 → 長い符号</strong></p>
+        <p>情報量（−log₂P）に比例した長さのビット列を割り当てることで、<strong>平均符号長が最小</strong>になります。</p>
+        <p>エントロピーが理論上の下限（最小平均ビット数）であり、ハフマン符号はこれに非常に近い値を達成できます。</p>
+      </article>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用途</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td>ZIP</td><td>ファイル圧縮</td></tr>
+            <tr><td>PNG</td><td>画像圧縮（可逆）</td></tr>
+            <tr><td>MP3</td><td>音声圧縮（非可逆+ハフマン）</td></tr>
+            <tr><td>GZIP</td><td>Web通信圧縮</td></tr>
+            <tr><td>PDF</td><td>テキスト圧縮</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="tree" class="lesson-section">
+      <h2>ハフマン木の構築手順</h2>
+      <p>ハフマン符号は<strong>二分木</strong>を使って構築します。左の枝=0、右の枝=1 として、根から葉までの経路がビット列になります。</p>
+
+      <h3>構築アルゴリズム（6ステップ）</h3>
+      <ol>
+        <li>各記号の出現頻度を並べる（例: A:40, B:30, C:20, D:10）</li>
+        <li><strong>最も頻度の小さい2つ</strong>を選び、1つのノードにまとめる</li>
+        <li>まとめたノードを元のリストに戻し、再び最小の2つを選ぶ</li>
+        <li>1つの木になるまで繰り返す</li>
+        <li>左右の枝に0と1を割り当てる（左=0, 右=1）</li>
+        <li>各記号のビット列が決まる</li>
+      </ol>
+
+      <figure class="wide-diagram">
+        <figcaption>ハフマン木の構築過程（A:40, B:30, C:20, D:10）</figcaption>
+        <pre><code>Step1: 頻度を並べる
+A:40  B:30  C:20  D:10
+
+Step2: C+D → CD:30
+        CD(30)
+       /      \
+     C(20)   D(10)
+
+Step3: B+CD → BCD:60
+        BCD(60)
+       /      \
+     B(30)   CD(30)
+            /      \
+          C(20)   D(10)
+
+Step4: A+BCD → 根(100)
+         根(100)
+        /       \
+     A(40)     BCD(60)
+              /      \
+            B(30)   CD(30)
+                   /      \
+                 C(20)   D(10)
+
+最終符号: A=0, B=10, C=110, D=111</code></pre>
+      </figure>
+
+      <article class="formula-box">
+        <h3>平均符号長の計算</h3>
+        <p>各符号長 × 出現確率の総和</p>
+        <p>= 1×0.4 + 2×0.3 + 3×0.2 + 3×0.1 = 0.4+0.6+0.6+0.3 = <strong>1.9 bit</strong></p>
+      </article>
+
+      <h3>プレフィックス符号</h3>
+      <p>ハフマン符号は<strong>プレフィックス符号</strong>（どの符号も他の符号の先頭にならない）です。そのため<strong>区切り記号なしで一意に復号</strong>できます。</p>
+      <figure class="wide-diagram">
+        <figcaption>プレフィックス性の確認</figcaption>
+        <pre><code>A: 0
+B: 10
+C: 110
+D: 111
+
+どの符号も他の符号の先頭になっていない
+例: A=0 は B=10 の先頭に含まれない
+    B=10 は C=110 の先頭に含まれない</code></pre>
+      </figure>
+    </section>
+
+    <section id="shannon" class="lesson-section">
+      <h2>通信の基本構造（シャノンモデル）</h2>
+      <p>通信とは「送り手が持つ情報を、受け手に正しく伝えること」です。シャノンは通信を次の<strong>5要素</strong>でモデル化しました。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>シャノンの通信モデル</figcaption>
+        <pre><code>送信者 → [符号化] → 通信路 → [復号] → 受信者
+(情報)    (ビット列化)  (ノイズあり) (情報復元)  (情報)</code></pre>
+      </figure>
+      <ul>
+        <li><strong>符号化</strong>: 情報をビット列に変換。ハフマン符号で圧縮すれば通信効率が向上する</li>
+        <li><strong>通信路</strong>: 電線や電波でビット列を送る経路。必ず<strong>ノイズ</strong>があり、ビット反転などの誤りが発生する</li>
+        <li><strong>復号</strong>: ビット列を元の情報に戻す</li>
+      </ul>
+
+      <h3>ノイズと誤り訂正</h3>
+      <p>通信路のノイズによるビット誤りを検出・訂正するために、<strong>冗長性</strong>（余分なビット）を追加します。ビット数は増えますが、通信の信頼性が上がります。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>方式</th><th>特徴</th></tr></thead>
+          <tbody>
+            <tr><td>パリティビット</td><td>奇数/偶数パリティ。1ビット誤り検出のみ</td></tr>
+            <tr><td>CRC</td><td>巡回冗長検査。データ通信で広く使用</td></tr>
+            <tr><td>ハミング符号</td><td>1ビット誤り訂正可能</td></tr>
+            <tr><td>LDPC符号</td><td>低密度パリティ検査。5G通信で使用</td></tr>
+            <tr><td>ターボ符号</td><td>反復復号。3G/4Gで使用</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="capacity" class="lesson-section">
+      <h2>通信路容量（通信の限界）</h2>
+      <p>通信路には「<strong>1秒間に送れる情報量の限界</strong>」があります。これを<strong>通信路容量</strong>と呼びます。</p>
+
+      <article class="formula-box">
+        <h3>シャノンの定理</h3>
+        <p><strong>通信路容量以下の情報量なら、理論上誤りゼロで通信できる。</strong></p>
+        <p>逆に、通信路容量を超える情報量は、どんな工夫をしても誤りゼロでは送れない。</p>
+      </article>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>観点</th><th>圧縮（ハフマン符号）</th><th>誤り訂正（冗長性）</th></tr></thead>
+          <tbody>
+            <tr><td>目的</td><td>ビット数を減らす</td><td>誤りを検出・訂正する</td></tr>
+            <tr><td>方法</td><td>頻度に応じた可変長符号</td><td>冗長ビットの追加</td></tr>
+            <tr><td>エントロピーとの関係</td><td>エントロピーが理論上の下限</td><td>通信路容量が上限</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>ハフマン木は最小頻度から</strong>: 最大頻度から始めない。最小の2つを繰り返し統合する。</li>
+        <li><strong>平均符号長 ≧ エントロピー</strong>: エントロピーが理論上の下限。ハフマン符号はこれに限りなく近づく。</li>
+        <li><strong>プレフィックス符号の条件</strong>: どの符号も他の符号の先頭になってはいけない。A=0 に対して B=01 は不可。</li>
+        <li><strong>通信路容量は通信の限界</strong>: 圧縮効率の話ではない。1秒間に送れる情報量の上限。</li>
+        <li><strong>冗長性はトレードオフ</strong>: ビット数は増えるが、誤り訂正能力（信頼性）が上がる。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. ハフマン符号で「よく出る記号に短い符号」を割り当てる理由は？</summary>
+        <p>答え: <strong>平均符号長を最小にするため</strong>。情報量に比例した長さで、エントロピーに最も近い値が達成できる。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. ハフマン木を構築するとき、最初に選ぶのはどれか。</summary>
+        <p>答え: <strong>最も頻度の小さい2つ</strong>。最小頻度から繰り返し統合して1つの木を作る。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. A:0.4, B:0.3, C:0.2, D:0.1 のハフマン符号で、Aの符号は何ビットか。</summary>
+        <p>答え: <strong>1ビット</strong>。最も頻度が高いAが最短の符号になる。A=0。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. ハフマン符号がプレフィックス符号であることの利点は？</summary>
+        <p>答え: <strong>区切り記号なしで一意に復号できる</strong>。どの符号も他の符号の先頭にならないため。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. シャノンの通信モデルの正しい順序は？</summary>
+        <p>答え: <strong>送信者→符号化→通信路→復号→受信者</strong>。5要素をこの順番で覚える。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q6. 通信路容量について正しいものは？</summary>
+        <p>答え: <strong>容量以下の情報量なら理論上誤りゼロで送れる</strong>。シャノンの定理による。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q7. 誤り訂正のために冗長ビットを追加すると通信はどうなるか。</summary>
+        <p>答え: <strong>ビット数は増えるが信頼性が上がる</strong>。冗長性と効率はトレードオフ。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q8. ハフマン符号が使われているものはどれか。</summary>
+        <p>答え: <strong>ZIP圧縮</strong>。PNG、MP3、GZIP、PDFテキスト圧縮でも使われている。</p>
+      </details>
+    </section>
+
+    <section class="lesson-section source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <ul>
+        <li>本体PDF: <strong>1_基礎理論（数学・論理・情報理論99）.pdf</strong> p143-p155（第5章 情報理論の基礎 後半）</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
