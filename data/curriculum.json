@@ -47,6 +47,11 @@
           "title": "ハフマン符号と通信路容量",
           "href": "fe/technology/basic-theory/huffman-channel.html",
           "status": "done"
+        },
+        {
+          "title": "情報理論の応用",
+          "href": "fe/technology/basic-theory/infotheory-application.html",
+          "status": "done"
         }
       ]
     },
