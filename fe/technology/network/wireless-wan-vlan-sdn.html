@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>無線LAN・WAN・VLAN・SDN | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#eef4f8",
+        primaryTextColor: "#182230",
+        primaryBorderColor: "#8aa4bf",
+        lineColor: "#2563eb",
+        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
+      },
+      flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 }
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>無線LAN・WAN・VLAN・SDN</h1>
+        <p class="lead">無線LANの暗号化方式、IEEE 802.x規格、WANの概念、VLANによるセグメント分割、SDNの制御分離、LAN間接続とインターネット接続までを整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#wlan">無線LAN</a>
+        <a href="#ieee">IEEE 802.x</a>
+        <a href="#wan">WAN</a>
+        <a href="#vlan">VLAN</a>
+        <a href="#sdn">SDN</a>
+        <a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">ネットワーク</a>
+      <span>無線LAN・WAN・VLAN・SDN</span>
+    </nav>
+    <section class="lesson-summary">
+      <div><h2>このページで覚えること</h2><ul class="check-list">
+          <li>無線LANの暗号化方式（WEP→WPA→WPA2→WPA3の変遷）</li>
+          <li>SSID・ステルスSSID・MACアドレス認証</li>
+          <li>IEEE 802.3（イーサネット）と802.11（無線LAN）の規格</li>
+          <li>WANとLANの違い、VLANによる論理セグメント分割</li>
+          <li>SDNのデータプレーン/コントロールプレーンの分離</li>
+          <li>L3スイッチとルーターの使い分け</li>
+        </ul></div>
+      <aside class="priority-box"><h2>出題優先度</h2><dl>
+          <div><dt>高</dt><dd>WPA2/WPA3、VLAN、L3スイッチvsルーター</dd></div>
+          <div><dt>中</dt><dd>IEEE 802.11規格、SDNの考え方、SSID</dd></div>
+          <div><dt>低</dt><dd>WEPの脆弱性詳細、WANの多義性</dd></div></dl><p>読了目安: 約22分</p></aside>
+    </section>
+
+    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap"><table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+            <tr><td>1</td><td>SSID</td><td>無線LANネットワークの識別名</td></tr>
+            <tr><td>2</td><td>ステルスSSID</td><td>SSIDのブロードキャストを停止し存在を隠す機能</td></tr>
+            <tr><td>3</td><td>WEP</td><td>初期の無線LAN暗号化（RC4、脆弱・現在非推奨）</td></tr>
+            <tr><td>4</td><td>WPA</td><td>WEPの後継。TKIPで動的鍵変更</td></tr>
+            <tr><td>5</td><td>WPA2</td><td>AES暗号採用。現在の標準</td></tr>
+            <tr><td>6</td><td>WPA3</td><td>最新規格。SAEでパスワード強化</td></tr>
+            <tr><td>7</td><td>IEEE 802.3</td><td>有線LAN（イーサネット）規格</td></tr>
+            <tr><td>8</td><td>IEEE 802.11</td><td>無線LAN（Wi-Fi）規格。a/b/g/n/ac/ax/be</td></tr>
+            <tr><td>9</td><td>WAN</td><td>広域ネットワーク。LAN間を接続する網</td></tr>
+            <tr><td>10</td><td>VLAN</td><td>物理配置に依存しない論理的なセグメント分割技術</td></tr>
+            <tr><td>11</td><td>VLAN-ID</td><td>VLANの識別子。スイッチ間で論理セグメントを構成</td></tr>
+            <tr><td>12</td><td>SDN</td><td>制御（Control）と転送（Data）を分離しソフトウェアで一元管理</td></tr>
+            <tr><td>13</td><td>OpenFlow</td><td>SDNの代表的な制御プロトコル</td></tr>
+            <tr><td>14</td><td>イントラネット</td><td>インターネットから隔離された企業内閉域ネットワーク</td></tr>
+            <tr><td>15</td><td>テザリング</td><td>スマートフォンの通信を他機器と共有する機能</td></tr>
+          </tbody></table></div></section>
+
+    <section id="wlan" class="lesson-section"><h2>無線LAN</h2>
+      <p>有線ケーブルではなく<strong>電波を使って機器を接続するLAN</strong>です。ケーブル不要で設置自由度が高い反面、電波が傍受されるリスクがあるためセキュリティ対策が必須です。</p>
+      <h3>SSID</h3>
+      <p>SSID（Service Set Identifier）は無線LANネットワークの<strong>名前</strong>です。端末は周囲のAPが送信するSSIDを受信→選択→認証情報を送信→接続の流れでネットワークに参加します。</p>
+      <ul><li><strong>ステルスSSID</strong>：SSIDのブロードキャストを停止し、一覧に表示されなくする。ただし通信自体は傍受可能なため、暗号化と併用必須。</li>
+        <li><strong>複数SSID</strong>：1台のAPで複数SSIDを設定可能。社員用/来客用の分離などに使う。VLANと組み合わせてセキュリティ向上。</li></ul>
+
+      <h3>無線LANの暗号化方式</h3>
+      <div class="table-wrap"><table>
+          <thead><tr><th>方式</th><th>暗号</th><th>特徴</th><th>状態</th></tr></thead><tbody>
+            <tr><td>WEP</td><td>RC4（40/104bit）</td><td>初期の暗号化。静的キーで脆弱</td><td>❌ 非推奨</td></tr>
+            <tr><td>WPA</td><td>TKIP（動的鍵変更）</td><td>WEPの脆弱性を改善</td><td>⚠ 旧式</td></tr>
+            <tr><td>WPA2</td><td>AES</td><td>強力な暗号。現在の標準</td><td>✅ 推奨</td></tr>
+            <tr><td>WPA3</td><td>SAE（Simultaneous Authentication of Equals）</td><td>パスワード推測耐性強化</td><td>✅ 最新</td></tr>
+          </tbody></table></div>
+
+      <h3>セキュリティ対策まとめ</h3>
+      <ul><li><strong>暗号化</strong>：WPA2以上が必須（WEPは解析ツールで破られる）</li>
+        <li><strong>MACアドレス認証</strong>：許可機器のみ接続（ただし偽装可能）</li>
+        <li><strong>ステルスSSID</strong>：存在を隠す（単独では不十分）</li>
+        <li><strong>RADIUSサーバー</strong>：上位層での強固な認証</li></ul>
+    </section>
+
+    <section id="ieee" class="lesson-section"><h2>IEEE 802.x規格</h2>
+      <h3>IEEE 802.3（有線LAN / イーサネット）</h3>
+      <p>物理層とデータリンク層を規定。ツイストペア・光ファイバーなどをサポート。</p>
+      <div class="table-wrap"><table><thead><tr><th>規格</th><th>速度</th><th>ケーブル</th></tr></thead><tbody>
+            <tr><td>10BASE-T</td><td>10Mbps</td><td>ツイストペア（CAT3以上）</td></tr>
+            <tr><td>100BASE-TX</td><td>100Mbps</td><td>CAT5以上</td></tr>
+            <tr><td>1000BASE-T</td><td>1Gbps</td><td>CAT6以上</td></tr>
+            <tr><td>10GBASE-T</td><td>10Gbps</td><td>CAT6a以上</td></tr>
+          </tbody></table></div>
+
+      <h3>IEEE 802.11（無線LAN / Wi-Fi）</h3>
+      <div class="table-wrap"><table><thead><tr><th>規格</th><th>周波数</th><th>最大速度</th><th>別名</th></tr></thead><tbody>
+            <tr><td>802.11b</td><td>2.4GHz</td><td>11Mbps</td><td>-</td></tr>
+            <tr><td>802.11g</td><td>2.4GHz</td><td>54Mbps</td><td>-</td></tr>
+            <tr><td>802.11n</td><td>2.4/5GHz</td><td>600Mbps</td><td>Wi-Fi 4</td></tr>
+            <tr><td>802.11ac</td><td>5GHz</td><td>6.9Gbps</td><td>Wi-Fi 5</td></tr>
+            <tr><td>802.11ax</td><td>2.4/5GHz</td><td>9.6Gbps</td><td>Wi-Fi 6</td></tr>
+            <tr><td>802.11be</td><td>2.4/5/6GHz</td><td>46Gbps</td><td>Wi-Fi 7</td></tr>
+          </tbody></table></div>
+      <p><strong>802.11ac（Wi-Fi 5）は5GHzのみ、802.11n/ax（Wi-Fi 4/6）は2.4GHzと5GHzの両方</strong>という周波数帯の違いが頻出。</p>
+    </section>
+
+    <section id="wan" class="lesson-section"><h2>WAN</h2>
+      <p>WAN（Wide Area Network）は、建物内外・都市間・国際間など<strong>広い地理的範囲を接続するネットワーク</strong>です。通信事業者が提供する専用線（ATM回線など）もWANの一例。</p>
+      <ul><li><strong>LAN</strong>：オフィス・建物内の狭い範囲</li>
+        <li><strong>WAN</strong>：都市間・国際間の広い範囲</li>
+        <li>ルーターのポート表記では「LAN側＝内部セグメント」「WAN側＝外部/上位ネットワーク」</li></ul>
+    </section>
+
+    <section id="vlan" class="lesson-section"><h2>VLAN</h2>
+      <p>VLAN（Virtual LAN）は、<strong>物理的な接続場所に関係なく論理的にネットワークセグメントを構成する技術</strong>です。VLAN-IDでスイッチ間のセグメントを管理し、ブロードキャストの影響範囲を制御します。</p>
+      <ul><li>別々のスイッチに接続された機器でも同じセグメントにまとめられる</li>
+        <li>ブロードキャストパケット（ARP/DHCP）をVLAN内に限定し、ネットワーク効率を向上</li>
+        <li>L2スイッチでもL3スイッチでも利用可能</li></ul>
+    </section>
+
+    <section id="sdn" class="lesson-section"><h2>SDN</h2>
+      <p>SDN（Software Defined Network）は、ネットワーク機器の設定を<strong>ソフトウェアで一元的に管理</strong>する仕組みです。</p>
+      <h3>データプレーンとコントロールプレーンの分離</h3>
+      <ul><li><strong>データプレーン</strong>：実際のデータ転送（スイッチ/ルーター）</li>
+        <li><strong>コントロールプレーン</strong>：経路管理・設定（制御サーバー）</li></ul>
+      <p>制御をソフトウェアに集中させることで、構成変更を一括で行えます。</p>
+      <ul><li><strong>OpenFlow</strong>：スイッチ制御の代表的なSDNプロトコル</li>
+        <li><strong>NETCONF</strong>：ネットワーク機器設定・管理プロトコル</li>
+        <li>REST API/Webベースで管理可能</li></ul>
+    </section>
+
+    <section class="lesson-section"><h2>LAN間接続とインターネット接続</h2>
+      <h3>L3スイッチとルーターの使い分け</h3>
+      <div class="table-wrap"><table><thead><tr><th>項目</th><th>L3スイッチ</th><th>ルーター</th></tr></thead><tbody>
+            <tr><td>主な用途</td><td>LAN内部のセグメント間接続</td><td>LANとWANの境界接続</td></tr>
+            <tr><td>処理速度</td><td>非常に高速（HW処理）</td><td>やや遅い（SW処理）</td></tr>
+            <tr><td>ポート数</td><td>16〜48ポート</td><td>数ポート</td></tr>
+            <tr><td>主な機能</td><td>VLAN間ルーティング</td><td>NAT/ファイアウォール/VPN/QoS</td></tr>
+          </tbody></table></div>
+
+      <h3>インターネット接続の基本</h3>
+      <ul><li><strong>エッジルーター</strong>：LANとインターネットの境界でパケットを中継・分離</li>
+        <li><strong>ファイアウォール</strong>：不正アクセスや攻撃パケットを遮断</li>
+        <li><strong>NAT/NAPT</strong>：プライベートIP↔グローバルIPの変換</li>
+        <li><strong>ISP</strong>：インターネット接続サービスを提供。代表例：NTT、KDDI、ソフトバンク</li>
+        <li><strong>イントラネット</strong>：社内業務専用の閉域ネットワーク</li>
+        <li><strong>テザリング</strong>：スマホ経由で他機器をインターネット接続（Wi-Fi/USB/Bluetooth）</li></ul>
+    </section>
+
+    <section class="lesson-section"><h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>WEPは脆弱、WPA2以上が必須</strong>：WEPは短時間で解析可能。試験では「WEPは安全でない」が正解。</li>
+        <li><strong>SSIDだけではセキュリティにならない</strong>：ステルスSSIDも単独では不十分。暗号化と併用すること。</li>
+        <li><strong>802.11ac（Wi-Fi 5）は5GHzのみ</strong>：2.4GHzと5GHz両方使えるのは802.11n（Wi-Fi 4）と802.11ax（Wi-Fi 6）。</li>
+        <li><strong>VLANは物理配置に依存しない</strong>：異なるスイッチの機器でも同じセグメントにできる。</li>
+        <li><strong>SDNのポイントは「制御と転送の分離」</strong>：データプレーンとコントロールプレーンに分けてソフトウェアで集中制御。</li>
+        <li><strong>L3スイッチはLAN内部、ルーターはWAN境界</strong>：どちらもL3機器だが役割が異なる。</li>
+      </ul></section>
+
+    <section id="quiz" class="lesson-section"><h2>確認問題</h2>
+      <details class="quiz-card"><summary>Q1. 無線LANの暗号化方式として、現在最も安全とされるものはどれか。</summary>
+        <p>ア）WEP<br>イ）WPA<br>ウ）WPA2<br>エ）WPA3</p>
+        <p>答え: <strong>エ</strong> — WPA3はSAEによりパスワード推測耐性を強化した最新規格。</p></details>
+      <details class="quiz-card"><summary>Q2. VLANの説明として正しいものはどれか。</summary>
+        <p>ア）物理的な配線に基づいてセグメントを分割する<br>イ）VLAN-IDで論理的にセグメントを構成する<br>ウ）WAN環境でのみ使用できる<br>エ）ルーターがないと利用できない</p>
+        <p>答え: <strong>イ</strong> — VLANはVLAN-IDで物理配置に依存せず論理セグメントを構成。L2スイッチでも利用可能。</p></details>
+      <details class="quiz-card"><summary>Q3. SDNの説明として正しいものはどれか。</summary>
+        <p>ア）データ転送と経路制御を同じ機器で行う<br>イ）制御（Control）と転送（Data）を分離し、ソフトウェアで一元管理する<br>ウ）有線LAN専用の暗号化技術である<br>エ）ネットワーク機器の台数を物理的に削減する技術である</p>
+        <p>答え: <strong>イ</strong> — SDNはデータプレーンとコントロールプレーンを分離し、制御をソフトウェアに集中させる。</p></details>
+      <details class="quiz-card"><summary>Q4. IEEE 802.11ac（Wi-Fi 5）の周波数帯として正しいものはどれか。</summary>
+        <p>ア）2.4GHzのみ<br>イ）5GHzのみ<br>ウ）2.4GHzと5GHzの両方<br>エ）6GHzのみ</p>
+        <p>答え: <strong>イ</strong> — 802.11acは5GHzのみ。2.4GHzと5GHz両方は802.11n（Wi-Fi 4）と802.11ax（Wi-Fi 6）。</p></details>
+      <details class="quiz-card"><summary>Q5. L3スイッチとルーターの違いとして正しいものはどれか。</summary>
+        <p>ア）L3スイッチはWANとの境界に設置される<br>イ）ルーターはL3スイッチよりポート数が多い<br>ウ）L3スイッチはハードウェア処理で高速、ルーターはNATやファイアウォール等の高度制御が可能<br>エ）L3スイッチはデータリンク層でのみ動作する</p>
+        <p>答え: <strong>ウ</strong> — L3スイッチはHW高速処理・多ポート。ルーターはSW処理・NAT/FW/VPN等の高度制御。ア・イは逆。</p></details>
+      <details class="quiz-card"><summary>Q6. WEPの脆弱性の原因として正しいものはどれか。</summary>
+        <p>ア）AES暗号が弱いため<br>イ）静的キーと初期化ベクトルの欠陥により短時間で解析可能なため<br>ウ）鍵長が256ビットと短すぎるため<br>エ）有線接続にしか対応していないため</p>
+        <p>答え: <strong>イ</strong> — WEPはRC4暗号の静的キーとIVの欠陥で容易に解読される。アのAESはWPA2で採用された強力な暗号。</p></details>
+      <details class="quiz-card"><summary>Q7. インターネットに直接アクセスできない企業内の閉域ネットワークを何と呼ぶか。</summary>
+        <p>ア）エクストラネット<br>イ）イントラネット<br>ウ）VLAN<br>エ）SDN</p>
+        <p>答え: <strong>イ</strong> — イントラネットは社内業務専用の閉域ネットワーク。アは取引先等と一部共有する拡張版。</p></details>
+      <details class="quiz-card"><summary>Q8. テザリングの方式として誤っているものはどれか。</summary>
+        <p>ア）Wi-Fiテザリング<br>イ）USBテザリング<br>ウ）NFCテザリング<br>エ）Bluetoothテザリング</p>
+        <p>答え: <strong>ウ</strong> — テザリングはWi-Fi/USB/Bluetoothの3方式。NFCテザリングは存在しない。</p></details>
+    </section>
+
+    <section class="source-note"><h2>出典PDF・対応ページ</h2>
+      <p>1_ネットワーク基礎.pdf ch26-ch34（p117-p154）: 無線LAN、IEEE 802.x、WAN、VLAN、SDN、LAN間接続、インターネット接続、モバイルネットワーク</p></section>
+  </main>
+</body>
+</html>
