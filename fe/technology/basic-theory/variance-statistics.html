@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>分散・標準偏差と頻度分布 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Basic Theory</p>
+        <h1>分散・標準偏差と頻度分布</h1>
+        <p class="lead">データのばらつきを数値化する分散・標準偏差と、分布の形を視覚化するヒストグラムをFE試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#variance">分散</a>
+        <a href="#stddev">標準偏差</a>
+        <a href="#usage">利用場面</a>
+        <a href="#histogram">頻度分布</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">基礎理論</a>
+      <span>分散・標準偏差</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>分散 = (各値−平均)² の平均。データのばらつきを数値化</li>
+          <li>標準偏差 = √分散。元の単位に戻したばらつき</li>
+          <li>標準偏差の5つの利用場面（品質管理・リスク評価・AI予測など）</li>
+          <li>頻度分布とヒストグラムでデータの形を読み取る</li>
+          <li>分布の4種類（正規・右裾・左裾・二峰性）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>分散の計算、標準偏差の意味</dd></div>
+          <div><dt>中</dt><dd>ヒストグラムの読み取り、分布の種類</dd></div>
+          <div><dt>低</dt><dd>標準偏差の実用例（品質管理・投資リスク）</dd></div>
+        </dl>
+        <p>読了目安: 約18分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>分散</td><td>(各値−平均)²の平均。ばらつきの大きさを表す</td></tr>
+            <tr><td>2</td><td>標準偏差 σ</td><td>分散の平方根。元の単位でばらつきを表す</td></tr>
+            <tr><td>3</td><td>頻度分布</td><td>データを区間ごとに分け、各区間のデータ数を数えたもの</td></tr>
+            <tr><td>4</td><td>頻度分布表</td><td>区間と人数（頻度）を表にしたもの</td></tr>
+            <tr><td>5</td><td>ヒストグラム</td><td>頻度分布表を棒グラフにしたもの</td></tr>
+            <tr><td>6</td><td>正規分布</td><td>左右対称の山型。平均周辺に集中（身長・テスト点数）</td></tr>
+            <tr><td>7</td><td>右裾分布</td><td>小さい値が多く、大きい値が少し（所得・売上）</td></tr>
+            <tr><td>8</td><td>左裾分布</td><td>大きい値が多く、小さい値が少し（難しいテスト）</td></tr>
+            <tr><td>9</td><td>二峰性分布</td><td>山が2つ。2グループ混在（男女混合身長）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="variance" class="lesson-section">
+      <h2>分散（ばらつきの大きさ）</h2>
+      <p>期待値は「平均的な結果」を表しますが、平均だけではデータの特徴は分かりません。平均50点のクラスでも、全員が50点付近のクラスと、0点と100点に分かれているクラスでは全く状況が異なります。この<strong>ばらつき</strong>を数値化するのが<strong>分散</strong>です。</p>
+
+      <article class="formula-box">
+        <h3>分散の定義</h3>
+        <p>Var(X) = E[(X − E(X))²] = (各値 − 平均)² の平均</p>
+        <p>ズレを<strong>二乗</strong>する理由：①マイナスを消すため ②大きなズレを強調するため（10のズレ→100、20のズレ→400）</p>
+      </article>
+
+      <figure class="wide-diagram">
+        <figcaption>サイコロの分散計算</figcaption>
+        <pre><code>出目  ズレ(値−平均)   ズレ²
+ 1    1−3.5=−2.5      6.25
+ 2    2−3.5=−1.5      2.25
+ 3    3−3.5=−0.5      0.25
+ 4    4−3.5= 0.5      0.25
+ 5    5−3.5= 1.5      2.25
+ 6    6−3.5= 2.5      6.25
+                    ─────
+         合計 = 17.5
+         分散 = 17.5/6 ≈ 2.92</code></pre>
+      </figure>
+
+      <p>分散が<strong>小さい</strong>→データが平均の近くに集まっている（安定）。分散が<strong>大きい</strong>→データが平均から遠くに散らばっている（不安定）。</p>
+    </section>
+
+    <section id="stddev" class="lesson-section">
+      <h2>標準偏差（分散の平方根）</h2>
+      <p>分散はズレを二乗しているため、単位が元と変わってしまいます（点数→点数²、cm→cm²）。そこで<strong>平方根</strong>を取って元の単位に戻したものが<strong>標準偏差</strong>です。</p>
+
+      <div class="compare-grid">
+        <article>
+          <h3>分散と標準偏差の違い</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>項目</th><th>分散</th><th>標準偏差</th></tr></thead>
+              <tbody>
+                <tr><td>定義</td><td>(値−平均)²の平均</td><td>分散の平方根</td></tr>
+                <tr><td>単位</td><td>点数², cm²</td><td>点数, cm（元と同じ）</td></tr>
+                <tr><td>直感性</td><td>直感的でない</td><td>直感的に理解しやすい</td></tr>
+                <tr><td>記号</td><td>Var(X)</td><td>σ</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+        <article>
+          <h3>標準偏差の算出4ステップ</h3>
+          <figure class="wide-diagram"><pre><code>① 平均を求める      μ = E(X)
+② 各データのズレ    X − μ
+③ ズレ²の平均      Var(X) = E[(X−μ)²]  ← 分散
+④ 平方根を取る      σ = √Var(X)         ← 標準偏差</code></pre></figure>
+        </article>
+      </div>
+
+      <article class="formula-box">
+        <h3>サイコロの標準偏差</h3>
+        <p>分散 = 17.5/6 ≈ 2.92</p>
+        <p>標準偏差 = √2.92 ≈ <strong>1.71</strong></p>
+        <p>意味：サイコロの出目は平均3.5から、だいたい<strong>±1.7</strong>の範囲に散らばる。</p>
+      </article>
+    </section>
+
+    <section id="usage" class="lesson-section">
+      <h2>標準偏差の利用場面（5つ）</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>場面</th><th>小さい場合の意味</th><th>大きい場合の意味</th></tr></thead>
+          <tbody>
+            <tr><td>データ安定性</td><td>安定している</td><td>不安定</td></tr>
+            <tr><td>品質管理</td><td>品質が良い（バラつき少）</td><td>不良品が混ざる</td></tr>
+            <tr><td>投資リスク</td><td>値動きが安定</td><td>値動きが激しい（危険）</td></tr>
+            <tr><td>AI予測信頼性</td><td>モデルが安定</td><td>モデルが不安定</td></tr>
+            <tr><td>テスト難易度</td><td>全員同程度（易しすぎ/難しすぎ）</td><td>実力差が出る</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="histogram" class="lesson-section">
+      <h2>頻度分布とヒストグラム</h2>
+      <p>平均・分散・標準偏差はデータの特徴を<strong>数値化</strong>したものですが、データの<strong>形</strong>そのものを見るには頻度分布とヒストグラムが必要です。</p>
+
+      <h3>頻度分布表の例（テスト30人の点数）</h3>
+      <figure class="wide-diagram">
+        <figcaption>テスト30人の点数分布</figcaption>
+        <pre><code>区間      人数（頻度）
+40〜49     1
+50〜59     8  ████████
+60〜69    10  ██████████
+70〜79     4  ████
+80〜89     4  ████
+90〜99     3  ███</code></pre>
+      </figure>
+
+      <h3>分布の種類（4つの形）</h3>
+      <div class="compare-grid">
+        <article>
+          <h3>正規分布</h3>
+          <p>左右対称の山型。平均の周りにデータが集まる。多くの自然現象がこの形に。</p>
+          <p>例：身長、テストの点数（大人数）</p>
+          <figure class="wide-diagram"><pre><code>    ┌─┐
+   ╱     ╲
+  ╱       ╲___
+ ￣￣￣￣￣￣￣</code></pre></figure>
+        </article>
+        <article>
+          <h3>右裾分布</h3>
+          <p>小さい値が多く、大きい値が少しだけ存在する。右に長く伸びる。</p>
+          <p>例：所得、売上、アクセス数</p>
+          <figure class="wide-diagram"><pre><code>  ┌─┐
+ ╱     ╲
+╱       ╲___
+￣￣￣￣￣￣￣￣￣</code></pre></figure>
+        </article>
+        <article>
+          <h3>左裾分布</h3>
+          <p>大きい値が多く、小さい値が少しだけ存在する。左に長く伸びる。</p>
+          <p>例：難しいテストの点数</p>
+          <figure class="wide-diagram"><pre><code>      ┌─┐
+  ___╱     ╲
+ ￣￣￣￣￣￣￣</code></pre></figure>
+        </article>
+        <article>
+          <h3>二峰性分布</h3>
+          <p>山が2つある。2つの異なるグループが混在している。</p>
+          <p>例：男女混合の身長データ</p>
+          <figure class="wide-diagram"><pre><code>┌─┐   ┌─┐
+╱   ╲ ╱   ╲
+￣￣￣￣￣￣￣￣￣</code></pre></figure>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>分散と標準偏差の単位の混同</strong>: 分散は単位²（点数²）、標準偏差は元の単位（点数）。テストなら分散=点²、標準偏差=点。</li>
+        <li><strong>分散の計算で二乗を忘れる</strong>: ズレ(X−μ)をそのまま平均しない。必ず二乗してから平均する。</li>
+        <li><strong>「分散が大きい＝悪い」とは限らない</strong>: テストでは分散大＝実力差が測れる。品質管理では分散小＝良好。文脈依存。</li>
+        <li><strong>平均だけ見て分布を判断しない</strong>: 2クラスとも平均50点でも分散が全く異なるケースがある。ヒストグラムで形を確認する。</li>
+        <li><strong>正規分布が常に正しいとは限らない</strong>: 所得は右裾分布、男女混合身長は二峰性。正規分布を前提にしない。</li>
+        <li><strong>標準偏差算出の順序</strong>: ①平均→②ズレ→③二乗平均（分散）→④平方根（標準偏差）。分散を飛ばして直接標準偏差は求められない。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. サイコロの出目1〜6の分散は約いくつか。</summary>
+        <p>答え: <strong>約2.92</strong>。各出目の期待値3.5からのズレ²の平均 = 17.5/6 ≈ 2.92。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. サイコロの出目の標準偏差は約いくつか。</summary>
+        <p>答え: <strong>約1.71</strong>。√2.92 ≈ 1.71。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. 分散の計算でズレを二乗する理由として正しいものは？</summary>
+        <p>答え: <strong>マイナスを消し、大きなズレを強調するため</strong>。二乗により正の値になり、大きなズレがより大きく反映される。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. テストの点数（単位:点）の標準偏差の単位はどれか。</summary>
+        <p>答え: <strong>点</strong>。標準偏差は平方根を取るので元の単位に戻る。分散の単位は点²。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. 2クラスのテストで平均は両方50点。クラスAの分散=5、クラスBの分散=200。正しい説明は？</summary>
+        <p>答え: <strong>クラスBの方がばらつきが大きい</strong>。分散が大きいほどデータの散らばりが大きい。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q6. 所得分布のヒストグラムでよく見られる形はどれか。</summary>
+        <p>答え: <strong>右裾分布（右に長い）</strong>。所得は少ない人が多く高所得者が少ないため、右に長く伸びる。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q7. ヒストグラムに山が2つある場合、そこから読み取れることは？</summary>
+        <p>答え: <strong>2つの異なるグループが混在している可能性がある</strong>。二峰性分布は平均だけでは絶対に分からない。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q8. 製造業でネジの長さの標準偏差を測定する主な目的は？</summary>
+        <p>答え: <strong>品質のばらつきを評価するため</strong>。標準偏差が小さいほど品質が安定している。</p>
+      </details>
+    </section>
+
+    <section class="lesson-section source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <ul>
+        <li>本体PDF: <strong>1_基礎理論（数学・論理・情報理論99）.pdf</strong> p110-p127（第4章 確率と統計の基礎 後半）</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

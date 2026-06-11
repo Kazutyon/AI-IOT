@@ -32,6 +32,11 @@
           "title": "確率の基礎と期待値",
           "href": "fe/technology/basic-theory/probability-statistics.html",
           "status": "done"
+        },
+        {
+          "title": "分散・標準偏差・頻度分布",
+          "href": "fe/technology/basic-theory/variance-statistics.html",
+          "status": "done"
         }
       ]
     },
