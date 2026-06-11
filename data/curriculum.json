@@ -28,8 +28,8 @@
       "id": "network",
       "title": "ネットワーク",
       "category": "technology",
-      "status": "in-progress",
-      "description": "OSI/TCP-IP、IPアドレス、DNS、Web、無線、ネットワークセキュリティ。",
+      "status": "done",
+      "description": "OSI/TCP-IP、IPアドレス、DNS、Web、メール、無線、セキュリティ。全12教材ページ完成。",
       "href": "fe/technology/network/index.html",
       "items": [
         {
@@ -60,6 +60,36 @@
         {
           "title": "サブネットとCIDR",
           "href": "fe/technology/network/ip-subnet.html",
+          "status": "done"
+        },
+        {
+          "title": "ネットワーク接続方式とイーサネット",
+          "href": "fe/technology/network/network-connection-ethernet.html",
+          "status": "done"
+        },
+        {
+          "title": "無線LAN・WAN・VLAN・SDN",
+          "href": "fe/technology/network/wireless-wan-vlan-sdn.html",
+          "status": "done"
+        },
+        {
+          "title": "インターネット・メール・Webのしくみ",
+          "href": "fe/technology/network/dns-web-mail.html",
+          "status": "done"
+        },
+        {
+          "title": "ネットワークプロトコル詳細",
+          "href": "fe/technology/network/network-protocols-advanced.html",
+          "status": "done"
+        },
+        {
+          "title": "ネットワークセキュリティ",
+          "href": "fe/technology/network/network-security.html",
+          "status": "done"
+        },
+        {
+          "title": "無線・モバイル通信とネットワーク監視",
+          "href": "fe/technology/network/wireless-mobile-monitoring.html",
           "status": "done"
         }
       ]
@@ -172,8 +202,8 @@
     {
       "title": "1_ネットワーク基礎.pdf",
       "category": "ネットワーク",
-      "status": "一部HTML化済み",
-      "next": "サブネット計算、DNS/Web/メール、無線/セキュリティを章ごとに精読"
+      "status": "HTML化済み",
+      "next": "全296ページ 12教材ページHTML化完了。GitHub Pages反映済み"
     },
     {
       "title": "2_クラウド基礎.pdf",
