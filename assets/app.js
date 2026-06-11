@@ -4,12 +4,10 @@ const fallbackCurriculum = {
       id: "basic-theory",
       title: "基礎理論",
       category: "technology",
-      status: "in-progress",
+      status: "planned",
       description: "進数、論理、確率、情報理論、オートマトンを扱う土台の分野。",
       href: "fe/technology/basic-theory/index.html",
-      items: [
-        { title: "進数・基数変換", href: "fe/technology/basic-theory/radix.html", status: "draft" }
-      ]
+      items: []
     },
     {
       id: "algorithm",
@@ -83,7 +81,7 @@ const fallbackCurriculum = {
       id: "management",
       title: "マネジメント",
       category: "management",
-      status: "in-progress",
+      status: "planned",
       description: "PMBOK、サービスマネジメント、システム監査など。",
       href: "fe/management/index.html",
       items: []
