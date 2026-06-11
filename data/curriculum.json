@@ -52,6 +52,11 @@
           "title": "情報理論の応用",
           "href": "fe/technology/basic-theory/infotheory-application.html",
           "status": "done"
+        },
+        {
+          "title": "形式言語とオートマトン",
+          "href": "fe/technology/basic-theory/automaton-regex.html",
+          "status": "done"
         }
       ]
     },

@@ -16,7 +16,8 @@ const fallbackCurriculum = {
         { title: "分散・標準偏差・頻度分布", href: "fe/technology/basic-theory/variance-statistics.html", status: "done" },
         { title: "情報量とエントロピー", href: "fe/technology/basic-theory/information-entropy.html", status: "done" },
         { title: "ハフマン符号と通信路容量", href: "fe/technology/basic-theory/huffman-channel.html", status: "done" },
-        { title: "情報理論の応用", href: "fe/technology/basic-theory/infotheory-application.html", status: "done" }
+        { title: "情報理論の応用", href: "fe/technology/basic-theory/infotheory-application.html", status: "done" },
+        { title: "形式言語とオートマトン", href: "fe/technology/basic-theory/automaton-regex.html", status: "done" }
       ]
     },
     {

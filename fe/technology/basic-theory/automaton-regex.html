@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>形式言語とオートマトン | 基礎理論 | FE対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Basic Theory</p>
+        <h1>形式言語とオートマトン</h1>
+        <p class="lead">「文字列が規則に合っているか」を機械的に判定するための仕組みを学びます。正規表現・DFA・状態遷移・受理状態をFE試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="このページの見出し">
+        <a href="#terms">用語</a>
+        <a href="#formal-lang">形式言語</a>
+        <a href="#regex">正規表現</a>
+        <a href="#dfa">DFA</a>
+        <a href="#transition">状態遷移</a>
+        <a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <span>›</span>
+      <a href="index.html">基礎理論</a>
+      <span>›</span>
+      <span>形式言語とオートマトン</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>形式言語 = 文字列の集合を数学的・機械的に扱う枠組み</li>
+          <li>記号→アルファベット→文字列→言語 の4階層</li>
+          <li>規則を記述する方法が正規表現、判定する機械がオートマトン</li>
+          <li>DFA は「有限個の状態＋遷移関数」で文字列を判定する</li>
+          <li>受理状態 = 入力をすべて読み終えたときの最終判定印</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>FE頻出ランク</h2>
+        <dl>
+          <div><dt>最頻出</dt><dd>DFAの状態遷移図の読み取り</dd></div>
+          <div><dt>最頻出</dt><dd>受理・拒否の判定</dd></div>
+          <div><dt>頻出</dt><dd>正規表現の記法（* + | ?）</dd></div>
+          <div><dt>頻出</dt><dd>形式言語の基本概念</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <!-- 重要用語 -->
+    <section id="terms" class="lesson-section">
+      <h2>重要用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>記号 symbol</td><td>意味を持たない単なるマーク（0, 1, a, b など）</td><td>形式言語では記号そのものに意味はない</td></tr>
+            <tr><td>アルファベット alphabet</td><td>使用する記号をまとめた有限集合（Σ で表す）</td><td>Σ = {0,1} など。使える記号の全集合</td></tr>
+            <tr><td>文字列 string</td><td>アルファベットの記号を順に並べたもの</td><td>空文字列 ε も文字列</td></tr>
+            <tr><td>言語 language</td><td>文字列の集合。規則を満たす文字列の集まり</td><td>「0で始まる文字列の集合」など条件で定義</td></tr>
+            <tr><td>形式言語 formal language</td><td>文字列・言語を数学的・機械的に扱う枠組み</td><td>プログラム文法チェック・正規表現の基礎</td></tr>
+            <tr><td>規則 rule</td><td>どの文字列を言語に含めるかを決める条件</td><td>規則を満たす文字列の集合 = 言語</td></tr>
+            <tr><td>判定 decision</td><td>文字列が規則を満たすか判断する操作</td><td>受理 accept / 拒否 reject の2択</td></tr>
+            <tr><td>正規表現 regular expression</td><td>文字列の規則を短く記述するための方法</td><td>* + | ? の記法がFEで出題</td></tr>
+            <tr><td>DFA</td><td>決定性有限オートマトン。状態と遷移関数で文字列を判定する機械</td><td>状態遷移図・受理状態の読み取りが最頻出</td></tr>
+            <tr><td>状態 state</td><td>これまで読んだ入力の「抽象的な記憶」。有限個に限られる</td><td>現在の状況ではなく記憶の分類</td></tr>
+            <tr><td>状態遷移 transition</td><td>δ(q, a) = q′：状態 q で文字 a を読むと状態 q′ に変わる規則</td><td>遷移関数は決定的（次の状態が1つに定まる）</td></tr>
+            <tr><td>受理状態 accepting state</td><td>入力列を読み終えたとき、そこにいれば受理と判定する状態</td><td>途中通過は無関係。最後にいるかどうかだけ判定</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 形式言語の基礎 -->
+    <section id="formal-lang" class="lesson-section">
+      <h2>形式言語の基礎概念</h2>
+      <p>形式言語は「記号 → アルファベット → 文字列 → 言語」の4階層で構成されます。コンパイラの文法チェック・正規表現・通信プロトコル・入力バリデーションはすべてこの枠組みで動いています。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>形式言語の4階層</figcaption>
+        <pre>
+【記号 symbol】
+  意味を持たない単なるマーク
+  例: 0, 1, a, b, +, *
+
+        ↓ まとめると
+
+【アルファベット alphabet】  Σ = {0, 1}  /  Σ = {a, b}
+  使う記号の有限集合
+
+        ↓ 並べると
+
+【文字列 string】  01, 110, abba, ε（空文字列）
+  記号を左から順に並べたもの
+
+        ↓ 集めると
+
+【言語 language】  L = {0で始まる文字列の集合}
+  規則を満たす文字列の集合
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>概念</th><th>例（Σ = {0,1}）</th><th>IT実務での対応</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>記号</td><td>0, 1</td><td>ソースコードの文字、バイト列</td></tr>
+            <tr><td>アルファベット</td><td>{0, 1}</td><td>文字セット（ASCII, UTF-8 など）</td></tr>
+            <tr><td>文字列</td><td>01, 1010, 0011</td><td>ソースコード、通信データ、入力値</td></tr>
+            <tr><td>言語</td><td>{01を含む文字列の集合}</td><td>文法を満たすプログラム、正しいHTTPリクエスト</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <article class="formula-box">
+        <h3>規則 → 言語 → 判定 の流れ</h3>
+        <pre>① 規則を決める     例:「01 を含む文字列」
+         ↓
+② 言語が定まる     例: {01, 1010, 0011, 001100, …}
+         ↓
+③ 判定する         例: 1101 → 01 を含む → 受理 ✅
+                        110  → 01 を含まない → 拒否 ✗
+
+この「規則 → 言語 → 判定」の流れが
+プログラミング言語・正規表現・プロトコルの共通基盤</pre>
+      </article>
+    </section>
+
+    <!-- 正規表現 -->
+    <section id="regex" class="lesson-section">
+      <h2>正規表現（regular expression）</h2>
+      <p>正規表現は「文字列の規則を短く・明確に・機械的に記述するための方法」です。FEでは記号の意味と読み方が出題されます。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>記号</th><th>意味</th><th>例</th><th>マッチする文字列例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>*（スター）</td><td>直前の要素が0回以上</td><td>0*1</td><td>1, 01, 001, 0001 …</td></tr>
+            <tr><td>+（プラス）</td><td>直前の要素が1回以上</td><td>ab+</td><td>ab, abb, abbb …（aのみはNG）</td></tr>
+            <tr><td>|（パイプ）</td><td>どちらか一方（OR）</td><td>01|10</td><td>01 または 10</td></tr>
+            <tr><td>?（クエスチョン）</td><td>直前の要素が0回または1回</td><td>ab?</td><td>a または ab</td></tr>
+            <tr><td>( )（括弧）</td><td>グループ化</td><td>(ab)+</td><td>ab, abab, ababab …</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>正規表現とオートマトンの対応関係</figcaption>
+        <pre>
+正規表現          ←→          オートマトン（DFA）
+
+規則を「式」で書く          規則を「状態と遷移」で書く
+
+  0*1                              [q0] -0→ [q0]
+                                   [q0] -1→ [q1★]
+
+両者は同じ表現力を持つ
+→ 正規表現で書ける規則は必ずDFAで判定できる
+→ DFAで判定できる規則は必ず正規表現で書ける
+        </pre>
+      </figure>
+
+      <h3>正規表現の実務利用</h3>
+      <ul class="check-list">
+        <li>入力チェック（メールアドレス・電話番号の形式検証）</li>
+        <li>ログ解析（パターンに合う行を抽出）</li>
+        <li>プログラムの字句解析（コンパイラがトークンを分割）</li>
+        <li>セキュリティ（SQLインジェクション・不正入力の検出）</li>
+      </ul>
+    </section>
+
+    <!-- DFA -->
+    <section id="dfa" class="lesson-section">
+      <h2>DFA（決定性有限オートマトン）</h2>
+      <p>DFAはコンピュータが文字列を判定するための最もシンプルな機械モデルです。「有限個の状態」と「遷移関数」だけで動作します。</p>
+
+      <article class="formula-box">
+        <h3>DFA の5要素</h3>
+        <pre>DFA = ( Q, Σ, δ, q₀, F )
+
+  Q  : 状態の有限集合
+  Σ  : アルファベット（入力記号の集合）
+  δ  : 遷移関数  δ(q, a) = q′
+  q₀ : 開始状態（q₀ ∈ Q）
+  F  : 受理状態の集合（F ⊆ Q）</pre>
+      </article>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>DFAでの役割</th><th>人間の例え</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>状態 Q</td><td>記憶の分類。有限個に限られる</td><td>「偶数読んだ」「奇数読んだ」という記憶の種類</td></tr>
+            <tr><td>遷移関数 δ</td><td>文字を読むたびに状態を更新する規則</td><td>「1を読んだら偶奇を反転する」</td></tr>
+            <tr><td>開始状態 q₀</td><td>文字列を読み始める最初の状態</td><td>ゲームの初期位置</td></tr>
+            <tr><td>受理状態 F</td><td>入力を読み終えたとき、ここにいれば受理</td><td>ゴール地点（途中通過は無効）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>DFAの「状態」とは何か</h3>
+      <p>DFAの状態は「現在の物理的な状況」ではありません。<strong>これまでに読んだ入力列に関する抽象的な記憶</strong>です。判定に必要な最小限の情報だけを保持します。</p>
+      <ul class="check-list">
+        <li>「1の出現回数が偶数か奇数か」→ 2状態で十分</li>
+        <li>「最後に読んだ文字がaかbか」→ 2状態で十分</li>
+        <li>「01 という並びが出現したか」→ 3状態で表現可能</li>
+        <li>何文字読んだか・どの位置で1が出たか → 状態に保存する必要なし</li>
+      </ul>
+    </section>
+
+    <!-- 状態遷移と受理 -->
+    <section id="transition" class="lesson-section">
+      <h2>状態遷移図と受理状態</h2>
+      <p>FEでは状態遷移図を読んで「この文字列は受理されるか」を判定する問題が最頻出です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>DFA例：「1の出現回数が偶数」を判定</figcaption>
+        <pre>
+  アルファベット Σ = {0, 1}
+  開始状態: q0（1の出現回数 = 偶数）
+  受理状態: q0 ★
+
+   ┌──0──┐          ┌──0──┐
+   │     ↓          │     ↓
+  ★[q0] ──1──→ [q1]
+   ↑              │
+   └──────1───────┘
+
+  状態:
+    q0: これまでに読んだ「1」の回数が偶数
+    q1: これまでに読んだ「1」の回数が奇数
+
+  遷移規則:
+    δ(q0, 0) = q0  （0を読んでも偶奇変わらず）
+    δ(q0, 1) = q1  （1を読んで奇数になる）
+    δ(q1, 0) = q1  （0を読んでも偶奇変わらず）
+    δ(q1, 1) = q0  （1を読んで偶数に戻る）</pre>
+      </figure>
+
+      <article class="formula-box">
+        <h3>判定の手順（例: 入力 = 1101）</h3>
+        <pre>開始: q0
+  1 を読む → δ(q0, 1) = q1
+  1 を読む → δ(q1, 1) = q0
+  0 を読む → δ(q0, 0) = q0
+  1 を読む → δ(q0, 1) = q1
+
+最終状態: q1 ← 受理状態ではない
+
+→ 「1101」の 1 の出現回数は3回（奇数）→ 拒否 ✗
+
+入力 = 110 の場合:
+  1→q1, 1→q0, 0→q0
+最終状態: q0 ★ → 受理 ✅（1が2回 = 偶数）</pre>
+      </article>
+
+      <figure class="wide-diagram">
+        <figcaption>受理状態の注意点</figcaption>
+        <pre>
+【途中で受理状態を通過しても関係ない】
+
+入力: 1100  に対して
+
+  1→q1, 1→q0★, 0→q0★, 0→q0★
+
+  → 途中で q0（受理状態）を2回通過
+  → でも最後が q0 なので受理 ✅
+
+受理状態 = 「入力を全部読み終えたとき、
+             そこにいるかどうか」だけで判定</pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>間違えやすい点</th><th>正しい理解</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>状態 = 「今どこにいるか」</td><td>状態 = 「これまでの入力の抽象的な記憶」</td></tr>
+            <tr><td>受理状態を途中で通過 → 受理</td><td>最後に受理状態にいる場合のみ受理</td></tr>
+            <tr><td>状態数は入力長に依存する</td><td>状態数は有限で固定（入力長と無関係）</td></tr>
+            <tr><td>DFA はリアルタイムの動作を表す</td><td>DFA は記憶更新規則を定めた数学的な仕様</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 確認問題 -->
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 形式言語において「言語」とは何か。</summary>
+        <p><strong>正解: 文字列の集合</strong><br>
+        言語 = 規則を満たす文字列の集合。例:「0で始まる文字列の集合」= {0, 00, 01, 010, …}</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. アルファベット Σ = {0, 1} のとき、正しい文字列はどれか。「abc」「011」「012」</summary>
+        <p><strong>正解: 011</strong><br>
+        アルファベットに含まれる記号（0と1）だけで構成されているのは「011」のみ。「abc」はaもbもcも Σ に含まれない。「012」の2も含まれない。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 正規表現 0*1 にマッチする文字列はどれか。「1」「10」「001」</summary>
+        <p><strong>正解: 1 と 001</strong><br>
+        0*1 = 「0が0回以上、その後に1が1回」。「1」は0が0回＋1 → ✅。「001」は0が2回＋1 → ✅。「10」は1の後に0 → ✗。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. DFAの遷移関数 δ(q, a) = q′ の意味を説明せよ。</summary>
+        <p><strong>正解: 状態 q のときに文字 a を読むと状態 q′ に遷移する</strong><br>
+        δ は記憶の更新規則。入力文字1つに対して次の状態が1つに決まる（決定性）。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. DFAで「入力 1101 を受理するか」を判定するにはどうするか。</summary>
+        <p><strong>正解: 開始状態から1文字ずつ遷移し、最後の状態が受理状態かどうかを確認する</strong><br>
+        途中で受理状態を通過しても関係ない。全文字を読み終えたときの状態だけで判定する。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 受理状態の説明として正しいのはどれか。①入力の途中でそこを通過すれば受理　②入力をすべて読み終えたときそこにいれば受理</summary>
+        <p><strong>正解: ②</strong><br>
+        受理状態は「最終判定のための印」。入力列を全部読み終えたとき、最終状態が受理状態かどうかだけで受理/拒否を決める。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 「1の出現回数が偶数」を判定するDFAに必要な状態数は最小いくつか。</summary>
+        <p><strong>正解: 2</strong><br>
+        「偶数」と「奇数」の2種類の記憶で十分。DFAは判定に必要な最小限の状態しか持たない。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 正規表現 ab+ にマッチする文字列はどれか。「a」「ab」「b」「abb」</summary>
+        <p><strong>正解: ab と abb</strong><br>
+        ab+ = 「a の後に b が1回以上」。「a」は b がない → ✗。「b」は a がない → ✗。「ab」= a + b×1 → ✅。「abb」= a + b×2 → ✅。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 正規表現 01|10 にマッチするのはどれか。「00」「01」「11」「10」</summary>
+        <p><strong>正解: 01 と 10</strong><br>
+        | は OR。01 または 10 にマッチする。「00」「11」はどちらにも含まれない。</p>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 形式言語の「記号」についての正しい説明はどれか。①記号0は「ゼロ」という値を意味する　②記号はそれ自体に意味を持たない単なるマークである</summary>
+        <p><strong>正解: ②</strong><br>
+        形式言語では記号は意味を持たない「形」として扱う。意味はコンパイラや人間が規則を与えたときに初めて生まれる。</p>
+      </details>
+    </section>
+
+    <!-- 出典 -->
+    <section id="sources" class="lesson-section source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <ul>
+        <li>本体PDF: <strong>1_基礎理論（数学・論理・情報理論99）.pdf</strong> p166-p191</li>
+        <li>対応章: 第6章 形式言語とオートマトン基礎（前半）</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
