@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>クラウドの定義と歴史 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#eef4f8",
+        primaryTextColor: "#182230",
+        primaryBorderColor: "#8aa4bf",
+        lineColor: "#2563eb",
+        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
+      },
+      flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 }
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Cloud</p>
+        <h1>クラウドの定義と歴史</h1>
+        <p class="lead">クラウドとは何か、オンプレミスとの違い、3つの形態、発展の歴史を基本情報技術者試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#definition">定義</a>
+        <a href="#types">3形態</a>
+        <a href="#history">歴史</a>
+        <a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <span>クラウド</span>
+      <span>クラウドの定義と歴史</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>クラウドコンピューティングの定義</li>
+          <li>オンプレミス・データセンター・クラウドの3形態の違い</li>
+          <li>クラウドの4つの基本特徴（従量課金・拡張性・事業者運用・セキュリティ整備）</li>
+          <li>クラウド発展の歴史的な流れ（1990年代〜現在）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>クラウドの定義、3形態の比較</dd></div>
+          <div><dt>中</dt><dd>従量課金・拡張性などの特徴</dd></div>
+          <div><dt>低</dt><dd>歴史的な経緯（年代の流れ）</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>クラウドコンピューティング</td><td>インターネット経由でIT資産をサービスとして利用する形態</td></tr>
+            <tr><td>2</td><td>オンプレミス</td><td>自社でサーバーを購入・設置・運用する形態</td></tr>
+            <tr><td>3</td><td>データセンター</td><td>自社機器を外部施設に設置しアウトソースする形態</td></tr>
+            <tr><td>4</td><td>従量課金</td><td>使った分だけ料金が発生する料金体系</td></tr>
+            <tr><td>5</td><td>スケールアウト</td><td>サーバー台数を増やして処理能力を拡張すること</td></tr>
+            <tr><td>6</td><td>仮想化技術</td><td>1台の物理サーバーを複数の仮想サーバーとして使う技術</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="definition" class="lesson-section">
+      <h2>クラウドとは</h2>
+      <p><strong>クラウドコンピューティング</strong>とは、サーバーやネットワークなどのIT資産を<strong>インターネット経由でサービスとして利用する形態</strong>です。「必要なときに、必要なだけ、借りて使う」という考え方で、自社で購入・設置・運用する従来方式（オンプレミス）と対比されます。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>比較項目</th><th>従来（オンプレミス）</th><th>クラウド</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>機器の保有</td><td>自社で購入</td><td>事業者が保有</td></tr>
+            <tr><td>設置場所</td><td>自社のサーバールーム</td><td>事業者のデータセンター</td></tr>
+            <tr><td>運用・保守</td><td>自社で実施</td><td>事業者が実施</td></tr>
+            <tr><td>料金体系</td><td>初期費用大・固定費</td><td>従量課金・初期費用小</td></tr>
+            <tr><td>拡張性</td><td>機器追加に時間と費用</td><td>設定変更で即時拡張</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="types" class="lesson-section">
+      <h2>システムの3つの形態</h2>
+      <p>試験では3形態の「機器保有者」「設置場所」「運用担当」の違いが問われます。特にデータセンター利用とクラウドの違い（機器を自社が持つかどうか）が頻出です。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>形態</th><th>機器保有</th><th>設置場所</th><th>運用</th><th>初期費用</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>オンプレミス</strong></td><td>自社</td><td>自社施設</td><td>自社</td><td>高額</td></tr>
+            <tr><td><strong>データセンター利用</strong></td><td>自社</td><td>データセンター</td><td>自社または委託</td><td>中〜高額</td></tr>
+            <tr><td><strong>クラウド</strong></td><td>事業者</td><td>事業者DC</td><td>事業者</td><td>低額〜無料</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="wide-diagram">
+        <figcaption>3形態の構造比較</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[オンプレミス] --> A1[自社で機器保有]
+    A1 --> A2[自社施設で運用]
+    B[データセンター利用] --> B1[自社で機器保有]
+    B1 --> B2[施設のみ借りる]
+    C[クラウド] --> C1[事業者から機器を借りる]
+    C1 --> C2[事業者が運用]</pre>
+      </figure>
+    </section>
+
+    <section id="history" class="lesson-section">
+      <h2>クラウド発展の歴史</h2>
+      <p>試験で歴史年代が直接問われることは少ないですが、「仮想化技術がクラウドより先に登場した」「AWS・Azure・GCPは2000年代後半に登場した」という流れは押さえておきましょう。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>時期</th><th>動向</th><th>試験ポイント</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1990年代</td><td>データセンター登場</td><td>アウトソースの始まり</td></tr>
+            <tr><td>1995年頃</td><td>部門ごとのサーバー管理が主流</td><td>各部門が個別に運用</td></tr>
+            <tr><td>2000年頃</td><td>サーバー集約が進む</td><td>部門横断的な効率化</td></tr>
+            <tr><td>2005年頃</td><td>仮想化技術が登場</td><td>1台を複数台に分割して運用</td></tr>
+            <tr><td>2010年代〜</td><td>クラウド本格普及</td><td>AWS・Azure・GCPが市場を牽引</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="wide-diagram">
+        <figcaption>クラウド発展の流れ</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[1990年代: データセンター登場] --> B[2000年頃: サーバー集約]
+    B --> C[2005年頃: 仮想化技術登場]
+    C --> D[2010年代〜: クラウド本格普及]
+    D --> E[AWS / Azure / GCP が市場牽引]</pre>
+      </figure>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li>データセンター利用は<strong>機器を自社が保有する</strong>。クラウドは事業者が保有する。</li>
+        <li>仮想化技術はクラウドより<strong>先に</strong>登場した（2005年頃）。</li>
+        <li>1990年代にはAWSやAzureはまだ存在していない。</li>
+        <li>従量課金はクラウドの特徴。オンプレミスは初期費用が大きく固定費が発生する。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. クラウドコンピューティングの説明として最も適切なものはどれか。</summary>
+        <p>ア）自社でサーバーを購入し、自社施設で運用する形態<br>
+        イ）インターネット経由でIT資産をサービスとして利用する形態<br>
+        ウ）データセンターの施設だけを借りて運用する形態<br>
+        エ）無料で使えるソフトウェアの総称</p>
+        <p>答え: <strong>イ</strong> — アはオンプレミス、ウはデータセンター利用の説明です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. オンプレミスと比較したクラウドの特徴として適切なものはどれか。</summary>
+        <p>ア）初期費用が高額になりがちである<br>
+        イ）利用量の拡大・縮小が容易である<br>
+        ウ）サーバーの設置場所を自社で完全に管理できる<br>
+        エ）機器の運用・保守はすべて自社で行う必要がある</p>
+        <p>答え: <strong>イ</strong> — ア・ウ・エはオンプレミスの特徴です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. データセンター利用とクラウドの違いに関する説明として正しいものはどれか。</summary>
+        <p>ア）データセンター利用は機器を自社で保有するが、クラウドは事業者の機器を利用する<br>
+        イ）データセンター利用は従量課金だが、クラウドは固定料金である<br>
+        ウ）データセンター利用では運用を完全に事業者が行う<br>
+        エ）クラウドでは自社でのサーバー設置が必要である</p>
+        <p>答え: <strong>ア</strong> — 機器の保有者の違いが最大のポイントです。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. クラウド発展の歴史に関する記述として適切なものはどれか。</summary>
+        <p>ア）1990年代にはすでにAWSやAzureが存在していた<br>
+        イ）仮想化技術はクラウドよりも後に登場した<br>
+        ウ）2005年頃から仮想化によるサーバー集約が進んだ<br>
+        エ）部門ごとのサーバー管理はクラウド登場後の動きである</p>
+        <p>答え: <strong>ウ</strong> — 仮想化が先に進み、その後にクラウドが普及しました。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. クラウドサービスの三大事業者の組み合わせとして正しいものはどれか。</summary>
+        <p>ア）Amazon・Microsoft・Google<br>
+        イ）富士通・NEC・日立<br>
+        ウ）NTT・KDDI・ソフトバンク<br>
+        エ）VMware・Docker・Kubernetes</p>
+        <p>答え: <strong>ア</strong> — AWS（Amazon）・Azure（Microsoft）・GCP（Google）が三大クラウド事業者です。</p>
+      </details>
+    </section>
+
+    <section class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>2_クラウド基礎.pdf セグメント1（クラウドの定義と歴史）</p>
+    </section>
+  </main>
+</body>
+</html>

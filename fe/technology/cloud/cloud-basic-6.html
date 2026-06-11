@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>サーバー・ストレージ・ネットワーク | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:true,theme:"base",themeVariables:{primaryColor:"#eef4f8",primaryTextColor:"#182230",primaryBorderColor:"#8aa4bf",lineColor:"#2563eb",fontFamily:"system-ui,-apple-system,Segoe UI,sans-serif"},flowchart:{curve:"basis",nodeSpacing:34,rankSpacing:42}});</script>
+</head>
+<body>
+  <header class="site-header lesson-header"><div class="header-inner"><div><p class="eyebrow">Technology / Cloud</p><h1>サーバー・ストレージ・ネットワーク</h1><p class="lead">クラウドを支える構成要素（サーバー形状・ストレージ種類・ネットワーク仮想化・負荷分散）を整理します。</p></div><nav class="study-map" aria-label="ページ内メニュー"><a href="#terms">用語</a><a href="#server">サーバー</a><a href="#storage">ストレージ</a><a href="#network">ネットワーク</a><a href="#quiz">確認問題</a></nav></div></header>
+  <main class="lesson-page"><nav class="breadcrumb" aria-label="パンくず"><a href="../../../index.html">ポータル</a><span>クラウド</span><span>サーバー・ストレージ・ネットワーク</span></nav>
+    <section class="lesson-summary"><div><h2>このページで覚えること</h2><ul class="check-list"><li>サーバーの形状と特徴</li><li>ストレージの種類（DAS/SAN/NAS/オブジェクト）</li><li>ネットワーク仮想化（VLAN/SDN）と負荷分散</li></ul></div><aside class="priority-box"><h2>出題優先度</h2><dl><div><dt>高</dt><dd>DAS/SAN/NAS/オブジェクトの区別</dd></div><div><dt>中</dt><dd>VLANとSDNの違い</dd></div><div><dt>低</dt><dd>サーバー形状の詳細</dd></div></dl><p>読了目安: 約12分</p></aside></section>
+    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+      <tr><td>1</td><td>DAS</td><td>サーバー直結ストレージ。シンプルだが拡張性低</td></tr>
+      <tr><td>2</td><td>SAN</td><td>専用ネットワーク経由の高速ブロックストレージ</td></tr>
+      <tr><td>3</td><td>NAS</td><td>LAN経由のファイル共有ストレージ</td></tr>
+      <tr><td>4</td><td>VLAN</td><td>物理スイッチを論理分割する技術</td></tr>
+      <tr><td>5</td><td>SDN</td><td>ソフトウェアでネットワークを一元制御する技術</td></tr>
+    </tbody></table></div></section>
+    <section id="server" class="lesson-section"><h2>サーバーの形状</h2><figure class="wide-diagram"><figcaption>サーバー形状の分類</figcaption><pre class="mermaid">flowchart TD
+    T[タワー型 単体設置・小規模向け] --> R[ラックマウント型 ラック収納・DC主力]
+    R --> D[高密度型 省電力・小型化]</pre></figure></section>
+    <section id="storage" class="lesson-section"><h2>ストレージの種類</h2>
+      <figure class="wide-diagram"><figcaption>ストレージ分類</figcaption><pre class="mermaid">flowchart TD
+    D1[DAS サーバー直結 ブロック SATA/SAS]
+    D2[SAN 専用ネットワーク ブロック FC/iSCSI]
+    D3[NAS LAN経由 ファイル CIFS/NFS]
+    D4[オブジェクト HTTP/REST オブジェクト S3]
+    D1 -->|高速化| D2
+    D2 -->|共有化| D3
+    D3 -->|大規模化| D4</pre></figure>
+      <div class="table-wrap"><table><thead><tr><th>種類</th><th>単位</th><th>プロトコル</th><th>特徴</th></tr></thead><tbody>
+        <tr><td>DAS</td><td>ブロック</td><td>SATA/SAS</td><td>サーバー直結、シンプル</td></tr>
+        <tr><td>SAN</td><td>ブロック</td><td>FC/iSCSI</td><td>高速、データベース向け</td></tr>
+        <tr><td>NAS</td><td>ファイル</td><td>CIFS/NFS</td><td>ファイル共有、導入容易</td></tr>
+        <tr><td>オブジェクト</td><td>オブジェクト</td><td>HTTP/REST</td><td>大容量、S3、拡張性◎</td></tr>
+      </tbody></table></div></section>
+    <section id="network" class="lesson-section"><h2>ネットワーク仮想化と負荷分散</h2>
+      <h3>VLAN（Virtual LAN）</h3><p>1台の物理スイッチを複数の仮想的なLANに分割。営業部・開発部・管理部を論理的に分離。</p>
+      <h3>SDN（Software Defined Networking）</h3><p>ネットワークの制御をソフトウェアで一元管理。制御層と転送層を分離。</p>
+      <h3>ロードバランシング</h3><p>複数サーバーにトラフィックを分散。ラウンドロビン、最小接続数などのアルゴリズムで処理性能向上と障害回避。</p>
+      <figure class="wide-diagram"><figcaption>負荷分散の仕組み</figcaption><pre class="mermaid">flowchart TD
+    U[ユーザー] --> LB[ロードバランサ]
+    LB --> S1[サーバー1]
+    LB --> S2[サーバー2]
+    LB --> S3[サーバー3]</pre></figure></section>
+    <section class="lesson-section"><h2>間違えやすいポイント</h2><ul class="mistake-list"><li>SAN=高速ブロックストレージ、NAS=<strong>ファイル共有</strong>。用途が異なる。</li><li>VLAN=スイッチの論理分割。SDN=<strong>ソフトウェア制御</strong>。</li><li>オブジェクトストレージは<strong>AWS S3</strong>が代表。HTTP/RESTでアクセス。</li></ul></section>
+    <section id="quiz" class="lesson-section"><h2>確認問題</h2>
+      <details class="quiz-card"><summary>Q1. NASの説明として適切なものはどれか。</summary><p>ア）サーバーに直接接続するストレージ<br>イ）専用ネットワークで接続する高速ストレージ<br>ウ）LAN経由でファイル共有するストレージ<br>エ）データをオブジェクトとして管理するストレージ</p><p>答え: <strong>ウ</strong> — アはDAS、イはSAN、エはオブジェクトストレージ。</p></details>
+      <details class="quiz-card"><summary>Q2. SANの特徴として正しいものはどれか。</summary><p>ア）ファイル単位でアクセス<br>イ）ブロック単位でアクセスし高速<br>ウ）HTTP/RESTでアクセス<br>エ）LAN経由でファイル共有</p><p>答え: <strong>イ</strong> — SANはブロック単位、FC/iSCSIを使用。</p></details>
+      <details class="quiz-card"><summary>Q3. VLANの説明として最も適切なものはどれか。</summary><p>ア）ネットワークをソフトウェアで制御する技術<br>イ）物理スイッチを論理的に分割する技術<br>ウ）負荷分散のための技術<br>エ）ストレージを仮想化する技術</p><p>答え: <strong>イ</strong> — アはSDNの説明。</p></details>
+      <details class="quiz-card"><summary>Q4. ロードバランサの主な役割はどれか。</summary><p>ア）データの暗号化<br>イ）複数サーバーへのトラフィック分散<br>ウ）ストレージのバックアップ<br>エ）ネットワークの論理分割</p><p>答え: <strong>イ</strong></p></details>
+      <details class="quiz-card"><summary>Q5. オブジェクトストレージの代表的なサービスはどれか。</summary><p>ア）AWS EC2<br>イ）Amazon S3<br>ウ）Google App Engine<br>エ）Azure VM</p><p>答え: <strong>イ</strong> — Amazon S3が代表的なオブジェクトストレージサービスです。</p></details>
+    </section>
+    <section class="source-note"><h2>出典PDF・対応ページ</h2><p>2_クラウド基礎.pdf セグメント6（サーバー・ストレージ・ネットワーク）</p></section>
+  </main>
+</body>
+</html>

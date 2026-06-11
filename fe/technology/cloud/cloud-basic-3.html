@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>クラウドの種類 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "base", themeVariables: { primaryColor: "#eef4f8", primaryTextColor: "#182230", primaryBorderColor: "#8aa4bf", lineColor: "#2563eb", fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif" }, flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 } });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Cloud</p>
+        <h1>クラウドの種類</h1>
+        <p class="lead">パブリッククラウド・プライベートクラウド・ハイブリッドクラウドの違いと、代表的なクラウド事業者を基本情報技術者試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#public">パブリック</a>
+        <a href="#private">プライベート</a>
+        <a href="#hybrid">ハイブリッド</a>
+        <a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <span>クラウド</span>
+      <span>クラウドの種類</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>パブリッククラウドとプライベートクラウドの違い</li>
+          <li>ハイブリッドクラウドの構成パターン</li>
+          <li>三大クラウド事業者（AWS/Azure/GCP）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>パブリック/プライベートの違い、事業者名</dd></div>
+          <div><dt>中</dt><dd>ハイブリッド構成パターン</dd></div>
+          <div><dt>低</dt><dd>事業者分類（IT大手・キャリア・ISP）</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>パブリッククラウド</td><td>不特定多数向けに公開されたクラウドサービス</td></tr>
+            <tr><td>2</td><td>プライベートクラウド</td><td>特定組織だけが使う専用クラウド環境</td></tr>
+            <tr><td>3</td><td>ハイブリッドクラウド</td><td>パブリックとプライベートを組み合わせた構成</td></tr>
+            <tr><td>4</td><td>リージョン</td><td>クラウド事業者のデータセンターがある地理的地域</td></tr>
+            <tr><td>5</td><td>AZ</td><td>リージョン内の独立した物理データセンター</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="public" class="lesson-section">
+      <h2>パブリッククラウド</h2>
+      <p><strong>パブリッククラウド</strong>は、クラウド事業者が不特定多数の企業・団体・個人に向けてインターネット経由で提供するサービスです。代表的な事業者は<strong>AWS（Amazon）・Azure（Microsoft）・GCP（Google）</strong>の三大メガベンダーです。</p>
+      <figure class="wide-diagram">
+        <figcaption>パブリッククラウドの構造</figcaption>
+        <pre class="mermaid">flowchart TD
+    subgraph パブリッククラウド
+        A[AWS]
+        B[Azure]
+        C[GCP]
+    end
+    D[インターネット] --> A
+    D --> B
+    D --> C
+    A --> U1[企業A]
+    B --> U2[企業B]
+    C --> U3[個人]</pre>
+      </figure>
+      <p>特徴: 初期費用なし／低額、従量課金制、拡張性が非常に高い、事業者が運用・保守を担当、<strong>どのサーバーを使っているか「見えない」</strong>（抽象化）。</p>
+    </section>
+
+    <section id="private" class="lesson-section">
+      <h2>プライベートクラウド</h2>
+      <p><strong>プライベートクラウド</strong>は、特定の企業や団体だけのために構築されたクラウド環境です。自社のデータセンター内に構築する場合もあれば、事業者の設備を専有で借りる場合もあります。<strong>どのサーバーに接続しているか把握できる</strong>のが最大の特徴です。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>比較項目</th><th>パブリッククラウド</th><th>プライベートクラウド</th></tr></thead>
+          <tbody>
+            <tr><td>利用者</td><td>不特定多数</td><td>特定の1社</td></tr>
+            <tr><td>サーバーの見え方</td><td>見えない（抽象化）</td><td>見える（把握可能）</td></tr>
+            <tr><td>コスト</td><td>従量課金で変動</td><td>専有なので高め</td></tr>
+            <tr><td>セキュリティ</td><td>事業者基準</td><td>自社でより厳格に可能</td></tr>
+            <tr><td>管理責任</td><td>事業者主体</td><td>自社主体</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="hybrid" class="lesson-section">
+      <h2>ハイブリッドクラウド</h2>
+      <p><strong>ハイブリッドクラウド</strong>は、パブリッククラウドとプライベートクラウド（またはオンプレミス）を組み合わせて利用する形態です。機密データはプライベート、Webサービスはパブリックという使い分けができます。</p>
+      <figure class="wide-diagram">
+        <figcaption>ハイブリッドクラウド構成</figcaption>
+        <pre class="mermaid">flowchart TD
+    O[オンプレミス 重要データ・基幹システム]
+    P[プライベートクラウド 社内専用アプリ]
+    Q[パブリッククラウド Webサービス・開発環境]
+    O <--> P
+    P <--> Q
+    O <-.-> Q</pre>
+      </figure>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>分類</th><th>代表的事業者</th><th>特徴</th></tr></thead>
+          <tbody>
+            <tr><td>三大メガベンダー</td><td>AWS, Azure, GCP</td><td>最先端技術、グローバル展開</td></tr>
+            <tr><td>IT大手・DC</td><td>富士通, NEC, IBM</td><td>OpenStackベース、大規模構築実績</td></tr>
+            <tr><td>通信キャリア</td><td>NTT, KDDI, ソフトバンク</td><td>通信インフラ活用</td></tr>
+            <tr><td>ISP・ホスティング</td><td>GMO, さくら, ニフティ</td><td>低価格、特徴的サービス</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li>「サーバーが見える」のは<strong>プライベート</strong>、「見えない」のは<strong>パブリック</strong>の特徴。</li>
+        <li>三大メガベンダーは<strong>AWS・Azure・GCP</strong>。富士通やNECは含まれない。</li>
+        <li>ハイブリッド＝異なる環境の<strong>組み合わせ</strong>。単一事業者だけの利用ではない。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card"><summary>Q1. パブリッククラウドの説明として最も適切なものはどれか。</summary><p>ア）特定の企業だけが利用できる専用環境<br>イ）事業者が不特定多数に向けて提供するサービス<br>ウ）自社のデータセンター内に構築するクラウド<br>エ）インターネットに接続しない閉じたクラウド</p><p>答え: <strong>イ</strong> — アとウはプライベートクラウドの説明です。</p></details>
+      <details class="quiz-card"><summary>Q2. プライベートクラウドの特徴として正しいものはどれか。</summary><p>ア）不特定多数のユーザーが利用する<br>イ）どのサーバーに接続しているか把握できる<br>ウ）従量課金が基本で安価である<br>エ）事業者が完全に運用を担当する</p><p>答え: <strong>イ</strong> — 専有環境のためサーバー特定が可能です。</p></details>
+      <details class="quiz-card"><summary>Q3. ハイブリッドクラウドの説明として適切なものはどれか。</summary><p>ア）1つの事業者だけから利用する形態<br>イ）パブリックとプライベートを組み合わせた形態<br>ウ）すべてをオンプレミスで運用する形態<br>エ）クラウドを全く使わない形態</p><p>答え: <strong>イ</strong> — 異なる環境の組み合わせです。</p></details>
+      <details class="quiz-card"><summary>Q4. 三大クラウド事業者に含まれないものはどれか。</summary><p>ア）AWS<br>イ）Microsoft Azure<br>ウ）Google Cloud Platform<br>エ）富士通 Cloud</p><p>答え: <strong>エ</strong> — 三大メガベンダーはAWS・Azure・GCPです。</p></details>
+      <details class="quiz-card"><summary>Q5. パブリックとプライベートの比較で正しいものはどれか。</summary><p>ア）パブリックはプライベートよりセキュリティが低い<br>イ）プライベートはパブリックより拡張性が高い<br>ウ）パブリックは初期費用を抑えられる<br>エ）プライベートは従量課金が必須</p><p>答え: <strong>ウ</strong> — パブリックは従量課金で初期費用低め、プライベートは専有で高額です。</p></details>
+    </section>
+
+    <section class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>2_クラウド基礎.pdf セグメント3（クラウドの種類）</p>
+    </section>
+  </main>
+</body>
+</html>

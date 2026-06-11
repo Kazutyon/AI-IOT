@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>信頼性と障害対策 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:true,theme:"base",themeVariables:{primaryColor:"#eef4f8",primaryTextColor:"#182230",primaryBorderColor:"#8aa4bf",lineColor:"#2563eb",fontFamily:"system-ui,-apple-system,Segoe UI,sans-serif"},flowchart:{curve:"basis",nodeSpacing:34,rankSpacing:42}});</script>
+</head>
+<body>
+  <header class="site-header lesson-header"><div class="header-inner"><div><p class="eyebrow">Technology / Cloud</p><h1>信頼性と障害対策</h1><p class="lead">SLA、リージョンとAZ、冗長化方式（ホット/ウォーム/コールド）、バックアップと障害対策を基本情報技術者試験向けに整理します。</p></div><nav class="study-map" aria-label="ページ内メニュー"><a href="#terms">用語</a><a href="#sla">SLA</a><a href="#az">リージョン/AZ</a><a href="#redundancy">冗長化</a><a href="#quiz">確認問題</a></nav></div></header>
+  <main class="lesson-page"><nav class="breadcrumb" aria-label="パンくず"><a href="../../../index.html">ポータル</a><span>クラウド</span><span>信頼性と障害対策</span></nav>
+    <section class="lesson-summary"><div><h2>このページで覚えること</h2><ul class="check-list"><li>SLA（サービスレベル合意）と稼働率の意味</li><li>リージョンとAZの違い</li><li>冗長化の3方式（ホット/ウォーム/コールドスタンバイ）</li><li>フォールトトレランスとクラスタリング</li></ul></div><aside class="priority-box"><h2>出題優先度</h2><dl><div><dt>高</dt><dd>ホット/ウォーム/コールドの違い</dd></div><div><dt>中</dt><dd>SLAの意味、リージョン/AZ</dd></div><div><dt>低</dt><dd>バックアップ方式（RPO/RTO）</dd></div></dl><p>読了目安: 約15分</p></aside></section>
+    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+      <tr><td>1</td><td>SLA</td><td>サービスレベル合意。稼働率や応答時間を保証</td></tr>
+      <tr><td>2</td><td>リージョン</td><td>地理的に独立したデータセンター群</td></tr>
+      <tr><td>3</td><td>AZ</td><td>リージョン内の独立した物理データセンター</td></tr>
+      <tr><td>4</td><td>ホットスタンバイ</td><td>待機系を常時稼働・即時切替（高コスト）</td></tr>
+      <tr><td>5</td><td>コールドスタンバイ</td><td>待機系を停止・切替に時間（低コスト）</td></tr>
+      <tr><td>6</td><td>RPO</td><td>目標復旧時点（どれだけ過去の状態まで戻せるか）</td></tr>
+      <tr><td>7</td><td>RTO</td><td>目標復旧時間（どれだけの時間で復旧できるか）</td></tr>
+    </tbody></table></div></section>
+
+    <section id="sla" class="lesson-section"><h2>SLA（Service Level Agreement）</h2>
+    <p><strong>SLA</strong>はクラウド事業者が提供するサービスの品質を定めた合意です。稼働率や応答時間が含まれます。「月間稼働率99.9%以上」→年間ダウンタイム約8時間45分以内。「99.99%」→約52分以内。</p>
+    <div class="table-wrap"><table><thead><tr><th>稼働率</th><th>年間ダウンタイム</th></tr></thead><tbody>
+      <tr><td>99%</td><td>約3日15時間</td></tr>
+      <tr><td>99.9%</td><td>約8時間45分</td></tr>
+      <tr><td>99.99%</td><td>約52分</td></tr>
+      <tr><td>99.999%</td><td>約5分</td></tr>
+    </tbody></table></div></section>
+
+    <section id="az" class="lesson-section"><h2>リージョンとアベイラビリティゾーン（AZ）</h2>
+    <figure class="wide-diagram"><figcaption>リージョンとAZの構造</figcaption><pre class="mermaid">flowchart TD
+    subgraph 東京リージョン
+        AZ1[AZ1 データセンターA]
+        AZ2[AZ2 データセンターB]
+        AZ3[AZ3 データセンターC]
+    end
+    AZ1 <--> AZ2
+    AZ2 <--> AZ3
+    AZ1 <--> AZ3</pre></figure>
+    <div class="table-wrap"><table><thead><tr><th>概念</th><th>説明</th><th>例</th></tr></thead><tbody>
+      <tr><td>リージョン</td><td>地理的に独立した地域。複数AZで構成</td><td>東京、大阪、バージニア北部</td></tr>
+      <tr><td>AZ</td><td>リージョン内の独立DC。異なる障害ドメイン</td><td>東京AZ1, AZ2, AZ3</td></tr>
+    </tbody></table></div>
+    <p>同一AZ内=低遅延だが同一障害リスク。異なるAZ=高可用性。異なるリージョン=ディザスタリカバリに有効。</p></section>
+
+    <section id="redundancy" class="lesson-section"><h2>冗長化の3方式</h2>
+    <figure class="wide-diagram"><figcaption>ホット/ウォーム/コールドスタンバイ</figcaption><pre class="mermaid">flowchart TD
+    A[冗長化方式] --> B[ホットスタンバイ]
+    A --> C[ウォームスタンバイ]
+    A --> D[コールドスタンバイ]
+    B -->|常時同期・即時切替| E[コスト最高]
+    C -->|最小稼働・切替数分| F[コスト中]
+    D -->|停止待機・切替数十分| G[コスト最低]</pre></figure>
+    <div class="table-wrap"><table><thead><tr><th>方式</th><th>待機系状態</th><th>切替時間</th><th>コスト</th></tr></thead><tbody>
+      <tr><td>ホット</td><td>常時稼働・同期</td><td>即時（数秒）</td><td>高</td></tr>
+      <tr><td>ウォーム</td><td>最小機能で稼働</td><td>数分</td><td>中</td></tr>
+      <tr><td>コールド</td><td>停止</td><td>数十分〜</td><td>低</td></tr>
+    </tbody></table></div>
+    <h3>フォールトトレランスとクラスタリング</h3>
+    <p><strong>フォールトトレランス</strong>: 一部に障害が発生してもシステム全体が継続動作する性質。<br><strong>クラスタリング</strong>: 複数サーバーを1つのシステムとして連携させる技術。</p>
+    <h3>RPOとRTO</h3>
+    <p><strong>RPO（目標復旧時点）</strong>: データ損失の許容量。「最大○時間前のデータまで復旧可能」。<br><strong>RTO（目標復旧時間）</strong>: システム復旧までの目標時間。「○時間以内に復旧」。</p></section>
+
+    <section class="lesson-section"><h2>間違えやすいポイント</h2><ul class="mistake-list">
+      <li>SLAは稼働率保証だが、<strong>逸失利益の補償はない</strong>。補償は利用料金の返金のみ。</li>
+      <li>ホット=即時切替・高コスト、コールド=切替に時間・低コスト。</li>
+      <li>RPO=時間的に<strong>どこまで戻せるか</strong>、RTO=<strong>何時間で戻せるか</strong>。混同注意。</li></ul></section>
+
+    <section id="quiz" class="lesson-section"><h2>確認問題</h2>
+      <details class="quiz-card"><summary>Q1. SLAに含まれるものはどれか。</summary><p>ア）逸失利益の補償<br>イ）月間稼働率の保証<br>ウ）アプリケーションの開発費用<br>エ）ユーザーデータの完全性保証</p><p>答え: <strong>イ</strong> — SLAには稼働率や応答時間の保証が含まれます。</p></details>
+      <details class="quiz-card"><summary>Q2. リージョンとAZの説明で正しいものはどれか。</summary><p>ア）AZの方がリージョンより広い範囲<br>イ）リージョンはAZを含む広域単位<br>ウ）AZとリージョンは同じ意味<br>エ）AZはリージョンの上位概念</p><p>答え: <strong>イ</strong> — リージョン（広域）の中に複数のAZがあります。</p></details>
+      <details class="quiz-card"><summary>Q3. ホットスタンバイの特徴として正しいものはどれか。</summary><p>ア）待機系は停止状態<br>イ）コストが最も低い<br>ウ）即時に切り替え可能<br>エ）切り替えに数十分かかる</p><p>答え: <strong>ウ</strong> — 常時稼働・同期により即時切替が可能です。</p></details>
+      <details class="quiz-card"><summary>Q4. 月間稼働率99.9%の年間ダウンタイムは約何時間か。</summary><p>ア）約52分<br>イ）約8時間45分<br>ウ）約3日15時間<br>エ）約5分</p><p>答え: <strong>イ</strong> — 365日×24時間×0.001≒8.76時間。</p></details>
+      <details class="quiz-card"><summary>Q5. RPO（目標復旧時点）の説明として適切なものはどれか。</summary><p>ア）復旧にかかる目標時間<br>イ）どれだけ過去の状態まで戻せるか<br>ウ）バックアップの保存期間<br>エ）サーバーの稼働率</p><p>答え: <strong>イ</strong> — アはRTOの説明。</p></details>
+    </section>
+    <section class="source-note"><h2>出典PDF・対応ページ</h2><p>2_クラウド基礎.pdf セグメント7（信頼性と障害対策）</p></section>
+  </main>
+</body>
+</html>

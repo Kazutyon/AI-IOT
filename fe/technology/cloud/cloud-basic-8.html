@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>クラウドセキュリティ | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:true,theme:"base",themeVariables:{primaryColor:"#eef4f8",primaryTextColor:"#182230",primaryBorderColor:"#8aa4bf",lineColor:"#2563eb",fontFamily:"system-ui,-apple-system,Segoe UI,sans-serif"},flowchart:{curve:"basis",nodeSpacing:34,rankSpacing:42}});</script>
+</head>
+<body>
+  <header class="site-header lesson-header"><div class="header-inner"><div><p class="eyebrow">Technology / Cloud</p><h1>クラウドセキュリティ</h1><p class="lead">責任共有モデル、IAM、暗号化、ネットワークセキュリティなど、クラウドのセキュリティ対策を基本情報技術者試験向けに整理します。</p></div><nav class="study-map" aria-label="ページ内メニュー"><a href="#terms">用語</a><a href="#shared">責任共有</a><a href="#iam">IAM</a><a href="#encryption">暗号化</a><a href="#quiz">確認問題</a></nav></div></header>
+  <main class="lesson-page"><nav class="breadcrumb" aria-label="パンくず"><a href="../../../index.html">ポータル</a><span>クラウド</span><span>セキュリティ</span></nav>
+    <section class="lesson-summary"><div><h2>このページで覚えること</h2><ul class="check-list"><li>責任共有モデル（事業者と利用者の責任分担）</li><li>IAM（Identity and Access Management）によるアクセス制御</li><li>保存データと転送データの暗号化</li><li>ネットワークセキュリティ（セキュリティグループ・WAF）</li></ul></div><aside class="priority-box"><h2>出題優先度</h2><dl><div><dt>高</dt><dd>責任共有モデルの理解</dd></div><div><dt>中</dt><dd>IAMの基本概念、暗号化の種類</dd></div><div><dt>低</dt><dd>具体的なセキュリティサービス名</dd></div></dl><p>読了目安: 約12分</p></aside></section>
+
+    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+      <tr><td>1</td><td>責任共有モデル</td><td>事業者と利用者のセキュリティ責任分担の考え方</td></tr>
+      <tr><td>2</td><td>IAM</td><td>ID管理とアクセス権限を一元管理する仕組み</td></tr>
+      <tr><td>3</td><td>暗号化（転送中）</td><td>TLS/SSLで通信経路を暗号化</td></tr>
+      <tr><td>4</td><td>暗号化（保存中）</td><td>ストレージ上のデータを暗号化（AES-256等）</td></tr>
+      <tr><td>5</td><td>WAF</td><td>Webアプリケーションを標的とした攻撃を防御</td></tr>
+    </tbody></table></div></section>
+
+    <section id="shared" class="lesson-section"><h2>責任共有モデル</h2>
+    <p>クラウドのセキュリティは<strong>事業者と利用者の共同責任</strong>です。「事業者はクラウドのセキュリティに責任を持ち、利用者はクラウドの中のセキュリティに責任を持つ」が基本原則。</p>
+    <div class="table-wrap"><table><thead><tr><th>責任範囲</th><th>事業者</th><th>利用者</th></tr></thead><tbody>
+      <tr><td>物理的セキュリティ</td><td>○</td><td></td></tr>
+      <tr><td>ネットワーク基盤</td><td>○</td><td></td></tr>
+      <tr><td>ハイパーバイザー</td><td>○</td><td></td></tr>
+      <tr><td>OSのセキュリティパッチ</td><td>IaaS:利用者 PaaS:事業者</td><td>IaaS:○</td></tr>
+      <tr><td>アプリケーション</td><td>SaaS:事業者</td><td>IaaS/PaaS:○</td></tr>
+      <tr><td>データの暗号化・アクセス制御</td><td></td><td>○</td></tr>
+      <tr><td>アカウント管理</td><td></td><td>○</td></tr>
+    </tbody></table></div></section>
+
+    <section id="iam" class="lesson-section"><h2>IAM（Identity and Access Management）</h2>
+    <p>クラウド上のリソースへのアクセスを<strong>誰が・何を・どのように</strong>できるかを制御する仕組み。主な要素:</p>
+    <ul><li><strong>認証（Authentication）</strong>: 本人確認（パスワード、多要素認証MFA）</li><li><strong>認可（Authorization）</strong>: 許可された操作の制御（ロールベース）</li><li><strong>最小権限の原則</strong>: 必要最小限の権限だけを付与する</li></ul></section>
+
+    <section id="encryption" class="lesson-section"><h2>暗号化</h2>
+    <h3>転送中の暗号化</h3><p>TLS/SSLを使って通信経路上のデータを暗号化。HTTPS、VPN（IPsec）が代表的。</p>
+    <h3>保存中の暗号化</h3><p>ストレージ（ディスク）上のデータを暗号化。AES-256が標準。クラウド事業者が自動暗号化を提供する場合が多い。</p>
+    <h3>ネットワークセキュリティ</h3><p><strong>ファイアウォール（セキュリティグループ）</strong>: インスタンス単位で通信制御。<br><strong>WAF（Web Application Firewall）</strong>: SQLインジェクションやXSSなどWeb攻撃を防御。<br><strong>DDoS対策</strong>: 大規模なアクセス集中攻撃からの防御。</p></section>
+
+    <section class="lesson-section"><h2>間違えやすいポイント</h2><ul class="mistake-list"><li><strong>データの暗号化とアクセス制御は常に利用者責任</strong>（サービスモデルに関わらず）。</li><li>認証と認可は別。認証=本人確認、認可=<strong>権限の付与</strong>。</li><li>WAFはネットワーク層ではなく<strong>アプリケーション層</strong>の防御。</li></ul></section>
+
+    <section id="quiz" class="lesson-section"><h2>確認問題</h2>
+      <details class="quiz-card"><summary>Q1. 責任共有モデルにおいて常に利用者の責任となるものはどれか。</summary><p>ア）物理的セキュリティ<br>イ）ハイパーバイザーの管理<br>ウ）データの暗号化とアクセス制御<br>エ）ネットワーク基盤の運用</p><p>答え: <strong>ウ</strong> — データの暗号化・アクセス制御・アカウント管理は常に利用者責任。</p></details>
+      <details class="quiz-card"><summary>Q2. IAMの機能として適切なものはどれか。</summary><p>ア）データのバックアップ<br>イ）ユーザー認証とアクセス権限制御<br>ウ）ネットワークの帯域制御<br>エ）サーバーの負荷分散</p><p>答え: <strong>イ</strong> — IAMはID管理とアクセス制御の仕組みです。</p></details>
+      <details class="quiz-card"><summary>Q3. 転送中のデータ暗号化に使われるプロトコルはどれか。</summary><p>ア）AES-256<br>イ）TLS/SSL<br>ウ）SHA-256<br>エ）RSA</p><p>答え: <strong>イ</strong> — TLS/SSLが通信経路の暗号化に使われます。AESは保存データの暗号化。</p></details>
+      <details class="quiz-card"><summary>Q4. WAFの主な防御対象はどれか。</summary><p>ア）DDoS攻撃<br>イ）OSの脆弱性攻撃<br>ウ）SQLインジェクション、XSSなどのWeb攻撃<br>エ）物理的なサーバー侵入</p><p>答え: <strong>ウ</strong> — WAFはアプリケーション層でWeb攻撃を防御します。</p></details>
+      <details class="quiz-card"><summary>Q5. 最小権限の原則として正しいものはどれか。</summary><p>ア）すべてのユーザーに管理者権限を付与する<br>イ）必要最小限の権限だけを付与する<br>ウ）権限をできるだけ細かく分割しない<br>エ）認証を不要にする</p><p>答え: <strong>イ</strong> — 最小権限の原則はセキュリティの基本です。</p></details>
+    </section>
+    <section class="source-note"><h2>出典PDF・対応ページ</h2><p>2_クラウド基礎.pdf セグメント8（セキュリティ）</p></section>
+  </main>
+</body>
+</html>

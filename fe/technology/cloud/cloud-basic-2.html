@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>クラウドの基本特徴 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        primaryColor: "#eef4f8",
+        primaryTextColor: "#182230",
+        primaryBorderColor: "#8aa4bf",
+        lineColor: "#2563eb",
+        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
+      },
+      flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 }
+    });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Cloud</p>
+        <h1>クラウドの基本特徴</h1>
+        <p class="lead">クラウドの4つの基本特徴（従量課金・拡張容易・事業者運用・セキュリティ整備）と導入メリットを基本情報技術者試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#features">4つの特徴</a>
+        <a href="#benefits">導入メリット</a>
+        <a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <span>クラウド</span>
+      <span>クラウドの基本特徴</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>クラウドの4つの基本特徴（従量課金・拡張容易・事業者運用・セキュリティ整備）</li>
+          <li>従量課金とオンプレミス固定費の違い</li>
+          <li>クラウド導入による運用負荷軽減のメリット</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>従量課金、拡張容易の特徴</dd></div>
+          <div><dt>中</dt><dd>事業者運用の範囲、セキュリティ整備</dd></div>
+          <div><dt>低</dt><dd>IPA調査データ（利用企業割合等）</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>従量課金</td><td>使った分だけ支払う料金体系（オンデマンド）</td></tr>
+            <tr><td>2</td><td>オンプレミス</td><td>自社で機器を保有・運用する従来型システム形態</td></tr>
+            <tr><td>3</td><td>スケーラビリティ</td><td>需要に応じてシステム規模を柔軟に変更できる能力</td></tr>
+            <tr><td>4</td><td>SLA</td><td>サービスレベル保証。稼働率99.9%などの約束</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="features" class="lesson-section">
+      <h2>クラウドの4つの基本特徴</h2>
+      <figure class="wide-diagram">
+        <figcaption>クラウドの4つの基本特徴</figcaption>
+        <pre class="mermaid">flowchart TD
+    A[クラウドの基本特徴] --> B[従量課金]
+    A --> C[拡大・縮小が容易]
+    A --> D[事業者が運用・保守]
+    A --> E[セキュリティ・通信環境整備]
+    B --> B1[使った分だけ支払う]
+    B --> B2[初期費用が抑えられる]
+    C --> C1[需要増で即拡張]
+    C --> C2[需要減で即縮小]
+    D --> D1[自社の運用負荷軽減]
+    D --> D2[24時間365日監視]
+    E --> E1[ファイアウォール標準装備]
+    E --> E2[モバイル接続環境あり]</pre>
+      </figure>
+
+      <h3>① 従量課金</h3>
+      <p>システムを利用した時間や量に応じて費用が発生します。使わないときは費用がかからないのが基本です。「1分あたり10円」のサーバーを15分利用 → <strong>150円</strong>だけ支払う。オンプレミスでは使っていなくても購入した機器の費用はかかり続けます。</p>
+
+      <h3>② 利用量の拡大・縮小が容易（スケーラビリティ）</h3>
+      <p>利用状況に応じて、サーバーの台数や性能をすぐに調整できます。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>比較</th><th>クラウド</th><th>オンプレミス</th></tr></thead>
+          <tbody>
+            <tr><td>拡張時の作業</td><td>設定変更で数分〜数時間</td><td>機器購入→設置→設定で数週間</td></tr>
+            <tr><td>縮小時の対応</td><td>不要なリソースを停止するだけ</td><td>購入した機器は余剰資産になる</td></tr>
+            <tr><td>柔軟性</td><td>非常に高い</td><td>低い</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>③ IT機器や関連設備は事業者が保有・運用</h3>
+      <p>サーバー、ネットワーク機器、空調、電源などはすべてクラウド事業者が責任を持ちます。</p>
+      <ul>
+        <li>機器の故障対応 → 事業者が交換</li>
+        <li>OSのパッチ適用 → 事業者が実施（IaaSの場合は一部ユーザー対応）</li>
+        <li>データセンターのセキュリティ → 事業者が管理</li>
+      </ul>
+
+      <h3>④ セキュリティや多様な通信手段への対応が整備</h3>
+      <p>ファイアウォール、VPN、モバイル端末からの接続環境などが標準で実装されています。自社システムをモバイル対応するには専用システムが必要ですが、<strong>クラウドは標準で対応済み</strong>という点が頻出です。</p>
+    </section>
+
+    <section id="benefits" class="lesson-section">
+      <h2>クラウド導入のメリット（運用視点）</h2>
+      <figure class="wide-diagram">
+        <figcaption>従来方式とクラウドの比較</figcaption>
+        <pre class="mermaid">flowchart TD
+    subgraph 従来[従来方式]
+        A1[機器購入] --> A2[設置]
+        A2 --> A3[設定]
+        A3 --> A4[運用監視]
+        A4 --> A5[故障対応]
+    end
+    subgraph クラウド[クラウド]
+        B1[Web申込み] --> B2[すぐ使える]
+        B2 --> B3[事業者が運用]
+    end</pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>従来（オンプレミス）</th><th>クラウド</th></tr></thead>
+          <tbody>
+            <tr><td>開発環境</td><td>専用の開発機を用意</td><td>最小限から開始、必要に応じて増設</td></tr>
+            <tr><td>運用監視</td><td>自社担当者が24時間監視</td><td>事業者が実施</td></tr>
+            <tr><td>メンテナンス</td><td>定期的な点検・部品交換</td><td>事業者が実施</td></tr>
+            <tr><td>障害対応</td><td>自社で原因調査・修理</td><td>事業者が対応</td></tr>
+            <tr><td>設置スペース</td><td>サーバールーム・空調・電源が必要</td><td>不要</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li>従量課金は<strong>使った分だけ支払う</strong>。月額固定料金ではない。</li>
+        <li>クラウドは<strong>モバイル接続環境が標準装備</strong>。専用システム不要。</li>
+        <li>事業者の運用範囲は<strong>インフラまで</strong>。業務アプリケーション開発はユーザー責任。</li>
+        <li>SLAは稼働率の保証。99.9%は年間約8.7時間の停止を許容するという意味。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. クラウドの「従量課金」の説明として最も適切なものはどれか。</summary>
+        <p>ア）月額固定料金で無制限に使える<br>
+        イ）利用した時間や量に応じて費用が発生する<br>
+        ウ）初期費用が非常に高額になる<br>
+        エ）使っていないときも同じ料金がかかる</p>
+        <p>答え: <strong>イ</strong> — クラウドの代表的な特徴。使わなければ費用は発生しません。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. クラウドの特徴として誤っているものはどれか。</summary>
+        <p>ア）サーバーの増設をすぐに行える<br>
+        イ）機器の運用・保守は事業者が行う<br>
+        ウ）モバイル端末からの接続は専用システムが必要<br>
+        エ）使った分だけ支払う従量課金が基本</p>
+        <p>答え: <strong>ウ</strong> — クラウドは標準でモバイル接続環境が整備されています。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. オンプレミスと比較したクラウドのメリットとして適切でないものはどれか。</summary>
+        <p>ア）初期費用を抑えられる<br>
+        イ）自社で機器の保守をする必要がない<br>
+        ウ）利用状況に応じて機器を追加購入する手間がかからない<br>
+        エ）サーバーの設置場所を自由に選べる</p>
+        <p>答え: <strong>エ</strong> — クラウドでは事業者のデータセンターに設置され、設置場所の選択肢はリージョン単位です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. クラウド事業者が行う運用業務として適切でないものはどれか。</summary>
+        <p>ア）サーバーの故障対応<br>
+        イ）データセンターのセキュリティ管理<br>
+        ウ）ユーザー企業の業務アプリケーションの開発<br>
+        エ）ネットワーク機器のメンテナンス</p>
+        <p>答え: <strong>ウ</strong> — アプリケーション開発はユーザー企業またはSIerが行います。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. クラウドの特徴「利用量の拡大・縮小が容易」の説明として正しいものはどれか。</summary>
+        <p>ア）利用量が増えても機器の追加購入は不要<br>
+        イ）拡大には必ず1か月以上の準備期間が必要<br>
+        ウ）縮小するときは違約金が発生する<br>
+        エ）拡大できるが縮小はできない</p>
+        <p>答え: <strong>ア</strong> — 設定変更だけでリソースを増減できます。</p>
+      </details>
+    </section>
+
+    <section class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>2_クラウド基礎.pdf セグメント2（クラウドの基本特徴）</p>
+    </section>
+  </main>
+</body>
+</html>

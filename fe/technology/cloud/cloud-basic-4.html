@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IaaS / PaaS / SaaS | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "base", themeVariables: { primaryColor: "#eef4f8", primaryTextColor: "#182230", primaryBorderColor: "#8aa4bf", lineColor: "#2563eb", fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif" }, flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 } });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Cloud</p>
+        <h1>IaaS / PaaS / SaaS</h1>
+        <p class="lead">クラウドサービスの3つの提供モデル（IaaS/PaaS/SaaS）の違いと責任範囲を基本情報技術者試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a><a href="#iaas">IaaS</a><a href="#paas">PaaS</a><a href="#saas">SaaS</a><a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず"><a href="../../../index.html">ポータル</a><span>クラウド</span><span>IaaS / PaaS / SaaS</span></nav>
+    <section class="lesson-summary">
+      <div><h2>このページで覚えること</h2><ul class="check-list"><li>IaaS・PaaS・SaaSの違い</li><li>各サービスモデルの責任範囲</li><li>代表的なサービス例</li></ul></div>
+      <aside class="priority-box"><h2>出題優先度</h2><dl><div><dt>高</dt><dd>IaaS/PaaS/SaaSの区別と責任範囲</dd></div><div><dt>中</dt><dd>代表的なサービス名</dd></div><div><dt>低</dt><dd>その他のas a Service（DBaaS等）</dd></div></dl><p>読了目安: 約15分</p></aside>
+    </section>
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+        <tr><td>1</td><td>IaaS</td><td>仮想サーバー・ストレージ・ネットワークを提供。OSより上は利用者責任</td></tr>
+        <tr><td>2</td><td>PaaS</td><td>開発・実行環境を提供。アプリとデータのみ利用者責任</td></tr>
+        <tr><td>3</td><td>SaaS</td><td>アプリケーションを提供。利用者は設定のみ</td></tr>
+        <tr><td>4</td><td>DBaaS</td><td>データベース機能を提供するサービス</td></tr>
+      </tbody></table></div>
+    </section>
+    <section id="iaas" class="lesson-section">
+      <h2>IaaS（Infrastructure as a Service）</h2>
+      <p>サーバー、ストレージ、ネットワークなどの<strong>ハードウェア資源</strong>を仮想化して提供。OSより上は利用者が管理。自由度が高い。</p>
+      <div class="table-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody>
+        <tr><td>事業者提供</td><td>サーバー、ストレージ、ネットワーク、仮想化環境</td></tr>
+        <tr><td>利用者責任</td><td>OS、ミドルウェア、アプリケーション、データ</td></tr>
+        <tr><td>代表例</td><td>AWS EC2、Azure VM、Google Compute Engine</td></tr>
+      </tbody></table></div>
+    </section>
+    <section id="paas" class="lesson-section">
+      <h2>PaaS（Platform as a Service）</h2>
+      <p>IaaSに加えて<strong>OS・ミドルウェア・開発環境</strong>まで提供。利用者はアプリとデータのみ管理。</p>
+      <div class="table-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody>
+        <tr><td>事業者提供</td><td>サーバー〜OS、ミドルウェア、DB、開発環境</td></tr>
+        <tr><td>利用者責任</td><td>アプリケーション、データ</td></tr>
+        <tr><td>代表例</td><td>Google App Engine、Heroku、Azure App Service</td></tr>
+      </tbody></table></div>
+    </section>
+    <section id="saas" class="lesson-section">
+      <h2>SaaS（Software as a Service）</h2>
+      <p>アプリケーションそのものを提供。利用者はブラウザ等からすぐに使える。インストール不要。</p>
+      <div class="table-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody>
+        <tr><td>事業者提供</td><td>すべて（サーバー〜アプリケーション）</td></tr>
+        <tr><td>利用者責任</td><td>データの入力・設定・利用</td></tr>
+        <tr><td>代表例</td><td>Gmail、Office 365、Salesforce</td></tr>
+      </tbody></table></div>
+      <figure class="wide-diagram"><figcaption>IaaS/PaaS/SaaSの責任範囲</figcaption><pre class="mermaid">flowchart TD
+    A[利用者管理] --> B[アプリケーション]
+    B --> C[データ]
+    C --> D[ミドルウェア]
+    D --> E[OS]
+    A2[事業者管理] --> F[仮想化]
+    F --> G[サーバー]
+    G --> H[ストレージ]
+    H --> I[ネットワーク]
+    J[補足] --> K[IaaS: OS+利用者]
+    J --> L[PaaS: ミドルウェア+利用者]
+    J --> M[SaaS: 事業者全管理]</pre></figure>
+    </section>
+    <section class="lesson-section"><h2>間違えやすいポイント</h2><ul class="mistake-list"><li>IaaSはOS管理が<strong>利用者責任</strong>。PaaSは<strong>事業者責任</strong>。</li><li>AWS EC2=IaaS、Google App Engine=PaaS、Gmail=SaaS。</li><li>SaaSは全レイヤー事業者責任だが、データの内容責任は利用者。</li></ul></section>
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card"><summary>Q1. IaaSの説明として最も適切なものはどれか。</summary><p>ア）アプリケーションまで提供<br>イ）サーバーやストレージなどのハードウェア資源を提供<br>ウ）開発環境とOSを提供<br>エ）データベース機能だけを提供</p><p>答え: <strong>イ</strong> — アはSaaS、ウはPaaS、エはDBaaSです。</p></details>
+      <details class="quiz-card"><summary>Q2. PaaSで事業者が提供するものとして適切でないものはどれか。</summary><p>ア）OS<br>イ）ミドルウェア<br>ウ）開発環境<br>エ）業務アプリケーション</p><p>答え: <strong>エ</strong> — 業務アプリケーションはSaaSの範囲です。</p></details>
+      <details class="quiz-card"><summary>Q3. SaaSの代表例として最も適切なものはどれか。</summary><p>ア）AWS EC2<br>イ）Google App Engine<br>ウ）Gmail<br>エ）Azure VM</p><p>答え: <strong>ウ</strong> — アとエはIaaS、イはPaaSです。</p></details>
+      <details class="quiz-card"><summary>Q4. IaaSとPaaSの責任範囲の境目はどこか。</summary><p>ア）アプリケーション<br>イ）データ<br>ウ）OS<br>エ）ネットワーク</p><p>答え: <strong>ウ</strong> — IaaSでは利用者がOS管理、PaaSでは事業者がOS管理。</p></details>
+      <details class="quiz-card"><summary>Q5. クラウドサービスモデルで最も自由度が高いのはどれか。</summary><p>ア）SaaS<br>イ）PaaS<br>ウ）IaaS<br>エ）DBaaS</p><p>答え: <strong>ウ</strong> — IaaSが最も自由度が高く、上に行くほど事業者管理範囲が広がる。</p></details>
+    </section>
+    <section class="source-note"><h2>出典PDF・対応ページ</h2><p>2_クラウド基礎.pdf セグメント4（IaaS/PaaS/SaaS）</p></section>
+  </main>
+</body>
+</html>

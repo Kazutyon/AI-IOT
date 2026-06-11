@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>仮想化技術 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "base", themeVariables: { primaryColor: "#eef4f8", primaryTextColor: "#182230", primaryBorderColor: "#8aa4bf", lineColor: "#2563eb", fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif" }, flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 } });
+  </script>
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Cloud</p>
+        <h1>仮想化技術</h1>
+        <p class="lead">ハイパーバイザー型とコンテナ型の違い、Docker、Kubernetesについて基本情報技術者試験向けに整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a><a href="#hypervisor">ハイパーバイザー</a><a href="#container">コンテナ</a><a href="#quiz">確認問題</a>
+      </nav>
+    </div>
+  </header>
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず"><a href="../../../index.html">ポータル</a><span>クラウド</span><span>仮想化技術</span></nav>
+    <section class="lesson-summary">
+      <div><h2>このページで覚えること</h2><ul class="check-list"><li>仮想化の仕組みとメリット</li><li>ハイパーバイザー型（VM）とコンテナ型の違い</li><li>DockerとKubernetesの役割</li></ul></div>
+      <aside class="priority-box"><h2>出題優先度</h2><dl><div><dt>高</dt><dd>ハイパーバイザー型とコンテナ型の違い</dd></div><div><dt>中</dt><dd>Docker/Kubernetesの役割</dd></div><div><dt>低</dt><dd>ストレージ・ネットワーク仮想化</dd></div></dl><p>読了目安: 約15分</p></aside>
+    </section>
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+        <tr><td>1</td><td>仮想化</td><td>1台の物理サーバーを複数台に論理分割する技術</td></tr>
+        <tr><td>2</td><td>ハイパーバイザー</td><td>物理サーバー上でVMを管理する仮想化ソフト</td></tr>
+        <tr><td>3</td><td>コンテナ</td><td>ホストOSのカーネルを共有する軽量な実行環境分離技術</td></tr>
+        <tr><td>4</td><td>Docker</td><td>コンテナ型仮想化のデファクトスタンダード</td></tr>
+        <tr><td>5</td><td>Kubernetes</td><td>コンテナの自動デプロイ・スケーリング・管理ツール</td></tr>
+      </tbody></table></div>
+    </section>
+    <section id="hypervisor" class="lesson-section">
+      <h2>ハイパーバイザー型（完全仮想化）</h2>
+      <p>物理サーバー上で<strong>ハイパーバイザー</strong>を動作させ、その上で複数の<strong>ゲストOS</strong>を動かす方式。各VMが独立したOSを持ち、互換性が高い。</p>
+      <figure class="wide-diagram"><figcaption>ハイパーバイザー型の構造</figcaption><pre class="mermaid">flowchart TD
+    H1[ハードウェア] --> H2[ハイパーバイザー]
+    H2 --> H3[ゲストOS + アプリ]
+    H2 --> H4[ゲストOS + アプリ]
+    H2 --> H5[ゲストOS + アプリ]</pre></figure>
+      <div class="table-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody>
+        <tr><td>代表製品</td><td>VMware ESXi, Hyper-V, KVM</td></tr>
+        <tr><td>メリット</td><td>異なるOSを同時実行可能、安定性高い</td></tr>
+        <tr><td>デメリット</td><td>OSごとにリソース消費、オーバーヘッド大</td></tr>
+      </tbody></table></div>
+    </section>
+    <section id="container" class="lesson-section">
+      <h2>コンテナ型（OSレベル仮想化）</h2>
+      <p>ホストOSのカーネルを共用し、アプリケーションの実行環境だけを隔離する方式。軽量で起動が速い。</p>
+      <figure class="wide-diagram"><figcaption>コンテナ型の構造</figcaption><pre class="mermaid">flowchart TD
+    C1[ハードウェア] --> C2[ホストOS]
+    C2 --> C3[コンテナエンジン Docker等]
+    C3 --> C4[コンテナ アプリ+ライブラリ]
+    C3 --> C5[コンテナ アプリ+ライブラリ]
+    C3 --> C6[コンテナ アプリ+ライブラリ]</pre></figure>
+      <div class="table-wrap"><table><thead><tr><th>比較項目</th><th>ハイパーバイザー型</th><th>コンテナ型</th></tr></thead><tbody>
+        <tr><td>起動速度</td><td>数分〜数十秒</td><td>ミリ秒〜数秒</td></tr>
+        <tr><td>リソース効率</td><td>やや悪い</td><td>非常に良い</td></tr>
+        <tr><td>隔離レベル</td><td>高い</td><td>中程度</td></tr>
+        <tr><td>OSの種類</td><td>異なるOS可</td><td>ホストと同じカーネル</td></tr>
+      </tbody></table></div>
+      <h3>DockerとKubernetes</h3>
+      <p><strong>Docker</strong>: コンテナのデファクトスタンダード。アプリと実行環境をイメージとしてパッケージ化。<br><strong>Kubernetes（k8s）</strong>: 複数コンテナの自動デプロイ・スケーリング・管理を行うオーケストレーションツール。</p>
+      <figure class="wide-diagram"><figcaption>Kubernetesクラスタ構成</figcaption><pre class="mermaid">flowchart TD
+    M[マスターノード 管理・制御]
+    W1[ワーカーノード1 コンテナ]
+    W2[ワーカーノード2 コンテナ]
+    W3[ワーカーノード3 コンテナ]
+    M --> W1
+    M --> W2
+    M --> W3
+    U[ユーザー] --> M</pre></figure>
+    </section>
+    <section class="lesson-section"><h2>間違えやすいポイント</h2><ul class="mistake-list"><li>コンテナは<strong>ホストOSのカーネルを共有</strong>。完全な隔離ではない。</li><li>Docker=コンテナ、Kubernetes=<strong>コンテナの管理</strong>。役割が異なる。</li><li>Immutable Infrastructure（変更しないインフラ）はコンテナと親和性が高い。</li></ul></section>
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card"><summary>Q1. 仮想化の説明として最も適切なものはどれか。</summary><p>ア）複数の物理サーバーを1台に見せる<br>イ）1台の物理サーバーを複数台に論理分割する<br>ウ）ソフトウェアを物理的に複製する<br>エ）ネットワークを完全に分離する</p><p>答え: <strong>イ</strong></p></details>
+      <details class="quiz-card"><summary>Q2. ハイパーバイザー型とコンテナ型の比較で正しいものはどれか。</summary><p>ア）コンテナ型の方が起動が遅い<br>イ）ハイパーバイザー型はホストOSのカーネルを共有する<br>ウ）コンテナ型はリソース効率が良い<br>エ）ハイパーバイザー型の方が軽量である</p><p>答え: <strong>ウ</strong> — コンテナはカーネル共有により軽量でリソース効率が良い。</p></details>
+      <details class="quiz-card"><summary>Q3. Dockerの説明として適切なものはどれか。</summary><p>ア）コンテナの自動スケーリングを行うツール<br>イ）コンテナ型仮想化を実現するソフトウェア<br>ウ）ハイパーバイザー型の仮想化ソフト<br>エ）ネットワーク仮想化のツール</p><p>答え: <strong>イ</strong> — アはKubernetesの説明。</p></details>
+      <details class="quiz-card"><summary>Q4. Kubernetesの主な機能として適切でないものはどれか。</summary><p>ア）コンテナの自動デプロイ<br>イ）負荷に応じた自動スケーリング<br>ウ）異常コンテナの自動再起動<br>エ）物理サーバーの故障修理</p><p>答え: <strong>エ</strong> — 物理サーバーの修理はクラウド事業者の役割。</p></details>
+      <details class="quiz-card"><summary>Q5. コンテナの特徴として正しいものはどれか。</summary><p>ア）各コンテナが独立したOSを持つ<br>イ）ホストOSのカーネルを共有する<br>ウ）起動に数十分かかる<br>エ）異なるOSの実行が可能</p><p>答え: <strong>イ</strong> — アとエはハイパーバイザー型の特徴。</p></details>
+    </section>
+    <section class="source-note"><h2>出典PDF・対応ページ</h2><p>2_クラウド基礎.pdf セグメント5（仮想化技術）</p></section>
+  </main>
+</body>
+</html>
