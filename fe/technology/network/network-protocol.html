@@ -198,32 +198,20 @@
       </div>
       <p class="hint">頻出：「TCP/IPモデルでOSIの第5〜7層をまとめた層は？」→ <strong>アプリケーション層</strong>。「TCP/IPモデルのインターネット層に対応するOSI層は？」→ <strong>ネットワーク層（第3層）</strong>。「TCP/IPモデルは何層構成か」→ <strong>4層</strong></p>
 
-      <figure class="wide-diagram">
-        <figcaption>OSI参照モデルとTCP/IPモデルの対応</figcaption>
-        <pre class="mermaid">flowchart TD
-    subgraph OSI["OSI参照モデル（7層）"]
-        A7[第7層 アプリケーション層]
-        A6[第6層 プレゼンテーション層]
-        A5[第5層 セッション層]
-        A4[第4層 トランスポート層]
-        A3[第3層 ネットワーク層]
-        A2[第2層 データリンク層]
-        A1[第1層 物理層]
-    end
-    subgraph TCPIP["TCP/IPモデル（4層）"]
-        B4[アプリケーション層]
-        B3[トランスポート層]
-        B2[インターネット層]
-        B1[ネットワークインターフェイス層]
-    end
-    A7 --> B4
-    A6 --> B4
-    A5 --> B4
-    A4 --> B3
-    A3 --> B2
-    A2 --> B1
-    A1 --> B1</pre>
-      </figure>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>OSI参照モデル</th><th>TCP/IPモデル</th><th>覚え方</th></tr></thead>
+          <tbody>
+            <tr><td>第7層 アプリケーション層</td><td rowspan="3">アプリケーション層</td><td>利用者に近い通信処理</td></tr>
+            <tr><td>第6層 プレゼンテーション層</td><td>文字コード変換、暗号化、圧縮</td></tr>
+            <tr><td>第5層 セッション層</td><td>通信開始・維持・終了の管理</td></tr>
+            <tr><td>第4層 トランスポート層</td><td>トランスポート層</td><td>TCP/UDP、分割、再送、順序制御</td></tr>
+            <tr><td>第3層 ネットワーク層</td><td>インターネット層</td><td>IP、経路選択、ルーティング</td></tr>
+            <tr><td>第2層 データリンク層</td><td rowspan="2">ネットワークインターフェイス層</td><td>MACアドレス、LAN内通信</td></tr>
+            <tr><td>第1層 物理層</td><td>ケーブル、電気信号、ビット伝送</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section id="ip-udp-tcp" class="lesson-section">

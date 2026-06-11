@@ -24,15 +24,41 @@ const fallbackCurriculum = {
       id: "network",
       title: "ネットワーク",
       category: "technology",
-      status: "in-progress",
-      description: "OSI/TCP-IP、IPアドレス、DNS、Web、無線、ネットワークセキュリティ。",
+      status: "done",
+      description: "OSI/TCP-IP、IPアドレス、DNS、Web、メール、無線、セキュリティ。全12教材ページ完成。",
       href: "fe/technology/network/index.html",
       items: [
         { title: "ネットワークの基本とデータ伝送", href: "fe/technology/network/network-basic.html", status: "done" },
         { title: "プロトコルとOSI/TCP/IP階層モデル", href: "fe/technology/network/network-protocol.html", status: "done" },
         { title: "IPアドレスとMACアドレス", href: "fe/technology/network/network-ip-mac.html", status: "done" },
         { title: "DHCP・NAT/NAPT・ルーティング・デフォルトGW", href: "fe/technology/network/dhcp-nat-routing.html", status: "done" },
-        { title: "IPアドレス・サブネット", href: "fe/technology/network/ip-subnet.html", status: "planned" }
+        { title: "ネットワーク機器とパケット交換", href: "fe/technology/network/network-devices-switching.html", status: "done" },
+        { title: "サブネットとCIDR", href: "fe/technology/network/ip-subnet.html", status: "done" },
+        { title: "ネットワーク接続方式とイーサネット", href: "fe/technology/network/network-connection-ethernet.html", status: "done" },
+        { title: "無線LAN・WAN・VLAN・SDN", href: "fe/technology/network/wireless-wan-vlan-sdn.html", status: "done" },
+        { title: "インターネット・メール・Webのしくみ", href: "fe/technology/network/dns-web-mail.html", status: "done" },
+        { title: "ネットワークプロトコル詳細", href: "fe/technology/network/network-protocols-advanced.html", status: "done" },
+        { title: "ネットワークセキュリティ", href: "fe/technology/network/network-security.html", status: "done" },
+        { title: "無線・モバイル通信とネットワーク監視", href: "fe/technology/network/wireless-mobile-monitoring.html", status: "done" }
+      ]
+    },
+    {
+      id: "cloud",
+      title: "クラウド",
+      category: "technology",
+      status: "done",
+      description: "クラウドの定義、SaaS/PaaS/IaaS、仮想化、信頼性設計、セキュリティ。",
+      href: "fe/technology/cloud/index.html",
+      items: [
+        { title: "クラウドの定義と歴史", href: "fe/technology/cloud/cloud-basic-1.html", status: "done" },
+        { title: "クラウドの基本特徴", href: "fe/technology/cloud/cloud-basic-2.html", status: "done" },
+        { title: "クラウドの種類", href: "fe/technology/cloud/cloud-basic-3.html", status: "done" },
+        { title: "IaaS / PaaS / SaaS", href: "fe/technology/cloud/cloud-basic-4.html", status: "done" },
+        { title: "仮想化技術", href: "fe/technology/cloud/cloud-basic-5.html", status: "done" },
+        { title: "サーバー・ストレージ・ネットワーク", href: "fe/technology/cloud/cloud-basic-6.html", status: "done" },
+        { title: "信頼性と障害対策", href: "fe/technology/cloud/cloud-basic-7.html", status: "done" },
+        { title: "クラウドセキュリティ", href: "fe/technology/cloud/cloud-basic-8.html", status: "done" },
+        { title: "導入メリットと事業者選定", href: "fe/technology/cloud/cloud-basic-9.html", status: "done" }
       ]
     },
     {
@@ -88,14 +114,14 @@ const fallbackCurriculum = {
     {
       title: "1_ネットワーク基礎.pdf",
       category: "ネットワーク",
-      status: "一部HTML化済み",
-      next: "サブネット計算、DNS/Web/メール、無線/セキュリティを章ごとに精読"
+      status: "HTML化済み",
+      next: "全296ページ 12教材ページHTML化完了。GitHub Pages反映済み"
     },
     {
       title: "2_クラウド基礎.pdf",
       category: "ネットワーク / システム構成",
-      status: "未作成",
-      next: "ネットワーク基礎の後に分野マッピング"
+      status: "HTML化済み",
+      next: "全9ページGitHub Pages反映済み。cloud_basic_10（クイズ）は別途方針決定"
     },
     {
       title: "1_情報セキュリティー.pdf",

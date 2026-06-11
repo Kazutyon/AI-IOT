@@ -64,18 +64,18 @@
         <tr><td>利用者責任</td><td>データの入力・設定・利用</td></tr>
         <tr><td>代表例</td><td>Gmail、Office 365、Salesforce</td></tr>
       </tbody></table></div>
-      <figure class="wide-diagram"><figcaption>IaaS/PaaS/SaaSの責任範囲</figcaption><pre class="mermaid">flowchart TD
-    A[利用者管理] --> B[アプリケーション]
-    B --> C[データ]
-    C --> D[ミドルウェア]
-    D --> E[OS]
-    A2[事業者管理] --> F[仮想化]
-    F --> G[サーバー]
-    G --> H[ストレージ]
-    H --> I[ネットワーク]
-    J[補足] --> K[IaaS: OS+利用者]
-    J --> L[PaaS: ミドルウェア+利用者]
-    J --> M[SaaS: 事業者全管理]</pre></figure>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>層</th><th>IaaS</th><th>PaaS</th><th>SaaS</th></tr></thead>
+          <tbody>
+            <tr><td>アプリケーション</td><td>利用者</td><td>利用者</td><td>事業者</td></tr>
+            <tr><td>データ</td><td>利用者</td><td>利用者</td><td>利用者</td></tr>
+            <tr><td>ミドルウェア</td><td>利用者</td><td>事業者</td><td>事業者</td></tr>
+            <tr><td>OS</td><td>利用者</td><td>事業者</td><td>事業者</td></tr>
+            <tr><td>仮想化・サーバー・ストレージ・ネットワーク</td><td>事業者</td><td>事業者</td><td>事業者</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
     <section class="lesson-section"><h2>間違えやすいポイント</h2><ul class="mistake-list"><li>IaaSはOS管理が<strong>利用者責任</strong>。PaaSは<strong>事業者責任</strong>。</li><li>AWS EC2=IaaS、Google App Engine=PaaS、Gmail=SaaS。</li><li>SaaSは全レイヤー事業者責任だが、データの内容責任は利用者。</li></ul></section>
     <section id="quiz" class="lesson-section">
