@@ -57,6 +57,11 @@
           "title": "形式言語とオートマトン",
           "href": "fe/technology/basic-theory/automaton-regex.html",
           "status": "done"
+        },
+        {
+          "title": "正規文法・BNF・チョムスキー階層",
+          "href": "fe/technology/basic-theory/grammar-bnf.html",
+          "status": "done"
         }
       ]
     },

@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DFAと状態遷移図 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Basic Theory</p>
+        <h1>DFAと状態遷移図</h1>
+        <p class="lead">有限オートマトン（DFA）の5つ組定義、状態遷移図の記法、動作の追跡まで。FE試験の形式言語・オートマトン分野を整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#example">DFAの例</a>
+        <a href="#diagram">状態遷移図</a>
+        <a href="#trace">動作追跡</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">基礎理論</a>
+      <span>DFAと状態遷移図</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>DFA（有限オートマトン）の5つ組定義 M = (Q, Σ, Δ, q₀, F)</li>
+          <li>状態＝抽象的な記憶の分類。具体的な数値は覚えない</li>
+          <li>状態遷移図の記法：開始状態（外矢印）・受理状態（二重丸）・遷移矢印・自己ループ</li>
+          <li>受理判定は「入力の最後に受理状態にいるか」で決まる</li>
+          <li>入力文字列を与えられたときの状態遷移を1文字ずつ追跡できる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>DFAの5つ組、受理判定条件、状態遷移図の読み方</dd></div>
+          <div><dt>中</dt><dd>自己ループ、動作の追跡、状態の設計</dd></div>
+          <div><dt>低</dt><dd>状態遷移図の描き方（記法の詳細）</dd></div>
+        </dl>
+        <p>読了目安: 約20分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>有限オートマトン（DFA）</td><td>有限個の状態で入力を1文字ずつ読み取り判定する抽象計算機</td></tr>
+            <tr><td>2</td><td>状態</td><td>抽象的な記憶の分類。数値そのものは覚えない</td></tr>
+            <tr><td>3</td><td>状態遷移</td><td>入力を読むたびに状態（記憶）が更新されること</td></tr>
+            <tr><td>4</td><td>受理状態</td><td>最終的にここで終われば受理（二重丸）</td></tr>
+            <tr><td>5</td><td>開始状態</td><td>入力を読む前の記憶の初期値（外側からの矢印）</td></tr>
+            <tr><td>6</td><td>遷移関数 Δ</td><td>現在状態と入力記号→次の状態を一意に決める関数</td></tr>
+            <tr><td>7</td><td>状態遷移図</td><td>DFAを図で表現した抽象機械の仕様書</td></tr>
+            <tr><td>8</td><td>自己ループ</td><td>同じ状態に戻る矢印。記憶が変わらない遷移</td></tr>
+            <tr><td>9</td><td>5つ組（5-tuple）</td><td>DFAの定義形式 M = (Q, Σ, Δ, q₀, F)</td></tr>
+            <tr><td>10</td><td>アルファベット Σ</td><td>入力として与えられる記号の集合（例: {0, 1})</td></tr>
+            <tr><td>11</td><td>状態集合 Q</td><td>DFAが取りうるすべての状態の集合</td></tr>
+            <tr><td>12</td><td>受理状態集合 F</td><td>受理状態の集合。F ⊆ Q</td></tr>
+            <tr><td>13</td><td>開始状態 q₀</td><td>Qの要素のうち最初の状態</td></tr>
+            <tr><td>14</td><td>動作の追跡</td><td>入力文字列に対し1文字ずつ状態遷移をたどること</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="example" class="lesson-section">
+      <h2>DFAの例：1の出現回数が偶数か判定</h2>
+      <p>0と1からなる文字列を入力として、「1の出現回数が偶数か」を判定するDFAを構成します。この例でDFAの構造がすべて理解できます。</p>
+
+      <h3>状態の設計</h3>
+      <p>必要な記憶は「これまでに読んだ1の出現回数が偶数か奇数か」だけです。DFAは「1の出現回数そのもの」を覚えているのではなく、<strong>偶数か奇数かという分類だけ</strong>を覚えます。これが「状態は抽象的な記憶」の意味です。</p>
+      <ul>
+        <li>状態 Even: これまでに読んだ1の出現回数が偶数</li>
+        <li>状態 Odd: これまでに読んだ1の出現回数が奇数</li>
+      </ul>
+
+      <h3>状態遷移の設計</h3>
+      <p>0を読んでも1の出現回数に影響しないため記憶（状態）は変わりません。1を読むと偶数⇔奇数が反転します。</p>
+
+      <h3>受理状態の決定</h3>
+      <p>「1の出現回数が偶数」を判定したいので、<strong>最後にEvenにいれば受理</strong>です。途中でEvenを通過しても受理にはなりません。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>DFAの状態遷移図（1の出現回数が偶数か）</figcaption>
+        <pre><code>              ┌──────────┐
+      ┌─────→│   Even   │←─────┐
+      │      │ (受理状態) │      │
+      │      └─────┬────┘      │
+      │            │ 1         │ 1
+      │ 0          ▼           │
+      │      ┌──────────┐      │
+      └──────│   Odd    │──────┘
+             │          │
+             └──────────┘
+                  0 (自己ループ)
+
+  Evenの0自己ループ: 0を読んでも1の出現回数は変わらない（偶数のまま）
+  Oddの0自己ループ: 0を読んでも出現回数は奇数のまま
+  Even→Odd(1): 1を読むと偶数→奇数に反転
+  Odd→Even(1): 1を読むと奇数→偶数に反転</code></pre>
+      </figure>
+
+      <article class="formula-box">
+        <h3>DFA 5つ組定義（偶数判定）</h3>
+        <p>M = (Q, Σ, Δ, q₀, F)</p>
+        <p>Q = {Even, Odd}<br>Σ = {0, 1}<br>q₀ = Even<br>F = {Even}</p>
+        <p>遷移関数 Δ:<br>Δ(Even,0) = Even / Δ(Even,1) = Odd<br>Δ(Odd,0) = Odd / Δ(Odd,1) = Even</p>
+      </article>
+    </section>
+
+    <section id="diagram" class="lesson-section">
+      <h2>状態遷移図の記法</h2>
+      <p>状態遷移図は、リアルタイムの動作を示す図ではなく、記憶の更新規則を視覚的に整理した<strong>抽象機械の仕様書</strong>です。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>図の要素</th><th>見た目</th><th>表す内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>状態</td><td>一重丸（○）</td><td>記憶の分類</td></tr>
+            <tr><td>開始状態</td><td>外から矢印が入る丸</td><td>読み始めの初期状態。必ず1つ</td></tr>
+            <tr><td>受理状態</td><td>二重丸（◎）</td><td>最終的にここで終われば受理。複数可</td></tr>
+            <tr><td>遷移矢印</td><td>状態間の矢印</td><td>記憶の更新規則。矢印の上に入力記号</td></tr>
+            <tr><td>自己ループ</td><td>同じ状態に戻る矢印</td><td>入力で記憶が変わらないことを表す</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>状態遷移図の記法と意味</figcaption>
+        <pre><code>┌──────────────────────────────────────────────────────────────┐
+│                    状態遷移図の記法                            │
+│                                                              │
+│  ┌───┐                                                       │
+│  │ A │  ← 状態（丸）。記憶の分類を表す。                        │
+│  └───┘                                                       │
+│    ↑                                                         │
+│    │    ← 開始状態への矢印。外側から入る。                       │
+│   →                                                            │
+│                                                              │
+│  ╔═══╗                                                       │
+│  ║ B ║  ← 受理状態（二重丸）。最終的にここで終われば受理。        │
+│  ╚═══╝                                                       │
+│                                                              │
+│  A ──a──→ B  ← 遷移矢印。上に書かれた記号aを読むとBへ移動。     │
+│                                                              │
+│  ┌───┐                                                       │
+│  │ C │◄─┐  ← 自己ループ。bを読んでもCのまま変わらない。          │
+│  └───┘  │ b                                                 │
+│  └────────┘                                                  │
+└──────────────────────────────────────────────────────────────┘</code></pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>通常状態</th><th>開始状態</th><th>受理状態</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>図での表し方</td><td>一重丸</td><td>外側から矢印が入る一重丸</td><td>二重丸</td></tr>
+            <tr><td>意味</td><td>記憶の分類</td><td>読み始めの初期記憶</td><td>受理判定の印</td></tr>
+            <tr><td>個数</td><td>任意</td><td>必ず1つ</td><td>0個以上（複数可）</td></tr>
+            <tr><td>判定への関与</td><td>直接的には関与しない</td><td>初期状態として関与</td><td>最終状態がこれなら受理</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="trace" class="lesson-section">
+      <h2>動作の追跡</h2>
+      <p>状態遷移図を正しく読むには、実際に文字列を読みながら状態がどう変わるかを確認する必要があります。1文字ずつ「現在状態→入力→次状態」をたどります。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>動作追跡: 入力「1010」</figcaption>
+        <pre><code>  入力: 1 0 1 0
+        │ │ │ │
+        ▼ ▼ ▼ ▼
+  Even ──→ Odd ──→ Odd ──→ Even ──→ Even
+       1      0       1       0
+  (開始)                       (受理)
+
+  最終状態 = Even → 受理（1の出現回数=2回で偶数）</code></pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>読んだ文字</th><th>移動先の状態</th><th>図のどの矢印か</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>(開始)</td><td>Even</td><td>→ Even</td></tr>
+            <tr><td>1</td><td>Odd</td><td>Even --1--> Odd</td></tr>
+            <tr><td>0</td><td>Odd</td><td>Odd --0--> Odd（自己ループ）</td></tr>
+            <tr><td>1</td><td>Even</td><td>Odd --1--> Even</td></tr>
+            <tr><td>0</td><td>Even</td><td>Even --0--> Even（自己ループ）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>DFA 5つ組の構造</figcaption>
+        <pre><code>┌──────────────────────────────────────────────────────────┐
+│                  DFA の 5つ組定義                          │
+│                                                          │
+│  M = ( Q ,  Σ ,  Δ ,  q₀ ,  F )                         │
+│       │    │    │    │     │                             │
+│       ▼    ▼    ▼    ▼     ▼                             │
+│   {A,B} {0,1} 遷移   A    {A}                            │
+│   状態   入力  関数  開始  受理                            │
+│   集合   記号        状態  状態                            │
+│        集合              集合                            │
+│                                                          │
+│  遷移関数 Δ の定義:                                        │
+│  Δ(A,0)=A  Δ(A,1)=B  Δ(B,0)=B  Δ(B,1)=A                 │
+└──────────────────────────────────────────────────────────┘</code></pre>
+      </figure>
+    </section>
+
+    <section class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>途中で受理状態を通過しても受理にはならない</strong>。判定は「入力の最後」だけ。</li>
+        <li>開始状態が受理状態を兼ねることもある（例: Evenは開始状態かつ受理状態）。</li>
+        <li>DFAの「Deterministic」は、同じ状態・同じ入力に対して<strong>遷移先が一意に決まる</strong>こと。</li>
+        <li>状態遷移図の矢印は「リアルタイム動作」ではなく「記憶の更新規則」を表す。</li>
+        <li>自己ループは「何も起こらない」のではなく「<strong>記憶が変わらない</strong>」という明確な規則。</li>
+        <li>DFAは具体的な出現回数を覚えているわけではなく、分類（偶数/奇数）だけを保持する。</li>
+        <li>5つ組の記号を混同しない: Q=状態集合、Σ=入力記号、F=受理状態集合、q₀=開始状態。</li>
+        <li>F ⊆ Q（受理状態集合は状態集合の部分集合）。受理状態はQの外にはない。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+      <details class="quiz-card">
+        <summary>Q1. DFAの5つ組 M = (Q, Σ, Δ, q₀, F) において、q₀ が表すものはどれか。</summary>
+        <p>A. 受理状態集合　B. 入力記号集合　C. 開始状態　D. 遷移関数</p>
+        <p>答え: <strong>C（開始状態）</strong>。q₀ はQの中の最初の状態です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q2. 状態遷移図において、受理状態はどのように表されるか。</summary>
+        <p>A. 四角で囲む　B. 破線で描く　C. 二重丸で表す　D. 色を付ける</p>
+        <p>答え: <strong>C（二重丸）</strong>。受理状態は◎（二重丸）で表します。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q3. DFAにおいて「状態」が表すものとして最も適切な説明はどれか。</summary>
+        <p>A. 入力された文字列そのもの<br>B. 抽象的な記憶の分類<br>C. プログラムの実行行番号<br>D. 出力される結果の値</p>
+        <p>答え: <strong>B</strong>。DFAの状態は抽象的な記憶の分類です。具体的な数値は覚えません。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q4. 自己ループが意味するものはどれか。</summary>
+        <p>A. 入力を読むと必ず別の状態に遷移する<br>B. 入力を読んでも状態（記憶）が変わらない<br>C. 受理状態だけが持つ特殊な遷移<br>D. エラーが発生したことを示す</p>
+        <p>答え: <strong>B</strong>。自己ループは入力を読んでも記憶が変わらないことを表します。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q5. 「1の出現回数が偶数か」を判定するDFAで、入力「1101」の最終状態はどれか。</summary>
+        <p>A. Even（受理）　B. Even（非受理）　C. Odd（受理）　D. Odd（非受理）</p>
+        <p>答え: <strong>D（Odd・非受理）</strong>。1が3回出現＝奇数。Oddは受理状態でないため非受理です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q6. 状態遷移図で開始状態を表す記法として正しいものはどれか。</summary>
+        <p>A. 状態の外側から中へ向かう矢印<br>B. 状態から外側へ向かう矢印<br>C. 状態を四角で囲む<br>D. 状態名の前に「S:」を付ける</p>
+        <p>答え: <strong>A</strong>。外側から状態へ向かう矢印が開始状態を表します。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q7. DFAの受理判定において正しい説明はどれか。</summary>
+        <p>A. 途中で受理状態を1回でも通過すれば受理される<br>B. 入力の最後に受理状態にいれば受理される<br>C. すべての状態が受理状態であれば受理される<br>D. 開始状態が受理状態であれば必ず受理される</p>
+        <p>答え: <strong>B</strong>。受理判定は入力の最後の状態だけで決まります。途中通過は関係ありません。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q8. DFA M = (Q, Σ, Δ, q₀, F) において、F ⊆ Q が意味することはどれか。</summary>
+        <p>A. 受理状態集合は状態集合の部分集合である<br>B. 状態集合は受理状態集合の部分集合である<br>C. 受理状態集合と状態集合は等しい<br>D. 受理状態集合は状態集合より大きい</p>
+        <p>答え: <strong>A</strong>。受理状態集合Fは状態集合Qの部分集合です。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q9. DFAの遷移関数Δの性質として正しいものはどれか。</summary>
+        <p>A. 同じ状態・同じ入力に対して複数の遷移先が存在できる<br>B. 同じ状態・同じ入力に対する遷移先は一意に決まる<br>C. 遷移先は入力記号に関係なく常に同じである<br>D. 遷移先が存在しない入力記号があってもよい</p>
+        <p>答え: <strong>B</strong>。DFAはDeterministic（決定性）。遷移先は一意に決まります。</p>
+      </details>
+      <details class="quiz-card">
+        <summary>Q10. 「1の出現回数が偶数」を判定するDFAで、最小の状態数はいくつか。</summary>
+        <p>A. 1　B. 2　C. 3　D. 4</p>
+        <p>答え: <strong>B（2状態）</strong>。EvenとOddの2状態だけで判定可能です。</p>
+      </details>
+    </section>
+
+    <section class="lesson-section source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <ul>
+        <li>本体PDF: <strong>1_基礎理論（数学・論理・情報理論99）.pdf</strong> p192-p208</li>
+        <li>範囲: 6-6 DFAの例 〜 6-7-8 状態遷移図が有限オートマトンを表す理由</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
