@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ネットワーク防御の基礎 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>ネットワーク防御の基礎</h1>
+        <p class="lead">企業ネットワークを外部・内部の脅威から守るための代表的な技術である「ファイアウォール」「IDS/IPS」「WAF」の役割と仕組みについて学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#firewall">ファイアウォール</a>
+        <a href="#ids-ips">IDS / IPS</a>
+        <a href="#waf">WAF</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>ネットワーク防御の基礎</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>ファイアウォールがL3/L4（IP・ポート）で通信を制御し、ステートフルインスペクションでセッションを管理する仕組みを理解している</li>
+          <li>IDS（検知）とIPS（遮断）の役割の違いと、シグネチャ型・アノマリ型の特徴を区別できる</li>
+          <li>WAFがL7（アプリケーション層）のHTTP通信を解析し、SQLiやXSSなどのWeb攻撃を防ぐ役割を説明できる</li>
+          <li>各製品の適切な配置場所（FW：境界、IDS：ミラーポート、IPS/WAF：インライン）を把握している</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ステートフルインスペクションの仕組み、IDSとIPSの違い、WAFが防げる攻撃の種類（SQLi/XSS等）</dd></div>
+          <div><dt>中</dt><dd>シグネチャ検知とアノマリ検知の优缺点、WAFの配置形態（リバースプロキシ型等）</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>パケットフィルタリング</td><td>IPアドレスやポート番号などヘッダ情報に基づき通信を許可・拒否する方式</td><td>最も基本的なFWの機能。L3/L4で動作</td></tr>
+            <tr><td>ステートフルインスペクション</td><td>通信の「状態（セッション）」を記録し、正規の応答パケットかどうかを判断する方式</td><td>現代のFWの主流。セッションテーブルを保持</td></tr>
+            <tr><td>IDS</td><td>Intrusion Detection System。不正な通信を「検知」してアラートを出すシステム</td><td>通信を遮断しない。ミラーポートに接続して監視</td></tr>
+            <tr><td>IPS</td><td>Intrusion Prevention System。不正な通信を「検知」し、即座に「遮断」するシステム</td><td>通信経路上（インライン）に配置され、リアルタイムで制御</td></tr>
+            <tr><td>シグネチャ検知</td><td>既知の攻撃パターン（シグネチャ）と照合して攻撃を検知する方式</td><td>誤検知は少ないが、未知の攻撃には対応できない</td></tr>
+            <tr><td>アノマリ検知</td><td>通常の通信パターンから外れた異常な挙動を検知する方式</td><td>未知の攻撃に対応可能だが、誤検知が発生しやすい</td></tr>
+            <tr><td>WAF</td><td>Web Application Firewall。Webアプリへの攻撃（L7）を検知・遮断する専用FW</td><td>SQLi、XSS、OSコマンドインジェクションなどを防ぐ</td></tr>
+            <tr><td>DPI</td><td>Deep Packet Inspection。パケットのヘッダだけでなくペイロード（中身）まで解析する技術</td><td>IDS/IPSやWAFで攻撃コードの断片を見つけるために使用</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="firewall" class="lesson-section">
+      <h2>1. ファイアウォール（Firewall）</h2>
+      <p>ファイアウォールは、社内ネットワークとインターネットの境界に配置され、許可された通信だけを通し、不要または危険な通信を遮断する装置です。基本的な動作は「パケットフィルタリング」であり、送信元/宛先IPアドレス、ポート番号、プロトコル（TCP/UDP）に基づいてルール（ポリシー）を評価します。</p>
+      <p>現代のファイアウォールの主流は「ステートフルインスペクション」です。これは単にパケットのヘッダを見るだけでなく、通信の「状態（セッション）」を内部のセッションテーブルで記録し、内部から開始された通信に対する「正規の応答パケット」かどうかを判断する仕組みです。これにより、外部から勝手に開始された不正な通信をより厳格に遮断できます。</p>
+      <p>さらに高度なファイアウォールでは、アプリケーション層（L7）の内容（HTTPのURLやDNSクエリなど）を解析する「アプリケーション層フィルタリング」機能も備えており、ポート番号が同じでもアプリケーションの種類を識別して制御することが可能です。また、NAT（アドレス変換）と連携し、内部ネットワークの構造を外部から隠す役割も果たします。</p>
+    </section>
+
+    <section id="ids-ips" class="lesson-section">
+      <h2>2. IDS / IPS（侵入検知・防御システム）</h2>
+      <p>ファイアウォールが「許可された通信だけを通す」のに対し、IDS（侵入検知システム）とIPS（侵入防御システム）は、許可された通信の中に潜む攻撃の兆候を見つける役割を持ちます。IDSは攻撃を「検知」して管理者にアラートを出すことに特化しており、通信自体は遮断しません。一方、IPSは検知した攻撃を即座に「遮断」する機能を持ちます。</p>
+      <p>検知方式には大きく2つあります。「シグネチャ方式」は既知の攻撃パターン（文字列や通信パターン）と照合する方式で、誤検知は少ないものの未知の攻撃には弱いという特徴があります。「アノマリ方式」は、平時の正常な通信パターンを学習しておき、そこから外れた異常な挙動（深夜の大量通信など）を検知する方式で、未知の攻撃に対応可能ですが誤検知が発生しやすい傾向があります。</p>
+      <p>配置場所も異なります。IDSはネットワークスイッチのミラーポートに接続し、通信を複製して監視する構成が一般的です。一方、IPSは通信経路の途中（インライン）に配置され、通過するすべてのパケットをリアルタイムで検査し、攻撃と判断したパケットを破棄します。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>IDSとIPSの配置と動作の違い</figcaption>
+        <pre>
+  [ インターネット ]
+          │
+  [ ファイアウォール ] (境界で許可/拒否を判断)
+          │
+          ├─▶ [ IDS ] (ミラーポートに接続)
+          │      └─▶ 通信を複製して監視。攻撃検知時は「アラート」のみ
+          │
+          ▼
+  [  IPS  ] (通信経路上にインライン配置)
+          └─▶ 通過するパケットを深層解析(DPI)。攻撃検知時は即座に「遮断」
+          │
+  [ 社内ネットワーク / Webサーバー ]
+        </pre>
+      </figure>
+    </section>
+
+    <section id="waf" class="lesson-section">
+      <h2>3. WAF（Web Application Firewall）</h2>
+      <p>WAFは、Webアプリケーションを狙った攻撃を防ぐために特化したファイアウォールです。通常のFWやIPSがL3/L4（ネットワーク層・トランスポート層）を中心に監視するのに対し、WAFはL7（アプリケーション層）のHTTP/HTTPS通信の内容を詳細に解析（Deep HTTP Inspection）します。</p>
+      <p>WAFが防ぐ主な攻撃には、SQLインジェクション、クロスサイトスクリプティング（XSS）、OSコマンドインジェクション、ディレクトリトラバーサルなどがあります。検知方式としては、既知の攻撃パターンをブロックする「シグネチャ方式」、特定のURLやUser-Agentを拒否する「ルールベースの検査」、そして短時間に大量のリクエストを送るなどの異常を検知する「アノマリ検知」を組み合わせて運用されます。</p>
+      <p>WAFの配置形態には、Webサーバーの前段に配置してリクエストを受け取り、安全なものだけを転送する「リバースプロキシ型」、通信経路上に直接配置する「インライン型」、そしてクラウドサービスとして提供される「クラウド型（CDN+WAF）」があります。近年では導入の容易さからクラウド型が主流となっています。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. ファイアウォールの「ステートフルインスペクション」の主な特徴はどれか。</summary>
+        <p>ア）パケットのヘッダ情報（IPアドレスやポート番号）のみを基に許可・拒否を判断する イ）通信のセッション状態を記録し、内部から開始された通信に対する正規の応答かどうかを判断する ウ）HTTPリクエストの内容を解析してSQLインジェクションを検知する エ）平時の通信パターンを学習し、逸脱した挙動を検知する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ステートフルインスペクションは、セッションテーブルで通信の状態を管理し、正規の応答パケットのみを通過させることで、より厳格な制御を実現します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. IDS（侵入検知システム）とIPS（侵入防御システム）の決定的な違いはどれか。</summary>
+        <p>ア）IDSはシグネチャ検知のみを行うが、IPSはアノマリ検知を行う イ）IDSは通信を遮断せずアラートを出すのみだが、IPSは検知した攻撃を即座に遮断する ウ）IDSはL7で動作するが、IPSはL3/L4で動作する エ）IDSはクラウド環境専用だが、IPSはオンプレミス専用である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IDSは監視と検知（アラート）に特化しており、IPSは検知に加えてリアルタイムでの通信遮断機能を持ちます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 既知の攻撃パターン（文字列や通信パターン）と照合して攻撃を検知する方式はどれか。</summary>
+        <p>ア）アノマリ検知 イ）シグネチャ検知 ウ）ステートフルインスペクション エ）リバースプロキシ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — シグネチャ検知は既知の攻撃には強く誤検知も少ないですが、パターンに登録されていない未知の攻撃には対応できません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. WAF（Web Application Firewall）が主に防ぐ対象となる攻撃はどれか。</summary>
+        <p>ア）ポートスキャンによる不要ポートの発見 イ）DDoS攻撃による帯域幅の枯渇 ウ）SQLインジェクションやクロスサイトスクリプティング（XSS） エ）ARPスプーフィングによるMACアドレスの偽装</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — WAFはL7（アプリケーション層）のHTTP通信を解析し、Webアプリ固有の脆弱性を突く攻撃（SQLi, XSS等）を検知・遮断します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. IDSをネットワークに導入する際の代表的な配置方法はどれか。</summary>
+        <p>ア）インターネットとファイアウォールの間にインライン配置する イ）ネットワークスイッチのミラーポートに接続し、通信を複製して監視する ウ）Webサーバーとデータベースサーバーの間に配置する エ）各エンドユーザーのPCにエージェントとしてインストールする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IDSは通信を遮断しないため、スイッチのミラーポート（SPAN）に接続してトラフィックを複製し、監視する構成が一般的です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. アノマリ検知方式の特徴として、最も適切なものはどれか。</summary>
+        <p>ア）既知の攻撃パターンに依存するため、未知の攻撃には対応できない イ）平時の正常な通信パターンを学習しておき、そこから外れた挙動を検知するため、未知の攻撃にも対応可能である ウ）HTTPリクエストの内容を詳細に解析するため、処理負荷が非常に低い エ）シグネチャデータベースの更新が不要なため、運用コストがゼロである</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — アノマリ検知は正常なベースラインからの逸脱を検知するため未知の攻撃に対応できますが、正常な新規業務などを誤検知してしまうリスクがあります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. WAFの配置形態の一つである「リバースプロキシ型」の特徴はどれか。</summary>
+        <p>ア）Webサーバーの代わりにリクエストを受け取り、安全なリクエストのみをWebサーバーに転送する イ）通信経路上に直接配置され、通過するパケットをリアルタイムで破棄する ウ）DNSサーバーと連携して、悪意あるドメインへの名前解決をブロックする エ）クライアントPC上にインストールされ、ブラウザの通信を監視する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — リバースプロキシ型WAFは、クライアントからのリクエストを一旦自身が受け止め、検査後にバックエンドのWebサーバーへ転送する構成です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. ファイアウォールの「パケットフィルタリング」で主に評価される情報はどれか。</summary>
+        <p>ア）HTTPリクエストのURLパスとクエリパラメータ イ）送信元/宛先IPアドレス、ポート番号、プロトコル ウ）ユーザーの認証情報とセッションCookie エ）ファイルのハッシュ値とデジタル署名</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — パケットフィルタリングはL3/L4のヘッダ情報（IPアドレス、ポート、プロトコル）に基づいて通信の許可・拒否を判断する基本的な機能です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. IPS（侵入防御システム）を運用する際に特に注意すべき点はどれか。</summary>
+        <p>ア）検知した攻撃を記録するログ容量が不足しないようにする イ）誤検知（False Positive）が発生した場合、正規の通信まで遮断されて業務が停止する可能性がある ウ）ミラーポートの帯域幅が不足しないようにネットワークを設計する エ）シグネチャデータベースを手動で毎日更新する必要がある</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IPSは通信経路上に配置され攻撃を遮断するため、誤検知が発生すると正常な業務通信まで止めてしまう（サービス停止）リスクがあります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. Deep Packet Inspection（DPI）がネットワークセキュリティにおいて果たす主な役割はどれか。</summary>
+        <p>ア）パケットのヘッダだけでなくペイロード（中身）まで解析し、隠された攻撃コードや不正なプロトコル使用を検出する イ）パケットの送信元IPアドレスを偽装して、攻撃者の特定を困難にする ウ）ネットワークの帯域幅を動的に制御し、重要な通信を優先する エ）パケットを暗号化し、通信経路での盗聴を防止する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — DPIは、パケットの中身（アプリケーションデータ）まで深く解析することで、FWのポート制御だけでは防げない高度な攻撃や不正通信を検知します。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第3章 セキュリティ技術（3-4-1 〜 3-4-3）</p>
+    </section>
+  </main>
+</body>
+</html>

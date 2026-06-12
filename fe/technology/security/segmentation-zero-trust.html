@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ネットワーク分離とゼロトラスト | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>ネットワーク分離とゼロトラスト</h1>
+        <p class="lead">攻撃の横展開を防ぐ「ネットワーク分離（VLAN/セグメント化）」と、内部ネットワークを信頼しない新しいセキュリティモデルである「ゼロトラスト」の仕組みについて学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#segmentation">ネットワーク分離</a>
+        <a href="#zero-trust">ゼロトラスト</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>ネットワーク分離とゼロトラスト</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>IoTデバイスや来客用ネットワークを社内ネットワークから分離（セグメント化）する必要性を説明できる</li>
+          <li>VLAN（仮想LAN）がスイッチを論理的に分割し、L3スイッチやFWで通信を制御する仕組みを理解している</li>
+          <li>ACL（アクセス制御リスト）を用いて、セグメント間の不要な通信を遮断する方法を把握している</li>
+          <li>ゼロトラストの「内部を信頼しない（Never Trust）」「継続的に検証する（Always Verify）」という基本思想を説明できる</li>
+          <li>マイクロセグメンテーションやデバイスポスチャチェックがゼロトラストを実現する技術要素であることを理解している</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ゼロトラストの基本原則、VLANとセグメント化の目的、ACLによる通信制御</dd></div>
+          <div><dt>中</dt><dd>マイクロセグメンテーションの概念、デバイスポスチャチェックの内容、横移動（Lateral Movement）の防止</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>VLAN</td><td>Virtual LAN。1台のスイッチを論理的に複数のネットワークに分割する技術</td><td>異なるVLAN間はデフォルトで通信できない</td></tr>
+            <tr><td>ネットワークセグメント化</td><td>ネットワークを複数の区画（セグメント）に分割し、通信を制御する仕組み</td><td>VLAN、サブネット分割、FWによる内部分離を含む広い概念</td></tr>
+            <tr><td>ACL</td><td>Access Control List。どの通信を許可・拒否するかを定義したリスト</td><td>L3スイッチやFWでVLAN間通信を制限するために使用</td></tr>
+            <tr><td>ゼロトラスト</td><td>「ネットワーク内部を信頼しない」ことを前提としたセキュリティモデル</td><td>境界防御の限界を補う次世代の考え方</td></tr>
+            <tr><td>マイクロセグメンテーション</td><td>ネットワークを細かく分割し、セグメントごとに通信を厳密に制御する技術</td><td>ゼロトラストの中核となるネットワーク制御手法</td></tr>
+            <tr><td>デバイスポスチャチェック</td><td>アクセスを試みるデバイスのセキュリティ状態（OS更新、ウイルス対策など）を評価すること</td><td>ゼロトラストにおいて、信頼できないデバイスはアクセスを制限する</td></tr>
+            <tr><td>横移動</td><td>攻撃者がネットワーク内部で、あるシステムから別のシステムへ侵入範囲を広げること</td><td>Lateral Movement。セグメント化で防止する主要な対象</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="segmentation" class="lesson-section">
+      <h2>1. ネットワーク分離（VLAN / セグメント化）</h2>
+      <p>IoTデバイス（監視カメラ、センサー、スマート家電など）は、一般的なPCやサーバーと比べてセキュリティ対策が弱い傾向があります。初期パスワードのまま運用されたり、ファームウェアの更新が放置されたりしているケースが多く、攻撃者が最初に狙う入口になりやすいのが実情です。</p>
+      <p>もしIoTデバイスが侵害された場合、同じネットワーク内にある社内PCや重要サーバーへ攻撃が「横移動（Lateral Movement）」する危険があります。これを防ぐために、IoTデバイスを他のネットワークから分離（セグメント化）し、攻撃が広がらないようにする仕組みが不可欠です。</p>
+      <p>代表的な方法がVLAN（仮想LAN）です。1台の物理スイッチを論理的に複数のネットワークに分割し、異なるVLAN同士は直接通信できないようにします。VLAN間通信が必要な場合は、L3スイッチやファイアウォールを経由させ、ACL（アクセス制御リスト）で「IoTから社内PCへの通信は拒否」などの細かい制御を行います。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>VLANによるネットワーク分離の構成例</figcaption>
+        <pre>
+  [ 社内ネットワーク ]
+  ┌─────────────────────────────────────┐
+  │  L3スイッチ / ファイアウォール (ACLで制御)  │
+  ├──────────┬──────────┬──────────┤
+  │ VLAN 10  │ VLAN 20  │ VLAN 30  │
+  │ 社内 PC  │ サーバー │  IoT機器 │
+  └──────────┴──────────┴──────────┘
+  ※ VLAN 30 (IoT) から VLAN 10 (社内PC) への通信はACLで拒否
+        </pre>
+      </figure>
+    </section>
+
+    <section id="zero-trust" class="lesson-section">
+      <h2>2. ゼロトラストネットワーク</h2>
+      <p>ゼロトラストは、「ネットワーク内部＝安全」という従来の境界防御モデルの前提を捨て、「内部・外部を問わず、すべての通信を常に検証する」セキュリティモデルです。社内PCでもマルウェアに感染している可能性があるため、一度認証を通過しても油断はできません。</p>
+      <p>ゼロトラストを実現するためには、アクセス要求のたびに「ユーザーの認証状態」「デバイスの状態（OS更新、ウイルス対策の有無）」「アクセス元IPや時刻」などを継続的に検証（Always Verify）し、必要最小限のアクセス権（Least Privilege）だけを付与します。これを支える技術がマイクロセグメンテーションやデバイスポスチャチェックです。</p>
+      <p>ゼロトラストは単一の製品で実現できるものではなく、MFA（多要素認証）、デバイス管理（MDM/EDR）、ネットワーク分離（VLAN/ACL）、ログ監視などを組み合わせた総合的なアーキテクチャです。段階的な導入が現実的であり、まずはMFAの導入とネットワークの論理分離から始めることが推奨されます。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 1台の物理スイッチを論理的に複数のネットワークに分割し、異なるネットワーク間の通信を制限する技術はどれか。</summary>
+        <p>ア）NAT（Network Address Translation） イ）VLAN（Virtual LAN） ウ）DHCP（Dynamic Host Configuration Protocol） エ）DNS（Domain Name System）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — VLANは、スイッチを論理的に分割する技術であり、異なるVLAN間の通信はデフォルトで遮断されます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. ネットワークセグメント化の主な目的として、最も適切なものはどれか。</summary>
+        <p>ア）ネットワークの通信速度を最大化する イ）攻撃者がネットワーク内部で横移動（Lateral Movement）する範囲を限定する ウ）すべてのデバイスを同じサブネットに配置して管理を簡素化する エ）インターネットへの接続を完全に遮断する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — セグメント化により、1台のデバイスが侵害されても、他のセグメントへの侵入を防ぎ、被害の拡大を最小限に抑えます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. VLAN間通信を制御し、特定のセグメントからのアクセスを許可・拒否するために使用される技術はどれか。</summary>
+        <p>ア）ACL（Access Control List） イ）ARP（Address Resolution Protocol） ウ）SNMP（Simple Network Management Protocol） エ）SMTP（Simple Mail Transfer Protocol）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — ACLは、L3スイッチやファイアウォールで通信ルールを定義し、セグメント間の不要な通信を遮断するために使用されます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. ゼロトラストセキュリティモデルの基本思想として、最も適切なものはどれか。</summary>
+        <p>ア）社内ネットワークは安全であるため、内部通信はすべて許可する イ）ネットワークの境界（ファイアウォール）さえ堅牢であれば内部は信頼できる ウ）内部・外部を問わず、ネットワーク内部を信頼せず、すべてのアクセスを常に検証する エ）すべてのユーザーに管理者権限を与え、業務効率を最優先する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ゼロトラストは「Never Trust, Always Verify（決して信頼せず、常に検証する）」を基本原則とします。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. ゼロトラストにおいて、アクセス要求のたびにデバイスのセキュリティ状態（OSの更新状況、ウイルス対策の有無など）を確認する仕組みはどれか。</summary>
+        <p>ア）デバイスポスチャチェック（Device Posture Check） イ）ポートスキャン ウ）DDoS対策 エ）ロードバランシング</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — デバイスポスチャチェックにより、信頼できない状態のデバイスからのアクセスを制限し、リスクを低減します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. ゼロトラストを実現するために、ネットワークを細かく分割し、セグメントごとに通信を厳密に制御する技術はどれか。</summary>
+        <p>ア）マクロセグメンテーション イ）マイクロセグメンテーション ウ）ポートミラーリング エ）ブリッジング</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — マイクロセグメンテーションは、ゼロトラストの中核となるネットワーク制御手法であり、きめ細かいアクセス制御を可能にします。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. IoTデバイスを社内ネットワークから分離する構成として、最も適切なものはどれか。</summary>
+        <p>ア）IoTデバイスを社内PCと同じVLANに配置し、通信を自由にする イ）IoTデバイス専用のVLANを作成し、ACLで社内ネットワークへの通信を拒否する ウ）IoTデバイスのファイアウォールをすべて無効化する エ）IoTデバイスにグローバルIPアドレスを直接割り当てる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IoTデバイスは脆弱性が高いため、専用VLANに隔離し、必要な通信（例：クラウドとの通信）のみを許可するのが適切です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. ゼロトラストネットワークが従来の境界防御モデルよりも優れている点として、最も適切なものはどれか。</summary>
+        <p>ア）ファイアウォールの設置が不要になるためコストが下がる イ）内部ネットワークに侵入された後でも、横移動や内部不正を効果的に制限できる ウ）すべての通信を暗号化するため、処理速度が向上する エ）ユーザーのパスワード管理が不要になる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 境界防御は一度突破されると内部は野放しになりますが、ゼロトラストは内部でも継続的に検証するため、侵入後の被害拡大を防げます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ゼロトラスト導入において、初学者が現場で困らないための「最小構成」として推奨される組み合わせはどれか。</summary>
+        <p>ア）MFA、デバイス管理、ネットワーク分離、ログ監視、最小権限アクセスの徹底 イ）すべての通信を平文で送信し、速度を優先する ウ）社内ネットワークのインターネット接続を物理的に遮断する エ）すべてのユーザーにルート権限を付与する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — ゼロトラストは段階的な導入が現実的であり、これらの基本対策を組み合わせるだけでも従来の境界防御より大幅に安全性が向上します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 攻撃者がネットワーク内部で、あるシステムから別のシステムへ侵入範囲を広げる行為を何と呼ぶか。</summary>
+        <p>ア）フィッシング イ）横移動（Lateral Movement） ウ）DDoS攻撃 エ）ソーシャルエンジニアリング</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 横移動は、初期侵入後に権限を昇格させたり、他のサーバーを狙ったりする行為であり、ネットワーク分離で防止すべき主要な脅威です。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第3章 セキュリティ技術（3-4-4, 3-4-5）</p>
+    </section>
+  </main>
+</body>
+</html>

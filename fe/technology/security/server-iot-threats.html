@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>サーバーとIoTの脅威 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>サーバーとIoTの脅威</h1>
+        <p class="lead">企業の基盤となるサーバー・OSへの攻撃手法と、セキュリティ対策が弱いままネットワークに接続されがちなIoT機器特有の脅威について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#server-threats">サーバー・OSの脅威</a>
+        <a href="#iot-threats">IoTの脅威</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>サーバーとIoTの脅威</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>RCE（リモートコード実行）やRDP公開など、サーバー攻撃の典型的な侵入経路を説明できる</li>
+          <li>クラウド環境におけるIAM設定ミスやアクセスキーの誤公開がもたらすリスクを理解している</li>
+          <li>IoT機器が「初期パスワードのまま」「ファームウェア未更新」であることの危険性を説明できる</li>
+          <li>IoT機器がボットネット化し、DDoS攻撃の「踏み台」として悪用される仕組みを把握している</li>
+          <li>サーバーとIoTをそれぞれ守るための具体的な対策（パッチ管理、ネットワーク分離など）を挙げられる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>RDP公開とブルートフォース攻撃、IoTボットネット（Mirai）の仕組み、VLANによるネットワーク分離</dd></div>
+          <div><dt>中</dt><dd>クラウドIAMの過剰権限付与、IoT機器への物理攻撃（JTAG/UART）の概念</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>RCE</td><td>Remote Code Execution。リモートから任意のコードを実行させる脆弱性</td><td>サーバー乗っ取りの「決定打」となる最も危険な脆弱性</td></tr>
+            <tr><td>ブルートフォース攻撃</td><td>パスワードの全組み合わせを総当たりで試す攻撃</td><td>RDPやSSHがインターネットに公開されている場合に狙われやすい</td></tr>
+            <tr><td>IAM</td><td>Identity and Access Management。クラウドのIDとアクセス権限を管理する仕組み</td><td>過剰な権限付与やアクセスキーの誤公開が重大なインシデントにつながる</td></tr>
+            <tr><td>IoTボットネット</td><td>乗っ取られたIoT機器を攻撃者の指令で一括制御するネットワーク</td><td>Miraiなどが代表的。DDoS攻撃の「踏み台」として悪用される</td></tr>
+            <tr><td>ファームウェア改ざん</td><td>機器の内部ソフトウェアを書き換え、バックドアを仕込む攻撃</td><td>IoT機器は更新が放置されやすく、改ざんに気づきにくい</td></tr>
+            <tr><td>物理攻撃（JTAG/UART）</td><td>機器を分解し、基板上の端子から直接アクセスして内部データを奪う手法</td><td>IoT機器は物理的に触れられる環境に置かれることが多いためリスクが高い</td></tr>
+            <tr><td>ネットワーク分離</td><td>VLANやファイアウォールを用いて、IoT網と社内網を論理的に遮断すること</td><td>IoTが侵害されても、社内サーバーへの「横移動」を防ぐ必須対策</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="server-threats" class="lesson-section">
+      <h2>1. サーバー・OSおよびクラウドの脅威</h2>
+      <p>サーバーやOSは企業の基盤システムが動作しているため、一度侵害されるとアプリケーション、データベース、ファイルサーバーなど複数のシステムに連鎖的に影響が及びます。攻撃者はShodanなどのスキャンツールで常に公開サーバーを監視しており、パッチ未適用や設定ミス（初期パスワード、不要なポート公開）を見つけると即座に攻撃を仕掛けてきます。</p>
+      <p>特に危険なのがRCE（リモートコード実行）につながる脆弱性の悪用や、RDP/SSHのインターネット公開に対するブルートフォース攻撃です。また、クラウド環境では、開発者が誤ってGitHubなどにIAMのアクセスキーを公開してしまう設定ミスが、管理者権限の乗っ取りやデータ大量流出の主要な侵入経路となっています。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>サーバー侵害の典型的なプロセス</figcaption>
+        <pre>
+  [ 1. 公開サーバーのスキャン ]
+  ポート・OS・ミドルウェアのバージョンを自動調査
+          │
+  [ 2. 初期侵入 ]
+  パッチ未適用の脆弱性悪用、またはRDP/SSHの総当たり突破
+          │
+  [ 3. 権限昇格 ]
+  OSやミドルウェアの弱点を突き、管理者権限を奪取
+          │
+  [ 4. 横移動・持続化 ]
+  バックドア設置、ログ改ざん、他サーバーへの侵入拡大
+          │
+  [ 5. 目的達成 ]
+  データ窃取、ランサムウェア展開、サービス停止
+        </pre>
+      </figure>
+    </section>
+
+    <section id="iot-threats" class="lesson-section">
+      <h2>2. IoT・組み込み機器特有の脅威</h2>
+      <p>IoT機器（監視カメラ、センサー、スマート家電など）は、PCやサーバーと比べてセキュリティ対策が弱いままネットワークに接続されがちです。工場出荷時の「初期パスワード」が変更されていない、ファームウェアのアップデートが数年間行われていない、といった状態が常態化しており、攻撃者にとって格好の標的となっています。</p>
+      <p>IoT機器が乗っ取られると、カメラ映像の盗み見やデータ改ざんだけでなく、機器が「ボットネット」化され、攻撃者の指令で一斉にDDoS攻撃を仕掛ける「踏み台」として悪用されるリスクがあります。この場合、被害者は「攻撃者」ではなく「攻撃に使われた側」として誤解される可能性もあり、社会的な信用失墜につながります。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>IoT機器がボットネット化してDDoS攻撃に参加する流れ</figcaption>
+        <pre>
+  [ 1. 脆弱なIoT機器の探索 ]
+  インターネット上の機器を自動スキャン（初期PW/古いFW）
+          │
+  [ 2. 侵入と乗っ取り ]
+  管理画面へのログイン、または脆弱性を悪用して制御権を奪取
+          │
+  [ 3. ボット化 ]
+  Mirai系マルウェアなどをインストールし、C2サーバーと接続
+          │
+  [ 4. DDoS攻撃の実行 ]
+  攻撃者の指令により、標的のサーバーへ一斉に大量通信を送信
+          │
+  [ 5. 被害の発生 ]
+  標的サーバーが応答不能になり、IoT機器は「踏み台」として記録される
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. サーバーのOSやミドルウェアの脆弱性を悪用し、攻撃者が外部からサーバー上で任意のプログラムを実行できる状態にする攻撃はどれか。</summary>
+        <p>ア）クロスサイトスクリプティング（XSS） イ）リモートコード実行（RCE） ウ）セッションハイジャック エ）ディレクトリトラバーサル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — RCE（Remote Code Execution）は、サーバー乗っ取りの「決定打」となる最も危険な脆弱性の悪用手法です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. RDP（リモートデスクトッププロトコル）がインターネットに公開されており、弱いパスワードが設定されている場合に狙われやすい攻撃はどれか。</summary>
+        <p>ア）SQLインジェクション イ）ブルートフォース攻撃 ウ）CSRF エ）DNSキャッシュポイズニング</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ブルートフォース攻撃（総当たり攻撃）は、パスワードの全組み合わせを機械的に試す攻撃であり、RDPやSSHの公開時に頻発します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. クラウド環境において、開発者が誤ってGitHubなどの公開リポジトリにアップロードしてしまうと、管理者権限でクラウド操作を許してしまう恐れがある情報はどれか。</summary>
+        <p>ア）サーバーのIPアドレス イ）IAMのアクセスキー ウ）HTMLソースコード エ）CSSスタイルシート</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IAMのアクセスキーが漏洩し、かつ過剰な権限が付与されていた場合、攻撃者が管理コンソールにログインしてデータを窃取したり破壊したりできます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. IoT機器が攻撃者に乗っ取られ、攻撃者の指令で一斉に特定の標的へ大量の通信を送りつける攻撃の名称はどれか。</summary>
+        <p>ア）フィッシング イ）DDoS攻撃 ウ）ウォーターホール攻撃 エ）パスワードリスト攻撃</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 乗っ取られたIoT機器は「ボットネット」を構成し、DDoS攻撃の「踏み台」として悪用されることが多いです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. IoT機器に対する物理的な攻撃手法として、機器を分解し、基板上の端子から直接アクセスして内部データや制御権限を奪うものはどれか。</summary>
+        <p>ア）JTAG/UARTによる攻撃 イ）ショルダーハッキング ウ）テールゲーティング エ） Dumpster Diving</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — IoT機器は物理的に触れられる環境に置かれることが多いため、基盤端子を介した直接アクセス（JTAG/UART）のリスクを考慮する必要があります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 工場内のIoT機器が乗っ取られ、社内ネットワーク全体に被害が広がるのを防ぐために、最も効果的なネットワーク構成上の対策はどれか。</summary>
+        <p>ア）すべての機器に同じパスワードを設定する イ）VLANやファイアウォールを用いてIoT網と社内網を論理的に分離（セグメント化）する ウ）IoT機器のファームウェア更新を停止する エ）社内ネットワークのインターネット接続を遮断する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ネットワーク分離（セグメント化）により、IoT機器が侵害されても、重要な社内サーバーへの「横移動」を物理的・論理的に遮断できます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. サーバーのセキュリティを強化する「OS強化（CIS Benchmarks）」の対策として、適切でないものはどれか。</summary>
+        <p>ア）不要なサービスやポートを停止・遮断する イ）rootアカウントでの直接SSHログインを許可する ウ）パスワードポリシーをOSレベルで強制する エ）定期的なセキュリティパッチを適用する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — rootアカウントでの直接ログインは、総当たり攻撃の標的となりやすく危険です。一般ユーザーでログインし、必要に応じてsudoを使用するのが正しい対策です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. IoT機器のファームウェア更新（OTAアップデート）を安全に行うために必須の仕組みはどれか。</summary>
+        <p>ア）更新ファイルを暗号化せずに高速に転送する イ）ベンダーのデジタル署名を検証し、改ざんされていないことを確認してから適用する ウ）更新時にデバイスの電源を一度完全に切断する エ）更新ファイルを公開Webサーバーにパスワードなしで配置する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — OTAアップデートでは、通信経路での改ざんや偽の更新ファイルのすり替えを防ぐため、デジタル署名の検証が不可欠です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. クラウド環境でIAMポリシーを設定する際に、「最小権限の原則」を適用する理由として、最も適切なものはどれか。</summary>
+        <p>ア）設定作業を簡素化するため イ）万が一アクセスキーが漏洩した場合の被害範囲を限定するため ウ）クラウドの利用料金を安くするため エ）すべてのユーザーに管理者権限を与えるため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 最小権限の原則により、必要な権限のみを付与することで、アカウントが侵害された際の横移動や大規模なデータ窃取を防ぎます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 中堅企業の事例において、RDPがインターネットに公開されており、弱いパスワードが設定されていたために発生した被害として、最も適切なものはどれか。</summary>
+        <p>ア）Webサイトの表示が遅くなっただけで実害はなかった イ）ブルートフォース攻撃で突破され、全サーバーがランサムウェアで暗号化された ウ）IoT機器がボットネット化し、外部へDDoS攻撃を仕掛けた エ）物理的にサーバーが盗難された</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 事例では、弱いパスワードのRDP公開が総当たり攻撃で突破され、権限昇格を経て全サーバーがランサムウェアに感染し、業務が長期停止しました。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第2章 情報セキュリティを脅かす脅威（2-1-6, 2-1-7）</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>APTとソーシャルエンジニアリング | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>APTとソーシャルエンジニアリング</h1>
+        <p class="lead">特定の組織を長期間狙う高度な標的型攻撃（APT）と、人の心理的な隙を突くソーシャルエンジニアリングの手法と対策について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#apt">標的型攻撃（APT）</a>
+        <a href="#se">ソーシャルエンジニアリング</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>APTとソーシャルエンジニアリング</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>APT（Advanced Persistent Threat）の3つの特徴（高度・持続的・標的型）を説明できる</li>
+          <li>APTの典型的な攻撃プロセス（Kill Chain）の流れを把握している</li>
+          <li>ソーシャルエンジニアリングが「技術的脆弱性」ではなく「人の心理」を突く攻撃であることを理解している</li>
+          <li>フィッシング、ビッシング、テールゲーティングなど、ソーシャルエンジニアリングの主な手口を区別できる</li>
+          <li>実際の被害事例から、侵入経路と人的対策の重要性を説明できる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>APTの特徴とKill Chain、ソーシャルエンジニアリングの具体的な手口と対策</dd></div>
+          <div><dt>中</dt><dd>APTとランサムウェアの複合型攻撃、物理的侵入（テールゲーティング）の概念</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>APT</td><td>特定の組織を長期間・高度に狙う標的型攻撃</td><td>Advanced（高度）、Persistent（持続的）、Targeted（標的型）の3特徴</td></tr>
+            <tr><td>Kill Chain</td><td>APT攻撃の典型的な段階的プロセス</td><td>偵察→初期侵入→内部移動→権限昇格→長期潜伏→目的達成</td></tr>
+            <tr><td>ソーシャルエンジニアリング</td><td>人の心理や行動の隙を突いて情報を不正取得する攻撃</td><td>技術的対策だけでは防げず、人的対策（教育・ルール）が必須</td></tr>
+            <tr><td>フィッシング</td><td>偽メールや偽サイトを用いて認証情報を盗む手法</td><td>メール経由のソーシャルエンジニアリングの代表格</td></tr>
+            <tr><td>ビッシング</td><td>電話（Voice）を用いて偽のサポート等を装い情報を盗む手法</td><td>音声によるなりすまし、近年はAI音声も増加</td></tr>
+            <tr><td>テールゲーティング</td><td>正規の従業員に続いて許可なく施設内に入る物理的侵入</td><td>入退室管理の隙を突く、物理的なソーシャルエンジニアリング</td></tr>
+            <tr><td>OSINT</td><td>公開情報源（Open Source Intelligence）からの情報収集</td><td>APTの偵察段階でSNSやWebサイトから標的の情報を収集</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="apt" class="lesson-section">
+      <h2>1. 標的型攻撃（APT）の特徴とプロセス</h2>
+      <p>APT（Advanced Persistent Threat）とは、特定の組織や個人を明確に狙い、長期間にわたり継続的かつ高度に侵入活動を行う攻撃の総称です。一般的なマルウェアが「誰でもいい」から侵入を試みるのに対し、APTは「あなた（組織）を狙っている」という点が最大の特徴です。</p>
+      <p>APTは「高度（Advanced）」「持続的（Persistent）」「標的型（Targeted）」の3つの特徴を持ちます。攻撃者はOSINT（公開情報収集）で標的を調査し、カスタムマルウェアや正規ツールの悪用により検知を回避しながら、数週間から数年にわたり潜伏し、機密情報の窃取や破壊を行います。近年では、情報窃取後にランサムウェアを展開する複合型攻撃も増加しています。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>APTの典型的な攻撃プロセス（Kill Chain）</figcaption>
+        <pre>
+  [ 1. 偵察 (Reconnaissance) ]
+  SNS・Web・公開情報から標的の詳細を収集 (OSINT)
+          │
+  [ 2. 初期侵入 (Initial Access) ]
+  標的型メール、VPN脆弱性、サプライチェーン攻撃など
+          │
+  [ 3. 内部移動 (Lateral Movement) ]
+  認証情報を奪取し、ネットワーク内を横移動して調査
+          │
+  [ 4. 権限昇格 (Privilege Escalation) ]
+  管理者権限を奪取し、システム全体を制御可能に
+          │
+  [ 5. 長期潜伏 (Persistence) ]
+  バックドア設置、ログ改ざん、正規ツール悪用で痕跡を隠蔽
+          │
+  [ 6. 目的達成 (Exfiltration/Disruption) ]
+  機密情報の窃取、システム破壊、ランサムウェア展開
+        </pre>
+      </figure>
+    </section>
+
+    <section id="se" class="lesson-section">
+      <h2>2. ソーシャルエンジニアリングの手口と対策</h2>
+      <p>ソーシャルエンジニアリングとは、技術的な脆弱性ではなく、人の心理・行動の隙（信頼、思い込み、焦りなど）を突いて、情報や認証情報、システムへのアクセスを不正に取得する攻撃の総称です。セキュリティ製品では検知が極めて困難であり、組織の「一人のミス」が全体の侵害につながるため、人的対策が最重要となります。</p>
+      <p>代表的な手口には、メールを用いる「フィッシング」、電話を用いる「ビッシング」、そして物理的に施設内へ侵入する「テールゲーティング」などがあります。攻撃者は事前に収集した情報をもとに「もっともらしい理由（プレテキスティング）」を作り、上司やIT部門を装って信頼を獲得し、情報開示やマルウェアの実行を誘導します。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>手口</th><th>概要</th><th>具体例</th></tr></thead>
+          <tbody>
+            <tr><td>フィッシング</td><td>偽メール・偽サイトで認証情報を詐取</td><td>「アカウント停止」を装った偽ログイン画面への誘導</td></tr>
+            <tr><td>ビッシング</td><td>電話で偽サポート等を装い情報を詐取</td><td>「OS更新のため」と偽り、リモート操作やパスワードを聞き出す</td></tr>
+            <tr><td>テールゲーティング</td><td>正規者に続いて許可なく入館する</td><td>荷物を抱えたふりをして、社員にドアを開けてもらう</td></tr>
+            <tr><td>なりすまし</td><td>上司・取引先・IT部門を装う</td><td>「緊急でパスワードが必要」とヘルプデスクに電話する</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. APT（Advanced Persistent Threat）の「Persistent（持続的）」の特徴を最もよく表しているものはどれか。</summary>
+        <p>ア）ゼロデイ脆弱性を悪用するなど高度な技術を使用する イ）特定の企業や省庁など明確な標的を狙って攻撃する ウ）数週間から数年にわたり潜伏し、発見されても再侵入を試みる エ）ランサムウェアを展開して即座に身代金を要求する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Persistentは「持続的」を意味し、長期間の潜伏やバックドアの維持、再侵入の試行などが該当します。アはAdvanced、イはTargetedの特徴です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. APTの典型的な攻撃プロセス（Kill Chain）において、「初期侵入」の直後に行われることが多い処理はどれか。</summary>
+        <p>ア）偵察 (Reconnaissance) イ）内部移動 (Lateral Movement) ウ）権限昇格 (Privilege Escalation) エ）目的達成 (Exfiltration)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 初期侵入の後、攻撃者はネットワーク内を調査し、他の端末やサーバーへ横移動（Lateral Movement）して権限拡大を図ります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ソーシャルエンジニアリングの定義として、最も適切なものはどれか。</summary>
+        <p>ア）OSやアプリケーションの未修正脆弱性を悪用する攻撃 イ）人の心理や行動の隙を突いて、情報やアクセス権を不正に取得する攻撃 ウ）ネットワーク上の通信を盗聴して認証情報を取得する攻撃 エ）大量のパケットを送りつけてサービスを停止させる攻撃</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ソーシャルエンジニアリングは、技術的な脆弱性ではなく「人」を攻撃の標的とし、心理的な隙を突く手法です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 電話を用いて、偽のITサポート担当者などを装い、パスワードや認証コードを聞き出す攻撃手法はどれか。</summary>
+        <p>ア）フィッシング イ）ビッシング ウ）テールゲーティング エ）スミッシング</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Voice（音声）を用いたフィッシング詐欺を「ビッシング（Vishing）」と呼びます。アはメール/Web、エはSMSを用いるものです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 正規の従業員が施設に入る際に、その背後に続いて許可なく内部へ侵入する物理的な手口はどれか。</summary>
+        <p>ア）テールゲーティング イ）ショルダーハッキング ウ） Dumpster Diving（ゴミ漁り） エ）Watering Hole Attack</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — テールゲーティングは、正規の入館者に続いてドアを通過する物理的な侵入手法です。入退室管理の隙を突きます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. APT攻撃の「偵察（Reconnaissance）」段階で攻撃者が行う活動として、最も適切なものはどれか。</summary>
+        <p>ア）標的の従業員のSNSや企業のWebサイトから公開情報を収集する イ）マルウェアに感染したPCを遠隔操作する ウ）窃取したデータを外部サーバーへ送信する エ）サーバーのログを改ざんして痕跡を消去する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 偵察段階では、攻撃対象を特定し、攻撃に有用な情報（役職、メールアドレス、技術スタックなど）をOSINTなどで収集します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. ソーシャルエンジニアリング対策として、組織的に実施すべき最も効果的な人的対策はどれか。</summary>
+        <p>ア）ファイアウォールのルールを厳格化する イ）全従業員に対して定期的なセキュリティ意識向上教育を実施する ウ）すべてのパスワードを90日ごとに強制変更する エ）サーバー室への入退室を完全自動化する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ソーシャルエンジニアリングは「人」を標的とするため、不審な要求への対処法などを学ぶ定期的な教育が最も効果的な人的対策となります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 精密機器メーカーのAPT被害事例において、攻撃者が最初に侵入した経路として最も適切なのはどれか。</summary>
+        <p>ア）工場のIoTセンサーの無線通信の盗聴 イ）研究員を狙ったスピアフィッシングメールの添付ファイル開封 ウ）完成車メーカーからのサプライチェーン攻撃 エ）海外拠点のPCのマルウェア感染からの横移動</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 事例では、研究員の論文発表情報をOSINTで収集し、「学会からの追加資料依頼」を装ったスピアフィッシングメールで初期侵入しました。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ITサービス企業の事例において、攻撃者がヘルプデスクなりすましで情報を取得できた主な理由はどれか。</summary>
+        <p>ア）ヘルプデスクのシステムにゼロデイ脆弱性があった イ）多要素認証コードを電話で伝えてしまう運用上の隙があった ウ）ファイアウォールが社内からの通信をすべて許可していた エ）バックアップデータが暗号化されていなかった</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 事例では、攻撃者が「社内の人間」を名乗り、緊急を装って多要素認証コードを電話で聞き出すことに成功しました。これは運用ルールの不備が原因です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 近年増加している「APTとランサムウェアの複合型攻撃」において、ランサムウェアが担う役割として最も適切なものはどれか。</summary>
+        <p>ア）長期間の潜伏と情報収集の足掛かりを作る イ）侵入経路の脆弱性を自動的にスキャンする ウ）破壊・恐喝・金銭要求という最終フェーズを展開する エ）窃取したデータを暗号化して秘匿性を高める</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 複合型攻撃では、APTが長期間の潜伏と情報窃取を行い、最終段階でランサムウェアを展開して業務停止や恐喝を行う役割分担が見られます。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第2章 情報セキュリティを脅かす脅威（2-1-2, 2-1-3）</p>
+    </section>
+  </main>
+</body>
+</html>

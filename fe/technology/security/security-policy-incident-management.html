@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>セキュリティポリシーとインシデント管理 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security Management</p>
+        <h1>セキュリティポリシーとインシデント管理</h1>
+        <p class="lead">組織のセキュリティ活動の基盤となる「ポリシーの3層構造」と、事故発生時に迅速かつ適切に対応するための「CSIRT体制と対応プロセス」について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#policy">セキュリティポリシー</a>
+        <a href="#incident">インシデント管理</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>ポリシーとインシデント管理</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>セキュリティポリシーが「基本方針・対策基準・実施手順」の3層構造で構成されることを説明できる</li>
+          <li>各階層の役割（理念・ルール・作業手順）と、それらが整合していることの重要性を理解している</li>
+          <li>インシデント対応の専門チームであるCSIRTの役割と構成を把握している</li>
+          <li>インシデント対応の5段階プロセス（検知・封じ込め・根絶・復旧・再発防止）の流れを説明できる</li>
+          <li>「封じ込め」が被害拡大を防ぐための最優先行動であり、「再発防止」が組織の成長につながることを理解している</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ポリシーの3層構造（方針・基準・手順）、インシデント対応の5段階プロセス、CSIRTの役割</dd></div>
+          <div><dt>中</dt><dd>エスカレーションの概念、証跡（ログ）の保全と活用法、初動対応の重要性</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>セキュリティポリシー</td><td>組織が情報セキュリティをどのように管理・運用するかを定めた規則・ルールの体系</td><td>3層構造（方針・基準・手順）で構成される</td></tr>
+            <tr><td>基本方針</td><td>セキュリティに対する経営層の姿勢や目的を定める最上位の文書</td><td>「なぜ守るのか」という理念を示す</td></tr>
+            <tr><td>対策基準</td><td>基本方針を実現するための具体的な技術的・運用的ルール</td><td>パスワード強度、アクセス制御などの基準値を定める</td></tr>
+            <tr><td>実施手順</td><td>現場担当者が実際に作業を行うための手順書・マニュアル</td><td>「どうやるか」という具体的な操作步骤を記述する</td></tr>
+            <tr><td>インシデント</td><td>セキュリティポリシー違反や、システムへの不正アクセスなどの事故・兆候</td><td>「インシデント≒事故」だが、兆候段階も含まれる</td></tr>
+            <tr><td>CSIRT</td><td>Computer Security Incident Response Team。インシデント対応の専門組織</td><td>技術対応、調整、広報、法務連携などを統括する</td></tr>
+            <tr><td>封じ込め</td><td>インシデント発生直後に、被害の拡大を防ぐために行う緊急措置</td><td>LAN切断、アカウント停止など。原因除去より優先される</td></tr>
+            <tr><td>エスカレーション</td><td>問題の重大度に応じて、上位の責任者や専門チームへ報告・引き上げること</td><td>初動の遅れを防ぎ、適切な判断を仰ぐために必須</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="policy" class="lesson-section">
+      <h2>1. セキュリティポリシーの3層構造</h2>
+      <p>セキュリティポリシーは、組織の規模や実態に合わせて「基本方針」「対策基準」「実施手順」の3層構造で整備するのが標準的です。この3つが階層構造を持ち、上位の文書が下位の文書を規定することで、組織全体で一貫したセキュリティ運用が可能になります。</p>
+      <p>最上位の「基本方針」は経営層が策定し、組織の理念や目的を示します。その方針に基づき、情報システム部門などが「対策基準」を作成して具体的なルール（パスワードの長さや更新頻度など）を定めます。そして、現場の担当者が実際に作業を行う際の「実施手順」が作成されます。</p>
+      <p>重要なのは、これら3つの文書に矛盾がないこと、そして変更が発生した際には上位から下位へ一貫して修正が反映されることです。例えば「基本方針で機密性の重視」を謳っているのに、「対策基準でパスワード強度が緩い」といった不整合があってはなりません。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>セキュリティポリシーの3層構造</figcaption>
+        <pre>
+  [ 基本方針 (Top-level Policy) ]
+  経営層が策定。「なぜ守るのか」「何を守るのか」の理念・目的
+          ▲
+          │ 規定する
+          │
+  [ 対策基準 (Security Standards) ]
+  管理部門が策定。「何をどう守るか」の具体的なルール・基準値
+          ▲
+          │ 具体化する
+          │
+  [ 実施手順 (Procedures) ]
+  現場が策定。「どう作業するか」のマニュアル・手順書
+        </pre>
+      </figure>
+    </section>
+
+    <section id="incident" class="lesson-section">
+      <h2>2. インシデント管理とCSIRT</h2>
+      <p>インシデント管理とは、セキュリティ事故（インシデント）が発生した際に、その被害を最小限に抑え、迅速な復旧と再発防止を図るための一連の活動です。この活動の中核を担うのがCSIRT（Computer Security Incident Response Team）です。</p>
+      <p>CSIRTは、技術的な分析・対応を行うチームだけでなく、経営層への報告（エスカレーション）、社内外への広報、法務・警察との連携など、組織横断的な調整役も担います。インシデント発生時には「誰が」「何を」「いつまでに」行うかが定められた手順（インシデント対応計画）に従って行動することが求められます。</p>
+      <p>インシデント対応は、一般的に「検知」「封じ込め」「根絶」「復旧」「再発防止」の5つのプロセスで構成されます。特に重要なのは「封じ込め」です。原因を完全に特定する前に、まず被害の拡大（他システムへの感染やデータ流出の停止）を最優先で止める行動が求められます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>インシデント対応の5段階プロセス</figcaption>
+        <pre>
+  [ 1. 検知 (Detect) ]
+  ログ分析、アラート、ユーザー報告などで異常を発見
+          │
+  [ 2. 封じ込め (Contain) ] ← 最優先！
+  被害拡大を防ぐ（LAN切断、アカウント停止、サービス停止）
+          │
+  [ 3. 根絶 (Eradicate) ]
+  マルウェア削除、脆弱性修正、バックドアの除去
+          │
+  [ 4. 復旧 (Recover) ]
+  システムの再構築、データ復元、サービス再開
+          │
+  [ 5. 再発防止 (Lessons Learned) ]
+  原因分析、手順書の改善、教育、横展開
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. セキュリティポリシーの3層構造において、経営層が策定し、組織の理念や目的を定める最上位の文書はどれか。</summary>
+        <p>ア）対策基準 イ）実施手順 ウ）基本方針 エ）監査報告書</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 基本方針（Top-level Policy）は、組織がなぜセキュリティに取り組むのかという理念を示す最上位の文書です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. セキュリティポリシーの3層構造において、「パスワードは8文字以上で英数字を含む」といった具体的なルールを定める文書はどれか。</summary>
+        <p>ア）基本方針 イ）対策基準 ウ）実施手順 エ）インシデント報告書</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 対策基準（Security Standards）は、基本方針を実現するための具体的な技術的・運用的ルールを定めます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 現場の担当者が実際にシステム設定や作業を行う際の具体的な操作步骤を記した文書はどれか。</summary>
+        <p>ア）基本方針 イ）対策基準 ウ）実施手順 エ）セキュリティポリシー</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 実施手順（Procedures）は、対策基準に基づいた具体的な作業手順（マニュアル）を記述します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 組織内で発生したセキュリティインシデントへの対応を統括する専門チームの名称はどれか。</summary>
+        <p>ア）SOC（Security Operation Center） イ）CSIRT（Computer Security Incident Response Team） ウ）CISO（Chief Information Security Officer） エ）ISO（International Organization for Standardization）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — CSIRTは、インシデントの検知、分析、対応、再発防止などを組織横断的に統括するチームです。SOCは監視・検知が主目的です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. インシデント対応プロセスにおいて、原因の完全な除去よりも優先して行うべき「被害拡大の防止」を目的とした段階はどれか。</summary>
+        <p>ア）検知 イ）封じ込め ウ）復旧 エ）再発防止</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 封じ込め（Containment）は、ネットワーク切断やアカウント停止など、これ以上の被害を広げないための緊急措置であり、最優先で行われます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. インシデント対応プロセスにおいて、マルウェアの削除や脆弱性の修正など、根本原因を取り除く作業を行う段階はどれか。</summary>
+        <p>ア）封じ込め イ）根絶（Eradicate） ウ）復旧 エ）検知</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 根絶（Eradicate）は、封じ込めの後に行われ、システムから脅威を完全に取り除き、再感染を防ぐための作業です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. インシデント対応の最後に実施し、今後の組織のセキュリティレベル向上に寄与する最も重要な活動はどれか。</summary>
+        <p>ア）警察への届出 イ）再発防止（Lessons Learned） ウ）システムの再起動 エ）メディアへの発表</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 再発防止（Lessons Learned）は、インシデントの原因を分析し、手順書や設定を改善することで、同じ事故を繰り返さないための活動です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. インシデント発生時に、その重大度に応じて上位の責任者や専門チームへ報告・引き上げを行うことを何と呼ぶか。</summary>
+        <p>ア）エスカレーション イ）モニタリング ウ）アーカイブ エ）スキャン</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — エスカレーションは、現場だけで対応困難な場合に、適切な権限を持つ管理者や専門組織へ迅速に判断を仰ぐプロセスです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. インシデント発生時に「証跡（ログ）」を保全する主な目的として、誤っているものはどれか。</summary>
+        <p>ア）攻撃者の侵入経路や手法を特定するため イ）法的な対応や警察への捜査協力に利用するため ウ）インシデントをなかったことにして隠蔽するため エ）再発防止策の検討材料とするため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ログの保全は隠蔽のためではなく、原因究明、法的対応、再発防止のために不可欠です。改ざんや削除は厳禁です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. セキュリティポリシーの3層構造において、下位の文書（実施手順）が上位の文書（基本方針）と矛盾していた場合、どうあるべきか。</summary>
+        <p>ア）現場の都合に合わせて実施手順を優先する イ）基本方針の理念に沿うように実施手順を修正する ウ）両方を無視して新しいルールを作る エ）監査の直前だけ整合性を取る</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ポリシーは一貫性が重要です。下位の文書は上位の文書に従う必要があり、矛盾がある場合は下位を修正して整合性を保ちます。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第4章 セキュリティ管理（4-2, 4-3）</p>
+    </section>
+  </main>
+</body>
+</html>

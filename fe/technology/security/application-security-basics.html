@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>アプリケーションセキュリティの基礎 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>アプリケーションセキュリティの基礎</h1>
+        <p class="lead">Webアプリケーションを攻撃から守るための基本的な実装方針である「入力値検証」「エラーハンドリング」「認証・認可」「セッション管理」の仕組みと対策について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#validation">入力値検証</a>
+        <a href="#error-handling">エラーハンドリング</a>
+        <a href="#auth">認証・認可</a>
+        <a href="#session">セッション管理</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>アプリケーションセキュリティの基礎</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>入力値検証において「ホワイトリスト方式」が基本であり、サーバー側での検証が必須であることを説明できる</li>
+          <li>エラー発生時にユーザーには汎用的なメッセージを表示し、詳細は内部ログに記録する原則を理解している</li>
+          <li>パスワードは平文で保存せず、ソルトを付与してハッシュ化することが必須であることを把握している</li>
+          <li>認可（権限）のチェックは、クライアント側ではなく必ずサーバー側で行う必要があることを理解している</li>
+          <li>セッションIDの推測困難性、Cookie属性（Secure/HttpOnly/SameSite）、ログイン後のID再発行の重要性を説明できる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ホワイトリスト方式、サーバー側での検証必須、パスワードのハッシュ化＋ソルト、セッション固定攻撃対策（ID再発行）</dd></div>
+          <div><dt>中</dt><dd>Fail-Safeなエラーハンドリング、CookieのSecure/HttpOnly/SameSite属性の役割、認可チェックのサーバー側実装</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>ホワイトリスト方式</td><td>許可する値の条件を明確に定義し、それ以外をすべて拒否する入力値検証方式</td><td>未知の攻撃パターンにも強く、最も安全な方式</td></tr>
+            <tr><td>ブラックリスト方式</td><td>禁止する値を定義し、それを含む入力を拒否する方式</td><td>新しい攻撃パターンが出ると防ぎきれないため、補助的な手法</td></tr>
+            <tr><td>Fail-Safe</td><td>エラー発生時に、安全側に倒す（例：アクセスを拒否する）動作</td><td>エラー時に「許可してしまう」動作は危険</td></tr>
+            <tr><td>ソルト（Salt）</td><td>パスワードハッシュ化前に付与するランダムな文字列</td><td>レインボーテーブル攻撃（事前計算攻撃）を防ぐ</td></tr>
+            <tr><td>セッション固定攻撃</td><td>攻撃者が事前にセッションIDを固定し、ユーザーがログインすることでそのIDを有効化する攻撃</td><td>ログイン成功時にセッションIDを再発行することで防ぐ</td></tr>
+            <tr><td>HttpOnly</td><td>Cookieに付与する属性。JavaScriptからのアクセスを禁止する</td><td>XSSによるセッションID盗難を防ぐ</td></tr>
+            <tr><td>Secure</td><td>Cookieに付与する属性。HTTPS通信時のみ送信する</td><td>平文通信によるセッションID盗聴を防ぐ</td></tr>
+            <tr><td>SameSite</td><td>Cookieに付与する属性。クロスサイト送信を制限する</td><td>CSRF（クロスサイトリクエストフォージェリ）対策に有効</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="validation" class="lesson-section">
+      <h2>1. 入力値検証（Validation）</h2>
+      <p>入力値検証は、ユーザーや外部システムから受け取るデータが正しい形式であるかを確認し、不正なデータがアプリケーション内部に入らないようにする仕組みです。SQLインジェクションやXSSなど、多くの攻撃を未然に防ぐための最初の防御線となります。</p>
+      <p>入力値検証の基本は「ホワイトリスト方式」です。これは、許可する値の条件（数字のみ、特定の文字数など）を明確に定義し、それ以外をすべて拒否する方式です。未知の攻撃パターンにも強いため、最も安全な方法とされています。一方、禁止する値を定義する「ブラックリスト方式」は、新しい攻撃パターンが出ると防ぎきれないため、補助的な手法として扱われます。</p>
+      <p>重要な点は、クライアント側（JavaScriptなど）の検証はユーザーの入力ミス防止には有効ですが、攻撃者は簡単に無効化できるため、必ず「サーバー側」でも同じ検証を行う必要があることです。二重のチェックによってアプリケーションの安全性が確保されます。</p>
+    </section>
+
+    <section id="error-handling" class="lesson-section">
+      <h2>2. エラーハンドリング</h2>
+      <p>エラーハンドリングは、アプリケーション内部で発生したエラーを安全に処理し、内部情報が外部に漏れないようにする仕組みです。エラーメッセージにSQL文やスタックトレース、ファイルパスなどが表示されると、攻撃者に内部構造を知られ、攻撃の足掛かりとなってしまいます。</p>
+      <p>適切なエラーハンドリングでは、ユーザーには「エラーが発生しました。時間をおいて再度お試しください」といった必要最小限の汎用的なメッセージのみを表示します。一方、内部ログには発生した例外の種類、スタックトレース、リクエスト元IPなどの詳細を記録し、インシデント対応や不具合調査に役立てます。ただし、ログにはパスワードやクレジットカード番号などの機密情報を残してはいけません。</p>
+      <p>また、エラー発生時の動作は「Fail-Safe（安全側に倒す）」であることが求められます。例えば、権限チェックや入力値検証でエラーが発生した場合は、処理を中断してアクセスを拒否するのが正しい動作です。エラーが起きたときに「許可してしまう」動作は重大な脆弱性につながります。</p>
+    </section>
+
+    <section id="auth" class="lesson-section">
+      <h2>3. 認証・認可の適切な実装</h2>
+      <p>認証（Authentication）は「誰か」を確認し、認可（Authorization）は「何ができるか」を制御する仕組みです。認証・認可を誤って実装すると、攻撃者がログインを回避したり、権限のない操作を実行できてしまうため、アプリケーションセキュリティの最重要領域となります。</p>
+      <p>パスワード認証において最も重要なルールは、「パスワードを平文で保存しない」ことです。サーバー側では、パスワードにランダムな文字列（ソルト）を付与し、bcryptやArgon2などのストレッチング機能を持つハッシュ関数で変換して保存します。これにより、データベースが漏洩してもパスワードの復元を困難にします。</p>
+      <p>認可の実装において絶対に守るべきルールは、「認可チェックは必ずサーバー側で行う」ことです。クライアント側（ブラウザ）で管理者用のボタンを非表示にするなどのUI制御だけでは不十分であり、攻撃者がAPIを直接呼び出した際に権限外の操作が実行できてしまいます。すべてのAPIや画面遷移でサーバー側が権限を検証する必要があります。</p>
+    </section>
+
+    <section id="session" class="lesson-section">
+      <h2>4. セッション管理</h2>
+      <p>セッション管理は、認証後のユーザーのログイン状態を安全に維持するための仕組みです。Webアプリケーションは状態を持たないHTTPプロトコルを使用するため、セッションIDをCookieなどに保存してユーザーを識別します。このセッションIDが盗まれると、攻撃者がユーザーになりすまして操作できてしまいます（セッションハイジャック）。</p>
+      <p>セッションIDは、推測困難な十分な長さのランダム値で生成する必要があります。また、Cookieには以下の3つの属性を付与して保護します。「Secure」（HTTPS通信時のみ送信）、「HttpOnly」（JavaScriptからのアクセスを禁止しXSS対策）、「SameSite」（クロスサイト送信を制限しCSRF対策）です。</p>
+      <p>さらに、「セッション固定攻撃」を防ぐために、ログイン成功時には必ず新しいセッションIDを再発行し、古いセッションIDは無効化する必要があります。これにより、攻撃者が事前に仕掛けたセッションIDを悪用されるリスクを排除できます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>安全なセッション管理のフロー</figcaption>
+        <pre>
+  [ 1. ログイン前 ]
+  ユーザーがID/PWを入力 ─▶ サーバーが認証
+          │
+  [ 2. ログイン成功時 ]
+  サーバーが「新しいセッションID」を生成（再発行）
+  古いセッションIDは無効化（セッション固定攻撃対策）
+          │
+  [ 3. Cookie設定 ]
+  セッションIDをCookieに保存し、以下の属性を付与
+  ・Secure (HTTPSのみ)
+  ・HttpOnly (JSアクセス禁止)
+  ・SameSite (CSRF対策)
+          │
+  [ 4. ログアウト時 ]
+  サーバー側のセッション情報を完全に削除
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 入力値検証において、許可する値の条件を明確に定義し、それ以外をすべて拒否する最も安全な方式はどれか。</summary>
+        <p>ア）ブラックリスト方式 イ）ホワイトリスト方式 ウ）サニタイズ方式 エ）エスケープ方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ホワイトリスト方式は、許可するパターンを定義し、それ以外をすべて拒否するため、未知の攻撃パターンにも強く、最も安全な方式です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 入力値検証を実施する場所として、セキュリティ上必須とされるのはどれか。</summary>
+        <p>ア）クライアント側（JavaScript）のみ イ）サーバー側のみ ウ）クライアント側とサーバー側の両方 エ）データベース側のみ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — クライアント側の検証は攻撃者によって容易に無効化されるため、必ずサーバー側でも検証を行う二重のチェックが必須です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. エラーハンドリングにおいて、ユーザーに表示すべきメッセージとして最も適切なものはどれか。</summary>
+        <p>ア）「/var/www/app/login.php の 42行目で例外が発生しました」 イ）「SQL文の構文エラーです。テーブル users にアクセスできません」 ウ）「エラーが発生しました。時間をおいて再度お試しください」 エ）「入力されたパスワードが間違っています。ユーザーIDは存在します」</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ユーザーには必要最小限の汎用的なメッセージのみを表示し、内部構造や機密情報が推測できる詳細な情報は表示してはいけません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. エラー発生時に、安全側に倒す（例：アクセスを拒否する）動作を何と呼ぶか。</summary>
+        <p>ア）Fail-Safe イ）Fail-Open ウ）Defense in Depth エ）Least Privilege</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — Fail-Safeは、エラーや障害が発生した場合に、システムが安全な状態（アクセス拒否など）になるように設計する考え方です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. パスワードをサーバー側で保存する際の適切な処理はどれか。</summary>
+        <p>ア）平文でそのまま保存する イ）Base64エンコードして保存する ウ）ランダムなソルトを付与し、ハッシュ化して保存する エ） reversible encryption（復号可能な暗号化）で保存する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — パスワードは、ソルトを付与してハッシュ化（bcryptやArgon2など）することで、データベース漏洩時でも復元を困難にします。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. ユーザーが権限外の操作を実行できないようにする「認可」のチェックを必ず実施すべき場所はどれか。</summary>
+        <p>ア）クライアント側のJavaScript イ）サーバー側 ウ）ブラウザのCookie エ）ユーザーのローカルストレージ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — クライアント側のUI制御は攻撃者によって回避される可能性があるため、すべての認可チェックは信頼できるサーバー側で行う必要があります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. XSS（クロスサイトスクリプティング）によるセッションIDの盗難を防ぐために、Cookieに付与すべき属性はどれか。</summary>
+        <p>ア）Secure イ）HttpOnly ウ）SameSite エ）Domain</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — HttpOnly属性を付与することで、JavaScript（document.cookie）からのCookie読み取りを禁止し、XSSによるセッションID盗難を防ぎます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. セッション固定攻撃を防ぐために、ログイン成功時に実施すべき対策はどれか。</summary>
+        <p>ア）セッションIDを再発行し、古いセッションIDを無効化する イ）セッションの有効期限を無制限に延長する ウ）セッションIDをユーザーIDと同じ値にする エ）CookieのSecure属性を削除する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — ログイン前に攻撃者が設定したセッションIDを無効化し、新しいランダムなセッションIDを再発行することで、セッション固定攻撃を防ぎます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. アプリケーションの内部ログに記録してはいけない情報はどれか。</summary>
+        <p>ア）エラーが発生したファイル名と行番号 イ）リクエスト元のIPアドレス ウ）ユーザーが入力したパスワードやクレジットカード番号 エ）アクセスを試みたユーザーID</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ログは漏洩のリスクがあるため、パスワード、クレジットカード番号、認証トークンなどの機密情報は絶対に記録してはいけません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. CSRF（クロスサイトリクエストフォージェリ）対策として有効な、Cookieに付与する属性はどれか。</summary>
+        <p>ア）Secure イ）HttpOnly ウ）SameSite エ）Path</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — SameSite属性をStrictまたはLaxに設定することで、クロスサイトからのリクエスト時にCookieが送信されるのを制限し、CSRF攻撃を防ぎます。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第3章 セキュリティ技術（3-5-1 〜 3-5-4）</p>
+    </section>
+  </main>
+</body>
+</html>

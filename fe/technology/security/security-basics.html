@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>情報セキュリティの基礎 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>情報セキュリティの基礎</h1>
+        <p class="lead">情報セキュリティの基本概念である「脅威・脆弱性・リスク」の関係と、基本原則である「CIA（3要素）」「7要素」について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#basic-concepts">基本概念</a>
+        <a href="#cia">CIA（3要素）</a>
+        <a href="#seven-elements">7要素</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>情報セキュリティの基礎</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>情報資産・脅威・脆弱性・リスクの定義と関係を説明できる</li>
+          <li>情報セキュリティの3要素（CIA：機密性・完全性・可用性）を区別できる</li>
+          <li>CIAのバランスが重要な理由を理解している</li>
+          <li>7要素（CIA＋真正性・否認防止・責任追及性・信頼性）の役割を説明できる</li>
+          <li>技術的対策・組織的対策・人的対策の具体例を挙げられる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>CIAの各要素の定義と具体例、リスクの計算式（脅威×脆弱性）</dd></div>
+          <div><dt>中</dt><dd>7要素の追加4要素（真正性・否認防止など）の用語と意味</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>情報資産</td><td>価値を持ち、保護すべき情報とそれを扱う仕組み</td><td>データだけでなく人・機器・ネットワークも含まれる</td></tr>
+            <tr><td>脅威 (Threat)</td><td>情報に損害を与える可能性のある事象</td><td>マルウェア、攻撃者、自然災害などが該当</td></tr>
+            <tr><td>脆弱性 (Vulnerability)</td><td>脅威に悪用される弱点</td><td>弱いパスワード、未更新のOS、初期設定など</td></tr>
+            <tr><td>リスク (Risk)</td><td>脅威と脆弱性の組み合わせによって発生する損害の大きさ</td><td>「リスク = 脅威 × 脆弱性」の構造を覚える</td></tr>
+            <tr><td>機密性 (Confidentiality)</td><td>許可された人だけが情報にアクセスできる状態</td><td>アクセス制御、暗号化、多要素認証などが対策</td></tr>
+            <tr><td>完全性 (Integrity)</td><td>情報が正しく、改ざんされていない状態</td><td>ハッシュ値、デジタル署名、バージョン管理が対策</td></tr>
+            <tr><td>可用性 (Availability)</td><td>必要なときに情報やシステムを利用できる状態</td><td>冗長化、バックアップ、DDoS対策などが対策</td></tr>
+            <tr><td>真正性 (Authenticity)</td><td>情報や利用者が「本物」であることを確認</td><td>証明書、電子署名、正規アプリの確認など</td></tr>
+            <tr><td>否認防止 (Non-repudiation)</td><td>行った操作を後から否定できないようにする</td><td>電子署名、タイムスタンプ、ログの保全</td></tr>
+            <tr><td>責任追及性 (Accountability)</td><td>誰が・いつ・何をしたかを追跡できる状態</td><td>操作ログ、監査証跡、ログイン履歴の記録</td></tr>
+            <tr><td>信頼性 (Reliability)</td><td>システムが正しく動作し続ける能力</td><td>障害対策、品質管理、定期アップデート</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="basic-concepts" class="lesson-section">
+      <h2>1. 脅威・脆弱性・リスクの関係</h2>
+      <p>情報セキュリティでは、<strong>脅威</strong>（攻撃や災害など）が、<strong>脆弱性</strong>（システムの弱点や設定ミス）を悪用することで、<strong>リスク</strong>（損害の大きさ）が発生します。この構造は企業だけでなく、個人や家庭においても全く同じです。</p>
+      <p>これらのリスクに対処するためには、技術的な対策（暗号化やファイアウォールなど）だけでなく、組織的な対策（ポリシーやルール）、人的な対策（教育やパスワード管理）の3つを組み合わせることが不可欠です。</p>
+      
+      <figure class="wide-diagram">
+        <figcaption>リスク発生のメカニズム</figcaption>
+        <pre>
+  [ 脅威 (Threat) ]
+  マルウェア / 攻撃者 / 自然災害 / 内部不正
+          │
+          ▼ 悪用する
+  [ 脆弱性 (Vulnerability) ]
+  弱いパスワード / 未更新のOS / 初期設定のまま
+          │
+          ▼ 掛け合わせる
+  [ リスク (Risk) ]
+  損害の大きさ ＝ 脅威 × 脆弱性
+        </pre>
+      </figure>
+    </section>
+
+    <section id="cia" class="lesson-section">
+      <h2>2. 情報セキュリティの3要素（CIA）</h2>
+      <p>情報セキュリティの基本原則は、<strong>機密性（Confidentiality）</strong>、<strong>完全性（Integrity）</strong>、<strong>可用性（Availability）</strong>の3つで構成され、これらは「CIA」と呼ばれます。この3つが揃って初めて、情報を安全に利用できます。</p>
+      <p>重要なのは、<strong>CIAのバランス</strong>です。例えば、機密性を高めすぎると利用者が使いにくくなり（可用性の低下）、可用性を優先しすぎると誰でもアクセスできてしまいます（機密性の低下）。3つの要素を状況に合わせて適切に保つことが求められます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>CIAの3要素とバランス</figcaption>
+        <pre>
+          [ 機密性 (Confidentiality) ]
+          許可された人だけがアクセスできる
+                 / \
+                /   \
+               /     \
+  [ 完全性 ] --------- [ 可用性 ]
+  (Integrity)         (Availability)
+  情報が正確で         必要なときに
+  改ざんされていない   利用できる
+        </pre>
+      </figure>
+    </section>
+
+    <section id="seven-elements" class="lesson-section">
+      <h2>3. 情報セキュリティの7要素</h2>
+      <p>CIAの3要素に加えて、現代の情報システムではさらに4つの要素（真正性・否認防止・責任追及性・信頼性）が重要視されています。これらを合わせた7要素は、互いに補完し合いながらセキュリティを支えています。</p>
+      <p>例えば、「真正性」がなければ「機密性」を保てず、「責任追及性」がなければ「否認防止」が成立しません。これら7要素を総合的に理解し、バランスよく対策を行うことが重要です。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>要素</th><th>内容</th><th>具体例</th></tr></thead>
+          <tbody>
+            <tr><td>機密性</td><td>許可された人だけがアクセスできる</td><td>生体認証、アクセス権管理</td></tr>
+            <tr><td>完全性</td><td>情報が改ざんされていない</td><td>ハッシュ値、正規アップデート</td></tr>
+            <tr><td>可用性</td><td>必要なときに利用できる</td><td>バックアップ、冗長化</td></tr>
+            <tr><td>真正性</td><td>情報や利用者が「本物」である</td><td>サーバー証明書、偽サイト対策</td></tr>
+            <tr><td>否認防止</td><td>操作を後から否定できない</td><td>電子署名、取引履歴の保全</td></tr>
+            <tr><td>責任追及性</td><td>誰が何をしたかを追跡できる</td><td>操作ログ、監査証跡</td></tr>
+            <tr><td>信頼性</td><td>システムが正しく動作し続ける</td><td>障害対策、定期アップデート</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 情報セキュリティの3要素（CIA）に含まれないものはどれか。</summary>
+        <p>ア）機密性 (Confidentiality) イ）完全性 (Integrity) ウ）信頼性 (Reliability) エ）可用性 (Availability)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — CIAは「機密性・完全性・可用性」の3つです。信頼性は7要素に含まれる追加の要素です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 「リスク」の定義として、最も適切なものはどれか。</summary>
+        <p>ア）情報に損害を与える可能性のある事象 イ）脅威に悪用される弱点 ウ）脅威と脆弱性によって発生する損害の大きさ エ）許可された人だけがアクセスできる状態</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — リスクは「脅威 × 脆弱性」によって発生する損害の大きさを指します。アは脅威、イは脆弱性の説明です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 情報が正しく保たれ、改ざんされていない状態を維持することを何というか。</summary>
+        <p>ア）機密性 イ）完全性 ウ）可用性 エ）真正性</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 「完全性 (Integrity)」は情報の正確性と改ざん防止を指します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 必要ときに情報やシステムを利用できる状態を保つための対策として、最も適切なものはどれか。</summary>
+        <p>ア）多要素認証の導入 イ）サーバーの冗長化とバックアップ ウ）デジタル署名の付与 エ）アクセス制御リスト（ACL）の設定</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 「可用性 (Availability)」を高めるためには、冗長化やバックアップが有効です。アとエは機密性、ウは完全性と否認防止の対策です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 真正性（Authenticity）を確保するために利用される技術はどれか。</summary>
+        <p>ア）ハッシュ関数 イ）デジタル証明書（PKI） ウ）RAID構成 エ）ログの改ざん防止</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 真正性は「本物であることを確認する」要素であり、デジタル証明書や電子署名が利用されます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 「否認防止（Non-repudiation）」の目的として、正しいものはどれか。</summary>
+        <p>ア）行った操作を後から否定できないようにする イ）誰が何をしたかを追跡できるようにする ウ）システムが正しく動作し続けるようにする エ）許可された人だけが情報にアクセスできるようにする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 否認防止は、電子署名などを用いて「自分が行った」という事実を後から否定できないようにする仕組みです。イは責任追及性です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 誰が・いつ・何をしたかを追跡できる状態を保つことを何というか。</summary>
+        <p>ア）真正性 イ）否認防止 ウ）責任追及性 エ）信頼性</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 責任追及性（Accountability）は、操作ログや監査証跡を通じて行為者を追跡できる状態を指します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 情報セキュリティが「技術」「組織」「人」の3つで成り立つとされる理由として、最も適切なものはどれか。</summary>
+        <p>ア）技術だけではコストがかかるため イ）どれか1つだけでは不十分で、多面的なアプローチが必要だから ウ）法律で3つの対策が義務付けられているから エ）個人と企業で必要な対策が異なるから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> - セキュリティは技術的対策だけでなく、組織的なルール作りや、人的な教育・意識向上が揃って初めて機能します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. CIAのバランスが重要とされる理由として、誤っているものはどれか。</summary>
+        <p>ア）機密性を高めすぎると、利用者が使いにくくなり可用性が低下する イ）可用性を優先しすぎると、誰でもアクセスできて機密性が低下する ウ）完全性が欠けると、正しい情報が得られず業務に支障が出る エ）CIAのうち1つが100%であれば、他の2つは0%でよい</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — CIAは3つがバランスよく保たれている状態が理想であり、1つだけ突出してもセキュリティは成立しません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 家庭用Wi-Fiの初期パスワードを変更することの目的として、最も関連が深い要素はどれか。</summary>
+        <p>ア）機密性 イ）完全性 ウ）可用性 エ）信頼性</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 初期パスワードは誰でも知ることができるため、変更することで「許可された人だけがアクセスできる状態（機密性）」を保ちます。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第1章 情報セキュリティの基礎（1-1〜1-3）</p>
+    </section>
+  </main>
+</body>
+</html>

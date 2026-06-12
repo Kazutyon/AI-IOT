@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>組み込み・IoTセキュリティ | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>組み込み・IoTセキュリティ</h1>
+        <p class="lead">従来のITシステムとは異なる特性を持つIoT機器や組み込みシステムにおいて、起動から通信、更新までのライフサイクル全体を守るための基盤技術（セキュアブート、署名、TPM/HSMなど）について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#overview">IoTセキュリティの特殊性</a>
+        <a href="#secure-boot">起動の安全（セキュアブート）</a>
+        <a href="#firmware-ota">更新の安全（署名・OTA）</a>
+        <a href="#tpm-hsm">鍵の保護（TPM/HSM）</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>組み込み・IoTセキュリティ</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>IoT機器が「物理的にアクセスされやすい」「長期運用される」「リソースが限られている」という特性を持つことを理解している</li>
+          <li>セキュアブートが「信頼の連鎖（Chain of Trust）」によって、正規のソフトウェアのみを起動する仕組みを説明できる</li>
+          <li>ファームウェア署名とOTAアップデートが、改ざんされたプログラムが実行されるのを防ぐ仕組みを把握している</li>
+          <li>TPM/HSMが秘密鍵をハードウェア内部に閉じ込め、外部への持ち出しを防ぐ役割を説明できる</li>
+          <li>無線通信の暗号化と実行時保護（メモリ保護など）の重要性を挙げられる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>セキュアブートの仕組み（Chain of Trust）、ファームウェア署名の検証フロー、TPM/HSMの役割</dd></div>
+          <div><dt>中</dt><dd>OTAアップデートの安全な手順、無線通信（BLE/Wi-Fi）の脅威と対策、物理攻撃への耐性</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>セキュアブート</td><td>起動時にソフトウェアの正当性を検証し、正規のものだけを動作させる仕組み</td><td>「信頼の連鎖（Chain of Trust）」が核心</td></tr>
+            <tr><td>Chain of Trust</td><td>ROM→ブートローダー→OSへと、段階的に署名検証を連鎖させる仕組み</td><td>起点となるROM（Root of Trust）が改ざん不可能であることが前提</td></tr>
+            <tr><td>ファームウェア署名</td><td>提供元がプログラムに電子署名を付与し、デバイス側でそれを検証する仕組み</td><td>改ざん検知と提供元の真正性確認に使用</td></tr>
+            <tr><td>OTA (Over-The-Air)</td><td>ネットワーク経由でファームウェアを遠隔更新する仕組み</td><td>通信経路での改ざんや偽ファイル混入を防ぐ対策が必須</td></tr>
+            <tr><td>TPM / HSM</td><td>暗号鍵や暗号処理を保護する専用ハードウェア（Trusted Platform Module等）</td><td>秘密鍵を外部に取り出せないようにし、物理的な盗難に耐える</td></tr>
+            <tr><td>Root of Trust</td><td>セキュアブートの起点となる、変更不可のハードウェア領域（ROM）</td><td>ここが信頼のアンカー（錨）となる</td></tr>
+            <tr><td>実行時保護</td><td>起動後のメモリ改ざんやデバッグポート悪用などを防ぐ仕組み</td><td>ASLR、デバッグポートの無効化、タンパ検知など</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="overview" class="lesson-section">
+      <h2>1. IoTセキュリティの特殊性と全体像</h2>
+      <p>IoT機器や組み込みシステムは、一般的なPCやサーバーとは異なり、「物理的にアクセスされやすい」「長期間稼働する」「リソース（CPUやメモリ）が限られている」といった特性があります。そのため、従来のITセキュリティの手法をそのまま適用するのが難しく、デバイス固有の対策が必要となります。</p>
+      <p>攻撃者は、ファームウェアの改ざん、物理的なポート（JTAG/UARTなど）からの侵入、無線通信の盗聴、不正なOTAアップデートなど、デバイス固有の弱点を狙ってきます。IoTセキュリティでは、起動・通信・更新・鍵管理といったライフサイクル全体を統合的に守る「多層防御」が不可欠です。</p>
+    </section>
+
+    <section id="secure-boot" class="lesson-section">
+      <h2>2. 起動の安全（セキュアブート）</h2>
+      <p>セキュアブートは、デバイスの起動プロセスにおいて、各段階で「次に実行するソフトウェアが正規のものであるか」を検証する仕組みです。これにより、攻撃者が不正なOSやファームウェアに差し替えても、起動を拒否することができます。</p>
+      <p>この仕組みの核心は「信頼の連鎖（Chain of Trust）」です。製造時に書き込まれた変更不可のROM（Root of Trust）を起点とし、ROMがブートローダーの署名を検証し、ブートローダーがOSの署名を検証するというように、段階的に信頼をリレーしていきます。この連鎖のどこか1つでも検証に失敗すると、デバイスは起動を停止します。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>セキュアブートと信頼の連鎖</figcaption>
+        <pre>
+  [ Boot ROM (Root of Trust) ]
+  変更不可のハードウェア領域。最初の検証を行う。
+          │ (1) ブートローダーの署名を検証
+          ▼
+  [ ブートローダー ]
+  正規のブートローダーが起動。
+          │ (2) OSイメージの署名を検証
+          ▼
+  [ OS (オペレーティングシステム) ]
+  正規のOSが起動。ドライバやアプリの検証へ続く。
+          │
+  [ アプリケーション実行 ]
+        </pre>
+      </figure>
+    </section>
+
+    <section id="firmware-ota" class="lesson-section">
+      <h2>3. 更新の安全（ファームウェア署名・OTA）</h2>
+      <p>IoT機器はネットワーク経由でファームウェアを更新するOTA（Over-The-Air）が一般的ですが、これは攻撃者にとっても格好の攻撃対象です。通信経路でファイルが改ざんされたり、偽のアップデートが配信されたりするリスクがあります。</p>
+      <p>これを防ぐため、ファームウェアには開発元（ベンダー）による「デジタル署名」が付与されます。デバイスは更新ファイルを受け取ると、内部に持つ公開鍵を使って署名を検証し、改ざんがないことと正規の提供元からのものであることを確認してからインストールを実行します。署名検証に失敗した場合は、決して更新を行いません。</p>
+    </section>
+
+    <section id="tpm-hsm" class="lesson-section">
+      <h2>4. 鍵の保護（TPM / HSM）</h2>
+      <p>IoTセキュリティにおいて、暗号鍵の管理は最重要課題です。もし秘密鍵がソフトウェア上に平文で保存されていれば、攻撃者がファームウェアを解析して鍵を抜き出し、不正なファームウェアに正規の署名を付けてしまう可能性があります。</p>
+      <p>TPM（Trusted Platform Module）やHSM（Hardware Security Module）は、このような鍵の漏洩を防ぐための専用ハードウェアです。これらのチップは、内部に生成した秘密鍵を外部に取り出せないようにロックし、暗号処理や署名生成もチップ内部で完結させます。これにより、物理的にデバイスが攻撃者の手に渡っても、鍵そのものを盗まれるリスクを大幅に低減できます。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. IoT機器の起動時に、正規のソフトウェアのみが実行されることを保証する仕組みはどれか。</summary>
+        <p>ア）ファイアウォール イ）セキュアブート ウ）アクセス制御リスト エ） intrusion Detection System (IDS)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — セキュアブートは、起動プロセスの各段階で署名を検証し、正規のコード以外は実行しないようにする仕組みです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. セキュアブートにおける「信頼の連鎖（Chain of Trust）」の起点となる、変更不可能な領域はどれか。</summary>
+        <p>ア）ハードディスクのブートセクタ イ）BIOS/UEFIの設定メモリ ウ）Boot ROM (Root of Trust) エ）オペレーティングシステムのカーネル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Boot ROMは製造時に書き込まれた変更不可の領域であり、信頼の連鎖のアンカー（起点）となります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ファームウェアのアップデート時に、ファイルが改ざんされていないことを確認するために使用される技術はどれか。</summary>
+        <p>ア）デジタル署名 イ）データ圧縮 ウ）エラー訂正符号 エ）ステガノグラフィ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 提供元の秘密鍵で付与されたデジタル署名を、デバイスの公開鍵で検証することで、改ざんの有無と真正性を確認します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. TPM（Trusted Platform Module）やHSMの主な役割はどれか。</summary>
+        <p>ア）ネットワーク通信の帯域制御 イ）暗号鍵の生成・保存・処理をハードウェア内で保護する ウ）ファームウェアの自動アップデートを実行する エ）物理的な衝撃を検知して電源を遮断する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — TPM/HSMは、秘密鍵を外部に取り出せないようにし、暗号処理を安全な領域内で完結させることで鍵の漏洩を防ぎます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. OTA（Over-The-Air）アップデートにおいて、セキュリティ上のリスクとなる主なシナリオはどれか。</summary>
+        <p>ア）アップデートファイルのサイズが大きすぎて通信がタイムアウトする イ）攻撃者が通信経路でファイルを改ざんし、不正なプログラムを配布する ウ）デバイスのバッテリー切れでアップデートが中断する エ）ユーザーがアップデートを拒否して古いバージョンのまま使用する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 中間者攻撃などによりアップデートファイルが改ざんされるリスクがあるため、署名検証と暗号化通信が必須です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. IoT機器が物理的に攻撃者の手に渡った場合、TPM/HSMが守るべき最重要情報はどれか。</summary>
+        <p>ア）ユーザーの設定データ イ）デバイスのシリアル番号 ウ）秘密鍵（Private Key） エ）ファームウェアのバージョン情報</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 秘密鍵が漏洩すると、攻撃者が不正なファームウェアに正規の署名を付けることが可能になるため、TPM/HSMによって厳重に保護されます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 組み込み機器のデバッグポート（JTAG/UARTなど）を塞ぐ、あるいは無効化する主な理由はどれか。</summary>
+        <p>ア）消費電力を下げるため イ）攻撃者が物理的に接続してファームウェアを吸い出したり改ざんしたりするのを防ぐため ウ）無線通信の干渉を防ぐため エ）製造コストを削減するため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — デバッグポートは開発には必須ですが、製品化後は攻撃の入口となるため、物理的にアクセスできないようにするか、無効化する必要があります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. IoT機器の無線通信（BLE/Wi-Fiなど）におけるセキュリティ対策として、最も基本的かつ重要なものはどれか。</summary>
+        <p>ア）通信の暗号化と相互認証 イ）通信速度の制限 ウ）電波の出力を最小限にする エ）アナログ変換して送信する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 無線は盗聴・改ざんのリスクが高いため、強力な暗号化と通信相手の正規性を確認する認証が不可欠です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 「実行時保護（Runtime Protection）」の目的として、適切なものはどれか。</summary>
+        <p>ア）デバイスの起動時間を短縮する イ）起動後にメモリ改ざんやプロセス乗っ取りが発生するのを検知・防止する ウ）ファームウェアのダウンロード速度を向上させる エ）バッテリーの寿命を延ばす</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 起動時の検証だけでなく、動作中のメモリ保護やデバッグツールの検知など、実行時の安全を確保する仕組みです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. IoTセキュリティにおいて、「リソース制約（低いCPU性能やメモリ容量）」がもたらす主な課題はどれか。</summary>
+        <p>ア）高度な暗号化やセキュリティ機構を搭載するのが困難になる イ）インターネットに接続できなくなる ウ）物理的な壊れやすさにつながる エ）ユーザーインターフェースが複雑になる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 軽量な暗号アルゴリズムの選定や、効率的なプロトコルの使用など、リソースに合わせたセキュリティ設計が求められます。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第3章 セキュリティ技術（3-7-1 〜 3-7-7）</p>
+    </section>
+  </main>
+</body>
+</html>

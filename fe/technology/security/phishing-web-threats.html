@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>フィッシングとWebアプリ脅威 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>フィッシングとWebアプリ脅威</h1>
+        <p class="lead">人の心理を突くフィッシング攻撃の最新動向（AI・ディープフェイク）と、Webアプリケーション固有の脆弱性を突く攻撃手法およびその対策について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#phishing">フィッシングの高度化</a>
+        <a href="#web-threats">Webアプリの脅威</a>
+        <a href="#cases">被害事例</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>フィッシングとWebアプリ脅威</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>フィッシング、スミッシング、ビッシングの手口の違いを説明できる</li>
+          <li>AIやディープフェイクを活用した高度なフィッシング攻撃の特徴を理解している</li>
+          <li>Webアプリの主要な脅威（SQLi、XSS、CSRF）の仕組みと対策を区別できる</li>
+          <li>入力値検証（ホワイトリスト方式）と出力エスケープの重要性を説明できる</li>
+          <li>WAF（Web Application Firewall）の役割と限界を理解している</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>SQLインジェクション・XSSの仕組みと対策、フィッシングの手口とAI悪用の特徴</dd></div>
+          <div><dt>中</dt><dd>CSRFの仕組み、セッション管理の対策（HttpOnly等）、WAFの役割</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>フィッシング</td><td>正規の組織を装い、偽サイトや偽メールで認証情報を詐取する攻撃</td><td>メール・SMS・SNSなど多様なチャネルを利用</td></tr>
+            <tr><td>スミッシング</td><td>SMS（ショートメッセージ）を用いたフィッシング攻撃</td><td>URLクリックを誘導し、偽アプリや偽サイトへ誘導</td></tr>
+            <tr><td>ビッシング</td><td>Voice（音声）を用いたフィッシング攻撃</td><td>電話で偽サポート等を装い、口頭で情報を聞き出す</td></tr>
+            <tr><td>ディープフェイク</td><td>AIを用いて人物の顔や声を合成し、本物のように見せかける技術</td><td>なりすまし詐欺や偽情報拡散に悪用される</td></tr>
+            <tr><td>SQLインジェクション</td><td>入力フォーム等に悪意あるSQL文を埋め込み、DBを不正操作する攻撃</td><td>プレースホルダ（バインド変数）の使用が有効な対策</td></tr>
+            <tr><td>XSS</td><td>クロスサイトスクリプティング。Webページに悪意あるスクリプトを埋め込む攻撃</td><td>出力時のエスケープ処理が主要な対策</td></tr>
+            <tr><td>CSRF</td><td>クロスサイトリクエストフォージェリ。ユーザーの意図しない操作を強制する攻撃</td><td>CSRFトークンの発行・検証が有効な対策</td></tr>
+            <tr><td>WAF</td><td>Web Application Firewall。Webアプリへの攻撃を検知・遮断する専用ファイアウォール</td><td>L7（アプリケーション層）の通信を解析して防御</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="phishing" class="lesson-section">
+      <h2>1. フィッシング攻撃の高度化（AI・ディープフェイク）</h2>
+      <p>フィッシングとは、正規の組織やサービスを装ってユーザーを騙し、認証情報や個人情報、金銭を不正に取得する攻撃手法です。従来のフィッシングは文章の不自然さやURLの違和感で見分けられることもありましたが、近年はAI技術の悪用により「本物と区別がつかない」レベルまで高度化しています。</p>
+      <p>AI生成フィッシングでは、標的のSNSや漏えいデータから収集した情報をもとに、自然な日本語でパーソナライズされたメールを大量生成します。また、ディープフェイク技術を用いて上司や取引先の声・映像を合成し、電話やビデオ通話で緊急の送金や認証コードの入力を要求する「ビッシング」の被害も増加しています。</p>
+      <p>これらの攻撃は、技術的な脆弱性ではなく「人の判断ミスや焦り」を突くため、メールフィルタなどの技術的対策だけでは完全に防ぎきれません。URLの直接クリック禁止、別チャネルでの確認、多要素認証（MFA）の徹底など、人的対策と組み合わせた多層防御が不可欠です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>AIを活用した高度なフィッシング攻撃の流れ</figcaption>
+        <pre>
+  [ 1. 情報収集 (OSINT) ]
+  SNS、漏えいデータから標的の属性・人間関係を収集
+          │
+  [ 2. AIによる偽装生成 ]
+  自然な文章の偽メール生成 / 音声・映像のディープフェイク合成
+          │
+  [ 3. 多チャネルでの接触 ]
+  メール、SMS、電話などを組み合わせ、緊急性・信頼性を演出
+          │
+  [ 4. 偽サイトへの誘導・情報入力 ]
+  本物そっくりの偽ログイン画面でID/PW・MFAコードを入力させる
+          │
+  [ 5. 不正利用・後続攻撃 ]
+  アカウント乗っ取り、不正送金、社内ネットワークへの侵入
+        </pre>
+      </figure>
+    </section>
+
+    <section id="web-threats" class="lesson-section">
+      <h2>2. Webアプリケーションの主要な脅威と対策</h2>
+      <p>Webアプリケーションはインターネット上に公開されているため、攻撃者から常に狙われる対象です。ファイアウォール（L3/L4）では防ぎきれないアプリケーション層（L7）の脆弱性を突く攻撃に対し、開発段階からのセキュアな実装が求められます。</p>
+      <p>代表的な攻撃には、データベースを不正操作する「SQLインジェクション」、ユーザーのブラウザで悪意あるスクリプトを実行させる「XSS」、ログイン中のユーザーに意図しない操作を強制する「CSRF」などがあります。これらを防ぐためには、入力値の厳格な検証（ホワイトリスト方式）と、出力時のエスケープ処理が基本となります。</p>
+      <p>また、開発段階の対策を補完するものとして、Webアプリケーションへの攻撃パターンを検知・遮断する「WAF（Web Application Firewall）」の導入が有効です。ただし、WAFは未知の攻撃や設定ミスには弱い場合があるため、あくまで「最後の防御線」として位置づけ、根本的なコードの修正と組み合わせる必要があります。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>攻撃手法</th><th>概要</th><th>主要な対策</th></tr></thead>
+          <tbody>
+            <tr><td>SQLインジェクション</td><td>入力値にSQL文を混ぜてDBを不正操作する</td><td>プレースホルダ（バインド変数）の使用</td></tr>
+            <tr><td>XSS</td><td>Webページに悪意あるスクリプトを埋め込む</td><td>出力時のエスケープ処理、CSPの導入</td></tr>
+            <tr><td>CSRF</td><td>ユーザーの意図しない操作を強制する</td><td>CSRFトークンの発行と検証、SameSite属性</td></tr>
+            <tr><td>セッションハイジャック</td><td>セッションIDを盗んでなりすます</td><td>CookieへのHttpOnly/Secure属性の付与</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cases" class="lesson-section">
+      <h2>3. 被害事例から学ぶべきこと</h2>
+      <p>金融機関におけるAI生成フィッシングの事例では、攻撃者が顧客名や利用サービスを正確に記載した「口座凍結通知」メールを送信しました。偽サイトは正規ドメインに酷似しており、多要素認証（MFA）のコードまで入力させた上で、リアルタイムで不正送金を実行しました。この事例から、MFAコードであっても「入力要求の正当性確認」なしに入力してはならないことが分かります。</p>
+      <p>また、Webアプリケーションの事例では、入力値検証の不備によりSQLインジェクションが発生し、顧客情報が大量に漏えいしました。開発現場では「動けばよい」という意識でセキュリティが後回しにされがちですが、入力値検証（ホワイトリスト方式）とプレースホルダの使用は、現代のWeb開発において必須の対策です。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. SMS（ショートメッセージ）を用いて、偽のURLをクリックさせ認証情報を詐取する攻撃手法はどれか。</summary>
+        <p>ア）ビッシング イ）スミッシング ウ）フィッシング エ）スピアフィッシング</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SMSを用いたフィッシング攻撃は「スミッシング（Smishing）」と呼ばれます。ビッシングは音声（電話）を用いるものです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. AIを活用したフィッシング攻撃の特徴として、最も適切なものはどれか。</summary>
+        <p>ア）標的に関係なく無差別に送信される イ）文章の不自然さが従来型よりも顕著になる ウ）標的の属性に基づいたパーソナライズされた文面を大量生成できる エ）技術的な脆弱性を突くため、人的対策は不要になる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — AIを活用することで、標的のSNS情報などに基づいた自然でパーソナライズされた文面を大量に生成できるようになり、見分けが困難になっています。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. Webアプリケーションにおいて、入力フォームに悪意あるSQL文を埋め込み、データベースを不正に操作する攻撃はどれか。</summary>
+        <p>ア）クロスサイトスクリプティング（XSS） イ）SQLインジェクション ウ）クロスサイトリクエストフォージェリ（CSRF） エ）ディレクトリトラバーサル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SQLインジェクションは、入力値としてSQL文の一部を渡すことで、データベースに対して意図しない操作を行わせる攻撃です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. SQLインジェクションに対する最も有効な対策はどれか。</summary>
+        <p>ア）入力値の長さを制限する イ）プレースホルダ（バインド変数）を使用する ウ）クライアント側でJavaScriptによる検証を行う エ）Webサーバーのログを毎日確認する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — プレースホルダ（バインド変数）を使用することで、入力値がSQL文の構造として解釈されるのを防ぎ、SQLインジェクションを根本的に防止できます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. クロスサイトスクリプティング（XSS）攻撃を防ぐために、アプリケーション側で実施すべき最も基本的な対策はどれか。</summary>
+        <p>ア）出力時のエスケープ処理 イ）HTTPS通信の強制 ウ）CSRFトークンの発行 エ）セッションIDの定期的な変更</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — XSSはユーザーの入力がスクリプトとして実行されることで発生するため、出力時に特殊文字をエスケープ（無害化）することが最も基本的で有効な対策です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. ユーザーがログイン状態にあることを悪用し、そのユーザーの意図しない操作（送金や設定変更など）を強制する攻撃はどれか。</summary>
+        <p>ア）SQLインジェクション イ）クロスサイトスクリプティング（XSS） ウ）クロスサイトリクエストフォージェリ（CSRF） エ）セッションハイジャック</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — CSRFは、ログイン済みのセッションを利用して、ユーザーが意図しないリクエストをサーバーに送信させる攻撃です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. セッションIDが盗まれてなりすまされる「セッションハイジャック」を防ぐために、Cookieに設定すべき属性はどれか。</summary>
+        <p>ア）Secure と HttpOnly イ）SameSite と Domain ウ）Path と Expires エ）Max-Age と Secure</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — Secure属性はHTTPS通信時のみ送信し、HttpOnly属性はJavaScriptからのアクセスを禁止することで、セッションIDの盗難リスクを低減します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 入力値検証において、「許可する値の条件を明確に定義し、それ以外を拒否する」方式はどれか。</summary>
+        <p>ア）ブラックリスト方式 イ）ホワイトリスト方式 ウ）サニタイズ方式 エ）エスケープ方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ホワイトリスト方式は、許可するパターン（数字のみ、特定の文字など）を定義し、それ以外をすべて拒否するため、未知の攻撃パターンにも強く、最も安全な方式です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. Webアプリケーションへの攻撃（SQLi、XSSなど）を検知・遮断するために、Webサーバーの前段に配置される専用のセキュリティ製品はどれか。</summary>
+        <p>ア）IDS イ）IPS ウ）WAF エ）UTM</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — WAF（Web Application Firewall）は、HTTP/HTTPS通信の内容（アプリケーション層）を解析し、Webアプリ特有の攻撃を検知・遮断します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. AIを用いて人物の顔や声を合成し、本物のように見せかけて緊急の送金を要求する詐欺の手口はどれか。</summary>
+        <p>ア）スミッシング イ）ディープフェイク ウ）ウォーターホール攻撃 エ）パスワードリスト攻撃</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ディープフェイクは、AI技術を用いて偽の映像や音声を生成する技術であり、なりすまし詐欺に悪用される新たな脅威として注目されています。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第2章 情報セキュリティを脅かす脅威（2-1-4, 2-1-5）</p>
+    </section>
+  </main>
+</body>
+</html>

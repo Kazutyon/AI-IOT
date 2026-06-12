@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>データ保護とセキュリティテスト | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>データ保護とセキュリティテスト</h1>
+        <p class="lead">アプリケーションが扱う機密データの安全な保存方法、通信の暗号化、依存ライブラリの脆弱性管理、および自動セキュリティテスト（SAST/DAST）の仕組みについて学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#secure-comm-data">安全な通信とデータ保存</a>
+        <a href="#dependencies">依存ライブラリの管理</a>
+        <a href="#sast-dast">SASTとDAST</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>データ保護とセキュリティテスト</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>パスワードは平文で保存せず、ソルトを付与してストレッチング付きのハッシュ関数で保存することを説明できる</li>
+          <li>暗号鍵をソースコードに埋め込まず、環境変数や秘密管理サービス（Vault）で管理する重要性を理解している</li>
+          <li>依存ライブラリのバージョン固定（Pinning）と脆弱性スキャンがサプライチェーン攻撃を防ぐ鍵であることを把握している</li>
+          <li>SAST（静的解析）とDAST（動的解析）の違いと、それぞれが検出できる脆弱性の種類を区別できる</li>
+          <li>セキュリティテストをCI/CDパイプラインに組み込むことで、開発初期段階で脆弱性を発見できる利点を説明できる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>パスワードのハッシュ化＋ソルト、鍵管理のベストプラクティス、SASTとDASTの違いと特徴</dd></div>
+          <div><dt>中</dt><dd>HSTSの目的、依存関係のバージョン固定、CI/CDへのセキュリティテスト統合</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>ストレッチング</td><td>ハッシュ計算を意図的に何千〜何万回も繰り返し、総当たり攻撃を困難にする技術</td><td>PBKDF2、bcrypt、Argon2などが代表的</td></tr>
+            <tr><td>シークレット管理</td><td>APIキーや暗号鍵を安全に保管・配布する仕組み</td><td>HashiCorp Vault、AWS Secrets Managerなどが利用される</td></tr>
+            <tr><td>HSTS</td><td>HTTP Strict Transport Security。ブラウザにHTTPS通信を強制させる仕組み</td><td>ダウングレード攻撃やセッションハイジャックを防ぐ</td></tr>
+            <tr><td>バージョン固定</td><td>依存ライブラリのバージョンをロックファイルで固定し、予期しない更新を防ぐこと</td><td>package-lock.json、Pipfile.lockなどが該当</td></tr>
+            <tr><td>SAST</td><td>Static Application Security Testing。ソースコードを実行せずに静的に解析する手法</td><td>開発早期にコード上の欠陥を発見できる</td></tr>
+            <tr><td>DAST</td><td>Dynamic Application Security Testing。実行中のアプリケーションに対して攻撃を模倣してテストする手法</td><td>実行時の挙動や設定ミスを発見できる</td></tr>
+            <tr><td>サプライチェーン攻撃</td><td>標的組織そのものではなく、利用しているライブラリや委託先の脆弱性を突く攻撃</td><td>依存ライブラリ管理が不十分だと狙われやすい</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="secure-comm-data" class="lesson-section">
+      <h2>1. 安全な通信とデータ保存</h2>
+      <p>アプリケーションが扱う機密情報（パスワード、個人情報、トークンなど）は、保存時と通信時の両方で適切に保護する必要があります。パスワードは決して平文で保存してはならず、ランダムな「ソルト」を付与した上で、bcryptやArgon2などのストレッチング機能を持つハッシュ関数で変換して保存します。これにより、データベースが漏洩してもパスワードの復元を極めて困難にします。</p>
+      <p>暗号鍵やAPIキーなどの機密情報は、ソースコードや設定ファイルに直接埋め込んではいけません。環境変数やHashiCorp Vaultなどの秘密管理サービス（Secrets Management）を利用して一元管理し、アクセス権限を最小限に抑えることが必須です。また、ログファイルにはパスワードやクレジットカード番号などの機密情報を決して記録してはいけません。</p>
+      <p>通信経路の保護にはHTTPS（TLS）が不可欠です。さらに、HTTPからHTTPSへのダウングレード攻撃を防ぐために、サーバーからブラウザに対して「今後このドメインとは必ずHTTPSで通信せよ」と指示するHSTS（HTTP Strict Transport Security）を導入することが推奨されます。CookieにはSecure、HttpOnly、SameSite属性を付与し、セッションIDの盗難やCSRF攻撃を防ぎます。</p>
+    </section>
+
+    <section id="dependencies" class="lesson-section">
+      <h2>2. 依存ライブラリの管理</h2>
+      <p>現代のアプリケーションは、Webフレームワークや暗号化ライブラリなど、多くの外部コード（依存関係）に依存して構築されています。これらのライブラリに既知の脆弱性が存在すると、アプリケーション全体が攻撃される「サプライチェーン攻撃」のリスクが高まります。そのため、依存関係の正確な把握と継続的な管理が不可欠です。</p>
+      <p>依存ライブラリを管理する際は、npmやpipなどのパッケージマネージャが生成するロックファイル（package-lock.jsonやPipfile.lock）を使用して、バージョンを厳密に固定（Version Pinning）する必要があります。これにより、開発環境と本番環境で異なるバージョンがインストールされる事故や、意図しない脆弱なバージョンへの自動更新を防げます。</p>
+      <p>さらに、GitHub DependabotやSnyk、npm auditなどの脆弱性スキャンツールを導入し、依存ライブラリに既知の脆弱性（CVE）が発見された場合に自動的にアラートを上げたり、プルリクエストを作成したりする仕組みを整備します。使用しなくなったライブラリは攻撃対象領域を広げるだけなので、速やかに削除することも重要です。</p>
+    </section>
+
+    <section id="sast-dast" class="lesson-section">
+      <h2>3. SASTとDASTによるセキュリティテスト</h2>
+      <p>アプリケーションの脆弱性を発見するためには、SAST（静的アプリケーションセキュリティテスト）とDAST（動的アプリケーションセキュリティテスト）を組み合わせて実施するのが効果的です。SASTはソースコードや設定ファイルを実行せずに解析し、SQLインジェクションやハードコードされたパスワードなどの「コード上の欠陥」を開発早期に発見します。</p>
+      <p>一方、DASTはアプリケーションを実際に起動させた状態で、外部から攻撃パターン（SQLi、XSS、CSRFなど）を送信し、その応答を解析して脆弱性を検出します。SASTでは発見しにくい「実行時の設定ミス」や「認証バイパス」などの問題を補完的に発見できるのが特徴です。</p>
+      <p>これらのテストは手動で行うのではなく、GitHub ActionsやGitLab CIなどのCI/CDパイプラインに自動的に組み込むことが現代の開発標準です。コードがリポジトリにプッシュされるたびに自動でスキャンが走り、脆弱性が検出された場合はビルドを失敗させることで、本番環境への脆弱なコードの混入を未然に防ぎます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>SASTとDASTの役割とCI/CD統合</figcaption>
+        <pre>
+  [ 開発者 ] → コードをプッシュ
+          │
+  [ CI/CD パイプライン ]
+  ├─▶ [ SAST ] ソースコードを静的解析（実行なし）
+  │      └─▶ コード上の欠陥、ハードコード検出
+  ├─▶ [ ビルド・デプロイ ] テスト環境へ展開
+  └─▶ [ DAST ] 実行中のアプリに攻撃を模倣
+         └─▶ 実行時の脆弱性、設定ミス検出
+          │
+  [ 結果 ] → 脆弱性あり＝パイプライン失敗（本番阻止）
+        </pre>
+        </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. パスワードをサーバー側で安全に保存するための適切な処理はどれか。</summary>
+        <p>ア）可逆暗号化（復号可能な暗号化）を施して保存する イ）Base64エンコードして保存する ウ）ランダムなソルトを付与し、ストレッチング付きのハッシュ関数で変換して保存する エ）平文のまま保存し、データベースへのアクセス権限のみで保護する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — パスワードは、ソルト付与とストレッチング（反復計算）を行ったハッシュ値として保存するのが現代の標準です。可逆暗号化や平文保存は漏洩時に即座に悪用されます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. アプリケーションが使用するAPIキーや暗号鍵を管理する際のベストプラクティスはどれか。</summary>
+        <p>ア）ソースコードの定数としてハードコードし、バージョン管理システムで管理する イ）環境変数や秘密管理サービス（Vaultなど）を使用して管理する ウ）開発者全員が共有するテキストファイルに平文で保存する エ）Gitリポジトリのプライベートブランチにのみ保存する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 機密情報はソースコードに埋め込まず、環境変数や専用の秘密管理サービスを通じてアプリケーションに渡すのがセキュアな開発プラクティスです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. HSTS（HTTP Strict Transport Security）を導入する主な目的はどれか。</summary>
+        <p>ア）Webサイトの表示速度を向上させる イ）ブラウザに対して、当該ドメインとの通信を常にHTTPSで行うよう強制し、ダウングレード攻撃を防ぐ ウ）サーバーのCPU使用率を監視し、異常時に自動でシャットダウンする エ）Cookieの保存容量を無制限に拡大する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — HSTSは、HTTPからHTTPSへの自動リダイレクトをブラウザに強制することで、中間者攻撃による通信の平文化（ダウングレード攻撃）を防ぎます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 依存ライブラリの管理において「バージョン固定（Version Pinning）」を行う主な理由はどれか。</summary>
+        <p>ア）ライブラリの開発者が新しい機能を実装するのを待つため イ）予期しない自動更新による動作不良や、脆弱なバージョンの混入を防ぐため ウ）アプリケーションの実行速度を最大化するため エ）ライセンス契約の要件を満たすため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ロックファイル（例: package-lock.json）を使用してバージョンを固定することで、環境間の差異や、意図しない脆弱なバージョンへの更新によるサプライチェーン攻撃を防ぎます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. SAST（静的アプリケーションセキュリティテスト）の特徴として、最も適切なものはどれか。</summary>
+        <p>ア）アプリケーションを実行した状態で外部から攻撃を模倣してテストする イ）ソースコードや設定ファイルを実行せずに解析し、コード上の欠陥を早期に発見する ウ）ネットワークのパケットをキャプチャして通信内容を分析する エ）ユーザーの行動ログを分析して不正アクセスを検知する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SASTはコードを実行せずに静的に解析する手法であり、開発の早期段階でSQLインジェクションなどのコード上の欠陥を発見するのに適しています。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. DAST（動的アプリケーションセキュリティテスト）がSASTよりも効果的に検出できる脆弱性はどれか。</summary>
+        <p>ア）ハードコードされたパスワード イ）未使用の変数宣言 ウ）実行時の認証バイパスやサーバーの設定ミス エ）ソースコード内のコメントアウトされた機密情報</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — DASTは実際に動作しているアプリケーションに対して攻撃を模倣するため、コード上には現れない「実行時の設定ミス」や「認証・認可のバイパス」などを検出するのに優れています。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. セキュリティテストをCI/CDパイプラインに統合する最大の利点はどれか。</summary>
+        <p>ア）テストの実行を手動で行うことで、開発者の負担を軽減する イ）コードがリポジトリに変更されるたびに自動で脆弱性をスキャンし、本番環境への混入を未然に防ぐ ウ）本番環境で直接脆弱性スキャンを実行し、リアルタイムで防御する エ）セキュリティテストの実行を開発プロセスの最終段階のみに限定する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — CI/CDに統合することで、開発者がコードをプッシュするたびに自動で検査が走り、脆弱性が検出された場合はビルドを失敗させるなどして、本番デプロイを阻止できます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. アプリケーションの内部ログに記録してはいけない情報はどれか。</summary>
+        <p>ア）エラーが発生したファイル名と行番号 イ）リクエスト元のIPアドレス ウ）ユーザーが入力したパスワードやクレジットカード番号 エ）アクセスを試みたユーザーID</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ログは漏洩のリスクがあるため、パスワード、クレジットカード番号、認証トークンなどの機密情報は絶対に記録してはいけません（ログのサニタイズ）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. サプライチェーン攻撃を防ぐために、依存ライブラリに対して実施すべき対策はどれか。</summary>
+        <p>ア）すべてのライブラリを自社でゼロから開発する イ）脆弱性スキャンツール（DependabotやSnykなど）を導入し、既知の脆弱性を監視・更新する ウ）ライブラリのソースコードをすべて目視でレビューする エ）インターネットから隔離された環境でのみ開発を行う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 現代の開発ではすべてのコードを自社開発することは現実的ではないため、自動化された脆弱性スキャンツールを導入し、既知の脆弱性（CVE）を継続的に監視・修正するのが現実的かつ効果的な対策です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. セッションIDを格納するCookieに付与すべきセキュリティ属性の正しい組み合わせはどれか。</summary>
+        <p>ア）Secure, HttpOnly, SameSite イ）Public, Readable, Shared ウ）Encrypted, Compressed, Cached エ）Visible, Persistent, Global</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — Secure（HTTPSのみ送信）、HttpOnly（JavaScriptからのアクセス禁止）、SameSite（クロスサイト送信制限）を付与することで、セッションハイジャックやCSRF攻撃のリスクを大幅に低減します。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第3章 セキュリティ技術（3-5-5 〜 3-5-8）</p>
+    </section>
+  </main>
+</body>
+</html>

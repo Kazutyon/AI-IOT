@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>サーバーセキュリティの基礎 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>サーバーセキュリティの基礎</h1>
+        <p class="lead">企業の基盤となるサーバーを安全に運用するために不可欠な「OS強化（CIS Benchmarks）」「SSH鍵管理」「ログ管理の仕組み」について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#os-hardening">OS強化</a>
+        <a href="#ssh-key">SSH鍵管理</a>
+        <a href="#logging">ログの仕組み</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>サーバーセキュリティの基礎</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>OS強化（CIS Benchmarks）が「攻撃対象領域（Attack Surface）の縮小」を目的としていることを説明できる</li>
+          <li>SSHにおいてパスワード認証を無効化し、公開鍵認証とrootログイン禁止を設定する理由を理解している</li>
+          <li>秘密鍵の保護（パスフレーズ、パーミッション600）と鍵のローテーションが必須であることを把握している</li>
+          <li>syslogやauditdなど、OSがどのようにログを生成・記録しているかの内部仕組みを区別できる</li>
+          <li>ログが「証跡（Audit Trail）」としてインシデント調査や監査において極めて重要な役割を果たすことを説明できる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>SSH公開鍵認証の仕組みとrootログイン禁止、OS強化の目的（不要サービス停止）、auditdの役割</dd></div>
+          <div><dt>中</dt><dd>秘密鍵のパーミッション（600）、PAMとsyslogの関係、カーネルパラメータの安全化</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>CIS Benchmarks</td><td>サーバーOSのセキュリティ設定に関する国際的なガイドライン</td><td>不要サービスの停止や権限最小化などの具体的な設定基準</td></tr>
+            <tr><td>攻撃対象領域</td><td>Attack Surface。攻撃者が侵入を試みることができる経路や弱点の総体</td><td>OS強化の目的は、この領域を可能な限り縮小すること</td></tr>
+            <tr><td>SSH公開鍵認証</td><td>パスワードを使わず、秘密鍵と公開鍵のペアで本人確認を行う方式</td><td>総当たり攻撃や盗聴に強く、サーバー管理の標準方式</td></tr>
+            <tr><td>authorized_keys</td><td>SSHサーバー側で、ログインを許可する公開鍵を登録するファイル</td><td>~/.ssh/authorized_keys に保存される</td></tr>
+            <tr><td>PAM</td><td>Pluggable Authentication Modules。OSの認証処理を担うモジュール</td><td>認証結果をsyslogに送信し、ログとして記録される</td></tr>
+            <tr><td>auditd</td><td>Linuxカーネルの監査フレームワークを利用したデーモン</td><td>ファイルアクセスや権限変更など、重要な操作を詳細に記録する</td></tr>
+            <tr><td>syslog</td><td>OSやサービスが出力するログを収集・振り分ける仕組み</td><td>認証ログ（auth.log/secure）やシステムログの基盤</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="os-hardening" class="lesson-section">
+      <h2>1. OS強化（CIS Benchmarks）</h2>
+      <p>サーバーOSはインストール直後の状態では、不要なサービスが動作していたり、外部に開いているポートが多かったりと、攻撃者に悪用される要因（脆弱性）を多数抱えています。OS強化（OS Hardening）とは、CIS Benchmarksなどの基準に従ってこれらの設定を変更し、リスクを下げる作業です。</p>
+      <p>OS強化の最大の目的は「攻撃対象領域（Attack Surface）の縮小」です。例えば、役割に関係のないサービス（telnet, ftp, cupsなど）を停止したり、Firewallで不要なポートを遮断したりすることで、攻撃者が接続を試せる入口を減らします。また、不要なユーザーアカウントの削除や、rootログインの禁止なども含まれます。</p>
+      <p>さらに、カーネルパラメータ（sysctl）の設定によるメモリ保護（ASLRなど）や、重要なファイル（/etc/shadowなど）のパーミッション厳格化、セキュリティパッチの定期的な適用もOS強化の重要な要素です。これらを多層的に実施することで、既知の脆弱性を悪用されるリスクを大幅に低減できます。</p>
+    </section>
+
+    <section id="ssh-key" class="lesson-section">
+      <h2>2. SSH鍵管理</h2>
+      <p>SSHはサーバー管理の最重要入口ですが、パスワード認証は総当たり攻撃（ブルートフォース）や盗聴のリスクが高いため、実務では「公開鍵認証」に統一するのが標準です。公開鍵認証は、秘密鍵を持つ本人だけがログインできる仕組みであり、ネットワーク上にパスワードが流れないため極めて安全です。</p>
+      <p>SSH設定において絶対に守るべきルールは、「rootログインの禁止」と「パスワード認証の無効化」です。rootはユーザー名が誰でも知っているため、攻撃の標的になりやすく、侵入された瞬間にサーバーの全権限を奪われます。必ず一般ユーザーでログインし、sudoで管理作業を行う運用にします。</p>
+      <p>秘密鍵の管理も極めて重要です。秘密鍵ファイルのパーミッションは「600（所有者のみ読み書き可能）」に設定し、パスフレーズを設定して漏洩時のリスクを軽減します。また、退職者の鍵や使わなくなった端末の鍵は「不要鍵」として定期的に削除し、鍵のローテーション（定期更新）も必須の運用プロセスです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>SSH公開鍵認証の仕組み</figcaption>
+        <pre>
+  [ 管理者PC (クライアント) ]             [ サーバー ]
+  秘密鍵 (id_rsa) を保持               公開鍵を ~/.ssh/authorized_keys に登録
+          │                                     │
+          ├─ (1) ログイン要求 ────────────────▶ │
+          │                                     ├─ (2) チャレンジ(乱数)生成
+          │ ◀────────── (3) チャレンジ送信 ──── ┤
+          ├─ (4) 秘密鍵で署名(レスポンス)生成   │
+          ├─ (5) 署名を送信 ──────────────────▶ │
+          │                                     ├─ (6) 公開鍵で署名を検証
+          │ ◀────────── (7) ログイン許可 ────── ┤
+        </pre>
+      </figure>
+    </section>
+
+    <section id="logging" class="lesson-section">
+      <h2>3. ログの仕組みと管理</h2>
+      <p>ログは、サーバーやアプリケーションが内部で行った操作を時系列で記録する技術的証跡（Audit Trail）です。不正アクセスの痕跡や障害の原因を特定するために不可欠であり、改ざんされないよう厳重に保全する必要があります。Linuxでは主にPAM（認証モジュール）やカーネル、各サービスがイベントを生成し、syslogデーモンがログファイルに書き込みます。</p>
+      <p>代表的なログとして、ログインの成功・失敗を記録する「認証ログ（auth.log / secure）」、サービスの起動やエラーを記録する「システムログ」があります。さらに、ファイルアクセスや権限変更など重要な操作をカーネルレベルで監視・記録するのが「監査ログ（auditd）」です。auditdは非常に詳細な情報を保持するため、インシデント調査において最も頼りになるログとなります。</p>
+      <p>Webサーバー（Apache/Nginx）やデータベース（MySQL/PostgreSQL）も、それぞれ独自のログ（アクセスログ、スロークエリログなど）を生成します。これらのログは攻撃者の足跡を追うための最重要データですが、ログ自体にパスワードや機密情報が含まれていないか（ログのサニタイズ）、ログファイルの権限が適切か（他ユーザーから読み取れないか）にも常に注意を払う必要があります。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. OS強化（OS Hardening）の最大の目的として、最も適切なものはどれか。</summary>
+        <p>ア）サーバーの処理速度を最大化する イ）攻撃対象領域（Attack Surface）を縮小し、侵入経路を減らす ウ）すべてのユーザーにroot権限を付与する エ）ネットワークの帯域幅を広くする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 不要なサービスの停止やポート制限などにより、攻撃者が接続を試せる入口を減らすことがOS強化の目的です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. サーバーOSのセキュリティ設定に関する国際的なガイドラインとして、現場で最もよく参照されるものはどれか。</summary>
+        <p>ア）OWASP Top 10 イ）CIS Benchmarks ウ）IPA 10大脅威 エ）NIST SP 800-53</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — CIS Benchmarksは、OSやミドルウェアのセキュアな設定基準を提供する国際的なガイドラインです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. SSHにおいて、rootアカウントでの直接ログインを禁止する主な理由はどれか。</summary>
+        <p>ア）rootはシステムに存在しないアカウントだから イ）rootはユーザー名が誰でも知っており、総当たり攻撃の標的になりやすいため ウ）rootでログインするとサーバーの動作が低速になるから エ）SSHプロトコルがrootログインをサポートしていないから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — rootはどのOSにも存在する管理者アカウントであり、攻撃者が最初に狙う標的になります。侵入時の被害を限定するため、直接ログインは禁止します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. SSH公開鍵認証において、サーバー側でログインを許可する公開鍵を登録するファイルはどれか。</summary>
+        <p>ア）/etc/passwd イ）~/.ssh/authorized_keys ウ）/etc/ssh/sshd_config エ）~/.bashrc</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — サーバー側の ~/.ssh/authorized_keys に登録された公開鍵に対応する秘密鍵を持つクライアントのみ、ログインが許可されます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. SSHの秘密鍵ファイル（id_rsaなど）のパーミッションとして、セキュリティ上最も適切なものはどれか。</summary>
+        <p>ア）644（所有者読み書き、他ユーザー読み取り可） イ）777（すべてのユーザーが読み書き実行可） ウ）600（所有者のみ読み書き可） エ）444（すべてのユーザーが読み取りのみ可）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 秘密鍵は他のユーザーから読み取られてはいけません。パーミッションを600に設定し、所有者のみがアクセスできるようにします。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. Linuxにおいて、ファイルアクセスや権限変更など、カーネルレベルの重要な操作を詳細に記録するデーモンはどれか。</summary>
+        <p>ア）syslog イ）sshd ウ）auditd エ）cron</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — auditdはLinuxカーネルの監査フレームワークを利用し、重要な操作を詳細に記録するデーモンです。インシデント調査で重要な役割を果たします。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. OSの認証処理（SSHログインやsudo実行など）を行い、その結果をsyslogに送信するモジュールはどれか。</summary>
+        <p>ア）PAM（Pluggable Authentication Modules） イ）SSH Agent ウ）SELinux エ）iptables</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — PAMはOSの認証を統合的に管理するモジュールであり、認証の成功・失敗などをログとしてsyslogに送信します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. SSHサーバーにおいて、パスワード認証を無効化して公開鍵認証のみを強制する設定の目的はどれか。</summary>
+        <p>ア）通信速度を向上させるため イ）パスワードの総当たり攻撃や盗聴による侵入を根本的に防ぐため ウ）サーバーのCPU負荷を下げるため エ）古いSSHクライアントとの互換性を保つため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — パスワード認証はブルートフォース攻撃に弱いため、これを無効化して公開鍵認証のみにすることで、セキュリティ強度を大幅に高めます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. サーバーのログ管理において、ログファイル自体のセキュリティ対策として適切なものはどれか。</summary>
+        <p>ア）ログファイルを誰でも読み取れるパーミッション（644等）に設定する イ）ログにパスワードやクレジットカード番号などの機密情報を平文で記録する ウ）ログファイルの権限を厳しく設定し、外部のログ収集サーバーへ転送・保全する エ）ログはディスク容量を圧迫するため、毎日すべて削除する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ログは攻撃者が改ざん・削除を試みる対象です。権限を厳格化し、外部の専用サーバー（SIEMなど）に転送して保全することが重要です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 退職者や異動者が発生した際に、SSH鍵管理において必ず実施すべき作業はどれか。</summary>
+        <p>ア）サーバーの電源を落とす イ）authorized_keysから該当者の公開鍵（不要鍵）を削除する ウ）すべてのSSHポートを閉じてSSHを完全に無効化する エ）rootパスワードを変更する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 退職者などの不要な公開鍵は、サーバーへの不正アクセス経路となるため、authorized_keysから速やかに削除する必要があります。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第3章 セキュリティ技術（3-6-1 〜 3-6-3）</p>
+    </section>
+  </main>
+</body>
+</html>

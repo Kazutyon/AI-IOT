@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>アクセス制御の仕組み | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>アクセス制御の仕組み</h1>
+        <p class="lead">情報システムにおいて「誰が、どの情報に、どのような操作を許可されるか」を管理する5つの主要なアクセス制御モデル（DAC, MAC, RBAC, ABAC, IAM）について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#dac">DAC（任意アクセス制御）</a>
+        <a href="#mac">MAC（強制アクセス制御）</a>
+        <a href="#rbac">RBAC（ロールベース）</a>
+        <a href="#abac">ABAC（属性ベース）</a>
+        <a href="#iam">IAM（統合管理）</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>アクセス制御の仕組み</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>DAC（所有者が自由に設定）とMAC（システムが強制設定）の違いを説明できる</li>
+          <li>RBAC（役割ベース）が大規模環境で管理負荷を下げる仕組みを理解している</li>
+          <li>ABAC（属性ベース）が時間や場所などの条件で動的に制御できる特徴を把握している</li>
+          <li>IAMがクラウド環境においてRBACとABACを組み合わせて一元的に管理する役割を説明できる</li>
+          <li>すべてのアクセス制御において「最小権限の原則」が最も重要であることを理解している</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>5つのアクセス制御モデルの特徴比較、RBACとABACの違い、最小権限の原則</dd></div>
+          <div><dt>中</dt><dd>MACのセキュリティラベル、ABACのPEP/PDP構造、IAMにおける過剰権限のリスク</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>DAC</td><td>Discretionary Access Control。リソースの所有者が自由に権限を設定する方式</td><td>柔軟性が高いが、誤設定や権限肥大化のリスクがある</td></tr>
+            <tr><td>MAC</td><td>Mandatory Access Control。システムが一元的にアクセス権を強制する方式</td><td>ユーザーは権限を変更できない。軍事・政府機関などで使用</td></tr>
+            <tr><td>RBAC</td><td>Role-Based Access Control。役割（ロール）に権限をまとめ、ユーザーに割り当てる方式</td><td>管理負荷が低く、企業システムの標準的な方式</td></tr>
+            <tr><td>ABAC</td><td>Attribute-Based Access Control。ユーザー・リソース・環境などの属性を組み合わせて制御する方式</td><td>「勤務時間外はアクセス不可」など動的な制御が可能</td></tr>
+            <tr><td>IAM</td><td>Identity and Access Management。クラウド環境でIDとアクセス権限を一元的に管理する仕組み</td><td>RBACとABACを組み合わせた高度な制御が特徴</td></tr>
+            <tr><td>ACL</td><td>Access Control List。どのユーザーにどの権限を与えるかを定義したリスト</td><td>DACなどで使用される技術的要素</td></tr>
+            <tr><td>セキュリティラベル</td><td>データやユーザーに付与される機密レベル（例：極秘、秘密）</td><td>MACにおいてアクセス可否を判断する基準となる</td></tr>
+            <tr><td>PEP / PDP</td><td>Policy Enforcement Point / Policy Decision Point。ABACにおけるアクセス要求の受付と判断を行うコンポーネント</td><td>PEPが要求を受け、PDPがポリシーを評価して許可・拒否を決定</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="dac" class="lesson-section">
+      <h2>1. DAC（任意アクセス制御）</h2>
+      <p>DAC（Discretionary Access Control）は、ファイルやフォルダなどの「リソースの所有者」が、誰にどの権限（読み取り、書き込みなど）を与えるかを自由に決められる方式です。WindowsやLinuxなどの一般的なOSで広く採用されています。</p>
+      <p>所有者が柔軟に権限を設定できるため小規模環境では扱いやすい反面、権限設定が分散しやすく、所有者が誤って広い権限を付与してしまう「誤設定」や、不要な権限が残り続ける「権限の肥大化」が起きやすいという弱点があります。</p>
+      <p>技術的には、OSのアクセス制御リスト（ACL）やパーミッションビット（rwx）を用いて実現されます。所有者アカウントが乗っ取られた場合、攻撃者が自由に権限を変更できてしまうため、所有者アカウントの認証強化（MFAなど）が不可欠です。</p>
+    </section>
+
+    <section id="mac" class="lesson-section">
+      <h2>2. MAC（強制アクセス制御）</h2>
+      <p>MAC（Mandatory Access Control）は、ユーザーや所有者の裁量によらず、システムが一元的にアクセス権限を管理し、強制する方式です。軍事システムや政府機関、高度な機密性が求められる環境で利用されます。</p>
+      <p>MACでは、すべてのユーザーに「クリアランス（許可レベル）」、すべてのリソースに「セキュリティラベル（機密区分）」が付与されます。システムはこれらを比較し、ポリシーに従ってアクセス可否を自動的に判断します。ユーザーは権限を変更することができません。</p>
+      <p>代表的な実装としてLinuxのSELinuxやAppArmorがあります。統制が強く内部不正に強い反面、ポリシー設計が複雑で、誤設定すると正常な業務が停止してしまうという運用上の難しさがあります。</p>
+    </section>
+
+    <section id="rbac" class="lesson-section">
+      <h2>3. RBAC（ロールベースアクセス制御）</h2>
+      <p>RBAC（Role-Based Access Control）は、ユーザーに直接権限を付与するのではなく、「役割（ロール）」に権限をまとめ、ユーザーにはそのロールを割り当てる方式です。現代の企業システムやクラウド環境におけるアクセス制御の標準となっています。</p>
+      <p>例えば、「経理担当」というロールに「経理DBの読み書き権限」を付与し、新規入社した経理社員には「経理担当」ロールを割り当てます。これにより、ユーザー数が増えてもロールに対して権限管理を行えばよいため、管理負荷が大幅に軽減されます。</p>
+      <p>ただし、ロールの設計が粗すぎると「とりあえず管理者ロールを付与する」といった権限の肥大化が起きやすく、細かすぎるとロールが乱立して管理が複雑化するというトレードオフがあります。</p>
+    </section>
+
+    <section id="abac" class="lesson-section">
+      <h2>4. ABAC（属性ベースアクセス制御）</h2>
+      <p>ABAC（Attribute-Based Access Control）は、ユーザー・リソース・環境などの「属性」を組み合わせて、アクセス可否を動的に判断する方式です。RBACでは表現しづらい細かい条件制御が可能になります。</p>
+      <p>属性には、ユーザー属性（部署、役職）、リソース属性（データの機密レベル）、環境属性（アクセス元IP、時刻、デバイス種類）などがあります。例えば、「『経理部』かつ『勤務時間内』かつ『社内ネットワーク』からのみ『機密ファイル』への『書き込み』を許可する」といった複雑なポリシーを記述できます。</p>
+      <p>技術的には、アクセス要求を受け付けるPEP（Policy Enforcement Point）と、ポリシーを評価して判断するPDP（Policy Decision Point）が連携して動作します。ゼロトラストセキュリティモデルとの親和性が非常に高い方式です。</p>
+    </section>
+
+    <section id="iam" class="lesson-section">
+      <h2>5. IAM（クラウドのアクセス管理）</h2>
+      <p>IAM（Identity and Access Management）は、クラウド環境（AWS, Azure, GCPなど）において、ユーザー、ロール、権限を一元的に管理する仕組みです。クラウドでは多様なリソースが存在するため、IAMはセキュリティの中心となります。</p>
+      <p>現代のIAMは、RBAC（ロールによる大枠の権限付与）とABAC（条件付きアクセスによる細かい制御）を組み合わせたハイブリッドな方式を採用しています。例えば、「管理者ロール」を持ち、かつ「MFAが有効」で、かつ「特定IPからのアクセス」のみを許可するといった設定が可能です。</p>
+      <p>クラウド環境では権限が強力であるため、「最小権限の原則（Least Privilege）」の徹底が特に重要です。不要な権限や過剰な権限（例：すべてのリソースに対するフルアクセス）を付与すると、アカウントが侵害された際の被害が甚大になります。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>IAMにおけるアクセス判断のフロー</figcaption>
+        <pre>
+  [ アクセス要求 ]
+  ユーザーがクラウドリソースへの操作を要求
+          │
+  [ 認証 (Authentication) ]
+  パスワード + MFA などで本人確認
+          │
+  [ 認可 (Authorization) ]
+  1. ユーザーに付与された「ロール」を確認 (RBAC)
+  2. 「環境属性 (IP, 時刻, MFA状態)」を確認 (ABAC)
+  3. IAMポリシーエンジンが許可/拒否を判断
+          │
+  [ 結果 ]
+  許可 → 操作実行 / 拒否 → エラー返却 (ログ記録)
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. ファイルの所有者が、他のユーザーに対して読み取りや書き込みの権限を自由に設定できるアクセス制御方式はどれか。</summary>
+        <p>ア）DAC（任意アクセス制御） イ）MAC（強制アクセス制御） ウ）RBAC（ロールベースアクセス制御） エ）ABAC（属性ベースアクセス制御）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — DACはリソースの所有者が裁量を持って権限を設定する方式であり、WindowsやLinuxのファイル権限などで採用されています。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. MAC（強制アクセス制御）の特徴として、最も適切なものはどれか。</summary>
+        <p>ア）ユーザーが自由にアクセス権を変更できる イ）システムが一元的にセキュリティラベルとポリシーに基づきアクセスを強制する ウ）役割（ロール）ごとに権限をまとめて管理する エ）アクセス元のIPアドレスや時刻によって動的に制御する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — MACはユーザーの裁量を排し、システムが設定したセキュリティラベルとポリシーに従って強制的にアクセスを制御します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 大規模な組織において、ユーザーごとに個別に権限を設定するのではなく、「役割」に権限をまとめて管理する方式はどれか。</summary>
+        <p>ア）DAC イ）MAC ウ）RBAC エ）ABAC</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — RBAC（Role-Based Access Control）は、役割（ロール）に権限を紐付け、ユーザーにはロールを割り当てることで管理負荷を低減します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 「勤務時間外はアクセスを拒否する」「社外ネットワークからの接続は読み取りのみ許可する」といった、環境や状況に応じた動的な制御を実現する方式はどれか。</summary>
+        <p>ア）DAC イ）MAC ウ）RBAC エ）ABAC</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — ABAC（Attribute-Based Access Control）は、ユーザー、リソース、環境などの属性を組み合わせて柔軟かつ動的にアクセスを制御します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. クラウド環境において、ユーザー、ロール、ポリシーを一元的に管理し、RBACとABACを組み合わせた高度な制御を実現する仕組みはどれか。</summary>
+        <p>ア）ACL イ）IAM（Identity and Access Management） ウ）PKI エ）SIEM</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IAMはクラウドセキュリティの中心となる仕組みであり、ロールによる権限付与と、条件付きアクセス（属性ベース）を組み合わせて管理します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. アクセス制御を設計・運用する際に、ユーザーやプログラムに対して、業務を遂行するために必要な最小限の権限のみを付与する原則はどれか。</summary>
+        <p>ア）防御の多重化 イ）最小権限の原則（Least Privilege） ウ）フェイルセーフ エ）ゼロトラスト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 最小権限の原則は、万が一アカウントが侵害された場合の被害範囲を限定するために不可欠な基本原則です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. DAC（任意アクセス制御）の主な弱点として、最も適切なものはどれか。</summary>
+        <p>ア）ポリシー設計が複雑で運用が困難である イ）所有者が誤って広い権限を付与してしまうリスクがある ウ）役割（ロール）が乱立して管理が複雑化する エ）環境属性の変化に対応できない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DACは所有者の裁量に依存するため、権限設定が分散し、誤設定や権限の肥大化による情報漏洩リスクが高まります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. ABAC（属性ベースアクセス制御）において、アクセス要求を受け付け、ポリシー評価エンジン（PDP）に判断を仰ぐコンポーネントはどれか。</summary>
+        <p>ア）PEP（Policy Enforcement Point） イ）CA（Certification Authority） ウ）WAF（Web Application Firewall） エ）HSM（Hardware Security Module）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — PEPはアクセス要求の入口でポリシー適用を強制し、PDPが属性を評価して返した許可/拒否の結果に従ってアクセスを制御します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. IAMにおいて、アクセスキーの漏洩リスクを低減するために推奨される対策はどれか。</summary>
+        <p>ア）アクセスキーをソースコードに埋め込んで管理する イ）可能な限りIAMロールを使用し、アクセスキーの利用を最小限にする ウ）すべてのユーザーに管理者権限を付与して管理を簡素化する エ）アクセスキーの有効期限を無制限に設定する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — アクセスキーは漏洩リスクが高いため、EC2インスタンスプロファイルやOIDC連携など、IAMロールを使用した一時的な権限付与が推奨されます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. SELinuxなどが採用している、ファイルやプロセスに「機密」「秘密」などのラベルを付与し、システムが強制的にアクセスを制御するモデルはどれか。</summary>
+        <p>ア）DAC イ）MAC ウ）RBAC エ）ABAC</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — MAC（強制アクセス制御）は、セキュリティラベルとポリシーに基づき、ユーザーの意図に関わらずシステムがアクセスを強制します。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第3章 セキュリティ技術（3-3-1 〜 3-3-5）</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>セキュリティ監査と事業継続計画 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security Management</p>
+        <h1>セキュリティ監査と事業継続計画</h1>
+        <p class="lead">組織のセキュリティ対策が適切に運用されているかを確認する「監査」と、災害や攻撃による業務停止から早期復旧を図る「BCP/BCM」の仕組みについて学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#audit">セキュリティ監査</a>
+        <a href="#bcp-bcm">BCPとBCM</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>セキュリティ監査と事業継続計画</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>内部監査と外部監査の目的・役割の違いを説明できる</li>
+          <li>監査の信頼性を担保するために「証跡（Evidence）」が不可欠であることを理解している</li>
+          <li>BCP（事業継続計画）とDR（災害対策）の違い、およびBCM（運用管理）の重要性を把握している</li>
+          <li>BIA（業務影響分析）がBCPの前提であり、RTO/RPOを設定する根拠となることを説明できる</li>
+          <li>BCPは「作って終わり」ではなく、訓練・見直しを通じて継続的に運用される必要があることを理解している</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>内部監査と外部監査の違い、証跡の重要性、BCPとDRの役割分担、BIAとRTO/RPO</dd></div>
+          <div><dt>中</dt><dd>BCPの発動基準、BCMの訓練サイクル、監査結果の改善プロセス</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>内部監査</td><td>組織内部で自社のセキュリティ運用を確認する仕組み</td><td>「自分たちで自分たちをチェック」する自律的な活動</td></tr>
+            <tr><td>外部監査</td><td>第三者（監査法人など）が客観的に評価する仕組み</td><td>ISMS認証や取引先監査などで実施。客観性が最大の価値</td></tr>
+            <tr><td>証跡（Evidence）</td><td>監査対象の活動が適切に行われたことを証明する記録</td><td>ログ、手順書、設定画面キャプチャなどが該当。口頭説明は不十分</td></tr>
+            <tr><td>BCP</td><td>Business Continuity Plan。重要業務を止めない／早期復旧するための計画書</td><td>「どの状況で誰が何をするか」を事前に定める</td></tr>
+            <tr><td>BCM</td><td>Business Continuity Management。BCPを運用・維持・改善する仕組み全体</td><td>計画だけでなく、訓練・見直しを含む継続的活動</td></tr>
+            <tr><td>DR</td><td>Disaster Recovery。システムやデータを復旧するための技術的対策</td><td>バックアップ、冗長化、代替サイトなどが中心</td></tr>
+            <tr><td>BIA</td><td>Business Impact Analysis。業務影響分析。BCPの前提となる工程</td><td>どの業務が重要か、停止時の影響を評価する</td></tr>
+            <tr><td>RTO</td><td>Recovery Time Objective。復旧目標時間。業務を再開するまでの許容時間</td><td>例：受注システムは4時間以内に復旧が必要</td></tr>
+            <tr><td>RPO</td><td>Recovery Point Objective。復旧目標時点。許容されるデータ損失量</td><td>例：売上データは1時間分までしか失えない</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="audit" class="lesson-section">
+      <h2>1. セキュリティ監査</h2>
+      <p>セキュリティ監査は、組織が策定したセキュリティポリシーや基準が、実際に現場で適切に運用されているかを確認する仕組みです。これは単なるチェックではなく、セキュリティレベルを維持・向上させるための重要なフィードバックループです。</p>
+      <p>監査には大きく分けて2種類あります。「内部監査」は組織内の専門チームが自社の運用をチェックし、改善点を洗い出す自律的な活動です。一方、「外部監査」は第三者（監査法人、認証機関、取引先など）が客観的な視点で評価を行うもので、ISMS（ISO/IEC 27001）などの認証取得や、取引先からの信頼獲得のために実施されます。</p>
+      <p>監査の信頼性を担保する上で最も重要なのが「証跡（Evidence）」です。監査では「言った」「やった」ではなく、「証拠があるかどうか」がすべてです。ログファイル、手順書、設定画面のキャプチャ、教育実施記録など、客観的に確認可能な記録が証跡として求められます。これらの証跡がなければ、監査は形式的になり、改善につながりません。</p>
+    </section>
+
+    <section id="bcp-bcm" class="lesson-section">
+      <h2>2. BCPとBCM（事業継続計画とその運用）</h2>
+      <p>BCP（Business Continuity Plan）は、地震・火災・サイバー攻撃などの重大インシデントが発生した際に、組織の「重要業務（クリティカル業務）」を止めない、または早期に復旧させるための計画書です。BCPは単なる文書ではなく、「どの状況で」「誰が」「どのような基準で」計画を発動するかを明確に定めたものです。</p>
+      <p>BCPを策定するための第一歩は、BIA（Business Impact Analysis：業務影響分析）です。ここでは、すべての業務を棚卸しし、停止した場合の影響（売上損失、法的ペナルティ、信用失墜など）を評価します。その結果に基づき、各業務の「RTO（復旧目標時間）」と「RPO（復旧目標時点）」を設定します。RTOは「業務を再開するまでの許容時間」、RPOは「許容されるデータ損失量」を意味します。</p>
+      <p>BCPと密接に関連するのがDR（Disaster Recovery：災害対策）です。DRは、システムやデータを技術的に復旧するための具体的な手段（バックアップ、冗長化、代替サイトなど）を指します。一方、BCM（Business Continuity Management）は、BCP/DRを単に作成するだけでなく、年1回以上の訓練（机上訓練・実動訓練）を行い、その結果をもとに計画を継続的に見直し・改善していく「運用の仕組み」全体を指します。BCPは「作って終わり」ではなく、BCMを通じて「生きている計画」として維持される必要があります。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>BCP/DR/BCMの関係</figcaption>
+        <pre>
+  [ BIA（業務影響分析） ]
+  重要業務の特定 → RTO/RPOの設定
+          │
+  [ BCP（事業継続計画） ]
+  「止めないための方法」を計画
+  （代替手段、連絡体制、発動基準）
+          │
+  [ DR（災害対策） ]
+  「復旧のための技術的対策」
+  （バックアップ、冗長化、代替サイト）
+          │
+  [ BCM（運用管理） ]
+  訓練 → 評価 → 見直し → 改善のPDCAサイクル
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 組織内部で自社のセキュリティ運用を自分たちで確認する監査の名称はどれか。</summary>
+        <p>ア）外部監査 イ）内部監査 ウ）セキュリティテスト エ）ペネトレーションテスト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 内部監査は、組織内の専門チームが自律的に自社のセキュリティ運用をチェックし、改善点を洗い出す活動です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 第三者（監査法人など）が客観的な視点でセキュリティレベルを評価する監査の最大の価値は何か。</summary>
+        <p>ア）コストが安い イ）迅速に実施できる ウ）客観性が高い エ）組織内部の秘密を守れる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 外部監査は、利害関係のない第三者が評価を行うため、客観性が高く、取引先や規制当局への信頼獲得に貢献します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 監査において、セキュリティ対策が適切に実施されたことを証明するために必要なものはどれか。</summary>
+        <p>ア）担当者の口頭説明 イ）監査人の主観的判断 ウ）証跡（Evidence） エ）将来の改善計画</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 証跡（ログ、手順書、設定キャプチャなど）は、監査の信頼性を担保するための客観的な証拠であり、口頭説明だけでは不十分です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 重要業務を災害や攻撃から守り、早期に復旧させるための「計画書」そのものを指す用語はどれか。</summary>
+        <p>ア）BCM イ）DR ウ）BIA エ）BCP</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — BCP（Business Continuity Plan）は、重要業務を止めない／早期復旧するための具体的な計画書です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. BCPを策定するための前提となる、どの業務が重要かを評価する工程の名称はどれか。</summary>
+        <p>ア）BCM イ）DR ウ）BIA エ）RTO</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — BIA（Business Impact Analysis）は、業務影響分析を行い、重要業務とそのRTO/RPOを特定するBCPの出発点です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 「業務を再開するまでの許容時間」を意味する用語はどれか。</summary>
+        <p>ア）RPO イ）BCM ウ）DR エ）RTO</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — RTO（Recovery Time Objective）は、災害発生後、業務を再開するまでに許容される最大の時間を指します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 「許容されるデータ損失量」を意味する用語はどれか。</summary>
+        <p>ア）RTO イ）RPO ウ）BIA エ）BCM</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — RPO（Recovery Point Objective）は、災害発生時に失ってもよいデータの最大量（例：1時間分の売上データ）を指します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. システムやデータを技術的に復旧するための具体的な手段（バックアップ、冗長化など）を指す用語はどれか。</summary>
+        <p>ア）BCP イ）BCM ウ）DR エ）BIA</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — DR（Disaster Recovery）は、災害発生後の技術的な復旧活動に特化した対策です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. BCPを単に作成するだけでなく、訓練・評価・見直しを通じて継続的に運用・改善する仕組み全体を指す用語はどれか。</summary>
+        <p>ア）BIA イ）DR ウ）BCM エ）RTO</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — BCM（Business Continuity Management）は、BCPを「生きている計画」として維持するためのPDCAサイクル全体を指します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. BCPが実際の災害時に機能するかどうかを確認するために、組織が最低限行うべき活動はどれか。</summary>
+        <p>ア）計画書をPDFで保存する イ）年1回以上の訓練（机上・実動）を実施する ウ）外部コンサルタントに依頼する エ）全従業員にメールで周知する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 訓練を実施しないBCPは机上の空論です。年1回以上の訓練を通じて、計画の妥当性を検証し、必要に応じて見直すことがBCMの要です。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第4章 セキュリティ管理（4-4, 4-5）</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>高度な認証とプロトコル | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>高度な認証とプロトコル</h1>
+        <p class="lead">パスワードに代わる次世代の認証方式である「FIDO2/パスキー」と、サービス間で安全に認証・認可を実現する「OAuth2/OIDC」の仕組みについて学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#possession">所持要素認証</a>
+        <a href="#passwordless">パスワードレス認証</a>
+        <a href="#protocol">認証プロトコル</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>高度な認証とプロトコル</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>所持要素認証（TOTP、プッシュ通知、ハードウェアキー）の内部動作とSMS認証の弱点を説明できる</li>
+          <li>FIDO2/パスキーが「公開鍵暗号」と「セキュア領域」を組み合わせてフィッシング耐性を実現する仕組みを理解している</li>
+          <li>OAuth2（認可）とOIDC（認証）の役割の違いを区別できる</li>
+          <li>PKCE（Proof Key for Code Exchange）が認可コードの盗難を防ぐ仕組みを把握している</li>
+          <li>IDトークン（JWT）の構造と、最小権限の原則の重要性を説明できる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>FIDO2の仕組みとフィッシング耐性、OAuth2/OIDCの役割、PKCEの目的、JWTの構造</dd></div>
+          <div><dt>中</dt><dd>TOTPの内部動作、SMS認証の弱点（SIMスワップ等）、パスキーのクラウド同期の仕組み</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>TOTP</td><td>Time-based One-Time Password。時刻ベースの使い捨てパスワード</td><td>秘密鍵と現在時刻（30秒区切り）からHMAC計算で生成</td></tr>
+            <tr><td>チャレンジレスポンス</td><td>サーバーが乱数（チャレンジ）を送り、クライアントが署名（レスポンス）で応答する方式</td><td>プッシュ通知やFIDO2の内部動作で利用される</td></tr>
+            <tr><td>SIMスワップ</td><td>攻撃者が携帯電話会社を騙して被害者の電話番号を乗っ取る攻撃</td><td>SMS認証が技術的に弱いとされる最大の理由</td></tr>
+            <tr><td>FIDO2 / パスキー</td><td>パスワードを使わず、端末内の秘密鍵と公開鍵暗号で認証する方式</td><td>フィッシング耐性が極めて高い。生体認証は「鍵の利用許可」に使われる</td></tr>
+            <tr><td>セキュア領域</td><td>OSやアプリから直接アクセスできない専用ハードウェア領域</td><td>Apple: Secure Enclave / Windows: TPM。秘密鍵はここから出ない</td></tr>
+            <tr><td>OAuth2</td><td>サードパーティのサービスに「アクセス権限（認可）」を委譲するプロトコル</td><td>認証（本人確認）ではなく、認可（何ができるか）を扱う</td></tr>
+            <tr><td>OIDC</td><td>OpenID Connect。OAuth2を拡張し、「認証（本人確認）」機能を追加したプロトコル</td><td>IDトークン（JWT）を発行してユーザー情報を提供する</td></tr>
+            <tr><td>PKCE</td><td>Proof Key for Code Exchange。モバイルアプリ等で認可コードの盗難を防ぐ拡張機能</td><td>code_verifierとcode_challengeを用いて、コード横取り攻撃を防止</td></tr>
+            <tr><td>JWT</td><td>JSON Web Token。OIDC等で使われる署名付きのトークン形式</td><td>Header, Payload, Signatureの3部構成。改ざん検知が可能</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="possession" class="lesson-section">
+      <h2>1. 所持要素認証の仕組みと弱点</h2>
+      <p>所持要素認証は、本人が「持っている物」（スマホ、認証アプリ、ハードウェアキー）を使って本人確認を行う方式です。内部では、サーバーとデバイスが共有する秘密鍵と、時刻や乱数を用いた暗号計算（TOTPやチャレンジレスポンス）によって動作しています。</p>
+      <p>代表的なTOTP（認証アプリ）は、QRコードで共有した秘密鍵と現在時刻（30秒区切り）をHMAC-SHA1で計算し、6桁の数字を生成します。一方、プッシュ通知型は、サーバーが生成した乱数（チャレンジ）に対し、端末内の秘密鍵で署名（レスポンス）を返すことで本人確認を行います。</p>
+      <p>一方で、SMS認証は技術的に弱点が多いとされています。SMSは通信規格（SS7）の脆弱性により盗聴されるリスクがあり、何より「SIMスワップ攻撃」により電話番号自体を乗っ取られると、認証コードが攻撃者の端末に届いてしまうためです。そのため、実務では認証アプリやFIDO2セキュリティキーの利用が強く推奨されています。</p>
+    </section>
+
+    <section id="passwordless" class="lesson-section">
+      <h2>2. パスワードレス認証（FIDO2 / パスキー）</h2>
+      <p>FIDO2（WebAuthn）やパスキーは、パスワードを完全に排除し、公開鍵暗号を利用して認証を行う次世代の方式です。端末内の「セキュア領域（Secure Enclave / TPM）」で秘密鍵を生成・保存し、公開鍵のみをサーバーに登録します。ログイン時は、サーバーからの乱数（チャレンジ）に対し、秘密鍵で署名して応答します。</p>
+      <p>この方式において、指紋や顔認証などの生体認証は「本人確認そのもの」ではなく、「セキュア領域に保存された秘密鍵の利用を許可する（ロックを解除する）」ための手段として機能します。生体情報そのものがサーバーに送信されることは決してありません。</p>
+      <p>FIDO2が極めて高い「フィッシング耐性」を持つ理由は、オリジン（ドメイン）チェックを行う仕組みがあるためです。秘密鍵は「example.com」用として生成されるため、攻撃者が「examp1e.com」のような偽サイトを用意しても、ブラウザがドメインの不一致を検知し、署名が成立しないようブロックします。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>FIDO2認証の内部フロー</figcaption>
+        <pre>
+  [ クライアント (ブラウザ) ]          [ サーバー ]
+  1. ログイン要求
+  2. チャレンジ(乱数)を受信 ◀─────────
+  3. ユーザーが生体認証(PIN)を実行
+  4. セキュア領域が署名を生成
+  5. 署名をサーバーへ送信 ─────────▶
+  6. 公開鍵で署名を検証し、一致すればログイン許可
+        </pre>
+      </figure>
+    </section>
+
+    <section id="protocol" class="lesson-section">
+      <h2>3. 認証プロトコル（OAuth2 / OIDC）</h2>
+      <p>現代のWebサービスでは、複数のサービス間で安全に連携するための標準プロトコルとしてOAuth2とOIDCが利用されています。OAuth2は「認可（Authorization）」を扱い、ユーザーのパスワードを共有せずに、サードパーティのアプリに限定されたアクセス権限（スコープ）を委譲する仕組みです。</p>
+      <p>一方、OIDC（OpenID Connect）はOAuth2を拡張し、「認証（Authentication）」機能を追加したプロトコルです。OIDCでは、認可サーバーが「IDトークン（JWT形式）」を発行し、これに含まれる署名付きのユーザー情報（名前、メールアドレス等）によって、利用者が確かに本人であることを保証します。</p>
+      <p>特にモバイルアプリやSPA（シングルページアプリケーション）では、認可コードが盗聴されるリスクがあるため、「PKCE（Proof Key for Code Exchange）」の使用が必須となっています。PKCEは、クライアント側で生成したランダムな文字列（code_verifier）のハッシュ値を事前に送信し、トークン交換時に元の文字列を提示させることで、コードが盗まれても悪用できないようにする仕組みです。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 所持要素認証において、現在時刻と共有秘密鍵を用いて6桁の数字を生成する方式はどれか。</summary>
+        <p>ア）SMS認証 イ）TOTP（Time-based One-Time Password） ウ）生体認証 エ）パスワードリスト攻撃</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — TOTPは、サーバーと認証アプリが共有する秘密鍵と、30秒ごとに区切られた現在時刻を元にHMAC計算を行い、使い捨てパスワードを生成します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. SMS認証が技術的に弱いとされる最大の理由はどれか。</summary>
+        <p>ア）通信速度が遅いためタイムアウトしやすい イ）SIMスワップ攻撃により電話番号自体を乗っ取られるリスクがある ウ）暗号化が強すぎて端末のバッテリーを消費する エ）ユーザーがコードを覚えられないため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 攻撃者が携帯電話会社を騙して被害者の電話番号を自分のSIMカードに移行させる「SIMスワップ攻撃」が成立すると、SMS認証は突破されてしまいます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. FIDO2（パスキー）において、指紋や顔認証などの生体認証が担う役割はどれか。</summary>
+        <p>ア）生体情報をサーバーに送信して本人確認する イ）セキュア領域に保存された秘密鍵の利用を許可する（ロック解除する） ウ）パスワードの代わりとなる複雑な文字列を生成する エ）ネットワーク通信を暗号化する鍵を配布する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — FIDO2では、生体認証は「秘密鍵を使ってもよいかの許可」を得るためだけに使われ、実際の本人確認は公開鍵暗号の仕組み（チャレンジレスポンス）で行われます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. FIDO2認証がフィッシング攻撃に対して極めて強い耐性を持つ技術的理由はどれか。</summary>
+        <p>ア）パスワードを使わないため総当たり攻撃が不可能だから イ）オリジン（ドメイン）チェックを行い、偽サイトでは署名が成立しない仕組みになっているから ウ）生体情報は変更できないため、漏洩のリスクがゼロだから エ）通信経路が常にVPNで保護されているから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — FIDO2の秘密鍵は特定のドメイン（例: example.com）に紐付いて生成されるため、攻撃者が類似ドメイン（examp1e.com）の偽サイトを用意しても署名が成立せず、突破できません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. OAuth2プロトコルが主に扱うセキュリティ機能はどれか。</summary>
+        <p>ア）認証（Authentication） イ）認可（Authorization） ウ）暗号化（Encryption） エ）監査（Auditing）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — OAuth2は「認可」を扱うプロトコルであり、ユーザーのパスワードを共有せずに、サードパーティのアプリに限定されたアクセス権限（スコープ）を委譲します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. OIDC（OpenID Connect）において、ユーザーの本人確認情報を提供するために発行されるトークンはどれか。</summary>
+        <p>ア）アクセストークン イ）リフレッシュトークン ウ）IDトークン（JWT） エ）CSRFトークン</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — OIDCはOAuth2に認証機能を追加したもので、認証の結果としてユーザー情報を含む「IDトークン（JWT形式）」を発行します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. モバイルアプリなどで認可コードが盗聴される攻撃（コード横取り）を防ぐために必須とされる拡張機能はどれか。</summary>
+        <p>ア）PKCE（Proof Key for Code Exchange） イ）HSTS（HTTP Strict Transport Security） ウ）CORS（Cross-Origin Resource Sharing） エ）SAML（Security Assertion Markup Language）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — PKCEは、クライアント側で生成したランダムな文字列（code_verifier）のハッシュ値を事前に送信し、トークン交換時に元の文字列を提示させることで、盗まれたコードの悪用を防ぎます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. JWT（JSON Web Token）が改ざんされていないことを保証する仕組みはどれか。</summary>
+        <p>ア）Base64エンコードされているため イ）発行者の秘密鍵によるデジタル署名（Signature）が含まれているため ウ）トークンの有効期限（exp）が設定されているため エ）HTTPS通信のみで送信されるため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — JWTはHeader, Payload, Signatureの3部構成であり、発行者の秘密鍵で生成された署名を検証することで、内容が改ざんされていないことを保証します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. パスキー（Passkey）をクラウド経由で複数デバイス間で同期する際、セキュリティを維持するための仕組みはどれか。</summary>
+        <p>ア）秘密鍵そのものを平文でクラウドサーバーに保存する イ）秘密鍵は端末ごとに生成し、クラウドには暗号化されたバックアップのみを保存し、復元には生体認証を要求する ウ）同期機能はセキュリティリスクが高いため、パスキーでは一切サポートされない エ）同期時には必ず管理者が手動で承認する必要がある</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — パスキーのクラウド同期では、秘密鍵そのものはクラウドに保存されず、エンドツーエンドで暗号化されたバックアップデータのみが保存され、復元時にはユーザーの生体認証が必須となります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. OAuth2/OIDCを利用する際、アプリケーションが必要以上の権限を持たないようにするために適用すべき原則はどれか。</summary>
+        <p>ア）最小権限の原則（Least Privilege） イ）フェイルセーフの原則 ウ）防御の多重化 エ）ゼロトラストの原則</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 最小権限の原則により、アプリケーションが必要とするスコープ（権限）のみを付与することで、万一トークンが漏洩した場合の被害範囲を限定できます。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+        <p>『1_情報セキュリティー.pdf』 第3章 セキュリティ技術（3-2-4 〜 3-2-6）</p>
+    </section>
+  </main>
+</body>
+</html>

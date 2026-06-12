@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>認証技術の基礎 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>認証技術の基礎</h1>
+        <p class="lead">システムの入口を守る「パスワード認証」「多要素認証（MFA）」「生体認証」の仕組みと、内部で利用されるハッシュ関数やセキュア領域などの技術要素について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#password">パスワード認証</a>
+        <a href="#mfa">多要素認証（MFA）</a>
+        <a href="#biometrics">生体認証</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>認証技術の基礎</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>パスワードがサーバー側で「ハッシュ化（＋ソルト・ストレッチング）」されて保存される仕組みを理解している</li>
+          <li>MFA（多要素認証）の3要素（知識・所持・生体）を区別し、組み合わせることでセキュリティ強度が上がる理由を説明できる</li>
+          <li>TOTPやプッシュ通知の内部動作、およびSMS認証が弱い理由を把握している</li>
+          <li>生体認証が「画像そのもの」ではなく「特徴量（テンプレート）」として保存されることを理解している</li>
+          <li>生体情報が端末内の「セキュア領域」で保護され、FIDO2などでは「鍵の利用許可」として使われる仕組みを説明できる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ハッシュ化・ソルト・ストレッチングの目的、MFAの3要素、生体認証の特徴量とセキュア領域</dd></div>
+          <div><dt>中</dt><dd>TOTPの仕組み、MFA疲れ攻撃、SMS認証の弱点（SIMスワップ等）、FIDO2との連携</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>ハッシュ化</td><td>パスワードを元に戻せない固定長の値に変換して保存すること</td><td>平文保存は厳禁。DB漏洩時の被害を防ぐ</td></tr>
+            <tr><td>ソルト</td><td>ハッシュ化前に付与するランダムな文字列</td><td>レインボーテーブル攻撃（事前計算攻撃）を防ぐ</td></tr>
+            <tr><td>ストレッチング</td><td>ハッシュ計算を意図的に何千〜何万回も繰り返すこと</td><td>総当たり攻撃の計算コストを増大させる</td></tr>
+            <tr><td>MFA</td><td>Multi-Factor Authentication。複数の異なる要素で本人確認すること</td><td>知識・所持・生体のうち2つ以上を組み合わせる</td></tr>
+            <tr><td>TOTP</td><td>Time-based One-Time Password。時刻ベースの使い捨てパスワード</td><td>秘密鍵と現在時刻から生成。認証アプリで利用</td></tr>
+            <tr><td>MFA疲れ攻撃</td><td>大量のプッシュ通知を送り、誤って承認させる攻撃</td><td>ユーザーの焦りやミスを利用する</td></tr>
+            <tr><td>特徴量（テンプレート）</td><td>指紋や顔の情報を数学的に変換・数値化したデータ</td><td>生体画像そのものは保存されない（復元不可）</td></tr>
+            <tr><td>セキュア領域</td><td>OSやアプリから直接アクセスできない専用ハードウェア領域</td><td>Apple: Secure Enclave / Windows: TPM など</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="password" class="lesson-section">
+      <h2>1. パスワード認証の仕組みと対策</h2>
+      <p>パスワード認証は、本人しか「知っていない情報（知識要素）」を使って本人確認を行う、最も基本的な認証方式です。しかし、漏洩したパスワードを使い回す「パスワードリスト攻撃」や、総当たり攻撃の標的となりやすく、単独での利用は現在では脆弱とされています。</p>
+      <p>サーバー側では、パスワードを平文で保存せず、必ず「ハッシュ化」して保存します。さらに、同じパスワードでも異なるハッシュ値になるようランダムな文字列（ソルト）を付与したり、計算を繰り返して解析を困難にする（ストレッチング）などの対策が必須です。これにより、データベースが漏洩した場合でも、元のパスワードが即座にばれるリスクを大幅に低減できます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>安全なパスワード保存のフロー</figcaption>
+        <pre>
+  [ ユーザー入力 ]
+  パスワード: "password123"
+          │
+  [ ソルト付与 ]
+  ランダム値: "X8f9@k" を結合
+          │
+  [ ストレッチング (PBKDF2 / bcrypt等) ]
+  ハッシュ計算を数万回繰り返す
+          │
+  [ サーバー保存 ]
+  最終ハッシュ値のみをDBに保存 (元パスワードは破棄)
+        </pre>
+      </figure>
+    </section>
+
+    <section id="mfa" class="lesson-section">
+      <h2>2. 多要素認証（MFA）の仕組み</h2>
+      <p>MFA（Multi-Factor Authentication）は、パスワードだけでなく「所持要素（スマホや認証アプリ）」や「生体要素（指紋・顔）」など、異なる種類の要素を組み合わせて本人確認を行う方式です。1つの要素が破られても、他の要素が突破されなければログインを防げるため、現代のセキュリティ対策では必須となっています。</p>
+      <p>代表的な方式であるTOTP（認証アプリ）は、サーバーとアプリが共有する「秘密鍵」と「現在時刻」から使い捨てパスワードを生成します。一方、SMS認証は電話番号の乗っ取り（SIMスワップ攻撃）や通信規格の脆弱性（SS7）による盗聴リスクがあるため、技術的には認証アプリやプッシュ通知よりも弱いとされています。</p>
+      <p>また、プッシュ通知型のMFAでは、攻撃者が大量の承認要求を送りつけ、ユーザーが誤って「承認」してしまう「MFA疲れ攻撃」が発生しています。これに対抗するため、番号入力や位置情報確認を組み合わせた追加の本人確認が導入されるようになっています。</p>
+    </section>
+
+    <section id="biometrics" class="lesson-section">
+      <h2>3. 生体認証の仕組みとセキュア領域</h2>
+      <p>生体認証は、指紋・顔・虹彩などの身体的特徴を利用して本人確認を行う方式です。重要な点は、指紋の画像や顔写真そのものが端末に保存されるわけではないということです。センサーが読み取ったデータは、数学的に変換された「特徴量（テンプレート）」として処理され、元の生体情報には復元できない形で保管されます。</p>
+      <p>この特徴量は、OSやアプリから直接アクセスできない「セキュア領域（Secure Enclave / TPM / TEE）」に保存されます。認証時には、センサーが読み取ったデータとセキュア領域内のテンプレートが照合され、一致した場合にのみ「認証成功」という結果だけがOSに返されます。生体情報そのものが外部に送信されることはありません。</p>
+      <p>また、FIDO2（パスキー）などのパスワードレス認証では、生体認証は「本人確認」そのものではなく、「端末内に保存された秘密鍵を利用するための許可（ロック解除）」として機能します。これにより、フィッシング耐性の高い安全な認証が実現されています。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. サーバー側でユーザーのパスワードを安全に保存するために実施すべき処理はどれか。</summary>
+        <p>ア）パスワードを暗号化して復号可能な形で保存する イ）パスワードをそのまま平文で保存する ウ）パスワードにソルトを付与し、ストレッチングを行ったハッシュ値を保存する エ）パスワードをBase64エンコードして保存する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — パスワードは、ソルト付与とストレッチング（反復計算）を行ったハッシュ値として保存するのが現代の標準です。アやエは解析されるリスクがあります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. パスワードのハッシュ化前にランダムな文字列を付与する「ソルト」の主な目的はどれか。</summary>
+        <p>ア）ハッシュ計算の速度を向上させる イ）レインボーテーブル攻撃（事前計算攻撃）を防ぐ ウ）パスワードの複雑性を強制的に高める エ）ネットワーク転送時のデータ量を圧縮する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ソルトを付与することで、同じパスワードでも異なるハッシュ値になり、事前に計算されたハッシュ値のリスト（レインボーテーブル）による解析を防ぎます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ハッシュ計算を意図的に何千〜何万回も繰り返し、総当たり攻撃を困難にする技術はどれか。</summary>
+        <p>ア）エンコード イ）ストレッチング ウ）エスケープ エ）サニタイズ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ストレッチング（PBKDF2やbcryptなど）は、計算コストを意図的に増大させることで、攻撃者による総当たり攻撃の速度を落とす効果があります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. MFA（多要素認証）の「所持要素」に該当するものはどれか。</summary>
+        <p>ア）パスワード イ）指紋 ウ）スマホの認証アプリ エ）IPアドレス</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 所持要素は「本人が持っている物」であり、スマホの認証アプリやハードウェアキーが該当します。アは知識要素、イは生体要素です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. TOTP（Time-based One-Time Password）の生成に利用される2つの要素はどれか。</summary>
+        <p>ア）ユーザーIDとパスワード イ）共有秘密鍵と現在時刻 ウ）公開鍵と秘密鍵 エ）セッションIDとCookie</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — TOTPは、サービスと認証アプリが共有する「秘密鍵」と、30秒ごとに区切った「現在時刻」を元にHMAC計算を行い、6桁のコードを生成します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. SMS認証が技術的に弱いとされる主な理由はどれか。</summary>
+        <p>ア）SMSは常に暗号化されているため解読できない イ）電話番号が乗っ取られる「SIMスワップ攻撃」のリスクがある ウ）SMSは生体認証と組み合わせる必要がある エ）SMSは送信に非常に長い時間がかかる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SMS認証は、電話番号そのものが乗っ取られるSIMスワップ攻撃や、通信規格（SS7）の脆弱性を突いた盗聴のリスクがあり、認証アプリよりも弱いとされています。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 攻撃者が大量のプッシュ通知を送りつけ、ユーザーが誤って「承認」してしまうことを狙う攻撃はどれか。</summary>
+        <p>ア）SQLインジェクション イ）MFA疲れ攻撃（MFA Fatigue） ウ）クロスサイトスクリプティング エ）ゼロデイ攻撃</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — MFA疲れ攻撃は、ユーザーが焦ったり疲れたりして誤って承認してしまう心理的な隙を突く攻撃です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 生体認証における「特徴量（テンプレート）」の説明として、正しいものはどれか。</summary>
+        <p>ア）指紋や顔の画像そのものを暗号化したデータ イ）生体情報を数学的に変換・数値化したデータで、元には復元できない ウ）パスワードをハッシュ化したものと同じデータ エ）ネットワーク上で送信されるセッションID</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 生体認証では、指紋の分岐点や顔の位置関係などを数値化した「特徴量」が保存され、元の画像や生体情報そのものは保存されません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 生体情報のテンプレートが保存される、OSやアプリから直接アクセスできない専用領域はどれか。</summary>
+        <p>ア）パブリッククラウド ストレージ イ）セキュア領域（Secure Enclave / TPM） ウ）ブラウザのLocalStorage エ）共有フォルダ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 生体情報のテンプレートは、Secure Enclave（Apple）やTPM（Windows）などのセキュア領域に保存され、外部への漏洩が物理的に防がれます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. FIDO2（パスキー）などのパスワードレス認証において、生体認証が担う役割はどれか。</summary>
+        <p>ア）サーバーに生体データを送信して本人確認する イ）端末内のセキュア領域に保存された「秘密鍵の利用許可（ロック解除）」を与える ウ）パスワードの代わりとなる複雑な文字列を生成する エ）ネットワーク通信を暗号化する鍵を配布する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — FIDO2では、生体認証は「秘密鍵を使ってもよいかの許可」を得るためだけに使われ、実際の本人確認は公開鍵暗号の仕組み（チャレンジレスポンス）で行われます。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第3章 セキュリティ技術（3-2-1 〜 3-2-3）</p>
+    </section>
+  </main>
+</body>
+</html>

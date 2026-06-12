@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TLSとPKIの仕組み | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>TLSとPKIの仕組み</h1>
+        <p class="lead">安全な通信を支えるTLSプロトコル、データの改ざんを検知するハッシュ関数、そして公開鍵の信頼性を保証するPKI（公開鍵基盤）の役割と仕組みについて学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#tls">TLSと安全な通信</a>
+        <a href="#hash">ハッシュ関数</a>
+        <a href="#signature-pki">デジタル署名とPKI</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>TLSとPKIの仕組み</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>TLSが通信の暗号化・改ざん防止・なりすまし防止の3つを実現する仕組みを説明できる</li>
+          <li>ハッシュ関数の3つの特徴（固定長・一方向性・衝突困難性）を区別できる</li>
+          <li>デジタル署名が「秘密鍵で作成・公開鍵で検証」される流れと、真正性・否認防止を保証する理由を理解している</li>
+          <li>PKIと認証局（CA）が「公開鍵の持ち主が本物であること」を保証する仕組みを把握している</li>
+          <li>HSTSや暗号スイートの選定など、TLS通信を安全に保つ実務的な対策を挙げられる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>TLSの役割と暗号スイート、ハッシュ関数の特徴、デジタル署名の鍵の使い方、CA/証明書の役割</dd></div>
+          <div><dt>中</dt><dd>中間者攻撃（MITM）の概念、HSTSの目的、証明書の有効期限・ドメイン不一致などのエラー要因</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>TLS</td><td>Transport Layer Security。通信を暗号化するプロトコル</td><td>HTTPSの基礎。暗号化・改ざん検知・サーバー認証の3機能</td></tr>
+            <tr><td>暗号スイート</td><td>TLSで使用する「鍵交換・暗号化・ハッシュ」アルゴリズムの組み合わせ</td><td>弱いアルゴリズム（RC4, 3DES）は排除し、AES-GCM等を推奨</td></tr>
+            <tr><td>ハッシュ関数</td><td>任意のデータから固定長の値（ハッシュ値）を生成する関数</td><td>一方向性・衝突困難性が特徴。改ざん検知に使用</td></tr>
+            <tr><td>デジタル署名</td><td>送信者の秘密鍵で生成し、公開鍵で検証する電子署名</td><td>真正性と否認防止を保証。改ざん検知にも利用</td></tr>
+            <tr><td>PKI</td><td>Public Key Infrastructure。公開鍵の信頼性を管理する基盤</td><td>認証局（CA）がデジタル証明書を発行・管理する</td></tr>
+            <tr><td>中間者攻撃(MITM)</td><td>通信経路に割り込み、盗聴や改ざん・なりすましを行う攻撃</td><td>偽証明書やHTTP通信の盗聴で成立。TLSで防御</td></tr>
+            <tr><td>HSTS</td><td>HTTP Strict Transport Security。ブラウザにHTTPS強制を指示する仕組み</td><td>HTTP→HTTPSへのダウングレード攻撃を防ぐ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="tls" class="lesson-section">
+      <h2>1. TLSによる安全な通信</h2>
+      <p>TLS（Transport Layer Security）は、インターネット上の通信を暗号化し、盗聴・改ざん・なりすましを防ぐプロトコルです。Webブラウザとサーバー間のHTTPS通信は、TLSを基盤として構築されています。TLSは接続開始時に「ハンドシェイク」を行い、使用する暗号アルゴリズムの組み合わせ（暗号スイート）とセッション鍵を安全に共有します。</p>
+      <p>古い暗号スイート（RC4や3DESなど）を使用すると解読リスクが生じるため、実務ではTLS 1.2以上を必須化し、AES-GCMなど安全性が確立された強力な暗号スイートのみを許可する設定が標準です。また、通信開始時にHTTPからHTTPSへ自動的にリダイレクトさせる「HSTS（HTTP Strict Transport Security）」を導入することで、中間者攻撃（MITM）によるなりすましや通信の平文化を防げます。</p>
+      <p>TLSを安全に運用するためには、信頼できる認証局（CA）が発行した正規の証明書を使用し、期限切れ・ドメイン不一致・中間証明書の欠落などの設定ミスを定期的に確認することが不可欠です。自己署名証明書や不正な証明書の利用は、なりすましの原因となるため避ける必要があります。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>TLS通信の安全なフロー</figcaption>
+        <pre>
+  [ クライアント ]                    [ サーバー ]
+  ClientHello ──────────────────────▶
+  (対応TLSver, 暗号スイート候補提示)
+          ◀────────────────────── ServerHello
+          (TLSver確定, サーバー証明書提示)
+          ◀────────────────────── 鍵交換・共有
+  [ セッション確立 ]
+  アプリデータ ─▶(暗号化)──▶ 復号 ─▶ アプリデータ
+  (盗聴・改ざん・MITMを防御)
+        </pre>
+      </figure>
+    </section>
+
+    <section id="hash" class="lesson-section">
+      <h2>2. ハッシュ関数の特徴と役割</h2>
+      <p>ハッシュ関数は、任意の長さのデータから「固定長の値（ハッシュ値）」を生成する数学的な関数です。同じ入力からは必ず同じハッシュ値が得られる一方、ハッシュ値から元のデータを復元することは計算上不可能です（一方向性）。また、わずかな入力の変更でもハッシュ値は完全に異なる値になり、異なるデータから同じハッシュ値が生成されることも極めて困難です（衝突困難性）。</p>
+      <p>これらの特性により、ハッシュ関数は主に「データの完全性（改ざん検知）」の保証に利用されます。ファイルのダウンロード時やソフトウェアの更新時に、提供元が公開しているハッシュ値とローカルで計算した値を照合することで、転送中の改ざんや破損を検知できます。パスワードの保存時にも、平文ではなくハッシュ値（＋ソルト）として保管するのが現代の標準です。</p>
+    </section>
+
+    <section id="signature-pki" class="lesson-section">
+      <h2>3. デジタル署名とPKI（公開鍵基盤）</h2>
+      <p>デジタル署名は、公開鍵暗号技術を応用した仕組みです。送信側はメッセージのハッシュ値を「自分の秘密鍵」で暗号化して署名を生成し、受信側は「送信側の公開鍵」で復号・検証します。これにより、メッセージが確かにその送信者から送られたこと（真正性）と、送信後に改ざんされていないこと（完全性）、そして送信者が後から「送っていない」と主張できないこと（否認防止）が保証されます。</p>
+      <p>しかし、公開鍵暗号には「その公開鍵が本当に本人のものか」を確認する課題があります。これを解決するのがPKI（公開鍵基盤）です。信頼できる第三者機関である認証局（CA）が、申請者の身元を確認した上で「公開鍵＋所有者情報」に電子署名を付与したデジタル証明書を発行します。ブラウザやOSには信頼済みCAのルート証明書が事前に組み込まれており、証明書のチェーンを検証することで、サーバーのなりすましを防いでいます。</p>
+      <p>証明書の運用では、期限切れやドメイン名との不一致、中間証明書の未インストール、またはCA自体の発行ミス（なりすましCA問題）などが脆弱性につながります。そのため、証明書の自動更新監視、HSTSの適用、強力な暗号スイートの強制などが実務では必須の対策となります。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. TLS（Transport Layer Security）が提供する主なセキュリティ機能の組み合わせはどれか。</summary>
+        <p>ア）可用性・信頼性・拡張性 イ）暗号化・改ざん検知・サーバー認証 ウ）圧縮・キャッシュ・ロードバランシング エ）認証・認可・監査</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — TLSは通信経路の暗号化、データ改ざんの検知、およびサーバー証明書を介したなりすまし防止（認証）の3つを主な目的としています。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. ハッシュ関数の特徴として、誤っているものはどれか。</summary>
+        <p>ア）同じ入力からは必ず同じハッシュ値が得られる イ）ハッシュ値から元のデータを復元することは不可能である（一方向性） ウ）入力がわずかに変わってもハッシュ値は大きく変化する エ）異なる入力から同じハッシュ値が容易に生成できる（衝突容易性）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — ハッシュ関数は「衝突困難性」を持ち、異なる入力から同じハッシュ値が生成されることは計算上極めて困難です。容易に生成できるとセキュリティ上無意味になります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. デジタル署名において、署名の作成と検証に使用される鍵の正しい組み合わせはどれか。</summary>
+        <p>ア）作成：公開鍵 ／ 検証：公開鍵 イ）作成：秘密鍵 ／ 検証：公開鍵 ウ）作成：公開鍵 ／ 検証：秘密鍵 エ）作成：秘密鍵 ／ 検証：秘密鍵</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — デジタル署名は、本人しか持たない「秘密鍵」で作成し、誰でもアクセスできる「公開鍵」で検証することで真正性と否認防止を保証します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. PKI（公開鍵基盤）において、公開鍵の所有者が本物であることを保証する役割を担うのはどれか。</summary>
+        <p>ア）ハッシュ関数 イ）認証局（CA） ウ）ファイアウォール エ）ロードバランサー</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 認証局（CA）は申請者の身元確認を行い、公開鍵と所有者情報を紐付けたデジタル証明書に電子署名を付与することで信頼性を保証します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 通信開始時にHTTPからHTTPSへ自動的にリダイレクトさせ、平文通信やダウングレード攻撃を防ぐ仕組みはどれか。</summary>
+        <p>ア）DNSSEC イ）HSTS（HTTP Strict Transport Security） ウ）OAuth 2.0 エ）SAML</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — HSTSはサーバーからブラウザに対して「今後このドメインとは必ずHTTPSで通信せよ」と指示する仕組みで、中間者攻撃による通信の平文化を防ぎます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. TLSの暗号スイート選定において、セキュリティリスクが高いため避けるべきアルゴリズムの組み合わせはどれか。</summary>
+        <p>ア）AES-GCM と SHA-256 イ）ChaCha20 と Poly1305 ウ）RC4 と 3DES エ）ECDHE と RSA</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — RC4や3DESは古く、解読リスクが確認されているため現代のTLSでは無効化され、AES-GCMなどの強力なアルゴリズムが推奨されます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. Webブラウザがサーバー証明書を「信頼できない」と警告する主な原因として、最も適切なものはどれか。</summary>
+        <p>ア）証明書の有効期限が切れている、またはドメイン名が一致していない イ）サーバーのCPU使用率が高い ウ）クライアント側のネットワーク速度が遅い エ）HTMLソースコードにコメントが含まれている</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 証明書の期限切れ、ドメイン不一致、中間証明書の欠落、または信頼されていないCA発行の場合、ブラウザはなりすましリスクを警告します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 中間者攻撃（MITM）が成功する主な条件はどれか。</summary>
+        <p>ア）通信が平文（HTTP）であるか、偽の証明書をユーザーが信頼してしまう場合 イ）サーバーのストレージ容量が不足している場合 ウ）クライアントOSが最新である場合 エ）TLS 1.3が使用されている場合</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 平文通信は盗聴・改ざんが容易であり、HTTPSであっても偽証明書をユーザーが無視してアクセスすると、攻撃者が通信を傍受・改ざんできます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ファイルのダウンロード元が改ざんされていないことを確認するために、提供元と一緒に公開される情報はどれか。</summary>
+        <p>ア）公開鍵証明書 イ）ハッシュ値（チェックサム） ウ）セッションID エ）CSRFトークン</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ダウンロードしたファイルのハッシュ値を計算し、公式が公開している値と一致するか照合することで、転送中の改ざんや破損を検知できます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. デジタル署名が保証するセキュリティ要素として、正しいものはどれか。</summary>
+        <p>ア）機密性と可用性 イ）真正性と否認防止 ウ）可用性と信頼性 エ）完全性と機密性</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — デジタル署名は、作成者が本物であること（真正性）と、送信後に内容が改ざんされていないこと、そして後から否定できないこと（否認防止）を保証します。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第3章 セキュリティ技術（3-1-4 〜 3-1-7）</p>
+    </section>
+  </main>
+</body>
+</html>

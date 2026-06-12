@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>APIセキュリティとXSS対策 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>APIセキュリティとXSS対策</h1>
+        <p class="lead">現代のアプリケーション連携に不可欠なAPIの認証・認可（OAuth2/OIDC）の仕組みと、Webアプリケーションで最も多い脆弱性の一つであるXSS（クロスサイトスクリプティング）の対策について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#api-security">APIセキュリティ</a>
+        <a href="#xss">XSS対策</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">セキュリティ</a>
+      <span>APIセキュリティとXSS対策</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>OAuth2が「認可（権限委譲）」を扱い、OIDCがその上に「認証（本人確認）」を追加する役割の違いを説明できる</li>
+          <li>JWT（JSON Web Token）が署名によって改ざんを検知できる構造を持っていることを理解している</li>
+          <li>API Gatewayがレート制限やトークン検証を通じてAPI全体を保護する役割を把握している</li>
+          <li>XSS（クロスサイトスクリプティング）が反射型・永続型・DOMベースの3種類に分類されることを区別できる</li>
+          <li>XSS対策の核心が「出力エスケープ」と「CSP（Content Security Policy）」の組み合わせであることを説明できる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>OAuth2/OIDCの役割の違い、JWTの構造と改ざん検知、XSSの3種類と出力エスケープの重要性</dd></div>
+          <div><dt>中</dt><dd>API Gatewayの役割（レート制限等）、DOMベースXSSの特徴、CSPの目的</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>OAuth2</td><td>ユーザーのパスワードを共有せずに、サードパーティにアクセス権限（認可）を委譲するプロトコル</td><td>「認可」を扱う。アクセストークンを使用してAPIにアクセスする</td></tr>
+            <tr><td>OIDC</td><td>OpenID Connect。OAuth2を拡張し、「認証（本人確認）」機能を追加したプロトコル</td><td>IDトークン（JWT）を発行してユーザー情報を提供する</td></tr>
+            <tr><td>JWT</td><td>JSON Web Token。OIDC等で使われる署名付きのトークン形式</td><td>Header, Payload, Signatureの3部構成。改ざん検知が可能</td></tr>
+            <tr><td>API Gateway</td><td>APIへのリクエストを一元管理し、認証・認可・レート制限などを適用するゲートウェイ</td><td>APIセキュリティの最前線で防御を担う</td></tr>
+            <tr><td>レート制限</td><td>一定時間あたりのAPIリクエスト回数を制限し、DoS攻撃や総当たり攻撃を防ぐ仕組み</td><td>APIの可用性を保つために必須</td></tr>
+            <tr><td>XSS</td><td>クロスサイトスクリプティング。Webページに悪意あるスクリプトを埋め込み、ユーザーのブラウザで実行させる攻撃</td><td>入力値のサニタイズと出力エスケープで防ぐ</td></tr>
+            <tr><td>出力エスケープ</td><td>データをHTML等に表示する際、特殊文字を無害な文字列（例: &lt;）に変換する処理</td><td>XSS対策の最も基本的かつ重要な手法</td></tr>
+            <tr><td>CSP</td><td>Content Security Policy。ブラウザに対して、許可されたドメインからのみスクリプトを実行するよう指示する仕組み</td><td>XSSによる被害を大幅に軽減する防御層</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="api-security" class="lesson-section">
+      <h2>1. APIセキュリティの基礎（OAuth2 / OIDC）</h2>
+      <p>現代のアプリケーションは、Web、モバイル、外部サービスなど多くのクライアントがAPIを通じてデータをやり取りします。APIは外部に公開されることが多く、攻撃者に直接触れられるため、適切な認証・認可が必須となります。その中心となるのがOAuth2とOpenID Connect（OIDC）です。</p>
+      <p>OAuth2は「認可（Authorization）」を扱うプロトコルであり、ユーザーのパスワードをサービス側に渡すことなく、限定されたアクセス権限（Scope）をサードパーティに委譲します。一方、OIDCはOAuth2を拡張し、「認証（Authentication）」機能を追加したプロトコルです。OIDCでは、認証の結果としてユーザー情報を含む「IDトークン（JWT形式）」が発行され、利用者が確かに本人であることを保証します。</p>
+      <p>これらのプロトコルで発行されるJWT（JSON Web Token）は、Header（署名方式）、Payload（ユーザー情報・有効期限）、Signature（改ざん防止の署名）の3部構成で成り立っています。サーバーは公開鍵で署名を検証することで、トークンが改ざんされていないことを確認し、安全にアクセスを許可します。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>OAuth2/OIDC によるAPIアクセスの流れ</figcaption>
+        <pre>
+  [ ユーザー ] ─▶ [ クライアントアプリ ]
+                          │ (1) ログイン要求
+                          ▼
+  [ 認可サーバー (IdP) ] ◀─ (2) リダイレクト
+        │ (3) ユーザー認証 (パスワード/MFA)
+        │ (4) 認可コード返却
+        │ (5) アクセストークン・IDトークン(JWT)発行
+        ▼
+  [ クライアントアプリ ] ─▶ (6) APIリクエスト (トークン添付)
+                          ▼
+  [ APIサーバー ] ◀────── (7) トークン検証 (署名確認)
+        │ (8) 権限チェック後、データを返却
+        ▼
+  [ クライアントアプリ ] ─▶ [ ユーザー ]
+        </pre>
+      </figure>
+    </section>
+
+    <section id="xss" class="lesson-section">
+      <h2>2. XSS（クロスサイトスクリプティング）の仕組みと対策</h2>
+      <p>XSSは、攻撃者が悪意のあるスクリプト（JavaScriptなど）をアプリケーションに埋め込み、他のユーザーのブラウザで実行させる攻撃です。成立すると、セッションIDの盗難、Cookieの窃取、偽画面の表示によるフィッシングなど、ユーザーに成りすました悪意ある操作が可能になります。</p>
+      <p>XSSは主に3種類に分類されます。「反射型XSS」はURLパラメータなどに埋め込んだスクリプトがそのままレスポンスに反映されるもの、「永続型XSS」は掲示板やコメント欄などデータベースに保存され、他のユーザーの画面で実行されるもの、「DOMベースXSS」はJavaScriptがDOMを操作する際に、不正な入力をそのままHTMLに挿入してしまうものです。</p>
+      <p>XSS対策の核心は「出力エスケープ」です。データをHTMLに表示する際、`<` を `&lt;`、`"` を `&quot;` などに無害化することで、ブラウザがスクリプトとして解釈するのを防ぎます。さらに、CSP（Content Security Policy）を導入し、許可されたドメインからのみスクリプトの実行を許可することで、万が一スクリプトが埋め込まれても実行を防ぐ多層防御が現代の標準です。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. ユーザーのパスワードを共有せずに、サードパーティのアプリケーションに限定されたアクセス権限を委譲するプロトコルはどれか。</summary>
+        <p>ア）SAML イ）OAuth2 ウ）OIDC エ）LDAP</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — OAuth2は「認可（Authorization）」を扱うプロトコルであり、アクセストークンを使用して権限を委譲します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. OAuth2を拡張し、「認証（本人確認）」機能を追加し、IDトークン（JWT）を発行するプロトコルはどれか。</summary>
+        <p>ア）OpenID Connect (OIDC) イ）RADIUS ウ）Kerberos エ）SFTP</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — OIDCはOAuth2に認証機能を追加したプロトコルであり、現代のWeb認証の標準となっています。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. JWT（JSON Web Token）が改ざんされていないことを保証する仕組みはどれか。</summary>
+        <p>ア）Base64エンコードされているため イ）発行者の秘密鍵によるデジタル署名（Signature）が含まれているため ウ）トークンの有効期限（exp）が設定されているため エ）HTTPS通信のみで送信されるため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — JWTはHeader, Payload, Signatureの3部構成であり、発行者の秘密鍵で生成された署名を検証することで、内容が改ざんされていないことを保証します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. APIへのリクエストを一元管理し、認証・認可・レート制限などを適用してAPI全体を保護するコンポーネントはどれか。</summary>
+        <p>ア）ロードバランサー イ）API Gateway ウ）CDN エ）DNSサーバー</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — API Gatewayは、APIセキュリティの最前線でトークン検証やレート制限などを適用し、バックエンドのAPIサーバーを保護します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 一定時間あたりのAPIリクエスト回数を制限し、DoS攻撃やパスワード総当たり攻撃を防ぐ仕組みはどれか。</summary>
+        <p>ア）ロードバランシング イ）レート制限（Rate Limiting） ウ）キャッシング エ）圧縮</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — レート制限は、APIの可用性を保ち、悪意のある大量アクセスからサービスを守るために必須の対策です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 攻撃者が悪意のあるスクリプトをWebページに埋め込み、他のユーザーのブラウザで実行させる攻撃はどれか。</summary>
+        <p>ア）SQLインジェクション イ）クロスサイトスクリプティング（XSS） ウ）クロスサイトリクエストフォージェリ（CSRF） エ）ディレクトリトラバーサル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — XSSは、ユーザーの入力がスクリプトとして実行されることで発生し、Cookieの窃取やなりすまし操作の原因となります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. XSSの種類の一つで、攻撃者の入力がデータベースに保存され、他のユーザーがそのページを表示した際にスクリプトが実行されるものはどれか。</summary>
+        <p>ア）反射型XSS イ）永続型XSS ウ）DOMベースXSS エ）ブラインドXSS</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 永続型XSS（Stored XSS）は、掲示板やコメント欄などに入力された悪意あるコードがサーバーに保存され、不特定多数のユーザーに影響を与えるため特に危険です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. XSS対策として、データをHTMLに表示する際に特殊文字を無害な文字列（例: &lt;）に変換する処理はどれか。</summary>
+        <p>ア）ハッシュ化 イ）出力エスケープ ウ）暗号化 エ）圧縮</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 出力エスケープは、ブラウザが入力をHTMLタグとして解釈するのを防ぎ、XSSを未然に防ぐ最も基本的で重要な対策です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. JavaScriptがDOMを操作する際に、ユーザー入力をそのままHTMLに挿入してしまうことで発生するXSSの種類はどれか。</summary>
+        <p>ア）反射型XSS イ）永続型XSS ウ）DOMベースXSS エ）サーバーサイドXSS</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — DOMベースXSSは、サーバーへのリクエストを伴わずにクライアント側のJavaScript処理（例: innerHTMLへの直接代入）だけで発生するため、サーバー側のWAF等では検知が難しい場合があります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. ブラウザに対して、許可されたドメインからのみスクリプトを実行するよう指示し、XSSによる被害を大幅に軽減する仕組みはどれか。</summary>
+        <p>ア）HSTS イ）CSP（Content Security Policy） ウ）CORS エ）SRI</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — CSPは、インラインスクリプトの実行禁止や信頼できるドメインのホワイトリスト設定により、万が一スクリプトが埋め込まれても実行を防ぐ強力な防御層となります。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_情報セキュリティー.pdf』 第3章 セキュリティ技術（3-5-9, 3-5-10）</p>
+    </section>
+  </main>
+</body>
+</html>
