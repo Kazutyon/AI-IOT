@@ -69,8 +69,8 @@
       "id": "algorithm",
       "title": "アルゴリズム",
       "category": "technology",
-      "status": "in-progress",
-      "description": "データ構造、探索、整列、計算量、擬似言語問題の対策。7ページ作成済み。",
+      "status": "done",
+      "description": "データ構造、探索、整列、計算量、擬似言語問題の対策。全8ページ完成。",
       "href": "fe/technology/algorithm/index.html",
       "items": [
         {
@@ -106,6 +106,11 @@
         {
           "title": "アルゴリズム基本（擬似言語・Big-O・評価基準）",
           "href": "fe/technology/algorithm/algo-basic.html",
+          "status": "done"
+        },
+        {
+          "title": "制御構造（順次・選択・反復・擬似言語・トレース）",
+          "href": "fe/technology/algorithm/algo-control.html",
           "status": "done"
         }
       ]
