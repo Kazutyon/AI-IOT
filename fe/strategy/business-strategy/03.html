@@ -1,0 +1,229 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>技術戦略 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Strategy</p>
+        <h1>技術戦略</h1>
+        <p class="lead">経営戦略を実現するために「どの技術を使うか」「どの技術を開発・保護するか」を決める方針である技術戦略。技術ロードマップ、R&D、知的財産、標準化、技術ポートフォリオについて学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#roadmap-rd">計画と開発</a>
+        <a href="#ip-standard">保護と互換性</a>
+        <a href="#portfolio-selection">選択と管理</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">経営・戦略</a>
+      <span>技術戦略</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>技術戦略が「経営戦略を実現するための技術の選択」であることを理解している</li>
+          <li>技術ロードマップ（導入計画）とR&D（研究開発）の役割を説明できる</li>
+          <li>知的財産（特許・商標・著作権・OSS）の違いと、それぞれが何を守るものか区別できる</li>
+          <li>標準化団体（ISO, W3C, IETF）の役割と、標準化がもたらす互換性のメリットを把握している</li>
+          <li>技術ポートフォリオ管理（投資・維持・撤退）と、技術選定基準の重要性を説明できる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>知的財産の種類（特許・商標・著作権）の使い分け、標準化団体（W3C/IETF/ISO）、OSSライセンス</dd></div>
+          <div><dt>中</dt><dd>技術ポートフォリオの考え方（撤退・投資の判断）、技術選定基準（コスト・セキュリティ・人材）</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>技術戦略</td><td>経営戦略を実現するために、どの技術を使うか・開発するかを決める方針</td><td>「動画SNSで勝ちたい」→「高速圧縮技術が必要」のような具体化</td></tr>
+            <tr><td>技術ロードマップ</td><td>技術の導入・開発スケジュールを可視化したもの</td><td>「今年はクラウド移行、来年はAI導入」などの計画</td></tr>
+            <tr><td>R&D</td><td>Research and Development（研究開発）</td><td>新技術調査、プロトタイプ開発、性能改善</td></tr>
+            <tr><td>特許権</td><td>技術的なアイデア（発明）を保護する権利</td><td>アルゴリズムやハードウェアの仕組みなど</td></tr>
+            <tr><td>商標権</td><td>サービス名やロゴなどのブランドを保護する権利</td><td>他社との区別をつけるためのマークや名称</td></tr>
+            <tr><td>著作権</td><td>プログラムやデザインなどの表現を保護する権利</td><td>ソースコードそのもの、UIデザインなど</td></tr>
+            <tr><td>OSS</td><td>Open Source Software。ソースコードが公開されたソフトウェア</td><td>利用時はライセンス条項（GPLなど）を遵守する必要がある</td></tr>
+            <tr><td>標準化</td><td>技術的な仕様を統一し、互換性を確保すること</td><td>ISO（国際）、W3C（Web）、IETF（インターネット）</td></tr>
+            <tr><td>技術ポートフォリオ</td><td>自社が持つ技術を「投資・維持・撤退」などに分類して管理すること</td><td>例：Flashは撤退、AIは投資、Javaは維持</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="roadmap-rd" class="lesson-section">
+      <h2>1. 技術の計画と開発（ロードマップ・R&D）</h2>
+      <p>技術戦略は、経営戦略で決めた「方向性」を技術面で支えるための具体的な計画です。例えば「AIサービスで差別化する」という経営戦略があれば、「独自の学習モデルを開発する」「GPU環境を整備する」といった技術戦略が必要になります。</p>
+      <p><strong>技術ロードマップ</strong>は、どの技術をいつ導入・開発するかを示すスケジュール表です。技術はすぐに使えるものばかりではないため、「まずクラウド化し、次にAIを導入する」といった順序立てた計画が不可欠です。これにより、経営の方向性と技術投資のズレを防ぎます。</p>
+      <p><strong>R&D（研究開発）</strong>は、将来の競争力を維持するために行う新技術の調査やプロトタイプ（試作品）の開発です。画像認識AIの精度改善や新しい暗号化方式の検証など、実用化に向けた研究活動が含まれます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>経営戦略と技術戦略の関係</figcaption>
+        <pre>
+  [ 経営戦略 ]
+  「動画SNSで勝ちたい」
+          │
+          ▼
+  [ 技術戦略 ]
+  「高速な動画圧縮技術が必要」
+  「AIレコメンド機能を開発する」
+          │
+          ▼
+  [ 具体的な施策 ]
+  ・技術ロードマップ（導入順序の計画）
+  ・R&D（プロトタイプ開発・精度検証）
+  ・特許取得（独自技術の保護）
+        </pre>
+      </figure>
+    </section>
+
+    <section id="ip-standard" class="lesson-section">
+      <h2>2. 技術の保護と互換性（知的財産・標準化）</h2>
+      <p>開発した技術が他社に真似されると価値が下がるため、<strong>知的財産</strong>による保護が重要です。「特許権」は技術的なアイデア（発明）を、「商標権」はサービス名やロゴを、「著作権」はプログラムコードやデザインを保護します。また、外部のOSS（オープンソースソフトウェア）を利用する際は、ライセンス条項（コピーレフトなど）を遵守し、自社のソースコードを公開しなければならないリスクなどを管理する必要があります。</p>
+      <p><strong>標準化</strong>は、技術的な仕様を統一し、異なる製品同士がつながるようにするための活動です。Web技術の標準化を行う<strong>W3C</strong>（HTML/CSSなど）、インターネットの基盤技術を決める<strong>IETF</strong>（RFCなど）、品質やセキュリティの国際標準を決める<strong>ISO/IEC</strong>などがあります。標準に従わないと、ブラウザで表示が崩れたり、他社製品と接続できなかったりする問題が発生します。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>知的財産・標準化</th><th>保護対象・目的</th><th>具体例</th></tr></thead>
+          <tbody>
+            <tr><td>特許権</td><td>技術的なアイデア（発明）の保護</td><td>独自のアルゴリズム、ハードウェア構造</td></tr>
+            <tr><td>商標権</td><td>ブランド（名前・ロゴ）の保護</td><td>サービス名、キャラクター、ロゴマーク</td></tr>
+            <tr><td>著作権</td><td>表現（コード・デザイン）の保護</td><td>ソースコード、マニュアル、UIデザイン</td></tr>
+            <tr><td>OSSライセンス</td><td>オープンソースの利用ルール遵守</td><td>GPL（派生作品の公開義務）など</td></tr>
+            <tr><td>W3C</td><td>Web技術の標準化</td><td>HTML, CSS, XML</td></tr>
+            <tr><td>IETF</td><td>インターネット基盤の標準化</td><td>TCP/IP, HTTP (RFCとして公開)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="portfolio-selection" class="lesson-section">
+      <h2>3. 技術の選択と管理（ポートフォリオ・選定基準）</h2>
+      <p>企業が持つすべての技術に無限に投資することはできません。<strong>技術ポートフォリオ管理</strong>では、各技術を「投資すべき技術」「維持すべき技術」「撤退すべき技術」に分類し、経営資源を最適配分します。例えば、古いFlash技術は「撤退」、AIやクラウドは「投資」、Javaなどの安定技術は「維持」といった判断を行います。</p>
+      <p>新しい技術を選定する際は、「流行っているから」ではなく、<strong>技術選定基準</strong>に基づいて判断します。主な基準は「コスト（ライセンス・運用費）」「セキュリティ（脆弱性の少なさ）」「保守性（ドキュメントの充実）」「将来性（コミュニティの活発さ）」「人材の確保しやすさ」などです。これらを総合的に評価し、自社の目的に最适合な技術を選択します。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 経営戦略を実現するために、どの技術をいつ導入・開発するかを示すスケジュール表はどれか。</summary>
+        <p>ア）技術ポートフォリオ イ）技術ロードマップ ウ）損益分岐点 エ）BSC</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 技術ロードマップは、技術導入の順序や時期を可視化し、経営計画と技術開発を同期させるためのツールです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 自社が開発した独自のアルゴリズムやハードウェアの仕組みを、他社に模倣されないように守るための知的財産権はどれか。</summary>
+        <p>ア）著作権 イ）商標権 ウ）特許権 エ）意匠権</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 特許権は、技術的なアイデア（発明）を保護する権利です。著作権は「表現」を、商標権は「ブランド名」を保護します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. Webブラウザで表示が崩れないようにするため、HTMLやCSSの仕様標準化を行っている団体はどれか。</summary>
+        <p>ア）ISO イ）IETF ウ）W3C エ）IEEE</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — W3C（World Wide Web Consortium）は、Web技術の標準化を推進する団体です。IETFはインターネット基盤（TCP/IP等）、ISOは国際標準全般を扱います。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. OSS（オープンソースソフトウェア）を利用する際に、最も注意すべき点はどれか。</summary>
+        <p>ア）必ず有料ライセンスを購入する必要がある イ）ソースコードを改変してはならない ウ）ライセンス条項（コピーレフト等）を遵守し、派生作品の公開義務などを管理する エ）OSSはセキュリティホールが含まれているため、企業内では一切使用してはならない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — OSSは無料で利用できますが、GPLなどのライセンス条項により「改変したソースコードの公開」が義務付けられる場合があり、自社のクローズドなソースコードと混在させないなどの管理が必要です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 技術ポートフォリオ管理において、「Flash」のような技術に対して行うべき対応として最も適切なものはどれか。</summary>
+        <p>ア）積極的に投資を行い、新機能を追加する イ）現在の利益源として、維持・管理を徹底する ウ）セキュリティリスクや互換性の喪失を考慮し、撤退・代替技術への移行を検討する エ）全社標準技術として指定する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 技術ポートフォリオでは、時代遅れやリスクの高い技術は「撤退」対象とし、リソースを成長分野（AIなど）へ配分します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 新しいフレームワークを導入する際の「技術選定基準」として、不適切なものはどれか。</summary>
+        <p>ア）コスト（ライセンス費用や学習コスト） イ）セキュリティ（脆弱性の少なさ） ウ）開発者の個人的な好みや流行りだけ エ）人材の確保しやすさ（コミュニティの大きさ）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 技術選定は、コスト、セキュリティ、保守性、将来性、人材確保など、客観的な基準に基づいて行う必要があります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. インターネットの基盤技術（TCP/IPやHTTPなど）の標準化を行っている団体はどれか。</summary>
+        <p>ア）W3C イ）IETF ウ）JIS エ）ANSI</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IETF（Internet Engineering Task Force）は、インターネットの標準化を行う団体で、その成果はRFCとして公開されます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. ソフトウェアのソースコードそのものを保護する権利はどれか。</summary>
+        <p>ア）特許権 イ）商標権 ウ）著作権 エ）実用新案権</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — プログラム（ソースコード）は著作物として著作権法で保護されます。特許権は「アイデア」を保護するものです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. R&D（研究開発）の目的として、最も適切なものはどれか。</summary>
+        <p>ア）既存製品の製造コストを下げる イ）新技術の調査やプロトタイプ開発により、将来の競争力を維持する ウ）顧客からのクレームに対応する エ）財務諸表を作成する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — R&Dは、将来のビジネスの種を作り、技術的な優位性を保つための投資活動です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 標準化（ISOやW3Cなど）に従うことの主なメリットはどれか。</summary>
+        <p>ア）自社の技術が他社に模倣されなくなる イ）異なる製品やシステム間の互換性が確保され、接続性が高まる ウ）開発コストがゼロになる エ）特許権が自動的に取得できる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 標準化の最大のメリットは互換性の確保です。これにより、異なるベンダーの製品同士でもスムーズに連携できます。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『3_経営・戦略.pdf』 第2章 技術戦略</p>
+    </section>
+  </main>
+<script data-goatcounter="https://kazutyon.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

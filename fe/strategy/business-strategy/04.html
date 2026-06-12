@@ -1,0 +1,225 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>情報・システム戦略 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Strategy</p>
+        <h1>情報・システム戦略</h1>
+        <p class="lead">経営戦略を実現するために「ITにいくら投資し、どのように業務を改善し、全体をどう最適化するか」を決める情報戦略とシステム戦略。TCO、BPM/BPR、EA、ITガバナンスについて学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#tco">TCO（総保有コスト）</a>
+        <a href="#bpr-ea">業務改善と全体最適</a>
+        <a href="#governance">ITガバナンスと投資評価</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">経営・戦略</a>
+      <span>情報・システム戦略</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>TCO（総保有コスト）が「初期費用＋運用費＋廃棄費」の総額であることを説明できる</li>
+          <li>IT投資の判断において、初期費用だけでなくランニングコストを含めて評価する重要性を理解している</li>
+          <li>BPM（業務プロセス管理）とBPR（業務改革）の違いを区別できる</li>
+          <li>EA（エンタープライズアーキテクチャ）が企業全体の「業務・データ・アプリ・技術」を整理する枠組みであることを把握している</li>
+          <li>ITガバナンスの目的と、ROI（投資対効果）による投資評価の考え方を説明できる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>TCOの3構成要素、BPMとBPRの違い、EAの4領域、ITガバナンスの目的</dd></div>
+          <div><dt>中</dt><dd>TCOとROIの違い、クラウド活用によるTCO削減、BPRの特徴（抜本的改善）</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>情報戦略</td><td>ITをどのように活用し、どこに投資するかを決める方針</td><td>経営戦略とシステム戦略の「橋渡し」役</td></tr>
+            <tr><td>TCO</td><td>Total Cost of Ownership（総保有コスト）</td><td>初期費用＋運用保守費＋廃棄更新費の「総額」</td></tr>
+            <tr><td>システム戦略</td><td>業務を支える情報システムをどう企画・導入・運用するかを決める方針</td><td>要件定義、EA、ITガバナンスなどを含む</td></tr>
+            <tr><td>BPM</td><td>Business Process Management（業務プロセス管理）</td><td>業務の流れを「見える化」し、継続的に改善する</td></tr>
+            <tr><td>BPR</td><td>Business Process Reengineering（業務改革）</td><td>既存の業務を「抜本的」に見直し、再構築する</td></tr>
+            <tr><td>EA</td><td>Enterprise Architecture（エンタープライズアーキテクチャ）</td><td>全社の業務・データ・アプリ・技術を整理し「全体最適」を図る</td></tr>
+            <tr><td>ITガバナンス</td><td>IT投資やセキュリティを会社全体で適切に管理する仕組み</td><td>ルールの統一、承認プロセス、リスク管理が目的</td></tr>
+            <tr><td>ROI</td><td>Return on Investment（投資対効果）</td><td>投資額に対してどれくらいの利益・効果があったかを測る指標</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="tco" class="lesson-section">
+      <h2>1. TCO（総保有コスト）による投資評価</h2>
+      <p>システムを導入する際、「初期費用が安いから」という理由だけで選定すると、後の運用費で莫大なコストがかかり失敗することがあります。これを防ぐために、導入から廃棄までにかかるすべてのコストを合算した<strong>TCO（Total Cost of Ownership：総保有コスト）</strong>で評価することが経営視点では不可欠です。</p>
+      <p>TCOは主に3つのコストで構成されます。①HW/SW購入や開発費などの「初期費用（導入コスト）」、②クラウド利用料や保守費、人件費などの「運用・保守費用（ランニングコスト）」、③システムの撤去やデータ移行にかかる「廃棄・更新費用（エンドコスト）」です。特にクラウド時代では、初期費用が安くてもランニングコストが積み重なるため、TCOでの比較が重要になります。</p>
+      <p>なお、TCOが「コストの総額を把握する」指標であるのに対し、<strong>ROI（投資対効果）</strong>は「その投資によってどれだけの利益や効果があったか」を測る指標です。TCOで総コストを把握し、ROIで投資の妥当性を判断するのが正しい流れです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>TCO（総保有コスト）の3構成要素</figcaption>
+        <pre>
+  [ TCO ＝ 初期費用 ＋ 運用・保守費 ＋ 廃棄・更新費 ]
+  ┌──────────────────┐
+  │ 1. 初期費用（導入コスト）          │
+  │    HW/SW購入、開発費、データ移行費 │
+  ├──────────────────┤
+  │ 2. 運用・保守費用（ランニング）    │
+  │    クラウド利用料、保守費、人件費等│
+  ├──────────────────┤
+  │ 3. 廃棄・更新費用（エンドコスト）  │
+  │    撤去費、新システム移行費、解約費│
+  └──────────────────┘
+        </pre>
+      </figure>
+    </section>
+
+    <section id="bpr-ea" class="lesson-section">
+      <h2>2. 業務改善と全体最適（BPM / BPR / EA）</h2>
+      <p>システムを作る前に、そもそも現在の業務が適切かどうかを見直す必要があります。<strong>BPM（業務プロセス管理）</strong>は、業務の流れを可視化し、ボトルネックを探して継続的に改善する活動です。一方、<strong>BPR（業務改革）</strong>は、既存の業務の延長線上で考えるのではなく、ITの活用を前提に業務そのものを「抜本的」に見直し、再構築する手法です。</p>
+      <p>さらに、部門ごとにバラバラなシステムが作られると、データの二重入力や機能の重複が発生します。これを防ぐのが<strong>EA（エンタープライズアーキテクチャ）</strong>です。EAは、企業全体の「業務（Business）」「データ（Data）」「アプリケーション（App）」「技術基盤（Tech）」の4つの領域を整理し、部分最適ではなく「全体最適」を図るための枠組みです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>EA（エンタープライズアーキテクチャ）の4領域</figcaption>
+        <pre>
+  [ 1. 業務 (Business) ]  → 何をやるか（業務プロセス）
+          ↓
+  [ 2. データ (Data) ]    → 何を扱うか（情報・データベース）
+          ↓
+  [ 3. アプリ (App) ]     → どの機能で実現するか（システム機能）
+          ↓
+  [ 4. 技術 (Tech) ]      → どの基盤で支えるか（HW/ネットワーク）
+        </pre>
+      </figure>
+    </section>
+
+    <section id="governance" class="lesson-section">
+      <h2>3. ITガバナンスと投資評価</h2>
+      <p>IT投資は高額であり、現場の判断で勝手にシステムを導入すると、セキュリティホールになったり、他部署のシステムと連携できなかったりするリスクがあります。<strong>ITガバナンス</strong>とは、IT投資のルール策定、セキュリティの統制、システム導入の承認プロセスなどを定め、会社全体でITを適切に管理・統制する仕組みです。</p>
+      <p>ITガバナンスのもとでは、システム投資の効果を<strong>ROI（投資対効果）</strong>などの指標で厳密に評価します。「システム化によって人件費がこれだけ削減できる」「売上増加につながる」といった定量的な効果や、リスク削減効果などを算出し、本当に投資する価値があるかを経営層が判断します。これにより、無駄なIT投資を防ぎ、経営戦略に貢献するシステム構築が可能になります。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. TCO（Total Cost of Ownership）の構成要素に含まれないものはどれか。</summary>
+        <p>ア）初期費用（導入コスト） イ）運用・保守費用（ランニングコスト） ウ）廃棄・更新費用（エンドコスト） エ）競合他社のシステム開発費用</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — TCOは「自社の」システム導入から廃棄までにかかる総コストです。他社の費用は関係ありません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 既存の業務プロセスを抜本的に見直し、ITを前提として業務そのものを再構築する手法はどれか。</summary>
+        <p>ア）BPM（業務プロセス管理） イ）BPR（業務改革） ウ）EA（エンタープライズアーキテクチャ） エ）PDCAサイクル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — BPR（Business Process Reengineering）は、既存の枠組みに囚われず、業務を「抜本的（ラディカル）」に再設計する手法です。BPMは継続的な改善プロセスです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 企業全体の「業務・データ・アプリケーション・技術基盤」を整理し、全体最適を図るための枠組みはどれか。</summary>
+        <p>ア）BPM イ）BPR ウ）EA エ）ROI</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — EA（Enterprise Architecture）は、部分最適を防ぎ、全社のシステムを整合性を持って構築・管理するためのアーキテクチャ枠組みです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. IT投資のルール策定やセキュリティの統制など、会社全体でITを適切に管理・統制する仕組みを何と呼ぶか。</summary>
+        <p>ア）ITガバナンス イ）ITコントローラブル ウ）ITコンプライアンス エ）ITアーキテクチャ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — ITガバナンスは、ITが経営戦略に沿っているか、リスクが管理されているかなどを統制する仕組み全体を指します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. TCOとROIの違いについて、正しい説明はどれか。</summary>
+        <p>ア）TCOは投資効果を測る指標であり、ROIは総コストを把握する指標である イ）TCOは総コストを把握する指標であり、ROIは投資効果を測る指標である ウ）どちらも総コストを把握するための指標である エ）どちらも投資効果を測るための指標である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — TCO（総保有コスト）は「いくらコストがかかるか」を把握する指標であり、ROI（投資対効果）は「その投資でどれだけのリターンがあったか」を測る指標です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. クラウドサービス（SaaS）を利用する際のTCOに関する記述として、最も適切なものはどれか。</summary>
+        <p>ア）初期費用は高くなるが、運用費用はゼロになる イ）初期費用は安く抑えられるが、長期的なランニングコスト（利用料）がTCOに大きく影響する ウ）TCOの計算において、クラウド利用料は含めない エ）廃棄・更新費用はオンプレミスよりも高くなる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — クラウドは初期費用（設備投資）を抑えられますが、月額利用料などのランニングコストが継続するため、長期的なTCOでの比較が重要です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. BPM（業務プロセス管理）の主な目的として、最も適切なものはどれか。</summary>
+        <p>ア）業務を抜本的に廃止し、新しい事業を立ち上げる イ）業務の流れを可視化し、ボトルネックを特定して継続的に改善する ウ）全社のシステムを一つのソフトウェアに統合する エ）IT投資の回収期間を計算する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — BPMは業務プロセスを「見える化」し、PDCAサイクルを通じて継続的に効率化や品質向上を図るマネジメント手法です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. EA（エンタープライズアーキテクチャ）において、「どのデータベースやデータ項目を扱うか」を定義する領域はどれか。</summary>
+        <p>ア）業務アーキテクチャ イ）データアーキテクチャ ウ）アプリケーションアーキテクチャ エ）技術アーキテクチャ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — データアーキテクチャは、企業内で扱うデータの種類、構造、配置場所などを定義し、データの重複や不整合を防ぎます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. システム導入の承認プロセスや、セキュリティポリシーの統一を定めているものはどれか。</summary>
+        <p>ア）BPR イ）EA ウ）ITガバナンス エ）損益分岐点</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ITガバナンスの中には、IT投資のルール、セキュリティ基準、標準技術の統一などが含まれ、組織全体のIT統制を実現します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. システム投資の評価において、「投資額に対して、どれくらいの利益やコスト削減効果があったか」を測る指標はどれか。</summary>
+        <p>ア）TCO イ）ROI ウ）BPR エ）EA</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ROI（Return on Investment：投資対効果）は、投資額に対するリターンの割合を算出し、投資の妥当性を判断するための指標です。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『3_経営・戦略.pdf』 第3章 情報戦略 / 第4章 システム戦略</p>
+    </section>
+  </main>
+<script data-goatcounter="https://kazutyon.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

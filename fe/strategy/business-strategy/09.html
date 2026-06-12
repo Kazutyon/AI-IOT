@@ -1,0 +1,221 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ORの基礎 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Strategy</p>
+        <h1>ORの基礎</h1>
+        <p class="lead">経営における「最適な意思決定」を行うための数理手法である「線形計画法（LP）」と「待ち行列理論」の仕組みと計算方法について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#lp">線形計画法（LP）</a>
+        <a href="#queueing">待ち行列理論</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">経営・戦略</a>
+      <span>ORの基礎</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>OR（オペレーションズ・リサーチ）が「限られた資源を最適に配分する手法」であることを説明できる</li>
+          <li>線形計画法（LP）の「目的関数」「制約条件」「実行可能領域」の関係を理解している</li>
+          <li>線形計画法の最適解が、必ず実行可能領域の「頂点」に存在することを把握している</li>
+          <li>待ち行列理論のM/M/1モデルにおける「安定条件（λ < μ）」の意味を説明できる</li>
+          <li>平均待ち時間の公式が「到着量と処理能力の差」によって決まることを理解している</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>線形計画法の定式化（目的関数・制約条件）、最適解が頂点にある理由、M/M/1の安定条件</dd></div>
+          <div><dt>中</dt><dd>待ち行列の平均待ち時間の計算、実行可能領域の図示と頂点の特定</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>OR</td><td>Operations Research（オペレーションズ・リサーチ）</td><td>数理モデルを用いて、経営上の最適解を導く手法の総称</td></tr>
+            <tr><td>線形計画法（LP）</td><td>Linear Programming。線形の目的関数と制約条件で最適解を求める手法</td><td>資源配分問題などで頻出</td></tr>
+            <tr><td>目的関数</td><td>最大化（利益など）または最小化（コストなど）したい対象を表す式</td><td>例：Z = 300x + 500y</td></tr>
+            <tr><td>制約条件</td><td>資源の限界や物理的な制約を表す不等式</td><td>例：3x + y ≦ 100</td></tr>
+            <tr><td>実行可能領域</td><td>すべての制約条件を同時に満たす変数の範囲</td><td>グラフ上で多角形（領域）として表される</td></tr>
+            <tr><td>最適解</td><td>実行可能領域の中で、目的関数を最大（または最小）にする点</td><td>必ず領域の「頂点」のいずれかに存在する</td></tr>
+            <tr><td>待ち行列理論</td><td>到着とサービスのバランスから、混雑や待ち時間を予測するモデル</td><td>コールセンター、サーバー負荷などで利用</td></tr>
+            <tr><td>M/M/1モデル</td><td>到着がポアソン分布、サービスが指数分布、窓口が1つの基本モデル</td><td>安定条件は「到着率λ < サービス率μ」</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="lp" class="lesson-section">
+      <h2>1. 線形計画法（LP）の仕組み</h2>
+      <p>線形計画法は、「限られた資源をどう配分すれば最も利益が大きくなるか（またはコストが最小になるか）」を求めるための数理手法です。この手法は「目的関数」と「制約条件」の2つで構成されます。</p>
+      <p><strong>目的関数</strong>は、最大化または最小化したい値を表す式です（例：利益 = 300x + 500y）。一方、<strong>制約条件</strong>は、材料の上限や作業時間の限界など、現実的な制限を表す不等式です（例：3x + y ≦ 100）。</p>
+      <p>これらの制約条件をすべて同時に満たす範囲を<strong>実行可能領域</strong>と呼びます。線形計画法の重要な性質として、「最適解は必ず実行可能領域の頂点（角）のいずれかに存在する」という定理があります。そのため、すべての頂点の座標を求めて目的関数に代入し、最大（または最小）の値を選ぶことで最適解を導き出せます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>線形計画法の解き方（頂点の列挙）</figcaption>
+        <pre>
+  [ 1. 制約条件をグラフ化 ]
+  各不等式を直線として描き、共通する領域（実行可能領域）を特定
+  
+  [ 2. 頂点の座標を求める ]
+  直線同士の交点や軸との交点を計算で求める
+  
+  [ 3. 目的関数に代入して比較 ]
+  各頂点の(x, y)を目的関数 Z = ax + by に代入
+  
+  [ 4. 最適解の決定 ]
+  Zが最大（または最小）になる頂点が最適解
+        </pre>
+      </figure>
+    </section>
+
+    <section id="queueing" class="lesson-section">
+      <h2>2. 待ち行列理論（M/M/1モデル）</h2>
+      <p>待ち行列理論は、「客がランダムに到着し、窓口でサービスを受ける」という状況において、平均待ち時間や行列の長さを予測するためのモデルです。最も基本的なモデルが<strong>M/M/1モデル</strong>です。</p>
+      <p>M/M/1モデルは、客の到着間隔がポアソン分布（到着率λ）、サービス時間が指数分布（サービス率μ）、窓口数が1つという条件を満たします。このモデルで最も重要なのが<strong>安定条件</strong>です。システムが混雑せずに安定して処理されるためには、「到着率（λ）がサービス率（μ）より小さい（λ < μ）」必要があります。λ ≧ μ になると、行列は無限に伸び続け、計算自体が意味をなさなくなります。</p>
+      <p>安定条件下での<strong>平均待ち時間（Wq）</strong>は、以下の公式で求められます。分母の (μ - λ) は「処理能力の余裕」を表しており、この値が小さいほど（混雑しているほど）待ち時間は急激に長くなります。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>待ち行列の構造と平均待ち時間</figcaption>
+        <pre>
+  [ 到着 ] → [ 待ち行列 ] → [ サービス(窓口) ] → [ 退出 ]
+     λ            (Wq)            μ
+
+  【平均待ち時間の公式】
+         λ
+  Wq = ───────
+       μ(μ - λ)
+
+  ※ λ: 単位時間あたりの到着数
+  ※ μ: 単位時間あたりの処理可能数
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 線形計画法（LP）において、最大化または最小化したい対象を表す式を何と呼ぶか。</summary>
+        <p>ア）制約条件 イ）目的関数 ウ）実行可能領域 エ）最適解</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 目的関数は、利益の最大化やコストの最小化など、最適化したい目標を数式で表したものです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 線形計画法において、すべての制約条件を同時に満たす変数の範囲を何と呼ぶか。</summary>
+        <p>ア）実行可能領域 イ）最適解領域 ウ）制約領域 エ）目的領域</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 実行可能領域は、資源の限界などの制約をすべて満たす解が存在する範囲のことです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 線形計画法の性質として、最適解が必ず存在する場所はどれか。</summary>
+        <p>ア）実行可能領域の中心 イ）実行可能領域の頂点（角）のいずれか ウ）制約条件の直線上の任意の点 エ）座標軸上の点</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 線形計画法の重要な定理として、最適解は必ず実行可能領域の頂点のいずれかに存在します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 待ち行列理論のM/M/1モデルにおいて、システムが安定して処理されるための条件（安定条件）はどれか。</summary>
+        <p>ア）到着率 λ ＝ サービス率 μ イ）到着率 λ ＞ サービス率 μ ウ）到着率 λ ＜ サービス率 μ エ）サービス率 μ ＝ 0</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 到着する客の数（λ）が、処理できる数（μ）より少なければ、行列は無限に伸びず安定します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. M/M/1モデルにおいて、単位時間あたりの到着数を表す記号はどれか。</summary>
+        <p>ア）α（アルファ） イ）λ（ラムダ） ウ）μ（ミュー） エ）ρ（ロー）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 待ち行列理論では、到着率をλ（ラムダ）、サービス率をμ（ミュー）で表すのが一般的です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 待ち行列の平均待ち時間（Wq）を求める公式において、分母にある「μ - λ」が意味するものはどれか。</summary>
+        <p>ア）サービスの総処理時間 イ）到着間隔の平均 ウ）処理能力の余裕（サービス率と到着率の差） エ）待ち行列の最大長</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — μ - λ は、処理能力が到着量をどの程度上回っているか（余裕）を示し、この値が小さいほど待ち時間は急激に長くなります。</p></details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 線形計画法の問題で、目的関数 Z = 300x + 500y を最大化したい。実行可能領域の頂点の一つが (x=16, y=52) のとき、この点での Z の値はいくらか。</summary>
+        <p>ア）20,800 イ）26,000 ウ）30,800 エ）32,000</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Z = 300(16) + 500(52) = 4,800 + 26,000 = 30,800 となります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 待ち行列理論において、客の到着間隔がポアソン分布、サービス時間が指数分布、窓口数が1つのモデルを何と呼ぶか。</summary>
+        <p>ア）M/M/1モデル イ）M/G/1モデル ウ）M/M/cモデル エ）G/G/1モデル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — M/M/1モデルは、到着(Markovian)、サービス(Markovian)、窓口数(1)を表す最も基本的な待ち行列モデルです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 線形計画法を用いて資源配分問題を解く際、最初に実施すべき手順はどれか。</summary>
+        <p>ア）目的関数に頂点の座標を代入する イ）制約条件をグラフ化し、実行可能領域を特定する ウ）最適解の座標を推測する エ）変数の数を減らす</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 制約条件を満たす範囲（実行可能領域）を特定し、その頂点を列挙することが解法の出発点となります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 待ち行列の平均待ち時間が無限大に発散する（行列が伸び続ける）条件はどれか。</summary>
+        <p>ア）λ ＜ μ イ）λ ＝ μ または λ ＞ μ ウ）μ が非常に大きい場合 エ）到着間隔が一定の場合</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 到着率がサービス率以上（λ ≧ μ）になると、処理が追いつかず、待ち行列は安定せずに無限に伸び続けます。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『3_経営・戦略.pdf』 第9章 OR（1. ORの概要, 2. 線形計画法, 3. 待ち行列理論）</p>
+    </section>
+  </main>
+<script data-goatcounter="https://kazutyon.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
