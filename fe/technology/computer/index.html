@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
@@ -12,7 +12,7 @@
       <div>
         <p class="eyebrow">Technology / Computer Basics</p>
         <h1>コンピュータ概論</h1>
-        <p class="lead">コンピュータ構成、OS、ソフトウェア、ハードウェア基礎を教材化する予定です。</p>
+        <p class="lead">コンピュータの歴史・CPU・メモリ・OS・I/O・ソフトウェアまで全15ページで網羅。</p>
       </div>
     </div>
   </header>
@@ -21,15 +21,91 @@
       <a href="../../../index.html">ポータル</a>
       <span>コンピュータ概論</span>
     </nav>
+
     <section class="lesson-section">
-      <h2>準備中教材</h2>
+      <h2>ハードウェア・歴史</h2>
       <div class="list">
         <article class="list-item">
-          <h3>コンピュータ構成・OS・ソフトウェア</h3>
-          <p>コンピュータ概論PDFをFE出題範囲に合わせて分割します。</p>
+          <a href="computer-history.html">コンピュータの歴史・革命・初期電子計算機</a>
+          <p>そろばん→機械式→チューリングマシン→ノイマン型・ENIAC（p1〜p12）</p>
+        </article>
+        <article class="list-item">
+          <a href="tech-evolution.html">技術進化・世代別・商用PC・高速化</a>
+          <p>真空管→トランジスタ→IC→VLSI・ムーアの法則・マルチコア化（p13〜p25）</p>
+        </article>
+        <article class="list-item">
+          <a href="cloud-mobile-iot.html">小型化・クラウド・モバイル・IoT・AI</a>
+          <p>SoC・スマートフォン・IaaS/PaaS/SaaS・エッジAI・GPU・NPU（p26〜p48）</p>
         </article>
       </div>
     </section>
+
+    <section class="lesson-section">
+      <h2>CPU・メモリ</h2>
+      <div class="list">
+        <article class="list-item">
+          <a href="cpu-architecture.html">CPU（構成・パイプライン・RISC/CISC）</a>
+          <p>制御装置・演算装置・命令実行サイクル・スーパースカラ・RISC vs CISC（p49〜p62）</p>
+        </article>
+        <article class="list-item">
+          <a href="memory-cache.html">主記憶装置・キャッシュメモリ</a>
+          <p>DRAM/SRAM・ROM・L1/L2/L3キャッシュ・参照の局所性・Write Through/Back（p63〜p75）</p>
+        </article>
+        <article class="list-item">
+          <a href="virtual-memory-storage.html">仮想記憶・外部記憶装置</a>
+          <p>仮想アドレス空間・ページング・ページフォールト・HDD/SSD/光ディスク（p76〜p84）</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>入出力・システム</h2>
+      <div class="list">
+        <article class="list-item">
+          <a href="io-devices-bus.html">入出力装置・バス構造・制御方式</a>
+          <p>入出力デバイス・データ/アドレス/制御バス・プログラム制御・割込み・DMA（p85〜p97）</p>
+        </article>
+        <article class="list-item">
+          <a href="virtualization.html">仮想化・コンピュータ分類</a>
+          <p>ハードウェア仮想化・VM・ハイパーバイザー・デスクトップ/サーバ/組込み（p98〜p103）</p>
+        </article>
+        <article class="list-item">
+          <a href="io-scheduling-dma.html">I/Oスケジューリング・割込み・DMA・組込みI/O</a>
+          <p>FCFS/SCAN・ISR・DMAコントローラ・RTOS・IoTデバイスI/O（p160〜p171）</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>OS・ソフトウェア</h2>
+      <div class="list">
+        <article class="list-item">
+          <a href="bios-os-types.html">BIOS/UEFI・OS概要・種類</a>
+          <p>POST・ブートローダ・汎用OS/モバイルOS/RTOS/IoT向けOS・車載OS（p104〜p120）</p>
+        </article>
+        <article class="list-item">
+          <a href="process-scheduling.html">プロセス管理・スケジューリング</a>
+          <p>プロセス状態遷移・FCFS/SJF/RR/優先度・コンテキストスイッチ・スレッド（p121〜p130）</p>
+        </article>
+        <article class="list-item">
+          <a href="memory-management.html">メモリ管理</a>
+          <p>固定/可変区画方式・断片化・ページング・セグメンテーション・FIFO/LRU/LFU（p131〜p138）</p>
+        </article>
+        <article class="list-item">
+          <a href="filesystem.html">ファイルシステム</a>
+          <p>i-node・FAT・アクセス権・ジャーナリング・ウェアレベリング・組込み向けFS（p139〜p145）</p>
+        </article>
+        <article class="list-item">
+          <a href="device-management.html">デバイス管理</a>
+          <p>デバイスドライバ・バッファリング・スプーリング・スプーラ（p146〜p159）</p>
+        </article>
+        <article class="list-item">
+          <a href="software-classification.html">ソフトウェア分類</a>
+          <p>システムソフトウェア・ミドルウェア・アプリケーション・RTOS・ROS2（p172〜p196）</p>
+        </article>
+      </div>
+    </section>
+
   </main>
 <script data-goatcounter="https://kazutyon.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
