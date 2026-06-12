@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CPU（構成・パイプライン・RISC/CISC） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>CPU（構成・パイプライン・RISC/CISC）</h1>
+        <p class="lead">CPUの基本構成、命令実行サイクル、パイプライン処理、スーパースカラ、RISCとCISCの違いを理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#cpu-basics">CPUの基本構成</a>
+        <a href="#pipeline">パイプライン処理</a>
+        <a href="#superscalar">スーパースカラ</a>
+        <a href="#risc-cisc">RISC vs CISC</a>
+        <a href="#microarchitecture">マイクロアーキテクチャ</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>CPU（構成・パイプライン・RISC/CISC）</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>CPUの3大構成要素：制御装置（CU）・演算装置（ALU）・レジスタ</li>
+          <li>命令実行サイクル：フェッチ → デコード → エグゼキュート → ライトバック</li>
+          <li>パイプライン処理：命令を複数の段階に分け、同時並行で処理する方式</li>
+          <li>スーパースカラ：複数の実行ユニットを持ち、複数の命令を同時に実行</li>
+          <li>RISC：単純で高速な命令を持つ。省電力。ARMが代表例</li>
+          <li>CISC：複雑で多機能な命令を持つ。x86（Intel/AMD）が代表例</li>
+          <li>マイクロアーキテクチャ：ISAの内部実装方式。パイプライン構造やキャッシュ構成など</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>CPUの3大構成要素、命令実行サイクル、RISCとCISCの違い</dd></div>
+          <div><dt>中</dt><dd>パイプライン処理、スーパースカラ、マイクロアーキテクチャ</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CPU（中央演算処理装置）</td>
+              <td>コンピュータの「頭脳」。プログラムを読み取り、計算や判断を行い、全体の動作を制御</td>
+              <td>制御装置・演算装置・レジスタの3要素で構成</td>
+            </tr>
+            <tr>
+              <td>制御装置（CU）</td>
+              <td>命令を解読し、他の装置に「いつ・何をするか」を指示する</td>
+              <td>命令のフェッチとデコードを担当</td>
+            </tr>
+            <tr>
+              <td>演算装置（ALU）</td>
+              <td>四則演算（＋－×÷）や論理演算（AND, OR, NOT）を行う</td>
+              <td>実際の計算処理を担当</td>
+            </tr>
+            <tr>
+              <td>レジスタ</td>
+              <td>処理中のデータや命令を一時的に保持する高速メモリ</td>
+              <td>CPU内部に存在し、主記憶より高速</td>
+            </tr>
+            <tr>
+              <td>命令実行サイクル</td>
+              <td>CPUが1回の命令を処理する流れ。フェッチ・デコード・エグゼキュート・ライトバック</td>
+              <td>毎秒数十億回繰り返される</td>
+            </tr>
+            <tr>
+              <td>パイプライン処理</td>
+              <td>1つの命令を複数の段階に分け、複数の命令を同時並行で処理する方式</td>
+              <td>処理効率を大幅に向上。ほぼすべての現代CPUが採用</td>
+            </tr>
+            <tr>
+              <td>スーパースカラ</td>
+              <td>複数の命令を同時に実行できる複数の実行ユニットを持つ構造</td>
+              <td>パイプラインよりさらに高い性能を実現</td>
+            </tr>
+            <tr>
+              <td>RISC</td>
+              <td>単純で高速に実行できる命令を採用する設計思想</td>
+              <td>命令数が少なく、省電力。ARM、RISC-Vが代表例</td>
+            </tr>
+            <tr>
+              <td>CISC</td>
+              <td>複雑で多機能な命令を持つ設計思想</td>
+              <td>1命令で多くの処理ができる。x86（Intel/AMD）が代表例</td>
+            </tr>
+            <tr>
+              <td>マイクロアーキテクチャ</td>
+              <td>ISA（命令セット）をどのように内部で実装するかを決めるCPUの内部構造</td>
+              <td>パイプライン構造、実行ユニット数、キャッシュ構造などを決定</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cpu-basics" class="lesson-section">
+      <h2>2.1.1 CPU（中央演算処理装置）</h2>
+      <p>CPUはコンピュータの「頭脳」と呼ばれる部分で、プログラム（命令）を読み取り、計算や判断を行い、全体の動作を制御します。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>構成要素</th>
+              <th>役割</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>制御装置（CU：Control Unit）</td>
+              <td>命令を解読し、他の装置に「いつ・何をするか」を指示する</td>
+            </tr>
+            <tr>
+              <td>演算装置（ALU：Arithmetic Logic Unit）</td>
+              <td>四則演算（＋－×÷）や論理演算（AND, OR, NOT）を行う</td>
+            </tr>
+            <tr>
+              <td>レジスタ（Register）</td>
+              <td>処理中のデータや命令を一時的に保持する</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>CPUの基本構造</figcaption>
+        <pre>
+【CPUの基本構成】
+
+  +---------------------------------------------------+
+  |                       CPU                         |
+  |                                                   |
+  |   +---------------+    +---------------------+    |
+  |   |   制御装置    |    |      演算装置       |    |
+  |   |      CU       |<-->|        ALU          |    |
+  |   +---------------+    +---------------------+    |
+  |          ^                         ^              |
+  |          |                         |              |
+  |          v                         v              |
+  |   +---------------------------------------+       |
+  |   |              レジスタ                 |       |
+  |   |  （命令やデータを一時的に保持）       |       |
+  |   +---------------------------------------+       |
+  |                                                   |
+  +---------------------------------------------------+
+         ^                       ^
+         |                       |
+         | 命令・データ          | 結果
+         |                       |
+         v                       v
+  +-----------+            +-----------+
+  | 主記憶装置|            | 出力装置  |
+  |（メモリ） |            |           |
+  +-----------+            +-----------+
+        </pre>
+      </figure>
+
+      <h3>命令実行サイクル</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>段階</th>
+              <th>処理内容</th>
+              <th>関連する装置</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>フェッチ（Fetch）</td>
+              <td>主記憶装置から命令を取り出す</td>
+              <td>制御装置、主記憶装置</td>
+            </tr>
+            <tr>
+              <td>デコード（Decode）</td>
+              <td>命令の内容を解析し、実行すべき操作を決定する</td>
+              <td>制御装置</td>
+            </tr>
+            <tr>
+              <td>エグゼキュート（Execute）</td>
+              <td>実際の演算・処理を行う</td>
+              <td>演算装置</td>
+            </tr>
+            <tr>
+              <td>ライトバック（Write Back）</td>
+              <td>結果をレジスタや主記憶に書き戻す</td>
+              <td>演算装置、主記憶装置</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>命令実行サイクルの流れ</figcaption>
+        <pre>
+【命令実行サイクル】
+
+   [フェッチ]  -->  [デコード]  -->  [エグゼキュート]  -->  [ライトバック]
+   (命令取り出し)   (命令解析)      (演算実行)           (結果書き戻し)
+
+   CPUはこのサイクルを毎秒数十億回繰り返すことでプログラムを実行している。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="pipeline" class="lesson-section">
+      <h2>パイプライン処理（Pipeline Processing）</h2>
+      <p>1つの命令を複数の段階に分け、複数の命令を同時並行で処理する方式です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>パイプライン処理のイメージ</figcaption>
+        <pre>
+【パイプライン処理】
+
+  従来方式（パイプラインなし）：
+    命令1: [フェッチ][デコード][実行][ライトバック]
+    命令2:                             [フェッチ][デコード][実行][ライトバック]
+    命令3:                                                       [フェッチ]...
+
+  パイプライン方式：
+    時間 --------------------------------->
+    命令1: [フェッチ][デコード][実行][ライトバック]
+    命令2:          [フェッチ][デコード][実行][ライトバック]
+    命令3:                   [フェッチ][デコード][実行][ライトバック]
+
+  特徴：
+    - 複数の命令が同時に進むため、CPUの処理効率が大幅に向上
+    - ほぼすべての現代CPUが採用
+    - 分岐予測ミスなどでパイプラインが止まることがある
+        </pre>
+      </figure>
+    </section>
+
+    <section id="superscalar" class="lesson-section">
+      <h2>スーパースカラ（Superscalar）</h2>
+      <p>複数の命令を同時に実行できる複数の実行ユニットを持つ構造のことです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>スーパースカラのイメージ</figcaption>
+        <pre>
+【スーパースカラ】
+
+  パイプライン：1つの流れ作業
+  スーパースカラ：複数の作業員を配置
+
+  通常のパイプライン：
+    [実行ユニット1] ---> 命令1 ---> 命令2 ---> 命令3 --->
+
+  スーパースカラ：
+    [実行ユニット1] ---> 命令1 ---> 命令3 --->
+    [実行ユニット2] ---> 命令2 ---> 命令4 --->
+
+  特徴：
+    - 複数の命令を同時に処理できるため、パイプラインよりさらに高い性能
+    - Intel Core / AMD Ryzen / ARM など現代CPUの標準構造
+    - 命令の依存関係を解析し、並列実行できる命令を自動で選ぶ
+        </pre>
+      </figure>
+    </section>
+
+    <section id="risc-cisc" class="lesson-section">
+      <h2>RISC と CISC（命令セット）</h2>
+      <p>CPUが理解できる命令の種類を命令セットアーキテクチャ（ISA）と呼びます。ISAの設計思想には大きく分けて2種類あります。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>RISC</th>
+              <th>CISC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>命令の特徴</td>
+              <td>単純で高速に実行できる命令を採用。命令数が少ない</td>
+              <td>複雑で多機能な命令を持つ。1命令で多くの処理ができる</td>
+            </tr>
+            <tr>
+              <td>ハードウェア</td>
+              <td>ハードウェアがシンプルで省電力</td>
+              <td>ハードウェアが複雑になりやすい</td>
+            </tr>
+            <tr>
+              <td>プログラム</td>
+              <td>命令数は多いが、1命令の実行は高速</td>
+              <td>プログラムの行数は少なくて済む</td>
+            </tr>
+            <tr>
+              <td>代表例</td>
+              <td>ARM、RISC-V、MIPS</td>
+              <td>x86（Intel、AMD）</td>
+            </tr>
+            <tr>
+              <td>主な用途</td>
+              <td>スマホ・タブレット・組み込み機器</td>
+              <td>PC・サーバ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>プロセッサ</th>
+              <th>命令セット</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Intel / AMD</td>
+              <td>x86 / x64（CISC）</td>
+              <td>PC・サーバの標準。後方互換性を重視</td>
+            </tr>
+            <tr>
+              <td>Apple Mシリーズ</td>
+              <td>ARM（RISC）</td>
+              <td>省電力で高性能。Macに搭載</td>
+            </tr>
+            <tr>
+              <td>スマートフォン</td>
+              <td>ARM（RISC）</td>
+              <td>低消費電力が求められる</td>
+            </tr>
+            <tr>
+              <td>RISC-V</td>
+              <td>RISC</td>
+              <td>オープンソース、IoT・研究用途で注目</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="microarchitecture" class="lesson-section">
+      <h2>マイクロアーキテクチャ（Microarchitecture）</h2>
+      <p>CPUの命令セット（ISA）は「CPUが理解できる命令の種類」を定義する仕様です。一方、マイクロアーキテクチャは、そのISAをどのように内部で実装するかを決める“CPUの内部構造”のことです。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>要素</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>パイプラインの構造</td>
+              <td>命令を段階に分けて並列処理する仕組み</td>
+            </tr>
+            <tr>
+              <td>実行ユニットの数</td>
+              <td>同時に実行できる命令の数（スーパースカラ）</td>
+            </tr>
+            <tr>
+              <td>キャッシュ構造</td>
+              <td>L1/L2/L3キャッシュの容量や配置</td>
+            </tr>
+            <tr>
+              <td>分岐予測の仕組み</td>
+              <td>パイプラインを止めないための予測機構</td>
+            </tr>
+            <tr>
+              <td>メモリやコア間の通信方式</td>
+              <td>データをどれだけ効率よくやり取りできるか</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>CPUの性能を決める要素</figcaption>
+        <pre>
+【CPUの性能を決める要素】
+
+  +---------------------------------------------------+
+  |                                                   |
+  |  クロック周波数（GHz）                            |
+  |    - 1秒間に命令を実行できる回数                  |
+  |    - 値が大きいほど高速                           |
+  |                                                   |
+  |  コア数                                           |
+  |    - 同時に処理できる独立した演算ユニットの数     |
+  |    - マルチタスクに強い                           |
+  |                                                   |
+  |  キャッシュメモリ                                 |
+  |    - よく使うデータを一時保存する高速メモリ       |
+  |    - メモリアクセスを高速化                       |
+  |                                                   |
+  |  アーキテクチャ（RISC / CISC）                    |
+  |    - 命令体系や設計思想                           |
+  |                                                   |
+  +---------------------------------------------------+
+        </pre>
+      </figure>
+
+      <h3>CPUの種類と用途</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>分類</th>
+              <th>主な用途</th>
+              <th>代表例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PC向けCPU</td>
+              <td>パソコン・サーバ</td>
+              <td>Intel Core、AMD Ryzen、Apple Mシリーズ</td>
+            </tr>
+            <tr>
+              <td>モバイル向けCPU</td>
+              <td>スマートフォン・タブレット</td>
+              <td>Snapdragon、Apple Aシリーズ</td>
+            </tr>
+            <tr>
+              <td>マイコン（MCU）</td>
+              <td>家電・自動車・IoT機器</td>
+              <td>AVR、PIC、STM32、ESP32</td>
+            </tr>
+            </table>
+              <td>GPU</td>
+              <td>画像処理・AI学習</td>
+              <td>NVIDIA、AMD Radeon</td>
+            </tr>
+            <tr>
+              <td>NPU</td>
+              <td>AI推論処理</td>
+              <td>Apple Neural Engine、Google TPU</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. CPUの3大構成要素に含まれないものはどれか。</summary>
+        <p>ア）制御装置（CU）　イ）演算装置（ALU）　ウ）主記憶装置（メモリ）　エ）レジスタ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — CPUの3大構成要素は「制御装置」「演算装置」「レジスタ」。主記憶装置はCPUの外部にある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 命令実行サイクルの正しい順番はどれか。</summary>
+        <p>ア）デコード → フェッチ → エグゼキュート → ライトバック　イ）フェッチ → デコード → エグゼキュート → ライトバック　ウ）エグゼキュート → フェッチ → デコード → ライトバック　エ）フェッチ → エグゼキュート → デコード → ライトバック</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 命令実行サイクルは「フェッチ（命令取り出し）→ デコード（命令解析）→ エグゼキュート（演算実行）→ ライトバック（結果書き戻し）」の順。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. パイプライン処理の説明として、最も適切なものはどれか。</summary>
+        <p>ア）複数のCPUを並列に動作させる方式　イ）1つの命令を複数の段階に分け、複数の命令を同時並行で処理する方式　ウ）クロック周波数を上げて高速化する方式　エ）メモリ容量を増やして高速化する方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — パイプライン処理は命令を複数の段階に分け、複数の命令を同時並行で処理する。ほぼすべての現代CPUが採用。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. スーパースカラの説明として、最も適切なものはどれか。</summary>
+        <p>ア）複数の命令を同時に実行できる複数の実行ユニットを持つ構造　イ）1つの命令を複数の段階に分けて処理する方式　ウ）クロック周波数を動的に変更する方式　エ）メモリを仮想化する方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — スーパースカラは複数の実行ユニットを持ち、複数の命令を同時に実行する。パイプラインよりさらに高い性能。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. RISCの特徴として、適切なものはどれか。</summary>
+        <p>ア）複雑で多機能な命令を持つ　イ）命令数が少なく、省電力　ウ）主にPCやサーバで使われる　エ）1命令で多くの処理ができる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — RISCは単純で高速な命令を採用し、命令数が少なく省電力。ARMなどが代表例。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. CISCの代表例はどれか。</summary>
+        <p>ア）ARM　イ）RISC-V　ウ）x86（Intel/AMD）　エ）MIPS</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — CISCの代表例はx86（Intel、AMD）。RISCの代表例はARM、RISC-V、MIPS。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. マイクロアーキテクチャが決める要素として、本文で挙げられているものはどれか。</summary>
+        <p>ア）命令セットの種類　イ）パイプラインの構造、キャッシュ構造、分岐予測の仕組み　ウ）プログラムの書き方　エ）OSの種類</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — マイクロアーキテクチャはパイプライン構造、実行ユニット数、キャッシュ構造、分岐予測などを決定する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 演算装置（ALU）の役割はどれか。</summary>
+        <p>ア）命令を解読する　イ）四則演算や論理演算を行う　ウ）データを一時的に保持する　エ）メモリから命令を取り出す</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 演算装置（ALU）は四則演算（＋－×÷）や論理演算（AND, OR, NOT）を行う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 制御装置（CU）の役割はどれか。</summary>
+        <p>ア）実際の計算処理を行う　イ）データを一時的に保持する　ウ）命令を解読し、他の装置に指示を出す　エ）データを主記憶に書き戻す</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 制御装置（CU）は命令を解読し、他の装置に「いつ・何をするか」を指示する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. レジスタの説明として、適切なものはどれか。</summary>
+        <p>ア）主記憶装置の一部で大容量の記憶領域　イ）CPU内部にある高速な一時記憶領域　ウ）ハードディスク上の記憶領域　エ）キャッシュメモリの別名</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — レジスタはCPU内部に存在する高速な一時記憶領域で、処理中のデータや命令を保持する。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第2章 コンピュータの基本構成 / 2.1.1 CPU（p49-p62）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BIOS/UEFI・OS概要・種類 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>BIOS/UEFI・OS概要・種類</h1>
+        <p class="lead">BIOSとUEFIの違い、OSの役割（資源管理・抽象化・UI）、およびOSの種類（汎用OS・モバイルOS・RTOS・IoT向けOSなど）を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#bios-uefi">BIOSとUEFI</a>
+        <a href="#os-role">OSの役割</a>
+        <a href="#os-types">OSの種類</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>BIOS/UEFI・OS概要・種類</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>BIOS/UEFI：OSを起動するための準備を行うファームウェア</li>
+          <li>BIOSとUEFIの違い（レガシー vs 現代標準、MBR vs GPT、セキュリティ機能）</li>
+          <li>OSの3つの役割：資源管理、抽象化、ユーザインターフェース</li>
+          <li>汎用OS：Windows、macOS、Linux（多機能・マルチタスク）</li>
+          <li>モバイルOS：iOS、Android（タッチ操作・省電力）</li>
+          <li>リアルタイムOS（RTOS）：FreeRTOS、VxWorks（リアルタイム性重視）</li>
+          <li>IoT向けOS：Zephyr、Mbed OS（超省電力・小メモリ）</li>
+          <li>車載OS：AUTOSAR、QNX（高信頼性・安全規格対応）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>OSの3つの役割、BIOSとUEFIの違い、リアルタイムOS（RTOS）の特徴</dd></div>
+          <div><dt>中</dt><dd>汎用OSの種類、モバイルOS、IoT向けOS</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>BIOS（Basic Input/Output System）</td>
+              <td>マザーボードに組み込まれたファームウェア。OS起動前のハードウェア初期化を行う</td>
+              <td>テキストベースのインターフェース。MBR方式の起動。レガシーな方式</td>
+            </tr>
+            <tr>
+              <td>UEFI（Unified Extensible Firmware Interface）</td>
+              <td>BIOS後継のファームウェア規格。グラフィカルなインターフェース</td>
+              <td>GPT方式の起動。セキュリティ機能（Secure Boot）を備える。現代PCの標準</td>
+            </tr>
+            <tr>
+              <td>POST（Power-On Self Test）</td>
+              <td>電源投入時にハードウェアが正常に動作するかチェックするテスト</td>
+              <td>BIOS/UEFIの重要な機能の一つ</td>
+            </tr>
+            <tr>
+              <td>ブートローダ</td>
+              <td>OSを読み込むためのプログラム</td>
+              <td>Windows Boot Manager、GRUB（Linux）、U-Boot（組み込み）</td>
+            </tr>
+            <tr>
+              <td>OS（オペレーティングシステム）</td>
+              <td>ハードウェアを管理し、アプリケーションが動作する環境を提供するソフトウェア</td>
+              <td>資源管理・抽象化・ユーザインターフェースの3つの役割</td>
+            </tr>
+            <tr>
+              <td>リアルタイムOS（RTOS）</td>
+              <td>決められた時間内に必ず処理を完了することを重視したOS</td>
+              <td>FreeRTOS、VxWorks、μITRON。工場ロボット、医療機器、ドローンなど</td>
+            </tr>
+            <tr>
+              <td>IoT向けOS</td>
+              <td>IoTデバイス向けに最適化された軽量OS</td>
+              <td>Zephyr、Mbed OS、RIOT OS。超省電力・小メモリで動作</td>
+            </tr>
+            <tr>
+              <td>車載OS</td>
+              <td>自動車のECUや自動運転システムで利用されるOS</td>
+              <td>AUTOSAR、QNX、AGL。高信頼性・安全規格（ISO 26262）対応</td>
+            </tr>
+            <tr>
+              <td>Windows</td>
+              <td>マイクロソフト社の汎用OS。多様なハードウェアで動作</td>
+              <td>後方互換性を重視。企業向け管理機能が充実</td>
+            </tr>
+            <tr>
+              <td>macOS</td>
+              <td>Apple社の汎用OS。UNIXベース</td>
+              <td>Apple製ハード専用に最適化。安定性・UI/UXを重視</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="bios-uefi" class="lesson-section">
+      <h2>3.1 コンピュータの起動と BIOS / UEFI</h2>
+      <p>コンピュータは電源を入れるとすぐに OS が動き出すわけではありません。最初に動作するのは、マザーボードに組み込まれた BIOS または UEFI と呼ばれるプログラムです。</p>
+
+      <h3>BIOS / UEFI の役割</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>役割</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ハードウェアの初期化</td>
+              <td>CPU・メモリ・ストレージ・キーボードなどを認識し、使える状態にする</td>
+            </tr>
+            <tr>
+              <td>POST（Power-On Self Test）</td>
+              <td>電源投入時に、ハードウェアが正常に動作しているかをチェックする</td>
+            </tr>
+            <tr>
+              <td>ブートローダの起動</td>
+              <td>OSを読み込むためのプログラム（ブートローダ）をストレージから探し、実行する</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>BIOSとUEFIの違い</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>BIOS</th>
+              <th>UEFI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>方式</td>
+              <td>古い方式（1980年代から）</td>
+              <td>新しい方式（2000年代から）</td>
+            </tr>
+            <tr>
+              <td>画面</td>
+              <td>テキストベース</td>
+              <td>グラフィカル</td>
+            </tr>
+            <tr>
+              <td>起動方式</td>
+              <td>MBR（Master Boot Record）</td>
+              <td>GPT（GUID Partition Table）</td>
+            </tr>
+            <tr>
+              <td>メモリ利用</td>
+              <td>1MB以下</td>
+              <td>大容量利用可能</td>
+            </tr>
+            <tr>
+              <td>セキュリティ</td>
+              <td>弱い</td>
+              <td>Secure Bootなど強化</td>
+            </tr>
+          </tbody>
+        </tr>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>コンピュータ起動の流れ</figcaption>
+        <pre>
+【コンピュータ起動の流れ】
+
+  電源投入
+      |
+      v
+  BIOS / UEFI 起動
+      |
+      +---> ハードウェア初期化
+      +---> POST（自己診断テスト）
+      |
+      v
+  ブートローダの検索と起動
+  （Windows Boot Manager / GRUB / U-Boot）
+      |
+      v
+  OSの起動（カーネル読み込み）
+      |
+      v
+  ユーザーログイン / アプリ起動可能状態
+        </pre>
+      </figure>
+
+      <h3>組み込み・IoT におけるブート</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>代表的なブートローダ</td>
+              <td>U-Boot（LinuxベースのIoT機器で標準）</td>
+            </tr>
+            <tr>
+              <td>特徴</td>
+              <td>小型・省メモリ・高速起動・安定性重視</td>
+            </tr>
+            <tr>
+              <td>ファームウェア更新</td>
+              <td>OTA（Over The Air）による無線更新が一般的</td>
+            </tr>
+            <tr>
+              <td>セキュリティ</td>
+              <td>署名付きファームウェアによる改ざん防止</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="os-role" class="lesson-section">
+      <h2>3.2 OS（オペレーティングシステム）とは</h2>
+      <p>OSは、ハードウェアを管理し、アプリケーションが動作できる環境を提供するソフトウェアです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>OSの位置づけ</figcaption>
+        <pre>
+【ソフトウェア階層】
+
+  +-------------------------------------------+
+  |           アプリケーション                |
+  |     （Word、Excel、ブラウザなど）         |
+  +-------------------------------------------+
+  |                  OS                       |
+  |    （資源管理・抽象化・ユーザIF提供）     |
+  +-------------------------------------------+
+  |               ハードウェア                |
+  |     （CPU、メモリ、ディスク、I/O）        |
+  +-------------------------------------------+
+
+  OSはハードウェアとアプリケーションの間に入り、
+  アプリケーションがハードウェアを直接操作しなくても済むようにする。
+        </pre>
+      </figure>
+
+      <h3>OSの3つの役割</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>役割</th>
+              <th>説明</th>
+              <th>具体例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>資源管理</strong></td>
+              <td>コンピュータの各資源を管理し、アプリケーションに適切に割り当てる</td>
+              <td>CPU（プロセス管理）、メモリ（メモリ管理）、ストレージ（ファイル管理）、入出力装置（デバイス管理）</td>
+            </tr>
+            <tr>
+              <td><strong>抽象化</strong></td>
+              <td>ハードウェアの複雑さを隠し、アプリケーションが統一的な方法で操作できるようにする</td>
+              <td>「ファイル」という概念でストレージを扱う。「プロセス」という概念でCPUを扱う</td>
+            </tr>
+            <tr>
+              <td><strong>ユーザインターフェース</strong></td>
+              <td>ユーザがコンピュータを操作できる環境を提供する</td>
+              <td>GUI（Windows、macOS、Android）、CUI（Linuxのシェルなど）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="os-types" class="lesson-section">
+      <h2>OSの種類</h2>
+
+      <h3>① 汎用OS（General Purpose OS）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>OS</th>
+              <th>特徴</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Windows</td>
+              <td>多様なハードウェアで動作。後方互換性重視。企業向け管理機能充実</td>
+              <td>PC、サーバ、業務用端末</td>
+            </tr>
+            <tr>
+              <td>macOS</td>
+              <td>Apple製ハード専用に最適化。UNIXベース。安定性・UI/UX重視</td>
+              <td>Mac（デスクトップ・ノートPC）</td>
+            </tr>
+            <tr>
+              <td>Linux</td>
+              <td>オープンソース。多様なディストリビューション（Ubuntu、CentOSなど）</td>
+              <td>サーバ、開発環境、組み込み、スパコン</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>② モバイルOS</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>OS</th>
+              <th>特徴</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>iOS</td>
+              <td>Apple製iPhone/iPad専用。タッチ操作に最適化。App Storeで管理</td>
+              <td>iPhone、iPad</td>
+            </tr>
+            <tr>
+              <td>Android</td>
+              <td>Google開発。多様なメーカーのデバイスで動作。オープンソースベース</td>
+              <td>スマートフォン、タブレット</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>③ リアルタイムOS（RTOS）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>OS</th>
+              <th>特徴</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FreeRTOS</td>
+              <td>オープンソース。軽量・無料。組み込みで最も広く利用</td>
+              <td>家電、IoTデバイス、ドローン</td>
+            </tr>
+            <tr>
+              <td>VxWorks</td>
+              <td>商用RTOS。高い信頼性とリアルタイム性</td>
+              <td>航空宇宙、産業機器、医療機器</td>
+            </tr>
+            <tr>
+              <td>μITRON</td>
+              <td>日本で広く使われたRTOS規格。自動車や家電で実績</td>
+              <td>車載機器、デジカメ、プリンタ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>④ IoT向けOS</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>OS</th>
+              <th>特徴</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Zephyr</td>
+              <td>Linux財団開発。超省電力・小メモリ（数十KBから）</td>
+              <td>BLE、LoRa、センサーネットワーク</td>
+            </tr>
+            <tr>
+              <td>Mbed OS</td>
+              <td>Arm開発。クラウド連携が容易</td>
+              <td>スマートホーム、ウェアラブル</td>
+            </tr>
+            <tr>
+              <td>RIOT OS</td>
+              <td>低消費電力。IoTデバイス向けに特化</td>
+              <td>環境センサー、スマートシティ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>⑤ 車載OS（Automotive OS）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>OS</th>
+              <th>特徴</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AUTOSAR</td>
+              
+            
+              <td>自動車業界標準のOS規格。Classic（制御系）とAdaptive（情報系）</td>
+              <td>エンジン制御、ブレーキ制御、ADAS</td>
+            </tr>
+            <tr>
+              <td>QNX</td>
+              <td>商用RTOS。高い安全性（ISO 26262認証）</td>
+              <td>自動運転システム、デジタルコックピット</td>
+            </tr>
+            <tr>
+              <td>AGL（Automotive Grade Linux）</td>
+              <td>オープンソースの車載OS。Linuxベース</td>
+              十九章インフォテインメントシステム</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>⑥ マイコン向けOS</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>OS</th>
+              <th>特徴</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Arduino Core</td>
+              <td>Arduinoマイコン向けの軽量フレームワーク</td>
+              <td>電子工作、プロトタイピング</td>
+            </tr>
+            <tr>
+              <td>FreeRTOS（MCU版）</td>
+              <td>マイコンでも動作する軽量RTOS</td>
+              <td>家電制御、小型ロボット</td>
+            </table>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>WindowsとmacOSの設計思想の違い</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>OS</th>
+              <th>設計思想</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Windows</td>
+              <td>汎用性・後方互換性・企業利用を最優先</td>
+              <td>多様なハードウェアで動作。自作PCから企業端末まで。古いアプリも動かすため複雑化</td>
+            </tr>
+            <tr>
+              <td>macOS</td>
+              <td>統一されたハードウェアでの最適化・安定性・UXを最優先</td>
+              <td>Apple製ハード専用。UNIXベースで設計がシンプル。UI/UXの一貫性を重視</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. BIOSの役割として、適切でないものはどれか。</summary>
+        <p>ア）ハードウェアの初期化　イ）POST（自己診断テスト）の実行　ウ）アプリケーションの実行　エ）ブートローダの起動</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — BIOSはOS起動前の処理を行い、アプリケーションの実行はOSの役割。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. UEFIの特徴として、適切なものはどれか。</summary>
+        <p>ア）テキストベースのインターフェース　イ）MBR方式の起動　ウ）Secure Bootなどのセキュリティ機能　エ）1MB以下のメモリ制限</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — UEFIはSecure Bootなどのセキュリティ機能を持つ。ア、イ、エはBIOSの特徴。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. OSの役割として、本文で挙げられていないものはどれか。</summary>
+        <p>ア）資源管理　イ）抽象化　ウ）ユーザインターフェース　エ）アプリケーションの開発</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — OSの3つの役割は「資源管理」「抽象化」「ユーザインターフェース」。アプリケーションの開発は開発者の役割。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. リアルタイムOS（RTOS）の特徴として、最も適切なものはどれか。</summary>
+        <p>ア）多機能で大規模なアプリケーション向け　イ）決められた時間内に必ず処理を完了するリアルタイム性を重視　ウ）タッチ操作に最適化　エ）オフィス業務向け</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — RTOSは決められた時間内に必ず処理を完了するリアルタイム性を重視。工場ロボットや医療機器で利用。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 以下のうち、IoT向けOSはどれか。</summary>
+        <p>ア）Windows 11　イ）macOS　ウ）Zephyr　エ）iOS</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ZephyrはIoT向けOS。他は汎用OSまたはモバイルOS。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. BIOSと比較したUEFIの特徴として、適切なものはどれか。</summary>
+        <p>ア）テキストベースの画面　イ）MBR方式の起動　ウ）グラフィカルなインターフェースと大容量メモリ利用可能　エ）1MB以下のメモリ制限</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — UEFIはグラフィカルなインターフェースを持ち、大容量メモリを利用可能。ア、イ、エはBIOSの特徴。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. OSにおける「抽象化」の例として、適切なものはどれか。</summary>
+        <p>ア）CPUの使用率を監視する　イ）「ファイル」という概念でストレージを扱う　ウ）メモリ容量を増設する　エ）ディスクをフォーマットする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 抽象化の例は「ファイル」という概念でストレージを扱うこと。ハードウェアの複雑さを隠し、統一的な操作を提供する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 車載OSの代表例として、適切なものはどれか。</summary>
+        <p>ア）Windows 11　イ）Android　ウ）AUTOSAR　エ）FreeRTOS</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — AUTOSARは自動車業界標準の車載OS。FreeRTOSは汎用RTOSだが車載でも使われる場合がある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. POST（Power-On Self Test）の説明として、適切なものはどれか。</summary>
+        <p>ア）OSの起動後に実行されるテスト　イ）電源投入時にハードウェアが正常に動作するかチェックするテスト　ウ）アプリケーションの動作テスト　エ）ネットワーク接続テスト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — POSTは電源投入時にBIOS/UEFIが実行するハードウェアの自己診断テスト。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. ブートローダの役割はどれか。</summary>
+        <p>ア）アプリケーションを終了する　イ）OSを読み込むためのプログラムを起動する　ウ）ファイルを圧縮する　エ）ネットワーク設定を行う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ブートローダはOSを読み込むためのプログラム（Windows Boot Manager、GRUB、U-Bootなど）をストレージから探し、実行する。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第3章 OSとソフトウェア / 3.1 BIOS/UEFI、3.2 OSとは / OSの種類（p104-p120）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

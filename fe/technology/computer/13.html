@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>デバイス管理 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>デバイス管理</h1>
+        <p class="lead">デバイス管理の目的、デバイスドライバ、バッファリング、スプーリングを理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#device-management">デバイス管理とは</a>
+        <a href="#device-driver">デバイスドライバ</a>
+        <a href="#buffering">バッファリング</a>
+        <a href="#spooling">スプーリング</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>デバイス管理</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>デバイス管理の目的：デバイスの抽象化、データ転送の効率化、デバイスの安全な利用</li>
+          <li>デバイスドライバ：OSとハードウェアの間で通信を仲介するソフトウェア</li>
+          <li>バッファリング：データを一時的にメモリに蓄えてからデバイスへ送受信する仕組み</li>
+          <li>スプーリング：プリンタなどの遅いデバイス向けに、データをストレージに保存して順番に処理する仕組み</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>デバイスドライバの役割、バッファリング、スプーリング</dd></div>
+          <div><dt>中</dt><dd>デバイス管理の3つの目的</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>デバイス管理</td>
+              <td>入出力装置（I/Oデバイス）を統一的に扱えるように管理すること</td>
+              <td>デバイスの抽象化、データ転送の効率化、安全な利用が目的</td>
+            </tr>
+            <tr>
+              <td>デバイスドライバ</td>
+              <td>OSとハードウェアの間で通信を仲介するソフトウェア</td>
+              <td>デバイスごとに専用ドライバが必要。OSは共通APIで操作できる</td>
+            </tr>
+            <tr>
+              <td>バッファリング</td>
+              <td>データを一時的にメモリ（バッファ）に蓄えてからデバイスへ送受信する仕組み</td>
+              <td>CPUとI/Oデバイスの速度差を吸収する</td>
+            </tr>
+            <tr>
+              <td>スプーリング</td>
+              <td>プリンタなどの遅いデバイス向けに、データをストレージに保存して順番に処理する仕組み</td>
+              <td>Spool = Simultaneous Peripheral Operations Online</td>
+            </tr>
+            <tr>
+              <td>バッファ</td>
+              <td>データを一時的に蓄えるメモリ領域</td>
+              <td>キーボード入力バッファ、ネットワーク受信バッファなど</td>
+            </tr>
+            <tr>
+              <td>スプーラ</td>
+              <td>スプーリングを管理するソフトウェア</td>
+              <td>WindowsのPrint Spoolerなど</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="device-management" class="lesson-section">
+      <h2>6. デバイス管理（I/O管理）</h2>
+      <p>OSはキーボード、ディスプレイ、プリンタ、センサー、通信モジュールなど、さまざまな入出力装置（I/Oデバイス）を統一的に扱えるように管理します。</p>
+
+      <h3>デバイス管理の目的</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>目的</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>デバイスの抽象化</td>
+              <td>デバイスごとに異なる制御方法をOSがデバイスドライバで吸収し、共通の操作方法（API）で扱えるようにする</td>
+            </tr>
+            <tr>
+              <td>データ転送の効率化</td>
+              <td>バッファリング、スプーリング、DMAなどを使用してCPUの無駄な待ち時間を減らす</td>
+            </tr>
+            <tr>
+              <td>デバイスの安全な利用</td>
+              <td>複数アプリからの同時アクセスを制御し、不正なアクセスを防ぐ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="device-driver" class="lesson-section">
+      <h2>6.2 デバイスドライバ（Device Driver）</h2>
+      <p>デバイスドライバは、OSとハードウェアの間で通信を仲介し、デバイスを正しく動作させるためのソフトウェアです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>デバイスドライバの位置づけ</figcaption>
+        <pre>
+【デバイスドライバの役割】
+
+  アプリケーション
+         |
+         | I/O要求
+         v
+        OS
+         |
+         | デバイスドライバに依頼
+         v
+  デバイスドライバ
+         |
+         | デバイス固有の命令に変換
+         v
+   ハードウェア（I/Oデバイス）
+
+  OSはデバイスの詳細を知らずに、統一された方法でI/Oを扱える。
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>デバイスドライバの役割</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>デバイスの初期化・設定</td>
+              <td>通信速度、動作モード、割り込み設定などを行う</td>
+            </tr>
+            <tr>
+              <td>データ転送の制御</td>
+              <td>レジスタ操作、DMA設定、送受信処理など</td>
+            </tr>
+            <tr>
+              <td>デバイス状態の取得</td>
+              <td>ステータスレジスタの読み取り、エラー検出</td>
+            </tr>
+            <tr>
+              <td>OSへの通知</td>
+              <td>割り込み処理や完了報告を行い、OSに状態を伝える</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>デバイスドライバの例</th>
+              <th>対象デバイス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>USBドライバ</td>
+              <td>キーボード、マウス、外付けHDD</td>
+            </tr>
+            <tr>
+              <td>ネットワークドライバ</td>
+              <td>イーサネット、Wi-Fi</td>
+            </tr>
+            <tr>
+              <td>グラフィックドライバ</td>
+              <td>GPU（ビデオカード）</td>
+            </tr>
+            <tr>
+              <td>プリンタドライバ</td>
+              <td>プリンタ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="buffering" class="lesson-section">
+      <h2>6.3 バッファリング（Buffering）</h2>
+      <p>バッファリングとは、データを一時的にメモリ（バッファ）に蓄えてからデバイスへ送受信する仕組みです。CPUとI/Oデバイスの速度差を吸収し、システム全体の効率を高めます。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>バッファリングの効果</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CPUが待たされない</td>
+              <td>バッファに書き込んだらすぐ次の処理へ進める</td>
+            </tr>
+            <tr>
+              <td>データの取りこぼし防止</td>
+              <td>ネットワークや高速入力でもバッファが吸収</td>
+            </tr>
+            <tr>
+              <td>I/Oの効率化</td>
+              <td>デバイスの処理単位に合わせてまとめて転送できる</td>
+            </tr>
+            <tr>
+              <td>速度差の吸収</td>
+              <td>高速CPUと低速デバイスの橋渡しになる</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>バッファリングの具体例</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>キーボード入力バッファ</td>
+              <td>ユーザの入力をOSが一時的に蓄える</td>
+            </tr>
+            <tr>
+              <td>ネットワーク受信バッファ</td>
+              <td>パケットを一時保存し、アプリが順に処理</td>
+            </tr>
+            <tr>
+              <td>プリンタの印刷バッファ</td>
+              <td>印刷データをためてから順番に送信</td>
+            </tr>
+            <tr>
+              <td>ストレージI/Oバッファ</td>
+              <td>ディスク読み書きを効率化</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="spooling" class="lesson-section">
+      <h2>6.4 スプーリング（Spooling）</h2>
+      <p>スプーリング（Spool: Simultaneous Peripheral Operations Online）とは、CPUやアプリケーションより遅いデバイス（特にプリンタ）を効率よく使うために、データを一時的にストレージへ保存し、順番に処理する仕組みです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>スプーリングの流れ</figcaption>
+        <pre>
+【スプーリングの流れ】
+
+  1. アプリケーションが印刷要求をOSに送る
+         |
+         v
+  2. OSがデータをスプール領域（ストレージ）に保存する
+         |
+         v
+  3. スプーラ（Spooler）がキューを管理し、順番にプリンタへ送信
+         |
+         v
+  4. プリンタが処理している間、アプリは待たずに次の作業を続行できる
+
+  例：WindowsのPrint Spooler
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>スプーリングの特徴</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>アプリケーションがすぐに処理を終えられる</td>
+              <td>印刷中でも他の作業が可能</td>
+            </tr>
+            <tr>
+              <td>複数の印刷要求をOSがキューで管理</td>
+              <td>同時に送られても順番に処理される</td>
+            </tr>
+            <tr>
+              <td>デバイスの遅さを吸収</td>
+              <td>CPUとプリンタの速度差を非同期化で解消</td>
+            </tr>
+            <tr>
+              <td>プリンタ固有の処理はスプーラとドライバが担当</td>
+              <td>OSがデータ変換・送信を仲介する</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>スプーリングの利用例</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>印刷処理</td>
+              <td>Wordなどのアプリは印刷命令を送るだけで即終了。OSがバックグラウンドで印刷を進める</td>
+            </tr>
+            <tr>
+              <td>ネットワークプリンタの共有</td>
+              <td>複数ユーザのジョブをOSが順番に処理</td>
+            </tr>
+            <tr>
+              <td>大きな印刷ジョブの一時保存</td>
+              <td>PDFや画像などの重いデータもスプール領域で管理</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. デバイス管理の目的として、本文で挙げられているものはどれか。</summary>
+        <p>ア）デバイスの抽象化、データ転送の効率化、デバイスの安全な利用　イ）デバイスの製造、販売、廃棄　ウ）デバイスの色分け、整理整頓　エ）デバイスの速度向上、容量増加</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — デバイス管理の目的は「デバイスの抽象化」「データ転送の効率化」「デバイスの安全な利用」の3つ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. デバイスドライバの説明として、最も適切なものはどれか。</summary>
+        <p>ア）アプリケーションの動作を高速化するソフトウェア　イ）OSとハードウェアの間で通信を仲介するソフトウェア　ウ）ファイルを圧縮するソフトウェア　エ）ネットワーク通信を暗号化するソフトウェア</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — デバイスドライバはOSとハードウェアの間で通信を仲介するソフトウェア。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. バッファリングの説明として、最も適切なものはどれか。</summary>
+        <p>ア）データをストレージに保存して順番に処理する仕組み　イ）データを一時的にメモリに蓄えてからデバイスへ送受信する仕組み　ウ）データを暗号化して転送する仕組み　エ）データを圧縮して転送する仕組み</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — バッファリングはデータを一時的にメモリ（バッファ）に蓄えてからデバイスへ送受信する仕組み。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. スプーリングの説明として、最も適切なものはどれか。</summary>
+        <p>ア）データを一時的にメモリに蓄える仕組み　イ）プリンタなどの遅いデバイス向けに、データをストレージに保存して順番に処理する仕組み　ウ）CPUとメモリの速度差を吸収する仕組み　エ）複数のCPUで処理を分散する仕組み</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スプーリングはプリンタなどの遅いデバイス向けに、データをストレージに保存して順番に処理する仕組み。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. スプーリングの代表的な利用例はどれか。</summary>
+        <p>ア）キーボード入力　イ）マウス操作　ウ）印刷処理　エ）画面表示</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スプーリングは特にプリンタなどの印刷処理でよく利用される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. バッファリングの具体例として、本文で挙げられているものはどれか。</summary>
+        <p>ア）キーボード入力バッファ、ネットワーク受信バッファ　イ）CPUキャッシュ、レジスタ　ウ）ページテーブル、スワップ領域　エ）ファイルアロケーションテーブル、i-node</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — バッファリングの例は「キーボード入力バッファ」「ネットワーク受信バッファ」「プリンタの印刷バッファ」など。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. デバイスドライバの役割として、本文で挙げられていないものはどれか。</summary>
+        <p>ア）デバイスの初期化・設定　イ）データ転送の制御　ウ）アプリケーションの実行　エ）OSへの通知</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — アプリケーションの実行はデバイスドライバの役割ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. スプーリングの特徴として、適切なものはどれか。</summary>
+        <p>ア）CPUがデバイスを常に監視するため負荷が高い　イ）アプリケーションが処理完了を待たされる　ウ）複数の要求をキューで管理し、順番に処理する　エ）データをメモリにだけ保存する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スプーリングは複数の要求をキューで管理し、順番に処理する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. バッファリングの効果として、本文で挙げられているものはどれか。</summary>
+        <p>ア）CPUが待たされない、データの取りこぼし防止、I/Oの効率化　イ）プログラムの実行速度が2倍になる　ウ）メモリ容量が増える　エ）ディスク容量が増える</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — バッファリングの効果は「CPUが待たされない」「データの取りこぼし防止」「I/Oの効率化」「速度差の吸収」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. デバイスの抽象化を実現するために不可欠なソフトウェアはどれか。</summary>
+        <p>ア）コンパイラ　イ）アセンブラ　ウ）デバイスドライバ　エ）リンカ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — デバイスドライバがデバイス固有の制御を吸収し、OSに共通のインターフェースを提供することで抽象化を実現する。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第3章 OSとソフトウェア / 3.6 デバイス管理（p146-p159）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

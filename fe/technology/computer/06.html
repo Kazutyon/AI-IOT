@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>仮想記憶・外部記憶装置 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>仮想記憶・外部記憶装置</h1>
+        <p class="lead">仮想記憶の仕組み（ページング・ページテーブル・スワップ）と外部記憶装置（HDD/SSD）の種類・特徴を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#virtual-memory">仮想記憶</a>
+        <a href="#storage">外部記憶装置</a>
+        <a href="#access-method">アクセス方法</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>仮想記憶・外部記憶装置</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>仮想記憶：主記憶装置の容量を超えるメモリ空間を利用できる仕組み</li>
+          <li>ページング：仮想記憶を固定サイズの「ページ」で管理する方式</li>
+          <li>ページテーブル：仮想ページと物理ページフレームの対応表</li>
+          <li>ページフォールト：必要なページが主記憶にない状態。スワップ領域から読み込む</li>
+          <li>HDD：磁気ディスクを回転させて読み書き。大容量・低コスト</li>
+          <li>SSD：フラッシュメモリを使用。高速・耐衝撃性あり</li>
+          <li>ランダムアクセス vs シーケンシャルアクセス</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>仮想記憶の仕組み、ページング、ページフォールト、HDDとSSDの違い</dd></div>
+          <div><dt>中</dt><dd>ページテーブル、スワップ領域、アクセス方式の違い</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>仮想記憶（Virtual Memory）</td>
+              <td>主記憶装置の容量を超えるメモリ空間を利用できるようにする仕組み</td>
+              <td>主記憶装置と外部記憶装置（HDD/SSD）を組み合わせ、あたかも大容量のメモリがあるように見せる</td>
+            </tr>
+            <tr>
+              <td>ページング（Paging）</td>
+              <td>仮想記憶を固定サイズのブロック（ページ）で管理する方式</td>
+              <td>仮想アドレス空間をページ、物理メモリをページフレームに分割して管理</td>
+            </tr>
+            <tr>
+              <td>ページ（Page）</td>
+              <td>仮想メモリ側の固定サイズブロック（例：4KB）</td>
+              <td>プログラムから見える仮想的なメモリ空間の単位</td>
+            </tr>
+            <tr>
+              <td>ページフレーム（Page Frame）</td>
+              <td>物理メモリ側の固定サイズブロック（例：4KB）</td>
+              <td>実際の物理メモリ上の領域</td>
+            </tr>
+            <tr>
+              <td>ページテーブル（Page Table）</td>
+              <td>仮想ページと物理ページフレームの対応を管理する表</td>
+              <td>各プロセスが独自に持つ。MMUが参照してアドレス変換を行う</td>
+            </tr>
+            <tr>
+              <td>ページフォールト（Page Fault）</td>
+              <td>必要なページが主記憶になく、ページテーブルに存在ビットがない状態</td>
+              <td>OSがスワップ領域から該当ページを主記憶に読み込む</td>
+            </tr>
+            <tr>
+              <td>スワップ領域（Swap Area）</td>
+              <td>主記憶に入りきらないページを一時的に保存するHDD/SSD上の領域</td>
+              <td>主記憶の“拡張領域”として機能する</td>
+            </tr>
+            <tr>
+              <td>MMU（Memory Management Unit）</td>
+              <td>CPU内のメモリ管理ユニット。仮想アドレスを物理アドレスに変換する</td>
+              <td>ページテーブルを参照してアドレス変換を行うハードウェア</td>
+            </tr>
+            <tr>
+              <td>HDD（Hard Disk Drive）</td>
+              <td>磁気ディスクを回転させてデータを読み書きする外部記憶装置</td>
+              <td>大容量・低コスト。アクセス速度はSSDより遅い。回転部分があるため衝撃に弱い</td>
+            </tr>
+            <tr>
+              <td>SSD（Solid State Drive）</td>
+              <td>フラッシュメモリを使用する外部記憶装置</td>
+              <td>高速・耐衝撃性あり・省電力。HDDより高価だが、最近は価格差が縮小</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="virtual-memory" class="lesson-section">
+      <h2>2.1.4 仮想記憶（Virtual Memory）</h2>
+      <p>主記憶装置の容量には限りがあります。しかし、現代のアプリケーションは大量のメモリを必要とするため、主記憶だけでは足りません。そこで利用されるのが仮想記憶です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>仮想記憶の構造</figcaption>
+        <pre>
+【仮想記憶の構造】
+
+  仮想アドレス空間                    物理メモリ
+  （プログラムから見える）            （実際のRAM）
+  +-----------------+                +-----------------+
+  |   ページ0       | ------------>  | ページフレーム0 |
+  +-----------------+                +-----------------+
+  |   ページ1       | ------------>  | ページフレーム1 |
+  +-----------------+                +-----------------+
+  |   ページ2       |     未割り当て | ページフレーム2 |
+  +-----------------+    （スワップ）+-----------------+
+  |   ページ3       | ------------>  | ページフレーム3 |
+  +-----------------+                +-----------------+
+        |                                  |
+        | 主記憶にないページ                |
+        v                                  v
+  +---------------------------------------------------+
+  |                 スワップ領域（HDD/SSD）           |
+  |  ページ2  |  ページ5  |  ページ8  |  ...          |
+  +---------------------------------------------------+
+
+  ページテーブル：各プロセスが持ち、仮想ページ→物理フレームの対応を管理
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>仮想アドレス空間</td>
+              <td>プログラムが見る「仮想的なメモリ空間」。実際の物理メモリとは別物</td>
+            </tr>
+            <tr>
+              <td>ページ</td>
+              <td>仮想メモリ側の固定サイズブロック（例：4KB）</td>
+            </tr>
+            <tr>
+              <td>ページフレーム</td>
+              <td>物理メモリ側の固定サイズブロック（例：4KB）</td>
+            </tr>
+            <tr>
+              <td>ページテーブル</td>
+              <td>仮想ページ→物理ページフレームの対応表。各プロセスが独自に持つ</td>
+            </tr>
+            <tr>
+              <td>スワップ領域</td>
+              <td>主記憶に入りきらないページを一時的に保存するHDD/SSD上の領域</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>仮想記憶の動作（簡単な流れ）</h3>
+      <figure class="wide-diagram">
+        <figcaption>仮想記憶の動作フロー</figcaption>
+        <pre>
+【仮想記憶の動作フロー】
+
+  1. CPUが仮想アドレスでデータを要求する
+          |
+          v
+  2. MMUがページテーブルを参照して物理アドレスに変換する
+          |
+          v
+  3. ページが主記憶にあれば（ページテーブルの存在ビット=1）
+          |
+          +---> そのままアクセス（キャッシュヒットと同様の概念）
+          |
+          v
+  4. ページが主記憶になければ（ページテーブルの存在ビット=0）
+          |
+          +---> ページフォールト発生！
+          |
+          v
+  5. OSがスワップ領域から該当ページを主記憶に読み込む
+          |
+          v
+  6. ページテーブルを更新（存在ビットを1に）
+          |
+          v
+  7. CPUが再実行してアクセス完了
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>状態</th>
+              <th>動作</th>
+              <th>性能</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ページが主記憶にある</td>
+              <td>MMUがアドレス変換して即アクセス</td>
+              <td>高速</td>
+            </tr>
+            <tr>
+              <td>ページが主記憶にない（ページフォールト）</td>
+              <td>OSがスワップ領域から読み込む</td>
+              <td>低速（HDD/SSDアクセスが必要）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="storage" class="lesson-section">
+      <h2>2.1.5 外部記憶装置（ストレージ）</h2>
+      <p>外部記憶装置（ストレージ）は、主記憶装置では容量や保存期間が不足するデータを長期間保存する装置です。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>特徴</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>不揮発性</td>
+              <td>電源を切ってもデータが消えない</td>
+            </tr>
+            <tr>
+              <td>アクセス速度</td>
+              <td>主記憶装置より遅い（HDDはms単位、SSDはμs単位）</td>
+            </tr>
+            <tr>
+              <td>容量</td>
+              <td>主記憶装置よりはるかに大容量（数百GB～数TB、最近はPB単位）</td>
+            </tr>
+            <tr>
+              <td>役割</td>
+              <td>プログラムやOSの格納、ユーザデータの保存</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>外部記憶装置の種類と比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>種類</th>
+              <th>概要</th>
+              <th>特徴</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HDD</td>
+              <td>磁気ディスクを回転させてデータを読み書き</td>
+              <td>大容量・低コスト。アクセス速度はやや遅い</td>
+              <td>PC、サーバの大容量データ保存</td>
+            </tr>
+            <tr>
+              <td>SSD</td>
+              <td>フラッシュメモリを使用</td>
+              <td>高速・耐衝撃性あり・HDDより高価</td>
+              <td>OSやアプリの高速起動、ノートPC</td>
+            </tr>
+            <tr>
+              <td>光ディスク</td>
+              <td>CD/DVD/Blu-ray。レーザーで読み書き</td>
+              <td>不揮発性、持ち運び可能、容量中程度</td>
+              <td>音楽・動画配布、バックアップ</td>
+            </tr>
+            <tr>
+              <td>USBメモリ/SDカード</td>
+              <td>フラッシュメモリを使用</td>
+              <td>小型・持ち運び容易、容量は中～大</td>
+              <td>データの持ち運び、バックアップ</td>
+            </tr>
+            <tr>
+              <td>テープドライブ</td>
+              <td>磁気テープにデータを記録</td>
+              <td>大容量・低コスト、順次アクセスのみ</td>
+              <td>大規模バックアップ、アーカイブ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>主記憶装置と外部記憶装置の違い</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>特性</th>
+              <th>主記憶装置（メインメモリ）</th>
+              <th>外部記憶装置（ストレージ）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>揮発性</td>
+              <td>あり（電源を切ると消える）</td>
+              <td>なし（電源を切っても保持）</td>
+            </tr>
+            <tr>
+              <td>アクセス速度</td>
+              <td>高速（ns～μs単位）</td>
+              <td>遅い（HDD:ms単位、SSD:μs単位）</td>
+            </tr>
+            <tr>
+              <td>容量</td>
+              <td>数GB～数十GB程度</td>
+              <td>数百GB～数TB（最近はPB単位）</td>
+            </tr>
+            <tr>
+              <td>用途</td>
+              <td>CPUが直接処理する作業領域</td>
+              <td>長期保存、バックアップ、アーカイブ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="access-method" class="lesson-section">
+      <h2>アクセス方法（ランダムアクセス vs シーケンシャルアクセス）</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>アクセス方式</th>
+              <th>説明</th>
+              <th>代表例</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ランダムアクセス</td>
+              <td>任意の場所に直接アクセスしてデータを読み書きできる方式</td>
+              <td>HDD、SSD</td>
+              <td>必要なデータだけをすぐに読み書きできる。SSDは高速、HDDは磁気ヘッド移動が必要</td>
+            </tr>
+            <tr>
+              <td>シーケンシャルアクセス</td>
+              <td>先頭から順番にアクセスする方式</td>
+              <td>テープドライブ</td>
+              <td>大容量データの連続読み書きに適するが、ランダムアクセスは苦手</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>性能指標</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>指標</th>
+              <th>意味</th>
+              <th>単位</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>容量</td>
+              <td>保存できるデータ量</td>
+              <td>GB/TB/PB</td>
+            </tr>
+            <tr>
+              <td>転送速度</td>
+              <td>データを読み書きする速度</td>
+              <td>MB/s / GB/s</td>
+            </tr>
+            <tr>
+              <td>アクセス時間</td>
+              <td>データを読み込むまでの時間</td>
+              <td>ms / μs</td>
+            </tr>
+            <tr>
+              <td>耐久性</td>
+              <td>書き換え回数や寿命</td>
+              <td>回数 / 年</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>HDDとSSDの比較イメージ</figcaption>
+        <pre>
+【HDD vs SSD 比較】
+
+  HDD（ハードディスク）：
+    +-------------------+
+    |   磁気ディスク    |  ← 回転（5400rpm / 7200rpm）
+    |      [====]       |
+    +-------------------+
+         ↑
+      磁気ヘッド（移動が必要）
+    特徴：大容量・低コスト・アクセス遅い・衝撃に弱い
+
+  SSD（ソリッドステートドライブ）：
+    +-------------------+
+    | フラッシュメモリ  |
+    | +---+ +---+ +---+ |
+    | |   | |   | |   | |  ← 電子記憶（可動部なし）
+    | +---+ +---+ +---+ |
+    +-------------------+
+    特徴：高速・耐衝撃性・省電力・HDDより高価
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 仮想記憶の説明として、最も適切なものはどれか。</summary>
+        <p>ア）物理メモリを増設する技術　イ）主記憶装置の容量を超えるメモリ空間を利用できる仕組み　ウ）CPUのクロック周波数を上げる技術　エ）データを暗号化する仕組み</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 仮想記憶は主記憶装置の容量を超えるメモリ空間を利用できるようにする仕組み。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. ページングに関する説明として、適切なものはどれか。</summary>
+        <p>ア）プログラムを意味のある単位で分割する方式　イ）仮想記憶を固定サイズのブロックで管理する方式　ウ）メモリを可変サイズの区画に分割する方式　エ）キャッシュメモリの書き込み方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ページングは仮想記憶を固定サイズの「ページ」で管理する方式。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ページフォールトが発生するのはどのような時か。</summary>
+        <p>ア）キャッシュにデータがある時　イ）必要なページが主記憶にない時　ウ）CPUの温度が上がった時　エ）ディスク容量が不足した時</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ページフォールトは必要なページが主記憶になく、ページテーブルに存在ビットがない状態。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. ページテーブルの役割はどれか。</summary>
+        <p>ア）キャッシュメモリのデータを管理する　イ）仮想ページと物理ページフレームの対応を管理する　ウ）ファイルの一覧を管理する　エ）プロセスの優先度を管理する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ページテーブルは仮想ページと物理ページフレームの対応を管理する表。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. HDDとSSDの違いに関する説明として、適切なものはどれか。</summary>
+        <p>ア）HDDは半導体メモリ、SSDは磁気ディスク　イ）HDDは可動部があり衝撃に弱く、SSDは可動部がない　ウ）HDDは高速・高価、SSDは低速・低コスト　エ）HDDはフラッシュメモリ、SSDは光ディスク</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — HDDは磁気ディスクを回転させる可動部があり衝撃に弱い。SSDはフラッシュメモリで可動部がなく耐衝撃性が高い。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. スワップ領域の説明として、適切なものはどれか。</summary>
+        <p>ア）キャッシュメモリ上の特別な領域　イ）主記憶に入りきらないページを一時的に保存するHDD/SSD上の領域　ウ）CPU内部の高速バッファ　エ）BIOSを保存する領域</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スワップ領域は主記憶に入りきらないページを一時的に保存するHDD/SSD上の領域。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. ランダムアクセスの説明として、適切なものはどれか。</summary>
+        <p>ア）先頭から順番にアクセスする方式　イ）任意の場所に直接アクセスできる方式　ウ）データを暗号化して保存する方式　エ）データを圧縮して保存する方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ランダムアクセスは任意の場所に直接アクセスしてデータを読み書きできる方式。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 外部記憶装置の特徴として、適切でないものはどれか。</summary>
+        <p>ア）不揮発性（電源を切ってもデータが消えない）　イ）主記憶装置よりアクセス速度が速い　ウ）大容量データを格納可能　エ）プログラムやOSの格納に使用される</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 外部記憶装置は主記憶装置よりアクセス速度が遅い（HDDはms単位、SSDはμs単位）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. MMU（Memory Management Unit）の役割はどれか。</summary>
+        <p>ア）メモリの電源管理を行う　イ）仮想アドレスを物理アドレスに変換する　ウ）キャッシュメモリのデータを管理する　エ）入出力装置を制御する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — MMUはCPU内のメモリ管理ユニットで、仮想アドレスを物理アドレスに変換する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. シーケンシャルアクセスが主に使用される装置はどれか。</summary>
+        <p>ア）SSD　イ）HDD　ウ）USBメモリ　エ）テープドライブ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — テープドライブはシーケンシャルアクセス（先頭から順番にアクセス）の代表例。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第2章 コンピュータの基本構成 / 2.1.4 仮想記憶、2.1.5 外部記憶装置（p76-p84）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

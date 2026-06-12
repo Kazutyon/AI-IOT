@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>メモリ管理 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>メモリ管理</h1>
+        <p class="lead">メモリ管理の目的、割り当て方式（固定区画/可変区画）、断片化、ページング、セグメンテーション、ページ置換アルゴリズムを理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#allocation">メモリ割り当て方式</a>
+        <a href="#fragmentation">断片化</a>
+        <a href="#paging">ページング</a>
+        <a href="#segmentation">セグメンテーション</a>
+        <a href="#page-replacement">ページ置換アルゴリズム</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>メモリ管理</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>メモリ管理の目的：メモリの割り当て、保護、効率利用</li>
+          <li>固定区画方式：メモリをあらかじめ決まった大きさの区画に分割。内部断片化が発生</li>
+          <li>可変区画方式：プログラムの大きさに合わせて必要な分だけ割り当て。外部断片化が発生</li>
+          <li>内部断片化：割り当てられた区画内の使われない余り領域</li>
+          <li>外部断片化：空き領域が細かく分断され、必要なサイズの連続領域が確保できない</li>
+          <li>ページング：メモリを固定サイズのページで管理。外部断片化が発生しない</li>
+          <li>セグメンテーション：プログラムを意味のある単位（関数・データ・スタック）で分割</li>
+          <li>ページ置換アルゴリズム：FIFO、LRU、LFU</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>固定区画/可変区画の違い、内部断片化/外部断片化、ページング</dd></div>
+          <div><dt>中</dt><dd>セグメンテーション、ページ置換アルゴリズム</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>メモリ管理</td><td>OSがメモリを効率よく、安全に利用できるように管理すること</td><td>メモリの割り当て、保護、効率利用の3つが目的</td></tr>
+            <tr><td>固定区画方式</td><td>メモリをあらかじめ決まった大きさの区画に分割する方式</td><td>実装が簡単だが、内部断片化が発生しやすい</td></tr>
+            <tr><td>可変区画方式</td><td>プログラムの大きさに合わせて必要な分だけメモリを割り当てる方式</td><td>メモリを柔軟に利用できるが、外部断片化が発生する</td></tr>
+            <tr><td>内部断片化</td><td>割り当てられた区画の中に「使われない余り」ができる現象</td><td>例：100KBの区画に70KBのプログラム → 30KBの無駄</td></tr>
+            <tr><td>外部断片化</td><td>空き領域が細かく分断され、必要なサイズの連続領域が確保できない現象</td><td>例：10KBの空きが1KB×10箇所に分散 → 10KBのプログラムが置けない</td></tr>
+            <tr><td>ページング</td><td>メモリを固定サイズのページに分割して管理する方式</td><td>外部断片化が発生しない。仮想記憶と相性が良い</td></tr>
+            <tr><td>ページ</td><td>仮想メモリ側の固定サイズブロック</td><td>例：4KB</td></tr>
+            <tr><td>ページフレーム</td><td>物理メモリ側の固定サイズブロック</td><td>ページと同じサイズ</td></tr>
+            <tr><td>セグメンテーション</td><td>プログラムを意味のある単位（関数・データ・スタック）で分割する方式</td><td>プログラム構造に沿った管理が可能だが、外部断片化が発生する</td></tr>
+            <tr><td>ページ置換アルゴリズム</td><td>メモリ不足時にどのページを追い出すか決める方式</td><td>FIFO、LRU、LFUなどがある</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="allocation" class="lesson-section">
+      <h2>4. メモリ管理（Memory Management）</h2>
+      <p>メモリ（RAM）は、プログラムが実行されるための「作業領域」です。OSはメモリを効率よく、安全に利用できるように管理します。</p>
+
+      <h3>メモリ管理の目的</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>目的</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td>メモリの割り当て</td><td>プログラムが必要とするメモリ領域を確保する</td></tr>
+            <tr><td>メモリの保護</td><td>他のプロセスの領域を勝手に書き換えないようにする</td></tr>
+            <tr><td>メモリの効率利用</td><td>限られたメモリを無駄なく使うための仕組みを提供する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>メモリ割り当て方式</h3>
+
+      <h4>① 固定区画方式（Fixed Partitioning）</h4>
+      <p>メモリをあらかじめ決まった大きさの区画に分割しておく方式。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メリット</th><th>デメリット</th></tr></thead>
+          <tbody>
+            <tr><td>実装が簡単</td><td>内部断片化が発生しやすい</td></tr>
+            <tr><td>区画サイズが固定</td><td>区画より小さいプログラムを入れると余りが出る</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>② 可変区画方式（Variable Partitioning）</h4>
+      <p>プログラムの大きさに合わせて、必要な分だけメモリを割り当てる方式。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メリット</th><th>デメリット</th></tr></thead>
+          <tbody>
+            <tr><td>メモリを柔軟に利用できる</td><td>外部断片化が発生する</td></tr>
+            <tr><td>必要な分だけ割り当てる</td><td>空きが細かく分断され使いにくくなる</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="fragmentation" class="lesson-section">
+      <h2>断片化（Fragmentation）</h2>
+      <p>メモリ管理では、次の2種類の断片化が問題になります。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>種類</th><th>説明</th><th>例</th></tr></thead>
+          <tbody>
+            <tr><td>内部断片化</td><td>割り当てられた区画の中に「使われない余り」ができる</td><td>100KBの区画に70KBのプログラム → 30KBの無駄</td></tr>
+            <tr><td>外部断片化</td><td>空き領域が細かく分断され、必要なサイズの連続領域が確保できない</td><td>10KBの空きが1KB×10箇所に分散 → 10KBのプログラムが置けない</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="paging" class="lesson-section">
+      <h2>ページング（Paging）</h2>
+      <p>ページングは、メモリを固定サイズのページに分割し、プログラムをページ単位で管理する方式。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td>ページ（Page）</td><td>仮想メモリ側の固定サイズブロック</td></tr>
+            <tr><td>ページフレーム（Frame）</td><td>物理メモリ側の固定サイズブロック</td></tr>
+            <tr><td>ページテーブル</td><td>ページとフレームの対応関係を管理する表</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>ページングのイメージ</figcaption>
+        <pre>
+【ページングのイメージ】
+
+  仮想アドレス空間                物理メモリ
+  （プログラムから見える）        （実際のRAM）
+  +-------------+                +-----------------+
+  |   ページ0   | ------------>  | ページフレーム0 |
+  +-------------+                +-----------------+
+  |   ページ1   | ------------>  | ページフレーム1 |
+  +-------------+                +-----------------+
+  |   ページ2   |     未割り当て | ページフレーム2 |
+  +-------------+    （スワップ）+-----------------+
+  |   ページ3   | ------------>  | ページフレーム3 |
+  +-------------+                +-----------------+
+
+  特徴：外部断片化が発生しない。仮想記憶と相性が良い。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="segmentation" class="lesson-section">
+      <h2>セグメンテーション（Segmentation）</h2>
+      <p>プログラムを意味のある単位（関数・データ・スタックなど）で分割する方式。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メリット</th><th>デメリット</th></tr></thead>
+          <tbody>
+            <tr><td>プログラム構造に沿った管理が可能</td><td>外部断片化が発生する</td></tr>
+            <tr><td>セグメントごとにサイズが異なる</td><td>セグメント単位で保護が可能</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>セグメントの例</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>コードセグメント</td><td>プログラムの実行コード</td></tr>
+            <tr><td>データセグメント</td><td>グローバル変数や静的変数</td></tr>
+            <tr><td>スタックセグメント</td><td>ローカル変数や関数の戻りアドレス</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="page-replacement" class="lesson-section">
+      <h2>ページ置換アルゴリズム</h2>
+      <p>仮想記憶では、メモリが不足したときに「どのページを追い出すか」を決める必要があります。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>方式</th><th>説明</th><th>特徴</th></tr></thead>
+          <tbody>
+            <tr><td>FIFO</td><td>First In First Out。最も古くメモリに入ったページを追い出す</td><td>実装が簡単だが、性能は良くない</td></tr>
+            <tr><td>LRU</td><td>Least Recently Used。最も長い間使われていないページを追い出す</td><td>現実のアクセスパターンに近く、性能が良い</td></tr>
+            <tr><td>LFU</td><td>Least Frequently Used。使用回数が最も少ないページを追い出す</td><td>使用頻度を基準にする</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card"><summary>Q1. メモリ管理の目的として、本文で挙げられているものはどれか。</summary><p>ア）メモリの割り当て、保護、効率利用　イ）メモリの速度向上、容量増加　ウ）メモリの色分け、整理整頓　エ）メモリの暗号化、圧縮</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ア</strong> — メモリ管理の目的は「メモリの割り当て」「メモリの保護」「メモリの効率利用」の3つ。</p></details></details>
+
+      <details class="quiz-card"><summary>Q2. 固定区画方式の特徴として、適切なものはどれか。</summary><p>ア）プログラムの大きさに合わせて必要な分だけ割り当てる　イ）メモリをあらかじめ決まった大きさの区画に分割する　ウ）外部断片化が発生する　エ）メモリを固定サイズのページで管理する</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — 固定区画方式はメモリをあらかじめ決まった大きさの区画に分割する方式。</p></details></details>
+
+      <details class="quiz-card"><summary>Q3. 内部断片化の説明として、適切なものはどれか。</summary><p>ア）空き領域が細かく分断される現象　イ）割り当てられた区画内に使われない余りができる現象　ウ）メモリ全体が不足する現象　エ）プログラムが正常に終了しない現象</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — 内部断片化は割り当てられた区画の中に「使われない余り」ができる現象。</p></details></details>
+
+      <details class="quiz-card"><summary>Q4. 可変区画方式のデメリットとして、適切なものはどれか。</summary><p>ア）内部断片化が発生する　イ）実装が難しい　ウ）外部断片化が発生する　エ）プログラムの大きさに合わせられない</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ウ</strong> — 可変区画方式のデメリットは外部断片化が発生すること。</p></details></details>
+
+      <details class="quiz-card"><summary>Q5. ページングの特徴として、適切なものはどれか。</summary><p>ア）プログラムを意味のある単位で分割する　イ）外部断片化が発生しない　ウ）セグメントごとにサイズが異なる　エ）プログラム構造に沿った管理が可能</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — ページングは外部断片化が発生しない。</p></details></details>
+
+      <details class="quiz-card"><summary>Q6. セグメンテーションの特徴として、適切なものはどれか。</summary><p>ア）固定サイズのページで管理する　イ）外部断片化が発生しない　ウ）プログラム構造に沿った管理が可能　エ）仮想記憶と相性が良い</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ウ</strong> — セグメンテーションはプログラム構造に沿った管理が可能。</p></details></details>
+
+      <details class="quiz-card"><summary>Q7. LRUページ置換アルゴリズムの説明として、適切なものはどれか。</summary><p>ア）最も古くメモリに入ったページを追い出す　イ）最も長い間使われていないページを追い出す　ウ）使用回数が最も少ないページを追い出す　エ）ランダムにページを追い出す</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — LRUは最も長い間使われていないページを追い出す。</p></details></details>
+
+      <details class="quiz-card"><summary>Q8. 100KBの区画に70KBのプログラムを入れた場合、何KBの内部断片化が発生するか。</summary><p>ア）0KB　イ）30KB　ウ）70KB　エ）100KB</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — 100KB - 70KB = 30KBの内部断片化。</p></details></details>
+
+      <details class="quiz-card"><summary>Q9. ページテーブルの役割はどれか。</summary><p>ア）キャッシュメモリのデータを管理する　イ）ページとページフレームの対応関係を管理する　ウ）プロセスの優先度を管理する　エ）ファイルの一覧を管理する</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — ページテーブルはページとフレームの対応を管理する。</p></details></details>
+
+      <details class="quiz-card"><summary>Q10. 外部断片化が発生しやすいメモリ割り当て方式はどれか。</summary><p>ア）固定区画方式　イ）可変区画方式　ウ）ページング　エ）セグメンテーション</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — 可変区画方式は外部断片化が発生しやすい。</p></details></details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第3章 OSとソフトウェア / 3.4 メモリ管理（p131-p138）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

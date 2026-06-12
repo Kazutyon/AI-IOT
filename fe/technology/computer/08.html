@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>仮想化・コンピュータ分類 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>仮想化・コンピュータ分類</h1>
+        <p class="lead">ハードウェア仮想化の仕組み（VM・ハイパーバイザー）とコンピュータの種類（デスクトップ/サーバ/スーパーコンピュータ/組込み）を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#virtualization">仮想化</a>
+        <a href="#computer-classification">コンピュータの分類</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>仮想化・コンピュータ分類</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>仮想化技術：1台の物理マシンのリソースを分割し、複数の仮想マシン（VM）を同時に動かす仕組み</li>
+          <li>ハイパーバイザー：物理マシンと仮想マシンの仲介役。VMの生成・管理、I/O制御を担当</li>
+          <li>CPU仮想化支援機能：Intel VT-x、AMD-V。仮想マシンが直接CPUを操作しても安全に実行できる</li>
+          <li>MMU（メモリ管理ユニット）：仮想マシンごとに独立したメモリ空間を提供</li>
+          <li>デスクトップPC：個人向けやオフィス業務。操作性や拡張性が高い</li>
+          <li>サーバ：大量のデータ処理やネットワークサービス提供。24時間稼働を前提</li>
+          <li>スーパーコンピュータ：科学技術計算やシミュレーション。複数のCPU/GPUを並列動作</li>
+          <li>組込みコンピュータ：家電や車載機器などに組み込まれた専用コンピュータ。小型・省電力・高信頼性</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>仮想マシン（VM）、ハイパーバイザー、CPU仮想化支援機能（Intel VT-x / AMD-V）</dd></div>
+          <div><dt>中</dt><dd>サーバ・スーパーコンピュータ・組込みコンピュータの特徴</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>仮想化（Virtualization）</td>
+              <td>1台の物理マシンのリソースを効率よく分割し、複数の仮想マシンを同時に動かす技術</td>
+              <td>サーバ集約、テスト環境分離、障害局所化などのメリットがある</td>
+            </tr>
+            <tr>
+              <td>仮想マシン（VM）</td>
+              <td>物理的なコンピュータの中で独立した「もう一つのコンピュータ」として動作する環境</td>
+              <td>それぞれのVMはOSやアプリケーションを独立して動かせる</td>
+            <tr>
+            <tr>
+              <td>ハイパーバイザー</td>
+              <td>物理マシンと仮想マシンの仲介役。VMの生成・管理、I/O制御を担当</td>
+              <td>物理マシン上で動作し、各VMにリソースを割り当てる</td>
+            </tr>
+            <tr>
+              <td>Intel VT-x / AMD-V</td>
+              <td>IntelとAMDのCPU仮想化支援機能</td>
+              <td>仮想マシンが直接CPUを操作しても安全に実行できる。ソフトウェア仮想化より高速</td>
+            </tr>
+            <tr>
+              <td>MMU（メモリ管理ユニット）</td>
+              <td>仮想アドレスを物理アドレスに変換するハードウェア</td>
+              <td>仮想マシンごとに独立したメモリ空間を提供。他のVMのメモリを直接操作できない</td>
+            </tr>
+            <tr>
+              <td>ホストOS</td>
+              <td>物理マシン上で動作するOS</td>
+              <td>ハイパーバイザーを実行する基盤となるOS</td>
+            </tr>
+            <tr>
+              <td>ゲストOS</td>
+              <td>仮想マシン上で動作するOS</td>
+              <td>ホストOSとは異なるOSを動作させることも可能（例：Windows上でLinuxを実行）</td>
+            </tr>
+            <tr>
+              <td>サーバ</td>
+              <td>大量のデータ処理やネットワークサービス提供を目的とした高性能コンピュータ</td>
+              <td>Webサーバ、メールサーバ、データベースサーバなど。24時間稼働を前提</td>
+            </tr>
+            <tr>
+              <td>スーパーコンピュータ</td>
+              <td>科学技術計算や気象予測、シミュレーションなど、高度な計算能力が必要な分野で使用</td>
+              <td>複数のCPUやGPUを並列で動作させる。個人で所有することは困難</td>
+            </tr>
+            <tr>
+              <td>組込みコンピュータ</td>
+              <td>家電、車載機器、産業用機械などに組み込まれている専用コンピュータ</td>
+              <td>特定の機能に特化。小型・省電力・高信頼性</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="virtualization" class="lesson-section">
+      <h2>2.1.9 仮想化のハードウェア面</h2>
+      <p>近年のコンピュータでは、1台の物理マシンのリソースを効率よく分割し、複数の「仮想マシン」を同時に動かすことが可能になっています。これを実現するのが仮想化技術です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>仮想化の構造イメージ</figcaption>
+        <pre>
+【仮想化の構造】
+
+  +-----------------------------------------------------------+
+  |                    物理マシン（ホスト）                   |
+  |  +---------------------------------------------------+    |
+  |  |                   ハイパーバイザー                |    |
+  |  |          （VMの生成・管理・I/O制御）              |    |
+  |  +---------------------------------------------------+    |
+  |         |              |              |                   |
+  |         v              v              v                   |
+  |  +---------+    +---------+    +---------+                |
+  |  |   VM1   |    |   VM2   |    |   VM3   |                |
+  |  | ゲストOS|    | ゲストOS|    | ゲストOS|                |
+  |  | Windows |    |  Linux  |    |  macOS  |                |
+  |  +---------+    +---------+    +---------+                |
+  |                                                           |
+  |  +---------------------------------------------------+    |
+  |  |          CPU仮想化支援機能（Intel VT-x / AMD-V）  |    |
+  |  |          MMU（メモリ管理ユニット）                |    |
+  |  +---------------------------------------------------+    |
+  +-----------------------------------------------------------+
+
+  各VMは独立したOSとアプリケーションを動作させられる。
+        </pre>
+      </figure>
+
+      <h3>仮想化の構成要素</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>要素</th>
+              <th>役割</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CPU仮想化支援機能</td>
+              <td>Intel VT-x、AMD-V。仮想マシンが直接CPUを操作しても安全に実行できる。ソフトウェアによる仮想化よりも高速</td>
+            </tr>
+            <tr>
+              <td>MMU（メモリ管理ユニット）</td>
+              <td>仮想マシンごとに独立したメモリ空間を提供。他のVMのメモリを直接操作できない</td>
+            </tr>
+            <tr>
+              <td>I/Oデバイス仮想化</td>
+              <td>ネットワークカードやストレージ装置を複数のVMで共有。ハイパーバイザーが制御</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>仮想化の実務上の利点</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>利点</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>サーバ集約</td>
+              <td>1台の物理サーバに複数の仮想サーバを配置して、設備コストや電力を節約</td>
+            </tr>
+            <tr>
+              <td>テスト環境の分離</td>
+              <td>異なるOSやソフトウェアを同時に動作させ、干渉なく検証可能</td>
+            </tr>
+            <tr>
+              <td>障害の影響を局所化</td>
+              <td>仮想マシン単位で停止や再起動が可能。他のVMに影響しない</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>仮想化の方式</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>方式</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ハイパーバイザー型（Type1）</td>
+              <td>ハードウェア上で直接ハイパーバイザーが動作。性能が高い。VMware ESXi、KVMなど</td>
+            </tr>
+            <tr>
+              <td>ホストOS型（Type2）</td>
+              <td>ホストOS上でハイパーバイザーが動作。手軽に利用できる。VirtualBox、VMware Workstationなど</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="computer-classification" class="lesson-section">
+      <h2>2.1.10 コンピュータの分類と用途例</h2>
+      <p>コンピュータは、その性能や用途によっていくつかの分類ができます。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>分類</th>
+              <th>特徴</th>
+              <th>主な用途</th>
+              <th>代表例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>デスクトップコンピュータ</td>
+              <td>個人向けやオフィス業務で利用。処理能力は中程度。拡張性が高い</td>
+              <td>文書作成、表計算、インターネット利用</td>
+              <td>Windows PC、Mac</td>
+            </tr>
+            <tr>
+              <td>ノートパソコン／モバイル端末</td>
+              <td>持ち運び可能。軽量・省電力。スマートフォンやタブレットも含む</td>
+              <td>情報閲覧、簡単なアプリケーション、外出先での業務</td>
+              <td>ノートPC、スマートフォン、タブレット</td>
+            </tr>
+            <tr>
+              <td>サーバ</td>
+              <td>大量のデータ処理やネットワークサービス提供。24時間稼働を前提。信頼性・拡張性が重要</td>
+              <td>Webサーバ、メールサーバ、データベースサーバ、ファイルサーバ</td>
+              <td>各種サーバ機器、クラウドサーバ</td>
+            </tr>
+            <tr>
+              <td>スーパーコンピュータ</td>
+              <td>科学技術計算や気象予測、シミュレーションなど高度な計算能力が必要な分野で使用</td>
+              <td>気象予測、分子シミュレーション、宇宙開発、AI学習</td>
+              <td>富岳（Fugaku）、京、Frontier</td>
+            </tr>
+            <tr>
+              <td>組込みコンピュータ</td>
+              <td>家電、車載機器、産業機械などに組み込まれた専用コンピュータ。特定機能に特化</td>
+              <td>エンジン制御、IoT家電、医療機器、スマートウォッチ</td>
+              <td>マイコン（AVR、PIC、STM32）、Raspberry Pi</td>
+            <tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>コンピュータの分類イメージ</figcaption>
+        <pre>
+【コンピュータの分類（性能と規模のイメージ）】
+
+  高性能・大規模
+        ↑
+        |   スーパーコンピュータ（富岳、Frontier）
+        |         ↑
+        |         | 数千～数万コア
+        |   サーバ（Web、DB、メール）
+        |         ↑
+        |         | 数十～数百コア
+        |   デスクトップPC / ノートPC
+        |         ↑
+        |         | 4～16コア
+        |   スマートフォン / タブレット
+        |         ↑
+        |         | 省電力・SoC
+        |   組込みコンピュータ（マイコン）
+        |         ↑
+        |         | 低消費電力・小型
+        v
+  低性能・小規模
+
+  スーパーコンピュータ：計算速度を極限まで追求
+  サーバ：安定性・信頼性を重視
+  デスクトップPC：拡張性・操作性を重視
+  モバイル：携帯性・省電力を重視
+  組込み：特定機能・低コスト・高信頼性を重視
+        </pre>
+      </figure>
+
+      <h3>コンピュータの用途別特徴まとめ</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>分類</th>
+              <th>重視される特徴</th>
+              <th>性能/規模</th>
+              <th>消費電力</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>デスクトップPC</td>
+              <td>拡張性、操作性</td>
+              <td>中</td>
+              <td>中</td>
+            </tr>
+            <tr>
+              <td>ノートPC/モバイル</td>
+              <td>携帯性、省電力</td>
+              <td>中～低</td>
+              <td>低</td>
+            </tr>
+            <tr>
+              <td>サーバ</td>
+              <td>信頼性、拡張性、24時間稼働</td>
+              <td>高</td>
+              <td>高</td>
+            </tr>
+            <tr>
+              <td>スーパーコンピュータ</td>
+              <td>計算速度、並列処理性能</td>
+              <td>超高</td>
+              <td>超高</td>
+            </tr>
+            <tr>
+              <td>組込み</td>
+              <td>低コスト、省電力、高信頼性</td>
+              <td>低～中</td>
+              <td>低</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 仮想マシン（VM）の説明として、最も適切なものはどれか。</summary>
+        <p>ア）物理マシンを高速化する装置　イ）物理的なコンピュータの中で独立した「もう一つのコンピュータ」として動作する環境　ウ）CPUの高速化技術　エ）メモリの省電力技術</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 仮想マシンは物理的なコンピュータの中で独立したOSやアプリケーションを動作させる環境。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. ハイパーバイザーの役割として、適切なものはどれか。</summary>
+        <p>ア）CPUのクロック周波数を上げる　イ）物理マシンと仮想マシンの仲介役。VMの生成・管理、I/O制御を担当　ウ）メモリを増設する　エ）ディスクを高速化する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ハイパーバイザーは物理マシンと仮想マシンの仲介役で、VMの生成・管理やI/O制御を担当する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. CPU仮想化支援機能の代表例として、適切なものはどれか。</summary>
+        <p>ア）Intel VT-x、AMD-V　イ）Hyper-Threading　ウ）Turbo Boost　エ）SpeedStep</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — Intel VT-xとAMD-VはCPU仮想化支援機能。仮想マシンが直接CPUを操作しても安全に実行できる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 仮想化の実務上の利点として、本文で挙げられているものはどれか。</summary>
+        <p>ア）サーバ集約、テスト環境の分離、障害の影響を局所化　イ）CPUの速度が2倍になる　ウ）メモリ容量が無制限になる　エ）ネットワーク速度が向上する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 仮想化の利点は「サーバ集約」「テスト環境の分離」「障害の影響を局所化」など。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. スーパーコンピュータの主な用途として、適切なものはどれか。</summary>
+        <p>ア）オフィス業務　イ）文書作成　ウ）気象予測や科学技術計算　エ）スマートフォンアプリの実行</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スーパーコンピュータは気象予測、分子シミュレーション、宇宙開発などの科学技術計算に使用される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 組込みコンピュータの特徴として、適切なものはどれか。</summary>
+        <p>ア）高性能で拡張性が高い　イ）特定機能に特化。小型・省電力・高信頼性　ウ）24時間稼働を前提とした設計　エ）科学技術計算向け</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 組込みコンピュータは特定機能に特化し、小型・省電力・高信頼性が特徴。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. サーバの特徴として、適切なものはどれか。</summary>
+        <p>ア）持ち運び可能で省電力　イ）24時間稼働を前提としており、信頼性や拡張性が重要　ウ）個人向けの操作性を重視　エ）計算速度を極限まで追求</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — サーバは24時間稼働を前提としており、信頼性や拡張性が重視される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. MMUの役割はどれか。</summary>
+        <p>ア）CPUのクロック周波数を管理する　イ）仮想アドレスを物理アドレスに変換する　ウ）メモリの電源を管理する　エ）キャッシュメモリのデータを管理する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — MMU（メモリ管理ユニット）は仮想アドレスを物理アドレスに変換するハードウェア。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ホストOS型（Type2）ハイパーバイザーの特徴として、適切なものはどれか。</summary>
+        <p>ア）ハードウェア上で直接動作し性能が高い　イ）ホストOS上で動作し、手軽に利用できる　ウ）データセンター専用　エ）無償で利用できない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ホストOS型（Type2）はホストOS上でハイパーバイザーが動作し、手軽に利用できる（VirtualBoxなど）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 日本のスーパーコンピュータ「富岳」が属する分類はどれか。</summary>
+        <p>ア）デスクトップPC　イ）サーバ　ウ）スーパーコンピュータ　エ）組込みコンピュータ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 富岳（Fugaku）は日本のスーパーコンピュータで、科学技術計算やシミュレーションに使用される。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第2章 コンピュータの基本構成 / 2.1.9 仮想化のハードウェア面、2.1.10 コンピュータの分類と用途例（p98-p103）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

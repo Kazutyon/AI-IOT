@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ソフトウェア分類 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>ソフトウェア分類</h1>
+        <p class="lead">システムソフトウェア、ミドルウェア、アプリケーションソフトウェアの分類と、それぞれの代表例を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#system-software">システムソフトウェア</a>
+        <a href="#middleware">ミドルウェア</a>
+        <a href="#application-software">アプリケーションソフトウェア</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>ソフトウェア分類</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>ソフトウェア分類：システムソフトウェア、ミドルウェア、アプリケーションソフトウェアの3層構造</li>
+          <li>システムソフトウェア：OS、デバイスドライバ、ファームウェア、RTOS</li>
+          <li>ミドルウェア：DBMS、Webサーバ、APIゲートウェイ、MQTT、AIミドルウェア、ROS2、IoTミドルウェア、セキュリティミドルウェア</li>
+          <li>アプリケーションソフトウェア：業務アプリ、Webアプリ、モバイルアプリ、AIアプリ、IoTアプリ、デスクトップアプリ、組み込みアプリ</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>システムソフトウェアとアプリケーションソフトウェアの違い、ミドルウェアの代表例</dd></div>
+          <div><dt>中</dt><dd>OSの種類、RTOS、DBMS、Webサーバの役割</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>システムソフトウェア</td><td>コンピュータを動作させるための基盤となるソフトウェア</td><td>OS、デバイスドライバ、ファームウェア、RTOSなど</td></tr>
+            <tr><td>ミドルウェア</td><td>OSとアプリケーションの間で共通機能を提供するソフトウェア</td><td>DBMS、Webサーバ、APIゲートウェイ、MQTT、AIミドルウェアなど</td></tr>
+            <tr><td>アプリケーションソフトウェア</td><td>ユーザの目的に応じて動作するソフトウェア</td><td>業務アプリ、Webアプリ、モバイルアプリ、AIアプリなど</td></tr>
+            <tr><td>DBMS（データベース管理システム）</td><td>データを安全・効率的に保存・検索・更新するミドルウェア</td><td>MySQL、PostgreSQL、SQLiteなど</td></tr>
+            <tr><td>Webサーバ</td><td>HTTPを使ってクライアントにデータを返すミドルウェア</td><td>Apache、Nginx、Lighttpd</td></tr>
+            <tr><td>APIゲートウェイ</td><td>複数のサービスをまとめて外部に公開する窓口</td><td>認証・認可、ルーティング、レート制限を行う</td></tr>
+            <tr><td>MQTT</td><td>IoT向け軽量プロトコル。Pub/Sub方式のメッセージング</td><td>デバイス間の疎結合化、オフラインでも動作しやすい</td></tr>
+            <tr><td>AIミドルウェア</td><td>機械学習・深層学習の処理を簡単に実装できるフレームワーク</td><td>TensorFlow、PyTorch、ONNX Runtime</td></tr>
+            <tr><td>ROS2</td><td>ロボット制御のための通信・制御フレームワーク</td><td>センサー・アクチュエータの統合、ノード間通信（Pub/Sub）</td></tr>
+            <tr><td>IoTミドルウェア</td><td>クラウドとデバイスをつなぐミドルウェア</td><td>AWS IoT Core、Azure IoT Hub、Google Cloud IoT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="system-software" class="lesson-section">
+      <h2>7.1 システムソフトウェア（詳細）</h2>
+      <p>システムソフトウェアは、コンピュータを動作させるための基盤となるソフトウェアであり、アプリケーションが動作するための環境を提供します。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>説明</th><th>代表例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>OS（オペレーティングシステム）</td><td>ハードウェア資源を管理し、アプリケーションが動作する基盤を提供</td><td>Windows、Linux、macOS、Android、iOS</td></tr>
+            <tr><td>デバイスドライバ</td><td>OSとハードウェアをつなぐソフトウェア</td><td>USBドライバ、ネットワークドライバ、グラフィックドライバ</td></tr>
+            <tr><td>ファームウェア</td><td>ハードウェアを直接制御するために機器内部に組み込まれたソフトウェア</td><td>BIOS/UEFI、マイコン制御プログラム、SSD内部制御</td></tr>
+            <tr><td>RTOS（リアルタイムOS）</td><td>リアルタイム性を重視したOS。タスクの優先度が厳密に守られる</td><td>FreeRTOS、VxWorks、Zephyr、μITRON</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="middleware" class="lesson-section">
+      <h2>7.2 ミドルウェア</h2>
+      <p>ミドルウェアは、OSとアプリケーションの間で共通機能を提供するソフトウェアであり、アプリケーション開発を大幅に効率化します。</p>
+
+      <h3>ミドルウェアの種類</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>説明</th><th>代表例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>DBMS</td><td>データの永続化、同時アクセス制御、検索高速化、障害復旧</td><td>MySQL、PostgreSQL、SQLite</td></tr>
+            <tr><td>Webサーバ</td><td>HTTPリクエスト受付、静的ファイル配信、リバースプロキシ</td><td>Apache、Nginx、Lighttpd</td></tr>
+            <tr><td>アプリケーションサーバ</td><td>アプリケーションの実行環境を提供</td><td>Node.js、Tomcat、Django/Flask</td></tr>
+            <tr><td>APIゲートウェイ</td><td>認証・認可、ルーティング、レート制限、ログ収集</td><td>Kong、Amazon API Gateway、Nginx</td></tr>
+            <tr><td>メッセージング（MQTT）</td><td>非同期でデータを送受信する仕組み。IoTで標準的に利用</td><td>MQTT、RabbitMQ、Kafka</td></tr>
+            <tr><td>AIミドルウェア</td><td>ニューラルネットワークの構築、学習・推論の高速化</td><td>TensorFlow、PyTorch、ONNX Runtime</td></tr>
+            <tr><td>ロボットミドルウェア（ROS2）</td><td>センサー・アクチュエータ統合、ノード間通信、経路計画</td><td>ROS2（Robot Operating System 2）</td></tr>
+            <tr><td>IoTミドルウェア</td><td>デバイス認証、MQTT通信、データ収集、クラウド連携</td><td>AWS IoT Core、Azure IoT Hub、Google Cloud IoT</td></tr>
+            <tr><td>セキュリティミドルウェア</td><td>暗号化・認証・アクセス制御を提供</td><td>OpenSSL、Keycloak、JWT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="application-software" class="lesson-section">
+      <h2>7.3 アプリケーションソフトウェア</h2>
+      <p>アプリケーションソフトウェアは、ユーザの目的に応じて動作するソフトウェアであり、OSやミドルウェアの上で動作します。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>説明</th><th>代表例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>業務アプリケーション</td><td>企業の業務を支援。データベース連携が前提</td><td>会計ソフト、販売管理システム、CRM、ERP</td></tr>
+            <tr><td>Webアプリケーション</td><td>Webブラウザ上で動作。HTTP/HTTPSでサーバと通信</td><td>Google Workspace、SNS、ECサイト、Webメール</td></tr>
+            <tr><td>モバイルアプリ</td><td>スマートフォンやタブレットで動作。GPS・カメラなどと連携</td><td>iOS/Androidアプリ、地図アプリ、SNSアプリ</td></tr>
+            <tr><td>AIアプリケーション</td><td>機械学習モデルを利用。画像認識、音声認識、翻訳など</td><td>画像認識アプリ、音声アシスタント、翻訳アプリ</td></tr>
+            <tr><td>IoTアプリケーション</td><td>IoTデバイスと連携。MQTT・REST APIで状態・コマンドをやり取り</td><td>スマートスピーカー、遠隔診療、カーシェアアプリ</td></tr>
+            <tr><td>デスクトップアプリケーション</td><td>PC上で動作。ローカルリソースを直接利用</td><td>Microsoft Office、Photoshop、Visual Studio Code</td></tr>
+            <tr><td>組み込みアプリケーション</td><td>家電・車載機器などに組み込まれた専用アプリ。リアルタイム性重視</td><td>配膳ロボット、車載ナビ、エレベーター制御</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>ソフトウェアの3層構造</figcaption>
+        <pre>
+【ソフトウェアの3層構造】
+
+  +-----------------------------------------------------------+
+  |                   アプリケーション層                      |
+  | 業務アプリ / Webアプリ / モバイルアプリ / AIアプリなど    |
+  |             （ユーザの目的に応じて動作）                  |
+  +-----------------------------------------------------------+
+  |                       ミドルウェア層                      |
+  | DBMS / Webサーバ / APIゲートウェイ / MQTT / AIミドルウェア|
+  |           （OSとアプリの間で共通機能を提供）              |
+  +-----------------------------------------------------------+
+  |                    システムソフトウェア層                 |
+  |       OS / デバイスドライバ / ファームウェア / RTOS       |
+  |            （コンピュータを動作させる基盤）               |
+  +-----------------------------------------------------------+
+  |                      ハードウェア層                       |
+  |           CPU / メモリ / ストレージ / I/Oデバイス         |
+  +-----------------------------------------------------------+
+
+  各層が連携して動作することで、アプリケーションはハードウェアの詳細を
+  意識せずに動作できる。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. ソフトウェアの3層分類に含まれないものはどれか。</summary>
+        <p>ア）システムソフトウェア　イ）ミドルウェア　ウ）アプリケーションソフトウェア　エ）ハードウェア</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — ソフトウェアの3層分類は「システムソフトウェア」「ミドルウェア」「アプリケーションソフトウェア」。ハードウェアは別物。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. システムソフトウェアに分類されるものはどれか。</summary>
+        <p>ア）Webブラウザ　イ）Excel　ウ）OS、デバイスドライバ、ファームウェア　エ）スマホアプリ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — システムソフトウェアにはOS、デバイスドライバ、ファームウェア、RTOSなどが含まれる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ミドルウェアの代表例として、適切なものはどれか。</summary>
+        <p>ア）Windows　イ）Word　ウ）DBMS、Webサーバ、MQTT　エ）Google Chrome</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ミドルウェアの代表例はDBMS、Webサーバ、APIゲートウェイ、MQTT、AIミドルウェアなど。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. DBMS（データベース管理システム）の役割として、適切なものはどれか。</summary>
+        <p>ア）Webページを配信する　イ）データを安全・効率的に保存・検索・更新する　ウ）ロボットを制御する　エ）画像認識を行う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DBMSはデータの永続化、同時アクセス制御、検索高速化、障害復旧を行う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. Webサーバの代表例として、適切なものはどれか。</summary>
+        <p>ア）MySQL　イ）TensorFlow　ウ）Apache、Nginx　エ）ROS2</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Webサーバの代表例はApache、Nginx、Lighttpd。MySQLはDBMS、TensorFlowはAIミドルウェア。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. IoT向けの軽量メッセージングプロトコルはどれか。</summary>
+        <p>ア）HTTP　イ）FTP　ウ）MQTT　エ）SMTP</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — MQTTはIoT向け軽量プロトコル。Pub/Sub方式でデバイス間通信を実現する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. ロボット制御のためのミドルウェアはどれか。</summary>
+        <p>ア）TensorFlow　イ）ROS2　ウ）Apache　エ）MySQL</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ROS2（Robot Operating System 2）はロボット制御のための通信・制御フレームワーク。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. アプリケーションソフトウェアの例として、適切なものはどれか。</summary>
+        <p>ア）Linuxカーネル　イ）FreeRTOS　ウ）Microsoft Office　エ）Nginx</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Microsoft Officeはアプリケーションソフトウェア。他はシステムソフトウェアまたはミドルウェア。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. AIミドルウェアの代表例として、適切なものはどれか。</summary>
+        <p>ア）Apache　イ）TensorFlow、PyTorch　ウ）MQTT　エ）AWS IoT Core</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — AIミドルウェアの代表例はTensorFlow、PyTorch、ONNX Runtimeなど。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. リアルタイムOS（RTOS）の説明として、適切なものはどれか。</summary>
+        <p>ア）多機能で大規模なアプリケーション向け　イ）タッチ操作に最適化　ウ）リアルタイム性を重視。タスクの優先度が厳密に守られる　エ）オフィス業務向け</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — RTOSはリアルタイム性を重視し、タスクの優先度が厳密に守られる。FreeRTOS、VxWorksなど。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第3章 OSとソフトウェア / 3.7 ソフトウェア分類（p172-p196）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>主記憶装置・キャッシュメモリ | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>主記憶装置・キャッシュメモリ</h1>
+        <p class="lead">主記憶装置（RAM/ROM）の種類と役割、キャッシュメモリの階層構造・局所性・書き込み方式を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main-memory">主記憶装置</a>
+        <a href="#ram-rom">RAMとROM</a>
+        <a href="#cache-memory">キャッシュメモリ</a>
+        <a href="#locality">参照の局所性</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>主記憶装置・キャッシュメモリ</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>主記憶装置（メインメモリ）：CPUの作業スペース。プログラムやデータを一時保存</li>
+          <li>RAM（揮発性）：DRAM（PCメインメモリ）とSRAM（キャッシュ用）</li>
+          <li>ROM（不揮発性）：BIOSやファームウェアを格納。マスクROM、PROM、EPROM、EEPROM</li>
+          <li>キャッシュメモリ：CPUと主記憶の速度差を埋める高速メモリ。L1・L2・L3の階層構造</li>
+          <li>参照の局所性：時間的局所性（繰り返し）と空間的局所性（近いアドレス）</li>
+          <li>キャッシュヒット/ミス：ヒット＝高速、ミス＝低速（主記憶アクセス）</li>
+          <li>書き込み方式：Write Through（常に同期） vs Write Back（後でまとめて書き込み）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>DRAMとSRAMの違い、キャッシュの階層構造（L1/L2/L3）、局所性</dd></div>
+          <div><dt>中</dt><dd>ROMの種類、Write Through / Write Back、キャッシュヒット/ミス</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>主記憶装置（メインメモリ）</td>
+              <td>コンピュータの作業スペース。CPUが処理するデータやプログラムを一時的に保存</td>
+              <td>CPUが直接アクセスできる高速な記憶装置。揮発性</td>
+            </tr>
+            <tr>
+              <td>RAM</td>
+              <td>Random Access Memory。読み書き可能なメモリ。電源を切ると内容が消える（揮発性）</td>
+              <td>DRAMとSRAMの2種類がある</td>
+            </tr>
+            <tr>
+              <td>ROM</td>
+              <td>Read Only Memory。読み出し専用のメモリ。電源を切っても内容を保持（不揮発性）</td>
+              <td>BIOSやファームウェアの格納に使用</td>
+            </tr>
+            <tr>
+              <td>DRAM</td>
+              <td>Dynamic RAM。コンデンサに電荷を保持してデータを記憶。リフレッシュが必要</td>
+              <td>PCやサーバのメインメモリとして一般的。大容量・低コスト</td>
+            </tr>
+            <tr>
+              <td>SRAM</td>
+              <td>Static RAM。フリップフロップ回路でデータを保持。リフレッシュ不要で高速</td>
+              <td>CPUのキャッシュメモリとして利用。高コスト・小容量</td>
+            </tr>
+            <tr>
+              <td>キャッシュメモリ</td>
+              <td>CPUと主記憶装置の速度差を埋めるための高速メモリ</td>
+              <td>L1（最速・最小）→ L2 → L3（遅い・大容量）の階層構造</td>
+            </tr>
+            <tr>
+              <td>参照の局所性</td>
+              <td>プログラムが特定のデータや命令に偏ってアクセスする性質</td>
+              <td>時間的局所性（繰り返し）と空間的局所性（近いアドレス）</td>
+            </tr>
+            <tr>
+              <td>キャッシュヒット</td>
+              <td>必要なデータがキャッシュにあり、高速にアクセスできる状態</td>
+              <td>主記憶に行かなくてよいので高速</td>
+            </tr>
+            <tr>
+              <td>キャッシュミス</td>
+              <td>必要なデータがキャッシュにない状態</td>
+              <td>主記憶から読み込むため時間がかかる</td>
+            </tr>
+            <tr>
+              <td>Write Through</td>
+              <td>キャッシュに書き込むと同時に主記憶にも書き込む方式</td>
+              <td>データの整合性が高いが、速度は遅い</td>
+            </tr>
+            <tr>
+              <td>Write Back</td>
+              <td>キャッシュ内のデータが追い出されるタイミングでまとめて主記憶に書き込む方式</td>
+              <td>高速だが、主記憶が最新とは限らない</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main-memory" class="lesson-section">
+      <h2>2.1.2 主記憶装置（メインメモリ）</h2>
+      <p>主記憶装置は、コンピュータの作業スペースにあたる装置です。CPUが処理するデータやプログラムを一時的に保存します。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>役割</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>プログラムの一時保管</td>
+              <td>実行中のプログラム（命令列）を保持する</td>
+            </tr>
+            <tr>
+              <td>データの一時保管</td>
+              <td>計算や処理に必要なデータを保持する</td>
+            </tr>
+            </tr>
+              <td>高速なデータ交換</td>
+              <td>CPUは主記憶装置から直接データを読み書きすることで処理速度を最大化</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>CPUと主記憶装置の関係</figcaption>
+        <pre>
+【CPUと主記憶装置の関係】
+
+  +----------------+        データの読み書き        +----------------+
+  |                | <--------------------------->  |                |
+  |      CPU       |                                |   主記憶装置   |
+  |                |                                |   （メモリ）   |
+  +----------------+                                +----------------+
+        |                                                   |
+        | 命令やデータを要求                                  | アドレス指定可能な
+        |                                                   | セルで構成
+        v                                                   v
+  制御装置がアドレスを指定                                各セルにビット単位で
+  してアクセス                                            データを格納
+        </pre>
+      </figure>
+    </section>
+
+    <section id="ram-rom" class="lesson-section">
+      <h2>RAMとROMの種類と特徴</h2>
+
+      <h3>RAMの細分類</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>種類</th>
+              <th>概要</th>
+              <th>特徴</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DRAM</td>
+              <td>コンデンサに電荷を保持してデータを記憶</td>
+              <td>揮発性、リフレッシュ必要、大容量・低コスト</td>
+              <td>PCメインメモリ、サーバメモリ</td>
+            </tr>
+            <tr>
+              <td>SRAM</td>
+              <td>フリップフロップ回路でデータを保持</td>
+              <td>揮発性、リフレッシュ不要、高速・高コスト</td>
+              <td>CPUキャッシュメモリ、組み込み高速メモリ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ROMの細分類</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>種類</th>
+              <th>概要</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>マスクROM</td>
+              <td>製造時に書き込み済みのROM</td>
+              <td>高速・低コストだが内容を書き換えられない</td>
+            </tr>
+            <tr>
+              <td>PROM</td>
+              <td>Programmable ROM。一度だけ書き込み可能なROM</td>
+              <td>製造後にユーザが書き込み可能。書き込み後は不揮発性</td>
+            </tr>
+            <tr>
+              <td>EPROM</td>
+              <td>Erasable PROM。紫外線で消去可能なROM</td>
+              <td>再書き込み可能。書き換えには専用装置が必要</td>
+            </tr>
+            <tr>
+              <td>EEPROM</td>
+              <td>Electrically Erasable PROM。電気的に消去・書き込み可能なROM</td>
+              <td>再書き込みが容易で、フラッシュメモリとしてPCやスマホに利用</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cache-memory" class="lesson-section">
+      <h2>2.1.3 キャッシュメモリ</h2>
+      <p>キャッシュメモリは、CPUが頻繁に利用するデータや命令を一時的に保存する高速メモリです。CPUと主記憶装置の速度差を埋める役割があります。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>階層</th>
+              <th>容量</th>
+              <th>速度</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>L1キャッシュ</td>
+              <td>数十KB</td>
+              <td>最速</td>
+              <td>CPUコア内部に搭載。最も高速だが容量が小さい</td>
+            </tr>
+            <tr>
+              <td>L2キャッシュ</td>
+              <td>数百KB～数MB</td>
+              <td>L1より遅い</td>
+              <td>CPUコア内部またはすぐ近くに配置</td>
+            </tr>
+            <tr>
+              <td>L3キャッシュ</td>
+              <td>数MB～数十MB</td>
+              <td>さらに遅い</td>
+              <td>複数のコアで共有されることが多い。容量が大きい</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>キャッシュの階層構造</figcaption>
+        <pre>
+【キャッシュメモリの階層構造】
+
+  +-----------------------------------------------------------+
+  |                           CPU                             |
+  |  +---------+  +---------+  +---------+                    |
+  |  |  Core1  |  |  Core2  |  |  Core3  |  ...               |
+  |  | L1/L2   |  | L1/L2   |  | L1/L2   |                    |
+  |  +---------+  +---------+  +---------+                    |
+  |                                                           |
+  |  +---------------------------------------------------+    |
+  |  |                  L3キャッシュ（共有）             |    |
+  |  +---------------------------------------------------+    |
+  +-----------------------------------------------------------+
+                              |
+                              | キャッシュミス時にアクセス
+                              v
+                    +---------------------+
+                    |     主記憶装置      |
+                    |     （DRAM）        |
+                    +---------------------+
+
+  キャッシュはCPUに近いほど高速で、階層が下がるほど容量が大きくなる。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="locality" class="lesson-section">
+      <h2>参照の局所性とキャッシュの関係</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>局所性の種類</th>
+              <th>説明</th>
+              <th>例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>時間的局所性</td>
+              <td>一度使ったデータは再び使われやすい</td>
+              <td>ループ内で同じ変数を何度も使う、同じ命令を繰り返し実行する</td>
+            </tr>
+            <tr>
+              <td>空間的局所性</td>
+              <td>近くのアドレスのデータが続けて使われやすい</td>
+              <td>配列を順番に処理する、メモリ上で連続した命令を実行する</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>キャッシュヒットとキャッシュミス</figcaption>
+        <pre>
+【キャッシュヒット vs キャッシュミス】
+
+  キャッシュヒット：
+    CPU「このデータほしい！」
+    キャッシュ「はい、ここにあります！」
+    → 主記憶に行かなくていいので高速
+
+  キャッシュミス：
+    CPU「このデータほしい！」
+    キャッシュ「…持ってないです」
+    → 主記憶（遅い）に取りに行くので時間がかかる
+
+  キャッシュミスの原因：
+    - 初回アクセス（キャッシュにまだ読み込まれていない）
+    - 容量不足（キャッシュは小さいので全部は入らない）
+    - データの置き換え（必要なデータが追い出された）
+        </pre>
+      </figure>
+
+      <h3>キャッシュの書き込み方式</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>方式</th>
+              <th>動作</th>
+              <th>メリット</th>
+              <th>デメリット</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Write Through</td>
+              <td>キャッシュに書き込むと同時に主記憶にも書き込む</td>
+              <td>データの整合性が高い</td>
+              <td>速度が遅い</td>
+              <td>金融システム、組み込み機器、マルチコアCPUでの共有メモリ</td>
+            </tr>
+            <tr>
+              <td>Write Back</td>
+              <td>キャッシュ内のデータが追い出されるタイミングでまとめて主記憶に書き込む</td>
+              <td>高速</td>
+              <td>主記憶が最新状態とは限らない</td>
+              <td>PC・サーバのCPU、ゲーム機、高速処理が必要なアプリケーション</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. DRAMとSRAMの違いに関する説明として、適切なものはどれか。</summary>
+        <p>ア）DRAMは不揮発性、SRAMは揮発性　イ）DRAMはリフレッシュが必要、SRAMは不要　ウ）DRAMは高速・高コスト、SRAMは低速・低コスト　エ）DRAMはキャッシュ用、SRAMは主記憶用</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DRAMはコンデンサに電荷を保持するためリフレッシュが必要。SRAMはフリップフロップ回路で保持するため不要。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 主記憶装置の役割として、適切でないものはどれか。</summary>
+        <p>ア）実行中のプログラムを保持する　イ）計算に必要なデータを保持する　ウ）データを永続的に保存する　エ）CPUと高速にデータ交換する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 主記憶装置は揮発性メモリであり、電源を切ると内容が消える。永続的な保存は外部記憶装置（HDD/SSD）の役割。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. BIOSやファームウェアを格納するのに適したメモリはどれか。</summary>
+        <p>ア）DRAM　イ）SRAM　ウ）ROM　エ）キャッシュメモリ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ROMは不揮発性で電源を切っても内容を保持するため、BIOSやファームウェアの格納に適している。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. キャッシュメモリの階層構造で、最も高速なものはどれか。</summary>
+        <p>ア）L1キャッシュ　イ）L2キャッシュ　ウ）L3キャッシュ　エ）主記憶装置</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — L1キャッシュはCPUコア内部に搭載され、最も高速だが容量が小さい。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 参照の局所性のうち「時間的局所性」の説明として、適切なものはどれか。</summary>
+        <p>ア）近くのアドレスのデータが続けて使われやすい　イ）一度使ったデータは再び使われやすい　ウ）データがランダムにアクセスされる　エ）すべてのデータが均等に使われる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 時間的局所性は「一度使ったデータは再び使われやすい」性質。空間的局所性は「近くのアドレスのデータが続けて使われやすい」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. キャッシュミスが発生する原因として、本文で挙げられているものはどれか。</summary>
+        <p>ア）CPUのクロック周波数が低い　イ）初回アクセス、容量不足、データの置き換え　ウ）メモリ容量が大きすぎる　エ）OSのバージョンが古い</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — キャッシュミスの原因は「初回アクセス」「容量不足」「データの置き換え」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. Write Back方式の特徴として、適切なものはどれか。</summary>
+        <p>ア）キャッシュに書き込むと同時に主記憶にも書き込む　イ）主記憶への書き込みが減り高速だが、主記憶が最新とは限らない　ウ）データの整合性が最も高い　エ）金融システムでよく使われる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Write Backはキャッシュ内のデータが追い出されるタイミングでまとめて書き込むため高速だが、主記憶が最新とは限らない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 空間的局所性の例として、適切なものはどれか。</summary>
+        <p>ア）ループ内で同じ変数を何度も使う　イ）配列を順番に処理する　ウ）関数を呼び出す　エ）エラー処理を行う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 空間的局所性は「近くのアドレスのデータが続けて使われやすい」。配列の順次処理はその典型例。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. EEPROMの特徴として、適切なものはどれか。</summary>
+        <p>ア）紫外線で消去する　イ）一度だけ書き込める　ウ）電気的に消去・書き込みが可能　エ）製造時に書き込み済み</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — EEPROMは電気的に消去・書き込みが可能。フラッシュメモリとしてPCやスマホに利用される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. PCのメインメモリとして一般的に使用されるメモリはどれか。</summary>
+        <p>ア）SRAM　イ）DRAM　ウ）マスクROM　エ）EPROM</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — PCのメインメモリにはDRAM（特にDDR4/DDR5）が使用される。SRAMはキャッシュメモリに使用される。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第2章 コンピュータの基本構成 / 2.1.2 主記憶装置、2.1.3 キャッシュメモリ（p63-p75）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

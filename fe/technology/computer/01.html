@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>コンピュータの歴史・革命・初期電子計算機 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>コンピュータの歴史・革命・初期電子計算機</h1>
+        <p class="lead">コンピュータの誕生から発展までの歴史、チューリング・シャノン・ノイマンの貢献、初期の電子計算機を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#history">コンピュータの誕生と進化</a>
+        <a href="#revolution">コンピュータ革命</a>
+        <a href="#early-computers">初期の電子計算機</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>コンピュータの歴史・革命・初期電子計算機</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>コンピュータ発展の歴史（そろばん→歯車式→機械式→電子式）</li>
+          <li>チューリングマシン：計算可能性の理論的モデル（現代コンピュータの理論的基礎）</li>
+          <li>シャノン：2進数による計算と情報理論（エントロピー・暗号理論の基礎）</li>
+          <li>ノイマン型：プログラム内蔵方式（ソフトウェアとハードウェアの分離）</li>
+          <li>ENIAC：初めて実用的に動作した電子計算機（真空管18,000本）</li>
+          <li>ABCマシン：世界初の電子式デジタル計算機（2進数・真空管使用）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ノイマン型（プログラム内蔵方式）、チューリングマシン、ENIAC</dd></div>
+          <div><dt>中</dt><dd>シャノンの情報理論、ABCマシン、世代別分類の基礎</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>チューリングマシン</td>
+              <td>1936年にアラン・チューリングが提案した、無限に長いテープ上で計算を行う理論的な計算機モデル</td>
+              <td>現代コンピュータと理論上同等の計算能力を持つ。計算可能性の定義として重要</td>
+            </tr>
+            <tr>
+              <td>プログラム内蔵方式（ノイマン型）</td>
+              <td>1945年にジョン・フォン・ノイマンが提案した、プログラムをデータとしてメモリに格納する方式</td>
+              <td>現代コンピュータの基本アーキテクチャ。同じハードウェアで別の計算が可能に</td>
+            </tr>
+            <tr>
+              <td>2進数</td>
+              <td>0と1の2つの数字だけで数を表現する方法</td>
+              <td>シャノンが電気回路（ON/OFF）で計算可能と示した。現在のコンピュータの基礎</td>
+            </tr>
+            <tr>
+              <td>情報理論</td>
+              <td>1948年にクロード・シャノンが確立した、情報量や通信路容量を数学的に扱う理論</td>
+              <td>エントロピー（情報の不確定性の量）の概念を定義。暗号理論の基礎</td>
+            </tr>
+            <tr>
+              <td>ENIAC</td>
+              <td>1946年に完成した世界初の実用的電子計算機</td>
+              <td>真空管18,000本、消費電力140kW、重量30トン。弾道計算に利用</td>
+            </tr>
+            <tr>
+              <td>ABCマシン</td>
+              <td>1939年に試作された世界初の電子式デジタル計算機</td>
+              <td>真空管を使用し2進数計算を採用。世界初の電子計算機と評価される</td>
+            </tr>
+            <tr>
+              <td>エニグマ</td>
+              <td>ナチス・ドイツの暗号機（ローター式）</td>
+              <td>コンピュータではなく暗号機。チューリングが解読に貢献</td>
+            </tr>
+            <tr>
+              <td>コロッサス</td>
+              <td>ローレンツ暗号解読のために開発された電子計算機</td>
+              <td>現代コンピュータの原型といえる装置</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="history" class="lesson-section">
+      <h2>1.1 コンピュータの誕生と進化</h2>
+      <p>人類は古くから計算を行ってきました。その歴史をたどると、社会や技術の発展と深く結びついていることがわかります。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>時代</th><th>計算機</th><th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>大昔</td>
+              <td>指、石、棒</td>
+              <td>簡単な計算</td>
+            </tr>
+            <tr>
+              <td>有史</td>
+              <td>そろばん</td>
+              <td>計算補助具として広く普及</td>
+            </tr>
+            <tr>
+              <td>15世紀頃</td>
+              <td>計算尺（滑尺）</td>
+              <td>算術計算が可能</td>
+            </tr>
+            <tr>
+              <td>18世紀頃</td>
+              <td>歯車式計算機</td>
+              <td>機械的な計算装置</td>
+            </tr>
+            <tr>
+              <td>19世紀頃</td>
+              <td>機械式計算機（バベッジの解析機関など）</td>
+              <td>プログラム可能な機械式計算機の概念</td>
+            </tr>
+            <tr>
+              <td>20世紀初頭</td>
+              <td>ホレリスの統計機</td>
+              <td>パンチカードによる大量データ処理</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>計算機の発展の流れ</figcaption>
+        <pre>
+【計算機発展のイメージ】
+
+  指・石・棒 → そろばん → 計算尺 → 歯車式計算機 → 機械式計算機 → ホレリス統計機
+     (大昔)     (有史)    (15世紀)   (18世紀)      (19世紀)     (20世紀初頭)
+
+  これらの計算機は、いずれも「特定の計算を効率化する道具」として発展。
+  計算方法は人間の延長であり、限界も明確だった。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="revolution" class="lesson-section">
+      <h2>1.2 コンピュータ革命の始まり</h2>
+      <p>20世紀に入ると、計算方法に大きな変革が起こります。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>年</th><th>人物</th><th>貢献内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1936年</td>
+              <td>アラン・チューリング</td>
+              <td>「チューリングマシン」を提案。任意の計算可能な問題を理論上解ける計算機のモデルを確立</td>
+            </tr>
+            <tr>
+              <td>1937年</td>
+              <td>クロード・シャノン</td>
+              <td>2進数による計算の提案。電気回路でON/OFFスイッチを組み合わせて計算可能と示す</td>
+            </tr>
+            <tr>
+              <td>1945年</td>
+              <td>ジョン・フォン・ノイマン</td>
+              <td>プログラム内蔵方式（ソフトウェアとハードウェアの分離）を提案。現代コンピュータの基本アーキテクチャを確立</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>チューリングマシンの概要</h3>
+      <figure class="wide-diagram">
+        <figcaption>チューリングマシンのイメージ</figcaption>
+        <pre>
+【チューリングマシン】
+
+  +---------------------------------------------------+
+  |                                                   |
+  |    [ヘッド]                                       |
+  |       |                                           |
+  |       v                                           |
+  |   +---+---+---+---+---+---+---+                   |
+  |   | 0 | 1 | 0 | 0 | 1 | 1 | 0 | ... （無限テープ）|
+  |   +---+---+---+---+---+---+---+                   |
+  |                                                   |
+  |   - 無限に長いテープ上で文字列を書き換えながら計算|
+  |   - 理論上、現代のコンピュータと同等の計算が可能  |
+  |   - 計算可能性の定義として重要                    |
+  |                                                   |
+  +---------------------------------------------------+
+        </pre>
+      </figure>
+
+      <h3>ノイマン型コンピュータ</h3>
+      <figure class="wide-diagram">
+        <figcaption>プログラム内蔵方式のイメージ</figcaption>
+        <pre>
+【プログラム内蔵方式（ノイマン型）】
+
+  外部プログラム方式（ENIACなど）：
+    計算を変えたい場合 → 配線を組み直し、スイッチやジャックを操作
+    → 汎用性が低く、時間と手間がかかる
+
+  プログラム内蔵方式（ノイマン型）：
+    計算手順（プログラム）をデータとしてメモリに格納
+    コンピュータが自動的に読み取って実行
+    → 同じハードウェアで別の計算が容易に → 汎用性が飛躍的に向上！
+
+  これが現代コンピュータの基本アーキテクチャ。
+        </pre>
+      </figure>
+
+      <h3>エニグマとコロッサス</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>名称</th><th>説明</th><th>ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>エニグマ</td>
+              <td>ナチス・ドイツの暗号機（ローター式）</td>
+              <td>コンピュータではなく暗号機。毎日設定が変わり膨大な組み合わせ（10^114通り）</td>
+            </tr>
+            <tr>
+              <td>ボンベ（Bombe）</td>
+              <td>チューリングが設計に関わった暗号解読機</td>
+              <td>エニグマ解読を効率化</td>
+            </tr>
+            <tr>
+              <td>コロッサス</td>
+              <td>ローレンツ暗号解読のために開発された電子計算機</td>
+              <td>電子式スイッチング回路を使用。プログラム的に計算手順を変更可能。現代コンピュータの原型</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="early-computers" class="lesson-section">
+      <h2>1.3 初期の電子計算機</h2>
+
+      <h3>ABCマシン（1939年）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>開発者</td>
+              <td>ジョン・アタナソフ & クリフォード・ベリー</td>
+            </tr>
+            <tr>
+              <td>目的</td>
+              <td>線形連立一次方程式を高速で解く</td>
+            </tr>
+            <tr>
+              <td>特徴</td>
+              <td>電子回路（真空管）を使用。コンデンサを利用した記憶装置。2進数計算を行う</td>
+            </tr>
+            <tr>
+              <td>実用化できなかった理由</td>
+              <td>コンデンサが不安定、真空管の信頼性低い、汎用性が低かった</td>
+            </tr>
+            <tr>
+              <td>評価</td>
+              <td>世界初の電子式デジタル計算機。後の電子計算機の基礎となる仕組みを備えていた</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ENIAC（1946年）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>開発者</td>
+              <td>ジョン・モークリー & プレスバー・エッカート</td>
+            </tr>
+            <tr>
+              <td>目的</td>
+              <td>第二次世界大戦中の弾道計算（砲弾の軌道計算）</td>
+            </tr>
+            <tr>
+              <td>性能</td>
+              <td>毎秒約5000回の加算が可能。微分方程式の計算に利用</td>
+            </tr>
+            <tr>
+              <td>スペック</td>
+              <td>真空管18,000本、消費電力140kW、重量約30トン、占有面積80立方メートル</td>
+            </tr>
+            <tr>
+              <td>限界</td>
+              <td>プログラム変更には配線の差し替えなど手作業が必要（プログラム内蔵方式ではない）</td>
+            </tr>
+            <tr>
+              <td>評価</td>
+              <td>初めて実用的に動作した電子計算機。世界初の商用電子計算機への道を開いた</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>ABCマシンとENIACの比較</figcaption>
+        <pre>
+【初期電子計算機の比較】
+
+  +------------------+------------------+-------------------------+
+  |                  | ABCマシン        | ENIAC                   |
+  +------------------+------------------+-------------------------+
+  | 完成年           | 1939年（試作）   | 1946年                  |
+  | 開発者           |アタナソフ＆ベリー| モークリー＆エッカート  |
+  | 目的             | 連立方程式       | 弾道計算                |
+  | 真空管数         | 約300本          | 18,000本                |
+  | プログラム方式   | 固定（配線）     | 配線差し替え（外部）    |
+  | 実用化           | なし             | あり                    |
+  | 評価             | 世界初の電子式   | 世界初の実用的電子式    |
+  |                  | デジタル計算機   | 計算機                  |
+  +------------------+------------------+-------------------------+
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. チューリングマシンに関する説明として、最も適切なものはどれか。</summary>
+        <p>ア）実際に製造された世界初の電子計算機　イ）無限に長いテープ上で計算する理論的な計算機モデル　ウ）プログラム内蔵方式を提案した理論　エ）2進数による計算を提案した理論</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — チューリングマシンは1936年にアラン・チューリングが提案した理論的な計算機モデル。現代コンピュータと理論上同等の計算能力を持つ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. プログラム内蔵方式（ノイマン型）の説明として、最も適切なものはどれか。</summary>
+        <p>ア）計算手順を物理的に配線で設定する方式　イ）プログラムをデータとしてメモリに格納する方式　ウ）2進数ではなく10進数で計算する方式　エ）真空管ではなくリレーを使用する方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — プログラム内蔵方式は、計算手順（プログラム）をデータとしてメモリに格納する方式。これにより同じハードウェアで別の計算が可能になった。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. クロード・シャノンの貢献として、適切なものはどれか。</summary>
+        <p>ア）チューリングマシンの提案　イ）プログラム内蔵方式の提案　ウ）2進数による計算と情報理論の確立　エ）世界初の電子計算機の開発</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — シャノンは1937年に2進数による計算を提案し、1948年に情報理論を確立した。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. ENIACに関する説明として、適切なものはどれか。</summary>
+        <p>ア）世界初の電子式デジタル計算機　イ）世界初の実用的に動作した電子計算機　ウ）プログラム内蔵方式を採用した初の計算機　エ）トランジスタを使用した初の計算機</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ENIAC（1946年）は世界初の実用的に動作した電子計算機。真空管18,000本を使用した。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. ABCマシンに関する説明として、適切なものはどれか。</summary>
+        <p>ア）世界初の商用コンピュータ　イ）世界初の電子式デジタル計算機　ウ）プログラム内蔵方式を採用　エ）トランジスタを使用した初の計算機</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ABCマシン（1939年試作）は世界初の電子式デジタル計算機と評価されている。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. ノイマン型コンピュータの登場により実現したことはどれか。</summary>
+        <p>ア）計算速度が10倍になった　イ）同じハードウェアで別の計算が容易になった　ウ）真空管の消費電力が下がった　エ）2進数から10進数に変更された</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — プログラム内蔵方式により、同じハードウェアでプログラムを変えるだけで別の計算ができるようになった（汎用性の向上）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. エニグマに関する説明として、適切なものはどれか。</summary>
+        <p>ア）世界初の電子計算機　イ）ナチス・ドイツの暗号機　ウ）プログラム内蔵方式を採用した計算機　エ）チューリングが開発した計算機</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — エニグマはナチス・ドイツの暗号機（ローター式）。コンピュータではなく暗号機である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. コロッサスの説明として、適切なものはどれか。</summary>
+        <p>ア）エニグマ解読のための機械　イ）ローレンツ暗号解読のために開発された電子計算機　ウ）世界初の商用コンピュータ　エ）ノイマン型コンピュータの最初の実装</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — コロッサスはローレンツ暗号解読のために開発された電子計算機で、現代コンピュータの原型といわれる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 情報理論におけるエントロピーの説明として、適切なものはどれか。</summary>
+        <p>ア）データの圧縮率　イ）情報の不確定性の量　ウ）通信速度の単位　エ）記憶容量の単位</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 情報理論でのエントロピーは「情報の不確定性の量」を表す。暗号解読では「暗号文から元の情報を推測する難しさ」を評価できる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. ジョン・フォン・ノイマンの主な貢献はどれか。</summary>
+        <p>ア）チューリングマシンの提案　イ）情報理論の確立　ウ）プログラム内蔵方式の提案　エ）世界初の電子計算機の開発</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ノイマンは1945年にプログラム内蔵方式（ノイマン型アーキテクチャ）を提案し、現代コンピュータの基本設計を確立した。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第1章 コンピュータの歴史と発展 / 1.1〜1.3（p1-p12）</p>
+    </section>
+  </main>
+<script data-goatcounter="https://kazutyon.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>I/Oスケジューリング・割込み・DMA・組込みI/O | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>I/Oスケジューリング・割込み・DMA・組込みI/O</h1>
+        <p class="lead">I/Oスケジューリング方式（FCFS/SCAN）、割り込み処理、DMA（Direct Memory Access）、組み込み/IoT/RTOSにおけるI/O管理の特徴を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#io-scheduling">I/Oスケジューリング</a>
+        <a href="#interrupt">割り込み処理</a>
+        <a href="#dma">DMA</a>
+        <a href="#embedded-io">組み込み・IoT・RTOSのI/O管理</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>I/Oスケジューリング・割込み・DMA・組込みI/O</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>I/Oスケジューリング：ディスクなどのI/O要求の順番を最適化する仕組み</li>
+          <li>FCFS（先着順）：到着順に処理する最もシンプルな方式</li>
+          <li>SCAN（エレベータ方式）：一方向に動きながら処理し、端で折り返す</li>
+          <li>割り込み（Interrupt）：デバイスが処理完了をCPUに通知する仕組み</li>
+          <li>DMA（Direct Memory Access）：CPUを介さずにデバイスが直接メモリにアクセス</li>
+          <li>組み込みI/Oの特徴：多様なデバイス制御、割り込み駆動、DMA活用、電源断対策</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>割り込み処理、DMA、SCAN方式（エレベータ方式）</dd></div>
+          <div><dt>中</dt><dd>I/Oスケジューリングの目的、FCFS、組み込みI/Oの特徴</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>I/Oスケジューリング</td>
+              <td>ストレージなどのI/O要求の順番を最適化する仕組み</td>
+              <td>ディスクヘッドの移動量を減らし、平均待ち時間を短くする</td>
+            </tr>
+            <tr>
+              <td>FCFS（先着順）</td>
+              <td>到着した順に要求を処理する方式</td>
+              <td>シンプルだが、ディスクヘッドの移動が大きくなりやすい</td>
+            </tr>
+            <tr>
+              <td>SCAN（エレベータ方式）</td>
+              <td>ディスクヘッドを一方向に動かしながら処理し、端まで行ったら反対方向へ戻る</td>
+              <td>HDD時代に広く利用された。移動量が減り平均待ち時間が短い</td>
+            </tr>
+            <tr>
+              <td>割り込み（Interrupt）</td>
+              <td>I/Oデバイスが処理完了やイベント発生をCPUに通知する仕組み</td>
+              <td>CPUがデバイスを待ち続ける必要がなくなり、効率的なI/Oが可能</td>
+            </tr>
+            <tr>
+              <td>ISR（割り込みハンドラ）</td>
+              <td>割り込み発生時に実行される処理プログラム</td>
+              <td>RTOSでは割り込み遅延が致命的になるため、ISRは短く・軽くする</td>
+            </tr>
+            <tr>
+              <td>DMA（Direct Memory Access）</td>
+              <td>CPUを介さずにデバイスが直接メモリへデータ転送を行う仕組み</td>
+              <td>大量データ転送に向く。CPUの負荷を大幅に減らせる</td>
+            </tr>
+            <tr>
+              <td>DMAコントローラ</td>
+              <td>DMA転送を制御するハードウェア</td>
+              <td>CPUが転送元・転送先・サイズを設定し、転送完了時に割り込みを発生</td>
+            </tr>
+            <tr>
+              <td>組込みI/O</td>
+              <td>組み込みシステムにおけるI/O管理の特徴</td>
+              <td>多様なデバイス制御、割り込み駆動、DMA活用、電源断対策</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="io-scheduling" class="lesson-section">
+      <h2>6.5 I/Oスケジューリング</h2>
+      <p>ストレージ（HDD/SSD）などのデバイスは、複数のI/O要求が同時に発生します。しかし、ディスクは一度に1つの要求しか処理できないため、OSは要求の順番を最適化する必要があります。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>方式</th>
+              <th>説明</th>
+              <th>メリット</th>
+              <th>デメリット</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FCFS（先着順）</td>
+              <td>到着した順に要求を処理する</td>
+              <td>シンプルで実装が簡単。公平</td>
+              <td>ディスクヘッドの移動が大きくなりやすく、平均待ち時間が長い</td>
+            </tr>
+            <tr>
+              <td>SCAN（エレベータ方式）</td>
+              <td>ディスクヘッドを一方向に動かしながら処理し、端まで行ったら反対方向へ戻る</td>
+              <td>ディスクヘッドの移動量が減り、平均待ち時間が短い</td>
+              <td>端の要求が有利になりやすい</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>SCAN方式（エレベータ方式）のイメージ</figcaption>
+        <pre>
+【SCAN方式（エレベータ方式）】
+
+  ディスクヘッドの動き：
+    +---------------------------------------------------+
+    |                                                   |
+    |  端  ----->  ----->  ----->  ----->  端           |
+    |  (シリンダ0)    (要求処理)       (最大シリンダ)   |
+    |                                                   |
+    |   ← 端まで行ったら反対方向に折り返す ←          |
+    |                                                   |
+    +---------------------------------------------------+
+
+  エレベータが上下に動きながら階を順番に処理する動きに似ている。
+  HDD時代に広く利用された（シーク時間が支配的だったため）。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="interrupt" class="lesson-section">
+      <h2>6.6 割り込み（Interrupt）とI/O</h2>
+      <p>割り込み（Interrupt）は、I/Oデバイスが処理完了やイベント発生をCPUに通知する仕組みです。CPUがデバイスを待ち続ける必要がなくなり、効率的なI/Oが可能になります。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>割り込みが必要な理由</td>
+              <td>ボーリング方式（CPUが常に監視）ではCPUが待ち時間で無駄に占有される</td>
+            </tr>
+            <tr>
+              <td>割り込みの仕組み</td>
+              <td>デバイス側から「終わったよ」と通知。CPUは他の処理を進めながらI/Oを効率的に扱える</td>
+            </tr>
+            <tr>
+              <td>組み込みでの利用例</td>
+              <td>タイマー割り込み、外部割り込み（ボタン）、通信割り込み（UART/SPI/I2C）、DMA完了割り込み</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>割り込みの種類</th>
+              <th>説明</th>
+              <th>例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ハードウェア割り込み</td>
+              <td>外部デバイスからの割り込み</td>
+              <td>タイマー割り込み、キーボード入力、ネットワーク受信</td>
+            </tr>
+            <tr>
+              <td>ソフトウェア割り込み</td>
+              <td>プログラムが意図的に発生させる割り込み</td>
+              <td>システムコール、例外処理</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>割り込みの流れ</figcaption>
+        <pre>
+【割り込みの流れ】
+
+  通常時：
+    CPUは他の処理を続ける
+         |
+         | デバイスが処理完了
+         v
+  デバイス：割り込み要求（IRQ）を送信
+         |
+         v
+  CPU：現在の処理を一時停止
+         |
+         | レジスタなどの状態を保存
+         v
+  CPU：割り込みハンドラ（ISR）を実行
+         |
+         | 必要なI/O処理を実行
+         v
+  CPU：保存した状態を復元
+         |
+         v
+  CPU：中断していた処理を再開
+
+  RTOSでは割り込み遅延が致命的になるため、ISRは短く・軽くするのが原則。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="dma" class="lesson-section">
+      <h2>6.7 DMA（Direct Memory Access）</h2>
+      <p>DMAは、CPUを介さずにデバイスがメモリへ直接データ転送を行う仕組みです。大量データを扱う組み込みシステムでは特に重要なI/O技術です。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DMAを使う理由</td>
+              <td>通常のI/Oでは「デバイス→CPU→メモリ」の経路でCPUが占有される。DMAではCPUの負荷を大幅に減らせる</td>
+            </tr>
+            <tr>
+              <td>DMAの仕組み</td>
+              <td>CPUがDMAコントローラに転送設定 → DMAが転送実行 → 完了時に割り込み → CPUは開始指示と完了通知だけ担当</td>
+            </tr>
+            <tr>
+              <td>DMAの利点</td>
+              <td>CPU負荷軽減、大量データ転送が高速、リアルタイム性の向上</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>組み込みでのDMA利用例</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ADC（アナログ→デジタル変換）</td>
+              <td>連続サンプリングをDMAでメモリへ自動転送</td>
+            </tr>
+            <tr>
+              <td>UART / SPI / I2C通信</td>
+              <td>受信データをCPU介さずバッファへ格納</td>
+            </tr>
+            <tr>
+              <td>カメラモジュールの画像取り込み</td>
+              <td>大量の画素データを高速転送</td>
+            </tr>
+            <tr>
+              <td>PWMキャプチャ</td>
+              <td>入力パルス幅をDMAで自動記録</td>
+            </tr>
+            <tr>
+              <td>オーディオ処理（I2S）</td>
+              <td>音声データの連続ストリームをDMAで処理</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>DMAの動作イメージ</figcaption>
+        <pre>
+【DMAの動作の流れ】
+
+  通常のI/O：
+    デバイス → CPU → メモリ
+    （CPUが転送処理で占有される）
+
+  DMA使用時：
+    1. CPU → DMAコントローラ：「転送元・転送先・サイズ」を設定
+    2. DMAコントローラ：デバイス ↔ メモリ（直接転送）
+    3. DMAコントローラ → CPU：「転送完了」割り込み
+
+  CPUは「開始指示」と「完了通知」だけを担当。
+  転送そのものには関与しないため、他の処理に専念できる。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="embedded-io" class="lesson-section">
+      <h2>6.8 組み込み・IoT・RTOSにおけるI/O管理</h2>
+
+      <h3>組み込みシステムのI/O管理の特徴</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>特徴</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>多様なデバイスを直接制御</td>
+              <td>センサー、モーター、アクチュエータ、通信モジュールなど、デバイスごとに制御方式が異なる</td>
+            </tr>
+            <tr>
+              <td>割り込み駆動が中心</td>
+              <td>センサー値の変化や通信イベントを即時処理。ボーリングでは遅延が大きくリアルタイム性を満たせない</td>
+            </tr>
+            <tr>
+              <td>DMAの積極利用</td>
+              <td>高速サンプリングや連続データ取得で必須。CPU負荷を軽減</td>
+            </tr>
+            <tr>
+              <td>軽量で高速なデバイスドライバ</td>
+              <td>汎用OSのような複雑な抽象化レイヤは持たない。ハードウェア寄りのシンプルな構造</td>
+            </tr>
+            <tr>
+              <td>電源断・省電力を考慮したI/O設計</td>
+              <td>バッテリ駆動が多く、I/O動作そのものが電力消費に直結。書き込み中の電源断対策が必要</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>RTOSにおけるI/O管理</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>特徴</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>割り込みハンドラが最優先で実行</td>
+              <td>外部イベントに即応するため</td>
+            </tr>
+            <tr>
+              <td>タスクと割り込みの連携</td>
+              <td>キュー、セマフォ、イベントグループなどを利用。割り込み→タスクへのデータ受け渡しが基本パターン</td>
+            </tr>
+            <tr>
+              <td>遅いデバイスはタスク側で処理</td>
+              <td>通信、ストレージなど時間のかかる処理はタスクで実行。割り込みは「通知だけ」にして遅延を防ぐ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>IoTデバイスにおけるI/O特性</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>特性</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>省電力のためのI/O制御</td>
+              <td>デバイスを頻繁にスリープさせる。センサー取得はタイマー駆動や割り込みで必要時のみ実行</td>
+            </tr>
+            <tr>
+              <td>無線通信の電力管理</td>
+              <td>BLE/Wi-Fi/LPWAなどは電力消費が大きい。通信回数・送信タイミングを最適化。バッファリングしてまとめて送信</td>
+            </tr>
+            <tr>
+              <td>クラウド連携を前提としたI/O</td>
+              <td>センサー値 → ローカル処理 → 通信 → クラウド。通信I/Oがシステム全体のボトルネックになりやすい</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. I/Oスケジューリングの目的として、適切なものはどれか。</summary>
+        <p>ア）CPUのクロック周波数を上げる　イ）ディスクヘッドの移動量を減らし平均待ち時間を短くする　ウ）メモリ容量を増やす　エ）ファイルを圧縮する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — I/Oスケジューリングの目的は、ディスクヘッドの移動量を減らし、平均待ち時間を短くすること。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. SCAN方式（エレベータ方式）の説明として、適切なものはどれか。</summary>
+        <p>ア）到着した順に処理する方式　イ）ディスクヘッドを一方向に動かしながら処理し、端で折り返す方式　ウ）実行時間が短い要求を優先する方式　エ）ランダムに処理する方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SCAN方式はディスクヘッドを一方向に動かしながら処理し、端まで行ったら反対方向へ戻るエレベータ方式。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 割り込みの説明として、最も適切なものはどれか。</summary>
+        <p>ア）CPUが定期的にデバイスの状態を確認すること　イ）デバイスが処理完了をCPUに通知する仕組み　ウ）CPUのクロック周波数を下げる仕組み　エ）メモリを増設する仕組み</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 割り込みはデバイスが処理完了やイベント発生をCPUに通知する仕組み。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. DMAの説明として、最も適切なものはどれか。</summary>
+        <p>ア）CPUがデバイスの状態を監視する方式　イ）CPUを介さずにデバイスが直接メモリにアクセスする方式　ウ）データを暗号化して転送する方式　エ）データを圧縮して転送する方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DMAはCPUを介さずにデバイスが直接メモリにアクセスする方式。大量データ転送に適する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. DMAの利点として、適切なものはどれか。</summary>
+        <p>ア）CPUの負荷が増える　イ）データ転送が遅くなる　ウ）CPUの負荷が減り、大量データ転送が高速　エ）プログラムが複雑になる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — DMAの利点は「CPU負荷軽減」「大量データ転送が高速」「リアルタイム性の向上」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 組み込みシステムのI/O管理の特徴として、本文で挙げられているものはどれか。</summary>
+        <p>ア）仮想記憶を必ず使用する　イ）割り込み駆動が中心、DMAの積極利用、電源断対策　ウ）GUIが必須　エ）大容量メモリが必要</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 組み込みI/Oの特徴は「割り込み駆動が中心」「DMAの積極利用」「電源断・省電力を考慮」など。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. FCFS（先着順）の特徴として、適切なものはどれか。</summary>
+        <p>ア）ディスクヘッドの移動量が最も少ない　イ）平均待ち時間が最も短い　ウ）シンプルで実装が簡単だが、移動量が大きくなりやすい　エ）端の要求が有利になりやすい</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — FCFSはシンプルで実装が簡単だが、ディスクヘッドの移動が大きくなりやすい。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. RTOSにおける割り込み処理の特徴として、適切なものはどれか。</summary>
+        <p>ア）割り込み処理は最低優先度で実行される　イ）割り込みハンドラは長く複雑に書くのが良い　ウ）割り込みハンドラが最優先で実行され、ISRは短く軽くする　エ）割り込みは使用しない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — RTOSでは割り込みハンドラが最優先で実行され、割り込み遅延を防ぐためISRは短く軽くするのが原則。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. IoTデバイスのI/O特性として、本文で挙げられているものはどれか。</summary>
+        <p>ア）常時フルパワーで動作する　イ）省電力制御、無線通信の電力管理、クラウド連携　ウ）有線通信のみ使用　エ）大容量バッテリ必須</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IoTデバイスのI/O特性は「省電力のためのI/O制御」「無線通信の電力管理」「クラウド連携を前提」など。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 組み込みシステムでDMAがよく使われる例として、本文で挙げられているものはどれか。</summary>
+        <p>ア）キーボード入力処理　イ）マウスカーソル移動　ウ）ADC連続サンプリング、UART通信、カメラ画像取り込み　エ）プリンタ出力</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 組み込みでのDMA利用例は「ADC連続サンプリング」「UART/SPI/I2C通信」「カメラ画像取り込み」など。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第3章 OSとソフトウェア / 3.6 デバイス管理（後半）（p160-p171）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

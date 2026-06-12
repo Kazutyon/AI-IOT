@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>技術進化・世代別・商用PC・高速化 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>技術進化・世代別・商用PC・高速化</h1>
+        <p class="lead">コンピュータを支える技術の進化（真空管→トランジスタ→IC→LSI）、世代別分類、商用コンピュータとPCの登場、ムーアの法則と高速化を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#technology-evolution">技術進化</a>
+        <a href="#generations">世代別コンピュータ</a>
+        <a href="#commercial-pc">商用コンピュータとPC</a>
+        <a href="#moore-law">ムーアの法則と高速化</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>技術進化・世代別・商用PC・高速化</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>コンピュータを支える素子の進化：リレー → 真空管 → トランジスタ → IC → LSI/VLSI</li>
+          <li>世代別分類：第1世代（真空管）〜第4世代（LSI/VLSI）</li>
+          <li>商用コンピュータ：UNIVAC（世界初の商用）、IBM 701/7070、IBM 360（汎用機）</li>
+          <li>パーソナルコンピュータ（PC）の登場：Apple II、IBM PC、NEC 9801、Macintosh</li>
+          <li>ムーアの法則：半導体チップ上のトランジスタ数は約18〜24か月ごとに2倍</li>
+          <li>高速化の限界：クロック周波数の頭打ち → マルチコア化への転換</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>世代別分類（各世代の電子素子と特徴）、ムーアの法則、マルチコア化</dd></div>
+          <div><dt>中</dt><dd>商用コンピュータの歴史、PC登場の流れ</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>リレー</td>
+              <td>機械式のスイッチ。初期の計算機で使用</td>
+              <td>メカニカルで信頼性が低く、動作も遅い</td>
+            </tr>
+            <tr>
+              <td>真空管</td>
+              <td>電子式の増幅・スイッチング素子。第1世代コンピュータで使用</td>
+              <td>消費電力が大きく寿命も短い。故障が多かった</td>
+            </tr>
+            <tr>
+              <td>トランジスタ</td>
+              <td>半導体素子。第2世代コンピュータで使用</td>
+              <td>小型・低消費電力・高信頼性。コンピュータの小型化に貢献</td>
+            </tr>
+            <tr>
+              <td>IC（集積回路）</td>
+               Warsaw複数のトランジスタを小さな基板上に集積。第3世代コンピュータで使用</th>
+              <td>さらに小型化・高速化。汎用性が向上</td>
+            </tr>
+            <tr>
+              <td>LSI/VLSI</td>
+              <td>大規模集積回路/超大规模集積回路。第4世代コンピュータで使用</td>
+              <td>パーソナルコンピュータやスマートフォンの実現に貢献</td>
+            </tr>
+            <tr>
+              <td>UNIVAC</td>
+              <td>1951年に登場した世界初の商用コンピュータ</td>
+              <td>企業や行政の計算業務にコンピュータが利用可能であることを示した</td>
+            </tr>
+            <tr>
+              <td>IBM 360</td>
+              <td>1964年に登場した第3世代の汎用コンピュータ</td>
+              <td>異なるモデル間でもソフトウェア互換性を確保。汎用計算機の概念を確立</td>
+            </tr>
+            <tr>
+              <td>ムーアの法則</td>
+              <td>半導体チップ上のトランジスタ数は約18〜24か月ごとに2倍になるという予測</td>
+              <td>半導体技術の進歩が性能向上を牽引する仕組みを示した</td>
+            </tr>
+            <tr>
+              <td>マルチコアCPU</td>
+              <td>1つのCPUチップに複数のコアを搭載する方式</td>
+              <td>クロック周波数の限界を超えるために登場。複数の処理を同時に実行</td>
+            </tr>
+            <tr>
+              <td>GPU（Graphics Processing Unit）</td>
+              <td>画像処理のために開発されたが、現在はAI計算でも活用</td>
+              <td>数千の演算ユニットで並列処理。AI・画像処理・科学計算で活躍</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="technology-evolution" class="lesson-section">
+      <h2>1.4 コンピュータを支える技術の進化</h2>
+      <p>コンピュータは、計算を実行する「電子素子」の性能や信頼性に大きく依存しています。そのため、素子の進化とコンピュータの進化は密接に結びついています。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>時代</th>
+              <th>素子</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>初期</td>
+              <td>リレー</td>
+              <td>メカニカルで信頼性が低く、動作も遅い。大規模計算には不向き</td>
+            </tr>
+            <tr>
+              <td>真空管時代</td>
+              <td>真空管</td>
+              <td>電子式になり計算速度は向上したが、消費電力が大きく寿命も短い</td>
+            </tr>
+            <tr>
+              <td>トランジスタ登場</td>
+              <td>トランジスタ</td>
+              <td>小型・低消費電力・高信頼性。商用利用や研究機関での実用が現実的に</td>
+            </tr>
+            <tr>
+              <td>IC登場</td>
+              <td>IC（集積回路）</td>
+              <td>複数のトランジスタを集積。さらに小型化・高速化</td>
+            </tr>
+            </tr>
+              <td>LSI/VLSI時代</td>
+              <td>LSI/VLSI</td>
+              <td>複雑な処理も1枚のチップで可能に。パーソナルコンピュータやスマートフォンの基礎</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>素子の進化とコンピュータの変遷</figcaption>
+        <pre>
+【素子の進化の流れ】
+
+  リレー（大きくて遅い）
+      |
+      v
+  真空管（速いが不安定・大消費電力）
+      |
+      v
+  トランジスタ（小型・高信頼・低消費電力）
+      |
+      v
+  IC / LSI（高集積化）
+      |
+      v
+  VLSI（超高集積化）
+
+  この流れにより、計算機は大規模計算だけでなく日常業務や個人利用にも対応可能に。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="generations" class="lesson-section">
+      <h2>1.5 世代別コンピュータ</h2>
+      <p>コンピュータは、その時代ごとに使用される電子素子や回路技術の違いによって、いくつかの世代に分けられます。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>世代</th>
+              <th>主な電子素子</th>
+              <th>計算性能・特徴</th>
+              <th>主な用途・代表例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>第1世代</td>
+              <td>真空管</td>
+              <td>大型・高消費電力・故障しやすい</td>
+              <td>科学技術計算・軍事計算（ENIACなど）</td>
+            </tr>
+            <tr>
+              <td>第2世代</td>
+              <td>トランジスタ</td>
+              <td>小型化・高信頼性・低消費電力</td>
+              <td>商用計算機、研究機関（IBM 7070など）</td>
+            </tr>
+            <tr>
+              <td>第3世代</td>
+              <td>IC（集積回路）</td>
+              <td>汎用性向上・さらに小型・高速</td>
+              <td>オフィス計算、企業利用（IBM 360など）</td>
+            </tr>
+            <tr>
+              <td>第4世代</td>
+              <td>LSI/VLSI</td>
+              <td>高集積化・高性能・小型化</td>
+              <td>パーソナルコンピュータ、個人利用（Apple II、IBM PCなど）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="commercial-pc" class="lesson-section">
+      <h2>1.6 商用コンピュータとPCの登場</h2>
+
+      <h3>世界初の商用コンピュータ：UNIVAC（1951年）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>開発者</td>
+              <td>ジョン・モークリー、プレスパー・エッカート</td>
+            </tr>
+            <tr>
+              <td>特徴</td>
+              <td>電子式計算機で商用利用を目的として開発。科学技術計算や統計処理に活用</td>
+            </tr>
+            <tr>
+              <td>意義</td>
+              <td>コンピュータが企業や行政の計算業務にも利用可能であることを示した最初の例</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>IBMの商用コンピュータ</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>機種</th>
+              <th>年</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>IBM 701</td>
+              <td>1953年</td>
+              <td>科学技術計算向け</td>
+            </tr>
+            <tr>
+              <td>IBM 7070</td>
+              <td>1958年</td>
+              <td>第2世代トランジスタ利用。商用計算機として導入。政府や大企業でのデータ処理に利用</td>
+            </tr>
+            <tr>
+              <td>IBM 360</td>
+              <td>1964年</td>
+              <td>第3世代IC利用。異なるモデル間でもソフトウェア互換性を確保。「汎用計算機」の概念を確立</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>パーソナルコンピュータ（PC）の登場</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>機種</th>
+              <th>年</th>
+              <th>特徴・意義</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apple II</td>
+              <td>1977年</td>
+              <td>家庭や学校での教育利用を想定。色彩表示や拡張性が特徴</td>
+            </tr>
+            <tr>
+              <td>IBM PC</td>
+              <td>1981年</td>
+              <td>ビジネス用途に最適化。業務用アプリケーションが普及</td>
+            </tr>
+            <tr>
+              <td>NEC 9801</td>
+              <td>1982年</td>
+              <td>日本市場向け。企業や学校で利用</td>
+            </tr>
+            <tr>
+              <td>Macintosh 128K</td>
+              <td>1984年</td>
+              <td>GUI（グラフィカルユーザインターフェース）を搭載。操作性が向上</td>
+            </tr>
+            <tr>
+              <td>DOS/V</td>
+              <td>1990年以降</td>
+              <td>日本語PCの普及を促進。オフィス業務や教育現場で活用</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>コンピュータ普及の流れ</figcaption>
+        <pre>
+【コンピュータ普及のイメージ】
+
+  研究機関・軍事
+        |
+        v
+  商用コンピュータ（UNIVAC、IBM）
+        |
+        v
+  汎用コンピュータ（IBM 360）
+        |
+        v
+  パーソナルコンピュータ（Apple II、IBM PC）
+        |
+        v
+  スマートフォン・タブレット（現代）
+
+  個人や中小企業でもコンピュータを利用可能に。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="moore-law" class="lesson-section">
+      <h2>1.7 現代コンピュータの高速化</h2>
+
+      <h3>ムーアの法則（Moore's Law）</h3>
+      <p>1965年、インテル創業者の一人ゴードン・ムーアは次のように予測しました。</p>
+      <p><strong>「半導体チップ上のトランジスタ数は約18〜24か月ごとに2倍になる」</strong></p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>時代</th>
+              <th>トランジスタ数</th>
+              <th>代表例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1970年代</td>
+              <td>数千</td>
+              <td>Intel 4004</td>
+            </tr>
+            <tr>
+              <td>1980年代</td>
+              <td>数万～数十万</td>
+              <td>8086、初期PC</td>
+            </tr>
+            <tr>
+              <td>1990年代</td>
+              <td>数百万～数千万</td>
+              <td>Pentium</td>
+            </tr>
+            <tr>
+              <td>2000年代</td>
+              <td>数億</td>
+              <td>Core 2 Duo</td>
+            </tr>
+            <tr>
+              <td>2010年代</td>
+              <td>数十億</td>
+              <td>Core i7、Ryzen</td>
+            </tr>
+            <tr>
+              <td>2020年代</td>
+              <td>数百億</td>
+              <td>Apple M1/M2、Ryzen 7000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>クロック周波数の向上とその限界</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>時期</th>
+              <th>手法</th>
+              <th>問題点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2000年代初頭まで</td>
+              <td>クロック周波数（GHz）を上げる</td>
+              <td>発熱の増大、消費電力の増加、リーク電流</td>
+            </tr>
+            <tr>
+              <td>2000年代半ば以降</td>
+              <td>マルチコア化</td>
+              <td>1つのCPUチップに複数のコアを搭載。発熱を抑えつつ性能を向上</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>GPU・NPUによる並列処理の時代</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>プロセッサ</th>
+              <th>特徴</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GPU</td>
+              <td>数千の演算ユニットで並列処理</td>
+              <td>AI・画像処理・科学計算で活躍</td>
+            </tr>
+            <tr>
+              <td>NPU</td>
+              <td>AI計算（ニューラルネットワーク）に特化した専用プロセッサ</td>
+              <td>スマホやPCに搭載。画像認識・音声認識などを端末内で実行</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>高速化の変遷</figcaption>
+        <pre>
+【コンピュータ高速化の変遷】
+
+  1980-2000年代：
+    [クロック周波数向上] → 発熱・消費電力が限界に
+
+  2000年代後半以降：
+    [マルチコア化] → 複数コアで並列処理
+    [GPU活用] → 数千コアで並列処理（AI・画像処理）
+    [NPU登場] → AI処理に特化（省電力）
+
+  現代の高速化は「CPUの高速化」＋「並列処理の活用」の二本柱。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 第1世代コンピュータの主な電子素子はどれか。</summary>
+        <p>ア）トランジスタ　イ）IC（集積回路）　ウ）真空管　エ）LSI</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 第1世代コンピュータは真空管を使用。第2世代はトランジスタ、第3世代はIC、第4世代はLSI/VLSI。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. ムーアの法則の説明として、最も適切なものはどれか。</summary>
+        <p>ア）コンピュータの価格は18か月ごとに半減する　イ）半導体チップ上のトランジスタ数は約18〜24か月ごとに2倍になる　ウ）CPUのクロック周波数は18か月ごとに2倍になる　エ）メモリ容量は18か月ごとに2倍になる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ムーアの法則は「半導体チップ上のトランジスタ数は約18〜24か月ごとに2倍になる」という予測。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. クロック周波数を上げる方式の限界として、本文で挙げられているものはどれか。</summary>
+        <p>ア）ソフトウェア互換性が失われる　イ）発熱の増大、消費電力の増加　ウ）メモリ容量が不足する　エ）ディスクアクセスが遅くなる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — クロック周波数を上げると発熱の増大、消費電力の増加、リーク電流などの問題が発生する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. クロック周波数の限界を超えるために導入された方式はどれか。</summary>
+        <p>ア）真空管の採用　イ）トランジスタの採用　ウ）マルチコア化　エ）リレーの採用</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — クロック周波数の限界を超えるために、マルチコアCPU（1つのチップに複数のコアを搭載）が登場した。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 世界初の商用コンピュータはどれか。</summary>
+        <p>ア）ENIAC　イ）UNIVAC　ウ）IBM 360　エ）ABCマシン</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — UNIVAC（1951年）が世界初の商用コンピュータ。企業や行政の計算業務に利用可能であることを示した。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. IBM 360の特徴として、適切なものはどれか。</summary>
+        <p>ア）世界初の商用コンピュータ　イ）トランジスタを初めて使用　ウ）異なるモデル間でソフトウェア互換性を確保　エ）世界初のパーソナルコンピュータ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — IBM 360（1964年）は異なるモデル間でもソフトウェア互換性を確保し、「汎用計算機」の概念を確立した。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 第3世代コンピュータの主な電子素子はどれか。</summary>
+        <p>ア）真空管　イ）トランジスタ　ウ）IC（集積回路）　エ）LSI</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 第3世代はIC（集積回路）を使用。第1世代：真空管、第2世代：トランジスタ、第4世代：LSI/VLSI。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. トランジスタの登場により実現したことはどれか。</summary>
+        <p>ア）世界初の電子計算機　イ）小型化・低消費電力・高信頼性　ウ）プログラム内蔵方式　エ）GUIの搭載</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — トランジスタは小型・低消費電力・高信頼性を実現し、コンピュータの商用利用を可能にした。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. GUI（グラフィカルユーザインターフェース）を搭載した初期のPCはどれか。</summary>
+        <p>ア）Apple II　イ）IBM PC　ウ）NEC 9801　エ）Macintosh 128K</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — Macintosh 128K（1984年）はGUIを搭載し、操作性が大きく向上した。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. GPUの説明として、最も適切なものはどれか。</summary>
+        <p>ア）AI計算に特化した専用プロセッサ　イ）数千の演算ユニットで並列処理を行うプロセッサ　ウ）プログラムをメモリに格納する方式　エ）クロック周波数を上げる技術</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — GPUは数千の演算ユニットで並列処理を行い、AI・画像処理・科学計算で活躍する。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第1章 コンピュータの歴史と発展 / 1.4〜1.7（p13-p25）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>プロセス管理・スケジューリング | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>プロセス管理・スケジューリング</h1>
+        <p class="lead">プロセスの状態遷移、スケジューリング方式（FCFS/SJF/RR/優先度）、コンテキストスイッチ、スレッド、割り込み処理を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#process-state">プロセスの状態遷移</a>
+        <a href="#scheduling">スケジューリング</a>
+        <a href="#context-switch">コンテキストスイッチ</a>
+        <a href="#thread">スレッド</a>
+        <a href="#interrupt">割り込みとプロセス管理</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>プロセス管理・スケジューリング</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>プロセス：実行中のプログラム。プログラムコード、データ領域、スタック、レジスタ状態などを持つ</li>
+          <li>プロセスの状態遷移：実行（Running）・実行可能（Ready）・待ち（Waiting）</li>
+          <li>スケジューリング方式：FCFS（先着順）、SJF（最短ジョブ優先）、RR（ラウンドロビン）、優先度スケジューリング</li>
+          <li>ラウンドロビン：タイムクォンタム（一定時間）ずつCPUを割り当てる。現代OSで一般的</li>
+          <li>コンテキストスイッチ：CPUを別のプロセスに切り替える処理。レジスタやPCの保存・復元を行う</li>
+          <li>スレッド：プロセス内で動作する軽量な処理単位。メモリ空間を共有するため高速</li>
+          <li>割り込み：外部デバイスや内部イベントがCPUに処理を要求する仕組み</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>プロセスの状態遷移、スケジューリング方式の違い（特にRR）</dd></div>
+          <div><dt>中</dt><dd>コンテキストスイッチ、スレッド、割り込み処理</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>プロセス</td>
+              <td>実行中のプログラム</td>
+              <td>プログラムは静的、プロセスは動的</td>
+            </tr>
+            <tr>
+              <td>プロセスID（PID）</td>
+              <td>OSが各プロセスを識別する一意な番号</td>
+              <td>プロセス管理の基礎</td>
+            </tr>
+            <tr>
+              <td>実行状態（Running）</td>
+              <td>CPUを使って実際に処理している状態</td>
+              <td>CPUを占有できるのは1プロセスのみ</td>
+            </tr>
+            <tr>
+              <td>実行可能状態（Ready）</td>
+              <td>CPUの利用を待っている状態</td>
+              <td>いつでも実行できる状態</td>
+            </tr>
+            <tr>
+              <td>待ち状態（Waiting）</td>
+              <td>I/Oなどの完了待ちでCPUを使えない状態</td>
+              <td>入出力待ちやイベント待ち</td>
+            </tr>
+            <tr>
+              <td>ラウンドロビン（RR）</td>
+              <td>各プロセスに一定時間ずつCPUを割り当てる方式</td>
+              <td>現代のOSで一般的</td>
+            </tr>
+            <tr>
+              <td>FCFS</td>
+              <td>到着した順に実行する方式</td>
+              <td>シンプルだが長い処理が先に来ると待ち時間が増える</td>
+            </tr>
+            <tr>
+              <td>SJF</td>
+              <td>実行時間が短いプロセスを優先する方式</td>
+              <td>平均待ち時間が短くなる</td>
+            </tr>
+            <tr>
+              <td>コンテキストスイッチ</td>
+              <td>CPUを別のプロセスに切り替える処理</td>
+              <td>レジスタやPCの保存・復元が必要</td>
+            </tr>
+            <tr>
+              <td>スレッド</td>
+              <td>プロセス内で動作する軽量な処理単位</td>
+              <td>メモリ空間を共有するため高速</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="process-state" class="lesson-section">
+      <h2>3.3 プロセス管理（CPUの管理）</h2>
+      <p>OSの最も重要な役割のひとつがプロセス管理です。プロセスとは、実行中のプログラムのことです。</p>
+
+      <h3>プロセスとは</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>プロセスが持つ情報</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>プログラムコード</td>
+              <td>実行する命令の並び</td>
+            </tr>
+            <tr>
+              <td>データ領域</td>
+              <td>グローバル変数や静的変数</td>
+            </tr>
+            <tr>
+              <td>スタック</td>
+              <td>関数の引数やローカル変数、戻りアドレス</td>
+            </tr>
+            <tr>
+              <td>レジスタの状態</td>
+              <td>CPUレジスタの値（プログラムカウンタなど）</td>
+            </tr>
+            <tr>
+              <td>プロセスID（PID）</td>
+              <td>プロセスを識別する一意な番号</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>プロセスの状態遷移</h3>
+      <figure class="wide-diagram">
+        <figcaption>プロセスの状態遷移図</figcaption>
+        <pre>
+【プロセスの状態遷移】
+
+                +-----------------+
+                |                 |
+                |   実行状態      |
+                |   (Running)     |
+                | CPUを使っている |
+                +-----------------+
+                       |
+                       | タイムアウト
+                       | (時間切れ)
+                       v
+                +-----------------+
+                |                 |
+                |  実行可能状態   |
+                |    (Ready)      |
+                | CPUを待っている |
+                +-----------------+
+                       ^
+                       | I/O完了
+                       | イベント発生
+                       |
+                +-----------------+
+                |                 |
+                |    待ち状態     |
+                |   (Waiting)     |
+                | I/Oなど完了待ち |
+                +-----------------+
+        </pre>
+      </figure>
+
+      <h3>プロセスの3つの状態</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>状態</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>実行（Running）</td>
+              <td>CPUを使って処理している状態</td>
+            </tr>
+            <tr>
+              <td>実行可能（Ready）</td>
+              <td>CPUの利用を待っている状態</td>
+            </tr>
+            <tr>
+              <td>待ち（Waiting）</td>
+              <td>入出力（I/O）などの完了待ちでCPUを使えない状態</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="scheduling" class="lesson-section">
+      <h2>スケジューリング（CPUの順番決め）</h2>
+      <p>OSは複数のプロセスを公平かつ効率よく実行するために、スケジューリング方式を用いてCPUの順番を決めます。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>方式</th>
+              <th>説明</th>
+              <th>メリット</th>
+              <th>デメリット</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FCFS</td>
+              <td>到着した順に実行する</td>
+              <td>シンプルで実装が簡単</td>
+              <td>長い処理が先に来ると待ち時間が増える</td>
+            </tr>
+            <tr>
+              <td>SJF</td>
+              <td>実行時間が短いプロセスを優先</td>
+              <td>平均待ち時間が短くなる</td>
+              <td>実行時間の正確な予測が困難</td>
+            </tr>
+            <tr>
+              <td>ラウンドロビン</td>
+              <td>各プロセスに一定時間（タイムクォンタム）ずつCPUを割り当てる</td>
+              <td>応答時間が短く、公平</td>
+              <td>タイムクォンタムの設定が重要</td>
+            </tr>
+            <tr>
+              <td>優先度スケジューリング</td>
+              <td>プロセスに優先度をつけ、高いものから実行</td>
+              <td>重要な処理を優先できる</td>
+              <td>低優先度プロセスが実行されない可能性</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="context-switch" class="lesson-section">
+      <h2>コンテキストスイッチ</h2>
+      <p>OSがCPUを別のプロセスに切り替えることをコンテキストスイッチと呼びます。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>保存・復元する情報</th>
+              <th>説明</th>
+            </td>
+          </thead>
+          <tbody>
+            <tr>
+              <td>レジスタの内容</td>
+              <td>CPU内部の汎用レジスタの値</td>
+            </tr>
+            <tr>
+              <td>プログラムカウンタ</td>
+              <td>次に実行すべき命令のアドレス</td>
+            </tr>
+            <tr>
+              <td>スタックポインタ</td>
+              <td>スタックの現在位置</td>
+            </tr>
+            <tr>
+              <td>メモリ情報</td>
+              <td>ページテーブル情報など</td>
+            <tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>コンテキストスイッチの流れ</figcaption>
+        <pre>
+【コンテキストスイッチの流れ】
+
+  プロセスA実行中
+        |
+        | タイマー割り込み or I/O要求
+        v
+  OSカーネル割り込み処理
+        |
+        | プロセスAの状態を保存
+        | プロセスBの状態を復元
+        v
+  プロセスB実行開始
+        </pre>
+      </figure>
+    </section>
+
+    <section id="thread" class="lesson-section">
+      <h2>スレッド</h2>
+      <p>スレッドとは、プロセス内で動作する「軽量な処理単位」のことです。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>プロセス</th>
+              <th>スレッド</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>メモリ空間</td>
+              <td>プロセスごとに独立</td>
+              <td>同じプロセス内で共有</td>
+            </tr>
+            <tr>
+              <td>切り替えコスト</td>
+              <td>大きい</td>
+              <td>小さい（軽量）</td>
+            </tr>
+            <tr>
+              <td>生成・破棄コスト</td>
+              <td>大きい</td>
+              <td>小さい</td>
+            </tr>
+            <tr>
+              <td>データ共有</td>
+              <td>別プロセスとは困難</td>
+              <td>同じプロセス内では容易</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="interrupt" class="lesson-section">
+      <h2>割り込みとプロセス管理</h2>
+      <p>割り込みとは、外部デバイスや内部イベントがCPUに処理を要求する仕組みです。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>割り込みの種類</th>
+              <th>説明</th>
+              <th>例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ハードウェア割り込み</td>
+              <td>外部デバイスからの割り込み</td>
+              <td>タイマー割り込み、キーボード入力</td>
+            </tr>
+            <tr>
+              <td>ソフトウェア割り込み</td>
+              <td>プログラムが意図的に発生させる割り込み</td>
+              <td>システムコール、例外処理</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. プロセスの説明として、最も適切なものはどれか。</summary>
+        <p>ア）ストレージに保存されているプログラム　イ）実行中のプログラム　ウ）OSの一部　エ）ハードウェアの制御プログラム</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — プロセスは実行中のプログラム。ストレージに保存されているだけのプログラムは「静的」、実行されて初めて「プロセス」となる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. プロセスの状態遷移において「CPUを使っている状態」はどれか。</summary>
+        <p>ア）実行（Running）　イ）実行可能（Ready）　ウ）待ち（Waiting）　エ）停止（Stopped）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 実行状態（Running）はCPUを使って実際に処理している状態。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ラウンドロビン方式の説明として、適切なものはどれか。</summary>
+        <p>ア）到着した順に実行する方式　イ）実行時間が短いプロセスを優先する方式　ウ）各プロセスに一定時間ずつCPUを割り当てる方式　エ）優先度が高いプロセスを優先する方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ラウンドロビン方式は各プロセスに一定時間（タイムクォンタム）ずつCPUを割り当てる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. SJFの特徴として、適切なものはどれか。</summary>
+        <p>ア）最もシンプルな方式　イ）実行時間が短いプロセスを優先するため平均待ち時間が短くなる　ウ）公平性が最も高い　エ）応答時間が最も短い</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SJF（Shortest Job First）は実行時間が短いプロセスを優先するため、平均待ち時間が短くなる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. コンテキストスイッチで保存・復元される情報に含まれないものはどれか。</summary>
+        <p>ア）レジスタの内容　イ）プログラムカウンタ　ウ）ファイルの内容　エ）スタックポインタ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — コンテキストスイッチではCPUの状態（レジスタ、プログラムカウンタ、スタックポインタなど）を保存・復元する。ファイルの内容は対象外。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. スレッドの特徴として、適切なものはどれか。</summary>
+        <p>ア）プロセスとは独立したメモリ空間を持つ　イ）プロセスよりも切り替えコストが大きい　ウ）同じプロセス内のスレッドはメモリ空間を共有する　エ）データ共有が困難</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スレッドは同じプロセス内のメモリ空間を共有するため、データ共有が容易で切り替えコストも小さい。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. タイムクォンタムの説明として、適切なものはどれか。</summary>
+        <p>ア）プロセスがCPUを占有できる最大時間　イ）プロセスの優先度　ウ）メモリの割り当て単位　エ）ディスクのアクセス時間</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — タイムクォンタムはラウンドロビン方式で各プロセスがCPUを占有できる最大時間。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 割り込みの説明として、適切なものはどれか。</summary>
+        <p>ア）CPUが定期的にデバイスの状態を確認すること　イ）外部デバイスや内部イベントがCPUに処理を要求する仕組み　ウ）プロセスの優先度を変更すること　エ）メモリを増設すること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 割り込みは外部デバイスや内部イベントがCPUに処理を要求する仕組み。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. FCFSの特徴として、適切なものはどれか。</summary>
+        <p>ア）実行時間が短いプロセスを優先する　イ）到着した順に実行する最もシンプルな方式　ウ）各プロセスに一定時間ずつCPUを割り当てる　エ）優先度が高いプロセスを優先する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — FCFS（First Come First Served）は到着した順に実行する最もシンプルなスケジューリング方式。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. プロセスがI/O要求を発行した場合、どの状態に遷移するか。</summary>
+        <p>ア）実行 → 実行可能　イ）実行 → 待ち　ウ）実行可能 → 実行　エ）待ち → 実行可能</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — プロセスがI/O要求を発行すると、I/O完了待ちのために実行状態から待ち状態に遷移する。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第3章 OSとソフトウェア / 3.3 プロセス管理（p121-p130）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

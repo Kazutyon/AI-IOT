@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ファイルシステム | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>ファイルシステム</h1>
+        <p class="lead">ファイルシステムの役割、内部構造（i-node/FAT）、アクセス権、ジャーナリング、ウェアレベリングを理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#role">ファイルシステムの役割</a>
+        <a href="#internal-structure">内部構造</a>
+        <a href="#permission">アクセス権</a>
+        <a href="#journaling">ジャーナリング</a>
+        <a href="#wear-leveling">ウェアレベリング</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>ファイルシステム</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>ファイルシステムの役割：データ保存・管理、ディレクトリ構造提供、アクセス権管理</li>
+          <li>i-node方式：UNIX/Linux系で使用。メタデータとファイル名が分離。大規模システムで高速</li>
+          <li>FAT方式：Windows系・組み込みで多用。構造がシンプル。USBメモリやSDカードで採用</li>
+          <li>アクセス権：r（読み取り）、w（書き込み）、x（実行）。所有者・グループ・その他で設定</li>
+          <li>ジャーナリング：変更内容をログに記録し、障害時に復旧可能にする仕組み</li>
+          <li>ウェアレベリング：フラッシュメモリの書き込み寿命を延ばすため、書き込み場所を分散する仕組み</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>i-nodeとFATの違い、アクセス権（rwx）、ジャーナリング</dd></div>
+          <div><dt>中</dt><dd>ウェアレベリング、ファイルシステムの役割</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>ファイルシステム</td><td>ファイルを管理する仕組み。データの保存・管理、ディレクトリ構造、アクセス権を提供</td><td>OSの重要な機能の一つ</td></tr>
+            <tr><td>i-node</td><td>UNIX/Linux系ファイルシステムで使われる方式。ファイルのメタデータ（サイズ・所有者・アクセス権など）を管理</td><td>メタデータとファイル名が分離されている</td></tr>
+            <tr><td>FAT</td><td>File Allocation Table。Windows系・組み込みで多用されるシンプルなファイルシステム</td><td>USBメモリ、SDカードで標準的に採用</td></tr>
+            <tr><td>アクセス権</td><td>ユーザやアプリがファイルを読み書きできるかを制御する仕組み</td><td>r（読み取り）、w（書き込み）、x（実行）の3種類</td></tr>
+            <tr><td>ジャーナリング</td><td>変更内容をログ（ジャーナル）に記録し、障害時にファイルシステムの整合性を保つ仕組み</td><td>電源断やクラッシュからデータを保護</td></tr>
+            <tr><td>ウェアレベリング</td><td>フラッシュメモリの書き込み寿命を延ばすため、書き込み場所を分散させる仕組み</td><td>同じ場所に書き込み続けると故障するのを防ぐ</td></td>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="role" class="lesson-section">
+      <h2>5.1 ファイルシステムの役割</h2>
+      <p>ファイルシステムの主な役割は次の3つです。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>役割</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td>データの保存と管理</td><td>ファイルを作成・削除し、ストレージ上のどこに保存するかを管理する</td></tr>
+            <tr><td>ディレクトリ構造の提供</td><td>フォルダ（ディレクトリ）を使って階層的に整理する</td></tr>
+            <tr><td>アクセス権の管理</td><td>ユーザやアプリがファイルを読み書きできるかを制御する</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="internal-structure" class="lesson-section">
+      <h2>5.2 ファイルシステムの内部構造</h2>
+      <p>ファイルシステムは、「ファイル名」と「実際のデータの位置」を結びつける仕組みを持っています。</p>
+
+      <h3>① i-node（UNIX / Linux 系）</h3>
+      <p>UNIX/Linuxのファイルシステム（ext4など）で使われる方式。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>i-nodeが持つ情報</td><td>ファイルサイズ、所有者、アクセス権、タイムスタンプ、データブロックの位置情報</td></tr>
+            <tr><td>特徴</td><td>メタデータとファイル名が分離。大規模システムでも高速。サーバ・クラウドで広く利用</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>② FAT（File Allocation Table）</h3>
+      <p>Windows系・組み込みで多用される方式。USBメモリやSDカードで広く使われる。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>特徴</td><td>構造がシンプル。小規模ストレージに向く。FAT12/16/32などの種類がある</td></tr>
+            <tr><td>欠点</td><td>大容量ストレージには不向き。断片化が発生しやすい。信頼性はext4などに劣る</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>比較項目</th><th>i-node方式</th><th>FAT方式</th></tr></thead>
+          <tbody>
+            <tr><td>主なOS</td><td>UNIX / Linux</td><td>Windows / 組み込み</td></tr>
+            <tr><td>構造</td><td>メタデータとファイル名が分離</td><td>ファイルアロケーションテーブルで管理</td></tr>
+            <tr><td>特徴</td><td>大規模・高速</td><td>シンプル・小規模向き</td></tr>
+            <tr><td>代表例</td><td>ext4</td><td>FAT32、exFAT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="permission" class="lesson-section">
+      <h2>5.4 アクセス権（Permission）</h2>
+      <p>UNIX/Linuxでは、ファイルのアクセス権は次の3つで表される。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>記号</th><th>意味</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td>r</td><td>read（読み取り）</td><td>ファイルの中身を読める</td></tr>
+            <tr><td>w</td><td>write（書き込み）</td><td>ファイルの内容を変更できる</td></tr>
+            <tr><td>x</td><td>execute（実行）</td><td>プログラムを実行できる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>さらに、対象は3種類に分けられる。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>対象</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td>所有者（owner）</td><td>ファイルを作成したユーザ</td></tr>
+            <tr><td>グループ（group）</td><td>所有者が属するグループ</td></tr>
+            <td><td>その他（others）</td><td>所有者でもグループでもないユーザ</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>アクセス権の例</figcaption>
+        <pre>
+【アクセス権の例：rwxr-xr--】
+
+   rwx   r-x   r--
+   |     |     |
+   |     |     +--- その他（others）：読み取りのみ
+   |     +--------- グループ（group）：読み取りと実行はできるが、編集はできない
+   +--------------- 所有者（owner）：全ての権限がある（読み取り・書き込み・実行）
+        </pre>
+      </figure>
+    </section>
+
+    <section id="journaling" class="lesson-section">
+      <h2>5.5 ジャーナリング（Journaling）</h2>
+      <p>電源断や障害が発生したときに、ファイルシステムの整合性を保つための仕組み。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>仕組み</td><td>変更内容を「ジャーナル（ログ）」に記録。記録後に実際のデータを書き換える</td></tr>
+            <tr><td>障害時</td><td>ジャーナルを元に復旧可能</td></tr>
+            <tr><td>利点</td><td>データ破損を防ぎやすい。サーバ・PCで一般的（ext4、NTFSなど）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="wear-leveling" class="lesson-section">
+      <h2>5.6 フラッシュメモリとウェアレベリング（IoT・組み込み向け）</h2>
+      <p>IoT・組み込み機器では、フラッシュメモリ（SDカード・eMMC・NOR/NAND）が主流です。フラッシュメモリには寿命があり、同じ場所に書き込み続けると故障します。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>ウェアレベリングの役割</td><td>書き込み場所を分散して寿命を延ばす</td></tr>
+            <tr><td>担当</td><td>組み込み向けファイルシステム（FAT + FTL）が担当</td></tr>
+            <tr><td>注意点</td><td>電源断に弱い。書き込み回数に制限がある。ログを大量に書くと寿命が縮む</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+        <h3>組み込み・RTOS向けファイルシステム</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ファイルシステム</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>LittleFS</td>
+              <td>ARM Mbed向け。電源断に強い、フラッシュ向け</td>
+            </tr>
+            <tr>
+              <td>SPIFFS</td>
+              <td>ESP32向け。小規模フラッシュ向け</td>
+            </tr>
+            <tr>
+              <td>FAT（SDカード）</td>
+              <td>互換性が高い</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card"><summary>Q1. ファイルシステムの役割として、本文で挙げられているものはどれか。</summary><p>ア）データの保存と管理、ディレクトリ構造の提供、アクセス権の管理　イ）CPUのスケジューリング、メモリ管理　ウ）ネットワーク通信の制御、暗号化　エ）電源管理、温度監視</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ア</strong> — ファイルシステムの役割は「データの保存と管理」「ディレクトリ構造の提供」「アクセス権の管理」の3つ。</p></details></details>
+
+      <details class="quiz-card"><summary>Q2. i-node方式の特徴として、適切なものはどれか。</summary><p>ア）ファイル名とメタデータが一体化している　イ）メタデータとファイル名が分離されている　ウ）構造がシンプルで小規模ストレージに向く　エ）USBメモリで標準的に使われる</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — i-node方式はメタデータ（サイズ・所有者など）とファイル名が分離されている。アとウとエはFAT方式の特徴。</p></details></details>
+
+      <details class="quiz-card"><summary>Q3. FAT方式の特徴として、適切なものはどれか。</summary><p>ア）大規模ストレージに適している　イ）サーバ・クラウドで広く利用される　ウ）構造がシンプルで小規模ストレージに向く　エ）メタデータとファイル名が分離されている</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ウ</strong> — FAT方式は構造がシンプルで、USBメモリやSDカードなどの小規模ストレージに向く。</p></details></details>
+
+      <details class="quiz-card"><summary>Q4. アクセス権の「w」が表すものはどれか。</summary><p>ア）読み取り　イ）書き込み　ウ）実行　エ）削除</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — wはwrite（書き込み）を表す。rは読み取り、xは実行。</p></details></details>
+
+      <details class="quiz-card"><summary>Q5. アクセス権「rwxr-xr--」の説明として、適切なものはどれか。</summary><p>ア）全ユーザが全ての権限を持つ　イ）所有者は全ての権限を持ち、その他は読み取りのみ可能　ウ）全ユーザが読み取りのみ可能　エ）所有者は書き込みのみ可能</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — rwx（所有者：全権限）、r-x（グループ：読み取りと実行）、r--（その他：読み取りのみ）。</p></details></details>
+
+      <details class="quiz-card"><summary>Q6. ジャーナリングの説明として、適切なものはどれか。</summary><p>ア）ファイルの読み取り速度を向上させる仕組み　イ）変更内容をログに記録し、障害時に復旧可能にする仕組み　ウ）ファイルを圧縮する仕組み　エ）ファイルを暗号化する仕組み</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — ジャーナリングは変更内容をログに記録し、電源断などの障害時にファイルシステムの整合性を保つ。</p></details></details>
+
+      <details class="quiz-card"><summary>Q7. ウェアレベリングの目的として、適切なものはどれか。</summary><p>ア）ファイルの読み取り速度を向上させる　イ）フラッシュメモリの書き込み寿命を延ばす　ウ）ディスク容量を増やす　エ）データを暗号化する</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — ウェアレベリングは書き込み場所を分散させ、フラッシュメモリの寿命を延ばす。</p></details></details>
+
+      <details class="quiz-card"><summary>Q8. i-nodeが持つ情報として、本文で挙げられているものはどれか。</summary><p>ア）ファイルサイズ、所有者、アクセス権　イ）ファイルの中身のデータ　ウ）ファイルのバックアップ先　エ）ファイルの暗号化キー</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ア</strong> — i-nodeはファイルサイズ、所有者、アクセス権、タイムスタンプ、データブロックの位置情報を持つ。</p></details></details>
+
+      <details class="quiz-card"><summary>Q9. FAT方式の欠点として、本文で挙げられているものはどれか。</summary><p>ア）大容量ストレージに不向き、断片化が発生しやすい　イ）メタデータとファイル名の管理が複雑　ウ）サーバ用途には適さない　エ）書き込み速度が極端に遅い</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ア</strong> — FAT方式は大容量ストレージに不向きで、断片化が発生しやすい。</p></details></details>
+
+      <details class="quiz-card"><summary>Q10. ジャーナリングを採用しているファイルシステムの例として、本文で挙げられているものはどれか。</summary><p>ア）FAT32　イ）exFAT　ウ）ext4、NTFS　エ）FAT12</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ウ</strong> — ext4やNTFSはジャーナリングを採用している。FAT系はジャーナリング非対応。</p></details></details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第3章 OSとソフトウェア / 3.5 ファイルシステム（p139-p145）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

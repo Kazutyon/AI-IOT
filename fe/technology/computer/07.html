@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>入出力装置・バス構造・制御方式 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>入出力装置・バス構造・制御方式</h1>
+        <p class="lead">入出力装置（I/Oデバイス）の種類、バス構造（データ/アドレス/制御バス）、入出力制御方式（プログラム制御・割込み・DMA）を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#io-device">入出力装置</a>
+        <a href="#bus-structure">バス構造</a>
+        <a href="#io-control">入出力制御方式</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>入出力装置・バス構造・制御方式</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>入出力装置（I/Oデバイス）：コンピュータと外部の世界の橋渡し</li>
+          <li>入力装置：キーボード、マウス、スキャナ、カメラ、マイク、センサー</li>
+          <li>出力装置：ディスプレイ、プリンタ、スピーカ、アクチュエータ</li>
+          <li>バス：データバス・アドレスバス・制御バスの3種類</li>
+          <li>プログラム制御方式（ポーリング）：CPUがデバイスの状態を監視</li>
+          <li>割込み制御方式（Interrupt）：デバイスが完了をCPUに通知</li>
+          <li>DMA（Direct Memory Access）：CPUを介さずにメモリと直接転送</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>バスの3種類（データ/アドレス/制御）、割込み制御、DMA</dd></div>
+          <div><dt>中</dt><dd>プログラム制御方式（ポーリング）の特徴、入出力装置の種類</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>入出力装置（I/Oデバイス）</td>
+              <td>コンピュータと外部の世界（人間や他の機器）との橋渡しをする装置</td>
+              <td>入力装置と出力装置に分類される</td>
+            </tr>
+            <tr>
+              <td>バス（Bus）</td>
+              <td>コンピュータ内部でCPU・主記憶装置・入出力装置をつなぐ共通の通路</td>
+              <td>データバス・アドレスバス・制御バスの3種類で構成</td>
+            </td>
+            <tr>
+              <td>データバス</td>
+              <td>データそのものを運ぶバス</td>
+              <td>バス幅（32bit/64bitなど）が転送量を決定</td>
+            </tr>
+            <tr>
+              <td>アドレスバス</td>
+              <td>どのメモリやI/Oにアクセスするかを指定するバス</td>
+              <td>アドレスバスの幅が最大メモリ容量を決定</td>
+            </tr>
+            </tr>
+              <td>制御バス</td>
+              <td>読み込み・書き込みなどの制御信号を伝えるバス</td>
+              <td>メモリリード/ライト、割り込み要求など</td>
+            </tr>
+            <tr>
+              <td>プログラム制御方式（ポーリング）</td>
+              <td>CPUがデバイスの状態を監視しながら処理する方式</td>
+              <td>シンプルだがCPUの負荷が高い。古いデバイスや単純処理に利用</td>
+            </tr>
+            <tr>
+              <td>割込み制御方式（Interrupt）</td>
+              <td>デバイスが処理完了をCPUに通知する方式</td>
+              <td>CPUは他の処理をしながら待てる。キーボード、マウス、ネットワークで利用</td>
+            </tr>
+            <tr>
+              <td>DMA（Direct Memory Access）</td>
+              <td>CPUを介さずにデバイスが直接メモリにアクセスする方式</td>
+              <td>大量データ転送に向く。SSD、GPU、NICなどに利用</td>
+            </tr>
+            <tr>
+              <td>I/Oポート方式</td>
+              <td>I/Oデバイス専用のアドレス空間で制御する方式</td>
+              <td>CPUは専用のIN/OUT命令を使用</td>
+            </tr>
+            <tr>
+              <td>メモリマップドI/O方式</td>
+              <td>メモリ空間にI/Oデバイスを割り当てる方式</td>
+              <td>CPUは通常のメモリアクセス命令でI/O制御が可能</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="io-device" class="lesson-section">
+      <h2>2.1.6 入出力装置（Input/Output Device）</h2>
+      <p>入出力装置（I/Oデバイス）は、コンピュータと外部の世界（人間や他の機器）との橋渡しをする装置です。</p>
+
+      <h3>入力装置の種類</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>種類</th>
+              <th>具体例</th>
+              <th>主な用途・特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>キーボード</td>
+              <td>PC、タブレット</td>
+              <td>文字や数値を入力。基本的な入力装置</td>
+            </tr>
+            <tr>
+              <td>マウス／タッチパッド</td>
+              <td>PC、ノートPC</td>
+              <td>画面上のカーソルを操作。GUI操作に不可欠</td>
+            </tr>
+            <tr>
+              <td>スキャナ</td>
+              <td>事務機器、複合機</td>
+              <td>紙の文書や画像をデジタルデータに変換</td>
+            </tr>
+            <tr>
+              <td>カメラ</td>
+              <td>スマホ、PC</td>
+              <td>映像・画像を取り込み。顔認識やAI処理にも利用</td>
+            </tr>
+            <tr>
+              <td>マイク</td>
+              <td>PC、スマホ</td>
+              <td>音声データを入力。音声認識や通話に利用</td>
+            </tr>
+            <tr>
+              <td>センサー</td>
+              <td>IoTデバイス</td>
+              <td>温度・明るさ・加速度などの物理情報を入力</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>出力装置の種類</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>種類</th>
+              <th>具体例</th>
+              <th>主な用途・特徴</th>
+            </table>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ディスプレイ（モニタ）</td>
+              <td>PC、スマホ</td>
+              <td>文字・画像・映像を表示。主な出力装置</td>
+            </tr>
+            <tr>
+              <td>プリンタ</td>
+              <td>事務機器</td>
+              <td>文書・画像を紙に印刷</td>
+            </tr>
+            </tr>
+              <td>スピーカ</td>
+              <td>PC、スマホ</td>
+              <td>音声・音楽などを再生</td>
+            </tr>
+            <tr>
+              <td>LED表示器</td>
+              <td>組み込み機器</td>
+              <td>数値や状態を簡易的に表示</td>
+            </tr>
+            <tr>
+              <td>アクチュエータ</td>
+              <td>ロボット、IoT</td>
+              <td>電気信号でモーターなどを動作させ、物理的な動きを出力</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="bus-structure" class="lesson-section">
+      <h2>2.1.7 バス構造（Bus Architecture）</h2>
+      <p>バスとは、コンピュータ内部でCPU・主記憶装置・入出力装置をつなぐ“共通の通路”のことです。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>バス名</th>
+              <th>役割</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>データバス</td>
+              <td>データそのものを運ぶ</td>
+            </tr>
+            <tr>
+              <td>アドレスバス</td>
+              <td>どのメモリやI/Oにアクセスするかを指定</td>
+            </tr>
+            <tr>
+              <td>制御バス</td>
+              <td>読み込み・書き込みなどの制御信号を伝える</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>バス構造のイメージ</figcaption>
+        <pre>
+【バス構造のイメージ】
+
+  +----------------+         +----------------+         +----------------+
+  |      CPU       |         |   主記憶装置   |         |   I/O装置      |
+  |                |         |   （メモリ）   |         |  (周辺機器)    |
+  +----------------+         +----------------+         +----------------+
+          |                           |                           |
+          +---------------------------+---------------------------+
+                                      |
+                              +-----------------+
+                              |     バス        |
+                              | （共通の通路）  |
+                              +-----------------+
+
+  バスの3つの信号線：
+    [データバス] -------- データそのものを運ぶ
+    [アドレスバス] ------ アクセス先を指定
+    [制御バス] ---------- 読み込み/書き込みを指示
+        </pre>
+      </figure>
+
+      <h3>バスの種類（接続範囲による分類）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>種類</th>
+              <th>接続対象</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>内部バス（Internal Bus）</td>
+              <td>CPU内部のレジスタやALU</td>
+              <td>超高速。CPUの内部構造に依存</td>
+            </tr>
+            <tr>
+              <td>システムバス（System Bus）</td>
+              <td>CPUと主記憶装置</td>
+              <td>コンピュータの中核となるバス。データ/アドレス/制御バスを含む</td>
+            </tr>
+            <tr>
+              <td>I/Oバス（周辺バス）</td>
+              <td>外部機器（キーボード、SSD、GPUなど）</td>
+              <td>PCI Express、USB、SATAなど</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>主なバス規格</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>規格</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PCI Express（PCIe）</td>
+              <td>グラフィックボードなど高速デバイス用</td>
+            </tr>
+            <tr>
+              <td>USB</td>
+              <td>外部機器との接続</td>
+            </tr>
+            <tr>
+              <td>SATA</td>
+              <td>HDD/SSDの接続</td>
+            </tr>
+            <tr>
+              <td>I²C / SPI</td>
+              <td>組み込み機器で利用される低速バス</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="io-control" class="lesson-section">
+      <h2>2.1.8 入出力制御方式（I/O Control）</h2>
+      <p>入出力装置はCPUや主記憶装置に比べて動作速度が非常に遅いため、CPUとI/Oデバイスのデータのやり取りを効率よく制御する仕組みが必要です。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>制御方式</th>
+              <th>動作</th>
+              <th>メリット</th>
+              <th>デメリット</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>プログラム制御方式<br>（ポーリング）</strong></td>
+              <td>CPUがデバイスの状態を監視しながら処理する</td>
+              <td>シンプルで実装が容易</td>
+              <td>CPUが待ち時間で無駄に占有される。CPUの負荷が高い</td>
+              <td>古いデバイス、単純な処理</td>
+            </tr>
+            <tr>
+              <td><strong>割込み制御方式<br>（Interrupt）</strong></td>
+              <td>デバイスが処理完了をCPUに通知する</td>
+              <td>CPUは他の処理をしながら待てる。効率が良い</td>
+              <td>割込み処理のオーバーヘッドがある</td>
+              <td>キーボード、マウス、ネットワーク</td>
+            </tr>
+            <tr>
+              <td><strong>DMA方式<br>（Direct Memory Access）</strong></td>
+              <td>CPUを介さずにデバイスが直接メモリにアクセス</td>
+              <td>CPUの負荷がゼロ。最も高速で効率的</td>
+              <td>DMAコントローラが必要</td>
+              <td>SSD、GPU、NIC、大量データ転送</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>3つの制御方式の比較イメージ</figcaption>
+        <pre>
+【プログラム制御方式（ポーリング）】
+
+  CPU：「準備できた？」
+  デバイス：「まだです」
+  CPU：「準備できた？」
+  デバイス：「まだです」
+  CPU：「準備できた？」（待ち続ける）
+  デバイス：「できました！」
+  → CPUが常に監視しているので非効率
+
+
+【割込み制御方式（Interrupt）】
+
+  CPU：他の処理を続ける
+  デバイス：（処理完了）「終わったよ！」（割込み）
+  CPU：割込み処理を実行
+  → デバイスが完了した時だけCPUが対応するので効率的
+
+
+【DMA方式（Direct Memory Access）】
+
+  CPU：「このデータをメモリに転送して」（DMAコントローラに指示）
+  DMA：デバイスとメモリ間で転送実行（CPUは別の処理）
+  DMA：（転送完了）「終わったよ！」（割込み）
+  CPU：完了を確認
+  → CPUは開始指示と完了確認だけ。転送自体はDMAが担当
+        </pre>
+      </figure>
+
+      <h3>入出力インタフェース</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>区分</th>
+              <th>代表的なインタフェース</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>有線</td>
+              <td>USB、HDMI、SATA、Ethernet</td>
+              <td>高速・安定通信が可能。PC周辺機器に広く採用</td>
+            </tr>
+            <tr>
+              <td>無線</td>
+              <td>Bluetooth、Wi-Fi、NFC</td>
+              <td>ケーブル不要で利便性が高い。モバイル機器に多い</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>入出力装置の制御は、デバイスドライバと呼ばれるソフトウェアによって行われます。OSがハードウェアを正しく動作させるために、このドライバが欠かせません。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. バスを構成する3つの信号線に含まれないものはどれか。</summary>
+        <p>ア）データバス　イ）アドレスバス　ウ）制御バス　エ）通信バス</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — バスは「データバス」「アドレスバス」「制御バス」の3つで構成される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. アドレスバスの役割はどれか。</summary>
+        <p>ア）データそのものを運ぶ　イ）どのメモリにアクセスするかを指定する　ウ）読み込み・書き込みを指示する　エ）電源を供給する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — アドレスバスは「どのメモリやI/Oにアクセスするか」を指定する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 割込み制御方式（Interrupt）の説明として、適切なものはどれか。</summary>
+        <p>ア）CPUがデバイスの状態を常に監視する方式　イ）デバイスが処理完了をCPUに通知する方式　ウ）CPUを介さずにメモリと直接転送する方式　エ）データを暗号化して転送する方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 割込み制御方式はデバイスが処理完了をCPUに通知する方式。CPUは他の処理をしながら待てる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. DMAの説明として、最も適切なものはどれか。</summary>
+        <p>ア）CPUがデバイスの状態を監視する方式　イ）デバイスが完了をCPUに通知する方式　ウ）CPUを介さずにデバイスが直接メモリにアクセスする方式　エ）データを圧縮して転送する方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — DMAはCPUを介さずにデバイスが直接メモリにアクセスする方式。大量データ転送に適する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. プログラム制御方式（ポーリング）の特徴として、適切なものはどれか。</summary>
+        <p>ア）CPUの負荷が低い　イ）デバイスが完了を通知する　ウ）CPUが常にデバイスの状態を監視するため負荷が高い　エ）大量データ転送に適する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — プログラム制御方式はCPUがデバイスの状態を常に監視するため、CPUの負荷が高い。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. データバスの幅（バス幅）が表すものはどれか。</summary>
+        <p>ア）1秒間に転送できるデータ量　イ）一度に運べるデータ量　ウ）メモリの最大容量　エ）CPUのクロック周波数</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — バス幅とは一度に運べるデータ量のこと。32ビットバスなら一度に32ビット転送可能。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 以下のうち、出力装置に分類されないものはどれか。</summary>
+        <p>ア）ディスプレイ　イ）プリンタ　ウ）スキャナ　エ）スピーカ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スキャナは入力装置。ディスプレイ、プリンタ、スピーカは出力装置。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. PCI Express（PCIe）はどのようなバス規格か。</summary>
+        <p>ア）外部機器との接続用低速バス　イ）グラフィックボードなど高速デバイス用バス　ウ）HDD接続用バス　エ）組み込み機器用低速バス</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — PCI Express（PCIe）はグラフィックボードなど高速デバイス用のバス規格。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 入出力装置の制御をOSに代わって行うソフトウェアは何か。</summary>
+        <p>ア）コンパイラ　イ）アセンブラ　ウ）デバイスドライバ　エ）リンカ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — デバイスドライバはOSとハードウェアの間で通信を仲介し、デバイスを正しく動作させるソフトウェア。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. DMA方式の主な用途として、適切なものはどれか。</summary>
+        <p>ア）キーボード入力　イ）マウス操作　ウ）SSDやGPUの大量データ転送　エ）プリンタ出力</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — DMAはSSD、GPU、NICなど大量のデータ転送が必要なデバイスで利用される。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第2章 コンピュータの基本構成 / 2.1.6 入出力装置、2.1.7 バス構造、2.1.8 入出力制御方式（p85-p97）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小型化・クラウド・モバイル・IoT・AI | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / コンピュータ概論</p>
+        <h1>小型化・クラウド・モバイル・IoT・AI</h1>
+        <p class="lead">SoCによる小型化、クラウドコンピューティング、モバイル/IoTの普及、AI時代のGPU/NPUを理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#soc">SoCと小型化</a>
+        <a href="#cloud">クラウドコンピューティング</a>
+        <a href="#mobile-iot">モバイルとIoT</a>
+        <a href="#ai-gpu-npu">AI・GPU・NPU</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">コンピュータ概論</a>
+      <span>小型化・クラウド・モバイル・IoT・AI</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>SoC（System on a Chip）：CPU・GPU・メモリコントローラ・通信機能などを1チップに統合</li>
+          <li>クラウドコンピューティング：IaaS / PaaS / SaaSの3つのサービスモデル</li>
+          <li>モバイルコンピューティング：スマートフォンを支える技術（SoC・5G・センサー）</li>
+          <li>IoT：あらゆるモノがインターネットにつながる仕組み</li>
+          <li>GPU：数千の演算ユニットで並列処理。AI学習に最適</li>
+          <li>NPU：AI推論処理に特化した専用プロセッサ。省電力で高効率</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>クラウドの3サービスモデル（IaaS/PaaS/SaaS）、IoTの定義、GPUとNPUの違い</dd></div>
+          <div><dt>中</dt><dd>SoCの役割、モバイルを支える技術、オンデバイスAI</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>用語</th>
+              <th>意味</th>
+              <th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SoC（System on a Chip）</td>
+              <td>CPU・GPU・メモリコントローラ・通信機能などを1つのチップにまとめた高集積チップ</td>
+              <td>小型化・省電力化・高速化・コスト削減を同時に実現。スマートフォンの心臓部</td>
+            </tr>
+            <tr>
+              <td>クラウドコンピューティング</td>
+              <td>インターネットを通じて、必要なときに必要なだけコンピュータ資源を利用できる仕組み</td>
+              <td>IaaS / PaaS / SaaSの3つのサービスモデルが基本</td>
+            </tr>
+            <tr>
+              <td>IaaS</td>
+              <td>Infrastructure as a Service。サーバ・ストレージ・ネットワークなどのインフラを提供</td>
+              <td>例：AWS EC2、Microsoft Azure、Google Cloud</td>
+            </tr>
+            <tr>
+              <td>PaaS</td>
+              <td>Platform as a Service。アプリ開発に必要な環境を提供</td>
+              <td>例：Google App Engine、Azure App Service</td>
+            </tr>
+            <tr>
+              <td>SaaS</td>
+              <td>Software as a Service。アプリケーションをインターネット経由で利用</td>
+              <td>例：Google Workspace、Microsoft 365、Salesforce</td>
+            </tr>
+            <tr>
+              <td>IoT（Internet of Things）</td>
+              <td>あらゆるモノがインターネットにつながり、データを収集・共有し、自動で最適な動作を行う仕組み</td>
+              <td>家電・自動車・工場設備などがネットワークに接続される</td>
+            </tr>
+            <tr>
+              <td>GPU（Graphics Processing Unit）</td>
+              <td>画像処理のために開発されたが、現在はAI計算でも活用される並列処理プロセッサ</td>
+              <td>数千の演算ユニットを搭載。AI学習（ディープラーニング）に最適</td>
+            </tr>
+            <tr>
+              <td>NPU（Neural Processing Unit）</td>
+              <td>AIの計算（特にニューラルネットワークの推論処理）に特化した専用プロセッサ</td>
+              <td>GPUより省電力で高効率。スマホやPCに搭載され、オンデバイスAIを実現</td>
+            </tr>
+            <tr>
+              <td>オンデバイスAI</td>
+              <td>クラウドに送らず、端末内でAI処理を実行する方式</td>
+              <td>プライバシー保護・低遅延・省電力のメリットがある</td>
+            </tr>
+            <tr>
+              <td>エッジAI</td>
+              <td>IoTデバイスの近く（エッジ）でAI処理を実行する方式</td>
+              <td>クラウド依存を減らし、リアルタイム処理が可能</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+    <section id="soc" class="lesson-section">
+      <h2>1.8 現代コンピュータの小型化 — SoCの時代</h2>
+      <p>コンピュータは高速化と同時に、小型化も大きく進展してきました。電子素子の集積度が向上したことで、かつて大型装置だった計算機が、現在ではスマートフォンのような小型機器に搭載できるまでになりました。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>SoCのイメージ</figcaption>
+        <pre>
+【SoC（System on a Chip）】
+
+  +---------------------------------------------------+
+  |                                                   |
+  |   +---------+  +---------+  +-------------------+ |
+  |   |   CPU   |  |   GPU   |  |メモリコントローラ | |
+  |   +---------+  +---------+  +-------------------+ |
+  |                                                   |
+  |   +---------+  +-----------+  +-----------------+ |
+  |   |   NPU   |  | 通信機能  |  |   映像処理      | |
+  |   | (AI処理)|  |(Wi-Fi/5G) |  |   エンジン      | |
+  |   +---------+  +-----------+  +-----------------+ |
+  |                                                   |
+  |   +-------------------+-------------------------+ |
+  |   |   センサー制御    |    その他機能           | |
+  |   +-------------------+-------------------------+ |
+  |                                                   |
+  |   1つのチップに複数の機能を統合                   |
+  +---------------------------------------------------+
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>SoCに含まれる主な機能</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CPU（中央処理装置）</td>
+              <td>プログラムの実行と全体の制御</td>
+            </tr>
+            <tr>
+              <td>GPU（画像処理装置）</td>
+              <td>グラフィックス処理と並列計算</td>
+            </tr>
+            <tr>
+              <td>メモリコントローラ</td>
+              <td>メモリとのデータ転送を制御</td>
+            </tr>
+            <tr>
+              <td>NPU（AI処理ユニット）</td>
+              <td>AI推論処理を高速・省電力で実行</td>
+            </tr>
+            <tr>
+              <td>通信機能</td>
+              <td>Wi-Fi、Bluetooth、5Gなど</td>
+            </tr>
+            <tr>
+              <td>映像処理エンジン</td>
+              <td>カメラ映像や動画の処理</td>
+            </tr>
+            <tr>
+              <td>センサー制御回路</td>
+              <td>加速度センサー、ジャイロなどを制御</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cloud" class="lesson-section">
+      <h2>1.9 クラウドコンピューティングの時代</h2>
+      <p>クラウドコンピューティングとは、インターネットを通じて、必要なときに必要なだけコンピュータ資源（サーバ・ストレージ・アプリ）を利用できる仕組みのことです。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>サービスモデル</th>
+              <th>提供内容</th>
+              <th>代表例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>IaaS</strong><br>Infrastructure as a Service</td>
+              <td>サーバ、ストレージ、ネットワークなどの「インフラ」を提供。利用者はOSやアプリを自由に構築できる</td>
+              <td>AWS EC2、Microsoft Azure、Google Cloud</td>
+            </tr>
+            <tr>
+              <td><strong>PaaS</strong><br>Platform as a Service</td>
+              <td>アプリ開発に必要な環境（実行環境・DB・開発ツール）を提供。サーバ管理は不要</td>
+              <td>Google App Engine、Azure App Service</td>
+            </tr>
+            <tr>
+              <td><strong>SaaS</strong><br>Software as a Service</td>
+              <td>アプリケーションをインターネット経由で利用。インストール不要、常に最新バージョン</td>
+              <td>Google Workspace、Microsoft 365、Salesforce</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>クラウドの特徴</figcaption>
+        <pre>
+【クラウドの主な特徴】
+
+  +---------------------------------------------------+
+  |                                                   |
+  |  ✓ 必要なときに必要なだけ使える(スケーラビリティ)|
+  |                                                   |
+  |  ✓ 初期費用が少ない（サーバ購入不要）            |
+  |                                                   |
+  |  ✓ 世界中どこからでも利用可能                    |
+  |                                                   |
+  |  ✓ 自動バックアップ・自動更新で管理が容易        |
+  |                                                   |
+  |  ✓ 大規模データ処理やAI処理に向いている          |
+  |                                                   |
+  +---------------------------------------------------+
+
+  特にAIやビッグデータ分析は、クラウドの計算資源が不可欠。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="mobile-iot" class="lesson-section">
+      <h2>1.10 モバイルとIoTの時代</h2>
+
+      <h3>モバイルコンピューティングの発展</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>技術</th>
+              <th>役割</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SoC（System on a Chip）</td>
+              <td>CPU・GPU・通信機能を1チップに統合。小型化と省電力化を実現</td>
+            </tr>
+            <tr>
+              <td>高速通信（4G/5G）</td>
+              <td>動画視聴・オンラインゲーム・クラウド利用を可能に</td>
+            </tr>
+            <tr>
+              <td>バッテリー技術の向上</td>
+              <td>長時間の利用を実現</td>
+            </tr>
+            <tr>
+              <td>センサーの多様化</td>
+              <td>GPS、加速度センサー、ジャイロ、カメラ、生体認証など</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>IoT（Internet of Things）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>分野</th>
+              <th>具体例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>家庭</td>
+              <td>スマート家電、スマートメーター</td>
+            </tr>
+            <tr>
+              <td>工場</td>
+              <td>設備監視、予知保全（インダストリー4.0）</td>
+            </tr>
+            <tr>
+              <td>物流</td>
+              <td>位置情報追跡、在庫管理</td>
+            </tr>
+            <tr>
+              <td>医療</td>
+              <td>ウェアラブルデバイス、遠隔診断</td>
+            </tr>
+            <tr>
+              <td>農業</td>
+              <td>環境センサーによる自動制御</td>
+            </tr>
+            <tr>
+              <td>都市</td>
+              <td>スマートシティ、交通最適化</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>IoTの構造イメージ</figcaption>
+        <pre>
+【IoTの基本構造】
+
+  センサー（温度・湿度・加速度など）
+        |
+        | データ収集
+        v
+  IoTデバイス（マイコン＋通信機能）
+        |
+        | 無線通信（Wi-Fi / BLE / 5G / LoRa）
+        v
+  クラウド / エッジサーバ
+        |
+        | データ分析・AI処理
+        v
+  フィードバック（制御・通知・可視化）
+
+  人が操作しなくても、機器同士が連携して動作するのが特徴。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="ai-gpu-npu" class="lesson-section">
+      <h2>1.11 AIの時代（GPU・NPU）</h2>
+      <p>近年、画像認識・音声認識・自動運転・生成AIなど、人工知能（AI）を活用したサービスが急速に普及しています。これらのAI技術を支えているのが、GPUとNPUです。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>プロセッサ</th>
+              <th>特徴</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>GPU</strong></td>
+              <td>数千～数万の小さな演算ユニットを搭載。同じ計算を大量に並列処理できる</td>
+              <td>AI学習（ディープラーニング）、画像処理、科学技術計算</td>
+            </tr>
+            <tr>
+              <td><strong>NPU</strong></td>
+              <td>AIの行列計算に特化した専用回路。GPUより省電力で高効率</td>
+              <td>AI推論処理（画像認識・音声認識・翻訳など）、スマホやPCでのオンデバイスAI</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>GPUとNPUの比較</figcaption>
+        <pre>
+【GPU vs NPU】
+
+  GPU：
+    [並列処理に強い]
+    数千のコアで大量の計算を同時実行
+    主に「学習」フェーズで活躍
+    例：NVIDIA H100、AMD Radeon
+
+  NPU：
+    [AI推論に特化]
+    行列計算に最適化された専用回路
+    主に「推論」フェーズで活躍（省電力）
+    例：Apple Neural Engine、Google TPU
+
+  大規模学習はクラウド（GPU）
+  推論は端末内（NPU）→ オンデバイスAI
+        </pre>
+      </figure>
+
+      <h3>AI時代のコンピューティングの変化</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>変化</th>
+              <th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① CPUだけでは不十分</td>
+              <td>AIの計算はCPUでは処理しきれないため、GPUやNPUが必須に</td>
+            </tr>
+            <tr>
+              <td>② クラウドと端末の両方でAIが動く</td>
+              <td>クラウドAI：大量データの学習。端末AI（オンデバイスAI）：スマホやPCでリアルタイム処理</td>
+            </tr>
+            <tr>
+              <td>③ AIが日常のサービスに組み込まれる</td>
+              <td>写真の自動分類、音声アシスタント、翻訳、自動運転、生成AI</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. SoC（System on a Chip）の説明として、最も適切なものはどれか。</summary>
+        <p>ア）コンピュータのOSを記録したチップ　イ）CPU・GPU・通信機能などを1つのチップに統合した高集積チップ　ウ）外部記憶装置の一種　エ）電源を管理する専用チップ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SoCはCPU・GPU・メモリコントローラ・通信機能などを1つのチップに統合したもの。スマートフォンの心臓部。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. クラウドコンピューティングのサービスモデル「PaaS」の説明として、適切なものはどれか。</summary>
+        <p>ア）サーバやストレージなどのインフラを提供　イ）アプリケーションをインターネット経由で利用　ウ）アプリ開発に必要な環境を提供　エ）データベースのみを提供</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — PaaS（Platform as a Service）はアプリ開発に必要な環境（実行環境・DB・開発ツール）を提供する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. SaaSの代表例として、適切なものはどれか。</summary>
+        <p>ア）AWS EC2　イ）Google App Engine　ウ）Microsoft 365　エ）Azure Virtual Machine</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — SaaSの代表例はGoogle Workspace、Microsoft 365、Salesforceなど。アとエはIaaS、イはPaaS。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. IoTの説明として、最も適切なものはどれか。</summary>
+        <p>ア）パソコン同士をネットワークで接続する技術　イ）あらゆるモノがインターネットにつながる仕組み　ウ）スマートフォンの通信技術　エ）クラウド上の仮想サーバ技術</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IoT（Internet of Things）は、あらゆるモノがインターネットにつながり、データを収集・共有する仕組み。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. GPUの特徴として、適切なものはどれか。</summary>
+        <p>ア）AI推論処理に特化した省電力プロセッサ　イ）数千の演算ユニットで並列処理を行う　ウ）OSの管理を行うプロセッサ　エ）メモリ管理を専門に行う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — GPUは数千の演算ユニットで並列処理を行い、AI学習・画像処理などに活用される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. NPU（Neural Processing Unit）の説明として、適切なものはどれか。</summary>
+        <p>ア）画像処理のための専用プロセッサ　イ）AIの行列計算に特化した専用プロセッサ　ウ）ネットワーク通信のためのプロセッサ　エ）暗号化処理のためのプロセッサ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — NPUはAIのニューラルネットワーク計算に特化した専用プロセッサ。GPUより省電力で推論処理に適する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. オンデバイスAIのメリットとして、本文で挙げられているものはどれか。</summary>
+        <p>ア）クラウドの計算資源を大量に使える　イ）プライバシー保護・低遅延・省電力　ウ）常に最新のAIモデルを使える　エ）大規模な学習が可能</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — オンデバイスAIは端末内で処理するため、プライバシー保護・低遅延・省電力のメリットがある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. スマートフォンを支える技術として、本文で挙げられているものはどれか。</summary>
+        <p>ア）真空管　イ）磁気テープ　ウ）SoC、高速通信、センサー　エ）パンチカード</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スマートフォンを支える技術はSoC、高速通信（4G/5G）、バッテリー技術、センサーなど。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. IaaSの説明として、適切なものはどれか。</summary>
+        <p>ア）アプリケーションをインターネット経由で利用　イ）サーバやストレージなどのインフラを提供　ウ）アプリ開発に必要な環境を提供　エ）データ分析サービスを提供</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IaaS（Infrastructure as a Service）はサーバ、ストレージ、ネットワークなどのインフラを提供する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. エッジAIの説明として、適切なものはどれか。</summary>
+        <p>ア）クラウド上の大規模サーバでAI処理を行う　イ）IoTデバイスの近く（エッジ）でAI処理を実行する　ウ）スマートフォンのみでAI処理を行う　エ）データセンターで集中処理を行う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — エッジAIはIoTデバイスの近く（エッジ）でAI処理を実行し、クラウド依存を減らす。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『コンピュータ概論.pdf』 第1章 コンピュータの歴史と発展 / 1.8〜1.11（p26-p48）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
