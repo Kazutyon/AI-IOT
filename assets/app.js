@@ -229,8 +229,8 @@ const fallbackCurriculum = {
     {
       title: "2_アルゴリズムとデータ構造.pdf",
       category: "アルゴリズム",
-      status: "一部HTML化済み",
-      next: "5ページ作成済み（木構造・探索・整列・再帰計算量・データ構造）。擬似言語・グラフが未作成"
+      status: "HTML化済み",
+      next: "全8ページ（木構造・探索・整列・再帰計算量・データ構造・グラフ・基本・制御構造）をGitHub Pages反映用に登録済み"
     },
     {
       title: "1_マネジメント.pdf",

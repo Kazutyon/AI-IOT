@@ -2,15 +2,15 @@
 
 Last updated: 2026-06-12 / Codex
 
-## In Progress
+## Completed
 
 ### Algorithm
 
 - Folder: `fe/technology/algorithm/`
-- Status: in-progress
-- Done: tree/search, search, sort, recursion/complexity, data structure, graph
-- Current lock: `task-2026-06-12-034-deepseek-fe-page-html-algo-basic`
-- Remaining after current task: control structures / pseudocode coverage check
+- Status: done
+- Done: tree/search, search, sort, recursion/complexity, data structure, graph, basic, control
+- Portal: `fe/technology/algorithm/index.html`
+- Remaining: none for `2_アルゴリズムとデータ構造.pdf`
 
 ## Planned
 

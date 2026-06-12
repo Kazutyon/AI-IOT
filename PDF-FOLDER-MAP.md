@@ -11,7 +11,7 @@ Update rules are defined in `HTMLIZATION-STATUS-RULES.md`.
 |---|---|---|---|
 | `1_基礎理論（数学・論理・情報理論99）.pdf` | done | `fe/technology/basic-theory/` | All 11 lesson pages registered. |
 | `1_2(2)進数のお話.pdf` | integrated | `fe/technology/basic-theory/` | Supplement for radix/complement lesson. |
-| `2_アルゴリズムとデータ構造.pdf` | in-progress | `fe/technology/algorithm/` | Most pages done. `algo-basic` was being handled by another AI on 2026-06-12. |
+| `2_アルゴリズムとデータ構造.pdf` | done | `fe/technology/algorithm/` | All 8 lesson pages registered: tree/search, search, sort, recursion/complexity, data structure, graph, basic, control. |
 | `1_ネットワーク基礎.pdf` | done | `fe/technology/network/` | All 12 lesson pages registered. |
 | `2_クラウド基礎.pdf` | done | `fe/technology/cloud/` | All 9 lesson pages registered. |
 | `1_情報セキュリティー.pdf` | done | `fe/technology/security/` | All 22 lesson pages registered. |
