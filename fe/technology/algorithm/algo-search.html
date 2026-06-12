@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>探索アルゴリズム（線形探索・二分探索）| 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Algorithm</p>
+        <h1>探索アルゴリズム（線形探索・二分探索）</h1>
+        <p class="lead">線形探索 O(n) と二分探索 O(log n)。擬似コード・動作追跡・計算量比較。FE試験最重要分野を体系的に整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#linear">線形探索</a>
+        <a href="#binary">二分探索</a>
+        <a href="#compare">比較</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">アルゴリズム</a>
+      <span>探索アルゴリズム</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>線形探索のアルゴリズム（先頭から順に1つずつ調べる）</li>
+          <li>線形探索の擬似コードと計算量 O(n)</li>
+          <li>二分探索の前提条件（配列が整列済み）</li>
+          <li>二分探索のアルゴリズム（中央値と比較→範囲を半分に絞る）</li>
+          <li>二分探索の擬似コードと計算量 O(log n)</li>
+          <li>線形探索と二分探索の比較（いつどちらを使うか）</li>
+          <li>要素数100万でも二分探索なら約20回で見つかる理由</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>二分探索のアルゴリズム・計算量 O(log n)・整列前提</dd></div>
+          <div><dt>高</dt><dd>線形探索と二分探索の使い分け</dd></div>
+          <div><dt>中</dt><dd>線形探索の擬似コード・動作追跡</dd></div>
+          <div><dt>中</dt><dd>二分探索の動作追跡（left/mid/rightの変化）</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>線形探索</td><td>配列の先頭から順に1つずつ値を調べる探索</td><td>O(n)。整列不要。どんなデータにも使える</td></tr>
+            <tr><td>二分探索</td><td>整列済み配列で中央値と比較し、範囲を半分ずつ絞る探索</td><td>O(log n)。整列済みが前提</td></tr>
+            <tr><td>探索範囲</td><td>二分探索で left〜right の範囲</td><td>left <= right の間繰り返す</td></tr>
+            <tr><td>mid</td><td>(left + right) // 2 で計算する中央インデックス</td><td>整数除算で切り捨て</td></tr>
+            <tr><td>戻り値 -1</td><td>値が見つからなかったことを表す</td><td>配列に存在しない場合の慣習</td></tr>
+            <tr><td>O(n)</td><td>要素数に比例して処理時間が増加</td><td>線形探索の最悪ケース</td></tr>
+            <tr><td>O(log n)</td><td>要素数が増えても処理時間の増加が小さい</td><td>二分探索。log₂(1,000,000) ≒ 20</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="linear" class="lesson-section">
+      <h2>2. 線形探索（Linear Search）</h2>
+      <p>線形探索（リニアサーチ）は、<strong>配列の先頭から順に、1つずつ値を調べていく探索方法</strong>です。探索アルゴリズムの中で最も基本的であり、整列されていないデータにもそのまま使えます。</p>
+      <h3>擬似コード</h3>
+      <pre>function linear_search(a, n, x):
+    i = 0
+    while i < n:
+        if a[i] == x:
+            return i       // 見つかった！
+        i = i + 1
+    return -1              // 見つからなかった</pre>
+      <figure class="wide-diagram">
+        <figcaption>線形探索の動作追跡（値7を探す場合）</figcaption>
+        <pre>配列 A = [ 3, 8, 5, 7, 2 ], n = 5, x = 7
+
+回数  i   a[i]   判定    動作
+ 1   0    3     違う    次へ
+ 2   1    8     違う    次へ
+ 3   2    5     違う    次へ
+ 4   3    7     一致!   → 3 を返して終了
+
+値9を探す場合（見つからない）:
+回数  i   a[i]   判定    動作
+ 1   0    3     違う    次へ
+ 2   1    8     違う    次へ
+ 3   2    5     違う    次へ
+ 4   3    7     違う    次へ
+ 5   4    2     違う    次へ
+ 6   5    --     --     → -1 を返して終了</pre>
+      </figure>
+      <p><strong>計算量: O(n)</strong> — 要素数に比例して処理時間が増える。整列不要、実装が単純。見つかった時点で探索終了。</p>
+    </section>
+    <section id="binary" class="lesson-section">
+      <h2>3. 二分探索（Binary Search）</h2>
+      <p>二分探索（バイナリサーチ）は、<strong>整列された配列を対象に、探索範囲を半分ずつ狭めていく探索</strong>です。「真ん中を見る→範囲を半分に絞る」を繰り返します。</p>
+      <h3>前提条件（最重要）</h3>
+      <p><strong>配列が昇順または降順に整列されていること。</strong>未整列配列に二分探索を適用すると正しい結果が得られません。FE試験頻出。</p>
+      <h3>擬似コード</h3>
+      <pre>function binary_search(a, n, x):
+    left = 0
+    right = n - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if a[mid] == x:
+            return mid
+        if a[mid] < x:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1</pre>
+      <figure class="wide-diagram">
+        <figcaption>二分探索の動作追跡（値9を探す場合）</figcaption>
+        <pre>配列 A = [ 2, 4, 5, 7, 9, 12, 15 ], n = 7, x = 9
+
+回数 left right mid a[mid] 判定      動作
+ 1    0    6    3    7     7<9      右半分へ (left=4)
+ 2    4    6    5   12    12>9      左半分へ (right=4)
+ 3    4    4    4    9     一致！    → 4 を返す
+
+値8を探す場合（見つからない）:
+ 1    0    6    3    7     7<8      右半分へ
+ 2    4    6    5   12    12>8      左半分へ
+ 3    4    4    4    9     9>8      左半分へ (right=3)
+ 4    4    3    --   --    範囲消滅  → -1 を返す</pre>
+      </figure>
+      <p><strong>計算量: O(log n)</strong> — 要素数100万でも約20回の比較で済む。毎回範囲が約1/2になるため: n→n/2→n/4→...→1。</p>
+    </section>
+    <section id="compare" class="lesson-section">
+      <h2>4. 線形探索 vs 二分探索</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>項目</th><th>線形探索</th><th>二分探索</th></tr></thead><tbody>
+          <tr><td>配列の整列</td><td>不要（どんな並びでも可）</td><td>必須（昇順/降順）</td></tr>
+          <tr><td>調べ方</td><td>先頭から順に1つずつ</td><td>中央→範囲を半分に絞る</td></tr>
+          <tr><td>計算量</td><td>O(n)</td><td>O(log n)</td></tr>
+          <tr><td>要素増加時</td><td>比例して遅くなる</td><td>増えても増加が小さい</td></tr>
+          <tr><td>コード</td><td>簡単（数行）</td><td>やや複雑（範囲管理）</td></tr>
+          <tr><td>使いどころ</td><td>小規模・未整列</td><td>大規模・整列済み</td></tr>
+          <tr><td>100万件の比較</td><td>最大1,000,000回</td><td>約20回</td></tr>
+        </tbody></table></div>
+      <h3>どちらを使うべきか</h3>
+      <ul>
+        <li><strong>未整列→</strong>線形探索 / <strong>大規模整列済み→</strong>二分探索</li>
+        <li><strong>小規模→</strong>線形でも十分 / <strong>探索1回→</strong>線形、<strong>何度も→</strong>整列して二分</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card"><summary>Q1. 線形探索の計算量はどれか。</summary><p>ア）O(1)　イ）O(log n)　ウ）O(n)　エ）O(n²)</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ウ</strong> — 配列の先頭から順に1つずつ調べるため、最悪ケースで全要素走査し O(n)。</p></details></details>
+      <details class="quiz-card"><summary>Q2. 二分探索の必須前提条件はどれか。</summary><p>ア）データが連結リスト　イ）データが整列されている　ウ）ハッシュ表に格納　エ）スタック構造</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — 二分探索は整列が絶対条件。未整列データには使えない。</p></details></details>
+      <details class="quiz-card"><summary>Q3. 要素数1,000,000の整列済み配列で二分探索の最大比較回数は約何回か。</summary><p>ア）約10回　イ）約20回　ウ）約1,000回　エ）約1,000,000回</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — log₂(1,000,000) ≒ 20。毎回範囲が半分になるため。</p></details></details>
+      <details class="quiz-card"><summary>Q4. 配列 [2,4,5,7,9,12,15] で値12を二分探索するとき最初の中央値はどれか。</summary><p>ア）2　イ）5　ウ）7　エ）12</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ウ</strong> — mid=(0+6)//2=3, a[3]=7。7<12 なので右半分へ。</p></details></details>
+      <details class="quiz-card"><summary>Q5. 線形探索で値が見つからなかった場合の一般的な戻り値はどれか。</summary><p>ア）0　イ）null　ウ）-1　エ）末尾のインデックス</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ウ</strong> — 配列インデックスは0以上なので -1 で「見つからなかった」を表す。</p></details></details>
+      <details class="quiz-card"><summary>Q6. 二分探索の計算量が O(log n) になる理由はどれか。</summary><p>ア）全要素を1回ずつ調べるから　イ）毎回探索範囲が約半分になるから　ウ）ハッシュ関数で計算するから　エ）並列処理するから</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>イ</strong> — mid比較後、左半分/右半分に絞るため範囲が毎回約1/2になる。</p></details></details>
+      <details class="quiz-card"><summary>Q7. 未整列の配列 [8,3,1,6,4] から値6を探す場合、適切な方法はどれか。</summary><p>ア）二分探索　イ）ハッシュ探索　ウ）線形探索　エ）幅優先探索</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ウ</strong> — 未整列のため二分探索不可。線形探索は整列不要でそのまま使える。</p></details></details>
+      <details class="quiz-card"><summary>Q8. 二分探索で left > right となった場合の意味はどれか。</summary><p>ア）探索続行　イ）値が見つかった　ウ）値が存在しない　エ）先頭に戻る</p><details class="answer-toggle"><summary>答えを見る ▼</summary><p>答え: <strong>ウ</strong> — 探索範囲消滅 = 値が存在しない。return -1 を返す。</p></details></details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『2_アルゴリズムとデータ構造.pdf』 第5章 探索アルゴリズム（p122-p141）</p>
+    </section>
+  </main>
+</body>
+</html>
