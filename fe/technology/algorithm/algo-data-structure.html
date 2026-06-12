@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>データ構造（配列・リスト・スタック・キュー・ハッシュ）| 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Algorithm</p>
+        <h1>データ構造（配列・リスト・スタック・キュー・ハッシュ）</h1>
+        <p class="lead">FE試験必須のデータ構造5種。配列と連結リストの違い、スタック(LIFO)・キュー(FIFO)、ハッシュ表の衝突解決まで体系的に整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#array">配列</a>
+        <a href="#list">リスト</a>
+        <a href="#stack">スタック</a>
+        <a href="#queue">キュー</a>
+        <a href="#hash">ハッシュ</a>
+        <a href="#compare">比較</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">アルゴリズム</a>
+      <span>データ構造</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>配列の特徴：添字によるランダムアクセスO(1)、挿入・削除はO(n)</li>
+          <li>連結リストの特徴：ポインタの付け替えで挿入・削除O(1)、アクセスはO(n)</li>
+          <li>スタック：LIFO（後入れ先出し）。push/pop。逆ポーランド記法の計算</li>
+          <li>キュー：FIFO（先入れ先出し）。enqueue/dequeue。BFSで使用</li>
+          <li>ハッシュ表：ハッシュ関数でO(1)探索。衝突時はチェイン法で解決</li>
+          <li><strong>最重要：配列 vs 連結リストの操作速度の違い（FE頻出）</strong></li>
+          <li><strong>最重要：スタック（LIFO）とキュー（FIFO）の区別（FE頻出）</strong></li>
+          <li>データ構造の選び方：用途に応じた使い分けの判断基準</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>配列 vs 連結リストの操作速度比較、スタック(LIFO)とキュー(FIFO)の区別</dd></div>
+          <div><dt>高</dt><dd>ハッシュ表の衝突（シノニム）とチェイン法、逆ポーランド記法の計算</dd></div>
+          <div><dt>中</dt><dd>各データ構造の用途・使い分け、リングバッファ</dd></div>
+          <div><dt>中</dt><dd>双方向リストの用途、オープンアドレス法</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>配列（Array）</td><td>同じ型のデータを連続メモリに格納</td><td>添字でO(1)アクセス。挿入/削除はO(n)</td></tr>
+            <tr><td>ランダムアクセス</td><td>どの位置の要素も一定時間でアクセス可能</td><td>O(1)。配列の最大の利点</td></tr>
+            <tr><td>連結リスト</td><td>各ノードがデータと次へのポインタを持つ</td><td>挿入/削除O(1)。アクセスO(n)</td></tr>
+            <tr><td>ノード</td><td>連結リストの各要素（data + next）</td><td>双方向リストは prev も持つ</td></tr>
+            <tr><td>単方向リスト</td><td>次のノードへのポインタのみ</td><td>前方向のみ走査可能</td></tr>
+            <tr><td>双方向リスト</td><td>前後両方へのポインタを持つ</td><td>双方向走査可能。FE午前で出る</td></tr>
+            <tr><td>スタック</td><td>LIFO（後入れ先出し）のデータ構造</td><td>push（追加）/ pop（取出）</td></tr>
+            <tr><td>LIFO</td><td>Last-In First-Out。最後に入れたものが最初に出る</td><td>スタックの基本性質</td></tr>
+            <tr><td>逆ポーランド記法</td><td>演算子を後置する数式表記</td><td>スタックで計算。例: 3 4 + 5 × = 35</td></tr>
+            <tr><td>キュー</td><td>FIFO（先入れ先出し）のデータ構造</td><td>enqueue（追加）/ dequeue（取出）</td></tr>
+            <tr><td>FIFO</td><td>First-In First-Out。先に入れたものが先に出る</td><td>キューの基本性質</td></tr>
+            <tr><td>リングバッファ</td><td>配列を環状に使うキュー実装</td><td>メモリ効率が良い</td></tr>
+            <tr><td>ハッシュ表</td><td>キーと値のペアを格納。探索が平均O(1)</td><td>ハッシュ関数でindex計算</td></tr>
+            <tr><td>ハッシュ関数</td><td>キー→添字に変換する関数</td><td>異なるキーで同じ値＝衝突</td></tr>
+            <tr><td>衝突（コリジョン）</td><td>異なるキーが同じハッシュ値になること</td><td>シノニムとも呼ぶ</td></tr>
+            <tr><td>チェイン法</td><td>バケットに連結リストで衝突解決</td><td>最も一般的な衝突解決法</td></tr>
+            <tr><td>オープンアドレス法</td><td>衝突時に別の空きバケットを探す</td><td>線形探査など</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="array" class="lesson-section">
+      <h2>1. 配列（Array）</h2>
+      <p>配列は、<strong>同じ型のデータを連続したメモリ領域に格納する</strong>データ構造です。要素は添字（index）で識別し、arr[0], arr[1], arr[2]... のようにアクセスします。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>配列のメモリ配置（連続領域）</figcaption>
+        <pre>メモリ番地:  100   101   102   103   104
+            ┌────┬────┬────┬────┬────┐
+    配列A:  │ 10 │ 20 │ 30 │ 40 │ 50 │
+            └────┴────┴────┴────┴────┘
+    添字:      A[0] A[1] A[2] A[3] A[4]
+
+    ・A[2] → 即座に 30 を取得（O(1)）
+    ・先頭アドレス + 添字×要素サイズ で計算</pre>
+      </figure>
+
+      <h3>配列の長所と短所</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>操作</th><th>計算量</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td>✅ 長所</td><td>添字アクセス</td><td>O(1)</td><td>先頭アドレス+添字で即計算</td></tr>
+            <tr><td>✅ 長所</td><td>末尾への追加</td><td>O(1)</td><td>次の空き領域に書くだけ</td></tr>
+            <tr><td>❌ 短所</td><td>途中への挿入</td><td>O(n)</td><td>後続要素を1つずつ後ろにずらす</td></tr>
+            <tr><td>❌ 短所</td><td>途中の削除</td><td>O(n)</td><td>後続要素を1つずつ前に詰める</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>配列の途中への挿入（A[1]に25を挿入）</figcaption>
+        <pre>【挿入前】   [10] [20] [30] [40] [50] [  ]
+            添字:   0    1    2    3    4    5
+
+    Step1: A[4]→A[5], A[3]→A[4], A[2]→A[3], A[1]→A[2]
+    【移動後】 [10] [20] [  ] [30] [40] [50]
+    Step2: A[1] = 25
+    【挿入後】 [10] [25] [20] [30] [40] [50]
+              ↑ここに挿入（後ろの要素をずらす＝O(n)）</pre>
+      </figure>
+    </section>
+
+    <section id="list" class="lesson-section">
+      <h2>2. 連結リスト（Linked List）</h2>
+      <p>連結リストは、<strong>各ノードがデータと次のノードへのポインタを持つ</strong>データ構造です。メモリ上に分散して配置され、ポインタでつながっています。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>連結リストのノード構造</figcaption>
+        <pre>    head
+     ↓
+    ┌────┬────┐    ┌────┬────┐    ┌────┬────┐
+    │ 10 │ ●─┼───→│ 20 │ ●─┼───→│ 30 │ / │
+    └────┴────┘    └────┴────┘    └────┴────┘
+     data  next     data  next     data  next=null
+     [ノード1]      [ノード2]      [ノード3]（末尾）</pre>
+      </figure>
+
+      <h3>連結リストの長所と短所</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>操作</th><th>計算量</th><th>理由</th></tr></thead>
+          <tbody>
+            <tr><td>✅ 長所</td><td>途中への挿入</td><td>O(1)</td><td>ポインタの付け替えだけで済む</td></tr>
+            <tr><td>✅ 長所</td><td>途中の削除</td><td>O(1)</td><td>ポインタの付け替えだけで済む</td></tr>
+            <tr><td>❌ 短所</td><td>要素アクセス</td><td>O(n)</td><td>先頭から1つずつ辿る必要がある</td></tr>
+            <tr><td>❌ 短所</td><td>メモリ使用量</td><td>ポインタ分増加</td><td>各ノードにnext（+prev）が必要</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>連結リストへの挿入（20と30の間に25を挿入）</figcaption>
+        <pre>【挿入前】 [10]→[20]→[30]→[40]
+    【挿入】 新ノード[25]を作成
+            [25].next = [20].next（= [30]）
+            [20].next = [25]
+    【挿入後】 [10]→[20]→[25]→[30]→[40]
+              ↑ポインタ付け替えだけ＝O(1)</pre>
+      </figure>
+
+      <h3>配列 vs 連結リスト 比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>配列</th><th>連結リスト</th></tr></thead>
+          <tbody>
+            <tr><td>メモリ配置</td><td>連続</td><td>分散（ポインタで連結）</td></tr>
+            <tr><td>要素アクセス</td><td>O(1)</td><td>O(n)</td></tr>
+            <tr><td>挿入・削除</td><td>O(n)</td><td>O(1)</td></tr>
+            <tr><td>メモリ効率</td><td>良い</td><td>ポインタ分のオーバーヘッド</td></tr>
+            <tr><td>検索</td><td>O(n)</td><td>O(n)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="stack" class="lesson-section">
+      <h2>3. スタック（Stack）</h2>
+      <p>スタックは<strong>LIFO（Last-In First-Out：後入れ先出し）</strong>のデータ構造です。最後に積んだものが最初に取り出されます。本を積み重ねるイメージです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>スタックのpush/pop動作</figcaption>
+        <pre>【push(10)】  【push(20)】  【push(30)】  【pop()→30】
+    ┌───┐        ┌───┐        ┌───┐        ┌───┐
+    │   │        │   │        │30 │←top   │   │
+    │   │        │20 │←top   │20 │        │20 │←top
+    │10 │←top   │10 │        │10 │        │10 │
+    └───┘        └───┘        └───┘        └───┘
+    操作: push（頂上に追加）/ pop（頂上から取出）
+    性質: LIFO — 30が最後に入って最初に出た</pre>
+      </figure>
+
+      <h3>逆ポーランド記法とスタック</h3>
+      <p>逆ポーランド記法（後置記法）は演算子を後ろに書く数式表記で、<strong>スタックを使うと簡単に計算</strong>できます。FE午前で頻出です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>逆ポーランド記法 `3 4 + 5 ×` の計算</figcaption>
+        <pre>入力: 3 4 + 5 ×    （通常の式: (3+4)×5 = 35）
+
+    Step1: 3 → push(3)              stack: [3]
+    Step2: 4 → push(4)              stack: [3,4]
+    Step3: + → pop()→4, pop()→3
+              3+4=7, push(7)        stack: [7]
+    Step4: 5 → push(5)              stack: [7,5]
+    Step5: × → pop()→5, pop()→7
+              7×5=35, push(35)      stack: [35]
+    結果: 35
+
+    ルール: 数値はpush、演算子は2つpopして計算→結果をpush</pre>
+      </figure>
+    </section>
+
+    <section id="queue" class="lesson-section">
+      <h2>4. キュー（Queue）</h2>
+      <p>キューは<strong>FIFO（First-In First-Out：先入れ先出し）</strong>のデータ構造です。先に並んだものから順に処理されます。レジの待ち行列のイメージです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>キューのenqueue/dequeue動作</figcaption>
+        <pre>【enq(10)】  【enq(20)】  【enq(30)】  【deq()→10】
+    出口←入口   出口←入口     出口←入口     出口←入口
+    ┌──┬──┬──┐  ┌──┬──┬──┐  ┌──┬──┬──┐  ┌──┬──┬──┐
+    │10│  │  │  │10│20│  │  │10│20│30│  │  │20│30│
+    └──┴──┴──┘  └──┴──┴──┘  └──┴──┴──┘  └──┴──┴──┘
+    操作: enqueue（末尾に追加）/ dequeue（先頭から取出）
+    性質: FIFO — 10が最初に入って最初に出た</pre>
+      </figure>
+
+      <h3>スタック vs キュー 比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>スタック</th><th>キュー</th></tr></thead>
+          <tbody>
+            <tr><td>データの出し入れ</td><td>LIFO（後入れ先出し）</td><td>FIFO（先入れ先出し）</td></tr>
+            <tr><td>追加操作</td><td>push</td><td>enqueue</td></tr>
+            <tr><td>取出操作</td><td>pop</td><td>dequeue</td></tr>
+            <tr><td>イメージ</td><td>積み重ねた本</td><td>レジの待ち行列</td></tr>
+            <tr><td>主な用途</td><td>再帰・Undo・括弧の対応</td><td>プリンタ待ち・BFS・メッセージ処理</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="hash" class="lesson-section">
+      <h2>5. ハッシュ表（Hash Table）</h2>
+      <p>ハッシュ表は、<strong>キーからハッシュ関数で添字を計算し、値にO(1)でアクセス</strong>できるデータ構造です。連想配列や辞書の内部実装として広く使われています。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>ハッシュ表の基本構造</figcaption>
+        <pre>          ハッシュ関数
+    key ──→ h(key) ──→ index ──→ value
+
+    例:  key="Alice" → h("Alice")=2 → table[2]="Aliceのデータ"
+
+    バケット（配列の各要素）:
+    添字:   [0]    [1]    [2]    [3]    [4]
+          ┌────┬────┬────┬────┬────┐
+          │    │    │Alice│    │    │
+          └────┴────┴────┴────┴────┘</pre>
+      </figure>
+
+      <h3>衝突（コリジョン）とチェイン法</h3>
+      <p>異なるキーが同じハッシュ値になることを<strong>衝突（コリジョン）</strong>といいます。最も一般的な解決法が<strong>チェイン法</strong>で、各バケットに連結リストを持たせて衝突したデータを鎖状につなぎます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>チェイン法による衝突解決</figcaption>
+        <pre>h("Alice") = 2, h("Bob") = 2  → 衝突！
+
+    バケット[2]:
+    ┌────┬────┐    ┌────┬────┐
+    │Alice│ ●─┼───→│Bob  │ / │    ← 連結リストでチェイン
+    └────┴────┘    └────┴────┘
+
+    ・探索時: h(key)でバケット特定 → チェインを線形探索
+    ・衝突が少なければ平均O(1)、衝突が多いとO(n)に近づく</pre>
+      </figure>
+
+      <h3>チェイン法 vs オープンアドレス法</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>チェイン法</th><th>オープンアドレス法</th></tr></thead>
+          <tbody>
+            <tr><td>方式</td><td>バケットに連結リスト</td><td>別の空きバケットを探す</td></tr>
+            <tr><td>メモリ</td><td>ポインタ分余分</td><td>テーブルサイズ固定</td></tr>
+            <tr><td>削除</td><td>容易（リストから外す）</td><td>やや複雑（削除マーク必要）</td></tr>
+            <tr><td>負荷率への耐性</td><td>高い</td><td>負荷率が高いと性能劣化</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="compare" class="lesson-section">
+      <h2>6. データ構造の比較と使い分け</h2>
+      <p>FE試験では「どの場面でどのデータ構造を選ぶべきか」が問われます。各データ構造の特性を理解し、用途に応じて適切に選べることが重要です。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>データ構造</th><th>アクセス</th><th>挿入</th><th>削除</th><th>検索</th><th>主な用途</th></tr></thead>
+          <tbody>
+            <tr><td>配列</td><td>O(1)</td><td>O(n)</td><td>O(n)</td><td>O(n)</td><td>ランダムアクセスが必要な場面</td></tr>
+            <tr><td>連結リスト</td><td>O(n)</td><td>O(1)</td><td>O(1)</td><td>O(n)</td><td>挿入・削除が多い場面</td></tr>
+            <tr><td>スタック</td><td>O(1)※</td><td>O(1)</td><td>O(1)</td><td>-</td><td>再帰・Undo・括弧の対応</td></tr>
+            <tr><td>キュー</td><td>O(1)※</td><td>O(1)</td><td>O(1)</td><td>-</td><td>順番待ち・BFS</td></tr>
+            <tr><td>ハッシュ表</td><td>O(1)※</td><td>O(1)※</td><td>O(1)※</td><td>O(1)※</td><td>キーによる高速検索</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>※平均の場合。スタック/キューは先頭/末尾操作のみ。ハッシュ表は衝突状況に依存（最悪O(n)）。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 配列の添字アクセスの時間計算量はどれか。</summary>
+        <p>ア）O(1)　イ）O(log n)　ウ）O(n)　エ）O(n²)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 配列は「先頭アドレス + 添字 × 要素サイズ」で即計算できるためO(1)。ランダムアクセスが配列の最大の利点。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 配列の途中に要素を挿入するときの時間計算量はどれか。</summary>
+        <p>ア）O(1)　イ）O(log n)　ウ）O(n)　エ）O(n log n)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 途中に挿入すると後続の全要素を1つずつ後ろにずらす必要があるためO(n)。末尾への追加はO(1)。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 連結リストの途中への要素の挿入がO(1)でできる理由はどれか。</summary>
+        <p>ア）メモリが連続しているから　イ）ポインタの付け替えだけで済むから　ウ）添字で直接アクセスできるから　エ）二分探索が使えるから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 連結リストはポインタの付け替えだけで挿入/削除できる（挿入位置が分かっていればO(1)）。配列のように要素をずらす必要がない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 連結リストでn番目の要素にアクセスする時間計算量はどれか。</summary>
+        <p>ア）O(1)　イ）O(log n)　ウ）O(n)　エ）O(n log n)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 連結リストは先頭から順にポインタを辿る必要があるためO(n)。ランダムアクセスはできない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. スタックのデータ構造の特徴として正しいものはどれか。</summary>
+        <p>ア）FIFO（先入れ先出し）　イ）LIFO（後入れ先出し）　ウ）ランダムアクセスが可能　エ）キーと値のペアを格納する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スタックはLIFO（後入れ先出し）。pushで積み、popで最後に積んだものから取り出す。FIFOはキューの特徴。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 逆ポーランド記法「5 3 + 2 ×」の計算結果はどれか。</summary>
+        <p>ア）10　イ）13　ウ）16　エ）21</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 5 push → 3 push → + でpop2回(3,5)→5+3=8 push → 2 push → × でpop2回(2,8)→8×2=16。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. キューにデータを追加する操作の名称はどれか。</summary>
+        <p>ア）push　イ）pop　ウ）enqueue　エ）dequeue</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — キューへの追加はenqueue、取出しはdequeue。push/popはスタックの操作。混同注意。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. キューを使うアルゴリズムとして最も適切なものはどれか。</summary>
+        <p>ア）DFS（深さ優先探索）　イ）BFS（幅優先探索）　ウ）二分探索　エ）バブルソート</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — BFS（幅優先探索）は「先に見つけたノードから順に処理」するためキューを使う。DFSは再帰またはスタックを使う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ハッシュ表の探索が平均O(1)でできる理由はどれか。</summary>
+        <p>ア）二分探索を使うから　イ）全ての要素を順に調べるから　ウ）キーからハッシュ関数で直接indexを計算できるから　エ）データが整列されているから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ハッシュ表はキー→ハッシュ関数→indexの変換で直接格納場所を特定できるため平均O(1)。ただし衝突時はO(n)に近づく。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. ハッシュ表で異なるキーが同じハッシュ値になることを何というか。</summary>
+        <p>ア）オーバーフロー　イ）衝突（コリジョン）　ウ）デッドロック　エ）フラグメンテーション</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 異なるキーが同じハッシュ値になることを衝突（コリジョン）またはシノニムという。チェイン法などで解決する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q11. ハッシュ表の衝突解決法で、各バケットに連結リストを使う方式はどれか。</summary>
+        <p>ア）オープンアドレス法　イ）線形探査法　ウ）チェイン法　エ）二分法</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — チェイン法は各バケットに連結リストを持ち、衝突したデータを鎖状につなぐ。最も一般的な衝突解決法。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q12. 関数呼び出しの管理に使われるデータ構造はどれか。</summary>
+        <p>ア）配列　イ）キュー　ウ）スタック　エ）ハッシュ表</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 関数呼び出しはコールスタックで管理される（LIFO）。呼び出し元に戻るとき、最後に呼んだ関数から順に戻るためスタックが適する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q13. 「先に入れたものを先に取り出す」データ構造はどれか。</summary>
+        <p>ア）スタック　イ）キュー　ウ）配列　エ）連結リスト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — キューはFIFO（First-In First-Out）。先に並んだものから順に処理される。プリンタの印刷待ちなどが典型例。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q14. データの途中への挿入・削除が最も効率的なデータ構造はどれか。</summary>
+        <p>ア）配列　イ）連結リスト　ウ）スタック　エ）キュー</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 連結リストはポインタの付け替えだけで挿入/削除がO(1)でできる。配列は要素をずらす必要があるためO(n)。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q15. 添字によるランダムアクセスが最も効率的なデータ構造はどれか。</summary>
+        <p>ア）配列　イ）連結リスト　ウ）キュー　エ）スタック</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 配列は連続メモリ配置により「先頭アドレス+添字×要素サイズ」でO(1)アクセス。連結リストは先頭から辿るためO(n)。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q16. 逆ポーランド記法「2 5 × 3 +」の計算結果はどれか。</summary>
+        <p>ア）10　イ）11　ウ）13　エ）16</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 2 push → 5 push → × で 2×5=10 push → 3 push → + で 10+3=13。通常式は (2×5)+3 = 13。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『2_アルゴリズムとデータ構造.pdf』 第2章 データ構造（p58-p77）</p>
+    </section>
+  </main>
+</body>
+</html>
