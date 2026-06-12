@@ -26,7 +26,7 @@ const fallbackCurriculum = {
       title: "アルゴリズム",
       category: "technology",
       status: "in-progress",
-      description: "データ構造、探索、整列、計算量、擬似言語問題の対策。6ページ作成済み。",
+      description: "データ構造、探索、整列、計算量、擬似言語問題の対策。7ページ作成済み。",
       href: "fe/technology/algorithm/index.html",
       items: [
         { title: "木構造と探索（二分木・BST・DFS/BFS）", href: "fe/technology/algorithm/algo-tree-search.html", status: "done" },
@@ -34,7 +34,8 @@ const fallbackCurriculum = {
         { title: "整列（ソート）アルゴリズム", href: "fe/technology/algorithm/algo-sort.html", status: "done" },
         { title: "フローチャート・再帰・計算量", href: "fe/technology/algorithm/algo-recursion.html", status: "done" },
         { title: "データ構造（配列・リスト・スタック・キュー・ハッシュ）", href: "fe/technology/algorithm/algo-data-structure.html", status: "done" },
-        { title: "グラフ構造（DFS・BFS・ダイクストラ・最小全域木）", href: "fe/technology/algorithm/algo-graph.html", status: "done" }
+        { title: "グラフ構造（DFS・BFS・ダイクストラ・最小全域木）", href: "fe/technology/algorithm/algo-graph.html", status: "done" },
+        { title: "アルゴリズム基本（擬似言語・Big-O・評価基準）", href: "fe/technology/algorithm/algo-basic.html", status: "done" }
       ]
     },
     {
@@ -120,6 +121,24 @@ const fallbackCurriculum = {
       items: []
     },
     {
+      id: "computer",
+      title: "コンピュータ概論",
+      category: "technology",
+      status: "planned",
+      description: "コンピュータ構成、OS、ソフトウェア、ハードウェア基礎を扱う分野。",
+      href: "fe/technology/computer/index.html",
+      items: []
+    },
+    {
+      id: "iot-security",
+      title: "IoTセキュリティ",
+      category: "technology",
+      status: "planned",
+      description: "AI・IoTの脅威、組込み機器の脆弱性、対策、関連制度を扱う分野。",
+      href: "fe/technology/iot-security/index.html",
+      items: []
+    },
+    {
       id: "management",
       title: "マネジメント",
       category: "management",
@@ -156,7 +175,11 @@ const fallbackCurriculum = {
       status: "planned",
       description: "経営戦略、法務、標準化、デジタル社会の制度を扱う分野。",
       href: "fe/strategy/index.html",
-      items: []
+      items: [
+        { title: "経営・戦略", href: "fe/strategy/business-strategy/index.html", status: "planned" },
+        { title: "関連法令・契約", href: "fe/strategy/legal/index.html", status: "planned" },
+        { title: "デジタル社会の形成", href: "fe/strategy/digital-society/index.html", status: "planned" }
+      ]
     }
   ],
   sources: [
