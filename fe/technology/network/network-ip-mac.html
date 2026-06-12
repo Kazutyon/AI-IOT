@@ -337,52 +337,82 @@
 
       <details class="quiz-card">
         <summary>Q1. IPv4アドレスのビット数として正しいものはどれか。<br>A) 16ビット　B) 32ビット　C) 48ビット　D) 128ビット</summary>
-        <p>答え: <strong>B（32ビット）</strong>。IPv4は32ビット（4オクテット）。48ビットはMACアドレス、128ビットはIPv6、16ビットはポート番号のビット数。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B（32ビット）</strong>。IPv4は32ビット（4オクテット）。48ビットはMACアドレス、128ビットはIPv6、16ビットはポート番号のビット数。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q2. IPアドレスからMACアドレスを求めるプロトコルはどれか。<br>A) DNS　B) DHCP　C) ARP　D) NAT</summary>
-        <p>答え: <strong>C（ARP）</strong>。ARP（Address Resolution Protocol）はIPアドレス→MACアドレスの解決を行う。AのDNSはドメイン名→IPアドレス、BのDHCPはIPアドレス自動割り当て、DのNATはアドレス変換。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C（ARP）</strong>。ARP（Address Resolution Protocol）はIPアドレス→MACアドレスの解決を行う。AのDNSはドメイン名→IPアドレス、BのDHCPはIPアドレス自動割り当て、DのNATはアドレス変換。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q3. HTTP（Web通信）で使用されるウェルノウンポート番号はどれか。<br>A) 25　B) 53　C) 80　D) 443</summary>
-        <p>答え: <strong>C（80）</strong>。HTTPは80番。25はSMTP（メール送信）、53はDNS、443はHTTPS（暗号化Web通信）。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C（80）</strong>。HTTPは80番。25はSMTP（メール送信）、53はDNS、443はHTTPS（暗号化Web通信）。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q4. MACアドレスの説明として適切なものはどれか。<br>A) OSI第3層で使用される48ビットのアドレス　B) 上位24ビットはIEEEが管理するOUIである　C) ネットワーク接続のたびに動的に割り当てられる　D) IPv4アドレスをMACアドレスに変換するプロトコル</summary>
-        <p>答え: <strong>B</strong>。MACアドレスはOSI第2層（データリンク層）で使用。上位24ビット＝OUI（IEEE管理）、下位24ビット＝ノード番号。通常ROMに書き込まれ変更不可。DはARPの説明。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。MACアドレスはOSI第2層（データリンク層）で使用。上位24ビット＝OUI（IEEE管理）、下位24ビット＝ノード番号。通常ROMに書き込まれ変更不可。DはARPの説明。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q5. ARP要求の宛先MACアドレスとして使われるアドレスはどれか。<br>A) 00:00:00:00:00:00　B) FF:FF:FF:FF:FF:FF　C) 01:00:5E:00:00:01　D) 192.168.0.1</summary>
-        <p>答え: <strong>B</strong>。FF:FF:FF:FF:FF:FFはブロードキャストアドレス。ARP要求はネットワーク全体に問い合わせるためにブロードキャストを使う。Cはマルチキャストアドレスの例。DはIPアドレス。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。FF:FF:FF:FF:FF:FFはブロードキャストアドレス。ARP要求はネットワーク全体に問い合わせるためにブロードキャストを使う。Cはマルチキャストアドレスの例。DはIPアドレス。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q6. IPv6のアドレス長として正しいものはどれか。<br>A) 32ビット　B) 48ビット　C) 64ビット　D) 128ビット</summary>
-        <p>答え: <strong>D（128ビット）</strong>。IPv6は128ビット（16オクテット）。約3.4×10³⁸個のアドレスを表現可能。32ビットはIPv4、48ビットはMACアドレス。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>D（128ビット）</strong>。IPv6は128ビット（16オクテット）。約3.4×10³⁸個のアドレスを表現可能。32ビットはIPv4、48ビットはMACアドレス。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q7. プライベートIPアドレスの説明として正しいものはどれか。<br>A) 世界中で一意でインターネットから直接通信できる　B) LAN内で使用し異なるLAN間では重複しても問題ない　C) 機器のROMに書き込まれており変更できない　D) 128ビットで表現される次世代アドレス</summary>
-        <p>答え: <strong>B</strong>。プライベートIPアドレスはLAN内で使用。異なるLAN間では重複可。インターネット接続時はNAT/NAPTでグローバルIPに変換。AはグローバルIP、CはMACアドレス、DはIPv6の説明。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。プライベートIPアドレスはLAN内で使用。異なるLAN間では重複可。インターネット接続時はNAT/NAPTでグローバルIPに変換。AはグローバルIP、CはMACアドレス、DはIPv6の説明。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q8. 次のポート番号のうち、DNSで使用されるものはどれか。<br>A) 25　B) 53　C) 80　D) 110</summary>
-        <p>答え: <strong>B（53）</strong>。DNSは53番（UDP）。25はSMTP、80はHTTP、110はPOP3。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B（53）</strong>。DNSは53番（UDP）。25はSMTP、80はHTTP、110はPOP3。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q9. ARPテーブルの役割として最も適切なものはどれか。<br>A) ドメイン名とIPアドレスの対応を保存する　B) 取得したMACアドレスを一時保存し次回のARP問い合わせを省略する　C) プライベートIPとグローバルIPの変換情報を保持する　D) ファイアウォールのフィルタリングルールを管理する</summary>
-        <p>答え: <strong>B</strong>。ARPテーブルはARPで取得したIPアドレスとMACアドレスの対応をキャッシュし、次回以降のブロードキャスト問い合わせを省略する。AはDNSキャッシュ、CはNATテーブルの役割。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。ARPテーブルはARPで取得したIPアドレスとMACアドレスの対応をキャッシュし、次回以降のブロードキャスト問い合わせを省略する。AはDNSキャッシュ、CはNATテーブルの役割。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q10. NAT/NAPTの説明として最も適切なものはどれか。<br>A) ドメイン名をIPアドレスに変換する　B) IPアドレスからMACアドレスを求める　C) プライベートIPアドレスをグローバルIPアドレスに変換する　D) IPアドレスを自動的に割り当てる</summary>
-        <p>答え: <strong>C</strong>。NAT/NAPTはプライベートIPアドレスをグローバルIPアドレスに変換し、LAN内の機器がインターネットに接続できるようにする技術。AはDNS、BはARP、DはDHCPの役割。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C</strong>。NAT/NAPTはプライベートIPアドレスをグローバルIPアドレスに変換し、LAN内の機器がインターネットに接続できるようにする技術。AはDNS、BはARP、DはDHCPの役割。</p>
+          </details>
       </details>
     </section>
 

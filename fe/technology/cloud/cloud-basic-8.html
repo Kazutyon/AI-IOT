@@ -43,11 +43,26 @@
     <section class="lesson-section"><h2>間違えやすいポイント</h2><ul class="mistake-list"><li><strong>データの暗号化とアクセス制御は常に利用者責任</strong>（サービスモデルに関わらず）。</li><li>認証と認可は別。認証=本人確認、認可=<strong>権限の付与</strong>。</li><li>WAFはネットワーク層ではなく<strong>アプリケーション層</strong>の防御。</li></ul></section>
 
     <section id="quiz" class="lesson-section"><h2>確認問題</h2>
-      <details class="quiz-card"><summary>Q1. 責任共有モデルにおいて常に利用者の責任となるものはどれか。</summary><p>ア）物理的セキュリティ<br>イ）ハイパーバイザーの管理<br>ウ）データの暗号化とアクセス制御<br>エ）ネットワーク基盤の運用</p><p>答え: <strong>ウ</strong> — データの暗号化・アクセス制御・アカウント管理は常に利用者責任。</p></details>
-      <details class="quiz-card"><summary>Q2. IAMの機能として適切なものはどれか。</summary><p>ア）データのバックアップ<br>イ）ユーザー認証とアクセス権限制御<br>ウ）ネットワークの帯域制御<br>エ）サーバーの負荷分散</p><p>答え: <strong>イ</strong> — IAMはID管理とアクセス制御の仕組みです。</p></details>
-      <details class="quiz-card"><summary>Q3. 転送中のデータ暗号化に使われるプロトコルはどれか。</summary><p>ア）AES-256<br>イ）TLS/SSL<br>ウ）SHA-256<br>エ）RSA</p><p>答え: <strong>イ</strong> — TLS/SSLが通信経路の暗号化に使われます。AESは保存データの暗号化。</p></details>
-      <details class="quiz-card"><summary>Q4. WAFの主な防御対象はどれか。</summary><p>ア）DDoS攻撃<br>イ）OSの脆弱性攻撃<br>ウ）SQLインジェクション、XSSなどのWeb攻撃<br>エ）物理的なサーバー侵入</p><p>答え: <strong>ウ</strong> — WAFはアプリケーション層でWeb攻撃を防御します。</p></details>
-      <details class="quiz-card"><summary>Q5. 最小権限の原則として正しいものはどれか。</summary><p>ア）すべてのユーザーに管理者権限を付与する<br>イ）必要最小限の権限だけを付与する<br>ウ）権限をできるだけ細かく分割しない<br>エ）認証を不要にする</p><p>答え: <strong>イ</strong> — 最小権限の原則はセキュリティの基本です。</p></details>
+      <details class="quiz-card"><summary>Q1. 責任共有モデルにおいて常に利用者の責任となるものはどれか。</summary><p>ア）物理的セキュリティ<br>イ）ハイパーバイザーの管理<br>ウ）データの暗号化とアクセス制御<br>エ）ネットワーク基盤の運用</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>ウ</strong> — データの暗号化・アクセス制御・アカウント管理は常に利用者責任。</p>
+          </details></details>
+      <details class="quiz-card"><summary>Q2. IAMの機能として適切なものはどれか。</summary><p>ア）データのバックアップ<br>イ）ユーザー認証とアクセス権限制御<br>ウ）ネットワークの帯域制御<br>エ）サーバーの負荷分散</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>イ</strong> — IAMはID管理とアクセス制御の仕組みです。</p>
+          </details></details>
+      <details class="quiz-card"><summary>Q3. 転送中のデータ暗号化に使われるプロトコルはどれか。</summary><p>ア）AES-256<br>イ）TLS/SSL<br>ウ）SHA-256<br>エ）RSA</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>イ</strong> — TLS/SSLが通信経路の暗号化に使われます。AESは保存データの暗号化。</p>
+          </details></details>
+      <details class="quiz-card"><summary>Q4. WAFの主な防御対象はどれか。</summary><p>ア）DDoS攻撃<br>イ）OSの脆弱性攻撃<br>ウ）SQLインジェクション、XSSなどのWeb攻撃<br>エ）物理的なサーバー侵入</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>ウ</strong> — WAFはアプリケーション層でWeb攻撃を防御します。</p>
+          </details></details>
+      <details class="quiz-card"><summary>Q5. 最小権限の原則として正しいものはどれか。</summary><p>ア）すべてのユーザーに管理者権限を付与する<br>イ）必要最小限の権限だけを付与する<br>ウ）権限をできるだけ細かく分割しない<br>エ）認証を不要にする</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>イ</strong> — 最小権限の原則はセキュリティの基本です。</p>
+          </details></details>
     </section>
     <section class="source-note"><h2>出典PDF・対応ページ</h2><p>2_クラウド基礎.pdf セグメント8（セキュリティ）</p></section>
   </main>

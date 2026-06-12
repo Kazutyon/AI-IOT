@@ -515,6 +515,21 @@ th {
   margin: 10px 0 0;
 }
 
+.quiz-card .answer-toggle {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: 1px solid #b0c4de;
+  border-radius: 6px;
+  background: #eef4ff;
+}
+
+.quiz-card .answer-toggle summary {
+  cursor: pointer;
+  color: #1a56db;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
 @media (max-width: 760px) {
   body {
     font-size: 15px;

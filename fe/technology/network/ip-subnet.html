@@ -222,42 +222,66 @@
       <details class="quiz-card">
         <summary>Q1. サブネットマスク 255.255.255.0 のCIDR表記として正しいものはどれか。</summary>
         <p>ア）/8<br>イ）/16<br>ウ）/24<br>エ）/32</p>
-        <p>答え: <strong>ウ</strong> — 255.255.255.0 は上位24ビットが1なので/24。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>ウ</strong> — 255.255.255.0 は上位24ビットが1なので/24。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q2. CIDR /26 のネットワークで利用可能なホスト数はいくつか。</summary>
         <p>ア）62<br>イ）64<br>ウ）126<br>エ）128</p>
-        <p>答え: <strong>ア</strong> — ホスト部は 32-26 = 6ビット。2^6 - 2 = 64 - 2 = 62台。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>ア</strong> — ホスト部は 32-26 = 6ビット。2^6 - 2 = 64 - 2 = 62台。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q3. IPアドレス 192.168.1.100/24 のネットワークアドレスとして正しいものはどれか。</summary>
         <p>ア）192.168.1.0<br>イ）192.168.1.255<br>ウ）192.168.1.100<br>エ）192.168.0.0</p>
-        <p>答え: <strong>ア</strong> — /24 は上位24ビットがネットワーク部なので、ホスト部（下位8ビット）を0にした 192.168.1.0 がネットワークアドレス。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>ア</strong> — /24 は上位24ビットがネットワーク部なので、ホスト部（下位8ビット）を0にした 192.168.1.0 がネットワークアドレス。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q4. サブネット分割の目的として、適切でないものはどれか。</summary>
         <p>ア）部署ごとに通信を管理する<br>イ）トラフィックの制御やセキュリティを向上させる<br>ウ）IPアドレスを効率的に利用する<br>エ）通信速度を上げるために回線を専有する</p>
-        <p>答え: <strong>エ</strong> — 回線専有は回線交換方式の特徴。サブネット分割は通信分離・管理・IP効率利用が目的。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>エ</strong> — 回線専有は回線交換方式の特徴。サブネット分割は通信分離・管理・IP効率利用が目的。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q5. ホスト部に割り当て可能なアドレス数を求める式として正しいものはどれか。</summary>
         <p>ア）2^n<br>イ）2^n - 1<br>ウ）2^n - 2<br>エ）2^(n-1)</p>
-        <p>答え: <strong>ウ</strong> — ネットワークアドレス（全0）とブロードキャストアドレス（全1）の2つを引く。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>ウ</strong> — ネットワークアドレス（全0）とブロードキャストアドレス（全1）の2つを引く。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q6. クラスCのIPアドレスの先頭ビットパターンとして正しいものはどれか。</summary>
         <p>ア）0<br>イ）10<br>ウ）110<br>エ）1110</p>
-        <p>答え: <strong>ウ</strong> — クラスA=0、クラスB=10、クラスC=110、クラスD=1110。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>ウ</strong> — クラスA=0、クラスB=10、クラスC=110、クラスD=1110。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q7. CIDR /28 のサブネットマスクとして正しいものはどれか。</summary>
         <p>ア）255.255.255.0<br>イ）255.255.255.192<br>ウ）255.255.255.240<br>エ）255.255.255.252</p>
-        <p>答え: <strong>ウ</strong> — /28 は上位28ビットが1。11111111.11111111.11111111.11110000 = 255.255.255.240。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>ウ</strong> — /28 は上位28ビットが1。11111111.11111111.11111111.11110000 = 255.255.255.240。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q8. ブロードキャストアドレスの説明として正しいものはどれか。</summary>
         <p>ア）ホスト部が全て0のアドレス<br>イ）ホスト部が全て1のアドレス<br>ウ）ネットワーク部が全て0のアドレス<br>エ）ネットワーク部が全て1のアドレス</p>
-        <p>答え: <strong>イ</strong> — ブロードキャストアドレスはホスト部が全て1。アはネットワークアドレスの説明。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>イ</strong> — ブロードキャストアドレスはホスト部が全て1。アはネットワークアドレスの説明。</p>
+          </details>
       </details>
     </section>
 

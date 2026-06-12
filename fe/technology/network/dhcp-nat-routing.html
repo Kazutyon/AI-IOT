@@ -359,52 +359,82 @@
 
       <details class="quiz-card">
         <summary>Q1. DHCPの説明として適切なものはどれか。<br>A) ドメイン名をIPアドレスに変換するプロトコルである　B) IPアドレスを自動的に割り当てるプロトコルである　C) IPアドレスからMACアドレスを求めるプロトコルである　D) プライベートIPアドレスをグローバルIPアドレスに変換するプロトコルである</summary>
-        <p>答え: <strong>B</strong>。DHCP（Dynamic Host Configuration Protocol）はIPアドレスを自動割り当てする。AはDNS、CはARP、DはNAT/NAPT。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。DHCP（Dynamic Host Configuration Protocol）はIPアドレスを自動割り当てする。AはDNS、CはARP、DはNAT/NAPT。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q2. NAT（Network Address Translation）の説明として適切なものはどれか。<br>A) MACアドレスをIPアドレスに変換する　B) プライベートIPアドレスとグローバルIPアドレスを1対1で変換する　C) 1つのグローバルIPアドレスで複数の内部機器をポート番号で区別する　D) 経路情報を管理するルーティングテーブルを作成する</summary>
-        <p>答え: <strong>B</strong>。NATはプライベートIPアドレスをグローバルIPアドレスに1対1で変換する。CはNAPT（IPマスカレード）の説明。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。NATはプライベートIPアドレスをグローバルIPアドレスに1対1で変換する。CはNAPT（IPマスカレード）の説明。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q3. ルーティングテーブルに経路が存在しないパケットの転送先として指定されるものはどれか。<br>A) DNSサーバー　B) DHCPサーバー　C) デフォルトゲートウェイ　D) プロキシサーバー</summary>
-        <p>答え: <strong>C</strong>。デフォルトゲートウェイは、未知の宛先パケットの転送先となるルーター。設定されていない場合、パケットは破棄される。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C</strong>。デフォルトゲートウェイは、未知の宛先パケットの転送先となるルーター。設定されていない場合、パケットは破棄される。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q4. DHCPにおけるメッセージのやり取りの正しい順序はどれか。<br>A) Request → Discover → Offer → Ack　B) Discover → Offer → Request → Ack　C) Offer → Discover → Ack → Request　D) Discover → Request → Offer → Ack</summary>
-        <p>答え: <strong>B</strong>。DORA（Discover→Offer→Request→Ack）の順。まずクライアントがサーバーを探索（Discover）、サーバーが提案（Offer）、クライアントが要求（Request）、サーバーが確定（Ack）。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。DORA（Discover→Offer→Request→Ack）の順。まずクライアントがサーバーを探索（Discover）、サーバーが提案（Offer）、クライアントが要求（Request）、サーバーが確定（Ack）。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q5. NAPT（IPマスカレード）がNATと異なる点として正しいものはどれか。<br>A) プライベートIPアドレスを使わない　B) 1つのグローバルIPアドレスで複数の内部機器を同時にインターネット接続できる　C) MACアドレスも変換に使用する　D) ルーティングプロトコルを自動選択する</summary>
-        <p>答え: <strong>B</strong>。NAPTはTCP/UDPの送信元ポート番号で内部機器を区別するため、1つのグローバルIPアドレスで複数機器の同時接続が可能。NATは1対1変換のためグローバルIPが複数必要。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。NAPTはTCP/UDPの送信元ポート番号で内部機器を区別するため、1つのグローバルIPアドレスで複数機器の同時接続が可能。NATは1対1変換のためグローバルIPが複数必要。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q6. ディスタンスベクタ型のルーティングプロトコルはどれか。<br>A) OSPF　B) BGP　C) RIP　D) EIGRP</summary>
-        <p>答え: <strong>C</strong>。RIP（Routing Information Protocol）はホップ数（経由ルーター数）で最短経路を決めるディスタンスベクタ型。OSPFはリンクステート型、BGPはパスベクタ型（EGP）、EIGRPはハイブリッド型。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C</strong>。RIP（Routing Information Protocol）はホップ数（経由ルーター数）で最短経路を決めるディスタンスベクタ型。OSPFはリンクステート型、BGPはパスベクタ型（EGP）、EIGRPはハイブリッド型。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q7. インターネット全体で標準的に使われているルーティングプロトコルはどれか。<br>A) RIP　B) OSPF　C) EIGRP　D) BGP</summary>
-        <p>答え: <strong>D</strong>。BGP（Border Gateway Protocol）はAS間のルーティングに使われるEGPで、インターネット全体の標準プロトコル。AS番号のリストで経路を決定し、経済性やポリシーも考慮可能。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>D</strong>。BGP（Border Gateway Protocol）はAS間のルーティングに使われるEGPで、インターネット全体の標準プロトコル。AS番号のリストで経路を決定し、経済性やポリシーも考慮可能。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q8. DHCP Discoverメッセージの宛先として使われるアドレスはどれか。<br>A) 192.168.0.1　B) FF:FF:FF:FF:FF:FF　C) 255.255.255.255　D) 127.0.0.1</summary>
-        <p>答え: <strong>C</strong>。DHCP DiscoverはブロードキャストでDHCPサーバーを探索するため、宛先IPアドレスは255.255.255.255（ブロードキャストアドレス）。BはMACアドレスのブロードキャスト、Dはループバックアドレス。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C</strong>。DHCP DiscoverはブロードキャストでDHCPサーバーを探索するため、宛先IPアドレスは255.255.255.255（ブロードキャストアドレス）。BはMACアドレスのブロードキャスト、Dはループバックアドレス。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q9. IGP（Interior Gateway Protocol）の説明として正しいものはどれか。<br>A) 異なるAS間で経路情報を交換するプロトコルである　B) インターネット全体の経路制御に使われる標準プロトコルである　C) 同一AS内でルーター同士が経路情報を交換するプロトコルである　D) プライベートIPアドレスとグローバルIPアドレスを変換するプロトコルである</summary>
-        <p>答え: <strong>C</strong>。IGPは同一AS（自律システム）内のルーティングに使う。AとBはEGP（BGP）の説明。DはNAT/NAPT。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C</strong>。IGPは同一AS（自律システム）内のルーティングに使う。AとBはEGP（BGP）の説明。DはNAT/NAPT。</p>
+          </details>
       </details>
 
       <details class="quiz-card">
         <summary>Q10. デフォルトゲートウェイが設定されていない場合、ルーティングテーブルに存在しない宛先のパケットはどうなるか。<br>A) 自動的に最も近いルーターに転送される　B) 送信元にエラーメッセージが返される　C) パケットは破棄される　D) ブロードキャストで全ルーターに送信される</summary>
-        <p>答え: <strong>C</strong>。デフォルトゲートウェイが未設定の場合、ルーターは未知の宛先パケットを破棄する。デフォルトゲートウェイを設定することで、こうしたパケットも適切に転送できるようになる。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C</strong>。デフォルトゲートウェイが未設定の場合、ルーターは未知の宛先パケットを破棄する。デフォルトゲートウェイを設定することで、こうしたパケットも適切に転送できるようになる。</p>
+          </details>
       </details>
     </section>
 

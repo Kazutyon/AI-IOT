@@ -407,51 +407,87 @@ Q ──┘</code></pre></figure>
       <h2>確認問題</h2>
       <details class="quiz-card">
         <summary>Q1. P=1, Q=0のとき、P・Q（AND）の出力は？</summary>
-        <p>答え: <strong>0</strong>。ANDは両方1のときだけ1です。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>0</strong>。ANDは両方1のときだけ1です。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q2. P=0, Q=0のとき、P+Q（OR）の出力は？</summary>
-        <p>答え: <strong>0</strong>。ORはどちらかが1なら1。両方0のときだけ0です。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>0</strong>。ORはどちらかが1なら1。両方0のときだけ0です。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q3. P=1, Q=1のとき、P⊕Q（XOR）の出力は？</summary>
-        <p>答え: <strong>0</strong>。XORは異なるとき1、同じとき0です。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>0</strong>。XORは異なるとき1、同じとき0です。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q4. ¬(P・Q) と等価な式はどれか。A) ¬P・¬Q B) P+Q C) ¬P+¬Q D) P・Q</summary>
-        <p>答え: <strong>C) ¬P+¬Q</strong>。ド・モルガン第1法則により、ANDの否定はORの否定になります。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C) ¬P+¬Q</strong>。ド・モルガン第1法則により、ANDの否定はORの否定になります。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q5. ¬(P+Q) と等価な式はどれか。A) ¬P・¬Q B) ¬P+¬Q C) P+Q D) ¬P+Q</summary>
-        <p>答え: <strong>A) ¬P・¬Q</strong>。ド・モルガン第2法則により、ORの否定はANDの否定になります。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>A) ¬P・¬Q</strong>。ド・モルガン第2法則により、ORの否定はANDの否定になります。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q6. ¬(A・B) をド・モルガンの法則で変形した結果は？</summary>
-        <p>答え: <strong>¬A + ¬B</strong>。¬(A・B) = ¬A + ¬B です。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>¬A + ¬B</strong>。¬(A・B) = ¬A + ¬B です。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q7. 次の回路の出力Yを論理式で表すと？ P→[NOT]→┐ ┌→[AND]→Y, Q→────┘</summary>
-        <p>答え: <strong>¬P・Q</strong>。PをNOTしたものとQをANDしています。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>¬P・Q</strong>。PをNOTしたものとQをANDしています。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q8. NANDゲートだけで作れないものはどれか。A) AND B) OR C) NOT D) 作れないものはない</summary>
-        <p>答え: <strong>D) 作れないものはない</strong>。NANDは万能ゲートで、AND/OR/NOT/XORすべて構成可能です。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>D) 作れないものはない</strong>。NANDは万能ゲートで、AND/OR/NOT/XORすべて構成可能です。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q9. XORをAND/OR/NOTで構成する正しい式は？ A) (P+Q)・¬(P・Q) B) (P・Q)+(P+Q) C) (P+Q)・P D) P+Q</summary>
-        <p>答え: <strong>A) (P+Q)・¬(P・Q)</strong>。「(PまたはQ)」かつ「(PかつQ)の否定」でXORになります。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>A) (P+Q)・¬(P・Q)</strong>。「(PまたはQ)」かつ「(PかつQ)の否定」でXORになります。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q10. P=1, Q=0, R=1のとき、Y=(P・Q)+Rの出力は？</summary>
-        <p>答え: <strong>1</strong>。P・Q = 1・0 = 0、0+R = 0+1 = 1です。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>1</strong>。P・Q = 1・0 = 0、0+R = 0+1 = 1です。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q11. 論理回路図で、三角形の先端に小丸○が付いているゲートは何か。</summary>
-        <p>答え: <strong>NOTゲート</strong>。三角形（バッファ）＋小丸（否定）でNOTを表します。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>NOTゲート</strong>。三角形（バッファ）＋小丸（否定）でNOTを表します。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q12. P=1, Q=1のとき、XNORの出力は？</summary>
-        <p>答え: <strong>1</strong>。XNORはXORの否定で、同じとき1になります。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>1</strong>。XNORはXORの否定で、同じとき1になります。</p>
+          </details>
       </details>
     </section>
 

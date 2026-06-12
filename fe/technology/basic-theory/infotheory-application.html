@@ -348,62 +348,98 @@
       <details class="quiz-card">
         <summary>Q1. 可逆圧縮に分類されるファイル形式として、適切なものはどれか。</summary>
         <p>A. JPEG　B. MP3　C. PNG　D. H.264</p>
-        <p>答え: <strong>C（PNG）</strong>。PNGは可逆圧縮。JPEG/MP3/H.264は非可逆圧縮です。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C（PNG）</strong>。PNGは可逆圧縮。JPEG/MP3/H.264は非可逆圧縮です。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q2. 非可逆圧縮の説明として正しいものはどれか。</summary>
         <p>A. 元のデータに完全に戻せる<br>B. 一部の情報を削ることで圧縮し、元には戻せない<br>C. すべてのデータをビット反転して圧縮する<br>D. 圧縮率が可逆圧縮より必ず低い</p>
-        <p>答え: <strong>B</strong>。非可逆圧縮は情報を削るため元に戻せません。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。非可逆圧縮は情報を削るため元に戻せません。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q3. 誤り訂正符号の説明として正しいものはどれか。</summary>
         <p>A. データを暗号化して通信路のノイズから守る方式<br>B. 冗長ビットを付加し、通信中のビット誤りを検出・訂正する方式<br>C. データを圧縮して通信量を減らす方式<br>D. 通信路のノイズを取り除くハードウェア方式</p>
-        <p>答え: <strong>B</strong>。冗長ビットを付加して誤り検出・訂正を行います。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。冗長ビットを付加して誤り検出・訂正を行います。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q4. パリティビットに関する説明として、誤っているものはどれか。</summary>
         <p>A. 1ビットの誤りを検出できる<br>B. 1ビットの誤りを訂正できる<br>C. 偶数パリティでは1の数が偶数になるようにビットを追加する<br>D. 奇数パリティでは1の数が奇数になるようにビットを追加する</p>
-        <p>答え: <strong>B</strong>。パリティは誤り検出のみ可能で、訂正はできません。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。パリティは誤り検出のみ可能で、訂正はできません。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q5. ハミング符号の特徴として正しいものはどれか。</summary>
         <p>A. 誤り検出のみ可能で訂正はできない<br>B. 1ビットの誤り位置を特定し訂正できる<br>C. LDPC符号の別名である<br>D. 冗長ビットを一切追加しない</p>
-        <p>答え: <strong>B</strong>。ハミング符号は1ビット誤りの位置特定と訂正が可能です。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。ハミング符号は1ビット誤りの位置特定と訂正が可能です。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q6. 通信路容量に関する説明として正しいものはどれか。</summary>
         <p>A. 通信路の物理的な帯域幅と同じ意味である<br>B. ノイズがなければ通信路容量を超えても誤りなく通信できる<br>C. 1秒間に誤りなく送れる情報量の理論的限界値である<br>D. どんなに優れた符号化を使っても通信路容量を超えられる</p>
-        <p>答え: <strong>C</strong>。通信路容量は理論的限界値で、超えると誤りゼロ通信は不可能です（シャノンの定理）。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C</strong>。通信路容量は理論的限界値で、超えると誤りゼロ通信は不可能です（シャノンの定理）。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q7. 128ビットの暗号鍵に対する総当たり攻撃の候補数はどれか。</summary>
         <p>A. 128通り　B. 128×2通り　C. 2<sup>128</sup>通り　D. 128<sup>2</sup>通り</p>
-        <p>答え: <strong>C（2<sup>128</sup>通り）</strong>。鍵長がnビットなら候補数は2<sup>n</sup>通りです。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C（2<sup>128</sup>通り）</strong>。鍵長がnビットなら候補数は2<sup>n</sup>通りです。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q8. クロスエントロピーの説明として最も適切なものはどれか。</summary>
         <p>A. データを圧縮する際の符号の長さを決める基準<br>B. モデルの予測と正解ラベルのズレを情報量で測る損失関数<br>C. 2つの通信路の情報伝送量を比較する尺度<br>D. 暗号鍵の強さを評価する基準</p>
-        <p>答え: <strong>B</strong>。クロスエントロピーはAIの損失関数で、予測と正解の差を測ります。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。クロスエントロピーはAIの損失関数で、予測と正解の差を測ります。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q9. AIの学習において、クロスエントロピーを小さくする操作が意味することはどれか。</summary>
         <p>A. モデルの不確実性を減らし、正解に近づける<br>B. データの圧縮率を上げる<br>C. 通信路のノイズを除去する<br>D. 暗号鍵のビット長を長くする</p>
-        <p>答え: <strong>A</strong>。AIはクロスエントロピー最小化により不確実性を減らして学習します。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>A</strong>。AIはクロスエントロピー最小化により不確実性を減らして学習します。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q10. KLダイバージェンスの用途として最も適切なものはどれか。</summary>
         <p>A. 通信路の最大伝送速度を計算する<br>B. 2つの確率分布の違いを情報量の差として測り、モデルを選択する<br>C. データを圧縮するアルゴリズムを選択する<br>D. パリティビットの数を決定する</p>
-        <p>答え: <strong>B</strong>。KLダイバージェンスは分布の差を定量化しモデル選択に使います。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。KLダイバージェンスは分布の差を定量化しモデル選択に使います。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q11. 情報漏洩の評価に使われる情報理論の概念はどれか。</summary>
         <p>A. エントロピー　B. ハミング距離　C. 相互情報量　D. 通信路容量</p>
-        <p>答え: <strong>C</strong>。相互情報量で攻撃者の観測データと秘密データの関連量を測ります。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>C</strong>。相互情報量で攻撃者の観測データと秘密データの関連量を測ります。</p>
+          </details>
       </details>
       <details class="quiz-card">
         <summary>Q12. 最尤推定を情報理論的に解釈したとき、対応する操作はどれか。</summary>
         <p>A. 通信路容量を最大化する<br>B. エントロピーを最小にする分布を選ぶ<br>C. クロスエントロピーを最大化する<br>D. ハミング符号を追加する</p>
-        <p>答え: <strong>B</strong>。最尤推定はエントロピー最小の分布選択と等価です。</p>
+        <details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>B</strong>。最尤推定はエントロピー最小の分布選択と等価です。</p>
+          </details>
       </details>
     </section>
 

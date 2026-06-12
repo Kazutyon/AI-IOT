@@ -97,14 +97,38 @@
       </ul></section>
 
     <section id="quiz" class="lesson-section"><h2>確認問題</h2>
-      <details class="quiz-card"><summary>Q1. 共通鍵暗号方式の説明として正しいものはどれか。</summary><p>ア）暗号化と復号で異なる鍵を使う<br>イ）公開鍵をネットワーク上で共有できる<br>ウ）同じ鍵で暗号化と復号を行う<br>エ）鍵を使わずに暗号化する</p><p>答え: <strong>ウ</strong> — 共通鍵暗号方式は同じ鍵で暗号化・復号。ア・イは公開鍵暗号方式。</p></details>
-      <details class="quiz-card"><summary>Q2. 電子署名の仕組みとして正しいものはどれか。</summary><p>ア）受信者の公開鍵で暗号化する<br>イ）送信者の秘密鍵で暗号化し、送信者の公開鍵で検証する<br>ウ）共通鍵で暗号化する<br>エ）認証局が代わりに署名する</p><p>答え: <strong>イ</strong> — 電子署名は送信者の秘密鍵で暗号化→送信者の公開鍵で復号検証。</p></details>
-      <details class="quiz-card"><summary>Q3. DMZの説明として正しいものはどれか。</summary><p>ア）内部ネットワークの最深部にある領域<br>イ）外部と内部の中間に設けられ、公開サーバーを配置する領域<br>ウ）すべての通信を遮断する領域<br>エ）無線LAN専用の暗号化領域</p><p>答え: <strong>イ</strong> — DMZは非武装地帯。外部公開サーバーを隔離し、内部ネットワークを保護。</p></details>
-      <details class="quiz-card"><summary>Q4. IDSとIPSの違いとして正しいものはどれか。</summary><p>ア）IDSは遮断、IPSは検知のみ<br>イ）IDSは検知と通知、IPSは検知と遮断<br>ウ）両者に機能差はない<br>エ）IDSはファイアウォールの別名</p><p>答え: <strong>イ</strong> — IDS(Detection)=検知・通知、IPS(Prevention)=検知・遮断。</p></details>
-      <details class="quiz-card"><summary>Q5. TLSハンドシェイクでサーバーがブラウザに最初に送るものはどれか。</summary><p>ア）共通鍵<br>イ）サーバー証明書と公開鍵<br>ウ）秘密鍵<br>エ）パスワード</p><p>答え: <strong>イ</strong> — サーバーは証明書＋公開鍵を送信。ブラウザはCAで検証後、公開鍵で乱数を暗号化して返す。</p></details>
-      <details class="quiz-card"><summary>Q6. ファイアウォールのパケットフィルタリング型が検査するものはどれか。</summary><p>ア）通信内容（アプリケーション層）<br>イ）IPアドレスとポート番号（ヘッダ情報）<br>ウ）電子署名の有無<br>エ）ファイルの内容</p><p>答え: <strong>イ</strong> — パケットフィルタリング型はヘッダ情報（IP/ポート）で判断。アはゲートウェイ型。</p></details>
-      <details class="quiz-card"><summary>Q7. VPNのトンネル技術の説明として正しいものはどれか。</summary><p>ア）通信を平文で高速化する技術<br>イ）異なるプロトコルのパケットを別プロトコルに載せて転送する技術<br>ウ）ネットワークを物理的に分割する技術<br>エ）無線LAN専用の接続技術</p><p>答え: <strong>イ</strong> — トンネルはカプセル化により異なるプロトコルのパケットを安全に転送する技術。</p></details>
-      <details class="quiz-card"><summary>Q8. 認証局(CA)の主な役割はどれか。</summary><p>ア）通信を暗号化する<br>イ）サーバー証明書を発行し、通信相手の正当性を保証する<br>ウ）ファイアウォールを設定する<br>エ）ウイルスを検知する</p><p>答え: <strong>イ</strong> — CAはサーバー証明書の発行と正当性保証を行う第三者機関。</p></details>
+      <details class="quiz-card"><summary>Q1. 共通鍵暗号方式の説明として正しいものはどれか。</summary><p>ア）暗号化と復号で異なる鍵を使う<br>イ）公開鍵をネットワーク上で共有できる<br>ウ）同じ鍵で暗号化と復号を行う<br>エ）鍵を使わずに暗号化する</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>ウ</strong> — 共通鍵暗号方式は同じ鍵で暗号化・復号。ア・イは公開鍵暗号方式。</p>
+          </details></details>
+      <details class="quiz-card"><summary>Q2. 電子署名の仕組みとして正しいものはどれか。</summary><p>ア）受信者の公開鍵で暗号化する<br>イ）送信者の秘密鍵で暗号化し、送信者の公開鍵で検証する<br>ウ）共通鍵で暗号化する<br>エ）認証局が代わりに署名する</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>イ</strong> — 電子署名は送信者の秘密鍵で暗号化→送信者の公開鍵で復号検証。</p>
+          </details></details>
+      <details class="quiz-card"><summary>Q3. DMZの説明として正しいものはどれか。</summary><p>ア）内部ネットワークの最深部にある領域<br>イ）外部と内部の中間に設けられ、公開サーバーを配置する領域<br>ウ）すべての通信を遮断する領域<br>エ）無線LAN専用の暗号化領域</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>イ</strong> — DMZは非武装地帯。外部公開サーバーを隔離し、内部ネットワークを保護。</p>
+          </details></details>
+      <details class="quiz-card"><summary>Q4. IDSとIPSの違いとして正しいものはどれか。</summary><p>ア）IDSは遮断、IPSは検知のみ<br>イ）IDSは検知と通知、IPSは検知と遮断<br>ウ）両者に機能差はない<br>エ）IDSはファイアウォールの別名</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>イ</strong> — IDS(Detection)=検知・通知、IPS(Prevention)=検知・遮断。</p>
+          </details></details>
+      <details class="quiz-card"><summary>Q5. TLSハンドシェイクでサーバーがブラウザに最初に送るものはどれか。</summary><p>ア）共通鍵<br>イ）サーバー証明書と公開鍵<br>ウ）秘密鍵<br>エ）パスワード</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>イ</strong> — サーバーは証明書＋公開鍵を送信。ブラウザはCAで検証後、公開鍵で乱数を暗号化して返す。</p>
+          </details></details>
+      <details class="quiz-card"><summary>Q6. ファイアウォールのパケットフィルタリング型が検査するものはどれか。</summary><p>ア）通信内容（アプリケーション層）<br>イ）IPアドレスとポート番号（ヘッダ情報）<br>ウ）電子署名の有無<br>エ）ファイルの内容</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>イ</strong> — パケットフィルタリング型はヘッダ情報（IP/ポート）で判断。アはゲートウェイ型。</p>
+          </details></details>
+      <details class="quiz-card"><summary>Q7. VPNのトンネル技術の説明として正しいものはどれか。</summary><p>ア）通信を平文で高速化する技術<br>イ）異なるプロトコルのパケットを別プロトコルに載せて転送する技術<br>ウ）ネットワークを物理的に分割する技術<br>エ）無線LAN専用の接続技術</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>イ</strong> — トンネルはカプセル化により異なるプロトコルのパケットを安全に転送する技術。</p>
+          </details></details>
+      <details class="quiz-card"><summary>Q8. 認証局(CA)の主な役割はどれか。</summary><p>ア）通信を暗号化する<br>イ）サーバー証明書を発行し、通信相手の正当性を保証する<br>ウ）ファイアウォールを設定する<br>エ）ウイルスを検知する</p><details class="answer-toggle">
+            <summary>答えを見る ▼</summary>
+            <p>答え: <strong>イ</strong> — CAはサーバー証明書の発行と正当性保証を行う第三者機関。</p>
+          </details></details>
     </section>
     <section class="source-note"><h2>出典PDF・対応ページ</h2><p>1_ネットワーク基礎.pdf ch48-ch55（p212-p244）: 暗号化技術、共通鍵/公開鍵、CA、SSL/TLS、ファイアウォール、DMZ、IDS/IPS、VPN</p></section>
   </main>
