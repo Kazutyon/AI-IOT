@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>木構造と探索（二分木・BST・DFS/BFS）| 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Algorithm</p>
+        <h1>木構造と探索（二分木・BST・DFS/BFS）</h1>
+        <p class="lead">木構造の基本から二分探索木（BST）、DFS（深さ優先探索）・BFS（幅優先探索）まで。FE試験最重要分野を体系的に整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#tree-basics">木構造</a>
+        <a href="#binary-tree">二分木</a>
+        <a href="#bst">BST</a>
+        <a href="#dfs">DFS</a>
+        <a href="#bfs">BFS</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">アルゴリズム</a>
+      <span>木構造と探索</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>木構造の基本用語（根・葉・親・子・深さ・高さ）とグラフとの違い</li>
+          <li>二分木の定義・満二分木と完全二分木の違い</li>
+          <li>二分探索木（BST）の「左<親<右」ルールと挿入・探索の流れ</li>
+          <li>DFS 3種（前順・中順・後順）の訪問順と用途</li>
+          <li>BFS のレベル順訪問（キューを使う理由）</li>
+          <li>DFSとBFSの比較（スタックvsキュー）</li>
+          <li><strong>最重要：DFS中順=BST昇順ソートになる理由</strong></li>
+          <li>BST探索が O(log n) になる理由（毎回範囲が1/2になる）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>二分木の定義、BSTの挿入・探索、DFS/BFSの訪問順とデータ構造</dd></div>
+          <div><dt>高</dt><dd>中順DFS = BST昇順ソート（最重要論点）</dd></div>
+          <div><dt>中</dt><dd>満二分木と完全二分木の違い、O(log n)の理由</dd></div>
+          <div><dt>中</dt><dd>木の探索からグラフ探索への一般化（第4章の布石）</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>木構造（Tree）</td><td>1つの根から始まり、親→子の階層構造を持つデータ構造</td><td>閉路なし・親1つ・根1つがグラフとの違い</td></tr>
+            <tr><td>根（Root）</td><td>木の最上位ノード。親を持たない唯一のノード</td><td>根から探索が始まる</td></tr>
+            <tr><td>葉（Leaf）</td><td>子を持たないノード</td><td>left=null かつ right=null</td></tr>
+            <tr><td>二分木</td><td>各ノードが最大2つの子（左・右）を持つ木</td><td>完全二分木・満二分木の区別が頻出</td></tr>
+            <tr><td>満二分木</td><td>全てのノードが0個または2個の子を持つ二分木</td><td>子が1つだけのノードが存在しない</td></tr>
+            <tr><td>完全二分木</td><td>最下段以外は全て埋まり、最下段は左から詰まっている</td><td>ヒープの基礎。右側が欠けてもOK</td></tr>
+            <tr><td>深さ</td><td>根からの距離（根を0とする）</td><td>高さとの区別が重要</td></tr>
+            <tr><td>高さ</td><td>葉からの距離（葉を0とする）</td><td>木の高さが計算量に直結</td></tr>
+            <tr><td>BST</td><td>左部分木 < 親 < 右部分木（全部分木で成立）</td><td>探索・挿入が平均 O(log n)</td></tr>
+            <tr><td>前順（Preorder）</td><td>親→左→右の順で訪問</td><td>木のコピーに使う</td></tr>
+            <tr><td>中順（Inorder）</td><td>左→親→右の順で訪問</td><td>BSTで昇順ソートになる（最重要）</td></tr>
+            <tr><td>後順（Postorder）</td><td>左→右→親の順で訪問</td><td>木の削除に使う</td></tr>
+            <tr><td>BFS</td><td>レベル順に訪問。キューを使用</td><td>最短経路・階層探索に向く</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="tree-basics" class="lesson-section">
+      <h2>1. 木構造とは何か</h2>
+      <p>木構造（Tree）は、<strong>1つの根（root）から始まり、親→子という階層構造を持つデータ構造</strong>です。配列や連結リストでは階層を表現できないため、フォルダ構造・HTML DOM・組織図・決定木・データベースのインデックス（B木）などに使われます。</p>
+      <p>木はグラフの一種ですが、次の3つの制約があります：①閉路（ループ）がない ②親は1つだけ ③根が1つだけ。この制約があるからこそ、木は階層構造を表現するのに最適です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>木構造の基本用語</figcaption>
+        <pre>          [A] ←根（root）
+         /   \
+       [B]   [C] ←葉（子を持たない）
+      /   \
+    [D]   [E] ←葉
+   葉      葉
+
+  ・根（root）: A
+  ・親（parent）: AはBとCの親
+  ・子（child）: BとCはAの子
+  ・葉（leaf）: C, D, E（子を持たないノード）
+  ・辺（edge）: ノードをつなぐ線</pre>
+      </figure>
+    </section>
+
+    <section id="binary-tree" class="lesson-section">
+      <h2>2. 二分木（Binary Tree）</h2>
+      <p>二分木は、<strong>1つのノードが「左の子」「右の子」の最大2つまで子を持つ木構造</strong>です。木構造の中でも最も基本的で、後のBST・ヒープ・探索アルゴリズムの基礎になります。</p>
+      <p>各ノードは <code>key</code>（値）、<code>left</code>（左の子への参照）、<code>right</code>（右の子への参照）の3要素を持ちます。</p>
+
+      <h3>2-1. 満二分木 vs 完全二分木</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>満二分木</th><th>完全二分木</th></tr></thead>
+          <tbody>
+            <tr><td>定義</td><td>全てのノードが0個または2個の子を持つ</td><td>最下段以外は全て埋まり、最下段は左から詰まっている</td></tr>
+            <tr><td>子の数</td><td>0個または2個のみ（1個の子はNG）</td><td>最下段は左から順に埋まる（右が欠けてもOK）</td></tr>
+            <tr><td>最下段</td><td>制約なし（葉はどの段でもOK）</td><td>最下段の葉は左詰め</td></tr>
+            <tr><td>使用場面</td><td>理論的な分類</td><td>ヒープの実装</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>満二分木（左）と完全二分木（右）の比較</figcaption>
+        <pre>【満二分木】                【完全二分木】
+       [A]                          [A]
+      /   \                        /   \
+    [B]   [C]                    [B]   [C]
+   /   \                        /   \
+ [D]   [E]                    [D]   [E]
+                            （最下段が左から詰まっている）
+・全ノードが0個か2個の子    ・最下段以外は全て埋まっている
+・1個だけの子は存在しない    ・最下段のノードは左から順に</pre>
+      </figure>
+
+      <h3>2-2. 深さと高さ</h3>
+      <p>深さ（depth）は<strong>根からの距離</strong>（根を0とする）。高さ（height）は<strong>葉からの距離</strong>（葉を0とする）。この2つはFE試験で混同しやすいので注意。</p>
+      <pre>深さ0: [A] ←根（depth=0, height=2）
+         /   \
+深さ1: [B]   [C] ←葉（depth=1, height=0）
+      /   \
+深さ2:[D] [E] ←葉（depth=2, height=0）</pre>
+    </section>
+
+    <section id="bst" class="lesson-section">
+      <h2>3. 二分探索木（BST）</h2>
+      <p>二分探索木（Binary Search Tree）は、<strong>左部分木の値 < 親ノードの値 < 右部分木の値</strong>という順序ルールを持つ二分木です。<strong>このルールが全ての部分木で成立する</strong>ことが重要です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>BSTの例（「左<親<右」が全部分木で成立）</figcaption>
+        <pre>               [8] ←根
+              /    \
+            [3]    [10]
+           /   \       \
+         [1]   [6]     [14]
+              /   \        \
+            [4]   [7]      [16]
+
+・3 の左部分木（1）は3より小さい
+・3 の右部分木（6,4,7）は3より大きい
+・6 の左（4）は6より小さい
+・6 の右（7）は6より大きい
+→ どの部分木を切り取ってもルールが成立！</pre>
+      </figure>
+
+      <h3>3-1. BSTの挿入（insert）</h3>
+      <p>BSTの挿入は「根から比較→左か右へ→空き場所に追加」の繰り返しです。毎回1回の比較で探索範囲が約半分になるため、平均 <strong>O(log n)</strong> で挿入できます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>BST挿入の流れ（8,3,10,1,6,14,4,7,16 の順に挿入）</figcaption>
+        <pre>Step1: insert(8) → 空なので根になる [8]
+
+Step2: insert(3) → 3<8 左へ    [8]
+                              /
+                            [3]
+
+Step3: insert(10) → 10>8 右へ  [8]
+                              /   \
+                            [3]  [10]
+
+Step4-5: insert(1), insert(14)
+        [8]                    [8]
+       /   \          →       /   \
+     [3]  [10]              [3]   [10]
+    /               \       /        \
+  [1]              [14]   [1]       [14]
+
+Step6-9: insert(6,4,7,16) → 最終形:
+               [8]
+              /    \
+            [3]    [10]
+           /   \       \
+         [1]   [6]     [14]
+              /   \        \
+            [4]   [7]      [16]</pre>
+      </figure>
+
+      <h3>3-2. BSTの探索（search）</h3>
+      <p>search(7) の流れ：根(8)と比較→7<8で左→3と比較→7>3で右→6と比較→7>6で右→7と一致！<strong>比較回数は木の高さに比例</strong>します。</p>
+
+      <h3>3-3. BSTが高速な理由 O(log n)</h3>
+      <p>挿入も探索も毎回「左か右か」の1回の比較で進み、探索範囲が毎回1/2になります。n→n/2→n/4→n/8→...→1、つまり 2^k = n → k = log₂(n) の形です。<strong>ただし偏った木（片側にだけ伸びる）では最悪 O(n) になる</strong>ことに注意。</p>
+    </section>
+
+    <section id="dfs" class="lesson-section">
+      <h2>4. DFS（深さ優先探索）</h2>
+      <p>DFSは「<strong>深く潜ってから戻る</strong>」探索方法です。木構造では根→左の部分木→右の部分木の順で進みます。DFSには3種類の訪問順があります。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>DFS 3種の訪問順（同一木での比較）</figcaption>
+        <pre>           [A]
+          /   \
+        [B]   [C]
+       /   \
+     [D]   [E]
+
+【前順（Preorder）親→左→右】
+  訪問順: A → B → D → E → C
+  用途: 木のコピー作成
+
+【中順（Inorder）左→親→右】
+  訪問順: D → B → E → A → C
+  ★ BSTでは中順 = 昇順ソートになる！（最重要）
+
+【後順（Postorder）左→右→親】
+  訪問順: D → E → B → C → A
+  用途: 木の削除（子から先に処理）</pre>
+      </figure>
+
+      <h3>4-1. DFS（前順）のコード</h3>
+      <pre>function preorder(node):
+    if node is null: return
+    visit(node)              // 親を処理
+    preorder(node.left)      // 左の部分木へ
+    preorder(node.right)     // 右の部分木へ</pre>
+      <p>DFSは再帰で簡潔に書けます。反復版ではスタックを使います。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>走査種別</th><th>訪問順</th><th>BSTでの性質</th><th>主な用途</th></tr></thead>
+          <tbody>
+            <tr><td>前順</td><td>親→左→右</td><td>木の構造そのまま</td><td>木のコピー</td></tr>
+            <tr><td>中順</td><td>左→親→右</td><td>昇順ソート順</td><td>BSTのソート出力</td></tr>
+            <tr><td>後順</td><td>左→右→親</td><td>子から先に処理</td><td>木の削除</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="bfs" class="lesson-section">
+      <h2>5. BFS（幅優先探索）</h2>
+      <p>BFSは「<strong>横に広がりながら進む</strong>」探索方法です。DFSが「深く潜る」のに対し、BFSはレベル（階層）ごとに探索します。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>BFS レベル順訪問（キュー動作つき）</figcaption>
+        <pre>           [A] ←レベル0
+          /   \
+        [B]   [C] ←レベル1
+       /   \
+     [D]   [E] ←レベル2
+
+BFS訪問順: A → B → C → D → E
+（上から下へ、左から右へ）
+
+キュー動作:
+  初期: [A]
+  A取出→訪問→B,C追加: [B,C]
+  B取出→訪問→D,E追加: [C,D,E]
+  C取出→訪問: [D,E]
+  D取出→訪問: [E]
+  E取出→訪問: [] →終了</pre>
+      </figure>
+
+      <h3>5-1. BFSがキューを使う理由</h3>
+      <p>BFSは「<strong>先に見つけたノードから順に処理する</strong>」性質を持ちます。これはキュー（FIFO: First-In First-Out）の動作と一致するため、BFSは必ずキューを使います。</p>
+
+      <h3>5-2. BFSのコード</h3>
+      <pre>function bfs(root):
+    if root is null: return
+    queue = new Queue()
+    queue.enqueue(root)
+    while queue is not empty:
+        node = queue.dequeue()
+        visit(node)
+        if node.left is not null:
+            queue.enqueue(node.left)
+        if node.right is not null:
+            queue.enqueue(node.right)</pre>
+    </section>
+
+    <section class="lesson-section">
+      <h2>6. DFS vs BFS 比較</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>DFS（深さ優先）</th><th>BFS（幅優先）</th></tr></thead>
+          <tbody>
+            <tr><td>進み方</td><td>深く潜ってから戻る</td><td>横に広がってから下へ</td></tr>
+            <tr><td>使用データ構造</td><td>再帰 または スタック（LIFO）</td><td>キュー（FIFO）</td></tr>
+            <tr><td>訪問順序</td><td>部分木の構造を優先</td><td>距離（レベル）を優先</td></tr>
+            <tr><td>主な用途</td><td>木構造の走査・BSTソート出力</td><td>最短経路探索・レベル順出力</td></tr>
+            <tr><td>メモリ使用</td><td>木の高さに比例（再帰深度）</td><td>木の幅に比例（キュー容量）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>7. DFS中順 = BST昇順（最重要ポイント）</h2>
+      <p>FE試験で最も差がつく論点です：</p>
+      <ul>
+        <li><strong>BSTのルール:</strong> 左 < 親 < 右</li>
+        <li><strong>中順DFSの順番:</strong> 左 → 親 → 右</li>
+        <li><strong>この2つが完全に一致する</strong> → 中順DFS = 昇順ソートになる</li>
+      </ul>
+      <p>つまり「BSTを中順走査すると、値が小さい順に取り出せる」。これは木構造（形）と探索（順番）が結びつく最も重要なポイントで、<strong>午前試験の選択問題でも頻出</strong>です。</p>
+    </section>
+
+    <section class="lesson-section">
+      <h2>8. 木の探索からグラフ探索へ</h2>
+      <p>木は「閉路のないグラフ」として扱えます。DFSもBFSも、木構造だけでなくグラフ探索の基本アルゴリズムです。グラフでは閉路があるため <code>visited</code> 管理が追加で必要になります（第4章で詳しく扱います）。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 二分木において、子を持たないノードを何と呼ぶか。</summary>
+        <p>ア）根　イ）内部ノード　ウ）葉　エ）親</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 葉（leaf）は子を持たないノード。根は親を持たないノード、内部ノードは子を持つノード。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 二分探索木（BST）の正しい定義はどれか。</summary>
+        <p>ア）左の子 < 親 かつ 親 < 右の子（全部分木で成立）<br>イ）左の子 > 親 かつ 親 > 右の子<br>ウ）全てのノードが2つの子を持つ<br>エ）最下段が左から詰まっている</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — BSTは「左部分木 < 親 < 右部分木」が全部分木で成立する二分木。イは逆、ウは満二分木、エは完全二分木の説明。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 幅優先探索（BFS）で使用するデータ構造はどれか。</summary>
+        <p>ア）スタック　イ）キュー　ウ）配列　エ）ハッシュ表</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — BFSは「先に見つけたノードから順に処理」するためFIFOのキューを使う。DFSは再帰またはスタック（LIFO）を使う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 次の木を前順走査（親→左→右）した結果を選べ。A─(B─(D,E), C) の場合。</summary>
+        <p>ア）A, B, C, D, E　イ）A, B, D, E, C　ウ）D, B, E, A, C　エ）D, E, B, C, A</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 前順（親→左→右）: A（親）→ B（左）→ D（Bの左）→ E（Bの右）→ C（Aの右）。アは不正、ウは中順、エは後順。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 二分探索木において中順走査を行うと得られる結果はどれか。</summary>
+        <p>ア）後順の逆順　イ）ランダムな順序　ウ）昇順ソートされた順序　エ）レベル順</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — BSTの「左<親<右」と中順DFSの「左→親→右」が完全一致するため、中順走査 = 昇順ソートになる。これはFE試験最重要論点。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 満二分木の説明として正しいものはどれか。</summary>
+        <p>ア）全ての葉が同じ深さにある　イ）全てのノードが0個または2個の子を持つ　ウ）最下段が左から詰まっている　エ）全てのノードが2つの子を持つ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 満二分木は全ノードが0個または2個の子を持つ。アは完全二分木の条件ではない、ウは完全二分木、エは子を持たない葉が存在するため誤り。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. BSTに [8,3,10,1,6,14,4,7,16] を順に挿入したとき、ノード6の左の子はどれか。</summary>
+        <p>ア）1　イ）4　ウ）7　エ）なし</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — insert(4)のとき 4<8→左、4>3→右、4<6→左 でノード6の左の子になる。7は6の右の子、1は3の左の子。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 深さ優先探索（DFS）で使うデータ構造として最も適切なものはどれか。</summary>
+        <p>ア）キュー　イ）スタック（または再帰）　ウ）ハッシュ表　エ）連結リスト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DFSは再帰呼び出し（システムスタック）または明示的なスタックで実装する。BFSはキューを使う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. BSTの探索が平均O(log n)になる理由として最も適切なものはどれか。</summary>
+        <p>ア）全てのノードを一度ずつ訪問するから　イ）毎回探索範囲が約1/2になるから　ウ）キューを使って効率的に探索するから　エ）ハッシュ関数で直接計算するから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — BSTは毎回「左か右か」の比較で探索範囲が約1/2になる。n→n/2→n/4→...→1 で 2^k=n → k=log₂n。ただし偏った木では最悪O(n)。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 次のうち、木構造とグラフ構造の違いとして正しいものはどれか。</summary>
+        <p>ア）木には閉路がないが、グラフには閉路があってもよい　イ）グラフにはノードがない　ウ）木は必ず完全二分木である　エ）グラフは根を必ず1つ持つ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 木は「閉路のないグラフ」であり、閉路なし・親1つ・根1つの制約がある。グラフにはこれらの制約がない。イ・ウ・エはいずれも誤り。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『2_アルゴリズムとデータ構造.pdf』 第3章 木構造と探索（p78-p105）</p>
+    </section>
+  </main>
+</body>
+</html>
