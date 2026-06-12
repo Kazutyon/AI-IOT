@@ -3,6 +3,7 @@
 Last updated: 2026-06-12 / Codex
 
 This file maps each source PDF to the folder where HTML lessons should be created.
+Update rules are defined in `HTMLIZATION-STATUS-RULES.md`.
 
 ## Completed or In Progress
 
@@ -33,3 +34,4 @@ This file maps each source PDF to the folder where HTML lessons should be create
 - Strategy folders belong under `fe/strategy/`.
 - Do not use `fe/technology/strategy/`; it was a temporary empty folder.
 - PDF files do not have to be committed unless explicitly needed for GitHub Pages. If a PDF is kept outside this repository, record the source path in this file and the target folder README.
+- When a PDF status changes, update this file, the target folder `README.md`, `PENDING-LESSONS.md`, `data/curriculum.json`, `assets/app.js`, `LOG.md`, and `CURRENT.md` as applicable.

@@ -61,3 +61,4 @@ Last updated: 2026-06-12 / Codex
 - Top portal links now point to planned index pages, so future work can attach pages without changing the first screen again.
 - `fe/technology/strategy/` was the old temporary location. Strategy work should use `fe/strategy/`.
 - PDF-to-folder mapping is centralized in `PDF-FOLDER-MAP.md`.
+- HTMLization status update rules are centralized in `HTMLIZATION-STATUS-RULES.md`.
