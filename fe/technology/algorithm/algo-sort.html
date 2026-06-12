@@ -12,7 +12,7 @@
       <div>
         <p class="eyebrow">Technology / Algorithm</p>
         <h1>整列（ソート）アルゴリズム</h1>
-        <p class="lead">バブルソート・選択ソート・挿入ソート・マージソート・クイックソート。5種の計算量・安定性・使いどころを体系的に整理します。</p>
+        <p class="lead">5大ソートアルゴリズム（バブル・選択・挿入・マージ・クイック）の動作、計算量、安定性、使いどころを体系的に整理します。FE午前・午後試験の最重要分野。</p>
       </div>
       <nav class="study-map" aria-label="ページ内メニュー">
         <a href="#terms">用語</a>
@@ -21,6 +21,7 @@
         <a href="#insertion">挿入</a>
         <a href="#merge">マージ</a>
         <a href="#quick">クイック</a>
+        <a href="#compare">比較</a>
         <a href="#quiz">問題</a>
       </nav>
     </div>
@@ -37,22 +38,23 @@
       <div>
         <h2>このページで覚えること</h2>
         <ul class="check-list">
-          <li>バブルソート：隣接交換を繰り返す O(n²)・安定</li>
-          <li>選択ソート：最小値を選んで先頭と交換 O(n²)・不安定・交換回数少</li>
-          <li>挿入ソート：整列済み部分に挿入 O(n²)・安定・ほぼ整列済みでO(n)</li>
-          <li>マージソート：分割統治法 O(n log n)・安定・追加メモリ必要</li>
-          <li>クイックソート：ピボット分割 平均O(n log n)・最悪O(n²)・不安定</li>
-          <li>5ソートの計算量・安定性・メモリ使用量・使いどころの比較</li>
-          <li>安定ソート（バブル・挿入・マージ）と不安定ソート（選択・クイック）の違い</li>
+          <li>バブルソート：隣接交換を繰り返す。O(n²)・安定・実装が簡単</li>
+          <li>選択ソート：未整列部分から最小値を選んで交換。O(n²)・不安定・交換回数が少ない</li>
+          <li>挿入ソート：整列済み部分に新しい要素を挿入。O(n²)・安定・ほぼ整列済みでO(n)</li>
+          <li>マージソート：分割統治法。半分に分割→整列→統合。O(n log n)・安定・追加メモリ必要</li>
+          <li>クイックソート：ピボットで分割し再帰的に整列。平均O(n log n)・最悪O(n²)・不安定</li>
+          <li><strong>最重要：5ソートの計算量と安定性の比較（FE頻出）</strong></li>
+          <li>安定ソートの定義（同じ値の相対順序が保存される）</li>
+          <li>分割統治法を使うソート：マージソート・クイックソート</li>
         </ul>
       </div>
       <aside class="priority-box">
         <h2>出題優先度</h2>
         <dl>
-          <div><dt>高</dt><dd>各ソートの計算量（O(n²) / O(n log n)）と安定性</dd></div>
-          <div><dt>高</dt><dd>クイックソートとマージソートの違い</dd></div>
-          <div><dt>中</dt><dd>バブル・選択・挿入の擬似コードと動作の違い</dd></div>
-          <div><dt>中</dt><dd>ソートの使い分け（データ量・整列状態・安定性）</dd></div>
+          <div><dt>高</dt><dd>5ソートの計算量と安定性の比較、O(n²)とO(n log n)の違い</dd></div>
+          <div><dt>高</dt><dd>クイックソートの最悪O(n²)が発生する条件、マージソートの追加メモリ</dd></div>
+          <div><dt>中</dt><dd>各ソートの動作イメージ、分割統治法の概念</dd></div>
+          <div><dt>中</dt><dd>ほぼ整列済みデータでの挿入ソートの高速性（最良O(n)）</dd></div>
         </dl>
       </aside>
     </section>
@@ -63,348 +65,238 @@
         <table>
           <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
           <tbody>
-            <tr><td>バブルソート</td><td>隣接交換を繰り返す整列</td><td>O(n²)・安定・実装が簡単</td></tr>
-            <tr><td>選択ソート</td><td>未整列部分から最小値を選んで先頭と交換</td><td>O(n²)・不安定・交換回数が少ない</td></tr>
-            <tr><td>挿入ソート</td><td>整列済み部分に新しい要素を挿入</td><td>O(n²)・安定・ほぼ整列済みでO(n)</td></tr>
-            <tr><td>マージソート</td><td>分割統治法（分割→整列→統合）</td><td>O(n log n)・安定・追加メモリ必要</td></tr>
-            <tr><td>クイックソート</td><td>ピボットで分割し再帰的に整列</td><td>平均O(n log n)・最悪O(n²)・不安定</td></tr>
-            <tr><td>安定ソート</td><td>同じ値の順序関係が保存される整列</td><td>バブル・挿入・マージは安定</td></tr>
-            <tr><td>分割統治法</td><td>問題を分割し、解いて統合する手法</td><td>マージソート・クイックソートが該当</td></tr>
+            <tr><td>バブルソート</td><td>隣接交換を繰り返す整列</td><td>O(n²)・安定・実装簡単</td></tr>
+            <tr><td>選択ソート</td><td>最小値を選んで先頭と交換</td><td>O(n²)・不安定・交換回数少</td></tr>
+            <tr><td>挿入ソート</td><td>整列済み部に新要素を挿入</td><td>O(n²)・安定・ほぼ整列済みでO(n)</td></tr>
+            <tr><td>マージソート</td><td>分割統治で整列→統合</td><td>O(n log n)・安定・追加メモリ必要</td></tr>
+            <tr><td>クイックソート</td><td>ピボットで分割し再帰的整列</td><td>平均O(n log n)・最悪O(n²)・不安定</td></tr>
+            <tr><td>安定ソート</td><td>同じ値の相対順序が保存される</td><td>バブル/挿入/マージは安定</td></tr>
+            <tr><td>分割統治法</td><td>問題を分割→解決→統合</td><td>マージソート・クイックソート</td></tr>
+            <tr><td>ピボット</td><td>クイックソートの基準値</td><td>選択が悪いと最悪O(n²)</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <section id="tree-basics" class="lesson-section">
-      <h2>1. 木構造とは何か</h2>
-      <p>木構造（Tree）は、<strong>1つの根（root）から始まり、親→子という階層構造を持つデータ構造</strong>です。配列や連結リストでは階層を表現できないため、フォルダ構造・HTML DOM・組織図・決定木・データベースのインデックス（B木）などに使われます。</p>
-      <p>木はグラフの一種ですが、次の3つの制約があります：①閉路（ループ）がない ②親は1つだけ ③根が1つだけ。この制約があるからこそ、木は階層構造を表現するのに最適です。</p>
+    <section id="bubble" class="lesson-section">
+      <h2>1. バブルソート</h2>
+      <p>バブルソートは<strong>隣り合う要素を比較し、順序が逆なら交換する</strong>操作を繰り返すアルゴリズムです。大きい値が泡のように右へ移動していきます。</p>
 
       <figure class="wide-diagram">
-        <figcaption>木構造の基本用語</figcaption>
-        <pre>          [A] ←根（root）
-         /   \
-       [B]   [C] ←葉（子を持たない）
-      /   \
-    [D]   [E] ←葉
-   葉      葉
+        <figcaption>バブルソートの動作（[5,3,4,1,2] を昇順に）</figcaption>
+        <pre>初期: [5, 3, 4, 1, 2]
 
-  ・根（root）: A
-  ・親（parent）: AはBとCの親
-  ・子（child）: BとCはAの子
-  ・葉（leaf）: C, D, E（子を持たないノード）
-  ・辺（edge）: ノードをつなぐ線</pre>
+    1周目: 5と3を交換→[3,5,4,1,2]
+           5と4を交換→[3,4,5,1,2]
+           5と1を交換→[3,4,1,5,2]
+           5と2を交換→[3,4,1,2,5]  ←最大値5が右端に
+
+    2周目: [3,4,1,2,5] → [3,1,4,2,5] → [3,1,2,4,5]
+
+    3周目: [3,1,2,4,5] → [1,3,2,4,5] → [1,2,3,4,5]
+
+    結果: [1,2,3,4,5]
+    計算量: O(n²) / 安定 / 実装が最も簡単</pre>
       </figure>
     </section>
 
-    <section id="binary-tree" class="lesson-section">
-      <h2>2. 二分木（Binary Tree）</h2>
-      <p>二分木は、<strong>1つのノードが「左の子」「右の子」の最大2つまで子を持つ木構造</strong>です。木構造の中でも最も基本的で、後のBST・ヒープ・探索アルゴリズムの基礎になります。</p>
-      <p>各ノードは <code>key</code>（値）、<code>left</code>（左の子への参照）、<code>right</code>（右の子への参照）の3要素を持ちます。</p>
+    <section id="selection" class="lesson-section">
+      <h2>2. 選択ソート</h2>
+      <p>選択ソートは<strong>未整列部分から最小値を探し、未整列部分の先頭と交換する</strong>操作を繰り返します。交換回数が少ないのが特徴です。</p>
 
-      <h3>2-1. 満二分木 vs 完全二分木</h3>
+      <figure class="wide-diagram">
+        <figcaption>選択ソートの動作（[5,3,4,1,2]）</figcaption>
+        <pre>初期: [5, 3, 4, 1, 2]
+
+    1周目: 最小値1（位置4）を先頭と交換→[1, 3, 4, 5, 2]
+    2周目: 最小値2（位置5）を2番目と交換→[1, 2, 4, 5, 3]
+    3周目: 最小値3（位置5）を3番目と交換→[1, 2, 3, 5, 4]
+    4周目: 最小値4（位置5）を4番目と交換→[1, 2, 3, 4, 5]
+
+    結果: [1,2,3,4,5]
+    計算量: O(n²) / 不安定 / 交換回数が少ない（n-1回）</pre>
+      </figure>
+    </section>
+
+    <section id="insertion" class="lesson-section">
+      <h2>3. 挿入ソート</h2>
+      <p>挿入ソートは<strong>整列済み部分に新しい要素を正しい位置に挿入する</strong>操作を繰り返します。トランプの手札を並べるイメージです。ほぼ整列済みのデータでは高速（O(n)）です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>挿入ソートの動作（[5,3,4,1,2]）</figcaption>
+        <pre>初期: [5 | 3, 4, 1, 2]（左側が整列済み）
+
+    Step1: 3を挿入→[3, 5 | 4, 1, 2]
+    Step2: 4を挿入→[3, 4, 5 | 1, 2]
+    Step3: 1を挿入→[1, 3, 4, 5 | 2]
+    Step4: 2を挿入→[1, 2, 3, 4, 5]
+
+    結果: [1,2,3,4,5]
+    計算量: O(n²) / 安定 / ほぼ整列済みで最良O(n)</pre>
+      </figure>
+    </section>
+
+    <section id="merge" class="lesson-section">
+      <h2>4. マージソート</h2>
+      <p>マージソートは<strong>分割統治法</strong>を使います。配列を半分に分割→各部分を再帰的に整列→整列済みの2つをマージ（統合）します。安定でO(n log n)ですが、追加メモリが必要です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>マージソートの動作（[5,3,4,1,2]）</figcaption>
+        <pre>           [5, 3, 4, 1, 2]
+           /               \
+      [5, 3, 4]          [1, 2]
+      /        \          /    \
+    [5, 3]    [4]      [1]    [2]
+    /     \
+  [5]     [3]
+    \     /
+    [3, 5] ←マージ
+        \       /
+       [3, 4, 5] ←マージ
+              \         /
+           [1, 2, 3, 4, 5] ←マージ
+
+    計算量: O(n log n) / 安定 / 追加メモリO(n)必要</pre>
+      </figure>
+    </section>
+
+    <section id="quick" class="lesson-section">
+      <h2>5. クイックソート</h2>
+      <p>クイックソートは<strong>ピボットを基準に、小さい値を左、大きい値を右に分割</strong>し、各部分を再帰的に整列します。平均的には最も高速ですが、ピボット選択が悪いと最悪O(n²)になります。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>クイックソートの動作（ピボット=先頭値）</figcaption>
+        <pre>[5, 3, 4, 1, 2]  ピボット=5
+
+    分割: 5より小→[3,4,1,2] / ピボット[5] / 5より大→[]
+
+    [3,4,1,2] ピボット=3
+    分割: 3より小→[1,2] / [3] / 3より大→[4]
+
+    [1,2] ピボット=1
+    分割: [] / [1] / [2]
+
+    統合: [1,2] + [3] + [4] + [5] = [1,2,3,4,5]
+
+    計算量: 平均O(n log n) / 最悪O(n²) / 不安定</pre>
+      </figure>
+    </section>
+
+    <section id="compare" class="lesson-section">
+      <h2>6. 5ソート比較表</h2>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>項目</th><th>満二分木</th><th>完全二分木</th></tr></thead>
+          <thead><tr><th>ソート名</th><th>平均計算量</th><th>最悪計算量</th><th>安定性</th><th>追加メモリ</th><th>特徴</th></tr></thead>
           <tbody>
-            <tr><td>定義</td><td>全てのノードが0個または2個の子を持つ</td><td>最下段以外は全て埋まり、最下段は左から詰まっている</td></tr>
-            <tr><td>子の数</td><td>0個または2個のみ（1個の子はNG）</td><td>最下段は左から順に埋まる（右が欠けてもOK）</td></tr>
-            <tr><td>最下段</td><td>制約なし（葉はどの段でもOK）</td><td>最下段の葉は左詰め</td></tr>
-            <tr><td>使用場面</td><td>理論的な分類</td><td>ヒープの実装</td></tr>
+            <tr><td>バブルソート</td><td>O(n²)</td><td>O(n²)</td><td>安定</td><td>不要</td><td>実装が最も簡単</td></tr>
+            <tr><td>選択ソート</td><td>O(n²)</td><td>O(n²)</td><td>不安定</td><td>不要</td><td>交換回数が少ない</td></tr>
+            <tr><td>挿入ソート</td><td>O(n²)</td><td>O(n²)</td><td>安定</td><td>不要</td><td>ほぼ整列済みなら最良O(n)</td></tr>
+            <tr><td>マージソート</td><td>O(n log n)</td><td>O(n log n)</td><td>安定</td><td>O(n)必要</td><td>分割統治・外部記憶向き</td></tr>
+            <tr><td>クイックソート</td><td>O(n log n)</td><td>O(n²)</td><td>不安定</td><td>不要</td><td>平均最速・ピボット選択重要</td></tr>
           </tbody>
         </table>
       </div>
-
-      <figure class="wide-diagram">
-        <figcaption>満二分木（左）と完全二分木（右）の比較</figcaption>
-        <pre>【満二分木】                【完全二分木】
-       [A]                          [A]
-      /   \                        /   \
-    [B]   [C]                    [B]   [C]
-   /   \                        /   \
- [D]   [E]                    [D]   [E]
-                            （最下段が左から詰まっている）
-・全ノードが0個か2個の子    ・最下段以外は全て埋まっている
-・1個だけの子は存在しない    ・最下段のノードは左から順に</pre>
-      </figure>
-
-      <h3>2-2. 深さと高さ</h3>
-      <p>深さ（depth）は<strong>根からの距離</strong>（根を0とする）。高さ（height）は<strong>葉からの距離</strong>（葉を0とする）。この2つはFE試験で混同しやすいので注意。</p>
-      <pre>深さ0: [A] ←根（depth=0, height=2）
-         /   \
-深さ1: [B]   [C] ←葉（depth=1, height=0）
-      /   \
-深さ2:[D] [E] ←葉（depth=2, height=0）</pre>
-    </section>
-
-    <section id="bst" class="lesson-section">
-      <h2>3. 二分探索木（BST）</h2>
-      <p>二分探索木（Binary Search Tree）は、<strong>左部分木の値 < 親ノードの値 < 右部分木の値</strong>という順序ルールを持つ二分木です。<strong>このルールが全ての部分木で成立する</strong>ことが重要です。</p>
-
-      <figure class="wide-diagram">
-        <figcaption>BSTの例（「左<親<右」が全部分木で成立）</figcaption>
-        <pre>               [8] ←根
-              /    \
-            [3]    [10]
-           /   \       \
-         [1]   [6]     [14]
-              /   \        \
-            [4]   [7]      [16]
-
-・3 の左部分木（1）は3より小さい
-・3 の右部分木（6,4,7）は3より大きい
-・6 の左（4）は6より小さい
-・6 の右（7）は6より大きい
-→ どの部分木を切り取ってもルールが成立！</pre>
-      </figure>
-
-      <h3>3-1. BSTの挿入（insert）</h3>
-      <p>BSTの挿入は「根から比較→左か右へ→空き場所に追加」の繰り返しです。毎回1回の比較で探索範囲が約半分になるため、平均 <strong>O(log n)</strong> で挿入できます。</p>
-
-      <figure class="wide-diagram">
-        <figcaption>BST挿入の流れ（8,3,10,1,6,14,4,7,16 の順に挿入）</figcaption>
-        <pre>Step1: insert(8) → 空なので根になる [8]
-
-Step2: insert(3) → 3<8 左へ    [8]
-                              /
-                            [3]
-
-Step3: insert(10) → 10>8 右へ  [8]
-                              /   \
-                            [3]  [10]
-
-Step4-5: insert(1), insert(14)
-        [8]                    [8]
-       /   \          →       /   \
-     [3]  [10]              [3]   [10]
-    /               \       /        \
-  [1]              [14]   [1]       [14]
-
-Step6-9: insert(6,4,7,16) → 最終形:
-               [8]
-              /    \
-            [3]    [10]
-           /   \       \
-         [1]   [6]     [14]
-              /   \        \
-            [4]   [7]      [16]</pre>
-      </figure>
-
-      <h3>3-2. BSTの探索（search）</h3>
-      <p>search(7) の流れ：根(8)と比較→7<8で左→3と比較→7>3で右→6と比較→7>6で右→7と一致！<strong>比較回数は木の高さに比例</strong>します。</p>
-
-      <h3>3-3. BSTが高速な理由 O(log n)</h3>
-      <p>挿入も探索も毎回「左か右か」の1回の比較で進み、探索範囲が毎回1/2になります。n→n/2→n/4→n/8→...→1、つまり 2^k = n → k = log₂(n) の形です。<strong>ただし偏った木（片側にだけ伸びる）では最悪 O(n) になる</strong>ことに注意。</p>
-    </section>
-
-    <section id="dfs" class="lesson-section">
-      <h2>4. DFS（深さ優先探索）</h2>
-      <p>DFSは「<strong>深く潜ってから戻る</strong>」探索方法です。木構造では根→左の部分木→右の部分木の順で進みます。DFSには3種類の訪問順があります。</p>
-
-      <figure class="wide-diagram">
-        <figcaption>DFS 3種の訪問順（同一木での比較）</figcaption>
-        <pre>           [A]
-          /   \
-        [B]   [C]
-       /   \
-     [D]   [E]
-
-【前順（Preorder）親→左→右】
-  訪問順: A → B → D → E → C
-  用途: 木のコピー作成
-
-【中順（Inorder）左→親→右】
-  訪問順: D → B → E → A → C
-  ★ BSTでは中順 = 昇順ソートになる！（最重要）
-
-【後順（Postorder）左→右→親】
-  訪問順: D → E → B → C → A
-  用途: 木の削除（子から先に処理）</pre>
-      </figure>
-
-      <h3>4-1. DFS（前順）のコード</h3>
-      <pre>function preorder(node):
-    if node is null: return
-    visit(node)              // 親を処理
-    preorder(node.left)      // 左の部分木へ
-    preorder(node.right)     // 右の部分木へ</pre>
-      <p>DFSは再帰で簡潔に書けます。反復版ではスタックを使います。</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>走査種別</th><th>訪問順</th><th>BSTでの性質</th><th>主な用途</th></tr></thead>
-          <tbody>
-            <tr><td>前順</td><td>親→左→右</td><td>木の構造そのまま</td><td>木のコピー</td></tr>
-            <tr><td>中順</td><td>左→親→右</td><td>昇順ソート順</td><td>BSTのソート出力</td></tr>
-            <tr><td>後順</td><td>左→右→親</td><td>子から先に処理</td><td>木の削除</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="bfs" class="lesson-section">
-      <h2>5. BFS（幅優先探索）</h2>
-      <p>BFSは「<strong>横に広がりながら進む</strong>」探索方法です。DFSが「深く潜る」のに対し、BFSはレベル（階層）ごとに探索します。</p>
-
-      <figure class="wide-diagram">
-        <figcaption>BFS レベル順訪問（キュー動作つき）</figcaption>
-        <pre>           [A] ←レベル0
-          /   \
-        [B]   [C] ←レベル1
-       /   \
-     [D]   [E] ←レベル2
-
-BFS訪問順: A → B → C → D → E
-（上から下へ、左から右へ）
-
-キュー動作:
-  初期: [A]
-  A取出→訪問→B,C追加: [B,C]
-  B取出→訪問→D,E追加: [C,D,E]
-  C取出→訪問: [D,E]
-  D取出→訪問: [E]
-  E取出→訪問: [] →終了</pre>
-      </figure>
-
-      <h3>5-1. BFSがキューを使う理由</h3>
-      <p>BFSは「<strong>先に見つけたノードから順に処理する</strong>」性質を持ちます。これはキュー（FIFO: First-In First-Out）の動作と一致するため、BFSは必ずキューを使います。</p>
-
-      <h3>5-2. BFSのコード</h3>
-      <pre>function bfs(root):
-    if root is null: return
-    queue = new Queue()
-    queue.enqueue(root)
-    while queue is not empty:
-        node = queue.dequeue()
-        visit(node)
-        if node.left is not null:
-            queue.enqueue(node.left)
-        if node.right is not null:
-            queue.enqueue(node.right)</pre>
-    </section>
-
-    <section class="lesson-section">
-      <h2>6. DFS vs BFS 比較</h2>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>項目</th><th>DFS（深さ優先）</th><th>BFS（幅優先）</th></tr></thead>
-          <tbody>
-            <tr><td>進み方</td><td>深く潜ってから戻る</td><td>横に広がってから下へ</td></tr>
-            <tr><td>使用データ構造</td><td>再帰 または スタック（LIFO）</td><td>キュー（FIFO）</td></tr>
-            <tr><td>訪問順序</td><td>部分木の構造を優先</td><td>距離（レベル）を優先</td></tr>
-            <tr><td>主な用途</td><td>木構造の走査・BSTソート出力</td><td>最短経路探索・レベル順出力</td></tr>
-            <tr><td>メモリ使用</td><td>木の高さに比例（再帰深度）</td><td>木の幅に比例（キュー容量）</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="lesson-section">
-      <h2>7. DFS中順 = BST昇順（最重要ポイント）</h2>
-      <p>FE試験で最も差がつく論点です：</p>
-      <ul>
-        <li><strong>BSTのルール:</strong> 左 < 親 < 右</li>
-        <li><strong>中順DFSの順番:</strong> 左 → 親 → 右</li>
-        <li><strong>この2つが完全に一致する</strong> → 中順DFS = 昇順ソートになる</li>
-      </ul>
-      <p>つまり「BSTを中順走査すると、値が小さい順に取り出せる」。これは木構造（形）と探索（順番）が結びつく最も重要なポイントで、<strong>午前試験の選択問題でも頻出</strong>です。</p>
-    </section>
-
-    <section class="lesson-section">
-      <h2>8. 木の探索からグラフ探索へ</h2>
-      <p>木は「閉路のないグラフ」として扱えます。DFSもBFSも、木構造だけでなくグラフ探索の基本アルゴリズムです。グラフでは閉路があるため <code>visited</code> 管理が追加で必要になります（第4章で詳しく扱います）。</p>
     </section>
 
     <section id="quiz" class="lesson-section">
       <h2>確認問題</h2>
 
       <details class="quiz-card">
-        <summary>Q1. 二分木において、子を持たないノードを何と呼ぶか。</summary>
-        <p>ア）根　イ）内部ノード　ウ）葉　エ）親</p>
+        <summary>Q1. バブルソートの時間計算量はどれか。</summary>
+        <p>ア）O(n)　イ）O(n log n)　ウ）O(n²)　エ）O(1)</p>
         <details class="answer-toggle">
           <summary>答えを見る ▼</summary>
-          <p>答え: <strong>ウ</strong> — 葉（leaf）は子を持たないノード。根は親を持たないノード、内部ノードは子を持つノード。</p>
+          <p>答え: <strong>ウ</strong> — バブルソートは隣接要素の比較・交換を繰り返す二重ループのためO(n²)。選択ソート・挿入ソートも同じ。</p>
         </details>
       </details>
 
       <details class="quiz-card">
-        <summary>Q2. 二分探索木（BST）の正しい定義はどれか。</summary>
-        <p>ア）左の子 < 親 かつ 親 < 右の子（全部分木で成立）<br>イ）左の子 > 親 かつ 親 > 右の子<br>ウ）全てのノードが2つの子を持つ<br>エ）最下段が左から詰まっている</p>
+        <summary>Q2. 選択ソートの特徴として正しいものはどれか。</summary>
+        <p>ア）安定ソートである　イ）交換回数が少ない　ウ）O(n log n)で動作する　エ）再帰的に実装される</p>
         <details class="answer-toggle">
           <summary>答えを見る ▼</summary>
-          <p>答え: <strong>ア</strong> — BSTは「左部分木 < 親 < 右部分木」が全部分木で成立する二分木。イは逆、ウは満二分木、エは完全二分木の説明。</p>
+          <p>答え: <strong>イ</strong> — 選択ソートは各周で1回だけ交換するため交換回数がn-1回と少ない。不安定、O(n²)、再帰的ではない。</p>
         </details>
       </details>
 
       <details class="quiz-card">
-        <summary>Q3. 幅優先探索（BFS）で使用するデータ構造はどれか。</summary>
-        <p>ア）スタック　イ）キュー　ウ）配列　エ）ハッシュ表</p>
+        <summary>Q3. ほぼ整列済みのデータに対して最も高速なソートはどれか。</summary>
+        <p>ア）バブルソート　イ）選択ソート　ウ）挿入ソート　エ）クイックソート</p>
         <details class="answer-toggle">
           <summary>答えを見る ▼</summary>
-          <p>答え: <strong>イ</strong> — BFSは「先に見つけたノードから順に処理」するためFIFOのキューを使う。DFSは再帰またはスタック（LIFO）を使う。</p>
+          <p>答え: <strong>ウ</strong> — 挿入ソートはほぼ整列済みの場合、各要素の挿入箇所が近く、最良O(n)で動作する。</p>
         </details>
       </details>
 
       <details class="quiz-card">
-        <summary>Q4. 次の木を前順走査（親→左→右）した結果を選べ。A─(B─(D,E), C) の場合。</summary>
-        <p>ア）A, B, C, D, E　イ）A, B, D, E, C　ウ）D, B, E, A, C　エ）D, E, B, C, A</p>
+        <summary>Q4. マージソートの時間計算量はどれか。</summary>
+        <p>ア）O(n)　イ）O(n log n)　ウ）O(n²)　エ）O(log n)</p>
         <details class="answer-toggle">
           <summary>答えを見る ▼</summary>
-          <p>答え: <strong>イ</strong> — 前順（親→左→右）: A（親）→ B（左）→ D（Bの左）→ E（Bの右）→ C（Aの右）。アは不正、ウは中順、エは後順。</p>
+          <p>答え: <strong>イ</strong> — マージソートは分割（log n段階）×統合（各段階n回）で全体O(n log n)。最悪でもO(n log n)。</p>
         </details>
       </details>
 
       <details class="quiz-card">
-        <summary>Q5. 二分探索木において中順走査を行うと得られる結果はどれか。</summary>
-        <p>ア）後順の逆順　イ）ランダムな順序　ウ）昇順ソートされた順序　エ）レベル順</p>
+        <summary>Q5. クイックソートの最悪時間計算量はどれか。</summary>
+        <p>ア）O(n)　イ）O(n log n)　ウ）O(n²)　エ）O(log n)</p>
         <details class="answer-toggle">
           <summary>答えを見る ▼</summary>
-          <p>答え: <strong>ウ</strong> — BSTの「左<親<右」と中順DFSの「左→親→右」が完全一致するため、中順走査 = 昇順ソートになる。これはFE試験最重要論点。</p>
+          <p>答え: <strong>ウ</strong> — ピボット選択が悪く、毎回偏った分割になるとO(n²)。整列済みデータで先頭ピボットを選ぶと発生しやすい。</p>
         </details>
       </details>
 
       <details class="quiz-card">
-        <summary>Q6. 満二分木の説明として正しいものはどれか。</summary>
-        <p>ア）全ての葉が同じ深さにある　イ）全てのノードが0個または2個の子を持つ　ウ）最下段が左から詰まっている　エ）全てのノードが2つの子を持つ</p>
+        <summary>Q6. 安定ソートはどれか。</summary>
+        <p>ア）選択ソート　イ）クイックソート　ウ）バブルソート　エ）上記すべて</p>
         <details class="answer-toggle">
           <summary>答えを見る ▼</summary>
-          <p>答え: <strong>イ</strong> — 満二分木は全ノードが0個または2個の子を持つ。アは完全二分木の条件ではない、ウは完全二分木、エは子を持たない葉が存在するため誤り。</p>
+          <p>答え: <strong>ウ</strong> — 安定なのはバブルソート・挿入ソート・マージソート。選択ソートとクイックソートは不安定。</p>
         </details>
       </details>
 
       <details class="quiz-card">
-        <summary>Q7. BSTに [8,3,10,1,6,14,4,7,16] を順に挿入したとき、ノード6の左の子はどれか。</summary>
-        <p>ア）1　イ）4　ウ）7　エ）なし</p>
+        <summary>Q7. 分割統治法を使うソートはどれか。</summary>
+        <p>ア）バブルソートと選択ソート　イ）マージソートとクイックソート　ウ）挿入ソートとバブルソート　エ）選択ソートと挿入ソート</p>
         <details class="answer-toggle">
           <summary>答えを見る ▼</summary>
-          <p>答え: <strong>イ</strong> — insert(4)のとき 4<8→左、4>3→右、4<6→左 でノード6の左の子になる。7は6の右の子、1は3の左の子。</p>
+          <p>答え: <strong>イ</strong> — 分割統治法（問題を小さく分割→解決→統合）を使うのはマージソートとクイックソート。</p>
         </details>
       </details>
 
       <details class="quiz-card">
-        <summary>Q8. 深さ優先探索（DFS）で使うデータ構造として最も適切なものはどれか。</summary>
-        <p>ア）キュー　イ）スタック（または再帰）　ウ）ハッシュ表　エ）連結リスト</p>
+        <summary>Q8. 追加メモリを必要とするソートはどれか。</summary>
+        <p>ア）バブルソート　イ）選択ソート　ウ）挿入ソート　エ）マージソート</p>
         <details class="answer-toggle">
           <summary>答えを見る ▼</summary>
-          <p>答え: <strong>イ</strong> — DFSは再帰呼び出し（システムスタック）または明示的なスタックで実装する。BFSはキューを使う。</p>
+          <p>答え: <strong>エ</strong> — マージソートは統合時に一時配列が必要で追加メモリO(n)を使う。他の4つは元の配列内で整列可能。</p>
         </details>
       </details>
 
       <details class="quiz-card">
-        <summary>Q9. BSTの探索が平均O(log n)になる理由として最も適切なものはどれか。</summary>
-        <p>ア）全てのノードを一度ずつ訪問するから　イ）毎回探索範囲が約1/2になるから　ウ）キューを使って効率的に探索するから　エ）ハッシュ関数で直接計算するから</p>
+        <summary>Q9. 交換回数が最も少ないソートはどれか。</summary>
+        <p>ア）バブルソート　イ）選択ソート　ウ）挿入ソート　エ）マージソート</p>
         <details class="answer-toggle">
           <summary>答えを見る ▼</summary>
-          <p>答え: <strong>イ</strong> — BSTは毎回「左か右か」の比較で探索範囲が約1/2になる。n→n/2→n/4→...→1 で 2^k=n → k=log₂n。ただし偏った木では最悪O(n)。</p>
+          <p>答え: <strong>イ</strong> — 選択ソートは各周で最小値を見つけて1回だけ交換。合計n-1回。バブルソートはデータ次第で多数の交換が発生。</p>
         </details>
       </details>
 
       <details class="quiz-card">
-        <summary>Q10. 次のうち、木構造とグラフ構造の違いとして正しいものはどれか。</summary>
-        <p>ア）木には閉路がないが、グラフには閉路があってもよい　イ）グラフにはノードがない　ウ）木は必ず完全二分木である　エ）グラフは根を必ず1つ持つ</p>
+        <summary>Q10. クイックソートの平均計算量がO(n log n)になる理由はどれか。</summary>
+        <p>ア）隣接要素だけを交換するから　イ）最小値を選ぶから　ウ）分割統治で毎回約半分に分割されるから　エ）データが整列済み前提だから</p>
         <details class="answer-toggle">
           <summary>答えを見る ▼</summary>
-          <p>答え: <strong>ア</strong> — 木は「閉路のないグラフ」であり、閉路なし・親1つ・根1つの制約がある。グラフにはこれらの制約がない。イ・ウ・エはいずれも誤り。</p>
+          <p>答え: <strong>ウ</strong> — クイックソートはピボットで配列を約半分に分割できれば、分割の深さlog n×各段階n回でO(n log n)。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q11. 次のうち、安定かつO(n log n)のソートはどれか。</summary>
+        <p>ア）バブルソート　イ）選択ソート　ウ）マージソート　エ）クイックソート</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — マージソートは安定かつO(n log n)。バブルソートは安定だがO(n²)、クイックソートはO(n log n)だが不安定。</p>
         </details>
       </details>
     </section>
