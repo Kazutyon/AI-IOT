@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>在庫管理とシミュレーション | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Strategy</p>
+        <h1>在庫管理とシミュレーション</h1>
+        <p class="lead">限られた資源を最適に管理するためのOR（オペレーションズ・リサーチ）応用編として、在庫のトレードオフを最適化する「EOQ・ROP」と、不確実な要因を扱う「モンテカルロ法」について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#inventory">在庫管理（EOQ・ROP）</a>
+        <a href="#simulation">シミュレーション</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">経営・戦略</a>
+      <span>在庫管理とシミュレーション</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>在庫管理における「発注コスト」と「保管コスト」のトレードオフ関係を説明できる</li>
+          <li>EOQ（経済的発注量）が「総コストを最小化する発注量」を求める公式であることを理解している</li>
+          <li>ROP（発注点）が「いつ発注するか」を決める指標であり、リードタイムと安全在庫を考慮することを把握している</li>
+          <li>シミュレーションが、数式では解けない複雑・ランダムな現象をモデル化して評価する手法であることを説明できる</li>
+          <li>モンテカルロ法の「乱数生成→試行→繰り返し→統計的分析」の一連の手順を把握している</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>EOQの目的と変数の意味、ROPの構成要素（リードタイム・安全在庫）、モンテカルロ法の特徴</dd></div>
+          <div><dt>中</dt><dd>在庫管理のトレードオフ構造、シミュレーションが線形計画法と異なる点（不確実性の扱い）</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>在庫管理</td><td>「持ちすぎ（コスト増）」と「切らしすぎ（販売機会損失）」のバランスを最適化する活動</td><td>発注コストと保管コストのトレードオフが核心</td></tr>
+            <tr><td>EOQ</td><td>Economic Order Quantity（経済的発注量）</td><td>「1回あたりの発注量」を最適化し、総コストを最小にする</td></tr>
+            <tr><td>ROP</td><td>Reorder Point（発注点）</td><td>「いつ発注するか」を決める在庫の閾値</td></tr>
+            <tr><td>リードタイム</td><td>発注してから商品が届くまでの時間（所要日数）</td><td>ROPの計算に必須。長いほど安全在庫を増やす必要がある</td></tr>
+            <tr><td>安全在庫</td><td>需要の増加やリードタイムの遅れに備えるための予備在庫</td><td>欠品（ストックアウト）を防ぐためのバッファ</td></tr>
+            <tr><td>シミュレーション</td><td>現実の複雑なシステムをモデル化し、コンピュータ上で再現して評価する手法</td><td>数式（LPなど）で解けないランダムな事象を扱える</td></tr>
+            <tr><td>モンテカルロ法</td><td>乱数を用いて多数の試行を繰り返し、結果の統計的分布を求めるシミュレーション手法</td><td>カジノ（モンテカルロ）が名前の由来。確率評価に強い</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="inventory" class="lesson-section">
+      <h2>1. 在庫管理（EOQとROP）</h2>
+      <p>在庫管理の最大の課題は、<strong>「在庫を持ちすぎると保管コストが増える」</strong>一方で、<strong>「在庫を減らしすぎると欠品して販売機会を逃す」</strong>というトレードオフ（相反関係）をどうバランスさせるかにあります。この2つのコストの合計を最小化するための手法がEOQとROPです。</p>
+      <p><strong>EOQ（経済的発注量）</strong>は、「1回にどれだけ発注するか」を決定する手法です。発注コスト（発注回数が増えると増える）と保管コスト（在庫量が増えると増える）の合計が最小になる発注量を、数式（EOQ = √(2DS / H)）によって求めます。</p>
+      <p>一方、<strong>ROP（発注点）</strong>は、「いつ発注するか」を決定する手法です。在庫が特定の水準まで減ったら発注をかけるわけですが、発注してから届くまでの期間（リードタイム）中に消費される分と、予期せぬ需要増に備える予備（安全在庫）を足し合わせた在庫量をROPとします。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>発注点（ROP）とリードタイムの関係</figcaption>
+        <pre>
+  [ 在庫量 ]
+    ▲
+    │ \
+ 最 │  \  発注点 (ROP) に達したら発注
+ 高 │   \  ────────●───────────────
+ 庫 │    \        │ リードタイム中に消費
+ 存 │     \       │
+ 量 │      \      ●─────────────── 到着
+    │       \     /
+ 安 │        \   / 安全在庫
+ 全 │         \ /
+ 庫 │          ●
+ 存 │
+    └────────────────────────────▶ [ 時間 ]
+        </pre>
+      </figure>
+    </section>
+
+    <section id="simulation" class="lesson-section">
+      <h2>2. シミュレーションとモンテカルロ法</h2>
+      <p>線形計画法（LP）のような数理手法は、条件が明確で数式に落とし込める問題には強力ですが、現実のビジネスには「需要がランダムに変動する」「機械が突然故障する」といった不確実な要素が多く含まれます。このような数式では解けない複雑な問題を評価するのが<strong>シミュレーション</strong>です。</p>
+      <p>シミュレーションの代表的な手法が<strong>モンテカルロ法</strong>です。これは、乱数を用いて不確実な要素（需要やリードタイムなど）を再現し、モデルに当てはめて計算することを何百〜何万回も繰り返します。その結果を統計的に集計・分析することで、「欠品が発生する確率」や「期待される平均利益」などを予測します。</p>
+      <p>モンテカルロ法の手順は、①現実のモデル化、②乱数の生成、③試行計算、④繰り返し、⑤統計的分析の5ステップです。試行回数を増やせば増やすほど、結果の精度（信頼性）が向上するという特徴があります。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>モンテカルロ法の手順</figcaption>
+        <pre>
+  [ 1. モデル化 ]
+  現実のビジネスルール（在庫の増減など）を定義
+          │
+  [ 2. 乱数生成 ]
+  需要やリードタイムなどの不確実な要素を乱数で再現
+          │
+  [ 3. 試行計算 ]
+  モデルに乱数を当てはめて、1回分の結果を算出
+          │
+  [ 4. 繰り返し ]
+  数百〜数万回繰り返し、結果の分布を集計
+          │
+  [ 5. 統計的分析 ]
+  欠品確率や平均在庫などを求め、意思決定に活用
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 在庫管理において、「発注コスト」と「保管コスト」の関係として正しいものはどれか。</summary>
+        <p>ア）両者は常に同じ割合で増減する イ）発注コストを減らすと保管コストも減る ウ）発注回数を増やすと発注コストは増えるが、保管コストは減る エ）保管コストは需要に関係なく一定である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 発注回数を増やすと発注コストは増えますが、1回あたりの発注量を減らせるため平均在庫量が下がり、保管コストは減ります。このトレードオフを最適化するのがEOQです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. EOQ（経済的発注量）を求める目的として、最も適切なものはどれか。</summary>
+        <p>ア）欠品による販売機会損失をゼロにする イ）発注コストと保管コストの合計（総コスト）を最小にする ウ）リードタイムを最短にする エ）安全在庫の量を最大化する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — EOQは、相反する2つのコスト（発注コストと保管コスト）の合計が最も小さくなる「1回あたりの最適な発注量」を求める手法です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. EOQの公式（EOQ = √(2DS / H)）において、「S」が表すものはどれか。</summary>
+        <p>ア）年間需要量 イ）1個あたりの年間保管コスト ウ）1回あたりの発注コスト エ）リードタイム</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — EOQの公式で、Dは年間需要量、Sは1回あたりの発注コスト、Hは1個あたりの年間保管コストを表します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. ROP（発注点）が決定するものはどれか。</summary>
+        <p>ア）1回にどれだけ発注するか イ）いつ発注を開始するか ウ）どの取引先から発注するか エ）発注にかかる総コスト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ROP（Reorder Point）は、「いつ発注するか」を決めるための在庫の閾値（しきい値）です。EOQが「どれだけ」を決めるのとは役割が異なります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 発注点（ROP）を計算する際に考慮する必要がないものはどれか。</summary>
+        <p>ア）需要率（1日あたりの消費量） イ）リードタイム（発注から到着までの日数） ウ）安全在庫 エ）1回あたりの発注コスト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — ROP = 需要率 × リードタイム + 安全在庫 で求められます。1回あたりの発注コストはEOQの計算には使いますが、ROPの計算には使いません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 在庫管理において「安全在庫」を設ける主な目的はどれか。</summary>
+        <p>ア）保管コストを意図的に増やすため イ）需要の急増やリードタイムの遅れによる欠品を防ぐため ウ）発注回数を強制的に減らすため エ）仕入先との交渉力を高めるため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 安全在庫は、予測外の需要増加や配送遅延などの不確実性に対するバッファ（緩衝材）として機能し、欠品（ストックアウト）を防ぎます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 線形計画法（LP）ではなく「シミュレーション」が用いられる主なケースはどれか。</summary>
+        <p>ア）制約条件がすべて数式で表現できる場合 イ）目的関数が単純な一次式で表せる場合 ウ）需要や故障率など、不確実でランダムな要因が多く含まれる場合 エ）最適解が必ず実行可能領域の頂点に存在する場合</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — LPは確定した条件での最適化に向いていますが、現実のランダムな事象（不確実性）を扱う場合は、シミュレーションによって確率的な結果を評価します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. モンテカルロ法の特徴として、最も適切なものはどれか。</summary>
+        <p>ア）厳密な数式解を1回の計算で導き出す イ）乱数を用いて多数の試行を繰り返し、結果の統計的分布を求める ウ）線形計画法のシンプレックス法を応用した手法である エ）過去の確定データのみを用いてトレンドを予測する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — モンテカルロ法は、乱数によるランダムな試行を大量に繰り返し、その結果を統計的に処理することで、確率や期待値を評価する手法です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. モンテカルロ法によるシミュレーションの精度を向上させるために実施すべきことはどれか。</summary>
+        <p>ア）試行回数を増やす イ）使用する乱数の範囲を狭める ウ）モデルの複雑さを意図的に減らす エ）1回の試行で得られた結果をそのまま採用する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — モンテカルロ法は、試行回数（サンプル数）を増やせば増やすほど、大数の法則により結果の統計的精度が向上します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. シミュレーションの最終ステップである「統計的分析」の目的として、最も適切なものはどれか。</summary>
+        <p>ア）数式による厳密な最適解を求める イ）多数の試行結果から、欠品確率や平均在庫などの傾向・分布を把握する ウ）シミュレーションモデルのエラーを修正する エ）実際の業務プロセスを停止して検証する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — シミュレーションは厳密な「最適解」を出すものではなく、多数の試行結果を統計的に集計することで、「欠品が起きる確率は○％」といった傾向やリスクを把握し、意思決定に役立てます。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『3_経営・戦略.pdf』 第9章 OR（4. 在庫管理, 5. シミュレーション）</p>
+    </section>
+  </main>
+</body>
+</html>
