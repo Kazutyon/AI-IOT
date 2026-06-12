@@ -4,8 +4,8 @@ const fallbackCurriculum = {
       id: "basic-theory",
       title: "基礎理論",
       category: "technology",
-      status: "in-progress",
-      description: "進数、論理、確率、情報理論、オートマトンを扱う土台の分野。進数・補数・浮動小数点ページを作成済み。",
+      status: "done",
+      description: "進数、論理、確率、情報理論、オートマトンを扱う土台の分野。全11教材ページ完成。",
       href: "fe/technology/basic-theory/index.html",
       items: [
         { title: "進数・基数変換と補数表現", href: "fe/technology/basic-theory/radix-complement.html", status: "done" },
@@ -18,7 +18,7 @@ const fallbackCurriculum = {
         { title: "ハフマン符号と通信路容量", href: "fe/technology/basic-theory/huffman-channel.html", status: "done" },
         { title: "情報理論の応用", href: "fe/technology/basic-theory/infotheory-application.html", status: "done" },
         { title: "形式言語とオートマトン", href: "fe/technology/basic-theory/automaton-regex.html", status: "done" },
-        { title: "正規文法・BNF・チョムスキー階層", href: "fe/technology/basic-theory/grammar-bnf.html", status: "done" }
+        { title: "DFAと状態遷移図", href: "fe/technology/basic-theory/dfa-state-transition.html", status: "done" }
       ]
     },
     {
