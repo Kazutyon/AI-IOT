@@ -26,12 +26,13 @@ const fallbackCurriculum = {
       title: "アルゴリズム",
       category: "technology",
       status: "in-progress",
-      description: "データ構造、探索、整列、計算量、擬似言語問題の対策。3ページ作成済み。",
+      description: "データ構造、探索、整列、計算量、擬似言語問題の対策。4ページ作成済み。",
       href: "fe/technology/algorithm/index.html",
       items: [
         { title: "木構造と探索（二分木・BST・DFS/BFS）", href: "fe/technology/algorithm/algo-tree-search.html", status: "done" },
         { title: "探索アルゴリズム（線形探索・二分探索）", href: "fe/technology/algorithm/algo-search.html", status: "done" },
-        { title: "整列（ソート）アルゴリズム", href: "fe/technology/algorithm/algo-sort.html", status: "done" }
+        { title: "整列（ソート）アルゴリズム", href: "fe/technology/algorithm/algo-sort.html", status: "done" },
+        { title: "フローチャート・再帰・計算量", href: "fe/technology/algorithm/algo-recursion.html", status: "done" }
       ]
     },
     {
@@ -158,8 +159,8 @@ const fallbackCurriculum = {
     {
       title: "2_アルゴリズムとデータ構造.pdf",
       category: "アルゴリズム",
-      status: "未作成",
-      next: "データ構造、探索、整列、計算量、擬似言語へ分割"
+      status: "一部HTML化済み",
+      next: "4ページ作成済み（木構造・探索・整列・再帰計算量）。擬似言語・グラフ・データ構造が未作成"
     },
     {
       title: "1_マネジメント.pdf",

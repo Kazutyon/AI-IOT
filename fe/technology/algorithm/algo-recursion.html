@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>フローチャート・再帰・計算量 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Algorithm</p>
+        <h1>フローチャート・再帰・計算量</h1>
+        <p class="lead">アルゴリズムを図で表すフローチャート、自分自身を呼び出す再帰関数、そしてアルゴリズムの性能を測るBig-O計算量。FE試験の基礎を体系的に整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#flowchart">流れ図</a>
+        <a href="#recursion">再帰</a>
+        <a href="#factorial">階乗</a>
+        <a href="#complexity">計算量</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">アルゴリズム</a>
+      <span>フローチャート・再帰・計算量</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>フローチャートの基本記号6種（端子・処理・判断・ループ端・流れ線・定義済み処理）</li>
+          <li>再帰関数の2大要素：基底条件（停止条件）と再帰条件</li>
+          <li>階乗（n!）の再帰定義とトレース方法</li>
+          <li>フィボナッチ数列の再帰定義と二重呼び出しによる O(2^n) 問題</li>
+          <li>再帰と反復（ループ）の比較（コード簡潔さ vs メモリ効率）</li>
+          <li>Big-O記法の意味と代表的な計算量6種：O(1), O(log n), O(n), O(n log n), O(n²), O(2^n)</li>
+          <li><strong>最重要：nが大きくなるにつれて支配的な項だけ残すのがO記法のルール</strong></li>
+          <li>各アルゴリズムの計算量と代表例の対応</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>再帰関数のトレース（factorial / fibonacci）、Big-Oの種類と代表アルゴリズム</dd></div>
+          <div><dt>高</dt><dd>基底条件と再帰条件の区別、O(n²)とO(n log n)の違い</dd></div>
+          <div><dt>中</dt><dd>フローチャート記号の対応（JIS規格）、再帰vs反復の比較</dd></div>
+          <div><dt>中</dt><dd>O(2^n)の危険性（フィボナッチ素朴再帰）</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>フローチャート</td><td>アルゴリズムを図式で表現したもの。処理の流れを視覚化する</td><td>JIS規格で記号が定められている</td></tr>
+            <tr><td>端子記号</td><td>角丸長方形。アルゴリズムの開始と終了</td><td>「Start」「End」を中に書く</td></tr>
+            <tr><td>処理記号</td><td>長方形。代入や計算などの処理</td><td>最もよく使う記号</td></tr>
+            <tr><td>判断記号</td><td>ひし形。条件分岐（Yes/No）</td><td>if文に対応。2方向に分岐</td></tr>
+            <tr><td>ループ端記号</td><td>六角形。繰り返しの開始・終了</td><td>for文やwhile文の範囲を明示</td></tr>
+            <tr><td>流れ線</td><td>矢印。処理の順序を示す</td><td>原則として上から下、左から右</td></tr>
+            <tr><td>定義済み処理記号</td><td>二重線の長方形。サブルーチン呼び出し</td><td>別の場所で定義された処理を表す</td></tr>
+            <tr><td>再帰関数</td><td>自分自身を呼び出す関数。問題を小さな同じ形に分割</td><td>FE午前・午後で頻出。トレース注意</td></tr>
+            <tr><td>基底条件</td><td>再帰を停止する条件。n=0, n=1が典型</td><td>これがないと無限再帰になる</td></tr>
+            <tr><td>再帰条件</td><td>自分自身を呼び出す条件。n→n-1が基本</td><td>基底条件に向かって収束させる</td></tr>
+            <tr><td>コールスタック</td><td>関数呼び出しの情報を管理するスタック領域</td><td>再帰が深すぎるとスタックオーバーフロー</td></tr>
+            <tr><td>階乗（n!）</td><td>1からnまでの積。0! = 1</td><td>再帰の最も基本的な例</td></tr>
+            <tr><td>フィボナッチ数列</td><td>F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2)</td><td>二重再帰の典型。O(2^n)に注意</td></tr>
+            <tr><td>計算量</td><td>アルゴリズムの性能尺度。時間計算量と空間計算量</td><td>FE午前で頻出</td></tr>
+            <tr><td>Big-O記法</td><td>計算量のオーダーを表す表記法。定数倍・低次項を無視</td><td>nが大きいときの支配的な項だけ残す</td></tr>
+            <tr><td>O(1)</td><td>定数時間。nに関係なく一定</td><td>配列の添字アクセス</td></tr>
+            <tr><td>O(log n)</td><td>対数時間。毎回範囲が1/2</td><td>二分探索、BST探索</td></tr>
+            <tr><td>O(n)</td><td>線形時間。nに比例</td><td>線形探索、配列の合計</td></tr>
+            <tr><td>O(n log n)</td><td>準線形時間。n回のlog n操作</td><td>マージソート、クイックソート（平均）</td></tr>
+            <tr><td>O(n²)</td><td>二乗時間。二重ループ</td><td>バブルソート、選択ソート</td></tr>
+            <tr><td>O(2^n)</td><td>指数時間。nが1増えると2倍</td><td>フィボナッチ素朴再帰</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="flowchart" class="lesson-section">
+      <h2>1. フローチャート（流れ図）</h2>
+      <p>フローチャート（流れ図）は、<strong>アルゴリズムを図式で表現したもの</strong>です。処理の流れを視覚化することで、プログラムを書く前にアルゴリズムの正しさを確認できます。記号はJIS規格で定められており、FE試験でも頻出です。</p>
+
+      <h3>1-1. 基本記号一覧</h3>
+      <figure class="wide-diagram">
+        <figcaption>フローチャートの基本記号（JIS規格）</figcaption>
+        <pre>┌──────────────┐
+    │   START/END  │ ←端子記号（角丸長方形）: 開始・終了
+    └──────────────┘
+
+    ┌──────────────┐
+    │   x = x + 1  │ ←処理記号（長方形）: 代入・計算
+    └──────────────┘
+
+         ┌─┐
+         │?│ ←判断記号（ひし形）: 条件分岐 Yes/No
+         └┬┘
+    Yes ←┘└→ No
+
+    ┌──────────────┐
+    │   for 〜     │ ←ループ端記号（六角形）: 繰り返し開始・終了
+    └──────────────┘
+
+    ──→ 流れ線（矢印）: 処理の順序
+
+    ┌──────────────┐
+    ║  関数呼出()  ║ ←定義済み処理記号（二重線）: サブルーチン
+    └──────────────┘</pre>
+      </figure>
+
+      <h3>1-2. フローチャートの例：1からnまでの合計</h3>
+      <p>1からnまでの整数の合計を求めるアルゴリズムをフローチャートで表現します。</p>
+      <figure class="wide-diagram">
+        <figcaption>1からnまでの合計を求めるフローチャート</figcaption>
+        <pre>     ╔═══════════╗
+     ║  START    ║
+     ╚═════╤═════╝
+     ┌─────┴──────┐
+     │ sum = 0    │
+     │  i  = 1    │
+     └─────┬──────┘
+     ┌─────┴──────┐
+     │  i ≦ n ?   │──── No ──→ ╔═══════════╗
+     └──┬─────┬───┘              ║ sumを出力  ║
+   Yes ←┘     └→ No             ╚═════╤═════╝
+     ┌─────┴──────┐                    │
+     │ sum=sum+i  │              ╔═════╧═════╗
+     │ i = i + 1  │              ║   END     ║
+     └─────┬──────┘              ╚═══════════╝
+           │
+           ↓ (ループ先頭に戻る)</pre>
+      </figure>
+      <p>このフローチャートでは、判断記号「i ≦ n ?」でループの継続条件をチェックし、Noになると結果を出力して終了します。これはfor文やwhile文の考え方と一致します。</p>
+    </section>
+
+    <section id="recursion" class="lesson-section">
+      <h2>2. 再帰関数</h2>
+      <p>再帰（Recursion）とは、<strong>関数が自分自身を呼び出す</strong>プログラミング技法です。大きな問題を「同じ形の小さな問題」に分割して解くことで、複雑な処理を簡潔に表現できます。</p>
+
+      <h3>2-1. 再帰の2大要素</h3>
+      <p>再帰関数には必ず次の2つが必要です。</p>
+      <ul>
+        <li><strong>基底条件（停止条件）</strong>：再帰を停止する条件。これがないと無限に自分を呼び続け、スタックオーバーフローになる。典型的には n=0 や n=1。</li>
+        <li><strong>再帰条件</strong>：自分自身を呼び出す条件。問題を1つ小さいサイズ（例: n→n-1）に縮小し、基底条件に向かって収束させる。</li>
+      </ul>
+
+      <figure class="wide-diagram">
+        <figcaption>再帰関数の基本構造</figcaption>
+        <pre>function recur(n):
+    if (基底条件):        ← ここで止まる
+        return 基底値
+    else:                 ← 再帰条件
+        return n と recur(n-1) を使った計算</pre>
+      </figure>
+
+      <h3>2-2. コールスタックと再帰の動作</h3>
+      <p>再帰呼び出しのたびに、関数の情報（引数・戻り先・ローカル変数）が<strong>コールスタック</strong>に積まれます。基底条件に達すると、スタックを巻き戻しながら計算結果が伝播していきます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>コールスタックの積み上がりと巻き戻し（factorial(3)の例）</figcaption>
+        <pre>【積み上げフェーズ】
+    fact(3) 呼出  →  スタック: [ fact(3) ]
+    fact(2) 呼出  →  スタック: [ fact(3), fact(2) ]
+    fact(1) 呼出  →  スタック: [ fact(3), fact(2), fact(1) ]
+    fact(0) 呼出  →  基底条件！ return 1
+
+    【巻き戻しフェーズ】
+    fact(0)=1 → fact(1)=1×1=1 → fact(2)=2×1=2 → fact(3)=3×2=6
+    スタック:  []  ← 空になった</pre>
+      </figure>
+
+      <h3>2-3. 再帰 vs 反復（ループ）の比較</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>再帰</th><th>反復（ループ）</th></tr></thead>
+          <tbody>
+            <tr><td>実現方法</td><td>関数が自分自身を呼ぶ</td><td>for / while で繰り返す</td></tr>
+            <tr><td>コードの簡潔さ</td><td>簡潔（問題によっては劇的に）</td><td>やや長くなる</td></tr>
+            <tr><td>メモリ使用</td><td>コールスタックを使う（深さに比例）</td><td>スタックを使わない（メモリ効率良）</td></tr>
+            <tr><td>スタックオーバーフロー</td><td>深すぎると危険</td><td>発生しない</td></tr>
+            <tr><td>適する問題</td><td>木構造・分割統治・DFS</td><td>単純な繰り返し</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="factorial" class="lesson-section">
+      <h2>3. 再帰の例：階乗とフィボナッチ</h2>
+
+      <h3>3-1. 階乗（n!）の再帰</h3>
+      <p>階乗 n! は「1からnまでの整数をすべて掛けた値」です。再帰定義は次のとおり。</p>
+      <ul>
+        <li><strong>基底条件</strong>: n = 0 のとき 0! = 1</li>
+        <li><strong>再帰条件</strong>: n ≧ 1 のとき n! = n × (n-1)!</li>
+      </ul>
+
+      <figure class="wide-diagram">
+        <figcaption>factorial(4) の再帰トレース</figcaption>
+        <pre>fact(4) = 4 × fact(3)
+              = 4 × (3 × fact(2))
+              = 4 × (3 × (2 × fact(1)))
+              = 4 × (3 × (2 × (1 × fact(0))))
+              = 4 × (3 × (2 × (1 × 1)))        ← fact(0)=1（基底条件）
+              = 4 × (3 × (2 × 1))
+              = 4 × (3 × 2)
+              = 4 × 6
+              = 24
+
+    計算量: O(n) — n回の再帰呼び出しで済む</pre>
+      </figure>
+
+      <h3>3-2. フィボナッチ数列の再帰</h3>
+      <p>フィボナッチ数列は「前の2つの項の和で次の項を作る」数列です。再帰定義は次のとおり。</p>
+      <ul>
+        <li><strong>基底条件</strong>: F(0) = 0, F(1) = 1</li>
+        <li><strong>再帰条件</strong>: F(n) = F(n-1) + F(n-2) （n ≧ 2）</li>
+      </ul>
+
+      <figure class="wide-diagram">
+        <figcaption>fibonacci(5) の再帰ツリー（二重呼び出し）</figcaption>
+        <pre>                         fib(5)
+                    /                \
+               fib(4)                fib(3)
+            /         \            /        \
+       fib(3)        fib(2)    fib(2)     fib(1)=1
+      /      \      /     \    /     \
+  fib(2)  fib(1) fib(1) fib(0) fib(1) fib(0)
+  /    \    =1     =1    =0     =1    =0
+fib(1) fib(0)
+  =1     =0
+
+★ fib(3) が2回、fib(2) が3回も重複計算されている！
+→ 同じ計算を何度も繰り返すため、計算量は O(2ⁿ)</pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>階乗 fact(n)</th><th>フィボナッチ fib(n)（素朴再帰）</th></tr></thead>
+          <tbody>
+            <tr><td>再帰呼び出し回数</td><td>1回（n→n-1の一本道）</td><td>2回（n→n-1 と n→n-2 の二股）</td></tr>
+            <tr><td>計算量</td><td>O(n)</td><td>O(2ⁿ)</td></tr>
+            <tr><td>重複計算</td><td>なし</td><td>あり（同じ値を何度も計算）</td></tr>
+            <tr><td>n=50での目安</td><td>約50回</td><td>約1.1×10¹⁵（非現実的）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="complexity" class="lesson-section">
+      <h2>4. 計算量とBig-O記法</h2>
+      <p>計算量とは、<strong>アルゴリズムの性能を表す尺度</strong>です。入力サイズnが大きくなったとき、実行時間やメモリ使用量がどのように増えるかを評価します。</p>
+
+      <h3>4-1. Big-O記法のルール</h3>
+      <p>Big-O記法（O記法）は計算量の<strong>オーダー（概略的な増加率）</strong>を表します。ルールは次の2つ。</p>
+      <ol>
+        <li><strong>定数倍を無視する</strong>：3n²も100n²も同じ O(n²)。nが大きくなれば定数の差は無視できる。</li>
+        <li><strong>低次の項を無視する</strong>：n² + 100n + 1000 は O(n²)。nが大きくなれば n² の項が支配的になる。</li>
+      </ol>
+      <p>例えば、あるアルゴリズムのステップ数が 3n² + 5n + 200 の場合、Big-Oでは <strong>O(n²)</strong> と表現します。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Big-O 6種の増加曲線（nが大きくなると差は圧倒的）</figcaption>
+        <pre>計算量
+  ↑
+  │                                          O(2ⁿ) /
+  │                                               /
+  │                                   O(n²)  /──/
+  │                                /────────/
+  │                       O(n log n) /
+  │                    /───────────/
+  │              O(n) /
+  │           /──────/
+  │    O(log n) /
+  │  /───────/
+  │ O(1) ──────────────────────────────
+  └──────────────────────────────────────→ n
+
+     「定対線準二指」と覚える！
+      O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ)</pre>
+      </figure>
+
+      <h3>4-2. Big-O 早見表</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>O記法</th><th>名称</th><th>増え方（nが2倍で）</th><th>代表的なアルゴリズム</th></tr></thead>
+          <tbody>
+            <tr><td>O(1)</td><td>定数時間</td><td>変わらない</td><td>配列のindexアクセス、ハッシュ表検索</td></tr>
+            <tr><td>O(log n)</td><td>対数時間</td><td>+1 増加</td><td>二分探索、BSTの探索</td></tr>
+            <tr><td>O(n)</td><td>線形時間</td><td>2倍</td><td>線形探索、配列の合計計算</td></tr>
+            <tr><td>O(n log n)</td><td>準線形時間</td><td>約2倍+α</td><td>マージソート、クイックソート（平均）</td></tr>
+            <tr><td>O(n²)</td><td>二乗時間</td><td>4倍</td><td>バブルソート、選択ソート、挿入ソート</td></tr>
+            <tr><td>O(2ⁿ)</td><td>指数時間</td><td>2乗</td><td>フィボナッチ素朴再帰、組合せ全探索</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4-3. 具体的な数値で見る計算量の差</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>n</th><th>O(1)</th><th>O(log₂ n)</th><th>O(n)</th><th>O(n log₂ n)</th><th>O(n²)</th><th>O(2ⁿ)</th></tr></thead>
+          <tbody>
+            <tr><td>10</td><td>1</td><td>約3</td><td>10</td><td>約33</td><td>100</td><td>1,024</td></tr>
+            <tr><td>100</td><td>1</td><td>約7</td><td>100</td><td>約664</td><td>10,000</td><td>約10³⁰</td></tr>
+            <tr><td>1,000</td><td>1</td><td>約10</td><td>1,000</td><td>約9,966</td><td>1,000,000</td><td>約10³⁰¹</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>n=1,000のとき、O(n log n)は約1万回、O(n²)は100万回。この差が、FE試験で「どのソートアルゴリズムを選ぶべきか」の判断基準になります。</p>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. フローチャートにおいて、条件分岐を表す記号はどれか。</summary>
+        <p>ア）長方形　イ）ひし形　ウ）角丸長方形　エ）六角形</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 判断記号はひし形で、条件分岐（Yes/No）を表す。長方形は処理記号、角丸長方形は端子記号、六角形はループ端記号。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. フローチャートでサブルーチン（関数呼び出し）を表す記号はどれか。</summary>
+        <p>ア）ひし形　イ）長方形　ウ）二重線の長方形　エ）矢印</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 定義済み処理記号（二重線の長方形）は、別の場所で定義されたサブルーチン（関数）の呼び出しを表す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 再帰関数において、無限ループを防ぐために必ず必要なものはどれか。</summary>
+        <p>ア）ループ端記号　イ）グローバル変数　ウ）基底条件（停止条件）　エ）戻り値</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 基底条件（停止条件）がないと再帰呼び出しが無限に続き、スタックオーバーフローになる。n=0やn=1が典型。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 次の再帰関数 fact(4) の戻り値はいくつか。fact(n) = 1 (n=0), n × fact(n-1) (n≧1)</summary>
+        <p>ア）16　イ）20　ウ）24　エ）120</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 4! = 4 × 3 × 2 × 1 = 24。fact(4) → 4×fact(3) → 4×3×fact(2) → 4×3×2×fact(1) → 4×3×2×1×fact(0)=4×3×2×1×1=24。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. fact(0) の値はいくつと定義されているか。</summary>
+        <p>ア）0　イ）1　ウ）未定義　エ）-1</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 0! = 1 と定義されている。これが階乗の再帰における基底条件になる（n=0で停止して1を返す）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. フィボナッチ数列 F(5) の値はいくつか。F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2)</summary>
+        <p>ア）3　イ）5　ウ）8　エ）13</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — F(0)=0, F(1)=1, F(2)=1+0=1, F(3)=1+1=2, F(4)=2+1=3, F(5)=3+2=5。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 素朴な再帰で実装した fibonacci(n) の時間計算量を示すO記法はどれか。</summary>
+        <p>ア）O(n)　イ）O(log n)　ウ）O(n²)　エ）O(2ⁿ)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — フィボナッチの素朴再帰では1回の呼び出しが2回の再帰呼び出しを生むため、計算量はO(2ⁿ)。同じ値の重複計算が大量に発生する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 再帰と反復（ループ）の比較として正しいものはどれか。</summary>
+        <p>ア）再帰は常に反復より高速である　イ）再帰はコールスタックを使うため深すぎるとスタックオーバーフローの危険がある　ウ）反復は再帰よりコードが常に短い　エ）再帰はメモリを一切使わない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 再帰は呼び出しのたびにコールスタックを消費するため、深さが深すぎるとスタックオーバーフローになる。反復にはこの危険がない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 線形探索の平均時間計算量を示すO記法はどれか。</summary>
+        <p>ア）O(1)　イ）O(log n)　ウ）O(n)　エ）O(n²)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 線形探索は先頭から順に探すため、平均でn/2回、最悪でn回の比較が必要。計算量はO(n)。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 二分探索の時間計算量を示すO記法はどれか。</summary>
+        <p>ア）O(1)　イ）O(log n)　ウ）O(n)　エ）O(n log n)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 二分探索は毎回探索範囲が約1/2になるため、2^k = n → k = log₂ n より O(log n)。整列済み配列が前提。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q11. バブルソートの時間計算量を示すO記法はどれか。</summary>
+        <p>ア）O(n)　イ）O(log n)　ウ）O(n log n)　エ）O(n²)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — バブルソートは二重ループ（外側n回×内側n回）で全要素を比較するため O(n²)。選択ソート・挿入ソートも同じ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q12. 次のうち、最も効率の良い計算量はどれか。</summary>
+        <p>ア）O(1)　イ）O(log n)　ウ）O(n)　エ）O(n²)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — O(1) は定数時間で、nがいくら大きくなっても実行時間は変わらない。効率順: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ)。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q13. Big-O記法で「3n² + 5n + 100」はどのように表されるか。</summary>
+        <p>ア）O(3n²)　イ）O(n² + n)　ウ）O(n²)　エ）O(1)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Big-Oでは定数倍（3）と低次の項（5n, 100）を無視する。nが十分大きいとき n² の項が支配的になるため O(n²) と表す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q14. マージソートの時間計算量を示すO記法はどれか。</summary>
+        <p>ア）O(n)　イ）O(log n)　ウ）O(n log n)　エ）O(2ⁿ)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — マージソートは分割（log n段階）× 統合（各段階n回）で O(n log n)。クイックソートの平均も同じ。O(n²)のソートより高速。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q15. フローチャートで処理の開始と終了を示す記号の形はどれか。</summary>
+        <p>ア）長方形　イ）ひし形　ウ）角丸長方形　エ）六角形</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 端子記号（角丸長方形）はアルゴリズムの開始（Start）と終了（End）を表す。長方形は処理、ひし形は判断、六角形はループ端。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『2_アルゴリズムとデータ構造.pdf』 第1章 1-5〜1-7 フローチャート・再帰・計算量（p38-p57）</p>
+    </section>
+  </main>
+</body>
+</html>
