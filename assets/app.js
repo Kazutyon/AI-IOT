@@ -95,6 +95,7 @@ const fallbackCurriculum = {
         { title: "サーバーとIoTの脅威", href: "fe/technology/security/server-iot-threats.html", status: "done" },
         { title: "クラウド・AI脅威と最新動向", href: "fe/technology/security/cloud-ai-threats.html", status: "done" },
         { title: "暗号技術の基礎", href: "fe/technology/security/cryptography-basics.html", status: "done" },
+        { title: "RSA公開鍵暗号 実験室", href: "fe/technology/security/rsa-lab.html", status: "done" },
         { title: "TLSとPKIの仕組み", href: "fe/technology/security/tls-pki.html", status: "done" },
         { title: "認証技術の基礎", href: "fe/technology/security/authentication-basics.html", status: "done" },
         { title: "高度な認証とプロトコル", href: "fe/technology/security/advanced-auth-protocols.html", status: "done" },
