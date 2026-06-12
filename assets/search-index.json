@@ -1,27 +1,6002 @@
-[
-  { "term": "OSI参照モデル", "summary": "通信を7層に分けたモデル。物理・データリンク・ネットワーク・トランスポート・セッション・プレゼンテーション・アプリケーション層。", "url": "fe/technology/network/index.html", "tags": ["ネットワーク", "プロトコル"] },
-  { "term": "IPアドレス", "summary": "ネットワーク上の機器を識別する番号。IPv4は32ビット、IPv6は128ビット。", "url": "fe/technology/network/index.html", "tags": ["ネットワーク"] },
-  { "term": "TCP", "summary": "信頼性のある通信を提供するトランスポート層プロトコル。3ウェイハンドシェイクで接続確立。", "url": "fe/technology/network/index.html", "tags": ["ネットワーク", "プロトコル"] },
-  { "term": "DNS", "summary": "ドメイン名をIPアドレスに変換するシステム。名前解決とも呼ぶ。", "url": "fe/technology/network/index.html", "tags": ["ネットワーク"] },
-  { "term": "AES", "summary": "共通鍵暗号方式。同じ鍵で暗号化・復号。高速だが鍵配送問題がある。", "url": "fe/technology/security/index.html", "tags": ["セキュリティ", "暗号"] },
-  { "term": "RSA", "summary": "公開鍵暗号方式。公開鍵で暗号化、秘密鍵で復号。鍵配送問題を解決。", "url": "fe/technology/security/index.html", "tags": ["セキュリティ", "暗号"] },
-  { "term": "デジタル署名", "summary": "秘密鍵で署名、公開鍵で検証。なりすまし・改ざん防止に使う。", "url": "fe/technology/security/index.html", "tags": ["セキュリティ", "認証"] },
-  { "term": "二分探索", "summary": "ソート済みデータを半分ずつ絞り込む探索。計算量O(log n)。", "url": "fe/technology/algorithm/algo-search.html", "tags": ["アルゴリズム", "探索"] },
-  { "term": "バブルソート", "summary": "隣接要素を比較・交換するソート。O(n²)。実装が簡単だが遅い。", "url": "fe/technology/algorithm/algo-sort.html", "tags": ["アルゴリズム", "整列"] },
-  { "term": "クイックソート", "summary": "ピボットで分割して再帰的にソート。平均O(n log n)。最悪はO(n²)。", "url": "fe/technology/algorithm/algo-sort.html", "tags": ["アルゴリズム", "整列"] },
-  { "term": "スタック", "summary": "後入れ先出し（LIFO）のデータ構造。関数呼び出しの管理に使われる。", "url": "fe/technology/algorithm/algo-data-structure.html", "tags": ["アルゴリズム", "データ構造"] },
-  { "term": "キュー", "summary": "先入れ先出し（FIFO）のデータ構造。プリンタスプールなどに使われる。", "url": "fe/technology/algorithm/algo-data-structure.html", "tags": ["アルゴリズム", "データ構造"] },
-  { "term": "DFS", "summary": "深さ優先探索。行けるところまで深く探索してから戻る。スタックで実装。", "url": "fe/technology/algorithm/algo-tree-search.html", "tags": ["アルゴリズム", "探索"] },
-  { "term": "BFS", "summary": "幅優先探索。近い順に探索。キューで実装。最短経路の探索に向く。", "url": "fe/technology/algorithm/algo-tree-search.html", "tags": ["アルゴリズム", "探索"] },
-  { "term": "CPU", "summary": "コンピュータの中央処理装置。制御装置・演算装置・レジスタから構成。", "url": "fe/technology/computer/cpu-architecture.html", "tags": ["コンピュータ概論", "ハードウェア"] },
-  { "term": "キャッシュメモリ", "summary": "CPUと主記憶の間にある高速メモリ。参照の局所性を利用して高速化。L1/L2/L3の階層構造。", "url": "fe/technology/computer/memory-cache.html", "tags": ["コンピュータ概論", "メモリ"] },
-  { "term": "仮想記憶", "summary": "ディスクを主記憶の一部として使う仕組み。ページングでメモリを仮想的に拡張。", "url": "fe/technology/computer/virtual-memory-storage.html", "tags": ["コンピュータ概論", "メモリ"] },
-  { "term": "DMA", "summary": "CPUを介さずデバイスが直接メモリにアクセスする方式。CPU負荷を大幅に削減。", "url": "fe/technology/computer/io-scheduling-dma.html", "tags": ["コンピュータ概論", "I/O"] },
-  { "term": "RTOS", "summary": "リアルタイムOS。組込みシステムで使われ、タスクの実行時間が保証される。", "url": "fe/technology/computer/bios-os-types.html", "tags": ["コンピュータ概論", "OS"] },
-  { "term": "IaaS", "summary": "インフラ（VM・ストレージ・ネットワーク）をクラウドで提供するサービス形態。", "url": "fe/technology/cloud/index.html", "tags": ["クラウド"] },
-  { "term": "SaaS", "summary": "アプリケーション全体をクラウドで提供。ユーザーはブラウザで利用するだけ。", "url": "fe/technology/cloud/index.html", "tags": ["クラウド"] },
-  { "term": "補数", "summary": "負の数を表現するための方法。コンピュータでは2の補数を使う。", "url": "fe/technology/basic-theory/index.html", "tags": ["基礎理論", "2進数"] },
-  { "term": "論理演算", "summary": "AND・OR・NOT・XOR。ビット演算やフラグ制御に使われる。", "url": "fe/technology/basic-theory/index.html", "tags": ["基礎理論"] },
-  { "term": "SQLインジェクション", "summary": "悪意あるSQL文を入力してDBを不正操作する攻撃。プリペアドステートメントで対策。", "url": "fe/technology/security/index.html", "tags": ["セキュリティ", "攻撃"] },
-  { "term": "クリティカルパス", "summary": "プロジェクト完了までに必ず通る、余裕ゼロの作業経路。遅れると全体が遅延。", "url": "fe/technology/management/index.html", "tags": ["マネジメント", "スケジュール"] }
+﻿[
+  {
+    "term": "原価計算の基礎",
+    "summary": "原価計算とは、製品やサービスを作るのにかかったコストを計算する仕組みです。企業が利益を出すためには、「いくらで作って、いくらで売れば、どれだけ儲かるのか」を正しく把握する必要があります。そのため...",
+    "url": "fe/strategy/business-strategy/accounting-finance-advanced.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "財務指標（企業の健康診断）",
+    "summary": "財務指標とは、BS・PL・CFの数字を使って、企業の安全性・収益性・効率性を評価するための指標です。企業の健康状態を数値で読み解く「健康診断」のようなもので、投資判断や経営分析に不可欠です。",
+    "url": "fe/strategy/business-strategy/accounting-finance-advanced.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "会計と財務の役割",
+    "summary": "企業の活動を数字で評価する仕組みが「会計・財務」です。会計（Accounting）は、企業で起きた事実をルールに従って正確に記録し、財務諸表（BS・PL・CF）としてまとめる役割を担います。過去...",
+    "url": "fe/strategy/business-strategy/accounting-finance-basic.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "財務諸表の基本（BS・PL・CF）",
+    "summary": "企業の健康状態を数字で読み解くための公式な報告書が財務諸表です。主に3つの表があり、それぞれ異なる視点から企業の状態を示します。",
+    "url": "fe/strategy/business-strategy/accounting-finance-basic.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "損益分岐点分析（BEP）",
+    "summary": "損益分岐点分析は、売上と費用の関係から「利益がちょうどゼロになる売上高」を求める手法です。この売上高を超えれば企業は黒字になり、下回れば赤字になります。目標売上の設定や、コスト構造の改善効果を測...",
+    "url": "fe/strategy/business-strategy/accounting-finance-basic.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "ミクロ経済（需給と市場構造）",
+    "summary": "ミクロ経済は、個別の市場における価格決定や企業・消費者の行動を分析する分野です。市場の価格は、買いたい量を示す「需要曲線」と、売りたい量を示す「供給曲線」が交わる点（均衡価格）で決定されます。一...",
+    "url": "fe/strategy/business-strategy/economics.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "マクロ経済と景気循環",
+    "summary": "マクロ経済は、国全体の経済規模や物価、雇用などを扱います。経済規模を測る代表的な指標がGDP（国内総生産）とGNP（国民総生産）です。GDPは「国内」で生み出された付加価値の合計であり、GNPは...",
+    "url": "fe/strategy/business-strategy/economics.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "経済政策（金融政策と財政政策）",
+    "summary": "景気が過熱したり冷え込んだりしないよう調整するのが経済政策です。大きく分けて、中央銀行（日本銀行）が行う「金融政策」と、政府が行う「財政政策」の2つがあります。この2つの主体と手段を混同しないこ...",
+    "url": "fe/strategy/business-strategy/economics.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "国際経済（為替レートと購買力平価）",
+    "summary": "国際経済において、異なる通貨を交換する比率である「為替レート」は、企業の収益やコストに直結します。円安（円の価値が下がる）になると、輸出企業は海外で安く売れるため有利になりますが、輸入企業や海外...",
+    "url": "fe/strategy/business-strategy/economics.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "TCO（総保有コスト）による投資評価",
+    "summary": "システムを導入する際、「初期費用が安いから」という理由だけで選定すると、後の運用費で莫大なコストがかかり失敗することがあります。これを防ぐために、導入から廃棄までにかかるすべてのコストを合算した...",
+    "url": "fe/strategy/business-strategy/info-system-strategy.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "業務改善と全体最適（BPM / BPR / EA）",
+    "summary": "システムを作る前に、そもそも現在の業務が適切かどうかを見直す必要があります。BPM（業務プロセス管理）は、業務の流れを可視化し、ボトルネックを探して継続的に改善する活動です。一方、BPR（業務改...",
+    "url": "fe/strategy/business-strategy/info-system-strategy.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "ITガバナンスと投資評価",
+    "summary": "IT投資は高額であり、現場の判断で勝手にシステムを導入すると、セキュリティホールになったり、他部署のシステムと連携できなかったりするリスクがあります。ITガバナンスとは、IT投資のルール策定、セ...",
+    "url": "fe/strategy/business-strategy/info-system-strategy.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "PM理論とSL理論（行動と状況対応）",
+    "summary": "リーダーシップには、目標を達成するための行動と、組織をまとめるための行動があります。PM理論は、リーダーの行動を「P行動（Performance：目標達成・成果を出す）」と「M行動（Mainte...",
+    "url": "fe/strategy/business-strategy/leadership-motivation.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "マネジリアル・グリッド",
+    "summary": "マネジリアル・グリッドは、リーダーの行動を「業績への関心（Production）」と「人への関心（People）」の2軸で分類したフレームワークです。PM理論のPとMの概念を、より直感的な9段階...",
+    "url": "fe/strategy/business-strategy/leadership-motivation.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "動機づけ理論（人を動かす心理）",
+    "summary": "仕組み（KGI/KPI/BSC）が完璧でも、人が動かなければ成果は出ません。人の行動を促す心理的なアプローチが「動機づけ理論」です。マズローの欲求5段階説は、人間の欲求は「生理的→安全→社会的→...",
+    "url": "fe/strategy/business-strategy/leadership-motivation.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "経営管理の基礎（KGI / CSF / KPI）",
+    "summary": "経営管理とは、限られた経営資源（ヒト・モノ・カネ・情報）を最適に配分し、企業の目標を達成するための活動です。この活動において、目標を数値化し、進捗を管理するためのフレームワークが不可欠となります。",
+    "url": "fe/strategy/business-strategy/mgmt-org-structure.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "組織構造の種類と特徴",
+    "summary": "経営戦略を実行するために、どのような組織形態（組織構造）を選ぶかは極めて重要です。代表的な3つの形態（職能別、事業部制、マトリクス）には、それぞれ明確なメリットとデメリットがあり、企業の規模や戦...",
+    "url": "fe/strategy/business-strategy/mgmt-org-structure.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "PDCAサイクルとKGI/KPI",
+    "summary": "経営戦略で「どの方向に行くか」が決まったら、次はそれを現場で実行するための仕組みが必要です。その中核となるのがKGIとKPI、そしてそれらを達成するためのPDCAサイクルです。",
+    "url": "fe/strategy/business-strategy/mgmt-pdca-bsc.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "BSC（バランス・スコアカード）",
+    "summary": "KPIを設定する際、財務数値（売上や利益）だけを追いかけると、現場が疲弊したり、顧客満足度が低下したりする「部分最適」に陥るリスクがあります。これを防ぎ、組織全体を俯瞰してバランスよく目標を管理...",
+    "url": "fe/strategy/business-strategy/mgmt-pdca-bsc.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "線形計画法（LP）の仕組み",
+    "summary": "線形計画法は、「限られた資源をどう配分すれば最も利益が大きくなるか（またはコストが最小になるか）」を求めるための数理手法です。この手法は「目的関数」と「制約条件」の2つで構成されます。",
+    "url": "fe/strategy/business-strategy/or-basic.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "待ち行列理論（M/M/1モデル）",
+    "summary": "待ち行列理論は、「客がランダムに到着し、窓口でサービスを受ける」という状況において、平均待ち時間や行列の長さを予測するためのモデルです。最も基本的なモデルがM/M/1モデルです。",
+    "url": "fe/strategy/business-strategy/or-basic.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "在庫管理（EOQとROP）",
+    "summary": "在庫管理の最大の課題は、「在庫を持ちすぎると保管コストが増える」一方で、「在庫を減らしすぎると欠品して販売機会を逃す」というトレードオフ（相反関係）をどうバランスさせるかにあります。この2つのコ...",
+    "url": "fe/strategy/business-strategy/or-inventory-sim.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "シミュレーションとモンテカルロ法",
+    "summary": "線形計画法（LP）のような数理手法は、条件が明確で数式に落とし込める問題には強力ですが、現実のビジネスには「需要がランダムに変動する」「機械が突然故障する」といった不確実な要素が多く含まれます。...",
+    "url": "fe/strategy/business-strategy/or-inventory-sim.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "経営戦略の上位概念とPPM",
+    "summary": "経営戦略を考える大前提として、企業が何を目指し、どんな価値を提供する存在なのかを定義する「上位概念」が必要です。ミッション（存在意義）、ビジョン（未来像）、バリュー（行動基準）を明確にし、自社の...",
+    "url": "fe/strategy/business-strategy/strategy-basic-analysis.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "環境分析手法（SWOT / 3C / 5フォース）",
+    "summary": "戦略を選ぶための材料を集めるのが「環境分析」です。SWOT分析は、自社の「強み・弱み（内部要因）」と、市場の「機会・脅威（外部要因）」を掛け合わせて整理する基本フレームワークです。内部と外部を間...",
+    "url": "fe/strategy/business-strategy/strategy-basic-analysis.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "基本戦略の選択（ポーターの3戦略）",
+    "summary": "分析結果をもとに、企業がとるべき基本戦略（ポーターの3つの基本戦略）を選択します。「差別化戦略」は、他社にはない独自の価値（品質、デザイン、技術など）を提供し、価格競争を避ける戦略です。自社の強...",
+    "url": "fe/strategy/business-strategy/strategy-basic-analysis.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "STP分析（誰に、どう届けるかを決める）",
+    "summary": "STP分析は、経営戦略で決めた「差別化・低価格・集中」といった方向性を、具体的な顧客層に落とし込むためのフレームワークです。「誰に向けてサービスを作るのか」を明確にする3つのステップで構成されます。",
+    "url": "fe/strategy/business-strategy/strategy-marketing.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "4P（マーケティングミックス）と4C",
+    "summary": "STPでターゲットとポジショニングが決まったら、次はそのターゲットに価値を届けるための具体的な施策を設計します。これが4P（Product, Price, Place, Promotion）です...",
+    "url": "fe/strategy/business-strategy/strategy-marketing.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "製品ライフサイクル（PLC）",
+    "summary": "すべての製品には寿命があり、市場投入から撤退までを導入期・成長期・成熟期・衰退期の4段階で辿ります。このライフサイクルの段階に応じて、適切なマーケティング施策（4Pの組み合わせ）を変更する必要が...",
+    "url": "fe/strategy/business-strategy/strategy-marketing.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "技術の計画と開発（ロードマップ・R&D）",
+    "summary": "技術戦略は、経営戦略で決めた「方向性」を技術面で支えるための具体的な計画です。例えば「AIサービスで差別化する」という経営戦略があれば、「独自の学習モデルを開発する」「GPU環境を整備する」とい...",
+    "url": "fe/strategy/business-strategy/tech-strategy.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "技術の保護と互換性（知的財産・標準化）",
+    "summary": "開発した技術が他社に真似されると価値が下がるため、知的財産による保護が重要です。「特許権」は技術的なアイデア（発明）を、「商標権」はサービス名やロゴを、「著作権」はプログラムコードやデザインを保...",
+    "url": "fe/strategy/business-strategy/tech-strategy.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "技術の選択と管理（ポートフォリオ・選定基準）",
+    "summary": "企業が持つすべての技術に無限に投資することはできません。技術ポートフォリオ管理では、各技術を「投資すべき技術」「維持すべき技術」「撤退すべき技術」に分類し、経営資源を最適配分します。例えば、古い...",
+    "url": "fe/strategy/business-strategy/tech-strategy.html",
+    "tags": [
+      "ストラテジ"
+    ]
+  },
+  {
+    "term": "アルゴリズムとは何か",
+    "summary": "アルゴリズムとは、問題を解くための手順を明確に定めたものです。料理のレシピのように「何を、どの順番で、どう処理するか」を定義します。プログラムはアルゴリズムをコンピュータが実行できる形にしたものです。",
+    "url": "fe/technology/algorithm/algo-basic.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "アルゴリズムの記述方法",
+    "summary": "アルゴリズムを表現する方法は主に3つあります。FE試験では擬似言語が使われます。",
+    "url": "fe/technology/algorithm/algo-basic.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "擬似言語の基本構文",
+    "summary": "FE試験ではアルゴリズムを擬似言語で記述します。独特の文法がありますが、基本的な構文はシンプルです。",
+    "url": "fe/technology/algorithm/algo-basic.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "変数とデータ型",
+    "summary": "変数はデータを格納する入れ物です。名前（識別子）と型を持ち、使う前に宣言します。",
+    "url": "fe/technology/algorithm/algo-basic.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "計算量の概念",
+    "summary": "計算量とはアルゴリズムの性能を評価する指標です。同じ問題を解くアルゴリズムでも、計算量が大きく異なることがあります。",
+    "url": "fe/technology/algorithm/algo-basic.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "5-1. 時間計算量と空間計算量",
+    "summary": "Big-O記法は計算量のオーダー（概略的な増加率）を表します。定数倍や低次の項を無視し、最も影響の大きい項だけを残します。",
+    "url": "fe/technology/algorithm/algo-basic.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "5-2. Big-O記法",
+    "summary": "Big-O記法は計算量のオーダー（概略的な増加率）を表します。定数倍や低次の項を無視し、最も影響の大きい項だけを残します。",
+    "url": "fe/technology/algorithm/algo-basic.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "アルゴリズムの評価基準",
+    "summary": "アルゴリズムの良し悪しは次の3つの基準で評価します。",
+    "url": "fe/technology/algorithm/algo-basic.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "順次構造",
+    "summary": "順次構造は上から下へ1行ずつ順番に実行する最も基本的な構造です。すべてのプログラムはこの順次構造を土台に、選択や反復を組み合わせて作られます。",
+    "url": "fe/technology/algorithm/algo-control.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "選択構造（分岐）",
+    "summary": "選択構造は条件によって実行する処理を分岐させる構造です。FE試験では擬似言語での条件分岐の読み取りが問われます。",
+    "url": "fe/technology/algorithm/algo-control.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "反復構造（ループ）",
+    "summary": "反復構造は同じ処理を繰り返し実行する構造です。while文、do-while文、for文の3種類があり、判定タイミングと用途が異なります。",
+    "url": "fe/technology/algorithm/algo-control.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "for文の構造",
+    "summary": "for (初期化; 条件; 更新) 処理 end-for 例: for (i ← 1; i ≦ 5; i ← i + 1) 出力(i) end-for → 出力: 1, 2, 3, 4, 5 ①...",
+    "url": "fe/technology/algorithm/algo-control.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "ネスト（入れ子）構造",
+    "summary": "ネストとは制御構造の中に別の制御構造を入れることです。特に「二重ループ」はFE試験で頻出です。",
+    "url": "fe/technology/algorithm/algo-control.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "擬似言語での制御構造",
+    "summary": "FE試験では擬似言語で制御構造が記述されます。以下の構文を覚えましょう。",
+    "url": "fe/technology/algorithm/algo-control.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "トレース（手動実行）",
+    "summary": "トレースはFE午後試験のアルゴリズム問題で最も重要なスキルです。プログラムを1行ずつ実行し、変数の値の変化を表に記録していきます。",
+    "url": "fe/technology/algorithm/algo-control.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "配列（Array）",
+    "summary": "配列は、同じ型のデータを連続したメモリ領域に格納するデータ構造です。要素は添字（index）で識別し、arr[0], arr[1], arr[2]... のようにアクセスします。",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "配列の長所と短所",
+    "summary": "【挿入前】 [10] [20] [30] [40] [50] [ ] 添字: 0 1 2 3 4 5 Step1: A[4]→A[5], A[3]→A[4], A[2]→A[3], A[1]→A...",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "連結リスト（Linked List）",
+    "summary": "連結リストは、各ノードがデータと次のノードへのポインタを持つデータ構造です。メモリ上に分散して配置され、ポインタでつながっています。",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "連結リストの長所と短所",
+    "summary": "【挿入前】 [10]→[20]→[30]→[40] 【挿入】 新ノード[25]を作成 [25].next = [20].next（= [30]） [20].next = [25] 【挿入後】 [...",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "配列 vs 連結リスト 比較",
+    "summary": "スタックはLIFO（Last-In First-Out：後入れ先出し）のデータ構造です。最後に積んだものが最初に取り出されます。本を積み重ねるイメージです。",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "スタック（Stack）",
+    "summary": "スタックはLIFO（Last-In First-Out：後入れ先出し）のデータ構造です。最後に積んだものが最初に取り出されます。本を積み重ねるイメージです。",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "逆ポーランド記法とスタック",
+    "summary": "逆ポーランド記法（後置記法）は演算子を後ろに書く数式表記で、スタックを使うと簡単に計算できます。FE午前で頻出です。",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "キュー（Queue）",
+    "summary": "キューはFIFO（First-In First-Out：先入れ先出し）のデータ構造です。先に並んだものから順に処理されます。レジの待ち行列のイメージです。",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "スタック vs キュー 比較",
+    "summary": "ハッシュ表は、キーからハッシュ関数で添字を計算し、値にO(1)でアクセスできるデータ構造です。連想配列や辞書の内部実装として広く使われています。",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "ハッシュ表（Hash Table）",
+    "summary": "ハッシュ表は、キーからハッシュ関数で添字を計算し、値にO(1)でアクセスできるデータ構造です。連想配列や辞書の内部実装として広く使われています。",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "衝突（コリジョン）とチェイン法",
+    "summary": "異なるキーが同じハッシュ値になることを衝突（コリジョン）といいます。最も一般的な解決法がチェイン法で、各バケットに連結リストを持たせて衝突したデータを鎖状につなぎます。",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "チェイン法 vs オープンアドレス法",
+    "summary": "FE試験では「どの場面でどのデータ構造を選ぶべきか」が問われます。各データ構造の特性を理解し、用途に応じて適切に選べることが重要です。",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "データ構造の比較と使い分け",
+    "summary": "FE試験では「どの場面でどのデータ構造を選ぶべきか」が問われます。各データ構造の特性を理解し、用途に応じて適切に選べることが重要です。",
+    "url": "fe/technology/algorithm/algo-data-structure.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "グラフの基本概念",
+    "summary": "グラフは頂点（Vertex）と辺（Edge）の集合で構成されるデータ構造です。木構造を一般化したもので、木と違い閉路（サイクル）があってもよい点が最大の違いです。",
+    "url": "fe/technology/algorithm/algo-graph.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "グラフの表現方法",
+    "summary": "グラフをプログラムで扱うには隣接行列か隣接リストの2つの方法があります。グラフの密度によって適切な方法を選びます。",
+    "url": "fe/technology/algorithm/algo-graph.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "DFS（深さ優先探索）グラフ版",
+    "summary": "グラフのDFSはスタックを使って深く潜りながら探索します。木と違い閉路があるため、visited配列で訪問済み頂点を管理することが必須です。",
+    "url": "fe/technology/algorithm/algo-graph.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "BFS（幅優先探索）グラフ版",
+    "summary": "グラフのBFSはキューを使って近い順に広がりながら探索します。こちらもvisited配列で訪問済み頂点を管理します。",
+    "url": "fe/technology/algorithm/algo-graph.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "最短経路問題とダイクストラ法",
+    "summary": "重み付きグラフで2頂点間の重みの和が最小となる経路を求めるのが最短経路問題です。最も有名なアルゴリズムがダイクストラ法です。",
+    "url": "fe/technology/algorithm/algo-graph.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "5-1. ダイクストラ法の条件",
+    "summary": "グラフ: [A]────2────[B] │ ╲ ╱ │ 5│ 4╲ ╱1 │3 │ ╲ ╱ │ [C]────3────[D] Aから各頂点への最短距離を求める: 初期: dist[A]=0,...",
+    "url": "fe/technology/algorithm/algo-graph.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "5-2. 計算量",
+    "summary": "単純な実装では O(V²)。優先度付きキューを使うと O((V+E) log V) に改善できます。FE試験では計算量の違いが問われます。",
+    "url": "fe/technology/algorithm/algo-graph.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "最小全域木（MST）",
+    "summary": "全域木（Spanning Tree）はグラフの全頂点を含む木（閉路なし）です。最小全域木（MST）は辺の重みの総和が最小となる全域木です。代表的なアルゴリズムがクラスカル法とプリム法です。",
+    "url": "fe/technology/algorithm/algo-graph.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "6-1. クラスカル法（辺ベース）",
+    "summary": "辺を重みの昇順にソートし、閉路を作らない辺だけを追加していきます。閉路チェックにはUnion-Findデータ構造を使います。計算量は O(E log E)。疎グラフに適します。",
+    "url": "fe/technology/algorithm/algo-graph.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "6-2. プリム法（頂点ベース）",
+    "summary": "1つの頂点から始め、木に接続する最小重みの辺で木を成長させます。動作はダイクストラ法と非常に似ています。計算量は O(V²) または O((V+E)log V)。密グラフに適します。",
+    "url": "fe/technology/algorithm/algo-graph.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "フローチャート（流れ図）",
+    "summary": "フローチャート（流れ図）は、アルゴリズムを図式で表現したものです。処理の流れを視覚化することで、プログラムを書く前にアルゴリズムの正しさを確認できます。記号はJIS規格で定められており、FE試験...",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "1-1. 基本記号一覧",
+    "summary": "┌──────────────┐ │ START/END │ ←端子記号（角丸長方形）: 開始・終了 └──────────────┘ ┌──────────────┐ │ x = x + 1 ...",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "1-2. フローチャートの例：1からnまでの合計",
+    "summary": "1からnまでの整数の合計を求めるアルゴリズムをフローチャートで表現します。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "再帰関数",
+    "summary": "再帰（Recursion）とは、関数が自分自身を呼び出すプログラミング技法です。大きな問題を「同じ形の小さな問題」に分割して解くことで、複雑な処理を簡潔に表現できます。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "2-1. 再帰の2大要素",
+    "summary": "再帰関数には必ず次の2つが必要です。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "2-2. コールスタックと再帰の動作",
+    "summary": "再帰呼び出しのたびに、関数の情報（引数・戻り先・ローカル変数）がコールスタックに積まれます。基底条件に達すると、スタックを巻き戻しながら計算結果が伝播していきます。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "2-3. 再帰 vs 反復（ループ）の比較",
+    "summary": "階乗 n! は「1からnまでの整数をすべて掛けた値」です。再帰定義は次のとおり。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "再帰の例：階乗とフィボナッチ",
+    "summary": "階乗 n! は「1からnまでの整数をすべて掛けた値」です。再帰定義は次のとおり。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "3-1. 階乗（n!）の再帰",
+    "summary": "階乗 n! は「1からnまでの整数をすべて掛けた値」です。再帰定義は次のとおり。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "3-2. フィボナッチ数列の再帰",
+    "summary": "フィボナッチ数列は「前の2つの項の和で次の項を作る」数列です。再帰定義は次のとおり。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "計算量とBig-O記法",
+    "summary": "計算量とは、アルゴリズムの性能を表す尺度です。入力サイズnが大きくなったとき、実行時間やメモリ使用量がどのように増えるかを評価します。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "4-1. Big-O記法のルール",
+    "summary": "Big-O記法（O記法）は計算量のオーダー（概略的な増加率）を表します。ルールは次の2つ。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "4-2. Big-O 早見表",
+    "summary": "n=1,000のとき、O(n log n)は約1万回、O(n²)は100万回。この差が、FE試験で「どのソートアルゴリズムを選ぶべきか」の判断基準になります。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "4-3. 具体的な数値で見る計算量の差",
+    "summary": "n=1,000のとき、O(n log n)は約1万回、O(n²)は100万回。この差が、FE試験で「どのソートアルゴリズムを選ぶべきか」の判断基準になります。",
+    "url": "fe/technology/algorithm/algo-recursion.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "線形探索（Linear Search）",
+    "summary": "線形探索（リニアサーチ）は、配列の先頭から順に、1つずつ値を調べていく探索方法です。探索アルゴリズムの中で最も基本的であり、整列されていないデータにもそのまま使えます。",
+    "url": "fe/technology/algorithm/algo-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "擬似コード",
+    "summary": "function linear_search(a, n, x): i = 0 while i 線形探索の動作追跡（値7を探す場合） 配列 A = [ 3, 8, 5, 7, 2 ], n = 5...",
+    "url": "fe/technology/algorithm/algo-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "二分探索（Binary Search）",
+    "summary": "二分探索（バイナリサーチ）は、整列された配列を対象に、探索範囲を半分ずつ狭めていく探索です。「真ん中を見る→範囲を半分に絞る」を繰り返します。",
+    "url": "fe/technology/algorithm/algo-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "線形探索 vs 二分探索",
+    "summary": "ア）O(1) イ）O(log n) ウ）O(n) エ）O(n²)",
+    "url": "fe/technology/algorithm/algo-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "どちらを使うべきか",
+    "summary": "ア）O(1) イ）O(log n) ウ）O(n) エ）O(n²)",
+    "url": "fe/technology/algorithm/algo-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "バブルソート",
+    "summary": "バブルソートは隣り合う要素を比較し、順序が逆なら交換する操作を繰り返すアルゴリズムです。大きい値が泡のように右へ移動していきます。",
+    "url": "fe/technology/algorithm/algo-sort.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "選択ソート",
+    "summary": "選択ソートは未整列部分から最小値を探し、未整列部分の先頭と交換する操作を繰り返します。交換回数が少ないのが特徴です。",
+    "url": "fe/technology/algorithm/algo-sort.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "挿入ソート",
+    "summary": "挿入ソートは整列済み部分に新しい要素を正しい位置に挿入する操作を繰り返します。トランプの手札を並べるイメージです。ほぼ整列済みのデータでは高速（O(n)）です。",
+    "url": "fe/technology/algorithm/algo-sort.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "マージソート",
+    "summary": "マージソートは分割統治法を使います。配列を半分に分割→各部分を再帰的に整列→整列済みの2つをマージ（統合）します。安定でO(n log n)ですが、追加メモリが必要です。",
+    "url": "fe/technology/algorithm/algo-sort.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "クイックソート",
+    "summary": "クイックソートはピボットを基準に、小さい値を左、大きい値を右に分割し、各部分を再帰的に整列します。平均的には最も高速ですが、ピボット選択が悪いと最悪O(n²)になります。",
+    "url": "fe/technology/algorithm/algo-sort.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "5ソート比較表",
+    "summary": "ア）O(n) イ）O(n log n) ウ）O(n²) エ）O(1)",
+    "url": "fe/technology/algorithm/algo-sort.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "木構造とは何か",
+    "summary": "木構造（Tree）は、1つの根（root）から始まり、親→子という階層構造を持つデータ構造です。配列や連結リストでは階層を表現できないため、フォルダ構造・HTML DOM・組織図・決定木・データ...",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "二分木（Binary Tree）",
+    "summary": "二分木は、1つのノードが「左の子」「右の子」の最大2つまで子を持つ木構造です。木構造の中でも最も基本的で、後のBST・ヒープ・探索アルゴリズムの基礎になります。",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "2-1. 満二分木 vs 完全二分木",
+    "summary": "【満二分木】 【完全二分木】 [A] [A] / \\ / \\ [B] [C] [B] [C] / \\ / \\ [D] [E] [D] [E] （最下段が左から詰まっている） ・全ノードが0個か2...",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "2-2. 深さと高さ",
+    "summary": "深さ（depth）は根からの距離（根を0とする）。高さ（height）は葉からの距離（葉を0とする）。この2つはFE試験で混同しやすいので注意。",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "二分探索木（BST）",
+    "summary": "二分探索木（Binary Search Tree）は、左部分木の値 という順序ルールを持つ二分木です。このルールが全ての部分木で成立することが重要です。",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "3-1. BSTの挿入（insert）",
+    "summary": "BSTの挿入は「根から比較→左か右へ→空き場所に追加」の繰り返しです。毎回1回の比較で探索範囲が約半分になるため、平均 O(log n) で挿入できます。",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "3-2. BSTの探索（search）",
+    "summary": "search(7) の流れ：根(8)と比較→73で右→6と比較→7>6で右→7と一致！比較回数は木の高さに比例します。",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "3-3. BSTが高速な理由 O(log n)",
+    "summary": "挿入も探索も毎回「左か右か」の1回の比較で進み、探索範囲が毎回1/2になります。n→n/2→n/4→n/8→...→1、つまり 2^k = n → k = log₂(n) の形です。ただし偏った...",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "DFS（深さ優先探索）",
+    "summary": "DFSは「深く潜ってから戻る」探索方法です。木構造では根→左の部分木→右の部分木の順で進みます。DFSには3種類の訪問順があります。",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "4-1. DFS（前順）のコード",
+    "summary": "function preorder(node): if node is null: return visit(node) // 親を処理 preorder(node.left) // 左の部分木...",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "BFS（幅優先探索）",
+    "summary": "BFSは「横に広がりながら進む」探索方法です。DFSが「深く潜る」のに対し、BFSはレベル（階層）ごとに探索します。",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "5-1. BFSがキューを使う理由",
+    "summary": "BFSは「先に見つけたノードから順に処理する」性質を持ちます。これはキュー（FIFO: First-In First-Out）の動作と一致するため、BFSは必ずキューを使います。",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "5-2. BFSのコード",
+    "summary": "function bfs(root): if root is null: return queue = new Queue() queue.enqueue(root) while queue i...",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "DFS vs BFS 比較",
+    "summary": "FE試験で最も差がつく論点です：",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "木の探索からグラフ探索へ",
+    "summary": "木は「閉路のないグラフ」として扱えます。DFSもBFSも、木構造だけでなくグラフ探索の基本アルゴリズムです。グラフでは閉路があるため visited 管理が追加で必要になります（第4章で詳しく扱...",
+    "url": "fe/technology/algorithm/algo-tree-search.html",
+    "tags": [
+      "アルゴリズム"
+    ]
+  },
+  {
+    "term": "FE頻出ランク",
+    "summary": "形式言語は「記号 → アルファベット → 文字列 → 言語」の4階層で構成されます。コンパイラの文法チェック・正規表現・通信プロトコル・入力バリデーションはすべてこの枠組みで動いています。",
+    "url": "fe/technology/basic-theory/automaton-regex.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "形式言語の基礎概念",
+    "summary": "形式言語は「記号 → アルファベット → 文字列 → 言語」の4階層で構成されます。コンパイラの文法チェック・正規表現・通信プロトコル・入力バリデーションはすべてこの枠組みで動いています。",
+    "url": "fe/technology/basic-theory/automaton-regex.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "規則 → 言語 → 判定 の流れ",
+    "summary": "① 規則を決める 例:「01 を含む文字列」 ↓ ② 言語が定まる 例: {01, 1010, 0011, 001100, …} ↓ ③ 判定する 例: 1101 → 01 を含む → 受理 ✅...",
+    "url": "fe/technology/basic-theory/automaton-regex.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "正規表現（regular expression）",
+    "summary": "正規表現は「文字列の規則を短く・明確に・機械的に記述するための方法」です。FEでは記号の意味と読み方が出題されます。",
+    "url": "fe/technology/basic-theory/automaton-regex.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "正規表現の実務利用",
+    "summary": "DFAはコンピュータが文字列を判定するための最もシンプルな機械モデルです。「有限個の状態」と「遷移関数」だけで動作します。",
+    "url": "fe/technology/basic-theory/automaton-regex.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "DFA（決定性有限オートマトン）",
+    "summary": "DFAはコンピュータが文字列を判定するための最もシンプルな機械モデルです。「有限個の状態」と「遷移関数」だけで動作します。",
+    "url": "fe/technology/basic-theory/automaton-regex.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "DFA の5要素",
+    "summary": "DFA = ( Q, Σ, δ, q₀, F ) Q : 状態の有限集合 Σ : アルファベット（入力記号の集合） δ : 遷移関数 δ(q, a) = q′ q₀ : 開始状態（q₀ ∈ Q）...",
+    "url": "fe/technology/basic-theory/automaton-regex.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "DFAの「状態」とは何か",
+    "summary": "DFAの状態は「現在の物理的な状況」ではありません。これまでに読んだ入力列に関する抽象的な記憶です。判定に必要な最小限の情報だけを保持します。",
+    "url": "fe/technology/basic-theory/automaton-regex.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "状態遷移図と受理状態",
+    "summary": "FEでは状態遷移図を読んで「この文字列は受理されるか」を判定する問題が最頻出です。",
+    "url": "fe/technology/basic-theory/automaton-regex.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "判定の手順（例: 入力 = 1101）",
+    "summary": "開始: q0 1 を読む → δ(q0, 1) = q1 1 を読む → δ(q1, 1) = q0 0 を読む → δ(q0, 0) = q0 1 を読む → δ(q0, 1) = q1 最終...",
+    "url": "fe/technology/basic-theory/automaton-regex.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "DFAの例：1の出現回数が偶数か判定",
+    "summary": "0と1からなる文字列を入力として、「1の出現回数が偶数か」を判定するDFAを構成します。この例でDFAの構造がすべて理解できます。",
+    "url": "fe/technology/basic-theory/dfa-state-transition.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "状態の設計",
+    "summary": "必要な記憶は「これまでに読んだ1の出現回数が偶数か奇数か」だけです。DFAは「1の出現回数そのもの」を覚えているのではなく、偶数か奇数かという分類だけを覚えます。これが「状態は抽象的な記憶」の意...",
+    "url": "fe/technology/basic-theory/dfa-state-transition.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "状態遷移の設計",
+    "summary": "0を読んでも1の出現回数に影響しないため記憶（状態）は変わりません。1を読むと偶数⇔奇数が反転します。",
+    "url": "fe/technology/basic-theory/dfa-state-transition.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "受理状態の決定",
+    "summary": "「1の出現回数が偶数」を判定したいので、最後にEvenにいれば受理です。途中でEvenを通過しても受理にはなりません。",
+    "url": "fe/technology/basic-theory/dfa-state-transition.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "DFA 5つ組定義（偶数判定）",
+    "summary": "M = (Q, Σ, Δ, q₀, F)",
+    "url": "fe/technology/basic-theory/dfa-state-transition.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "状態遷移図の記法",
+    "summary": "状態遷移図は、リアルタイムの動作を示す図ではなく、記憶の更新規則を視覚的に整理した抽象機械の仕様書です。",
+    "url": "fe/technology/basic-theory/dfa-state-transition.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "動作の追跡",
+    "summary": "状態遷移図を正しく読むには、実際に文字列を読みながら状態がどう変わるかを確認する必要があります。1文字ずつ「現在状態→入力→次状態」をたどります。",
+    "url": "fe/technology/basic-theory/dfa-state-transition.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "固定小数点と浮動小数点",
+    "summary": "小数点の位置をあらかじめ決めた表現方式。例として16ビット中、上位8ビットを整数部・下位8ビットを小数部に割り当てる。",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "固定小数点数の仕組み",
+    "summary": "小数点の位置をあらかじめ決めた表現方式。例として16ビット中、上位8ビットを整数部・下位8ビットを小数部に割り当てる。",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "固定小数点 vs 浮動小数点 比較",
+    "summary": "IEEE 754 は浮動小数点数の国際規格。単精度（32ビット）と倍精度（64ビット）が試験に出る。",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "IEEE 754 単精度の構造",
+    "summary": "IEEE 754 は浮動小数点数の国際規格。単精度（32ビット）と倍精度（64ビット）が試験に出る。",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "バイアス付き指数",
+    "summary": "指数部は「バイアス値127を加えた値」として保存する。これにより、負の指数（−127〜0）を符号なし整数で表現できる。",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "隠れた1（hidden bit）",
+    "summary": "正規化数では仮数部は常に 1.XXXXX… の形になる。先頭の \"1\" は必ず1なので省略できる。これにより、仮数部23ビットで実質24ビット分の精度を得る。",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "3大誤差",
+    "summary": "浮動小数点の誤差はバグではなく本質的な性質。仮数部が有限ビットである以上、誤差は避けられない。",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "丸め誤差のメカニズム",
+    "summary": "0.1 を2進数に変換すると: 0.0001100110011001100110011… （無限循環） │← 仮数部23ビット →│ ↓ ここで打ち切る → 0.1 は内部では近似値として保存さ...",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "誤差の判定手順",
+    "summary": "[判定の手がかり] 近い値の引き算 → 桁落ち 大きな数 ＋ 小さな数 → 情報落ち 小数を2進変換 → 丸め誤差 無限級数を有限回で打切り → 打切り誤差 [例] 1000000.0 − 99...",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "文字コード",
+    "summary": "コンピュータは0/1のみ扱う。「どの文字にどの番号を割り当てるか」がルールが文字コードと文字集合の役割。",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "ASCII の主なコード値",
+    "summary": "Unicode は「文字集合（カタログ）」— 文字に番号（コードポイント）を割り当てるルール。保存形式ではない。",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "Unicode と UTF-8 の違い",
+    "summary": "Unicode は「文字集合（カタログ）」— 文字に番号（コードポイント）を割り当てるルール。保存形式ではない。",
+    "url": "fe/technology/basic-theory/float-error-code.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "ハフマン符号の原理",
+    "summary": "ハフマン符号は、データをできるだけ短いビット列で表す圧縮技術です。ZIP、PNG、MP3、GZIP、PDFテキスト圧縮など、多くの圧縮形式で使われています。",
+    "url": "fe/technology/basic-theory/huffman-channel.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "基本思想",
+    "summary": "よく出る記号 → 短い符号 / めったに出ない記号 → 長い符号",
+    "url": "fe/technology/basic-theory/huffman-channel.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "ハフマン木の構築手順",
+    "summary": "ハフマン符号は二分木を使って構築します。左の枝=0、右の枝=1 として、根から葉までの経路がビット列になります。",
+    "url": "fe/technology/basic-theory/huffman-channel.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "構築アルゴリズム（6ステップ）",
+    "summary": "Step1: 頻度を並べる A:40 B:30 C:20 D:10 Step2: C+D → CD:30 CD(30) / \\ C(20) D(10) Step3: B+CD → BCD:60 ...",
+    "url": "fe/technology/basic-theory/huffman-channel.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "平均符号長の計算",
+    "summary": "各符号長 × 出現確率の総和",
+    "url": "fe/technology/basic-theory/huffman-channel.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "プレフィックス符号",
+    "summary": "ハフマン符号はプレフィックス符号（どの符号も他の符号の先頭にならない）です。そのため区切り記号なしで一意に復号できます。",
+    "url": "fe/technology/basic-theory/huffman-channel.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "通信の基本構造（シャノンモデル）",
+    "summary": "通信とは「送り手が持つ情報を、受け手に正しく伝えること」です。シャノンは通信を次の5要素でモデル化しました。",
+    "url": "fe/technology/basic-theory/huffman-channel.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "ノイズと誤り訂正",
+    "summary": "通信路のノイズによるビット誤りを検出・訂正するために、冗長性（余分なビット）を追加します。ビット数は増えますが、通信の信頼性が上がります。",
+    "url": "fe/technology/basic-theory/huffman-channel.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "通信路容量（通信の限界）",
+    "summary": "通信路には「1秒間に送れる情報量の限界」があります。これを通信路容量と呼びます。",
+    "url": "fe/technology/basic-theory/huffman-channel.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "シャノンの定理",
+    "summary": "通信路容量以下の情報量なら、理論上誤りゼロで通信できる。",
+    "url": "fe/technology/basic-theory/huffman-channel.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "情報量とは",
+    "summary": "情報とは「不確実性が減る量」です。起こりやすいことが起きても驚かない（情報量小）、めったに起きないことが起きると驚く（情報量大）という直感を数式で表します。",
+    "url": "fe/technology/basic-theory/information-entropy.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "情報量の定義",
+    "summary": "I(x) = −log₂ P(x) P(x): 出来事xの確率 底が2の対数: 情報をbitで測るため マイナス符号: 確率が小さいほど値が大きくなるよう正にする コイン表（確率 1/2） → ...",
+    "url": "fe/technology/basic-theory/information-entropy.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "情報量の性質",
+    "summary": "情報量が「1回の驚き」なら、エントロピーは「この情報源から情報を受け取るたびに、平均してどれだけ驚くか」を表します。期待値と同じ構造で計算します。",
+    "url": "fe/technology/basic-theory/information-entropy.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "エントロピー（情報量の平均）",
+    "summary": "情報量が「1回の驚き」なら、エントロピーは「この情報源から情報を受け取るたびに、平均してどれだけ驚くか」を表します。期待値と同じ構造で計算します。",
+    "url": "fe/technology/basic-theory/information-entropy.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "エントロピーの定義",
+    "summary": "H = −Σ Pᵢ log₂ Pᵢ = Σ Pᵢ × I(xᵢ) ← 情報量の期待値 公平なコイン（表0.5, 裏0.5）: H = −0.5×log₂0.5 − 0.5×log₂0.5 = −...",
+    "url": "fe/technology/basic-theory/information-entropy.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "エントロピーとデータ圧縮",
+    "summary": "エントロピーは「データをどこまで圧縮できるかの理論的限界」を示します。ZIP・PNG・MP3 などの圧縮技術はすべてこの原理に基づきます。",
+    "url": "fe/technology/basic-theory/information-entropy.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "情報理論の応用 5領域",
+    "summary": "情報理論は単なる数学ではなく、現代の通信・データ処理・AIの根幹を支える理論です。エントロピー（不確実性の尺度）がすべての応用の基礎になっています。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "データ圧縮",
+    "summary": "情報理論の最も直接的な応用がデータ圧縮です。エントロピーが決める「最小ビット数」に近づくように設計されます。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "可逆圧縮（元に戻せる）",
+    "summary": "展開すると元のデータと完全に一致します。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "非可逆圧縮（元に戻せない）",
+    "summary": "人間が気づきにくい情報を削ることで圧縮します。削る基準にエントロピーが使われます。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "通信（誤り訂正符号・通信路容量）",
+    "summary": "通信路では電波の乱れや雑音などのノイズにより、送ったビット列が途中で変化することがあります。この誤りを検出・訂正するために、あらかじめ余分なビット（冗長ビット）を付けて送る仕組みを誤り訂正符号と...",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "誤り訂正符号",
+    "summary": "通信路では電波の乱れや雑音などのノイズにより、送ったビット列が途中で変化することがあります。この誤りを検出・訂正するために、あらかじめ余分なビット（冗長ビット）を付けて送る仕組みを誤り訂正符号と...",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "通信路容量",
+    "summary": "通信路容量とは、その通信路が1秒間に正しく送ることができる情報量（ビット）の限界値です。ここでの「情報量」は単なるビット数ではなく、不確実性をどれだけ減らせるかを表すエントロピーです。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "暗号とセキュリティ",
+    "summary": "暗号の安全性は、情報理論の観点から「不確実性の大きさ」で評価されます。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "鍵の強さと情報量",
+    "summary": "暗号の鍵は「128ビットの鍵」「256ビットの鍵」などと表現されます。これは攻撃者が総当たりで鍵を推測しようとしたとき、どれだけの不確実性（情報量）があるかをビットで表したものです。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "鍵長と安全性",
+    "summary": "鍵長が長いほど総当たり攻撃の不確実性が大きく、安全です。情報理論では、鍵そのものが持つ情報量（エントロピー）が安全性の尺度になります。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "情報漏洩の評価",
+    "summary": "暗号やプライバシーの分野では、「どれだけ情報が漏れたか」を測る必要があります。このとき使われるのが相互情報量で、攻撃者が観測できるデータと本来秘密であるべきデータの間に、どれだけ関連した情報が含...",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "AI・機械学習（クロスエントロピー）",
+    "summary": "AIの学習で最もよく使われる損失関数がクロスエントロピーです。クロスエントロピーとは、モデルの予測と正解ラベルの「ズレ」を情報量として測ったものです。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "クロスエントロピーのイメージ",
+    "summary": "画像分類の例:",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "統計・推定・モデル選択",
+    "summary": "最尤推定は、観測データを最も「ありそう」に説明する確率分布を選ぶ方法です。情報理論的には、エントロピーを最小にする分布を選ぶという解釈ができます。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "最尤推定",
+    "summary": "最尤推定は、観測データを最も「ありそう」に説明する確率分布を選ぶ方法です。情報理論的には、エントロピーを最小にする分布を選ぶという解釈ができます。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "KLダイバージェンス",
+    "summary": "KLダイバージェンス（カルバック・ライブラー情報量）とは、2つの確率分布の違いを「情報量の差」として測る尺度です。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "用途1: モデル選択",
+    "summary": "モデルが現実のデータ分布からどれだけズレているかを評価し、最も無駄なくデータを説明できるモデルを選びます。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "用途2: 分布の比較",
+    "summary": "2つの確率分布PとQの差をKL(P∥Q)として定量化します。値が小さいほど分布が近いことを意味します。",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "最尤推定と情報理論の関係",
+    "summary": "最尤推定 = エントロピーを最小にする分布を選ぶ操作",
+    "url": "fe/technology/basic-theory/infotheory-application.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "命題とは",
+    "summary": "命題とは、「真（TRUE）か偽（FALSE）」のどちらかに必ず決まる文のことです。",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "命題になる例",
+    "summary": "真理値は TRUE=1、FALSE=0 で表します。この表現は後に出てくる論理回路の HIGH(1) / LOW(0) と直接対応しています。",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "命題にならない例",
+    "summary": "真理値は TRUE=1、FALSE=0 で表します。この表現は後に出てくる論理回路の HIGH(1) / LOW(0) と直接対応しています。",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "真理値表と基本論理演算",
+    "summary": "真理値表とは、命題変数が取り得るすべての値（1/0）に対して、論理式全体が1か0かを体系的に示した表です。変数n個で2n行になります。",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "AND（論理積：P・Q）",
+    "summary": "両方が1のときだけ1。「PかつQ」",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "OR（論理和：P+Q）",
+    "summary": "どちらか1なら1。「PまたはQ」",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "NOT（否定：¬P）",
+    "summary": "入力を反転。「Pでない」",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "XOR（排他的論理和：P⊕Q）",
+    "summary": "異なるとき1。一致比較やビット演算で重要",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "ド・モルガンの法則",
+    "summary": "ド・モルガンの法則は、論理式を別の形に書き換えるための基本法則です。複雑な論理式の簡略化や論理回路の簡略化に不可欠です。",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "第1法則：¬(P・Q) = ¬P + ¬Q",
+    "summary": "ANDの否定はORの否定に変わる。「両方必要」の否定は「どちらか欠けていればよい」",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "第2法則：¬(P+Q) = ¬P・¬Q",
+    "summary": "ORの否定はANDの否定に変わる。「どちらかでよい」の否定は「両方ダメ」",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "論理回路の基本ゲート",
+    "summary": "論理回路は、論理演算を電気的に実現したものです。入力は1(HIGH)または0(LOW)で、出力も1または0です。",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "基本ゲート一覧",
+    "summary": "┌───┐ P ──┤ & ├── P・Q Q ──┤ │ └───┘ P Q | P・Q 0 0 | 0 0 1 | 0 1 0 | 0 1 1 | 1 ORゲート（どちらか1で1） ┌───...",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "万能ゲート（NAND / NOR）",
+    "summary": "NAND（ANDの否定）とNOR（ORの否定）は、この1種だけでAND・OR・NOT・XORなどすべての論理回路を構成できます。そのため「万能ゲート」と呼ばれます。",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "NAND",
+    "summary": "┌───┐ P ──┤ & │○── ¬(P・Q) Q ──┤ │ └───┘ P Q | ¬(P・Q) 0 0 | 1 0 1 | 1 1 0 | 1 1 1 | 0 NOR ┌───┐ P ...",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "XNOR",
+    "summary": "┌───┐ P ──┤ =1│○── XNOR Q ──┤ │ └───┘ P Q | XNOR 0 0 | 1 0 1 | 0 1 0 | 0 1 1 | 1 ゲート基本構成真理値表の特徴用途...",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "論理回路の設計",
+    "summary": "論理回路の設計は、次の2ステップで行います。",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "例題1: Y = (P・Q) + R",
+    "summary": "PとQをAND → その結果をRとOR",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "例題2: Y = ¬P・(Q+R)",
+    "summary": "PをNOT → QとRをOR → 両結果をAND",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "例題3: XORをAND+OR+NOTで構成",
+    "summary": "XORは (P+Q)・¬(P・Q) で構成できます。これは「PまたはQ」かつ「PかつQの否定」という意味です。",
+    "url": "fe/technology/basic-theory/logic-circuit.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "確率とは",
+    "summary": "確率とは、「起こりうる結果のうち、目的の結果が占める割合」を数値で表したものです。予言ではなく、長期的に見たときの割合です。",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "確率の定義",
+    "summary": "確率 = 目的の事象数 ÷ 全体の事象数",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "標本空間と事象",
+    "summary": "確率の分母になるのが標本空間 S（起こりうる結果の全体集合）です。標本空間の定義を誤ると、すべての確率計算が破綻します。",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "標本空間の作り方（3ステップ）",
+    "summary": "標本空間の部分集合。条件を満たす結果だけを集めたものです。",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "事象 E",
+    "summary": "標本空間の部分集合。条件を満たす結果だけを集めたものです。",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "確率の計算（加法法則・乗法法則）",
+    "summary": "確率の計算は、「事象をどう組み合わせるか」によって決まります。",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "加法法則（OR）",
+    "summary": "A または B が起こる確率を求めるときに使います。",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "乗法法則（AND）",
+    "summary": "A かつ B が起こる確率を求めるときに使います。",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "例題: サイコロの確率（加法法則）",
+    "summary": "サイコロ1回で「偶数または3の倍数」が出る確率",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "期待値（長期的な平均）",
+    "summary": "期待値とは、「長期的に見たときに平均として得られる値」です。1回の結果を予言するものではありません。",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "期待値の定義",
+    "summary": "E(X) = Σ(結果 × その確率)",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "期待値の例題",
+    "summary": "くじ引き: 当たり100円（確率0.2）、ハズレ0円（確率0.8）",
+    "url": "fe/technology/basic-theory/probability-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "ビットと進数の基本",
+    "summary": "コンピュータの内部回路は、電圧ありと電圧なしの2状態を扱います。この2状態を 1 と 0 に対応させるため、コンピュータ内部では2進数が基本になります。",
+    "url": "fe/technology/basic-theory/radix-complement.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "ビット数と状態数",
+    "summary": "Nビットで表せる状態数は 2N 通りです。ただし、符号なし整数の最大値は 2N - 1 です。0から数え始めるため、8ビットなら状態数は256通り、最大値は255になります。",
+    "url": "fe/technology/basic-theory/radix-complement.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "進数の変換",
+    "summary": "基数変換では、数そのものは変わりません。変わるのは表し方だけです。",
+    "url": "fe/technology/basic-theory/radix-complement.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "n進数から10進数へ",
+    "summary": "各桁の値に「基数の桁位置乗」を掛けて足します。",
+    "url": "fe/technology/basic-theory/radix-complement.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "10進数からn進数へ",
+    "summary": "基数で割り続け、余りを下から上へ並べます。",
+    "url": "fe/technology/basic-theory/radix-complement.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "2進数と16進数",
+    "summary": "2進数を右から4ビットずつ区切ると、16進数へ直接変換できます。",
+    "url": "fe/technology/basic-theory/radix-complement.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "補数と負数表現",
+    "summary": "補数は、引き算を足し算に変えるための仕組みです。コンピュータは加算器を使って計算するため、負数表現には2の補数が使われます。",
+    "url": "fe/technology/basic-theory/radix-complement.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "計算・手順",
+    "summary": "8ビットで -12 を表す +12 = 00001100 反転 = 11110011 +1 = 11110100 よって -12 は 11110100 補数による減算 9 - 6 を8ビットで計...",
+    "url": "fe/technology/basic-theory/radix-complement.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "2の補数の求め方",
+    "summary": "8ビットで -12 を表す +12 = 00001100 反転 = 11110011 +1 = 11110100 よって -12 は 11110100 補数による減算 9 - 6 を8ビットで計...",
+    "url": "fe/technology/basic-theory/radix-complement.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "補数による減算",
+    "summary": "9 - 6 を8ビットで計算する +9 = 00001001 +6 = 00000110 -6 = 11111010 00001001 + 11111010 =1 00000011 左端のキャリ...",
+    "url": "fe/technology/basic-theory/radix-complement.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "2進接頭辞",
+    "summary": "答え: 256。28 = 256種類です。",
+    "url": "fe/technology/basic-theory/radix-complement.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "集合とは",
+    "summary": "集合とは、「ある条件を満たす対象をひとまとめにしたもの」です。集合は「箱」ではなく、条件で決まる構造です。",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "基本性質",
+    "summary": "要素をすべて書く方法。小さい集合向き。",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "所属記号",
+    "summary": "要素をすべて書く方法。小さい集合向き。",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "集合の表し方",
+    "summary": "要素をすべて書く方法。小さい集合向き。",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "外延的表現（列挙）",
+    "summary": "要素をすべて書く方法。小さい集合向き。",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "内包的表現（条件）",
+    "summary": "条件で集合を定義する方法。集合の本質的定義。",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "集合演算",
+    "summary": "集合演算は、第2章の論理演算と1対1対応しています。",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "和集合 A∪B = OR",
+    "summary": "A∪B = {x｜x∈A または x∈B}",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "積集合 A∩B = AND",
+    "summary": "A∩B = {x｜x∈A かつ x∈B}",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "差集合 A−B",
+    "summary": "A−B = {x｜x∈A かつ x∉B}",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "補集合 A^c = NOT",
+    "summary": "A^c = {x｜x∉A} = U − A",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "ベン図による集合の視覚化",
+    "summary": "集合は図で理解が完成します。",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "和集合 A∪B（全部）",
+    "summary": "┌───────────────────┐ │ 全体集合 U │ │ ┌───┐ ┌───┐ │ │ │ A │███│ B │ │ │ │ │███│ │ │ │ └───┘ └───┘ │ ...",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "積集合 A∩B（重なり）",
+    "summary": "┌───────────────────┐ │ 全体集合 U │ │ ┌───┐ ┌───┐ │ │ │ │███│ │ │ │ │ A │███│ B │ │ │ └───┘ └───┘ │ ...",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "差集合 A−B（Aだけ）",
+    "summary": "┌───────────────────┐ │ 全体集合 U │ │ ┌───┐ ┌───┐ │ │ │███│ │ │ │ │ │███│ │ B │ │ │ └───┘ └───┘ │ │ ...",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "補集合 A^c（Aの外側）",
+    "summary": "┌───────────────────┐ │███████████████████│ │███┌───┐███████████│ │███│ A │███████████│ │███│ │██...",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "関係（relation）",
+    "summary": "集合を学ぶ目的のひとつは、「要素同士の対応（つながり）を扱えるようにすること」です。その対応を数学的に表したものが関係（relation）です。",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "直積 A×B",
+    "summary": "Aの全要素とBの全要素の組み合わせ集合です。要素数は |A| × |B| です。",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "関係の定義",
+    "summary": "関係とは、直積A×Bの中から「意味のある組だけ」を取り出した部分集合です。",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "関係の性質",
+    "summary": "すべてのa∈Aで (a,a)∈R が成り立つ",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "集合演算の例題",
+    "summary": "A={1,2,3,4}, B={3,4,5,6}",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "例題1: 和集合・積集合",
+    "summary": "A={1,2,3,4}, B={3,4,5,6}",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "例題2: 補集合",
+    "summary": "U={1,2,3,4,5,6}, A={2,4,6}",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "例題3: 内包的記法→外延的記法",
+    "summary": "A = {x｜xは偶数で 1≤x≤10}",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "例題4: 関係の性質判定",
+    "summary": "A={1,2,3}上の関係 R = {(1,1),(2,2),(3,3),(1,2)}",
+    "url": "fe/technology/basic-theory/sets-relations.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "分散（ばらつきの大きさ）",
+    "summary": "期待値は「平均的な結果」を表しますが、平均だけではデータの特徴は分かりません。平均50点のクラスでも、全員が50点付近のクラスと、0点と100点に分かれているクラスでは全く状況が異なります。この...",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "分散の定義",
+    "summary": "Var(X) = E[(X − E(X))²] = (各値 − 平均)² の平均",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "標準偏差（分散の平方根）",
+    "summary": "分散はズレを二乗しているため、単位が元と変わってしまいます（点数→点数²、cm→cm²）。そこで平方根を取って元の単位に戻したものが標準偏差です。",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "分散と標準偏差の違い",
+    "summary": "① 平均を求める μ = E(X) ② 各データのズレ X − μ ③ ズレ²の平均 Var(X) = E[(X−μ)²] ← 分散 ④ 平方根を取る σ = √Var(X) ← 標準偏差 サイ...",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "標準偏差の算出4ステップ",
+    "summary": "① 平均を求める μ = E(X) ② 各データのズレ X − μ ③ ズレ²の平均 Var(X) = E[(X−μ)²] ← 分散 ④ 平方根を取る σ = √Var(X) ← 標準偏差 サイ...",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "サイコロの標準偏差",
+    "summary": "分散 = 17.5/6 ≈ 2.92",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "標準偏差の利用場面（5つ）",
+    "summary": "平均・分散・標準偏差はデータの特徴を数値化したものですが、データの形そのものを見るには頻度分布とヒストグラムが必要です。",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "頻度分布とヒストグラム",
+    "summary": "平均・分散・標準偏差はデータの特徴を数値化したものですが、データの形そのものを見るには頻度分布とヒストグラムが必要です。",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "頻度分布表の例（テスト30人の点数）",
+    "summary": "区間 人数（頻度） 40〜49 1 50〜59 8 ████████ 60〜69 10 ██████████ 70〜79 4 ████ 80〜89 4 ████ 90〜99 3 ███ 分布の種...",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "分布の種類（4つの形）",
+    "summary": "左右対称の山型。平均の周りにデータが集まる。多くの自然現象がこの形に。",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "正規分布",
+    "summary": "左右対称の山型。平均の周りにデータが集まる。多くの自然現象がこの形に。",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "右裾分布",
+    "summary": "小さい値が多く、大きい値が少しだけ存在する。右に長く伸びる。",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "左裾分布",
+    "summary": "大きい値が多く、小さい値が少しだけ存在する。左に長く伸びる。",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "二峰性分布",
+    "summary": "山が2つある。2つの異なるグループが混在している。",
+    "url": "fe/technology/basic-theory/variance-statistics.html",
+    "tags": [
+      "基礎理論"
+    ]
+  },
+  {
+    "term": "クラウドとは",
+    "summary": "クラウドコンピューティングとは、サーバーやネットワークなどのIT資産をインターネット経由でサービスとして利用する形態です。「必要なときに、必要なだけ、借りて使う」という考え方で、自社で購入・設置...",
+    "url": "fe/technology/cloud/cloud-basic-1.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "システムの3つの形態",
+    "summary": "試験では3形態の「機器保有者」「設置場所」「運用担当」の違いが問われます。特にデータセンター利用とクラウドの違い（機器を自社が持つかどうか）が頻出です。",
+    "url": "fe/technology/cloud/cloud-basic-1.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "クラウド発展の歴史",
+    "summary": "試験で歴史年代が直接問われることは少ないですが、「仮想化技術がクラウドより先に登場した」「AWS・Azure・GCPは2000年代後半に登場した」という流れは押さえておきましょう。",
+    "url": "fe/technology/cloud/cloud-basic-1.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "クラウドの4つの基本特徴",
+    "summary": "システムを利用した時間や量に応じて費用が発生します。使わないときは費用がかからないのが基本です。「1分あたり10円」のサーバーを15分利用 → 150円だけ支払う。オンプレミスでは使っていなくて...",
+    "url": "fe/technology/cloud/cloud-basic-2.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "従量課金",
+    "summary": "システムを利用した時間や量に応じて費用が発生します。使わないときは費用がかからないのが基本です。「1分あたり10円」のサーバーを15分利用 → 150円だけ支払う。オンプレミスでは使っていなくて...",
+    "url": "fe/technology/cloud/cloud-basic-2.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "利用量の拡大・縮小が容易（スケーラビリティ）",
+    "summary": "利用状況に応じて、サーバーの台数や性能をすぐに調整できます。",
+    "url": "fe/technology/cloud/cloud-basic-2.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "IT機器や関連設備は事業者が保有・運用",
+    "summary": "サーバー、ネットワーク機器、空調、電源などはすべてクラウド事業者が責任を持ちます。",
+    "url": "fe/technology/cloud/cloud-basic-2.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "セキュリティや多様な通信手段への対応が整備",
+    "summary": "ファイアウォール、VPN、モバイル端末からの接続環境などが標準で実装されています。自社システムをモバイル対応するには専用システムが必要ですが、クラウドは標準で対応済みという点が頻出です。",
+    "url": "fe/technology/cloud/cloud-basic-2.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "クラウド導入のメリット（運用視点）",
+    "summary": "flowchart TD subgraph 従来[従来方式] A1[機器購入] --> A2[設置] A2 --> A3[設定] A3 --> A4[運用監視] A4 --> A5[故障対応] ...",
+    "url": "fe/technology/cloud/cloud-basic-2.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "パブリッククラウド",
+    "summary": "パブリッククラウドは、クラウド事業者が不特定多数の企業・団体・個人に向けてインターネット経由で提供するサービスです。代表的な事業者はAWS（Amazon）・Azure（Microsoft）・GC...",
+    "url": "fe/technology/cloud/cloud-basic-3.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "プライベートクラウド",
+    "summary": "プライベートクラウドは、特定の企業や団体だけのために構築されたクラウド環境です。自社のデータセンター内に構築する場合もあれば、事業者の設備を専有で借りる場合もあります。どのサーバーに接続している...",
+    "url": "fe/technology/cloud/cloud-basic-3.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "ハイブリッドクラウド",
+    "summary": "ハイブリッドクラウドは、パブリッククラウドとプライベートクラウド（またはオンプレミス）を組み合わせて利用する形態です。機密データはプライベート、Webサービスはパブリックという使い分けができます。",
+    "url": "fe/technology/cloud/cloud-basic-3.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "IaaS（Infrastructure as a Service）",
+    "summary": "サーバー、ストレージ、ネットワークなどのハードウェア資源を仮想化して提供。OSより上は利用者が管理。自由度が高い。",
+    "url": "fe/technology/cloud/cloud-basic-4.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "PaaS（Platform as a Service）",
+    "summary": "IaaSに加えてOS・ミドルウェア・開発環境まで提供。利用者はアプリとデータのみ管理。",
+    "url": "fe/technology/cloud/cloud-basic-4.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "SaaS（Software as a Service）",
+    "summary": "アプリケーションそのものを提供。利用者はブラウザ等からすぐに使える。インストール不要。",
+    "url": "fe/technology/cloud/cloud-basic-4.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "ハイパーバイザー型（完全仮想化）",
+    "summary": "物理サーバー上でハイパーバイザーを動作させ、その上で複数のゲストOSを動かす方式。各VMが独立したOSを持ち、互換性が高い。",
+    "url": "fe/technology/cloud/cloud-basic-5.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "コンテナ型（OSレベル仮想化）",
+    "summary": "ホストOSのカーネルを共用し、アプリケーションの実行環境だけを隔離する方式。軽量で起動が速い。",
+    "url": "fe/technology/cloud/cloud-basic-5.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "DockerとKubernetes",
+    "summary": "Docker: コンテナのデファクトスタンダード。アプリと実行環境をイメージとしてパッケージ化。Kubernetes（k8s）: 複数コンテナの自動デプロイ・スケーリング・管理を行うオーケストレ...",
+    "url": "fe/technology/cloud/cloud-basic-5.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "サーバーの形状",
+    "summary": "flowchart TD T[タワー型 単体設置・小規模向け] --> R[ラックマウント型 ラック収納・DC主力] R --> D[高密度型 省電力・小型化] ストレージの種類 ストレージ分類...",
+    "url": "fe/technology/cloud/cloud-basic-6.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "ストレージの種類",
+    "summary": "flowchart TD D1[DAS サーバー直結 ブロック SATA/SAS] D2[SAN 専用ネットワーク ブロック FC/iSCSI] D3[NAS LAN経由 ファイル CIFS/N...",
+    "url": "fe/technology/cloud/cloud-basic-6.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "ネットワーク仮想化と負荷分散",
+    "summary": "1台の物理スイッチを複数の仮想的なLANに分割。営業部・開発部・管理部を論理的に分離。",
+    "url": "fe/technology/cloud/cloud-basic-6.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "VLAN（Virtual LAN）",
+    "summary": "1台の物理スイッチを複数の仮想的なLANに分割。営業部・開発部・管理部を論理的に分離。",
+    "url": "fe/technology/cloud/cloud-basic-6.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "SDN（Software Defined Networking）",
+    "summary": "ネットワークの制御をソフトウェアで一元管理。制御層と転送層を分離。",
+    "url": "fe/technology/cloud/cloud-basic-6.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "ロードバランシング",
+    "summary": "複数サーバーにトラフィックを分散。ラウンドロビン、最小接続数などのアルゴリズムで処理性能向上と障害回避。",
+    "url": "fe/technology/cloud/cloud-basic-6.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "SLA（Service Level Agreement）",
+    "summary": "SLAはクラウド事業者が提供するサービスの品質を定めた合意です。稼働率や応答時間が含まれます。「月間稼働率99.9%以上」→年間ダウンタイム約8時間45分以内。「99.99%」→約52分以内。",
+    "url": "fe/technology/cloud/cloud-basic-7.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "リージョンとアベイラビリティゾーン（AZ）",
+    "summary": "flowchart TD subgraph 東京リージョン AZ1[AZ1 データセンターA] AZ2[AZ2 データセンターB] AZ3[AZ3 データセンターC] end AZ1 AZ2 A...",
+    "url": "fe/technology/cloud/cloud-basic-7.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "冗長化の3方式",
+    "summary": "flowchart TD A[冗長化方式] --> B[ホットスタンバイ] A --> C[ウォームスタンバイ] A --> D[コールドスタンバイ] B -->|常時同期・即時切替| E[コス...",
+    "url": "fe/technology/cloud/cloud-basic-7.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "フォールトトレランスとクラスタリング",
+    "summary": "フォールトトレランス: 一部に障害が発生してもシステム全体が継続動作する性質。クラスタリング: 複数サーバーを1つのシステムとして連携させる技術。",
+    "url": "fe/technology/cloud/cloud-basic-7.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "RPOとRTO",
+    "summary": "RPO（目標復旧時点）: データ損失の許容量。「最大○時間前のデータまで復旧可能」。RTO（目標復旧時間）: システム復旧までの目標時間。「○時間以内に復旧」。",
+    "url": "fe/technology/cloud/cloud-basic-7.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "責任共有モデル",
+    "summary": "クラウドのセキュリティは事業者と利用者の共同責任です。「事業者はクラウドのセキュリティに責任を持ち、利用者はクラウドの中のセキュリティに責任を持つ」が基本原則。",
+    "url": "fe/technology/cloud/cloud-basic-8.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "IAM（Identity and Access Management）",
+    "summary": "クラウド上のリソースへのアクセスを誰が・何を・どのようにできるかを制御する仕組み。主な要素:",
+    "url": "fe/technology/cloud/cloud-basic-8.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "転送中の暗号化",
+    "summary": "TLS/SSLを使って通信経路上のデータを暗号化。HTTPS、VPN（IPsec）が代表的。",
+    "url": "fe/technology/cloud/cloud-basic-8.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "保存中の暗号化",
+    "summary": "ストレージ（ディスク）上のデータを暗号化。AES-256が標準。クラウド事業者が自動暗号化を提供する場合が多い。",
+    "url": "fe/technology/cloud/cloud-basic-8.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "ネットワークセキュリティ",
+    "summary": "ファイアウォール（セキュリティグループ）: インスタンス単位で通信制御。WAF（Web Application Firewall）: SQLインジェクションやXSSなどWeb攻撃を防御。DDoS...",
+    "url": "fe/technology/cloud/cloud-basic-8.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "クラウド導入のメリットと課題",
+    "summary": "flowchart TD A[オンプレミス] -->|大きな初期投資| B[CAPEX 設備投資] B -->|減価償却| C[複数年で費用化] D[クラウド移行] -->|月額利用料| E[O...",
+    "url": "fe/technology/cloud/cloud-basic-9.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "メリット",
+    "summary": "flowchart TD A[オンプレミス] -->|大きな初期投資| B[CAPEX 設備投資] B -->|減価償却| C[複数年で費用化] D[クラウド移行] -->|月額利用料| E[O...",
+    "url": "fe/technology/cloud/cloud-basic-9.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "経済性評価（TCO/ROI/CAPEX/OPEX）",
+    "summary": "flowchart TD A[オンプレミス] -->|大きな初期投資| B[CAPEX 設備投資] B -->|減価償却| C[複数年で費用化] D[クラウド移行] -->|月額利用料| E[O...",
+    "url": "fe/technology/cloud/cloud-basic-9.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "主要クラウド事業者の比較",
+    "summary": "システムの置き場所（リージョン・AZ）は事前に検討。東京に本社がある企業は東日本リージョンを中心に選択。準拠法や裁判管轄権も考慮する。",
+    "url": "fe/technology/cloud/cloud-basic-9.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "リージョン選定の考え方",
+    "summary": "システムの置き場所（リージョン・AZ）は事前に検討。東京に本社がある企業は東日本リージョンを中心に選択。準拠法や裁判管轄権も考慮する。",
+    "url": "fe/technology/cloud/cloud-basic-9.html",
+    "tags": [
+      "クラウド"
+    ]
+  },
+  {
+    "term": "1 コンピュータの起動と BIOS / UEFI",
+    "summary": "コンピュータは電源を入れるとすぐに OS が動き出すわけではありません。最初に動作するのは、マザーボードに組み込まれた BIOS または UEFI と呼ばれるプログラムです。",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "BIOS / UEFI の役割",
+    "summary": "【コンピュータ起動の流れ】 電源投入 | v BIOS / UEFI 起動 | +---> ハードウェア初期化 +---> POST（自己診断テスト） | v ブートローダの検索と起動 （Win...",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "BIOSとUEFIの違い",
+    "summary": "【コンピュータ起動の流れ】 電源投入 | v BIOS / UEFI 起動 | +---> ハードウェア初期化 +---> POST（自己診断テスト） | v ブートローダの検索と起動 （Win...",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "組み込み・IoT におけるブート",
+    "summary": "OSは、ハードウェアを管理し、アプリケーションが動作できる環境を提供するソフトウェアです。",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "2 OS（オペレーティングシステム）とは",
+    "summary": "OSは、ハードウェアを管理し、アプリケーションが動作できる環境を提供するソフトウェアです。",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "OSの3つの役割",
+    "summary": "ア）ハードウェアの初期化 イ）POST（自己診断テスト）の実行 ウ）アプリケーションの実行 エ）ブートローダの起動",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "OSの種類",
+    "summary": "ア）ハードウェアの初期化 イ）POST（自己診断テスト）の実行 ウ）アプリケーションの実行 エ）ブートローダの起動",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "汎用OS（General Purpose OS）",
+    "summary": "ア）ハードウェアの初期化 イ）POST（自己診断テスト）の実行 ウ）アプリケーションの実行 エ）ブートローダの起動",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "モバイルOS",
+    "summary": "ア）ハードウェアの初期化 イ）POST（自己診断テスト）の実行 ウ）アプリケーションの実行 エ）ブートローダの起動",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "リアルタイムOS（RTOS）",
+    "summary": "ア）ハードウェアの初期化 イ）POST（自己診断テスト）の実行 ウ）アプリケーションの実行 エ）ブートローダの起動",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "IoT向けOS",
+    "summary": "ア）ハードウェアの初期化 イ）POST（自己診断テスト）の実行 ウ）アプリケーションの実行 エ）ブートローダの起動",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "車載OS（Automotive OS）",
+    "summary": "ア）ハードウェアの初期化 イ）POST（自己診断テスト）の実行 ウ）アプリケーションの実行 エ）ブートローダの起動",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "マイコン向けOS",
+    "summary": "ア）ハードウェアの初期化 イ）POST（自己診断テスト）の実行 ウ）アプリケーションの実行 エ）ブートローダの起動",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "WindowsとmacOSの設計思想の違い",
+    "summary": "ア）ハードウェアの初期化 イ）POST（自己診断テスト）の実行 ウ）アプリケーションの実行 エ）ブートローダの起動",
+    "url": "fe/technology/computer/bios-os-types.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "8 現代コンピュータの小型化 — SoCの時代",
+    "summary": "コンピュータは高速化と同時に、小型化も大きく進展してきました。電子素子の集積度が向上したことで、かつて大型装置だった計算機が、現在ではスマートフォンのような小型機器に搭載できるまでになりました。",
+    "url": "fe/technology/computer/cloud-mobile-iot.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "9 クラウドコンピューティングの時代",
+    "summary": "クラウドコンピューティングとは、インターネットを通じて、必要なときに必要なだけコンピュータ資源（サーバ・ストレージ・アプリ）を利用できる仕組みのことです。",
+    "url": "fe/technology/computer/cloud-mobile-iot.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "10 モバイルとIoTの時代",
+    "summary": "【IoTの基本構造】 センサー（温度・湿度・加速度など） | | データ収集 v IoTデバイス（マイコン＋通信機能） | | 無線通信（Wi-Fi / BLE / 5G / LoRa） v ク...",
+    "url": "fe/technology/computer/cloud-mobile-iot.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "モバイルコンピューティングの発展",
+    "summary": "【IoTの基本構造】 センサー（温度・湿度・加速度など） | | データ収集 v IoTデバイス（マイコン＋通信機能） | | 無線通信（Wi-Fi / BLE / 5G / LoRa） v ク...",
+    "url": "fe/technology/computer/cloud-mobile-iot.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "IoT（Internet of Things）",
+    "summary": "【IoTの基本構造】 センサー（温度・湿度・加速度など） | | データ収集 v IoTデバイス（マイコン＋通信機能） | | 無線通信（Wi-Fi / BLE / 5G / LoRa） v ク...",
+    "url": "fe/technology/computer/cloud-mobile-iot.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "11 AIの時代（GPU・NPU）",
+    "summary": "近年、画像認識・音声認識・自動運転・生成AIなど、人工知能（AI）を活用したサービスが急速に普及しています。これらのAI技術を支えているのが、GPUとNPUです。",
+    "url": "fe/technology/computer/cloud-mobile-iot.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "AI時代のコンピューティングの変化",
+    "summary": "ア）コンピュータのOSを記録したチップ イ）CPU・GPU・通信機能などを1つのチップに統合した高集積チップ ウ）外部記憶装置の一種 エ）電源を管理する専用チップ",
+    "url": "fe/technology/computer/cloud-mobile-iot.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1 コンピュータの誕生と進化",
+    "summary": "人類は古くから計算を行ってきました。その歴史をたどると、社会や技術の発展と深く結びついていることがわかります。",
+    "url": "fe/technology/computer/computer-history.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "2 コンピュータ革命の始まり",
+    "summary": "20世紀に入ると、計算方法に大きな変革が起こります。",
+    "url": "fe/technology/computer/computer-history.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "ノイマン型コンピュータ",
+    "summary": "【プログラム内蔵方式（ノイマン型）】 外部プログラム方式（ENIACなど）： 計算を変えたい場合 → 配線を組み直し、スイッチやジャックを操作 → 汎用性が低く、時間と手間がかかる プログラム内...",
+    "url": "fe/technology/computer/computer-history.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "エニグマとコロッサス",
+    "summary": "【初期電子計算機の比較】 +------------------+------------------+-------------------------+ | | ABCマシン | ENIAC...",
+    "url": "fe/technology/computer/computer-history.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "3 初期の電子計算機",
+    "summary": "【初期電子計算機の比較】 +------------------+------------------+-------------------------+ | | ABCマシン | ENIAC...",
+    "url": "fe/technology/computer/computer-history.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "ABCマシン（1939年）",
+    "summary": "【初期電子計算機の比較】 +------------------+------------------+-------------------------+ | | ABCマシン | ENIAC...",
+    "url": "fe/technology/computer/computer-history.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "ENIAC（1946年）",
+    "summary": "【初期電子計算機の比較】 +------------------+------------------+-------------------------+ | | ABCマシン | ENIAC...",
+    "url": "fe/technology/computer/computer-history.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1.1 CPU（中央演算処理装置）",
+    "summary": "CPUはコンピュータの「頭脳」と呼ばれる部分で、プログラム（命令）を読み取り、計算や判断を行い、全体の動作を制御します。",
+    "url": "fe/technology/computer/cpu-architecture.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "命令実行サイクル",
+    "summary": "【命令実行サイクル】 [フェッチ] --> [デコード] --> [エグゼキュート] --> [ライトバック] (命令取り出し) (命令解析) (演算実行) (結果書き戻し) CPUはこのサイク...",
+    "url": "fe/technology/computer/cpu-architecture.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "パイプライン処理（Pipeline Processing）",
+    "summary": "1つの命令を複数の段階に分け、複数の命令を同時並行で処理する方式です。",
+    "url": "fe/technology/computer/cpu-architecture.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "スーパースカラ（Superscalar）",
+    "summary": "複数の命令を同時に実行できる複数の実行ユニットを持つ構造のことです。",
+    "url": "fe/technology/computer/cpu-architecture.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "RISC と CISC（命令セット）",
+    "summary": "CPUが理解できる命令の種類を命令セットアーキテクチャ（ISA）と呼びます。ISAの設計思想には大きく分けて2種類あります。",
+    "url": "fe/technology/computer/cpu-architecture.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "マイクロアーキテクチャ（Microarchitecture）",
+    "summary": "CPUの命令セット（ISA）は「CPUが理解できる命令の種類」を定義する仕様です。一方、マイクロアーキテクチャは、そのISAをどのように内部で実装するかを決める“CPUの内部構造”のことです。",
+    "url": "fe/technology/computer/cpu-architecture.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "CPUの種類と用途",
+    "summary": "ア）制御装置（CU） イ）演算装置（ALU） ウ）主記憶装置（メモリ） エ）レジスタ",
+    "url": "fe/technology/computer/cpu-architecture.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "デバイス管理（I/O管理）",
+    "summary": "OSはキーボード、ディスプレイ、プリンタ、センサー、通信モジュールなど、さまざまな入出力装置（I/Oデバイス）を統一的に扱えるように管理します。",
+    "url": "fe/technology/computer/device-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "デバイス管理の目的",
+    "summary": "デバイスドライバは、OSとハードウェアの間で通信を仲介し、デバイスを正しく動作させるためのソフトウェアです。",
+    "url": "fe/technology/computer/device-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "2 デバイスドライバ（Device Driver）",
+    "summary": "デバイスドライバは、OSとハードウェアの間で通信を仲介し、デバイスを正しく動作させるためのソフトウェアです。",
+    "url": "fe/technology/computer/device-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "3 バッファリング（Buffering）",
+    "summary": "バッファリングとは、データを一時的にメモリ（バッファ）に蓄えてからデバイスへ送受信する仕組みです。CPUとI/Oデバイスの速度差を吸収し、システム全体の効率を高めます。",
+    "url": "fe/technology/computer/device-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "4 スプーリング（Spooling）",
+    "summary": "スプーリング（Spool: Simultaneous Peripheral Operations Online）とは、CPUやアプリケーションより遅いデバイス（特にプリンタ）を効率よく使うために...",
+    "url": "fe/technology/computer/device-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1 ファイルシステムの役割",
+    "summary": "ファイルシステムの主な役割は次の3つです。",
+    "url": "fe/technology/computer/filesystem.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "2 ファイルシステムの内部構造",
+    "summary": "ファイルシステムは、「ファイル名」と「実際のデータの位置」を結びつける仕組みを持っています。",
+    "url": "fe/technology/computer/filesystem.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "i-node（UNIX / Linux 系）",
+    "summary": "UNIX/Linuxのファイルシステム（ext4など）で使われる方式。",
+    "url": "fe/technology/computer/filesystem.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "FAT（File Allocation Table）",
+    "summary": "Windows系・組み込みで多用される方式。USBメモリやSDカードで広く使われる。",
+    "url": "fe/technology/computer/filesystem.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "4 アクセス権（Permission）",
+    "summary": "UNIX/Linuxでは、ファイルのアクセス権は次の3つで表される。",
+    "url": "fe/technology/computer/filesystem.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "5 ジャーナリング（Journaling）",
+    "summary": "電源断や障害が発生したときに、ファイルシステムの整合性を保つための仕組み。",
+    "url": "fe/technology/computer/filesystem.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "6 フラッシュメモリとウェアレベリング（IoT・組み込み向け）",
+    "summary": "IoT・組み込み機器では、フラッシュメモリ（SDカード・eMMC・NOR/NAND）が主流です。フラッシュメモリには寿命があり、同じ場所に書き込み続けると故障します。",
+    "url": "fe/technology/computer/filesystem.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "組み込み・RTOS向けファイルシステム",
+    "summary": "ア）データの保存と管理、ディレクトリ構造の提供、アクセス権の管理 イ）CPUのスケジューリング、メモリ管理 ウ）ネットワーク通信の制御、暗号化 エ）電源管理、温度監視",
+    "url": "fe/technology/computer/filesystem.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1.6 入出力装置（Input/Output Device）",
+    "summary": "入出力装置（I/Oデバイス）は、コンピュータと外部の世界（人間や他の機器）との橋渡しをする装置です。",
+    "url": "fe/technology/computer/io-devices-bus.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "入力装置の種類",
+    "summary": "バスとは、コンピュータ内部でCPU・主記憶装置・入出力装置をつなぐ“共通の通路”のことです。",
+    "url": "fe/technology/computer/io-devices-bus.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "出力装置の種類",
+    "summary": "バスとは、コンピュータ内部でCPU・主記憶装置・入出力装置をつなぐ“共通の通路”のことです。",
+    "url": "fe/technology/computer/io-devices-bus.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1.7 バス構造（Bus Architecture）",
+    "summary": "バスとは、コンピュータ内部でCPU・主記憶装置・入出力装置をつなぐ“共通の通路”のことです。",
+    "url": "fe/technology/computer/io-devices-bus.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "バスの種類（接続範囲による分類）",
+    "summary": "入出力装置はCPUや主記憶装置に比べて動作速度が非常に遅いため、CPUとI/Oデバイスのデータのやり取りを効率よく制御する仕組みが必要です。",
+    "url": "fe/technology/computer/io-devices-bus.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "主なバス規格",
+    "summary": "入出力装置はCPUや主記憶装置に比べて動作速度が非常に遅いため、CPUとI/Oデバイスのデータのやり取りを効率よく制御する仕組みが必要です。",
+    "url": "fe/technology/computer/io-devices-bus.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1.8 入出力制御方式（I/O Control）",
+    "summary": "入出力装置はCPUや主記憶装置に比べて動作速度が非常に遅いため、CPUとI/Oデバイスのデータのやり取りを効率よく制御する仕組みが必要です。",
+    "url": "fe/technology/computer/io-devices-bus.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "入出力インタフェース",
+    "summary": "入出力装置の制御は、デバイスドライバと呼ばれるソフトウェアによって行われます。OSがハードウェアを正しく動作させるために、このドライバが欠かせません。",
+    "url": "fe/technology/computer/io-devices-bus.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "5 I/Oスケジューリング",
+    "summary": "ストレージ（HDD/SSD）などのデバイスは、複数のI/O要求が同時に発生します。しかし、ディスクは一度に1つの要求しか処理できないため、OSは要求の順番を最適化する必要があります。",
+    "url": "fe/technology/computer/io-scheduling-dma.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "6 割り込み（Interrupt）とI/O",
+    "summary": "割り込み（Interrupt）は、I/Oデバイスが処理完了やイベント発生をCPUに通知する仕組みです。CPUがデバイスを待ち続ける必要がなくなり、効率的なI/Oが可能になります。",
+    "url": "fe/technology/computer/io-scheduling-dma.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "7 DMA（Direct Memory Access）",
+    "summary": "DMAは、CPUを介さずにデバイスがメモリへ直接データ転送を行う仕組みです。大量データを扱う組み込みシステムでは特に重要なI/O技術です。",
+    "url": "fe/technology/computer/io-scheduling-dma.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "8 組み込み・IoT・RTOSにおけるI/O管理",
+    "summary": "ア）CPUのクロック周波数を上げる イ）ディスクヘッドの移動量を減らし平均待ち時間を短くする ウ）メモリ容量を増やす エ）ファイルを圧縮する",
+    "url": "fe/technology/computer/io-scheduling-dma.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "組み込みシステムのI/O管理の特徴",
+    "summary": "ア）CPUのクロック周波数を上げる イ）ディスクヘッドの移動量を減らし平均待ち時間を短くする ウ）メモリ容量を増やす エ）ファイルを圧縮する",
+    "url": "fe/technology/computer/io-scheduling-dma.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "RTOSにおけるI/O管理",
+    "summary": "ア）CPUのクロック周波数を上げる イ）ディスクヘッドの移動量を減らし平均待ち時間を短くする ウ）メモリ容量を増やす エ）ファイルを圧縮する",
+    "url": "fe/technology/computer/io-scheduling-dma.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "IoTデバイスにおけるI/O特性",
+    "summary": "ア）CPUのクロック周波数を上げる イ）ディスクヘッドの移動量を減らし平均待ち時間を短くする ウ）メモリ容量を増やす エ）ファイルを圧縮する",
+    "url": "fe/technology/computer/io-scheduling-dma.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1.2 主記憶装置（メインメモリ）",
+    "summary": "主記憶装置は、コンピュータの作業スペースにあたる装置です。CPUが処理するデータやプログラムを一時的に保存します。",
+    "url": "fe/technology/computer/memory-cache.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "RAMとROMの種類と特徴",
+    "summary": "キャッシュメモリは、CPUが頻繁に利用するデータや命令を一時的に保存する高速メモリです。CPUと主記憶装置の速度差を埋める役割があります。",
+    "url": "fe/technology/computer/memory-cache.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "RAMの細分類",
+    "summary": "キャッシュメモリは、CPUが頻繁に利用するデータや命令を一時的に保存する高速メモリです。CPUと主記憶装置の速度差を埋める役割があります。",
+    "url": "fe/technology/computer/memory-cache.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "ROMの細分類",
+    "summary": "キャッシュメモリは、CPUが頻繁に利用するデータや命令を一時的に保存する高速メモリです。CPUと主記憶装置の速度差を埋める役割があります。",
+    "url": "fe/technology/computer/memory-cache.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1.3 キャッシュメモリ",
+    "summary": "キャッシュメモリは、CPUが頻繁に利用するデータや命令を一時的に保存する高速メモリです。CPUと主記憶装置の速度差を埋める役割があります。",
+    "url": "fe/technology/computer/memory-cache.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "参照の局所性とキャッシュの関係",
+    "summary": "【キャッシュヒット vs キャッシュミス】 キャッシュヒット： CPU「このデータほしい！」 キャッシュ「はい、ここにあります！」 → 主記憶に行かなくていいので高速 キャッシュミス： CPU「...",
+    "url": "fe/technology/computer/memory-cache.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "キャッシュの書き込み方式",
+    "summary": "ア）DRAMは不揮発性、SRAMは揮発性 イ）DRAMはリフレッシュが必要、SRAMは不要 ウ）DRAMは高速・高コスト、SRAMは低速・低コスト エ）DRAMはキャッシュ用、SRAMは主記憶用",
+    "url": "fe/technology/computer/memory-cache.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "メモリ管理（Memory Management）",
+    "summary": "メモリ（RAM）は、プログラムが実行されるための「作業領域」です。OSはメモリを効率よく、安全に利用できるように管理します。",
+    "url": "fe/technology/computer/memory-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "メモリ管理の目的",
+    "summary": "メモリをあらかじめ決まった大きさの区画に分割しておく方式。",
+    "url": "fe/technology/computer/memory-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "メモリ割り当て方式",
+    "summary": "メモリをあらかじめ決まった大きさの区画に分割しておく方式。",
+    "url": "fe/technology/computer/memory-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "断片化（Fragmentation）",
+    "summary": "メモリ管理では、次の2種類の断片化が問題になります。",
+    "url": "fe/technology/computer/memory-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "ページング（Paging）",
+    "summary": "ページングは、メモリを固定サイズのページに分割し、プログラムをページ単位で管理する方式。",
+    "url": "fe/technology/computer/memory-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "セグメンテーション（Segmentation）",
+    "summary": "プログラムを意味のある単位（関数・データ・スタックなど）で分割する方式。",
+    "url": "fe/technology/computer/memory-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "ページ置換アルゴリズム",
+    "summary": "仮想記憶では、メモリが不足したときに「どのページを追い出すか」を決める必要があります。",
+    "url": "fe/technology/computer/memory-management.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "3 プロセス管理（CPUの管理）",
+    "summary": "OSの最も重要な役割のひとつがプロセス管理です。プロセスとは、実行中のプログラムのことです。",
+    "url": "fe/technology/computer/process-scheduling.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "プロセスとは",
+    "summary": "【プロセスの状態遷移】 +-----------------+ | | | 実行状態 | | (Running) | | CPUを使っている | +-----------------+ | | ...",
+    "url": "fe/technology/computer/process-scheduling.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "プロセスの状態遷移",
+    "summary": "【プロセスの状態遷移】 +-----------------+ | | | 実行状態 | | (Running) | | CPUを使っている | +-----------------+ | | ...",
+    "url": "fe/technology/computer/process-scheduling.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "プロセスの3つの状態",
+    "summary": "OSは複数のプロセスを公平かつ効率よく実行するために、スケジューリング方式を用いてCPUの順番を決めます。",
+    "url": "fe/technology/computer/process-scheduling.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "スケジューリング（CPUの順番決め）",
+    "summary": "OSは複数のプロセスを公平かつ効率よく実行するために、スケジューリング方式を用いてCPUの順番を決めます。",
+    "url": "fe/technology/computer/process-scheduling.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "コンテキストスイッチ",
+    "summary": "OSがCPUを別のプロセスに切り替えることをコンテキストスイッチと呼びます。",
+    "url": "fe/technology/computer/process-scheduling.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "スレッド",
+    "summary": "スレッドとは、プロセス内で動作する「軽量な処理単位」のことです。",
+    "url": "fe/technology/computer/process-scheduling.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "割り込みとプロセス管理",
+    "summary": "割り込みとは、外部デバイスや内部イベントがCPUに処理を要求する仕組みです。",
+    "url": "fe/technology/computer/process-scheduling.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1 システムソフトウェア（詳細）",
+    "summary": "システムソフトウェアは、コンピュータを動作させるための基盤となるソフトウェアであり、アプリケーションが動作するための環境を提供します。",
+    "url": "fe/technology/computer/software-classification.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "2 ミドルウェア",
+    "summary": "ミドルウェアは、OSとアプリケーションの間で共通機能を提供するソフトウェアであり、アプリケーション開発を大幅に効率化します。",
+    "url": "fe/technology/computer/software-classification.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "ミドルウェアの種類",
+    "summary": "アプリケーションソフトウェアは、ユーザの目的に応じて動作するソフトウェアであり、OSやミドルウェアの上で動作します。",
+    "url": "fe/technology/computer/software-classification.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "3 アプリケーションソフトウェア",
+    "summary": "アプリケーションソフトウェアは、ユーザの目的に応じて動作するソフトウェアであり、OSやミドルウェアの上で動作します。",
+    "url": "fe/technology/computer/software-classification.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "4 コンピュータを支える技術の進化",
+    "summary": "コンピュータは、計算を実行する「電子素子」の性能や信頼性に大きく依存しています。そのため、素子の進化とコンピュータの進化は密接に結びついています。",
+    "url": "fe/technology/computer/tech-evolution.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "5 世代別コンピュータ",
+    "summary": "コンピュータは、その時代ごとに使用される電子素子や回路技術の違いによって、いくつかの世代に分けられます。",
+    "url": "fe/technology/computer/tech-evolution.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "6 商用コンピュータとPCの登場",
+    "summary": "【コンピュータ普及のイメージ】 研究機関・軍事 | v 商用コンピュータ（UNIVAC、IBM） | v 汎用コンピュータ（IBM 360） | v パーソナルコンピュータ（Apple II、I...",
+    "url": "fe/technology/computer/tech-evolution.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "世界初の商用コンピュータ：UNIVAC（1951年）",
+    "summary": "【コンピュータ普及のイメージ】 研究機関・軍事 | v 商用コンピュータ（UNIVAC、IBM） | v 汎用コンピュータ（IBM 360） | v パーソナルコンピュータ（Apple II、I...",
+    "url": "fe/technology/computer/tech-evolution.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "IBMの商用コンピュータ",
+    "summary": "【コンピュータ普及のイメージ】 研究機関・軍事 | v 商用コンピュータ（UNIVAC、IBM） | v 汎用コンピュータ（IBM 360） | v パーソナルコンピュータ（Apple II、I...",
+    "url": "fe/technology/computer/tech-evolution.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "パーソナルコンピュータ（PC）の登場",
+    "summary": "【コンピュータ普及のイメージ】 研究機関・軍事 | v 商用コンピュータ（UNIVAC、IBM） | v 汎用コンピュータ（IBM 360） | v パーソナルコンピュータ（Apple II、I...",
+    "url": "fe/technology/computer/tech-evolution.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "7 現代コンピュータの高速化",
+    "summary": "1965年、インテル創業者の一人ゴードン・ムーアは次のように予測しました。",
+    "url": "fe/technology/computer/tech-evolution.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "ムーアの法則（Moore's Law）",
+    "summary": "1965年、インテル創業者の一人ゴードン・ムーアは次のように予測しました。",
+    "url": "fe/technology/computer/tech-evolution.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "クロック周波数の向上とその限界",
+    "summary": "【コンピュータ高速化の変遷】 1980-2000年代： [クロック周波数向上] → 発熱・消費電力が限界に 2000年代後半以降： [マルチコア化] → 複数コアで並列処理 [GPU活用] → ...",
+    "url": "fe/technology/computer/tech-evolution.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "GPU・NPUによる並列処理の時代",
+    "summary": "【コンピュータ高速化の変遷】 1980-2000年代： [クロック周波数向上] → 発熱・消費電力が限界に 2000年代後半以降： [マルチコア化] → 複数コアで並列処理 [GPU活用] → ...",
+    "url": "fe/technology/computer/tech-evolution.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1.4 仮想記憶（Virtual Memory）",
+    "summary": "主記憶装置の容量には限りがあります。しかし、現代のアプリケーションは大量のメモリを必要とするため、主記憶だけでは足りません。そこで利用されるのが仮想記憶です。",
+    "url": "fe/technology/computer/virtual-memory-storage.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "仮想記憶の動作（簡単な流れ）",
+    "summary": "【仮想記憶の動作フロー】 1. CPUが仮想アドレスでデータを要求する | v 2. MMUがページテーブルを参照して物理アドレスに変換する | v 3. ページが主記憶にあれば（ページテーブル...",
+    "url": "fe/technology/computer/virtual-memory-storage.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1.5 外部記憶装置（ストレージ）",
+    "summary": "外部記憶装置（ストレージ）は、主記憶装置では容量や保存期間が不足するデータを長期間保存する装置です。",
+    "url": "fe/technology/computer/virtual-memory-storage.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "外部記憶装置の種類と比較",
+    "summary": "【HDD vs SSD 比較】 HDD（ハードディスク）： +-------------------+ | 磁気ディスク | ← 回転（5400rpm / 7200rpm） | [====] |...",
+    "url": "fe/technology/computer/virtual-memory-storage.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "主記憶装置と外部記憶装置の違い",
+    "summary": "【HDD vs SSD 比較】 HDD（ハードディスク）： +-------------------+ | 磁気ディスク | ← 回転（5400rpm / 7200rpm） | [====] |...",
+    "url": "fe/technology/computer/virtual-memory-storage.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "アクセス方法（ランダムアクセス vs シーケンシャルアクセス）",
+    "summary": "【HDD vs SSD 比較】 HDD（ハードディスク）： +-------------------+ | 磁気ディスク | ← 回転（5400rpm / 7200rpm） | [====] |...",
+    "url": "fe/technology/computer/virtual-memory-storage.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "性能指標",
+    "summary": "【HDD vs SSD 比較】 HDD（ハードディスク）： +-------------------+ | 磁気ディスク | ← 回転（5400rpm / 7200rpm） | [====] |...",
+    "url": "fe/technology/computer/virtual-memory-storage.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1.9 仮想化のハードウェア面",
+    "summary": "近年のコンピュータでは、1台の物理マシンのリソースを効率よく分割し、複数の「仮想マシン」を同時に動かすことが可能になっています。これを実現するのが仮想化技術です。",
+    "url": "fe/technology/computer/virtualization.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "仮想化の構成要素",
+    "summary": "コンピュータは、その性能や用途によっていくつかの分類ができます。",
+    "url": "fe/technology/computer/virtualization.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "仮想化の実務上の利点",
+    "summary": "コンピュータは、その性能や用途によっていくつかの分類ができます。",
+    "url": "fe/technology/computer/virtualization.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "仮想化の方式",
+    "summary": "コンピュータは、その性能や用途によっていくつかの分類ができます。",
+    "url": "fe/technology/computer/virtualization.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1.10 コンピュータの分類と用途例",
+    "summary": "コンピュータは、その性能や用途によっていくつかの分類ができます。",
+    "url": "fe/technology/computer/virtualization.html",
+    "tags": [
+      "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "1-4. アジャイル開発",
+    "summary": "アジャイル開発は、短い期間（1～4週間）で計画 → 開発 → テスト → 振り返りを繰り返す開発手法。",
+    "url": "fe/technology/management/agile-scrum.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "アジャイル開発の特徴",
+    "summary": "スクラムには3つの役割がある。これは「上下関係」ではなく、責任の種類が違うだけ。",
+    "url": "fe/technology/management/agile-scrum.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "スクラムの3つの価値基準",
+    "summary": "スクラムには3つの役割がある。これは「上下関係」ではなく、責任の種類が違うだけ。",
+    "url": "fe/technology/management/agile-scrum.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-4-1-1. スクラムの役割",
+    "summary": "スクラムには3つの役割がある。これは「上下関係」ではなく、責任の種類が違うだけ。",
+    "url": "fe/technology/management/agile-scrum.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-4-1-2. スクラムのイベント",
+    "summary": "スクラムには4つのイベントがあり、これらがチームのリズムを作る。",
+    "url": "fe/technology/management/agile-scrum.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-4-1-5. スクラムが強力な理由",
+    "summary": "ア）計画を最初に全て決めてから進める イ）短いサイクルで開発と改善を繰り返す ウ）大規模なプロジェクトに向く エ）文書を最も重視する",
+    "url": "fe/technology/management/agile-scrum.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-13-1. 変更管理とは何か",
+    "summary": "変更管理とは、プロジェクトの要件・仕様・スコープに変更が発生したとき、その影響（工数・コスト・納期）を評価し、承認された変更だけを正式に反映するための管理。",
+    "url": "fe/technology/management/change-management-1.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-13-2. なぜ変更管理が必要なのか",
+    "summary": "【スコープクリープ（スコープの暴走）】 当初の計画： [========] ← 本来のスコープ 変更管理なし： [========] + [==] + [==] + [==] ← どんどん拡大 ...",
+    "url": "fe/technology/management/change-management-1.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-13-4. 変更管理の流れ（全体像）",
+    "summary": "【変更管理の流れ】 STEP1. 変更要求の受付 変更要求は必ず文書（変更要求書）で受け付ける 口頭の変更は絶対に禁止 STEP2. 影響分析（工数・コスト・納期） 設計・実装・テストへの影響を...",
+    "url": "fe/technology/management/change-management-1.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-13-6. 変更要求書（Change Request）の作り方",
+    "summary": "変更要求書は、変更管理の入口であり、品質を左右する最重要ドキュメント。",
+    "url": "fe/technology/management/change-management-1.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "変更要求書を作る5ステップ",
+    "summary": "【変更要求書のチェックリスト】 □ 変更内容は作業レベルで書かれているか （「検索機能強化」ではなく「検索条件にカテゴリ追加」） □ 変更理由は業務上の根拠があるか （「顧客が言った」ではなく「...",
+    "url": "fe/technology/management/change-management-1.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "変更要求書のテンプレート",
+    "summary": "【変更要求書のチェックリスト】 □ 変更内容は作業レベルで書かれているか （「検索機能強化」ではなく「検索条件にカテゴリ追加」） □ 変更理由は業務上の根拠があるか （「顧客が言った」ではなく「...",
+    "url": "fe/technology/management/change-management-1.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-13-8. 変更要求書の“良い例・悪い例”",
+    "summary": "【変更要求書のチェックリスト】 □ 変更内容は作業レベルで書かれているか （「検索機能強化」ではなく「検索条件にカテゴリ追加」） □ 変更理由は業務上の根拠があるか （「顧客が言った」ではなく「...",
+    "url": "fe/technology/management/change-management-1.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-13-9. 変更管理表（Change Log）の作り方",
+    "summary": "変更管理表は、変更要求書（CR）で承認された変更を、プロジェクト全体に反映し、履歴として残すための管理表。",
+    "url": "fe/technology/management/change-management-2.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "変更管理表を作る5ステップ",
+    "summary": "変更承認プロセスは、変更要求（CR）を正式に採用するかどうかを判断する手続き。",
+    "url": "fe/technology/management/change-management-2.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "変更管理表のテンプレート例",
+    "summary": "変更承認プロセスは、変更要求（CR）を正式に採用するかどうかを判断する手続き。",
+    "url": "fe/technology/management/change-management-2.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-13-13. 変更承認プロセスの作り方",
+    "summary": "変更承認プロセスは、変更要求（CR）を正式に採用するかどうかを判断する手続き。",
+    "url": "fe/technology/management/change-management-2.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-13-15. 変更反映の作業手順",
+    "summary": "変更反映とは：承認された変更を、プロジェクトの計画・設計・実装・テストに“漏れなく・重複なく”反映する作業。",
+    "url": "fe/technology/management/change-management-2.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-10. コミュニケーション管理",
+    "summary": "コミュニケーション管理は、プロジェクトの“情報の流れ”を設計し、必要な人に、必要な情報を、必要なタイミングで届けるための管理。",
+    "url": "fe/technology/management/communication-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-10-1. コミュニケーション管理の目的",
+    "summary": "【情報のタイミングの重要性】 早すぎる 遅すぎる | | v v [判断材料不足] [手遅れ] | | +------------+---------------+ | v 【適切なタイミング】...",
+    "url": "fe/technology/management/communication-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-10-2. コミュニケーション管理の3つの柱",
+    "summary": "コミュニケーション計画は、「情報の流れ」を設計する作業。",
+    "url": "fe/technology/management/communication-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "会議体の例",
+    "summary": "コミュニケーション計画は、「情報の流れ」を設計する作業。",
+    "url": "fe/technology/management/communication-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "報連相（ほうれんそう）",
+    "summary": "コミュニケーション計画は、「情報の流れ」を設計する作業。",
+    "url": "fe/technology/management/communication-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "ステークホルダーごとの情報ニーズ",
+    "summary": "コミュニケーション計画は、「情報の流れ」を設計する作業。",
+    "url": "fe/technology/management/communication-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-10-3. コミュニケーション計画",
+    "summary": "コミュニケーション計画は、「情報の流れ」を設計する作業。",
+    "url": "fe/technology/management/communication-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "ステークホルダー分析の例",
+    "summary": "【「言った／言わない」問題】 口頭でのやり取りだけでは、後から認識の相違が発生する 例： Aさん：「この仕様でお願いします」 Bさん：「はい、分かりました」 3週間後... Aさん：「こんな仕様...",
+    "url": "fe/technology/management/communication-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-10-4. コミュニケーション管理の失敗例",
+    "summary": "【「言った／言わない」問題】 口頭でのやり取りだけでは、後から認識の相違が発生する 例： Aさん：「この仕様でお願いします」 Bさん：「はい、分かりました」 3週間後... Aさん：「こんな仕様...",
+    "url": "fe/technology/management/communication-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-10-5. コミュニケーション管理の価値",
+    "summary": "【コミュニケーション管理の全体像】 +-----------------------------------------------------------+ | コミュニケーション管理 | |...",
+    "url": "fe/technology/management/communication-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-8. コスト管理",
+    "summary": "コスト管理は、プロジェクトに必要なお金・工数を計画し、実績と比較しながら予算内で完了させるための管理。",
+    "url": "fe/technology/management/cost-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-8-1. コスト管理の目的",
+    "summary": "【コスト・スケジュール・品質のバランス】 +-----------------+ | 品質 | | （良いもの） | +-----------------+ /\\ / \\ / \\ / \\ / \\...",
+    "url": "fe/technology/management/cost-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-8-2. コストの内訳（ITプロジェクトのコスト構造）",
+    "summary": "ITプロジェクトのコストは、ほぼ次の4つで構成される。",
+    "url": "fe/technology/management/cost-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-8-3. コスト管理の流れ",
+    "summary": "【コスト管理の流れ】 STEP1. 見積り（計画値）を作る WBSをもとに、作業ごとの工数を見積もる STEP2. 実績を記録する 毎日の作業時間、完了したタスク、発生した手戻り、レビュー時間 ...",
+    "url": "fe/technology/management/cost-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "超過の原因5種類",
+    "summary": "【コスト超過率の計算】 例：予算100万円、実績120万円の場合 コスト超過率 = (120 - 100) / 100 = 20% 意味：予算に対して20%多くコストがかかっている 【判断基準】...",
+    "url": "fe/technology/management/cost-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "見積り例（WBSベース）",
+    "summary": "【コスト超過率の計算】 例：予算100万円、実績120万円の場合 コスト超過率 = (120 - 100) / 100 = 20% 意味：予算に対して20%多くコストがかかっている 【判断基準】...",
+    "url": "fe/technology/management/cost-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-8-4. コスト管理で使う代表的な指標",
+    "summary": "【コスト超過率の計算】 例：予算100万円、実績120万円の場合 コスト超過率 = (120 - 100) / 100 = 20% 意味：予算に対して20%多くコストがかかっている 【判断基準】...",
+    "url": "fe/technology/management/cost-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "コスト管理がプロジェクトにもたらす価値",
+    "summary": "【コスト管理の全体像】 +-----------------------------------------------------------+ | コスト管理 | | | | 計画（見積り）...",
+    "url": "fe/technology/management/cost-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-6. クリティカルパス（Critical Path）",
+    "summary": "クリティカルパスは、プロジェクトが最短で終わるために“絶対に遅れてはいけない作業の連鎖”のこと。",
+    "url": "fe/technology/management/critical-path.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-6-2. クリティカルパスの構造",
+    "summary": "クリティカルパスは、作業の依存関係を線でつなぎ、各作業の工数を足し合わせたときに“最も長くなるルート”のこと。",
+    "url": "fe/technology/management/critical-path.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-6-3. クリティカルパスの求め方（実務で使う考え方）",
+    "summary": "クリティカルパスは、「計算」ではなく“依存関係 × 工数 × 並行可否”の組み合わせで決まる。",
+    "url": "fe/technology/management/critical-path.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-5. 依存関係とは何か",
+    "summary": "依存関係とは、「どの作業が、どの作業に影響するか」を示すルール。",
+    "url": "fe/technology/management/dependency-relationships.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-5-2. 依存関係の3種類：FS（Finish to Start）",
+    "summary": "【FS（Finish to Start）のイメージ】 作業A 作業B [========] -> [========] 終了 開始 例：要件定義（A）が終わったら、設計（B）を開始する 2-5-...",
+    "url": "fe/technology/management/dependency-relationships.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-5-2. 依存関係の3種類：SS（Start to Start）",
+    "summary": "【SS（Start to Start）のイメージ】 作業A [========] | +----> 作業B（Aの開始と同時に開始） [========] 例：画面設計（A）を始めたら、API設計...",
+    "url": "fe/technology/management/dependency-relationships.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-5-2. 依存関係の3種類：FF（Finish to Finish）",
+    "summary": "【FF（Finish to Finish）のイメージ】 作業A [========] | +----> 作業B（Aの終了と同時に終了） [========] 例：結合テスト（A）が終わるときに、...",
+    "url": "fe/technology/management/dependency-relationships.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-5-4. 依存関係を誤るとどうなるか（実務の失敗例）",
+    "summary": "【正しい依存関係 vs 誤った依存関係】 正しい（FS）: [設計] -> [実装] 設計が終わってから実装開始 → 手戻りなし 誤り（SSでつないだ場合）: [設計] +-> [実装] 設計途...",
+    "url": "fe/technology/management/dependency-relationships.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-5-5. 依存関係はクリティカルパスの前提",
+    "summary": "ア）プロジェクトの予算配分を決めるルール イ）どの作業がどの作業に影響するかを示すルール ウ）チームメンバーの役割を決めるルール エ）品質基準を決めるルール",
+    "url": "fe/technology/management/dependency-relationships.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-2-4. 開発モデルの分類（全体像）",
+    "summary": "開発モデルには複数の種類があり、全体像を俯瞰することが重要。代表的なモデルは以下の4つ。",
+    "url": "fe/technology/management/development-model-selection.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-2-5. モデルを選ぶ基準",
+    "summary": "開発モデルは“どれが正しい”ではなく、プロジェクトに合ったものを選ぶことが重要。選ぶ基準は次の3つが中心。",
+    "url": "fe/technology/management/development-model-selection.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-3. ウォーターフォールモデル",
+    "summary": "ウォーターフォールは、要件 → 設計 → 実装 → テスト → 運用 の順に進む、最も伝統的で安定した開発モデル。",
+    "url": "fe/technology/management/development-model-selection.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-3-1. ウォーターフォールの本質",
+    "summary": "ウォーターフォールの本質は次の3つ。",
+    "url": "fe/technology/management/development-model-selection.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-3-2. ウォーターフォールが向いている場面",
+    "summary": "ウォーターフォールは次のような場面で力を発揮する。",
+    "url": "fe/technology/management/development-model-selection.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-3-3. ウォーターフォールを成功させるための視点",
+    "summary": "ウォーターフォールは、正しく使えば非常に強力なモデル。成功するプロジェクトは次のポイントを押さえている。",
+    "url": "fe/technology/management/development-model-selection.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-12. 課題管理（Issue Management）",
+    "summary": "課題管理は、すでに発生してしまった問題を、影響が広がる前に確実に解決するための管理。",
+    "url": "fe/technology/management/issue-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-12-1. 課題管理の目的",
+    "summary": "【課題放置の連鎖】 課題発生 | v 放置する | +---> スケジュール遅延 | +---> コスト超過 | +---> 品質低下 | +---> 顧客不満 | +---> チーム混乱 | ...",
+    "url": "fe/technology/management/issue-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-12-2. リスク管理との違い",
+    "summary": "【リスク管理 vs 課題管理】 時間軸：過去 ---------- 現在 ---------- 未来 | | | | 課題管理 リスク管理 （発生済み） （未発生） | | v v 解決する 予...",
+    "url": "fe/technology/management/issue-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-12-3. 課題管理の流れ",
+    "summary": "【課題管理の流れ】 STEP1. 課題を特定する（発生した問題を洗い出す） 事実ベースで書く。例： 「顧客の承認が遅れている」 「テスト環境が準備できていない」 「外部ベンダーの成果物が遅延」 ...",
+    "url": "fe/technology/management/issue-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "課題特定の良い例と悪い例",
+    "summary": "[課題管理表 テンプレート] +----+------------------+--------+------------+------------------+--------+------+...",
+    "url": "fe/technology/management/issue-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "影響の書き方テンプレート",
+    "summary": "[課題管理表 テンプレート] +----+------------------+--------+------------+------------------+--------+------+...",
+    "url": "fe/technology/management/issue-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "原因の書き方テンプレート",
+    "summary": "[課題管理表 テンプレート] +----+------------------+--------+------------+------------------+--------+------+...",
+    "url": "fe/technology/management/issue-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-12-5. 課題管理表",
+    "summary": "[課題管理表 テンプレート] +----+------------------+--------+------------+------------------+--------+------+...",
+    "url": "fe/technology/management/issue-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-1. PMBOKが示す10の管理領域",
+    "summary": "PMBOK（Project Management Body of Knowledge）は、プロジェクトを成功に導くために必要な「10の管理領域」を体系化した国際標準。",
+    "url": "fe/technology/management/pmbok-overview.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-1-2. 統合管理",
+    "summary": "統合管理は、プロジェクト全体を一貫性のある状態に保つための視点。",
+    "url": "fe/technology/management/pmbok-overview.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-1-3. スコープ管理",
+    "summary": "スコープ管理は、「何を作るか」「どこまで作るか」を明確にする視点。",
+    "url": "fe/technology/management/pmbok-overview.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-1-4. スケジュール管理",
+    "summary": "スケジュール管理は、プロジェクトの時間軸を整える視点。",
+    "url": "fe/technology/management/pmbok-overview.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-1-5. コスト管理",
+    "summary": "コスト管理は、お金と工数を適切に扱う視点。",
+    "url": "fe/technology/management/pmbok-overview.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-1-6. 品質管理",
+    "summary": "品質管理は、「良いものを作る」ための視点。",
+    "url": "fe/technology/management/pmbok-overview.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-1-7. 資源管理",
+    "summary": "資源管理は、プロジェクトに必要な“力”を整える視点。",
+    "url": "fe/technology/management/pmbok-scope-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-1-8. コミュニケーション管理",
+    "summary": "コミュニケーション管理は、プロジェクトの“情報の流れ”を整える視点。",
+    "url": "fe/technology/management/pmbok-scope-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-1-9. リスク管理",
+    "summary": "リスク管理は、「起きるかもしれないこと」に備える視点。",
+    "url": "fe/technology/management/pmbok-scope-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-1-10. 調達管理",
+    "summary": "調達管理は、外部の力を適切に使うための視点。",
+    "url": "fe/technology/management/pmbok-scope-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-1-11. ステークホルダー管理",
+    "summary": "ステークホルダー管理は、プロジェクトに関わる人たちの期待を整える視点。",
+    "url": "fe/technology/management/pmbok-scope-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-2. スコープ管理",
+    "summary": "スコープ管理は、「プロジェクトで作るもの・作らないものを明確にし、関係者の認識を揃えるための管理」。",
+    "url": "fe/technology/management/pmbok-scope-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-2-1. スコープ管理が扱う2つの範囲",
+    "summary": "【スコープ管理の流れ】 STEP 1. 成果物を定義する（成果物スコープ） - 画面一覧、API一覧、データ構造、マニュアルなど - 成果物が具体的であるほど後の工程がスムーズ STEP 2. ...",
+    "url": "fe/technology/management/pmbok-scope-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-2-4. スコープ管理の目的",
+    "summary": "【スコープ管理の流れ】 STEP 1. 成果物を定義する（成果物スコープ） - 画面一覧、API一覧、データ構造、マニュアルなど - 成果物が具体的であるほど後の工程がスムーズ STEP 2. ...",
+    "url": "fe/technology/management/pmbok-scope-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-2-5. スコープ管理の流れ",
+    "summary": "【スコープ管理の流れ】 STEP 1. 成果物を定義する（成果物スコープ） - 画面一覧、API一覧、データ構造、マニュアルなど - 成果物が具体的であるほど後の工程がスムーズ STEP 2. ...",
+    "url": "fe/technology/management/pmbok-scope-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-2-6. スコープ管理がプロジェクトにもたらす価値",
+    "summary": "【スコープ管理の全体像】 +-----------------------------------------------------------+ | スコープ管理 | | | | +----...",
+    "url": "fe/technology/management/pmbok-scope-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-14. 調達管理（Procurement Management）",
+    "summary": "調達管理とは、プロジェクトで必要なモノ・サービスを外部の企業・ベンダーから適切に調達し、契約・品質・納期を管理するプロセス。",
+    "url": "fe/technology/management/procurement-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-14-1. 調達管理の目的",
+    "summary": "【調達管理の流れ】 STEP1. 調達の要否判断 本当に外部調達が必要かを判断する STEP2. 調達計画の作成 調達するもの、範囲、契約形態、スケジュールを整理 STEP3. ベンダー選定 技...",
+    "url": "fe/technology/management/procurement-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-14-2. 調達管理の流れ",
+    "summary": "【調達管理の流れ】 STEP1. 調達の要否判断 本当に外部調達が必要かを判断する STEP2. 調達計画の作成 調達するもの、範囲、契約形態、スケジュールを整理 STEP3. ベンダー選定 技...",
+    "url": "fe/technology/management/procurement-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-14-3. 調達の要否判断",
+    "summary": "まず、外部調達が本当に必要かを判断する。",
+    "url": "fe/technology/management/procurement-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-14-5. ベンダー選定",
+    "summary": "契約では、以下を明確にする。",
+    "url": "fe/technology/management/procurement-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-14-6. 契約締結",
+    "summary": "契約では、以下を明確にする。",
+    "url": "fe/technology/management/procurement-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "契約形態の種類",
+    "summary": "調達後は、外部ベンダーの管理が必要。",
+    "url": "fe/technology/management/procurement-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-14-7. ベンダー管理（進捗・品質・納期）",
+    "summary": "調達後は、外部ベンダーの管理が必要。",
+    "url": "fe/technology/management/procurement-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-7. 進捗管理",
+    "summary": "進捗管理は、「計画（スケジュール）と実績の差」を把握し、遅れを早期に発見して対策するための管理。",
+    "url": "fe/technology/management/progress-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-7-1. 進捗管理の目的",
+    "summary": "【進捗管理の流れ】 STEP1. 計画（ガントチャート）を基準にする 進捗管理は、ガントチャート（計画）と実績を比較する作業。 計画が曖昧だと、進捗管理は成立しない。 STEP2. 実績を収集す...",
+    "url": "fe/technology/management/progress-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-7-2. 進捗管理の流れ",
+    "summary": "【進捗管理の流れ】 STEP1. 計画（ガントチャート）を基準にする 進捗管理は、ガントチャート（計画）と実績を比較する作業。 計画が曖昧だと、進捗管理は成立しない。 STEP2. 実績を収集す...",
+    "url": "fe/technology/management/progress-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "遅れの原因5種類",
+    "summary": "進捗率は、「作業がどれだけ終わったか」を示す数字。初心者はここで必ずつまずく。",
+    "url": "fe/technology/management/progress-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "対策（リカバリ計画）の例",
+    "summary": "進捗率は、「作業がどれだけ終わったか」を示す数字。初心者はここで必ずつまずく。",
+    "url": "fe/technology/management/progress-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-7-3. 進捗率の考え方",
+    "summary": "進捗率は、「作業がどれだけ終わったか」を示す数字。初心者はここで必ずつまずく。",
+    "url": "fe/technology/management/progress-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-7-4. 進捗管理で使う代表的な指標",
+    "summary": "【進捗管理の全体像】 +-----------------------------------------------------------+ | 進捗管理 | | | | 計画（ガントチャー...",
+    "url": "fe/technology/management/progress-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-7-5. 進捗管理の効果",
+    "summary": "【進捗管理の全体像】 +-----------------------------------------------------------+ | 進捗管理 | | | | 計画（ガントチャー...",
+    "url": "fe/technology/management/progress-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-1. プロジェクトの基礎",
+    "summary": "プロジェクトとは、「期限・目的・成果物・メンバーが明確に定められた、一時的な活動」のこと。IT現場では、新規システム開発、機能追加、インフラ刷新、クラウド移行、アプリのリニューアルなどがすべてプ...",
+    "url": "fe/technology/management/project-basics-development-models.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "プロジェクトの定義",
+    "summary": "プロジェクトとは、「期限・目的・成果物・メンバーが明確に定められた、一時的な活動」のこと。IT現場では、新規システム開発、機能追加、インフラ刷新、クラウド移行、アプリのリニューアルなどがすべてプ...",
+    "url": "fe/technology/management/project-basics-development-models.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "プロジェクトと日常業務の違い",
+    "summary": "プロジェクトは「変化を起こす活動」、日常業務は「安定を維持する活動」という違いがある。IT企業では、開発＝プロジェクト、運用＝日常業務と整理されることが多い。",
+    "url": "fe/technology/management/project-basics-development-models.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "プロジェクトがうまく進むための視点",
+    "summary": "プロジェクトは複数の専門家が協力して進めるチーム活動。成功するプロジェクトには共通点がある。",
+    "url": "fe/technology/management/project-basics-development-models.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-2. 開発モデル",
+    "summary": "開発モデルは、「システム開発をどのような流れ・考え方で進めるか」を示す枠組み。プロジェクトは規模・期間・関係者・変化の多さなどによって進め方が大きく変わるため、開発モデルはプロジェクトの成功に直...",
+    "url": "fe/technology/management/project-basics-development-models.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "開発モデルとは何か",
+    "summary": "開発モデルは、「システム開発をどのような流れ・考え方で進めるか」を示す枠組み。プロジェクトは規模・期間・関係者・変化の多さなどによって進め方が大きく変わるため、開発モデルはプロジェクトの成功に直...",
+    "url": "fe/technology/management/project-basics-development-models.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "開発モデルの定義",
+    "summary": "開発モデルとは、システム開発をどのような順序・考え方で進めるかを体系化したもの。以下の観点を整理する。",
+    "url": "fe/technology/management/project-basics-development-models.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "なぜ開発モデルが必要なのか",
+    "summary": "開発モデルが必要な理由は、プロジェクトを迷わず進めるための“共通の進め方”を作るため。開発モデルがないと以下の問題が起きやすくなる。",
+    "url": "fe/technology/management/project-basics-development-models.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "開発モデルの役割",
+    "summary": "開発モデルはプロジェクトに次の4つの役割を果たす。",
+    "url": "fe/technology/management/project-basics-development-models.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "開発モデルの分類",
+    "summary": "開発モデルの全体像を理解することが重要。",
+    "url": "fe/technology/management/project-basics-development-models.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "モデルを選ぶ基準",
+    "summary": "開発モデルは“どれが正しい”ではなく、プロジェクトに合ったものを選ぶことが重要。選ぶ基準は次の3つ。",
+    "url": "fe/technology/management/project-basics-development-models.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-9. 品質管理",
+    "summary": "品質管理は、「品質を後でチェックする」のではなく、「最初から品質を作り込む」ための管理。",
+    "url": "fe/technology/management/quality-management-qc-tools.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-9-1. 品質管理の目的",
+    "summary": "【品質管理の3つの柱】 +-----------------------------------------------------------+ | | | ① 品質計画（Quality Pl...",
+    "url": "fe/technology/management/quality-management-qc-tools.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-9-2. 品質管理の3つの柱",
+    "summary": "【品質管理の3つの柱】 +-----------------------------------------------------------+ | | | ① 品質計画（Quality Pl...",
+    "url": "fe/technology/management/quality-management-qc-tools.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-9-3. QC七つ道具",
+    "summary": "QC七つ道具は、品質を“見える化”するための7つの基本技法。",
+    "url": "fe/technology/management/quality-management-qc-tools.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "パレート図",
+    "summary": "「どの問題が最も影響が大きいか」を見つけるための図。",
+    "url": "fe/technology/management/quality-management-qc-tools.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "特性要因図（フィッシュボーン図）",
+    "summary": "問題の原因を体系的に洗い出す図。",
+    "url": "fe/technology/management/quality-management-qc-tools.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "ヒストグラム",
+    "summary": "データがどの範囲にどれだけ分布しているかを見る図。",
+    "url": "fe/technology/management/quality-management-qc-tools.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-11. リスク管理",
+    "summary": "リスク管理は、「問題が起きてから対処する」のではなく、「起きる前に備える」ための管理。",
+    "url": "fe/technology/management/risk-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-11-1. リスク管理の目的",
+    "summary": "【リスク管理の流れ】 STEP1. リスク特定（洗い出す） プロジェクトに潜むリスクをすべて洗い出す カテゴリ：スケジュール・コスト・品質・人・技術・外部要因・コミュニケーション・契約 STEP...",
+    "url": "fe/technology/management/risk-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-11-2. リスク管理の流れ（実務で使う5ステップ）",
+    "summary": "【リスク管理の流れ】 STEP1. リスク特定（洗い出す） プロジェクトに潜むリスクをすべて洗い出す カテゴリ：スケジュール・コスト・品質・人・技術・外部要因・コミュニケーション・契約 STEP...",
+    "url": "fe/technology/management/risk-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "リスク特定のカテゴリ例",
+    "summary": "リスクマトリクスは、確率 × 影響度 を視覚化する図。",
+    "url": "fe/technology/management/risk-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "リスク分析の例",
+    "summary": "リスクマトリクスは、確率 × 影響度 を視覚化する図。",
+    "url": "fe/technology/management/risk-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "リスク対応4種類",
+    "summary": "リスクマトリクスは、確率 × 影響度 を視覚化する図。",
+    "url": "fe/technology/management/risk-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-11-3. リスクマトリクス",
+    "summary": "リスクマトリクスは、確率 × 影響度 を視覚化する図。",
+    "url": "fe/technology/management/risk-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-11-4. リスク台帳",
+    "summary": "リスク台帳は、優先順位が決まったリスクに対して“具体的にどう管理するか”を記述する表。",
+    "url": "fe/technology/management/risk-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "リスク台帳の作り方",
+    "summary": "ア）問題が起きてから迅速に対処する管理 イ）問題が起きる前に備える予防的な管理 ウ）予算を管理する管理 エ）品質をテストで確認する管理",
+    "url": "fe/technology/management/risk-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "リスク台帳の例",
+    "summary": "ア）問題が起きてから迅速に対処する管理 イ）問題が起きる前に備える予防的な管理 ウ）予算を管理する管理 エ）品質をテストで確認する管理",
+    "url": "fe/technology/management/risk-management.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-4. スケジュール管理",
+    "summary": "スケジュール管理は、「いつ・誰が・何をするか」を明確にし、プロジェクトを安定して前に進めるための管理。",
+    "url": "fe/technology/management/schedule-gantt.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-4-1. スケジュール管理の目的",
+    "summary": "【スケジュール管理の流れ】 STEP1. WBSを作る（作業を分解する） スケジュールはWBSなしでは作れない STEP2. 作業の順番（依存関係）を整理する Aが終わらないとBができない、Cと...",
+    "url": "fe/technology/management/schedule-gantt.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-4-2. スケジュール管理の流れ",
+    "summary": "【スケジュール管理の流れ】 STEP1. WBSを作る（作業を分解する） スケジュールはWBSなしでは作れない STEP2. 作業の順番（依存関係）を整理する Aが終わらないとBができない、Cと...",
+    "url": "fe/technology/management/schedule-gantt.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-4-3. ガントチャート",
+    "summary": "ガントチャートは、WBSで分解した作業を“時間軸に並べて”可視化したもの。",
+    "url": "fe/technology/management/schedule-gantt.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-4-3-1. ガントチャートの本質は“配置の考え方”",
+    "summary": "ガントチャートは次の3つを同時に満たすように配置する図。",
+    "url": "fe/technology/management/schedule-gantt.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-4-3-2. ガントチャートの構造",
+    "summary": "【ガントチャート例】 No. 作業名 | 4/1 | 4/2 | 4/3 | 4/4 | 4/5 | 4/6 | 4/7 | 4/8 ----+-------------+-----+-----...",
+    "url": "fe/technology/management/schedule-gantt.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "マイルストーンの例",
+    "summary": "【ガントチャートの読み取り】 +-------------------------------------------------------------+ | バーが長い = 時間がかかる作業...",
+    "url": "fe/technology/management/schedule-gantt.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-4-3-4. ガントチャートを「読める／使える」ようになる視点",
+    "summary": "【ガントチャートの読み取り】 +-------------------------------------------------------------+ | バーが長い = 時間がかかる作業...",
+    "url": "fe/technology/management/schedule-gantt.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-4-1-3. スプリントレビュー",
+    "summary": "スプリントの最後に、実際に動くものを見せてフィードバックをもらうイベント。",
+    "url": "fe/technology/management/scrum-review-retrospective.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-4-1-4. レトロスペクティブ（チームの改善会議）",
+    "summary": "スプリントの最後に行う振り返り。チームが毎回少しずつ成長することがスクラムの強み。",
+    "url": "fe/technology/management/scrum-review-retrospective.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-5. ウォーターフォールとアジャイルの違い",
+    "summary": "【プロジェクトの特徴によるモデル選択】 要件が明確 + 大規模 + 長期 + 高信頼性が必要 | +---------------------> ウォーターフォール 要件が変わりやすい + 小規...",
+    "url": "fe/technology/management/scrum-review-retrospective.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-5-1. 開発の進め方の違い",
+    "summary": "【プロジェクトの特徴によるモデル選択】 要件が明確 + 大規模 + 長期 + 高信頼性が必要 | +---------------------> ウォーターフォール 要件が変わりやすい + 小規...",
+    "url": "fe/technology/management/scrum-review-retrospective.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-5-4. 向いている案件の違い",
+    "summary": "【プロジェクトの特徴によるモデル選択】 要件が明確 + 大規模 + 長期 + 高信頼性が必要 | +---------------------> ウォーターフォール 要件が変わりやすい + 小規...",
+    "url": "fe/technology/management/scrum-review-retrospective.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "1-5-5. チームの動き方の違い",
+    "summary": "【プロジェクトの特徴によるモデル選択】 要件が明確 + 大規模 + 長期 + 高信頼性が必要 | +---------------------> ウォーターフォール 要件が変わりやすい + 小規...",
+    "url": "fe/technology/management/scrum-review-retrospective.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "各本質の詳細",
+    "summary": "ウォーターフォールは次のような場面で力を発揮する。",
+    "url": "fe/technology/management/waterfall-model.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-3-1. WBSとは",
+    "summary": "プロジェクトで必要な作業を「大→中→小」へと分解し、全体像を見える化するための仕組み。",
+    "url": "fe/technology/management/wbs.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-3-2. WBSの目的",
+    "summary": "WBSの難しさは、「どこまで細かくすればよいか」という粒度の判断。",
+    "url": "fe/technology/management/wbs.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-3-3. 粒度の基準",
+    "summary": "WBSの難しさは、「どこまで細かくすればよいか」という粒度の判断。",
+    "url": "fe/technology/management/wbs.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "2-3-4. 作り方（大→中→小の順に分解する）",
+    "summary": "【WBSの3階層構造】 +-----------------------------------------------------------+ | 大分類（フェーズ） | | +------...",
+    "url": "fe/technology/management/wbs.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "STEP1：大分類（フェーズ）を決める",
+    "summary": "【WBSの3階層構造】 +-----------------------------------------------------------+ | 大分類（フェーズ） | | +------...",
+    "url": "fe/technology/management/wbs.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "STEP2：中分類（成果物）を決める",
+    "summary": "【WBSの3階層構造】 +-----------------------------------------------------------+ | 大分類（フェーズ） | | +------...",
+    "url": "fe/technology/management/wbs.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "STEP3：小分類（作業）を分解する",
+    "summary": "【WBSの3階層構造】 +-----------------------------------------------------------+ | 大分類（フェーズ） | | +------...",
+    "url": "fe/technology/management/wbs.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "要件定義のWBS例",
+    "summary": "【ECサイト開発のWBS】 要件定義 | +---> 設計 | +---> 開発 | +---> 商品検索 | +---> カート | +---> 決済 | +---> 会員登録 | +--->...",
+    "url": "fe/technology/management/wbs.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "設計のWBS例",
+    "summary": "【ECサイト開発のWBS】 要件定義 | +---> 設計 | +---> 開発 | +---> 商品検索 | +---> カート | +---> 決済 | +---> 会員登録 | +--->...",
+    "url": "fe/technology/management/wbs.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "ECサイトのWBS例",
+    "summary": "【ECサイト開発のWBS】 要件定義 | +---> 設計 | +---> 開発 | +---> 商品検索 | +---> カート | +---> 決済 | +---> 会員登録 | +--->...",
+    "url": "fe/technology/management/wbs.html",
+    "tags": [
+      "マネジメント"
+    ]
+  },
+  {
+    "term": "DHCP（Dynamic Host Configuration Protocol）",
+    "summary": "ネットワークに機器を接続した瞬間、IPアドレスはどのように決まるのか。DHCPは、LAN内の機器にIPアドレス・サブネットマスク・デフォルトゲートウェイ・DNSサーバーなどの情報を自動的に割り当...",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "DHCPのDORAシーケンス",
+    "summary": "DHCPクライアントとサーバー間の4ステップのやり取りをDORAと呼ぶ。午前試験では「正しい順序はどれか」という形式で頻出。",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "リース期間",
+    "summary": "DHCPで割り当てられるIPアドレスには有効期限（リース期間）がある。期限が切れると再割り当てが発生するため、IPアドレスを効率的に再利用できる。大規模ネットワークや一時接続が多い環境でDHCP...",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "NAT / NAPT",
+    "summary": "LAN内の機器にはプライベートIPアドレス（例: 192.168.0.x）が割り当てられる。しかしプライベートIPはインターネット上では使えない。インターネットに出るには、グローバルIPアドレス...",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "NAT（Network Address Translation）",
+    "summary": "頻出：「NATとNAPTの違いは？」→ NATはIPのみ1対1変換、NAPTはIPとポート番号を使い多対1変換。「家庭用ルーターで使われる技術は？」→ NAPT（IPマスカレード）",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "NAPT（Network Address Port Translation）",
+    "summary": "頻出：「NATとNAPTの違いは？」→ NATはIPのみ1対1変換、NAPTはIPとポート番号を使い多対1変換。「家庭用ルーターで使われる技術は？」→ NAPT（IPマスカレード）",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ルーティング",
+    "summary": "インターネットは世界中のLANを相互接続した巨大なネットワーク。宛先まで適切な経路を選ぶ技術がルーティングである。ルーターは受信パケットを調べ、自分が管理するLAN宛てなら直接届け、それ以外は別...",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ルーティングプロトコルの分類（IGP / EGP）",
+    "summary": "ルーター同士が経路情報を交換する通信規則をルーティングプロトコルといい、適用範囲によってIGPとEGPに大別される。",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "デフォルトゲートウェイ",
+    "summary": "ルーターはルーティングテーブルに経路情報があるパケットは転送できるが、経路情報のないパケット（未知のパケット）は通常破棄してしまう。",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "NATとNAPTの比較",
+    "summary": "答え: B。DHCP（Dynamic Host Configuration Protocol）はIPアドレスを自動割り当てする。AはDNS、CはARP、DはNAT/NAPT。",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ルーティングプロトコル（IGP）の比較",
+    "summary": "答え: B。DHCP（Dynamic Host Configuration Protocol）はIPアドレスを自動割り当てする。AはDNS、CはARP、DはNAT/NAPT。",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IGPとEGPの比較",
+    "summary": "答え: B。DHCP（Dynamic Host Configuration Protocol）はIPアドレスを自動割り当てする。AはDNS、CはARP、DはNAT/NAPT。",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "DHCP DORAシーケンスの4ステップ",
+    "summary": "答え: B。DHCP（Dynamic Host Configuration Protocol）はIPアドレスを自動割り当てする。AはDNS、CはARP、DはNAT/NAPT。",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "DHCP自動設定と手動設定の比較",
+    "summary": "答え: B。DHCP（Dynamic Host Configuration Protocol）はIPアドレスを自動割り当てする。AはDNS、CはARP、DはNAT/NAPT。",
+    "url": "fe/technology/network/dhcp-nat-routing.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "インターネットの基本",
+    "summary": "インターネットは、企業LANやISP、モバイルネットワークなど様々なネットワークを相互接続する広域ネットワークです。起源は1967年のARPANET計画で、1969年にはアメリカの4大学・研究機...",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ルーターの役割（再掲）",
+    "summary": "ISP（インターネットサービスプロバイダ）：個人や企業にインターネット接続回線を提供する業者。代表例：NTT、KDDI、ソフトバンク。エッジルーター・ファイアウォール・ISPの3つが役割を分担し...",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "メールのしくみ",
+    "summary": "SMTPで送信、POP3またはIMAPで受信という役割分担が基本です。IMAPはサーバーにメールを残すため、スマホとPCで同じメールを読む場合に適しています。",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "Webのしくみ",
+    "summary": "Webページを転送するプロトコル。ステートレス（状態を持たない）が特徴で、各リクエストは独立して処理されます。ポート番号は80。",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "HTTP（Hypertext Transfer Protocol）",
+    "summary": "Webページを転送するプロトコル。ステートレス（状態を持たない）が特徴で、各リクエストは独立して処理されます。ポート番号は80。",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "HTTPS（HTTP Secure）",
+    "summary": "HTTPをSSL/TLSで暗号化したもの。ポート番号は443。通信の盗聴・改ざん・なりすましを防止します。",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "URLとURI",
+    "summary": "URL（Uniform Resource Locator）は「スキーム://ホスト/パス」の形式でリソースの場所を示します。例：https://www.example.com/index.html",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "DNS（Domain Name System）",
+    "summary": "DNSはドメイン名をIPアドレスに変換するシステムです。人間が覚えやすい名前（例：www.example.com）をコンピューターが使うIPアドレスに変換します。",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "名前解決の流れ",
+    "summary": "再帰問合せ：DNSサーバーが代理で全部調べて結果だけ返す。反復問合せ：DNSサーバーが「次はここに聞け」と順に案内する。",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "AjaxとREST API",
+    "summary": "ページ全体を再読み込みせず、非同期通信で必要なデータだけを取得して画面を部分的に更新する技術。Google Mapsのスクロールで新しい地図が読み込まれるのが代表例。",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "Ajax（Asynchronous JavaScript + XML）",
+    "summary": "ページ全体を再読み込みせず、非同期通信で必要なデータだけを取得して画面を部分的に更新する技術。Google Mapsのスクロールで新しい地図が読み込まれるのが代表例。",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "REST API",
+    "summary": "HTTPメソッド（GET/POST/PUT/DELETE）でリソースを操作するWeb APIの設計スタイル。URLでリソースを指定し、JSON形式でデータをやり取りするのが一般的です。",
+    "url": "fe/technology/network/dns-web-mail.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "サブネットとは",
+    "summary": "サブネットとは、1つのネットワークを複数の小さなセグメントに分割したものです。分割された各セグメントを「サブネット」と呼びます。",
+    "url": "fe/technology/network/ip-subnet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ネットワークを分割する理由",
+    "summary": "IPアドレスはネットワーク部とホスト部に分かれます。",
+    "url": "fe/technology/network/ip-subnet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IPアドレスの構造",
+    "summary": "IPアドレスはネットワーク部とホスト部に分かれます。",
+    "url": "fe/technology/network/ip-subnet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "サブネットマスク",
+    "summary": "サブネットを定義するために使われるのがサブネットマスク（Subnet Mask）です。サブネットマスクは、IPアドレスのうちどの部分がネットワーク部かを示す値です。",
+    "url": "fe/technology/network/ip-subnet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "サブネットマスク早見表",
+    "summary": "CIDR方式では、IPアドレスの後ろにスラッシュでネットワーク部のビット数を表します。これをプレフィックス表記と呼びます。",
+    "url": "fe/technology/network/ip-subnet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "CIDR（Classless Inter-Domain Routing）",
+    "summary": "CIDR方式では、IPアドレスの後ろにスラッシュでネットワーク部のビット数を表します。これをプレフィックス表記と呼びます。",
+    "url": "fe/technology/network/ip-subnet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IPv4クラスアドレス",
+    "summary": "クラスDとクラスEはホスト部を持たない特殊用途アドレスです。",
+    "url": "fe/technology/network/ip-subnet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "計算問題の解き方",
+    "summary": "2n - 2（n = ホスト部のビット数）",
+    "url": "fe/technology/network/ip-subnet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "利用可能ホスト数の公式",
+    "summary": "2n - 2（n = ホスト部のビット数）",
+    "url": "fe/technology/network/ip-subnet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ネットワークトポロジー",
+    "summary": "ネットワークトポロジーは、ノード同士の接続形態です。基本情報技術者試験では、形の名前よりも「障害時の影響」「現在よく使われる構成」「耐障害性」が問われます。",
+    "url": "fe/technology/network/network-basic.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ネットワーク機器とOSI層",
+    "summary": "ハブ、スイッチ、ルーターは役割とOSI層をセットで覚えます。特にスイッチはMACアドレス、ルーターはIPアドレスで判断する点が頻出です。",
+    "url": "fe/technology/network/network-basic.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "データ伝送の分類",
+    "summary": "シリアル伝送は1本の信号線で1ビットずつ送るため長距離向きです。パラレル伝送は複数本の信号線で同時に送れますが、長距離では信号ズレやノイズが問題になります。",
+    "url": "fe/technology/network/network-basic.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "シリアル伝送 vs パラレル伝送",
+    "summary": "シリアル伝送は1本の信号線で1ビットずつ送るため長距離向きです。パラレル伝送は複数本の信号線で同時に送れますが、長距離では信号ズレやノイズが問題になります。",
+    "url": "fe/technology/network/network-basic.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "非同期通信 vs 同期通信",
+    "summary": "非同期通信はスタートビットとストップビットで区切ります。同期通信はクロック信号に合わせるため効率が高く、大量データに向きます。",
+    "url": "fe/technology/network/network-basic.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "半二重通信 vs 全二重通信",
+    "summary": "半二重は送信と受信を交互に行います。全二重は同時に送受信できます。トランシーバーは半二重、電話回線は全二重の例です。",
+    "url": "fe/technology/network/network-basic.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "伝送時間",
+    "summary": "伝送時間 = データ量（ビット） ÷ 伝送速度（bps）",
+    "url": "fe/technology/network/network-basic.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "伝送効率",
+    "summary": "伝送効率 = 有効データ量 ÷ 総データ量 × 100",
+    "url": "fe/technology/network/network-basic.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "クライアントサーバー型",
+    "summary": "サービスを提供する側をサーバー、サービスを利用する側をクライアントと呼びます。業務アプリケーションやネットワークサービスの中心としてサーバーが存在し、クライアントはネットワーク経由でサーバーから...",
+    "url": "fe/technology/network/network-connection-ethernet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "デメリット",
+    "summary": "端末同士が直接通信し、サーバーを介さずデータやサービスを共有する方式です。IPアドレスや専用アプリを利用して端末同士を接続します。",
+    "url": "fe/technology/network/network-connection-ethernet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ピアツーピア型（P2P）",
+    "summary": "端末同士が直接通信し、サーバーを介さずデータやサービスを共有する方式です。IPアドレスや専用アプリを利用して端末同士を接続します。",
+    "url": "fe/technology/network/network-connection-ethernet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "イーサネット",
+    "summary": "現在のLANのほとんどはイーサネット規格（IEEE 802.3）を利用しています。イーサネットは、回線の使用状況を検知して通信の開始や待機を判断するランダムアクセス方式を採用しています。",
+    "url": "fe/technology/network/network-connection-ethernet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "基本原理",
+    "summary": "有線LANで使用される方式です。",
+    "url": "fe/technology/network/network-connection-ethernet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "CSMA/CD（衝突検知方式）",
+    "summary": "有線LANで使用される方式です。",
+    "url": "fe/technology/network/network-connection-ethernet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "CSMA/CA（衝突回避方式）",
+    "summary": "無線LANで使用される方式です。",
+    "url": "fe/technology/network/network-connection-ethernet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "イーサネットフレームの構造",
+    "summary": "イーサネットでやり取りされるデータの単位をイーサネットフレームと呼びます。スイッチングハブはMACアドレスを参照して転送先ポートを判断します。",
+    "url": "fe/technology/network/network-connection-ethernet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ネットワーク形態の変化",
+    "summary": "ア）端末間で負荷を分散できるイ）サーバーが停止するとサービス全体が利用できなくなるウ）管理が分散的でセキュリティ管理が難しいエ）サーバー不要でコストが削減できる",
+    "url": "fe/technology/network/network-connection-ethernet.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "パケット交換方式",
+    "summary": "パケット交換方式は、通信データを「パケット」と呼ばれる小さな単位に分割して送受信する方式です。各パケットにはヘッダー（宛先・送信元・プロトコル・順序番号などの制御情報）とペイロード（データ本体）...",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "回線交換方式との比較",
+    "summary": "flowchart TD subgraph パケット交換 P1[データ分割] --> P2[各パケット独立転送] P2 --> P3[複数通信が混在] P3 --> P4[宛先で再構成] end...",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ルーター",
+    "summary": "ルーターはOSI参照モデルの第3層（ネットワーク層）で動作し、IPアドレスを参照してパケットの経路を判断します。",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ハブとスイッチ",
+    "summary": "複数の回線を束ねる装置。現在の製品はリピータ機能（信号増幅・波形整形）とスイッチ機能を内蔵しているのが主流。",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ハブ（集線装置）",
+    "summary": "複数の回線を束ねる装置。現在の製品はリピータ機能（信号増幅・波形整形）とスイッチ機能を内蔵しているのが主流。",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "スイッチ（スイッチングハブ）",
+    "summary": "スイッチはMACアドレスで宛先ポートを判断するL2機器で、通信効率がハブより格段に高いです。",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ケーブルとコネクタ",
+    "summary": "ア）通信前に回線を確保し、通信が終わるまで専有する イ）データを小さなパケットに分割し、各パケットが独立してネットワークを経由する ウ）1本の回線で1つの通信だけを扱う エ）すべてのパケットが必...",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "伝送方式",
+    "summary": "ア）通信前に回線を確保し、通信が終わるまで専有する イ）データを小さなパケットに分割し、各パケットが独立してネットワークを経由する ウ）1本の回線で1つの通信だけを扱う エ）すべてのパケットが必...",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "主なケーブル規格",
+    "summary": "ア）通信前に回線を確保し、通信が終わるまで専有する イ）データを小さなパケットに分割し、各パケットが独立してネットワークを経由する ウ）1本の回線で1つの通信だけを扱う エ）すべてのパケットが必...",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "光ファイバーの種類",
+    "summary": "ア）通信前に回線を確保し、通信が終わるまで専有する イ）データを小さなパケットに分割し、各パケットが独立してネットワークを経由する ウ）1本の回線で1つの通信だけを扱う エ）すべてのパケットが必...",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "コネクタ",
+    "summary": "ア）通信前に回線を確保し、通信が終わるまで専有する イ）データを小さなパケットに分割し、各パケットが独立してネットワークを経由する ウ）1本の回線で1つの通信だけを扱う エ）すべてのパケットが必...",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "USB Type-C",
+    "summary": "ア）通信前に回線を確保し、通信が終わるまで専有する イ）データを小さなパケットに分割し、各パケットが独立してネットワークを経由する ウ）1本の回線で1つの通信だけを扱う エ）すべてのパケットが必...",
+    "url": "fe/technology/network/network-devices-switching.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IPアドレス",
+    "summary": "IPアドレスはTCP/IPネットワークにおいて送信元や宛先を特定するための「住所」のようなデータです。IPv4アドレスは32ビットのデータで構成されます。32ビットを8ビットずつ4つに分け、それ...",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IPv4アドレスの構造",
+    "summary": "IPアドレスはTCP/IPネットワークにおいて送信元や宛先を特定するための「住所」のようなデータです。IPv4アドレスは32ビットのデータで構成されます。32ビットを8ビットずつ4つに分け、それ...",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "グローバルIPアドレスとプライベートIPアドレス",
+    "summary": "プライベートIPアドレスはLAN内でのみ有効で、そのままではインターネットに出られません。インターネットに接続する際は、NATまたはNAPT（IPマスカレード）によってグローバルIPアドレスに変...",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IPv6",
+    "summary": "IPv4のアドレス枯渇問題を解消するために設計された次世代プロトコルです。128ビット（16オクテット）で構成され、約3.4×10³⁸個のアドレスを表現できます。IPv4とIPv6は互換性がなく...",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IPv6のアドレス種別",
+    "summary": "IPv6では3種類のアドレスが定義されています。IPv4にあったブロードキャストは存在しません。代わりにマルチキャストを使います。",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "MACアドレス",
+    "summary": "MACアドレスは、ネットワークに接続される各機器が持つ固有の48ビット識別番号です。OSI参照モデルの第2層（データリンク層）で使用されます。",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "MACアドレスの構造",
+    "summary": "48ビットは上位24ビットと下位24ビットに分かれます。",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "特別なMACアドレス",
+    "summary": "頻出：「FF:FF:FF:FF:FF:FFは何アドレスか？」→ ブロードキャストアドレス",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ARP（Address Resolution Protocol）",
+    "summary": "ARPは、IPアドレスからMACアドレスを求めるプロトコルです。LAN内で実際にデータを送信するにはMACアドレスが必要ですが、アプリケーションはIPアドレスしか扱いません。このギャップを埋める...",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ARPの動作の流れ",
+    "summary": "頻出：「IPアドレスからMACアドレスを求めるプロトコルは？」→ ARP。「ARP要求の宛先MACアドレスは？」→ FF:FF:FF:FF:FF:FF（ブロードキャスト）",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ポート番号とウェルノウンポート",
+    "summary": "ポート番号はTCP/UDPヘッダーに含まれる16ビットの識別子で、IPアドレスだけでは特定できない「どのアプリケーションにデータを渡すか」を指定します。範囲は0〜65535です。",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "暗記必須のウェルノウンポート",
+    "summary": "頻出：HTTP=80、HTTPS=443、DNS=53（UDP）、SMTP=25、FTP=20/21、SSH=22は暗記必須",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IPv4とIPv6の比較",
+    "summary": "答え: B（32ビット）。IPv4は32ビット（4オクテット）。48ビットはMACアドレス、128ビットはIPv6、16ビットはポート番号のビット数。",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "MACアドレスとIPアドレスの比較",
+    "summary": "答え: B（32ビット）。IPv4は32ビット（4オクテット）。48ビットはMACアドレス、128ビットはIPv6、16ビットはポート番号のビット数。",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "グローバルIPアドレスとプライベートIPアドレスの比較",
+    "summary": "答え: B（32ビット）。IPv4は32ビット（4オクテット）。48ビットはMACアドレス、128ビットはIPv6、16ビットはポート番号のビット数。",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ポート番号の3区分",
+    "summary": "答え: B（32ビット）。IPv4は32ビット（4オクテット）。48ビットはMACアドレス、128ビットはIPv6、16ビットはポート番号のビット数。",
+    "url": "fe/technology/network/network-ip-mac.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "プロトコルとは",
+    "summary": "プロトコル（Protocol）とは、ネットワーク通信を正しく行うための「約束事」や「規約」のことです。プロトコルが異なる機器同士は正しく通信できません。人間の「共通言語」にあたります。",
+    "url": "fe/technology/network/network-protocol.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "標準化機関",
+    "summary": "試験対策：「RFCを発行する組織は？」→ IETF。「OSI参照モデルを策定した組織は？」→ ISO",
+    "url": "fe/technology/network/network-protocol.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ネットワークの階層化とカプセル化",
+    "summary": "ネットワーク通信は階層（レイヤー）に分けて設計されています。これにより「役割分担・変更の局所化・異なる機器間の相互接続性確保」が実現します。",
+    "url": "fe/technology/network/network-protocol.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "OSI参照モデル（7層）",
+    "summary": "OSI（Open Systems Interconnection）参照モデルは、ISOが策定した7階層の通信モデルです。現在、これを完全実装した機器はほぼ存在しませんが、階層構造の考え方の枠組み...",
+    "url": "fe/technology/network/network-protocol.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "TCP/IPモデル（4層）",
+    "summary": "インターネットではTCP/IPモデルという4階層のモデルが実際に使われています。OSI参照モデルの7層を簡素化・統合した構成です。",
+    "url": "fe/technology/network/network-protocol.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IP・UDP・TCPの違い",
+    "summary": "TCP/IPモデルの中核をなす3つのプロトコルです。役割と信頼性が大きく異なります。",
+    "url": "fe/technology/network/network-protocol.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IP（Internet Protocol）",
+    "summary": "送信元と宛先をIPアドレスで識別し、経路を決定します。ベストエフォート型で、届ける努力はしますが確実な配送は保証しません。信頼性確保は上位層（TCP）に任せます。",
+    "url": "fe/technology/network/network-protocol.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "UDP（User Datagram Protocol）",
+    "summary": "軽量・高速なデータ送信を提供します。受信確認・再送処理を行いません。データ単位はデータグラム。動画ストリーミング・音声通話など、多少の欠落よりリアルタイム性を優先する用途に使われます。",
+    "url": "fe/technology/network/network-protocol.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "TCP（Transmission Control Protocol）",
+    "summary": "信頼性の高い通信を提供します。3ウェイハンドシェイク（SYN → SYN+ACK → ACK）で接続を確立し、再送制御・順序保証・フロー制御を行います。Web閲覧・メール・ファイル転送など、確実...",
+    "url": "fe/technology/network/network-protocol.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ICMP",
+    "summary": "ICMPは通信のエラー通知や疎通確認を行うプロトコルです。IPパケットのペイロードに格納され、LAN内だけでなくインターネット上もルーター経由で流れます。",
+    "url": "fe/technology/network/network-protocols-advanced.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "主なタイプ",
+    "summary": "Ping：タイプ8（要求）→タイプ0（応答）でホストの死活確認。traceroute：TTLを1ずつ増やし、タイプ11（時間超過）を利用して経路を調べる。",
+    "url": "fe/technology/network/network-protocols-advanced.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "TELNET",
+    "summary": "ネットワーク経由でサーバーやネットワーク機器にリモートログインするプロトコル。TCP 23番。最大の問題は通信が暗号化されず平文で流れること。現在はSSHに置き換えられています。",
+    "url": "fe/technology/network/network-protocols-advanced.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "アクティブモードとパッシブモード",
+    "summary": "Anonymous FTP：ユーザー名anonymousで誰でもログイン可能。公開ファイル配布用。アップロード禁止が多い。",
+    "url": "fe/technology/network/network-protocols-advanced.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "暗号化技術",
+    "summary": "送信者が自分の秘密鍵でデータを暗号化→受信者が送信者の公開鍵で復号。公開鍵で復号できること＝送信者が確かにそのデータを作成した証明になります。公開鍵の真正性は認証局(CA)が保証します。",
+    "url": "fe/technology/network/network-security.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "暗号方式の比較",
+    "summary": "送信者が自分の秘密鍵でデータを暗号化→受信者が送信者の公開鍵で復号。公開鍵で復号できること＝送信者が確かにそのデータを作成した証明になります。公開鍵の真正性は認証局(CA)が保証します。",
+    "url": "fe/technology/network/network-security.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "電子署名",
+    "summary": "送信者が自分の秘密鍵でデータを暗号化→受信者が送信者の公開鍵で復号。公開鍵で復号できること＝送信者が確かにそのデータを作成した証明になります。公開鍵の真正性は認証局(CA)が保証します。",
+    "url": "fe/technology/network/network-security.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "サーバー証明書とSSL/TLS",
+    "summary": "SSL→TLSの進化：SSLは旧式（脆弱性あり非推奨）。現在はTLS 1.2/1.3が標準。TLSは機密性・完全性・認証の3要素を保護。",
+    "url": "fe/technology/network/network-security.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "認証局(CA)の役割",
+    "summary": "SSL→TLSの進化：SSLは旧式（脆弱性あり非推奨）。現在はTLS 1.2/1.3が標準。TLSは機密性・完全性・認証の3要素を保護。",
+    "url": "fe/technology/network/network-security.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "SSL/TLSハンドシェイクの流れ",
+    "summary": "SSL→TLSの進化：SSLは旧式（脆弱性あり非推奨）。現在はTLS 1.2/1.3が標準。TLSは機密性・完全性・認証の3要素を保護。",
+    "url": "fe/technology/network/network-security.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ファイアウォールとDMZ",
+    "summary": "ステートフル型：通信のセッション状態を監視し、不正な順序のパケットや異常通信を検知。",
+    "url": "fe/technology/network/network-security.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ファイアウォールの種類",
+    "summary": "ステートフル型：通信のセッション状態を監視し、不正な順序のパケットや異常通信を検知。",
+    "url": "fe/technology/network/network-security.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IDS/IPS",
+    "summary": "次世代型ファイアウォール(NGFW)：IP/ポートだけでなくパケットの中身やアプリ挙動も監視。WAF（SQLインジェクション/XSS防御）やUTM（統合脅威管理）と統合される。",
+    "url": "fe/technology/network/network-security.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "モバイル通信",
+    "summary": "eSIM：物理SIM不要で遠隔契約切替可。MVNO：MNO回線を借りた格安SIM。",
+    "url": "fe/technology/network/wireless-mobile-monitoring.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "世代ごとの進化",
+    "summary": "eSIM：物理SIM不要で遠隔契約切替可。MVNO：MNO回線を借りた格安SIM。",
+    "url": "fe/technology/network/wireless-mobile-monitoring.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ローカル5G",
+    "summary": "企業や自治体が特定エリア内で専用構築する5G。他ユーザーと分離され安定・低遅延。活用例：自動運転バス、遠隔医療、工場ロボット制御。",
+    "url": "fe/technology/network/wireless-mobile-monitoring.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "無線技術",
+    "summary": "低消費電力・広域のIoT向け。代表例：LoRa、Sigfox、NB-IoT。",
+    "url": "fe/technology/network/wireless-mobile-monitoring.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "LPWA",
+    "summary": "低消費電力・広域のIoT向け。代表例：LoRa、Sigfox、NB-IoT。",
+    "url": "fe/technology/network/wireless-mobile-monitoring.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "Bluetooth / NFC",
+    "summary": "多数のセンサーを無線接続し環境データ収集。ZigBee、Z-Wave等。",
+    "url": "fe/technology/network/wireless-mobile-monitoring.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "センサーネットワーク",
+    "summary": "多数のセンサーを無線接続し環境データ収集。ZigBee、Z-Wave等。",
+    "url": "fe/technology/network/wireless-mobile-monitoring.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "ネットワーク監視と障害対応",
+    "summary": "ア）超高速通信イ）超低遅延ウ）多数同時接続エ）アナログ音声通信",
+    "url": "fe/technology/network/wireless-mobile-monitoring.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "監視技術",
+    "summary": "ア）超高速通信イ）超低遅延ウ）多数同時接続エ）アナログ音声通信",
+    "url": "fe/technology/network/wireless-mobile-monitoring.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "障害切り分けの基本手順",
+    "summary": "ア）超高速通信イ）超低遅延ウ）多数同時接続エ）アナログ音声通信",
+    "url": "fe/technology/network/wireless-mobile-monitoring.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "無線LAN",
+    "summary": "有線ケーブルではなく電波を使って機器を接続するLANです。ケーブル不要で設置自由度が高い反面、電波が傍受されるリスクがあるためセキュリティ対策が必須です。",
+    "url": "fe/technology/network/wireless-wan-vlan-sdn.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "SSID",
+    "summary": "SSID（Service Set Identifier）は無線LANネットワークの名前です。端末は周囲のAPが送信するSSIDを受信→選択→認証情報を送信→接続の流れでネットワークに参加します。",
+    "url": "fe/technology/network/wireless-wan-vlan-sdn.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "無線LANの暗号化方式",
+    "summary": "物理層とデータリンク層を規定。ツイストペア・光ファイバーなどをサポート。",
+    "url": "fe/technology/network/wireless-wan-vlan-sdn.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IEEE 802.x規格",
+    "summary": "物理層とデータリンク層を規定。ツイストペア・光ファイバーなどをサポート。",
+    "url": "fe/technology/network/wireless-wan-vlan-sdn.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IEEE 802.3（有線LAN / イーサネット）",
+    "summary": "物理層とデータリンク層を規定。ツイストペア・光ファイバーなどをサポート。",
+    "url": "fe/technology/network/wireless-wan-vlan-sdn.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "IEEE 802.11（無線LAN / Wi-Fi）",
+    "summary": "802.11ac（Wi-Fi 5）は5GHzのみ、802.11n/ax（Wi-Fi 4/6）は2.4GHzと5GHzの両方という周波数帯の違いが頻出。",
+    "url": "fe/technology/network/wireless-wan-vlan-sdn.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "VLAN",
+    "summary": "VLAN（Virtual LAN）は、物理的な接続場所に関係なく論理的にネットワークセグメントを構成する技術です。VLAN-IDでスイッチ間のセグメントを管理し、ブロードキャストの影響範囲を制御...",
+    "url": "fe/technology/network/wireless-wan-vlan-sdn.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "データプレーンとコントロールプレーンの分離",
+    "summary": "制御をソフトウェアに集中させることで、構成変更を一括で行えます。",
+    "url": "fe/technology/network/wireless-wan-vlan-sdn.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "LAN間接続とインターネット接続",
+    "summary": "ア）WEPイ）WPAウ）WPA2エ）WPA3",
+    "url": "fe/technology/network/wireless-wan-vlan-sdn.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "L3スイッチとルーターの使い分け",
+    "summary": "ア）WEPイ）WPAウ）WPA2エ）WPA3",
+    "url": "fe/technology/network/wireless-wan-vlan-sdn.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "インターネット接続の基本",
+    "summary": "ア）WEPイ）WPAウ）WPA2エ）WPA3",
+    "url": "fe/technology/network/wireless-wan-vlan-sdn.html",
+    "tags": [
+      "ネットワーク"
+    ]
+  },
+  {
+    "term": "DAC（任意アクセス制御）",
+    "summary": "DAC（Discretionary Access Control）は、ファイルやフォルダなどの「リソースの所有者」が、誰にどの権限（読み取り、書き込みなど）を与えるかを自由に決められる方式です。...",
+    "url": "fe/technology/security/access-control.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "MAC（強制アクセス制御）",
+    "summary": "MAC（Mandatory Access Control）は、ユーザーや所有者の裁量によらず、システムが一元的にアクセス権限を管理し、強制する方式です。軍事システムや政府機関、高度な機密性が求め...",
+    "url": "fe/technology/security/access-control.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "RBAC（ロールベースアクセス制御）",
+    "summary": "RBAC（Role-Based Access Control）は、ユーザーに直接権限を付与するのではなく、「役割（ロール）」に権限をまとめ、ユーザーにはそのロールを割り当てる方式です。現代の企業...",
+    "url": "fe/technology/security/access-control.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "ABAC（属性ベースアクセス制御）",
+    "summary": "ABAC（Attribute-Based Access Control）は、ユーザー・リソース・環境などの「属性」を組み合わせて、アクセス可否を動的に判断する方式です。RBACでは表現しづらい細...",
+    "url": "fe/technology/security/access-control.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "IAM（クラウドのアクセス管理）",
+    "summary": "IAM（Identity and Access Management）は、クラウド環境（AWS, Azure, GCPなど）において、ユーザー、ロール、権限を一元的に管理する仕組みです。クラウド...",
+    "url": "fe/technology/security/access-control.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "所持要素認証の仕組みと弱点",
+    "summary": "所持要素認証は、本人が「持っている物」（スマホ、認証アプリ、ハードウェアキー）を使って本人確認を行う方式です。内部では、サーバーとデバイスが共有する秘密鍵と、時刻や乱数を用いた暗号計算（TOTP...",
+    "url": "fe/technology/security/advanced-auth-protocols.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "パスワードレス認証（FIDO2 / パスキー）",
+    "summary": "FIDO2（WebAuthn）やパスキーは、パスワードを完全に排除し、公開鍵暗号を利用して認証を行う次世代の方式です。端末内の「セキュア領域（Secure Enclave / TPM）」で秘密鍵...",
+    "url": "fe/technology/security/advanced-auth-protocols.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "認証プロトコル（OAuth2 / OIDC）",
+    "summary": "現代のWebサービスでは、複数のサービス間で安全に連携するための標準プロトコルとしてOAuth2とOIDCが利用されています。OAuth2は「認可（Authorization）」を扱い、ユーザー...",
+    "url": "fe/technology/security/advanced-auth-protocols.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "APIセキュリティの基礎（OAuth2 / OIDC）",
+    "summary": "現代のアプリケーションは、Web、モバイル、外部サービスなど多くのクライアントがAPIを通じてデータをやり取りします。APIは外部に公開されることが多く、攻撃者に直接触れられるため、適切な認証・...",
+    "url": "fe/technology/security/api-security-xss.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "XSS（クロスサイトスクリプティング）の仕組みと対策",
+    "summary": "XSSは、攻撃者が悪意のあるスクリプト（JavaScriptなど）をアプリケーションに埋め込み、他のユーザーのブラウザで実行させる攻撃です。成立すると、セッションIDの盗難、Cookieの窃取、...",
+    "url": "fe/technology/security/api-security-xss.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "入力値検証（Validation）",
+    "summary": "入力値検証は、ユーザーや外部システムから受け取るデータが正しい形式であるかを確認し、不正なデータがアプリケーション内部に入らないようにする仕組みです。SQLインジェクションやXSSなど、多くの攻...",
+    "url": "fe/technology/security/application-security-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "エラーハンドリング",
+    "summary": "エラーハンドリングは、アプリケーション内部で発生したエラーを安全に処理し、内部情報が外部に漏れないようにする仕組みです。エラーメッセージにSQL文やスタックトレース、ファイルパスなどが表示される...",
+    "url": "fe/technology/security/application-security-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "認証・認可の適切な実装",
+    "summary": "認証（Authentication）は「誰か」を確認し、認可（Authorization）は「何ができるか」を制御する仕組みです。認証・認可を誤って実装すると、攻撃者がログインを回避したり、権限...",
+    "url": "fe/technology/security/application-security-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "セッション管理",
+    "summary": "セッション管理は、認証後のユーザーのログイン状態を安全に維持するための仕組みです。Webアプリケーションは状態を持たないHTTPプロトコルを使用するため、セッションIDをCookieなどに保存し...",
+    "url": "fe/technology/security/application-security-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "標的型攻撃（APT）の特徴とプロセス",
+    "summary": "APT（Advanced Persistent Threat）とは、特定の組織や個人を明確に狙い、長期間にわたり継続的かつ高度に侵入活動を行う攻撃の総称です。一般的なマルウェアが「誰でもいい」か...",
+    "url": "fe/technology/security/apt-social-engineering.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "ソーシャルエンジニアリングの手口と対策",
+    "summary": "ソーシャルエンジニアリングとは、技術的な脆弱性ではなく、人の心理・行動の隙（信頼、思い込み、焦りなど）を突いて、情報や認証情報、システムへのアクセスを不正に取得する攻撃の総称です。セキュリティ製...",
+    "url": "fe/technology/security/apt-social-engineering.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "パスワード認証の仕組みと対策",
+    "summary": "パスワード認証は、本人しか「知っていない情報（知識要素）」を使って本人確認を行う、最も基本的な認証方式です。しかし、漏洩したパスワードを使い回す「パスワードリスト攻撃」や、総当たり攻撃の標的とな...",
+    "url": "fe/technology/security/authentication-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "多要素認証（MFA）の仕組み",
+    "summary": "MFA（Multi-Factor Authentication）は、パスワードだけでなく「所持要素（スマホや認証アプリ）」や「生体要素（指紋・顔）」など、異なる種類の要素を組み合わせて本人確認を...",
+    "url": "fe/technology/security/authentication-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "生体認証の仕組みとセキュア領域",
+    "summary": "生体認証は、指紋・顔・虹彩などの身体的特徴を利用して本人確認を行う方式です。重要な点は、指紋の画像や顔写真そのものが端末に保存されるわけではないということです。センサーが読み取ったデータは、数学...",
+    "url": "fe/technology/security/authentication-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "クラウド特有の脅威",
+    "summary": "クラウド（AWS/Azure/GCPなど）は便利で柔軟ですが、設定ミスやアクセス権の誤りが原因で、「自社では気づけない場所」から情報が漏れるリスクがあります。クラウドは「安全にしてくれる場所」で...",
+    "url": "fe/technology/security/cloud-ai-threats.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "AIを使った攻撃の高度化",
+    "summary": "AI（人工知能）を悪用した攻撃は、人間では難しい精度・速度・規模で実行されるため、攻撃の質と量が桁違いに向上しています。従来の攻撃と違い、「自動化」「大量生成」「高精度化」が特徴であり、攻撃者の...",
+    "url": "fe/technology/security/cloud-ai-threats.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "IPA「情報セキュリティ10大脅威」",
+    "summary": "IPA（情報処理推進機構）は、日本の情報セキュリティを支える公的機関であり、毎年「情報セキュリティ10大脅威」を発表しています。これは、その年に特に被害が多かったサイバー攻撃をランキング化したも...",
+    "url": "fe/technology/security/cloud-ai-threats.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "共通鍵暗号（Symmetric Key Encryption）",
+    "summary": "共通鍵暗号は、データの暗号化と復号に「同じ鍵（共通鍵）」を使用する方式です。アルゴリズムが比較的単純で計算コストが低いため、大量のデータを高速に処理できるのが最大の特徴です。AESやChaCha...",
+    "url": "fe/technology/security/cryptography-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "公開鍵暗号（Public Key Encryption）",
+    "summary": "公開鍵暗号は、「公開鍵（誰でも知っている鍵）」と「秘密鍵（所有者だけが知る鍵）」という2つの鍵のペアを使用する方式です。公開鍵で暗号化したデータは、対応する秘密鍵でしか復号できません。RSAやE...",
+    "url": "fe/technology/security/cryptography-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "ハイブリッド暗号方式（Hybrid Encryption）",
+    "summary": "ハイブリッド暗号方式は、共通鍵暗号と公開鍵暗号を組み合わせて、両者の弱点を補い強みを最大限に活かす方式です。現代のインターネット通信（TLS/HTTPS、VPNなど）のほぼすべてで、この方式が標...",
+    "url": "fe/technology/security/cryptography-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "補助教材: RSA公開鍵暗号 実験室",
+    "summary": "公開鍵暗号の「公開鍵で暗号化し、秘密鍵で復号する」流れは、数字を動かすと理解しやすくなります。学習用の小さなRSAデモで、素数 p・q、公開指数 e、送りたい数字 M を変えながら、公開鍵・秘密...",
+    "url": "fe/technology/security/cryptography-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "かんたん公開鍵暗号 動くRSA実験室",
+    "summary": "公開鍵暗号の仕組みを、手計算できる小さな数で試す補助ツールです。実際の暗号用途ではなく、学習用として使います。",
+    "url": "fe/technology/security/cryptography-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "安全な通信とデータ保存",
+    "summary": "アプリケーションが扱う機密情報（パスワード、個人情報、トークンなど）は、保存時と通信時の両方で適切に保護する必要があります。パスワードは決して平文で保存してはならず、ランダムな「ソルト」を付与し...",
+    "url": "fe/technology/security/data-protection-security-testing.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "依存ライブラリの管理",
+    "summary": "現代のアプリケーションは、Webフレームワークや暗号化ライブラリなど、多くの外部コード（依存関係）に依存して構築されています。これらのライブラリに既知の脆弱性が存在すると、アプリケーション全体が...",
+    "url": "fe/technology/security/data-protection-security-testing.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "SASTとDASTによるセキュリティテスト",
+    "summary": "アプリケーションの脆弱性を発見するためには、SAST（静的アプリケーションセキュリティテスト）とDAST（動的アプリケーションセキュリティテスト）を組み合わせて実施するのが効果的です。SASTは...",
+    "url": "fe/technology/security/data-protection-security-testing.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "IoTセキュリティの特殊性と全体像",
+    "summary": "IoT機器や組み込みシステムは、一般的なPCやサーバーとは異なり、「物理的にアクセスされやすい」「長期間稼働する」「リソース（CPUやメモリ）が限られている」といった特性があります。そのため、従...",
+    "url": "fe/technology/security/embedded-iot-security.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "起動の安全（セキュアブート）",
+    "summary": "セキュアブートは、デバイスの起動プロセスにおいて、各段階で「次に実行するソフトウェアが正規のものであるか」を検証する仕組みです。これにより、攻撃者が不正なOSやファームウェアに差し替えても、起動...",
+    "url": "fe/technology/security/embedded-iot-security.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "更新の安全（ファームウェア署名・OTA）",
+    "summary": "IoT機器はネットワーク経由でファームウェアを更新するOTA（Over-The-Air）が一般的ですが、これは攻撃者にとっても格好の攻撃対象です。通信経路でファイルが改ざんされたり、偽のアップデ...",
+    "url": "fe/technology/security/embedded-iot-security.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "鍵の保護（TPM / HSM）",
+    "summary": "IoTセキュリティにおいて、暗号鍵の管理は最重要課題です。もし秘密鍵がソフトウェア上に平文で保存されていれば、攻撃者がファームウェアを解析して鍵を抜き出し、不正なファームウェアに正規の署名を付け...",
+    "url": "fe/technology/security/embedded-iot-security.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "マルウェアの基礎",
+    "summary": "マルウェアとは、悪意を持って作られたソフトウェアの総称であり、情報の窃取・破壊・改ざん・不正操作・業務妨害など、利用者や組織に被害を与えることを目的とします。「ウイルス」「ランサムウェア」「スパ...",
+    "url": "fe/technology/security/malware-ransomware.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "ランサムウェアの攻撃手法",
+    "summary": "ランサムウェアとは、データやシステムを“人質（Ransom）”に取り、その回復や非公開と引き換えに代償を要求するマルウェアの総称です。重要なのは、暗号化や金銭要求は“典型例”であって必須条件では...",
+    "url": "fe/technology/security/malware-ransomware.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "被害事例から学ぶべきこと",
+    "summary": "実際の被害事例を見ると、ランサムウェアの侵入経路は「インターネットに公開された機器の脆弱性放置」や「海外拠点などセキュリティレベルの低い場所からの横移動」が大半を占めます。一度侵入を許すと、ネッ...",
+    "url": "fe/technology/security/malware-ransomware.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "ファイアウォール（Firewall）",
+    "summary": "ファイアウォールは、社内ネットワークとインターネットの境界に配置され、許可された通信だけを通し、不要または危険な通信を遮断する装置です。基本的な動作は「パケットフィルタリング」であり、送信元/宛...",
+    "url": "fe/technology/security/network-defense-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "IDS / IPS（侵入検知・防御システム）",
+    "summary": "ファイアウォールが「許可された通信だけを通す」のに対し、IDS（侵入検知システム）とIPS（侵入防御システム）は、許可された通信の中に潜む攻撃の兆候を見つける役割を持ちます。IDSは攻撃を「検知...",
+    "url": "fe/technology/security/network-defense-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "WAF（Web Application Firewall）",
+    "summary": "WAFは、Webアプリケーションを狙った攻撃を防ぐために特化したファイアウォールです。通常のFWやIPSがL3/L4（ネットワーク層・トランスポート層）を中心に監視するのに対し、WAFはL7（ア...",
+    "url": "fe/technology/security/network-defense-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "フィッシング攻撃の高度化（AI・ディープフェイク）",
+    "summary": "フィッシングとは、正規の組織やサービスを装ってユーザーを騙し、認証情報や個人情報、金銭を不正に取得する攻撃手法です。従来のフィッシングは文章の不自然さやURLの違和感で見分けられることもありまし...",
+    "url": "fe/technology/security/phishing-web-threats.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "Webアプリケーションの主要な脅威と対策",
+    "summary": "Webアプリケーションはインターネット上に公開されているため、攻撃者から常に狙われる対象です。ファイアウォール（L3/L4）では防ぎきれないアプリケーション層（L7）の脆弱性を突く攻撃に対し、開...",
+    "url": "fe/technology/security/phishing-web-threats.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "入退室管理と物理的アクセスの防止",
+    "summary": "物理的セキュリティの第一歩は、サーバールームや重要な機器が設置されているエリアへの「入退室管理」です。その本質は「誰が入れるかを制限する」ことと、「誰がいつ入ったかを記録する」ことの2点に集約さ...",
+    "url": "fe/technology/security/physical-security.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "環境対策（環境監視）",
+    "summary": "サーバーやネットワーク機器は、温度・湿度・水・埃などの環境変化に非常に弱いという特性があります。そのため、機器が安定して稼働し続けるよう、「安定した環境を維持すること」が物理的セキュリティの重要...",
+    "url": "fe/technology/security/physical-security.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "点検・記録の管理",
+    "summary": "物理的セキュリティは、設備を導入して終わりではありません。「運用」が最も重要であり、定期的な点検と記録がなければ、セキュリティは実質的に機能しないものとみなされます。",
+    "url": "fe/technology/security/physical-security.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "リスクマネジメントのプロセス",
+    "summary": "リスクマネジメントは、組織が抱えるリスクを体系的に管理し、限られたリソース（予算・人員・時間）の中で最も効果的な対策を実現するためのプロセスです。このプロセスは、①特定、②分析、③評価、④対応、...",
+    "url": "fe/technology/security/risk-management.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "リスク特定と分析",
+    "summary": "リスク特定のステップでは、「資産（守るべきもの）」「脅威（起こり得る出来事）」「脆弱性（弱点）」の3要素をセットで洗い出します。これらが組み合わさることで初めて「リスク」として認識されます。例え...",
+    "url": "fe/technology/security/risk-management.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "リスク対応の4つの基本方針",
+    "summary": "リスク評価で優先順位が決まったら、次は「どう対処するか」を決めるリスク対応のステップです。ここでの選択肢は大きく分けて4つあります。すべてのリスクを「ゼロ（回避）」にすることは現実的に難しいため...",
+    "url": "fe/technology/security/risk-management.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "継続的改善（見直し）",
+    "summary": "リスクマネジメントは、一度実施して終わりではありません。ビジネス環境の変化、新しい脅威の出現、システムの変更などに伴い、リスクの状況は常に変動します。そのため、定期的にリスク台帳を見直し、既存の...",
+    "url": "fe/technology/security/risk-management.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "入力を変える",
+    "summary": "",
+    "url": "fe/technology/security/rsa-lab.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "送る前の数字 M",
+    "summary": "",
+    "url": "fe/technology/security/rsa-lab.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "公開鍵で暗号化",
+    "summary": "",
+    "url": "fe/technology/security/rsa-lab.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "秘密鍵で復号",
+    "summary": "",
+    "url": "fe/technology/security/rsa-lab.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "受信者が鍵を作る",
+    "summary": "",
+    "url": "fe/technology/security/rsa-lab.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "秘密指数 d の探し方",
+    "summary": "",
+    "url": "fe/technology/security/rsa-lab.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "送信者が暗号化する",
+    "summary": "送信者が使うのは、受信者が公開した と、送りたい数字 M だけです。 秘密鍵 d は知りません。",
+    "url": "fe/technology/security/rsa-lab.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "暗号化の計算過程",
+    "summary": "送信者が使うのは、受信者が公開した と、送りたい数字 M だけです。 秘密鍵 d は知りません。",
+    "url": "fe/technology/security/rsa-lab.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "受信者が復号する",
+    "summary": "",
+    "url": "fe/technology/security/rsa-lab.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "復号の計算過程",
+    "summary": "",
+    "url": "fe/technology/security/rsa-lab.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "公開鍵と秘密鍵の動き",
+    "summary": "${base}^${exponent} = ${factors}",
+    "url": "fe/technology/security/rsa-lab.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "セキュリティ監査",
+    "summary": "セキュリティ監査は、組織が策定したセキュリティポリシーや基準が、実際に現場で適切に運用されているかを確認する仕組みです。これは単なるチェックではなく、セキュリティレベルを維持・向上させるための重...",
+    "url": "fe/technology/security/security-audit-bcp.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "BCPとBCM（事業継続計画とその運用）",
+    "summary": "BCP（Business Continuity Plan）は、地震・火災・サイバー攻撃などの重大インシデントが発生した際に、組織の「重要業務（クリティカル業務）」を止めない、または早期に復旧させ...",
+    "url": "fe/technology/security/security-audit-bcp.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "脅威・脆弱性・リスクの関係",
+    "summary": "情報セキュリティでは、脅威（攻撃や災害など）が、脆弱性（システムの弱点や設定ミス）を悪用することで、リスク（損害の大きさ）が発生します。この構造は企業だけでなく、個人や家庭においても全く同じです。",
+    "url": "fe/technology/security/security-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "情報セキュリティの3要素（CIA）",
+    "summary": "情報セキュリティの基本原則は、機密性（Confidentiality）、完全性（Integrity）、可用性（Availability）の3つで構成され、これらは「CIA」と呼ばれます。この3つ...",
+    "url": "fe/technology/security/security-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "情報セキュリティの7要素",
+    "summary": "CIAの3要素に加えて、現代の情報システムではさらに4つの要素（真正性・否認防止・責任追及性・信頼性）が重要視されています。これらを合わせた7要素は、互いに補完し合いながらセキュリティを支えています。",
+    "url": "fe/technology/security/security-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "セキュリティポリシーの3層構造",
+    "summary": "セキュリティポリシーは、組織の規模や実態に合わせて「基本方針」「対策基準」「実施手順」の3層構造で整備するのが標準的です。この3つが階層構造を持ち、上位の文書が下位の文書を規定することで、組織全...",
+    "url": "fe/technology/security/security-policy-incident-management.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "インシデント管理とCSIRT",
+    "summary": "インシデント管理とは、セキュリティ事故（インシデント）が発生した際に、その被害を最小限に抑え、迅速な復旧と再発防止を図るための一連の活動です。この活動の中核を担うのがCSIRT（Computer...",
+    "url": "fe/technology/security/security-policy-incident-management.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "ネットワーク分離（VLAN / セグメント化）",
+    "summary": "IoTデバイス（監視カメラ、センサー、スマート家電など）は、一般的なPCやサーバーと比べてセキュリティ対策が弱い傾向があります。初期パスワードのまま運用されたり、ファームウェアの更新が放置された...",
+    "url": "fe/technology/security/segmentation-zero-trust.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "ゼロトラストネットワーク",
+    "summary": "ゼロトラストは、「ネットワーク内部＝安全」という従来の境界防御モデルの前提を捨て、「内部・外部を問わず、すべての通信を常に検証する」セキュリティモデルです。社内PCでもマルウェアに感染している可...",
+    "url": "fe/technology/security/segmentation-zero-trust.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "サーバー・OSおよびクラウドの脅威",
+    "summary": "サーバーやOSは企業の基盤システムが動作しているため、一度侵害されるとアプリケーション、データベース、ファイルサーバーなど複数のシステムに連鎖的に影響が及びます。攻撃者はShodanなどのスキャ...",
+    "url": "fe/technology/security/server-iot-threats.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "IoT・組み込み機器特有の脅威",
+    "summary": "IoT機器（監視カメラ、センサー、スマート家電など）は、PCやサーバーと比べてセキュリティ対策が弱いままネットワークに接続されがちです。工場出荷時の「初期パスワード」が変更されていない、ファーム...",
+    "url": "fe/technology/security/server-iot-threats.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "OS強化（CIS Benchmarks）",
+    "summary": "サーバーOSはインストール直後の状態では、不要なサービスが動作していたり、外部に開いているポートが多かったりと、攻撃者に悪用される要因（脆弱性）を多数抱えています。OS強化（OS Hardeni...",
+    "url": "fe/technology/security/server-security-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "SSH鍵管理",
+    "summary": "SSHはサーバー管理の最重要入口ですが、パスワード認証は総当たり攻撃（ブルートフォース）や盗聴のリスクが高いため、実務では「公開鍵認証」に統一するのが標準です。公開鍵認証は、秘密鍵を持つ本人だけ...",
+    "url": "fe/technology/security/server-security-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "ログの仕組みと管理",
+    "summary": "ログは、サーバーやアプリケーションが内部で行った操作を時系列で記録する技術的証跡（Audit Trail）です。不正アクセスの痕跡や障害の原因を特定するために不可欠であり、改ざんされないよう厳重...",
+    "url": "fe/technology/security/server-security-basics.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "TLSによる安全な通信",
+    "summary": "TLS（Transport Layer Security）は、インターネット上の通信を暗号化し、盗聴・改ざん・なりすましを防ぐプロトコルです。Webブラウザとサーバー間のHTTPS通信は、TLS...",
+    "url": "fe/technology/security/tls-pki.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "ハッシュ関数の特徴と役割",
+    "summary": "ハッシュ関数は、任意の長さのデータから「固定長の値（ハッシュ値）」を生成する数学的な関数です。同じ入力からは必ず同じハッシュ値が得られる一方、ハッシュ値から元のデータを復元することは計算上不可能...",
+    "url": "fe/technology/security/tls-pki.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  },
+  {
+    "term": "デジタル署名とPKI（公開鍵基盤）",
+    "summary": "デジタル署名は、公開鍵暗号技術を応用した仕組みです。送信側はメッセージのハッシュ値を「自分の秘密鍵」で暗号化して署名を生成し、受信側は「送信側の公開鍵」で復号・検証します。これにより、メッセージ...",
+    "url": "fe/technology/security/tls-pki.html",
+    "tags": [
+      "セキュリティ"
+    ]
+  }
 ]
