@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WBS（作業分解構造） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>WBS（作業分解構造）</h1>
+        <p class="lead">WBSの定義・目的・粒度基準・作り方を理解し、プロジェクトの作業を「見える化」する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#wbs-overview">WBSとは</a>
+        <a href="#granularity">粒度の基準</a>
+        <a href="#how-to-make">作り方</a>
+        <a href="#format">参考フォーマット</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>WBS（作業分解構造）</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>WBSの定義（作業分解構造：プロジェクトの作業を大→中→小へ分解）</li>
+          <li>WBSは「プロジェクトの地図」であり、抜け漏れ防止・見積り・スケジュールの基盤</li>
+          <li>WBSの目的（作業の抜け漏れ防止・見積り基盤・担当者割り当て）</li>
+          <li>粒度の基準（1〜3日で終わる作業、成果物がイメージできるレベル）</li>
+          <li>WBSの作り方（大分類→中分類→小分類の順に分解）</li>
+          <li>WBSの参考フォーマット（要件定義・設計の例）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>WBSの定義と目的、粒度の基準（1〜3日）</dd></div>
+          <div><dt>中</dt><dd>WBSの作り方（大→中→小）、参考フォーマット</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>WBS（Work Breakdown Structure）</th>
+              <td>作業分解構造。プロジェクトで必要な作業を「大→中→小」へ分解し、全体像を見える化する仕組み</th>
+              <td>プロジェクトの「地図」。抜け漏れ防止・見積り・スケジュールの基盤</th>
+            </tr>
+            <tr>
+              <td>粒度</th>
+              <td>作業をどこまで細かく分解するかの基準</th>
+              <td>1つの作業が1〜3日で終わるレベルが理想</th>
+            </tr>
+            <tr>
+              <td>大分類（フェーズ）</th>
+              <td>プロジェクトの大きな工程区分</th>
+              <td>例：要件定義、設計、実装、テスト、リリース</th>
+            </tr>
+            <tr>
+              <td>中分類（成果物）</th>
+              <td>各フェーズで生み出す成果物の単位</th>
+              <td>例：要件定義書、画面設計書、API仕様書</th>
+            </tr>
+            <tr>
+              <td>小分類（作業）</th>
+              <td>成果物を作るための具体的な行動</th>
+              <td>例：要件ヒアリング、レビュー、修正、承認</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="wbs-overview" class="lesson-section">
+      <h2>2-3-1. WBSとは</h2>
+      <p>プロジェクトで必要な作業を「大→中→小」へと分解し、全体像を見える化するための仕組み。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>WBSのイメージ</figcaption>
+        <pre>
+【WBSがないと起こる問題】
+  - 何をすればよいか分からない
+  - 抜け漏れが起きる
+  - 見積りが曖昧になる
+  - スケジュールが作れない
+
+【WBSは「プロジェクトの地図」】
+  これらの問題を防ぎ、プロジェクトを迷わず進めるための基盤
+        </pre>
+      </figure>
+
+      <h3>2-3-2. WBSの目的</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>目的</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 作業の抜け漏れを防ぐ</th>
+              <td>作業を分解して一覧化することで、「やるべきことがすべて見える状態」を作る</th>
+            </tr>
+            <tr>
+              <td>② 見積り・スケジュールの基盤をつくる</th>
+              <td>WBSがあることで、時間・工数・順番の計画が現実的になる</th>
+            </tr>
+            <tr>
+              <td>③ 担当者を割り当てやすくする</th>
+              <td>作業が具体的になると、誰がどの作業を担当するかが明確になる</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="granularity" class="lesson-section">
+      <h2>2-3-3. 粒度の基準</h2>
+      <p>WBSの難しさは、「どこまで細かくすればよいか」という粒度の判断。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>基準</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1つの作業が1～3日で終わるレベル</strong></th>
+              <td>1日で終わる作業：理想<br>3日で終わる作業：許容<br>5日以上かかる作業：分解が不足している可能性が高い</th>
+            </tr>
+            <tr>
+              <td><strong>作業の内容が“誰が見ても同じ意味”になるレベル</strong></th>
+              <td>×「テストする」（抽象的）<br>○「単体テスト仕様書を作成する」<br>○「結合テストを実施し、結果を記録する」</th>
+            </tr>
+            <tr>
+              <td><strong>成果物が明確にイメージできるレベル</strong></th>
+              <td>「何をするか」ではなく「何が出来上がるか」を基準に分解する</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>粒度のイメージ</figcaption>
+        <pre>
+【粒度の比較】
+
+  悪い例（大きすぎる）：
+    +------------------+
+    | 決済機能(5日以上)|
+    +------------------+
+
+  良い例（適切な粒度）：
+    +------------------+    +------------------+    +------------------+
+    | クレジットカード |    | コンビニ決済     |    | 決済エラー処理   |
+    | 決済（2日）      |    | （1日）          |    | （1日）          |
+    +------------------+    +------------------+    +------------------+
+        </pre>
+      </figure>
+    </section>
+
+    <section id="how-to-make" class="lesson-section">
+      <h2>2-3-4. 作り方（大→中→小の順に分解する）</h2>
+
+      <h3>STEP1：大分類（フェーズ）を決める</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>大分類の例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>要件定義</td></tr>
+            <tr><td>設計</td></tr>
+            <tr><td>実装</td></tr>
+            <tr><td>テスト</td></tr>
+            <tr><td>リリース</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>STEP2：中分類（成果物）を決める</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>設計の中分類例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>画面設計書</td></tr>
+            <tr><td>API仕様書</td></tr>
+            <tr><td>DB設計書</td></tr>
+            <tr><td>外部設計書</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>STEP3：小分類（作業）を分解する</h3>
+      <div class="table-wrap">
+        <tr>
+          <thead>
+            <tr><th>画面設計書の小分類例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>レイアウト作成</td></tr>
+            <tr><td>入力項目定義</td></tr>
+            <tr><td>画面遷移図作成</td></tr>
+            <tr><td>レビュー</td></tr>
+            <tr><td>修正</td></tr>
+            <tr><td>承認</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>WBSの階層構造イメージ</figcaption>
+        <pre>
+【WBSの3階層構造】
+
+  +-----------------------------------------------------------+
+  |  大分類（フェーズ）                                       |
+  |    +---------------------------------------------------+  |
+  |    | 中分類（成果物）                                  |  |
+  |    |   +-------------------------------------------+   |  |
+  |    |   | 小分類（作業）                            |   |  |
+  |    |   | - 具体的な行動レベル                      |   |  |
+  |    |   | - 1〜3日で完了                            |   |  |
+  |    |   | - 担当者を割り当て可能                    |   |  |
+  |    |   +-------------------------------------------+   |  |
+  |    +---------------------------------------------------+  |
+  +-----------------------------------------------------------+
+
+  例：要件定義 → 要件定義書 → 要件ヒアリング → 作成 → レビュー → 修正 → 承認
+        </pre>
+      </figure>
+    </section>
+
+    <section id="format" class="lesson-section">
+      <h2>2-3-6. WBSの参考フォーマット</h2>
+
+      <h3>① 要件定義のWBS例</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>大分類</th><th>中分類</th><th>小分類</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr rowspan="4">
+              <td>要件定義</th>
+              <td>画面一覧</th>
+              <td>画面ID付与</th>
+            </tr>
+            <tr><td></td><td></td><td>画面遷移の整理</td></tr>
+            <tr><td></td><td>機能一覧</td><td>機能ID付与</td></tr>
+            <tr><td></td><td></td><td>処理概要の整理</td></tr>
+            <tr><td></td><td>データ項目</td><td>項目名・型・桁数の定義</td></tr>
+            <tr><td></td><td>非機能</td><td>性能要件・セキュリティ要件の整理</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>② 設計のWBS例</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>大分類</th><th>中分類</th><th>小分類</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr rowspan="5">
+              <td>設計</th>
+              <td>画面設計</th>
+              <td>レイアウト作成</th>
+            </tr>
+            <tr><td></td><td></td><td>入力項目定義</td></tr>
+            <tr><td></td><td></td><td>画面遷移図作成</td></tr>
+            <tr><td></td><td>DB設計</td><td>テーブル定義</td></tr>
+            <tr><td></td><td></td><td>ER図作成</td></tr>
+            <tr><td></td><td>API設計</td><td>リクエスト/レスポンス定義</td></tr>
+            <tr><td></td><td></td><td>エンドポイント設計</td></tr>
+            <tr><td></td><td>外部設計</td><td>外部IF仕様作成</td></tr>
+            <tr><td></td><td></td><td>外部システム連携図</td></tr>
+            <tr><td></td><td>内部設計</td><td>クラス設計</td></tr>
+            <tr><td></td><td></td><td>処理フロー設計</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ECサイトのWBS例</h3>
+      <figure class="wide-diagram">
+        <figcaption>ECサイト開発のWBS階層</figcaption>
+        <pre>
+【ECサイト開発のWBS】
+
+  要件定義
+     |
+     +---> 設計
+             |
+             +---> 開発
+                     |
+                     +---> 商品検索
+                     |
+                     +---> カート
+                     |
+                     +---> 決済
+                     |
+                     +---> 会員登録
+             |
+             +---> テスト
+             |
+             +---> リリース
+
+  このように、大きな作業 → 中くらいの作業 → 小さな作業 へと分解していく
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. WBS（Work Breakdown Structure）の説明として、最も適切なものはどれか。</summary>
+        <p>ア）プロジェクトの予算を管理する表　イ）プロジェクトの作業を大→中→小へ分解し見える化する仕組み　ウ）プロジェクトのメンバーを一覧にした表　エ）プロジェクトのリスクを洗い出す表</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — WBSは作業分解構造。プロジェクトの作業を階層的に分解し、全体像を見える化する「プロジェクトの地図」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. WBSの目的として、本文で挙げられていないものはどれか。</summary>
+        <p>ア）作業の抜け漏れを防ぐ　イ）見積り・スケジュールの基盤をつくる　ウ）プロジェクトの宣伝効果を高める　エ）担当者を割り当てやすくする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — WBSの目的は作業の抜け漏れ防止、見積り・スケジュールの基盤、担当者割り当て。宣伝効果は関係ない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. WBSの粒度に関する記述として、適切なものはどれか。</summary>
+        <p>ア）1つの作業は5日以上かかるレベルが理想　イ）1つの作業は1〜3日で終わるレベルが理想　ウ）作業はできるだけ大きくまとめるのが良い　エ）粒度は成果物と関係なく決めてよい</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 粒度の基準は「1つの作業が1〜3日で終わるレベル」。1日：理想、3日：許容、5日以上：分解不足。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 適切な粒度で書かれたWBSの小分類として、最も適切なものはどれか。</summary>
+        <p>ア）テストする　イ）決済機能　ウ）単体テスト仕様書を作成する　エ）システム開発</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 「単体テスト仕様書を作成する」は具体的で成果物が明確。アは抽象的、イとエは大きすぎる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. WBSの作り方として、正しい順番はどれか。</summary>
+        <p>ア）小分類 → 中分類 → 大分類　イ）中分類 → 大分類 → 小分類　ウ）大分類 → 中分類 → 小分類　エ）どの順番でもよい</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — WBSは「大分類（フェーズ）→ 中分類（成果物）→ 小分類（作業）」の順に分解する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. WBSの大分類（フェーズ）の例として、適切なものはどれか。</summary>
+        <p>ア）画面設計書　イ）要件定義　ウ）レイアウト作成　エ）API仕様書</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 大分類の例は「要件定義」「設計」「実装」「テスト」「リリース」など。アとエは中分類、ウは小分類。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. WBSの中分類（成果物）の例として、適切なものはどれか。</summary>
+        <p>ア）レビュー　イ）実装　ウ）画面設計書　エ）承認</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 中分類の例は「要件定義書」「画面設計書」「API仕様書」など。アとエは小分類、イは大分類。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 下記のうち、WBSの小分類として最も適切な粒度のものはどれか。</summary>
+        <p>ア）システム開発（10日）　イ）ログイン機能の実装（2日）　ウ）バグ修正（時間未定）　エ）運用保守</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 「ログイン機能の実装（2日）」は1〜3日の範囲に収まっており、適切な粒度。アは大きすぎる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. WBSを「何が出来上がるか」を基準に分解する理由として、最も適切なものはどれか。</summary>
+        <p>ア）作業時間を短縮するため　イ）成果物が明確になると、作業の内容や完了条件が分かりやすくなるため　ウ）コストを削減するため　エ）メンバーのモチベーションを上げるため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 「何をするか」ではなく「何が出来上がるか」を基準に分解すると、作業の内容や完了条件が明確になる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. WBSがないと発生する問題として、本文で挙げられているものはどれか。</summary>
+        <p>ア）プロジェクトが予算内に収まる　イ）抜け漏れが起きる　ウ）コミュニケーションが円滑になる　エ）品質が自動的に向上する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — WBSがないと「何をすればよいか分からない」「抜け漏れが起きる」「見積りが曖昧」「スケジュールが作れない」などの問題が発生する。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-3 WBS（Work Breakdown Structure）（p43-p53）</p>
+    </section>
+  </main>
+</body>
+</html>

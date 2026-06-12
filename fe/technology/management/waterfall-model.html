@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ウォーターフォールモデル（詳細） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>ウォーターフォールモデル（詳細）</h1>
+        <p class="lead">ウォーターフォールモデルの本質・特徴・向いている場面・成功させるためのポイントを深堀りする。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#essence">ウォーターフォールの本質</a>
+        <a href="#situation">向いている場面</a>
+        <a href="#success">成功のポイント</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>ウォーターフォールモデル（詳細）</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>ウォーターフォールモデルの特徴（工程明確・文書整備・多人数開発・進捗把握容易）</li>
+          <li>ウォーターフォールの本質（計画重視・成果物作成・変更慎重）</li>
+          <li>ウォーターフォールが向く場面（要件明確・文書重要・大規模・長期・高信頼性）</li>
+          <li>ウォーターフォール成功の3ポイント</li>
+          <li>変更管理の重要性</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ウォーターフォールの本質（3つ）、向いている場面の具体例</dd></div>
+          <div><dt>中</dt><dd>成功のポイント、変更管理の考え方</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>ウォーターフォールモデル</td><td>要件→設計→実装→テスト→運用の順に一方向に進む開発モデル</td><td>「滝のように下流へ進む」イメージ。工程間の逆戻りが難しい</td></tr>
+            <tr><td>要件定義</td><td>システムに何を求めるかを明確に定義する最初の工程</td><td>ウォーターフォールでは最重要工程。ここが曖昧だと全工程に影響</td></tr>
+            <tr><td>設計</td><td>要件を実現するための技術的な仕様を決める工程</td><td>外部設計・内部設計・画面設計・DB設計・API設計などがある</td></tr>
+            <tr><td>実装</td><td>設計書に基づいて実際にプログラムを書く工程</td><td>コーディング規約の遵守やコードレビューが品質を左右する</td></tr>
+            <tr><td>テスト</td><td>プログラムが正しく動作するか確認する工程</td><td>単体テスト→結合テスト→総合テストの順で進める</td></tr>
+            <tr><td>運用</td><td>システムを実際に使いながら維持・管理するフェーズ</td><td>開発プロジェクトの最終工程。運用チームへの引き継ぎが重要</td></tr>
+            <tr><td>成果物（ドキュメント）</td><td>各工程で作成される文書類（要件定義書・設計書など）</td><td>多人数開発での認識合わせや引き継ぎに不可欠</td></tr>
+            <tr><td>変更管理</td><td>変更の影響を分析し、関係者と合意して進めるプロセス</td><td>ウォーターフォールでは後工程への影響が大きいため特に重要</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="essence" class="lesson-section">
+      <h2>1-3-1. ウォーターフォールの本質</h2>
+      <p>ウォーターフォールモデルの本質は次の3つに集約される。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>本質</th><th>キーワード</th><th>実務での意味</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>① 事前にしっかり計画し、段階的に進める</strong></td><td>事前計画・段階的実行</td><td>最初に全体計画を立ててから、計画通りに進める</td></tr>
+            <tr><td><strong>② 各工程で成果物を作り、次の工程へ渡す</strong></td><td>ドキュメント・認識合わせ</td><td>各工程で文書を作成し、それを次の工程へ引き継ぐ</td></tr>
+            <tr><td><strong>③ 変更は慎重に扱う（変更管理が重要）</strong></td><td>影響分析・合意形成</td><td>変更があれば影響を分析し、承認を得てから反映する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>各本質の詳細</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>本質</th><th>詳細説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>計画重視</strong></td><td>「何を作るか」「どの順番で進めるか」「どれくらい時間がかかるか」を最初に整理することで、大規模開発でも安定して進められる。</td></tr>
+            <tr><td><strong>成果物ベース</strong></td><td>工程ごとに成果物（ドキュメント）を作ることで、多人数でも認識が揃い、引き継ぎがしやすく、品質を計画的に作り込める。</td></tr>
+            <tr><td><strong>変更慎重</strong></td><td>変更は「悪い」わけではない。ただし変更があると後工程に影響が出やすいため、影響を分析し、関係者と合意して進める考え方が重要。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="situation" class="lesson-section">
+      <h2>1-3-2. ウォーターフォールが向いている場面</h2>
+      <p>ウォーターフォールは次のような場面で力を発揮する。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>場面</th><th>具体例</th><th>なぜウォーターフォールが適するか</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>要件が明確</td><td>法改正対応、既存システムのリプレース</td><td>最初に全ての要件を定義できるため、計画通り進められる</td></tr>
+            <tr><td>文書が重要</td><td>官公庁案件、金融系システム</td><td>監査や承認プロセスで詳細な文書が必要</td></tr>
+            <tr><td>大規模・多人数</td><td>基幹システム開発、プラットフォーム構築</td><td>工程を明確に区切ることで大人数でも管理可能</td></tr>
+            <tr><td>長期間</td><td>1年以上の大型プロジェクト</td><td>長期的な計画立てが有効で、進捗が把握しやすい</td></tr>
+            <tr><td>高信頼性が必要</td><td>銀行の勘定系システム、航空管制</td><td>徹底した設計とテストによる品質保証が可能</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>「<strong>しっかり計画して、確実に進めたい</strong>」というプロジェクトに向いている。</p>
+    </section>
+
+    <section id="success" class="lesson-section">
+      <h2>1-3-3. ウォーターフォールを成功させるための視点</h2>
+      <p>ウォーターフォールは、正しく使えば非常に強力なモデル。成功するプロジェクトは次のポイントを押さえている。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>成功ポイント</th><th>具体的なアクション</th><th>よくある失敗</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>① 目的と成果物を明確にする</strong></td><td>最初に「何を作るか」を明確にする。画面一覧・API一覧・データ構造を定義し、「作らないもの」も明示する。</td><td>「なんとなく」で始めて後で認識ズレが発生する。</td></tr>
+            <tr><td><strong>② 認識合わせを丁寧に行う</strong></td><td>ウォーターフォールは文書中心。文書を最新に保つことで、設計・実装・テスト・運用がすべてスムーズに進む。</td><td>文書が古いまま進めて手戻りが発生する。</td></tr>
+            <tr><td><strong>③ 変更管理を適切に行う</strong></td><td>変更は「避ける」のではなく、「影響を分析して合意して進める」姿勢が大切。変更要求書を作成し、承認を得てから反映する。</td><td>口頭で変更を受け入れてスコープが膨張する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. ウォーターフォールモデルの特徴として、適切なものはどれか。</summary>
+        <p>ア）工程が曖昧で、進捗が把握しにくい　イ）文書よりも対話を重視する　ウ）工程が明確で、文書が整備される　エ）変更を前提に進める</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ウォーターフォールは工程が明確で文書を重視する。アは逆、イはアジャイルの特徴、エもアジャイルの特徴。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. ウォーターフォールモデルの本質として、本文で挙げられているものはどれか。</summary>
+        <p>ア）変更を積極的に受け入れる　イ）各工程で成果物を作り次の工程へ渡す　ウ）計画を立てずにまず実装する　エ）テストを最後の工程だけで行う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 「各工程で成果物を作り次の工程へ渡す」はウォーターフォールの本質の1つ。アはアジャイル、ウは逆、エは誤り（品質は全工程で作り込む）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ウォーターフォールモデルにおける変更の扱い方として、適切なものはどれか。</summary>
+        <p>ア）変更は全て拒否する　イ）変更があれば影響を分析し関係者と合意して進める　ウ）変更は開発者が自由に判断する　エ）変更は常に優先して即座に実装する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ウォーターフォールでは変更があると後工程に影響が出やすいため、影響を分析し関係者と合意して進める。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. ウォーターフォールモデルが最も適するプロジェクトはどれか。</summary>
+        <p>ア）要件が頻繁に変わるスマホアプリ開発　イ）2人のチームで行う小規模ツール開発　ウ）金融機関の基幹システム開発　エ）ユーザーと対話しながら仕様を決める開発</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 金融機関の基幹システムは大規模・高信頼性・要件が明確で、ウォーターフォールが適する。他はアジャイル向き。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. ウォーターフォールを成功させるためのポイントとして、適切でないものはどれか。</summary>
+        <p>ア）目的と成果物を明確にする　イ）認識合わせを丁寧に行う　ウ）変更は避けるようにする　エ）変更管理を適切に行う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ウォーターフォールは変更を「避ける」のではなく「影響を分析して合意して進める」姿勢が大切。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. ウォーターフォールモデルで「文書が重要」とされる理由として、最も適切なものはどれか。</summary>
+        <p>ア）文書が多いほどプロジェクトが成功するから　イ）多人数でも認識を揃えられ、引き継ぎがしやすいから　ウ）法律で文書作成が義務付けられているから　エ）文書があればテストが不要になるから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ウォーターフォールでは工程ごとに成果物（ドキュメント）を作ることで、多人数でも認識が揃い、引き継ぎがしやすくなる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 「事前にしっかり計画し、段階的に進める」という考え方を持つ開発モデルはどれか。</summary>
+        <p>ア）アジャイル　イ）ウォーターフォール　ウ）スクラム　エ）XP（エクストリーム・プログラミング）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 「計画を立ててから実行する」という考え方はウォーターフォールの本質。アジャイルは変化を前提に進みながら計画を育てる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. ウォーターフォールモデルで「要件定義」が特に重要とされる理由はなぜか。</summary>
+        <p>ア）要件定義は最もコストがかかるから　イ）要件定義が曖昧だと後の全工程に影響するから　ウ）要件定義は最も時間がかかるから　エ）要件定義は開発者が最も得意とする工程だから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ウォーターフォールは上流から下流へ一方向に進むため、上流の要件定義が曖昧だと、設計・実装・テストの全工程に影響する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ウォーターフォールモデルの各工程で作成される「成果物」の例として、適切でないものはどれか。</summary>
+        <p>ア）要件定義書　イ）設計書　ウ）テスト仕様書　エ）完成した製品そのもの</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — ウォーターフォールの成果物は主にドキュメント類。完成した製品は最終成果物だが、各工程の成果物としてはドキュメントが該当する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. ウォーターフォールモデルが「高信頼性が必要なプロジェクト」に向く理由として、最も適切なものはどれか。</summary>
+        <p>ア）開発が速いから　イ）変更に柔軟に対応できるから　ウ）徹底した設計とテストによる品質保証が可能だから　エ）少人数で開発できるから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ウォーターフォールは上流工程で徹底した設計を行い、各工程でレビューを実施することで、高い品質を計画的に作り込める。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第1章 プロジェクトマネジメント(PM) / 1-3 ウォーターフォールモデル（p11-p14）</p>
+    </section>
+  </main>
+</body>
+</html>

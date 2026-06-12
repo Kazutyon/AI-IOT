@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>スケジュール管理・ガントチャート | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>スケジュール管理・ガントチャート</h1>
+        <p class="lead">スケジュール管理の目的・流れと、ガントチャートの構造・読み方・使い方を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#schedule-overview">スケジュール管理</a>
+        <a href="#gantt-chart">ガントチャート</a>
+        <a href="#gantt-structure">ガントチャートの構造</a>
+        <a href="#gantt-points">意識するポイント</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>スケジュール管理・ガントチャート</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>スケジュール管理の目的（全体像の把握・遅延早期発見・チームの共通リズム）</li>
+          <li>スケジュール管理の流れ（WBS→依存関係→工数見積→ガントチャート→クリティカルパス→進捗確認）</li>
+          <li>ガントチャートとは（作業を時間軸に並べた図）</li>
+          <li>ガントチャートの配置の考え方（依存関係・工数・並行作業）</li>
+          <li>ガントチャートの読み方（バーの長さ・重なり・マイルストーン）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>スケジュール管理の目的、ガントチャートの役割と読み方</dd></div>
+          <div><dt>中</dt><dd>スケジュール管理の流れ、クリティカルパス、マイルストーン</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>スケジュール管理</th>
+              <td>「いつ・誰が・何をするか」を明確にし、プロジェクトを安定して進めるための管理</th>
+              <td>プロジェクトの「時間の地図」。遅延を早期発見するのが目的</th>
+            </tr>
+            <tr>
+              <td>ガントチャート</th>
+              <td>WBSで分解した作業を時間軸に並べて可視化した図</th>
+              <td>作業の流れ・重なり・依存関係・開始日・終了日が一目で分かる</th>
+            </tr>
+            <tr>
+              <td>WBS（Work Breakdown Structure）</th>
+              <td>作業分解構造。プロジェクトの作業を大→中→小へ分解</th>
+              <td>スケジュールはWBSなしでは作れない</th>
+            </tr>
+            <tr>
+              <td>依存関係</th>
+              <td>どの作業がどの作業に影響するかを示すルール</th>
+              <td>FS・SS・FFの3種類。スケジュールの土台</th>
+            </tr>
+            <tr>
+              <td>工数</th>
+              <td>作業に必要な時間（人時・人日）</th>
+              <td>ガントチャートの横棒の長さ＝工数</th>
+            </tr>
+            <tr>
+              <td>クリティカルパス</th>
+              <td>プロジェクトの最短完了ルート。このルート上の作業が遅れると全体が遅れる</th>
+              <td>スケジュール短縮はクリティカルパス上の作業を短縮するしかない</th>
+            </tr>
+            <tr>
+              <td>マイルストーン</th>
+              <td>プロジェクトの重要な節目</th>
+              <td>例：要件定義完了、設計完了、テスト開始、リリース判定</th>
+            </tr>
+            <tr>
+              <td>FS（Finish to Start）</th>
+              <td>Aが終わらないとBを開始できない依存関係</th>
+              <td>最も一般的。プロジェクトの8割以上がこの関係</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="schedule-overview" class="lesson-section">
+      <h2>2-4. スケジュール管理</h2>
+      <p>スケジュール管理は、「いつ・誰が・何をするか」を明確にし、プロジェクトを安定して前に進めるための管理。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>スケジュール管理がないと起こる問題</figcaption>
+        <pre>
+【スケジュール管理がないと】
+
+  - どの作業が遅れているのか分からない
+  - どの作業が重要なのか分からない
+  - どの作業が他の作業を止めているのか分からない
+  - どこにリスクが潜んでいるか分からない
+
+  → 気づいたら遅延していた、という事態が起きる
+        </pre>
+      </figure>
+
+      <h3>2-4-1. スケジュール管理の目的</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>目的</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① プロジェクトの全体像を時間軸で把握する</th>
+              <td>どの作業がいつ始まり、いつ終わり、どの作業に依存しているかを時間軸で見える化</th>
+            </tr>
+            <tr>
+              <td>② 遅延を早期に発見し、対策できるようにする</th>
+              <td>スケジュールは「守るため」ではなく「遅れを早く見つけるため」。早期発見が修正の鍵</th>
+            </tr>
+            <tr>
+              <td>③ チーム全員が同じペースで進めるようにする</th>
+              <td>スケジュールはチームの共通リズムを作る。いつレビュー・テスト・リリースするかが共有される</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2-4-2. スケジュール管理の流れ</h3>
+      <figure class="wide-diagram">
+        <figcaption>スケジュール管理6ステップ</figcaption>
+        <pre>
+【スケジュール管理の流れ】
+
+  STEP1. WBSを作る（作業を分解する）
+         スケジュールはWBSなしでは作れない
+
+  STEP2. 作業の順番（依存関係）を整理する
+         Aが終わらないとBができない、CとDは同時にできる、など
+
+  STEP3. 作業ごとの工数を見積もる
+         例：要件ヒアリング:4H、画面設計:16H、API設計:12H
+
+  STEP4. ガントチャートに落とし込む
+         作業を時間軸に並べた図を作成
+
+  STEP5. クリティカルパスを把握する
+         プロジェクトの最短完了ルートを特定
+
+  STEP6. 進捗を定期的に確認する
+         毎日・毎週・毎月の進捗を確認し、遅れがあれば早期対策
+        </pre>
+      </figure>
+    </section>
+
+    <section id="gantt-chart" class="lesson-section">
+      <h2>2-4-3. ガントチャート</h2>
+      <p>ガントチャートは、WBSで分解した作業を“時間軸に並べて”可視化したもの。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ガントチャートで分かること</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>どの作業がいつ始まり、いつ終わるか</th>
+            </tr>
+            <tr>
+              <td>どの作業がどれに依存しているか</th>
+            </tr>
+            <tr>
+              <td>どの作業が並行できるか</th>
+            </tr>
+            <tr>
+              <td>どこが遅れると全体に影響するか（クリティカルパス）</th>
+            </tr>
+            <tr>
+              <td>どこに負荷が集中しているか</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2-4-3-1. ガントチャートの本質は“配置の考え方”</h3>
+      <p>ガントチャートは次の3つを同時に満たすように配置する図。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>配置ルール</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 作業の順番（依存関係）を守る</th>
+              <td>FS（終了→開始）、SS（開始→開始）、FF（終了→終了）の関係を反映</th>
+            </tr>
+            <tr>
+              <td>② 作業の長さ（工数）を反映する</th>
+              <td>WBSで見積もった工数を横棒の長さにする。8時間→1日、40時間→5日</th>
+            </tr>
+            <tr>
+              <td>③ 並行できる作業は重ねて配置する</th>
+              <td>担当が違う／対象が違う作業は並行可能。バーを横に重ねて描く</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>ガントチャート配置のイメージ</figcaption>
+        <pre>
+【ガントチャート配置の3原則】
+
+  ① 依存関係を守る
+     要件定義レビューが終わらないと画面設計は始められない
+     [----A----] -> [----B----]
+
+  ② 工数を反映する
+     工数が大きい作業ほど横棒が長くなる
+     [--------] 工数大
+     [--] 工数小
+
+  ③ 並行作業は重ねる
+     画面設計とAPI設計は別の担当 → 同じ期間に重ねて配置
+     日付:   4/1   4/2   4/3   4/4   4/5
+     画面設計: [========]
+     API設計: [========]
+        </pre>
+      </figure>
+    </section>
+
+    <section id="gantt-structure" class="lesson-section">
+      <h2>2-4-3-2. ガントチャートの構造</h2>
+
+      <figure class="wide-diagram">
+        <figcaption>ガントチャートの例</figcaption>
+        <pre>
+【ガントチャート例】
+
+  No. 作業名         | 4/1 | 4/2 | 4/3 | 4/4 | 4/5 | 4/6 | 4/7 | 4/8
+  ----+-------------+-----+-----+-----+-----+-----+-----+-----+-----
+   1  要件ヒアリング  [===]
+   2  要件定義書作成  [=====]
+   3  要件定義書レビュー     [==]
+   4  画面設計              [=====]
+   5  画面設計レビュー           [=]
+   6  実装                        [=======]
+   7  単体テスト                         [===]
+   8  結合テスト                             [====]
+
+  凡例：[===] 作業期間、 ◆ マイルストーン
+        </pre>
+      </figure>
+
+      <h3>マイルストーンの例</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>マイルストーン</th><th>意味</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>要件定義完了</th><td>日付だけのポイントとして菱形や記号で表す</th>
+            </tr>
+            <tr><td>設計完了</th><td>「ここまでに絶対終わらせるべき節目」が一目で分かる</th>
+            </tr>
+            <tr><td>テスト開始</th><td>リスクが集中しやすいポイント</th>
+            </tr>
+            <tr><td>リリース判定</th><td>プロジェクトの最終判断ポイント</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="gantt-points" class="lesson-section">
+      <h2>2-4-3-3. ガントチャートで必ず意識するポイント</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ポイント</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>依存関係を反映する</strong></th>
+              <td>「要件定義書レビュー」が終わらないと「画面設計」は始められない。FS（Finish to Start）を意識してバーを配置</th>
+            </tr>
+            <tr>
+              <td><strong>並行できる作業は重ねて配置する</strong></th>
+              <td>画面設計とAPI設計など、別の担当・別の対象なら並行可能。バーを横に重ねて描くことで「並行作業」が見える</th>
+            </tr>
+            <tr>
+              <td><strong>マイルストーン（節目）を明示する</strong></th>
+              <td>要件定義完了、設計完了、テスト開始、リリース判定などを菱形や記号で表す。節目が一目で分かる</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2-4-3-4. ガントチャートを「読める／使える」ようになる視点</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>見るべきポイント</th><th>意味</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>バーが長い作業</th>
+              <td>時間がかかる作業。リスクが潜む可能性が高い</th>
+            </tr>
+            <tr>
+              <td>バーが連続している経路</th>
+              <td>クリティカルパス候補。ここが遅れると全体が遅れる</th>
+            </tr>
+            <tr>
+              <td>バーが重なっているところ</th>
+              <td>リソース（人）の負荷が高いところ。担当者が過負荷の可能性</th>
+            </tr>
+            <tr>
+              <td>マイルストーン前後</th>
+              <td>リスクが集中しやすいポイント。特に注意が必要</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>ガントチャート読み取りのポイント</figcaption>
+        <pre>
+【ガントチャートの読み取り】
+
+  +-------------------------------------------------------------+
+  |  バーが長い = 時間がかかる作業 → ここにリスクが潜む        |
+  |                                                             |
+  |  バーが連続 = クリティカルパス候補 → ここが遅れると全体遅延|
+  |                                                             |
+  |  バーが重なり = リソース負荷集中 → 担当者が過負荷か確認    |
+  |                                                             |
+  |  マイルストーン前後 = リスク集中ポイント → 特に注意        |
+  |                                                             |
+  |  ガントチャートは「きれいな図」ではなく、                   |
+  |  リスクと負荷を見つけるための道具                           |
+  +-------------------------------------------------------------+
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. スケジュール管理の目的として、最も適切なものはどれか。</summary>
+        <p>ア）計画通りに進めることを絶対に守る　イ）遅延を早期に発見し対策できるようにする　ウ）プロジェクトの予算を削減する　エ）メンバーの給与を決定する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スケジュール管理の本質は「遅れを早く見つけること」。スケジュールは守るためではなく、遅れを早期発見するために作る。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. スケジュール管理の最初のステップとして正しいものはどれか。</summary>
+        <p>ア）ガントチャートを作成する　イ）クリティカルパスを把握する　ウ）WBSを作る　エ）進捗を確認する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スケジュール管理はWBSなしでは作れない。まずWBSで作業を分解し、「何をするか」を明確にする。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ガントチャートの説明として、最も適切なものはどれか。</summary>
+        <p>ア）プロジェクトの予算を管理する図　イ）WBSで分解した作業を時間軸に並べて可視化した図　ウ）組織の指揮系統を示す図　エ）リスクの発生確率と影響度を示す図</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ガントチャートはWBSで分解した作業を時間軸に並べた図。作業の流れ・重なり・依存関係が一目で分かる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. ガントチャートの横棒の長さが表すものはどれか。</summary>
+        <p>ア）作業の優先度　イ）作業の難易度　ウ）作業に必要な時間（工数）　エ）担当者のスキルレベル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ガントチャートの横棒の長さ＝作業に必要な時間（工数）。WBSで見積もった工数を反映する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. ガントチャートで「バーが連続している経路」が示すものはどれか。</summary>
+        <p>ア）予算が最もかかる経路　イ）クリティカルパス候補　ウ）品質が最も重要な経路　エ）最も人数が多い経路</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — バーが連続している経路はクリティカルパス候補。このルート上の作業が遅れるとプロジェクト全体が遅れる可能性が高い。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. ガントチャートで「バーが重なっているところ」が示すものはどれか。</summary>
+        <p>ア）リソース（人）の負荷が高いところ　イ）品質に問題があるところ　ウ）予算が超過しているところ　エ）依存関係が間違っているところ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — バーが重なっているところはリソースの負荷が高いところ。担当者が過負荷になっていないか確認が必要。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. ガントチャートにおけるマイルストーンの役割として、適切なものはどれか。</summary>
+        <p>ア）作業の詳細な手順を示す　イ）プロジェクトの重要な節目を明示する　ウ）予算の内訳を示す　エ）チームメンバーの役割を示す</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — マイルストーンは「要件定義完了」「設計完了」「テスト開始」などの重要な節目を菱形や記号で明示する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. スケジュール管理に関する記述として、適切でないものはどれか。</summary>
+        <p>ア）スケジュールは「守るため」ではなく「遅れを早く見つけるため」に作る　イ）遅れは早期に見つければ修正できるが、後半で気づくと取り返しがつかない　ウ）スケジュールは一度作ったら変更してはいけない　エ）スケジュールはチームの共通リズムを作る</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スケジュールは状況に応じて見直し、変更するもの。一度作ったら変更してはいけないわけではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ガントチャートを作る際の配置の考え方として、本文で挙げられていないものはどれか。</summary>
+        <p>ア）依存関係を守る　イ）工数を反映する　ウ）並行作業は重ねる　エ）担当者の給与を記載する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 担当者の給与を記載することはガントチャートの配置ルールではない。3つのルールは「依存関係」「工数」「並行作業」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. スケジュール管理の最終ステップ（STEP6）は何か。</summary>
+        <p>ア）WBSを作る　イ）ガントチャートを作成する　ウ）クリティカルパスを把握する　エ）進捗を定期的に確認する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — スケジュール管理の流れは「WBS → 依存関係 → 工数見積 → ガントチャート → クリティカルパス → 進捗確認」。最後に進捗を定期的に確認する。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-4 スケジュール管理、2-4-3 ガントチャート（p54-p64）</p>
+    </section>
+  </main>
+</body>
+</html>

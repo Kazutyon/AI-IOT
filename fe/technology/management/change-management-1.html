@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>変更管理（前編） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>変更管理（前編）</h1>
+        <p class="lead">変更管理の目的・必要性・流れ、変更要求書（CR）の作り方を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#change-overview">変更管理とは</a>
+        <a href="#change-flow">変更管理の流れ</a>
+        <a href="#change-request">変更要求書の作り方</a>
+        <a href="#good-bad-examples">良い例・悪い例</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>変更管理（前編）</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>変更管理とは：要件・仕様・スコープの変更を統制する仕組み</li>
+          <li>変更管理が必要な理由：無制御な変更がプロジェクト失敗の最大要因</li>
+          <li>変更管理の流れ：受付 → 影響分析 → 承認 → 計画反映 → 履歴記録</li>
+          <li>変更要求書（CR）の作り方：作業レベルで具体化、理由を明確に、影響を数字で</li>
+          <li>口頭の変更は絶対に禁止。必ず文書で管理する</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>変更管理の必要性、変更要求書の項目、口頭変更禁止</dd></div>
+          <div><dt>中</dt><dd>変更管理の流れ、影響分析の重要性</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>変更管理（Change Control）</th>
+              <td>要件・仕様・スコープの変更が発生したとき、その影響（工数・コスト・納期）を評価し、承認された変更だけを正式に反映する管理</th>
+              <td>勝手な変更を防ぎ、プロジェクトを安定させる仕組み</th>
+            </tr>
+            <tr>
+              <td>スコープクリープ</th>
+              <td>無制御な変更によるプロジェクト範囲の拡大</th>
+              <td>変更管理がないと発生。プロジェクト失敗の主要因</th>
+            </tr>
+            <tr>
+              <td>変更要求書（Change Request / CR）</th>
+              <td>変更を文書化したもの。変更管理の入口</th>
+              <td>口頭の変更は禁止。必ず文書で提出する</th>
+            </tr>
+            <tr>
+              <td>影響分析</th>
+              <td>変更が工数・コスト・納期・品質に与える影響を評価すること</th>
+              <td>承認判断の根拠となる。数字で示すことが重要</th>
+            </tr>
+            <tr>
+              <td>変更承認プロセス</th>
+              <td>変更要求を承認する手続き</th>
+              <td>技術承認 → PM承認 → 顧客承認の3段階が一般的</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="change-overview" class="lesson-section">
+      <h2>2-13-1. 変更管理とは何か</h2>
+      <p>変更管理とは、プロジェクトの要件・仕様・スコープに変更が発生したとき、その影響（工数・コスト・納期）を評価し、承認された変更だけを正式に反映するための管理。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>変更管理の考え方</figcaption>
+        <pre>
+【変更管理の定義】
+
+  変更管理 = 勝手な変更を防ぎ、プロジェクトを安定させるための仕組み
+
+  変更管理がないと：
+    - 顧客が口頭で仕様を変える
+    - 開発者が勝手に機能を追加する
+    - ベンダーが独断で設計を変える
+    - 変更の影響を評価せずに進めてしまう
+
+  → これらはすべてスコープクリープ（スコープの暴走）を引き起こす
+        </pre>
+      </figure>
+
+      <h3>2-13-2. なぜ変更管理が必要なのか</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>変更管理がないと</th><th>結果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>納期が遅れる</th>
+              <td>計画外の変更でスケジュールが圧迫</th>
+            </tr>
+            <tr>
+              <td>コストが膨らむ</th>
+              <td>追加工数が発生し予算超過</th>
+            </tr>
+            <tr>
+              <td>品質が落ちる</th>
+              <td>テスト不足や手戻りで品質低下</th>
+            </tr>
+            <tr>
+              <td>顧客との認識ズレが発生する</th>
+              <td>「言った／言わない」問題が発生</th>
+            </tr>
+            <tr>
+              <td>手戻りが増える</th>
+              <td>変更に対応するための再作業が発生</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>スコープクリープのイメージ</figcaption>
+        <pre>
+【スコープクリープ（スコープの暴走）】
+
+  当初の計画：
+    [========]  ← 本来のスコープ
+
+  変更管理なし：
+    [========] + [==] + [==] + [==] ← どんどん拡大
+        元      追加1   追加2   追加3
+
+  結果：
+    - 納期遅延
+    - コスト超過
+    - 品質低下
+    - チーム疲弊
+
+  変更管理はスコープクリープを防ぐ“統制プロセス”
+        </pre>
+      </figure>
+    </section>
+
+    <section id="change-flow" class="lesson-section">
+      <h2>2-13-4. 変更管理の流れ（全体像）</h2>
+
+      <figure class="wide-diagram">
+        <figcaption>変更管理5ステップ</figcaption>
+        <pre>
+【変更管理の流れ】
+
+  STEP1. 変更要求の受付
+         変更要求は必ず文書（変更要求書）で受け付ける
+         口頭の変更は絶対に禁止
+
+  STEP2. 影響分析（工数・コスト・納期）
+         設計・実装・テストへの影響を分析し、工数と納期を算出
+
+  STEP3. 承認（承認／却下／保留）
+         技術承認 → PM承認 → 顧客承認の3段階
+
+  STEP4. 計画への反映（WBS・設計書・スケジュール）
+         承認された変更をプロジェクト計画に反映
+
+  STEP5. 変更履歴の記録と共有
+         変更管理表に記録し、関係者全員に共有
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ステップ</th><th>内容</th><th>ポイント</th>
+            </table>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 変更要求受付</th>
+              <td>文書で受け付ける</th>
+              <td>口頭変更は禁止。必ず記録を残す</th>
+            </tr>
+            <tr>
+              <td>② 影響分析</th>
+              <td>工数・コスト・納期を評価</th>
+              <td>数字で示すことが重要</th>
+            </tr>
+            <tr>
+              <td>③ 承認</th>
+              <td>技術・PM・顧客の承認</th>
+              <td>3者すべての承認が必要</th>
+            </tr>
+            <tr>
+              <td>④ 計画反映</th>
+              <td>WBS・設計書・スケジュールを更新</th>
+              <td>反映漏れを防ぐため順番を守る</th>
+            </tr>
+            <tr>
+              <td>⑤ 履歴記録・共有</th>
+              <td>変更管理表に記録</th>
+              <td>証跡として残すことが重要</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="change-request" class="lesson-section">
+      <h2>2-13-6. 変更要求書（Change Request）の作り方</h2>
+      <p>変更要求書は、変更管理の入口であり、品質を左右する最重要ドキュメント。</p>
+
+      <h3>変更要求書を作る5ステップ</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ステップ</th><th>内容</th><th>悪い例</th><th>良い例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 変更内容を"作業レベル"で具体化する</strong></th>
+              <td>抽象ではなく、作業に落とせるレベルで書く</th>
+              <td>「検索機能を強化したい」</th>
+              <td>「検索条件にカテゴリを追加する」</th>
+            </tr>
+            <tr>
+              <td><strong>② 変更理由を"業務上の根拠"で書く</strong></th>
+              <td>「なぜ必要か」を明確にする</th>
+              <td>「顧客が言っていた」</th>
+              <td>「業務フロー変更により必須になった」</th>
+            </tr>
+            <tr>
+              <td><strong>③ 影響範囲を"工程別"に書く</strong></th>
+              <td>要件定義・設計・実装・テストなど工程別に分解</th>
+              <td>「少し影響がある」</th>
+              <td>「設計:画面仕様変更、実装:APIパラメータ追加」</th>
+            </tr>
+            <tr>
+              <td><strong>④ 工数・納期への影響を"数値で"表す</strong></th>
+              <td>数字がないと承認判断ができない</th>
+              <td>「まあまあ影響がある」</th>
+              <td>「合計32時間（4人日）、納期+3日」</th>
+            </tr>
+            <tr>
+              <td><strong>⑤ 添付資料で"変更の証拠"を示す</strong></th>
+              <td>資料がない変更要求は後で揉める</th>
+              <td>「添付資料なし」</th>
+              <td>「画面モック、API仕様書、顧客メール」</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>変更要求書のテンプレート</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>記入例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>変更番号</th>
+              <td>CR-202406-001</th>
+            </tr>
+            <tr>
+              <td>変更内容</th>
+              <td>検索条件に「カテゴリ」を追加する</th>
+            </tr>
+            <tr>
+              <td>変更理由</th>
+              <td>顧客業務フロー変更によりカテゴリ検索が必須となった</th>
+            </tr>
+            <tr>
+              <td>影響範囲</th>
+              <td>設計:画面仕様変更、API仕様変更<br>実装:検索APIパラメータ追加<br>テスト:テストケース5件追加</th>
+            </tr>
+            <tr>
+              <td>工数</th>
+              <td>設計4h、実装12h、単体6h、結合8h、ドキュメント2h（合計32h）</th>
+            </tr>
+            <tr>
+              <td>納期影響</th>
+              <td>+3日</th>
+            </tr>
+            <tr>
+              <td>リスク</th>
+              <td>API変更により他機能への影響の可能性</th>
+            </tr>
+            <tr>
+              <td>添付資料</th>
+              <td>画面モック、API仕様書、顧客メール</th>
+            </tr>
+            <tr>
+              <td>依頼者</th>
+              <td>顧客担当:A氏</th>
+            </tr>
+            <tr>
+              <td>希望反映日</th>
+              <td>2024/06/20</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="good-bad-examples" class="lesson-section">
+      <h2>2-13-8. 変更要求書の“良い例・悪い例”</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>区分</th><th>例</th><th>問題点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>悪い例</strong></th>
+              <td>「検索機能を強化したい」</th>
+              <td>抽象的にすぎて影響分析ができない</th>
+            </tr>
+            <tr>
+              <td><strong>悪い例</strong></th>
+              <td>「ユーザーが言っていた」</th>
+              <td>理由が曖昧。業務上の根拠がない</th>
+            </tr>
+            <tr>
+              <td><strong>悪い例</strong></th>
+              <td>「影響は少ないと思う」</th>
+              <td>数字がない。主観的な判断</th>
+            <tr>
+            <tr>
+              <td><strong>悪い例</strong></th>
+              <td>添付資料なし</th>
+              <td>変更の証拠がない。後で揉める</th>
+            </tr>
+            <tr>
+              <td><strong>良い例</strong></th>
+              <td>「検索条件にカテゴリを追加する」</th>
+              <td>作業レベルで具体化されている</th>
+            </tr>
+            <tr>
+              <td><strong>良い例</strong></th>
+              <td>「業務フロー変更により必須」</th>
+              <td>明確な理由がある</th>
+            </tr>
+            <tr>
+              <td><strong>良い例</strong></th>
+              <td>「工数32H、納期+3日」</th>
+              <td>数字で示されている。承認判断可能</th>
+            </tr>
+            <tr>
+              <td><strong>良い例</strong></th>
+              <td>「画面モック・API仕様書添付」</th>
+              <td>証跡がある。後で揉めない</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>変更要求書チェックポイント</figcaption>
+        <pre>
+【変更要求書のチェックリスト】
+
+  □ 変更内容は作業レベルで書かれているか
+    （「検索機能強化」ではなく「検索条件にカテゴリ追加」）
+
+  □ 変更理由は業務上の根拠があるか
+    （「顧客が言った」ではなく「業務フロー変更により必須」）
+
+  □ 影響範囲は工程別に書かれているか
+    （設計・実装・テストそれぞれの影響）
+
+  □ 工数・納期は数字で示されているか
+    （「少し」ではなく「32時間、+3日」）
+
+  □ 添付資料はあるか
+    （画面モック、仕様書、メールなど）
+
+  このチェックリストを満たさない変更要求は承認できない。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 変更管理（Change Control）の説明として、最も適切なものはどれか。</summary>
+        <p>ア）変更を全て受け入れる管理　イ）変更の影響を評価し、承認された変更だけを反映する管理　ウ）変更を全て拒否する管理　エ）変更を後回しにする管理</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 変更管理は変更の影響を評価し、承認された変更だけを正式に反映するための管理。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. プロジェクト失敗の最大要因として本文で挙げられているものはどれか。</summary>
+        <p>ア）予算不足　イ）技術力不足　ウ）無制御な変更　エ）人員不足</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ITプロジェクトが失敗する最大要因は「無制御な変更」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 変更管理がないと発生する問題として、本文で挙げられているものはどれか。</summary>
+        <p>ア）スコープクリープ（スコープの暴走）　イ）自動的に品質が上がる　ウ）予算が削減される　エ）納期が短縮される</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 変更管理がないと無制御な変更によりスコープクリープ（スコープの暴走）が発生する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 変更管理の最初のステップは何か。</summary>
+        <p>ア）影響分析　イ）承認　ウ）変更要求の受付　エ）計画への反映</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 変更管理の流れは「変更要求受付 → 影響分析 → 承認 → 計画反映 → 履歴記録」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 変更要求書（Change Request）に必ず記載すべき項目として、本文で挙げられているものはどれか。</summary>
+        <p>ア）天気予報　イ）変更内容、変更理由、影響範囲、工数、納期影響　ウ）オフィスの住所　エ）開発言語のバージョン</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 変更要求書には変更内容、変更理由、影響範囲、工数、納期影響などを記載する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 変更要求書に記載する変更理由として「良い例」とされるものはどれか。</summary>
+        <p>ア）顧客が言っていた　イ）なんとなく必要　ウ）業務フロー変更により必須になった　エ）ユーザーから要望があった</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 変更理由は「業務上の根拠」で書くことが重要。「顧客が言っていた」などの曖昧な理由は悪い例。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 変更要求書に記載する影響の書き方として「良い例」とされるものはどれか。</summary>
+        <p>ア）少し影響がある　イ）まあまあ大変　ウ）工数32H、納期+3日　エ）そこそこ影響</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 影響は数字で示すことが重要。悪い例は「少し」「まあまあ」などの曖昧な表現。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 変更管理における「口頭の変更」の扱いとして、適切なものはどれか。</summary>
+        <p>ア）すぐに受け入れる　イ）後で思い出したら対応する　ウ）絶対に禁止。必ず文書で管理する　エ）重要な変更だけ口頭でOK</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 口頭の変更は絶対に禁止。変更要求は必ず文書で受け付ける。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 変更要求書に添付する資料として、本文で挙げられているものはどれか。</summary>
+        <p>ア）日報　イ）画面モック、API仕様書、顧客メール　ウ）出張報告書　エ）社内報</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 変更要求書には画面モック、API仕様書、顧客メール、業務フロー図などの証拠資料を添付する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 変更要求書に記載する変更内容の書き方として「良い例」とされるものはどれか。</summary>
+        <p>ア）検索機能を強化したい　イ）UIを改善したい　ウ）検索条件に「カテゴリ」を追加する　エ）APIを調整したい</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 変更内容は「作業レベル」で具体化する。ア、イ、エは抽象的すぎる。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-13 変更管理（Change Control）前編（p146-p158）</p>
+    </section>
+  </main>
+</body>
+</html>

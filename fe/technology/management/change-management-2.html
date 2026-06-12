@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>変更管理（後編） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>変更管理（後編）</h1>
+        <p class="lead">変更管理表（Change Log）の作り方、変更承認プロセス、変更反映の作業手順を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#change-log">変更管理表</a>
+        <a href="#approval-process">変更承認プロセス</a>
+        <a href="#reflection-procedure">変更反映の作業手順</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>変更管理（後編）</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>変更管理表（Change Log）の目的と作り方</li>
+          <li>変更管理表の必須項目：変更内容・影響・承認者・承認日・状況</li>
+          <li>変更承認プロセス：技術承認 → PM承認 → 顧客承認の3段階</li>
+          <li>口頭承認は禁止、承認者は必ず3者、影響は数字で示す</li>
+          <li>変更反映の手順：要件 → 設計 → WBS → スケジュール → テストの順</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>変更承認プロセス（3段階）、変更反映の順番</dd></div>
+          <div><dt>中</dt><dd>変更管理表の項目、口頭承認禁止</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>変更管理表（Change Log）</th>
+              <td>変更要求書（CR）で承認された変更を一覧化し、プロジェクト全体に反映し、履歴として残す管理表</th>
+              <td>プロジェクトの“公式記録”。スコープの安定性を守る必須ツール</th>
+            </tr>
+            <tr>
+              <td>変更承認プロセス</th>
+              <td>変更要求（CR）を正式に採用するかどうかを判断する手続き</th>
+              <td>技術承認 → PM承認 → 顧客承認の3段階が最も実務的</th>
+            </tr>
+            <tr>
+              <td>技術承認</th>
+              <td>変更が技術的に可能かどうかを判断する承認</th>
+              <td>実装できるか、他機能に影響しないか、リスクは許容できるか</th>
+            </tr>
+            <tr>
+              <td>PM承認</th>
+              <td>プロジェクト計画に影響が出ないか判断する承認</th>
+              <td>工数は予算内か、納期に影響しないか、スコープに収まるか</th>
+            </tr>
+            <tr>
+              <td>顧客承認</th>
+              <td>変更内容・影響・追加費用を理解し、正式に合意する最終承認</th>
+              <td>これがないと「そんな変更頼んでない」問題が発生</th>
+            </tr>
+            <tr>
+              <td>変更反映</th>
+              <td>承認された変更をプロジェクトの計画・設計・実装・テストに反映する作業</th>
+              <td>要件→設計→WBS→スケジュール→テストの順で行う</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="change-log" class="lesson-section">
+      <h2>2-13-9. 変更管理表（Change Log）の作り方</h2>
+      <p>変更管理表は、変更要求書（CR）で承認された変更を、プロジェクト全体に反映し、履歴として残すための管理表。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>変更管理表がないと起こる問題</figcaption>
+        <pre>
+【変更管理表がないと】
+
+  - どの変更が承認されたか分からない
+  - どの変更が反映済みか分からない
+  - 設計書・WBS・テストが更新されたか追跡できない
+  - 顧客と「言った／言わない」が発生する
+
+  → 変更管理表はプロジェクトの“公式記録”
+  → スコープの安定性を守るための必須ツール
+        </pre>
+      </figure>
+
+      <h3>変更管理表を作る5ステップ</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ステップ</th><th>内容</th><th>良い例 / 悪い例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 変更要求書（CR）を1行1変更で登録する</strong></th>
+              <td>承認されたCRを1行ずつ登録する</th>
+              <td>良い例：「CR-001：検索条件にカテゴリ追加」<br>悪い例：「検索機能の変更いろいろ」</th>
+            </tr>
+            <tr>
+              <td><strong>② 変更内容は“作業レベル”で書く</strong></th>
+              <td>抽象表現は禁止。作業に落とせるレベルで</th>
+              <td>良い例：「検索条件にカテゴリ追加」<br>悪い例：「検索機能を改善」</th>
+            </tr>
+            <tr>
+              <td><strong>③ 影響（工数・納期・品質）を数字で記録する</strong></th>
+              <td>数字がないと履歴として意味がない</th>
+              <td>良い例：「工数32H、納期+3日」<br>悪い例：「影響あり」「少し増える」</th>
+            </tr>
+            <tr>
+              <td><strong>④ 承認者・承認日を必ず記録する</strong></th>
+              <td>「誰が承認したか」を残すための表</th>
+              <td>顧客承認、PM承認、技術承認を記録</th>
+            </tr>
+            <tr>
+              <td><strong>⑤ 反映状況を“工程別”に追跡する</strong></th>
+              <td>設計→実装→テスト→リリースのどこまで反映されたか</th>
+              <td>良い例：「設計反映済→実装中→テスト中」<br>悪い例：「対応中」だけ</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>変更管理表のテンプレート例</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No</th><th>変更内容</th><th>理由</th><th>影響（工数・納期）</th><th>承認者</th><th>承認日</th><th>状況</th><th>備考</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CR-001</th>
+              <td>検索条件にカテゴリ追加</th>
+              <td>業務フロー変更</th>
+              <td>32h、+3日</th>
+              <td>顧客、PM</th>
+              <td>6/10</th>
+              <td>設計反映済</th>
+              <td>テストケース5件追加</th>
+            </tr>
+            <tr>
+              <td>CR-002</th>
+              <td>APIレスポンスにitemType追加</th>
+              <td>外部API仕様変更</th>
+              <td>20h、+1日</th>
+              <td>PM、SE</th>
+              <td>6/12</th>
+              <td>実装中</th>
+              <td>他機能影響あり</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>変更管理表の注意点</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>注意点</th><th>NG例</th><th>OK例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 抽象的に書かない</strong></th>
+              <td>「検索機能改善」</th>
+              <td>「検索条件にカテゴリを追加」</th>
+            </tr>
+            <tr>
+              <td><strong>② 影響は数字で書く</strong></th>
+              <td>「影響あり」</th>
+              <td>「工数32H、納期+3日」</th>
+            </tr>
+            <tr>
+              <td><strong>③ 承認者を必ず書く</strong></th>
+              <td>「PM承認のみ」</th>
+              <td>「顧客＋PM承認」</th>
+            </tr>
+            <tr>
+              <td><strong>④ 状況は工程別に書く</strong></th>
+              <td>「対応中」</th>
+              <td>「設計反映済 → 実装中 → テスト中」</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="approval-process" class="lesson-section">
+      <h2>2-13-13. 変更承認プロセスの作り方</h2>
+      <p>変更承認プロセスは、変更要求（CR）を正式に採用するかどうかを判断する手続き。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>変更承認プロセス3段階</figcaption>
+        <pre>
+【変更承認プロセス（3段階）】
+
+  技術承認（SE／技術リーダー）
+        |
+        | 技術的に可能か？
+        v
+  PM承認（プロジェクトマネージャ）
+        |
+        | 計画に影響ないか？
+        v
+  顧客承認（最終承認）
+        |
+        v
+  承認された変更を反映
+
+  この順番が最も実務的で、最もトラブルが少ない。
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>承認段階</th><th>担当</th><th>判断基準</th><th>この承認がないと</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 技術承認</strong></th>
+              <td>SE／技術リーダー</th>
+              <td>実装できるか、他機能に影響しないか、リスクは許容できるか、工数見積は妥当か</th>
+              <td>実装不能な変更が承認されて炎上する</th>
+            </tr>
+            <tr>
+              <td><strong>② PM承認</strong></th>
+              <td>プロジェクトマネージャ</th>
+              <td>工数は予算内か、納期に影響しないか、スコープに収まるか、優先度は適切か</th>
+              <td>スケジュール崩壊・コスト超過が発生する</th>
+            </tr>
+            </tr>
+              <td><strong>③ 顧客承認</strong></th>
+              <td>顧客（最終承認者）</th>
+              <td>変更内容、変更理由、工数・納期への影響、追加費用の有無を理解し合意</th>
+              <td>「そんな変更頼んでない」「聞いてない」が発生する</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>承認プロセスで絶対に守るべき注意点</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>注意点</th><th>理由</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 口頭承認は禁止（必ず文書）</th>
+              <td>後で「言った／言わない」問題を防ぐため</th>
+            </tr>
+            <tr>
+              <td>② 承認者は必ず“技術＋PM＋顧客”の3者</th>
+              <td>それぞれの視点での判断が必要なため</th>
+            </tr>
+            <tr>
+              <td>③ 影響は数字で示す（工数・納期）</th>
+              <td>承認判断の根拠となるため</th>
+            </tr>
+            <tr>
+              <td>④ 承認日を必ず記録する（履歴として必須）</th>
+              
+            
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="reflection-procedure" class="lesson-section">
+      <h2>2-13-15. 変更反映の作業手順</h2>
+      <p>変更反映とは：承認された変更を、プロジェクトの計画・設計・実装・テストに“漏れなく・重複なく”反映する作業。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>変更反映の順番（5つの反映）</figcaption>
+        <pre>
+【変更反映は5つの反映を順番に行う】
+
+  ① 要件定義書に反映する
+        |
+        v
+  ② 設計書に反映する（画面・API・DBすべて）
+        |
+        v
+  ③ WBS（作業分解）に反映する
+        |
+        v
+  ④ スケジュールに反映する（納期影響を確定）
+        |
+        v
+  ⑤ テスト計画・テストケースに反映する
+
+  この順番が最も実務的で、最もミスが少ない。
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ステップ</th><th>やること</th><th>なぜ必要なのか</th><th>注意点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 要件定義書に反映</strong></th>
+              <td>変更内容を要件定義書に追記・修正、変更理由も記録</th>
+              <td>要件が変わらないと、設計・実装・テストが全部ズレるから最初にやる</th>
+              <td>最初に必ずここから</th>
+            </tr>
+            <tr>
+              <td><strong>② 設計書に反映</strong></th>
+              <td>画面仕様、API仕様、DB定義、業務フローを修正</th>
+              <td>設計書の更新漏れが最も多い。ここが漏れると実装が必ずズレる</th>
+              <td>画面・API・DBすべての設計書をチェック</th>
+            </tr>
+            <tr>
+              <td><strong>③ WBSに反映</strong></th>
+              <td>追加作業をタスクとして追加、工数を反映、依存関係を調整</th>
+              <td>WBSに反映しないと作業が“存在しない扱い”になり誰もやらない</th>
+              <td>追加工数の見積りを忘れずに</th>
+            </tr>
+            <tr>
+              <td><strong>④ スケジュールに反映</strong></th>
+              <td>追加工数をスケジュールに反映、クリティカルパスを再計算、納期影響を確定</th>
+              <td>スケジュールに反映しない変更は“承認しただけで実行されない変更”になる</th>
+              <td>クリティカルパスの再計算が必須</th>
+            </tr>
+            <tr>
+              <td><strong>⑤ テスト計画・テストケースに反映</strong></th>
+              <td>テストケース追加、既存ケースの修正、結合テスト・総合テストの範囲調整</th>
+              <td>テスト反映漏れ＝不具合の温床。品質に直結する</th>
+              <td>追加した機能のテスト漏れを防ぐ</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>変更反映で守るべき注意点</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>注意点</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 順番を崩さない</th>
+              <td>要件 → 設計 → WBS → スケジュール → テスト の順で行う</th>
+            </tr>
+            <tr>
+              <td>② 反映漏れに注意</th>
+              <td>反映漏れが最も多いのは「設計書」と「テスト」</th>
+            </tr>
+            <tr>
+              <td>③ 反映したら記録する</th>
+              <td>変更管理表に“反映済”と記録する</th>
+            </tr>
+            <tr>
+              <td>④ 口頭での反映は禁止</th>
+              <td>必ず文書で反映する。口頭は絶対にNG</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>変更管理の全体イメージ</figcaption>
+        <pre>
+【変更管理の全体像】
+
+  +-----------------------------------------------------------+
+  |                      変更管理                             |
+  |                                                           |
+  |  変更要求書（CR）                                         |
+  |        |                                                  |
+  |        v                                                  |
+  |  変更承認プロセス                                         |
+  |    技術承認 → PM承認 → 顧客承認                         |
+  |        |                                                  |
+  |        v                                                  |
+  |  変更管理表（Change Log）に登録                           |
+  |        |                                                  |
+  |        v                                                  |
+  |  変更反映（5つの反映）                                    |
+  |    要件 → 設計 → WBS → スケジュール → テスト          |
+  |        |                                                  |
+  |        v                                                  |
+  |  完了                                                     |
+  |                                                           |
+  +-----------------------------------------------------------+
+
+  変更管理はプロジェクトの安定性を守る“統制プロセス”
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 変更管理表（Change Log）の説明として、最も適切なものはどれか。</summary>
+        <p>ア）変更要求を全て拒否する表　イ）承認された変更を一覧化し、履歴として残す管理表　ウ）プロジェクトの予算を管理する表　エ）メンバーの勤怠を管理する表</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 変更管理表は変更要求書（CR）で承認された変更を一覧化し、プロジェクト全体に反映し、履歴として残す管理表。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 変更管理表の必須項目として、本文で挙げられているものはどれか。</summary>
+        <p>ア）天気予報　イ）変更内容、影響、承認者、承認日、状況　ウ）オフィスの住所　エ）開発言語</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 変更管理表には変更内容、影響（工数・納期）、承認者、承認日、状況を記載する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 変更承認プロセスの3段階として正しい順番はどれか。</summary>
+        <p>ア）顧客承認 → PM承認 → 技術承認　イ）技術承認 → PM承認 → 顧客承認　ウ）PM承認 → 技術承認 → 顧客承認　エ）顧客承認 → 技術承認 → PM承認</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 変更承認プロセスは「技術承認 → PM承認 → 顧客承認」の順番が最も実務的。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 技術承認の判断基準として、本文で挙げられているものはどれか。</summary>
+        <p>ア）予算内かどうか　イ）実装できるか、他機能に影響しないか　ウ）顧客が喜ぶか　エ）納期に間に合うか</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 技術承認は「実装できるか」「他機能に影響しないか」「リスクは許容できるか」「工数見積は妥当か」を判断する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. PM承認の判断基準として、本文で挙げられているものはどれか。</summary>
+        <p>ア）コードがきれいか　イ）工数は予算内か、納期に影響しないか　ウ）デザインが良いか　エ）テストが通るか</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — PM承認は「工数は予算内か」「納期に影響しないか」「スコープに収まるか」「優先度は適切か」を判断する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 顧客承認がないと発生する問題はどれか。</summary>
+        <p>ア）自動的に品質が上がる　イ）「そんな変更頼んでない」「聞いてない」問題が発生する　ウ）予算が削減される　エ）納期が短縮される</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 顧客承認がないと「そんな変更頼んでない」「聞いてない」問題が必ず発生する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 変更反映の最初に行うべきステップはどれか。</summary>
+        <p>ア）テスト計画に反映　イ）設計書に反映　ウ）要件定義書に反映　エ）スケジュールに反映</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 変更反映は「要件定義書 → 設計書 → WBS → スケジュール → テスト」の順で行う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 変更反映で「反映漏れが最も多い」とされるものはどれか。</summary>
+        <p>ア）要件定義書とWBS　イ）設計書とテスト　ウ）スケジュールと予算　エ）マニュアルと運用資料</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 反映漏れが最も多いのは「設計書」と「テスト」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 変更承認プロセスで「絶対に守るべき注意点」として、本文で挙げられていないものはどれか。</summary>
+        <p>ア）口頭承認は禁止　イ）承認者は必ず3者（技術＋PM＋顧客）　ウ）影響は数字で示す　エ）承認はメールだけでOK</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 承認は必ず文書で行う。メールだけでは証跡として不十分な場合がある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 変更管理表の「状況」欄に記載する例として、本文で挙げられているものはどれか。</summary>
+        <p>ア）良い・悪い　イ）設計反映済 → 実装中 → テスト中　ウ）楽観・悲観　エ）緊急・非緊急</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 状況は工程別に「設計反映済」「実装中」「テスト中」「リリース済」「完了」などと記載する。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-13 変更管理（Change Control）後編（p159-p171）</p>
+    </section>
+  </main>
+</body>
+</html>

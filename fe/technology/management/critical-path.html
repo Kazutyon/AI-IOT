@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>クリティカルパス | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>クリティカルパス</h1>
+        <p class="lead">クリティカルパスの定義・構造・求め方・重要性を理解し、プロジェクトの「本当のリスク」を見極める。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#cp-overview">クリティカルパスとは</a>
+        <a href="#cp-structure">構造と計算例</a>
+        <a href="#cp-howto">求め方</a>
+        <a href="#cp-importance">重要な理由</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>クリティカルパス</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>クリティカルパスとは「絶対に遅れてはいけない作業の連鎖」</li>
+          <li>クリティカルパス上の作業が1日遅れると、プロジェクト全体が1日遅れる</li>
+          <li>クリティカルパス以外の作業は多少遅れても全体に影響しない</li>
+          <li>クリティカルパスは「依存関係 × 工数 × 並行可否」の組み合わせで決まる</li>
+          <li>最も長いルート（合計日数が最大）がクリティカルパス</li>
+          <li>プロジェクト短縮はクリティカルパス上の作業を短縮するしかない</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>クリティカルパスの定義、クリティカルパス上の作業の意味、最も長いルートがクリティカルパス</dd></div>
+          <div><dt>中</dt><dd>クリティカルパスの求め方、スケジュール短縮の考え方</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        </table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>クリティカルパス（Critical Path）</th>
+              <td>プロジェクトが最短で終わるために“絶対に遅れてはいけない作業の連鎖”</th>
+              <td>このルートが1日遅れると、プロジェクト全体が1日遅れる</th>
+            </tr>
+            <tr>
+               unless非クリティカルパス</th>
+               unlessクリティカルパス以外の作業経路</th>
+              <td>多少遅れても全体には影響しない（ある程度の余裕がある）</th>
+            </tr>
+            <tr>
+               unless依存関係</th>
+               unlessどの作業がどの作業に影響するかを示すルール（FS/SS/FF）</th>
+              <td>クリティカルパスは依存関係が正しく設定されていることが前提</th>
+            </tr>
+            <tr>
+               unless工数</th>
+               unless作業に必要な時間（人時・人日）</th>
+              <td>工数が長い作業が多いルートほどクリティカルパスになりやすい</th>
+            </tr>
+            <tr>
+               unlessスケジュール短縮</th>
+               unlessプロジェクトの納期を短縮すること</th>
+              <td>クリティカルパス上の作業を短縮するしか方法がない</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cp-overview" class="lesson-section">
+      <h2>2-6. クリティカルパス（Critical Path）</h2>
+      <p>クリティカルパスは、プロジェクトが最短で終わるために“絶対に遅れてはいけない作業の連鎖”のこと。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>クリティカルパスの考え方</figcaption>
+        <pre>
+【クリティカルパスの本質】
+
+  プロジェクトには多くの作業があるが、すべてが同じ重要度ではない：
+
+    - 遅れても全体に影響しない作業
+    - 遅れると全体が遅れる作業
+
+  この違いを見抜くための仕組みがクリティカルパス。
+
+  【最重要ポイント】
+  「このルートが1日遅れると、プロジェクト全体が1日遅れる」
+  これがクリティカルパスの定義。
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        </table>
+          <thead>
+            <tr><th>クリティカルパスの性質</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+               unlessクリティカルパス上の作業</th>
+               unless「1時間の遅れでも致命傷」になる。最優先で管理すべき作業</th>
+            </tr>
+            <tr>
+               unlessクリティカルパス外の作業</th>
+              <td>多少遅れても全体には影響しない（ある程度の余裕がある）</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cp-structure" class="lesson-section">
+      <h2>2-6-2. クリティカルパスの構造</h2>
+      <p>クリティカルパスは、作業の依存関係を線でつなぎ、各作業の工数を足し合わせたときに“最も長くなるルート”のこと。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>クリティカルパス計算例（ECサイト開発）</figcaption>
+        <pre>
+【作業一覧と依存関係】
+
+  作業A：要件ヒアリング（2日）
+  作業B：要件定義書作成（5日）
+  作業C：要件定義レビュー（3日）
+  作業D：画面設計（7日）
+  作業E：API設計（4日）
+  作業F：実装（10日）
+  作業G：単体テスト（5日）
+  作業H：結合テスト（6日）
+
+  依存関係：A -> B -> C -> D -> F -> G -> H
+                    ＼
+                      -> E ->
+
+【ルート①とルート②】
+  ルート①：A(2)->B(5)->C(3)->D(7)->F(10)->G(5)->H(6) = 38日
+  ルート②：A(2)->B(5)->C(3)->E(4)->F(10)->G(5)->H(6) = 35日
+
+  【結論】最も長いルート①（38日）がクリティカルパス
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ルート</th><th>経路</th><th>合計日数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+               unlessルート①</th>
+               unlessA(2)->B(5)->C(3)->D(7)->F(10)->G(5)->H(6)</th>
+               unless38日（クリティカルパス）</th>
+            </tr>
+            <tr>
+               unlessルート②</th>
+               unlessA(2)->B(5)->C(3)->E(4)->F(10)->G(5)->H(6)</th>
+               unless35日</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>クリティカルパスの視覚化</figcaption>
+        <pre>
+【クリティカルパスのイメージ図】
+
+  ルート①（クリティカルパス）:
+    A(2) -> B(5) -> C(3) -> D(7) -> F(10) -> G(5) -> H(6)
+    [==]   [=====]  [===]   [=======] [==========] [=====] [======]
+         合計38日 → これがプロジェクト全体の所要期間
+
+  ルート②（非クリティカル）:
+    A(2) -> B(5) -> C(3) -> E(4) -> F(10) -> G(5) -> H(6)
+    [==]   [=====]  [===]   [====] [==========] [=====] [======]
+         合計35日 → 3日の余裕がある
+
+  【重要】ルート②の作業Eは3日までなら遅れても全体に影響しない
+        </pre>
+      </figure>
+    </section>
+
+    <section id="cp-howto" class="lesson-section">
+      <h2>2-6-3. クリティカルパスの求め方（実務で使う考え方）</h2>
+      <p>クリティカルパスは、「計算」ではなく“依存関係 × 工数 × 並行可否”の組み合わせで決まる。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ステップ</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+               unless<strong>① 依存関係を整理する</strong></th>
+               unlessAが終わらないとBができない（FS）、CとDは並行できる、EはBとDの両方が終わらないとできない、など。依存関係が複雑なほどクリティカルパスは重要になる</th>
+            </tr>
+            <tr>
+               unless<strong>② 各作業の工数を確認する</strong></th>
+               unless例：A:3日、B:5日、C:10日、D:12日、E:4日。工数が長い作業が多いルートほど、クリティカルパスになりやすい</th>
+            </tr>
+            <tr>
+               unless<strong>③ 並行できる作業を除外する</strong></th>
+               unless並行できる作業は、クリティカルパスになりにくい。例：画面設計（5日）とAPI設計（5日）は同時にできるなら、どちらもクリティカルパスではない</th>
+            </tr>
+            <tr>
+               unless<strong>④ 最も長いルートがクリティカルパス</strong></th>
+               unless複数のルートの中で、合計期間が最も長いルートがクリティカルパス</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>クリティカルパス判定フロー</figcaption>
+        <pre>
+【クリティカルパス判定のフロー】
+
+  スタート
+      |
+      v
+  ① 依存関係を整理（どの作業がどの作業に依存しているか）
+      |
+      v
+  ② 各作業の工数を確認（日数・時間）
+      |
+      v
+  ③ 並行できる作業を特定（同時進行可能な作業）
+      |
+      v
+  ④ 全ルートの合計日数を計算
+      |
+      v
+  ⑤ 最も長いルート = クリティカルパス
+      |
+      v
+  終了（クリティカルパス上の作業を最優先で管理）
+        </pre>
+      </figure>
+    </section>
+
+    <section id="cp-importance" class="lesson-section">
+      <h2>2-6-4. クリティカルパスが重要な理由</h2>
+      <p>クリティカルパスを理解すると、プロジェクトの“本当のリスク”が見える。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>理由</th><th>具体的な効果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+               unless<strong>① どこが遅れると致命傷か分かる</strong></th>
+               unlessクリティカルパス上の作業：1日の遅れが全体の1日の遅れ。クリティカルパス外の作業：多少の遅れなら吸収できる</th>
+            </tr>
+            <tr>
+               unless<strong>② リソース（人）の集中ポイントが分かる</strong></th>
+               unlessクリティカルパス上の作業は、最優先で人を配置すべき作業</th>
+            </tr>
+            <tr>
+               unless<strong>③ スケジュール短縮の方法が分かる</strong></th>
+               unlessプロジェクトを短縮したいなら、クリティカルパス上の作業を短縮するしかない。方法：人を増やす、並行作業にする（SS）、作業を削る、工程を改善する</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>スケジュール短縮の考え方</figcaption>
+        <pre>
+【スケジュール短縮の方法】
+
+  プロジェクトの納期を短縮したい場合：
+
+  +-----------------------------------------------------------+
+  |                                                           |
+  |  クリティカルパス上の作業に対してのみ効果がある            |
+  |                                                           |
+  |  方法1：人を増やす（リソース追加）                         |
+  |  方法2：並行作業にする（SSの活用）                        |
+  |  方法3：作業を削る（スコープ削減）                        |
+  |  方法4：工程を改善する（効率化）                          |
+  |                                                           |
+  |  【注意】クリティカルパス外の作業を短縮しても              |
+  |         プロジェクト全体の納期は変わらない                  |
+  |                                                           |
+  +-----------------------------------------------------------+
+
+  例：38日のプロジェクトを35日に短縮したい
+    → クリティカルパス上の作業（D:画面設計 7日→4日 など）を短縮
+        </pre>
+      </figure>
+
+      <h3>クリティカルパス管理の実務ポイント</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ポイント</th><th>実務での対応</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+               unless常にクリティカルパスを意識する</th>
+               unless進捗会議では必ずクリティカルパス上の作業の状況を確認する</th>
+            </tr>
+            <td>
+               unlessクリティカルパスが変わる可能性を考慮する</th>
+               unless作業の遅延や短縮によってクリティカルパスは変化する。定期的に見直す</th>
+            </tr>
+            <tr>
+               unlessクリティカルパス上の作業に最優先でリソースを投入する</th>
+               unless人が不足している場合は、非クリティカルな作業から人員を移動させる</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. クリティカルパスの説明として、最も適切なものはどれか。</summary>
+        <p>ア）プロジェクトで最もコストがかかる作業の連鎖　イ）絶対に遅れてはいけない作業の連鎖　ウ）最も人数が多い作業の連鎖　エ）最も品質が重要な作業の連鎖</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — クリティカルパスは「絶対に遅れてはいけない作業の連鎖」。このルートが1日遅れるとプロジェクト全体が1日遅れる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. クリティカルパス上の作業が1日遅れた場合、プロジェクト全体に与える影響はどれか。</summary>
+        <p>ア）影響なし　イ）1日遅れる　ウ）2日遅れる　エ）遅れが解消される</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — クリティカルパス上の作業が1日遅れると、プロジェクト全体が1日遅れる。これがクリティカルパスの定義。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. クリティカルパス外の作業が遅れた場合の説明として、適切なものはどれか。</summary>
+        <p>ア）必ずプロジェクト全体が遅れる　イ）必ずクリティカルパスが変わる　ウ）許容範囲内であれば全体に影響しない　エ）即座にプロジェクトを中止する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — クリティカルパス外の作業は多少遅れても全体には影響しない（ある程度の余裕がある）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 下記の作業ルートの中で、クリティカルパスになるのはどれか。</summary>
+        <p>ア）合計10日のルート　イ）合計15日のルート　ウ）合計20日のルート　エ）合計25日のルート（他に24日、22日のルートがある場合）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 複数のルートの中で、合計期間が最も長いルートがクリティカルパス。25日が最長ならそれがクリティカルパス。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. クリティカルパスを求める際に必要な要素として、本文で挙げられているものはどれか。</summary>
+        <p>ア）予算 × 人員 × 品質　イ）依存関係 × 工数 × 並行可否　ウ）顧客満足度 × 納期 × コスト　エ）使用言語 × フレームワーク × ツール</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — クリティカルパスは「依存関係 × 工数 × 並行可否」の組み合わせで決まる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. プロジェクトのスケジュールを短縮するために有効な手段はどれか。</summary>
+        <p>ア）クリティカルパス外の作業を短縮する　イ）クリティカルパス上の作業を短縮する　ウ）すべての作業を均等に短縮する　エ）テストを省略する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — プロジェクトを短縮したいなら、クリティカルパス上の作業を短縮するしかない。クリティカルパス外の作業を短縮しても全体の納期は変わらない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. スケジュール短縮の方法として、本文で挙げられているものはどれか。</summary>
+        <p>ア）予算を減らす　イ）人を減らす　ウ）人を増やす、並行作業にする、作業を削る　エ）品質を下げる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スケジュール短縮の方法は「人を増やす」「並行作業にする（SS）」「作業を削る」「工程を改善する」など。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. クリティカルパスを理解することで得られるメリットとして、適切でないものはどれか。</summary>
+        <p>ア）どこが遅れると致命傷か分かる　イ）リソースの集中ポイントが分かる　ウ）スケジュール短縮の方法が分かる　エ）バグの発生箇所が特定できる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — クリティカルパスはスケジュール管理の概念であり、バグの発生箇所を特定するものではない（これは品質管理やテストの領域）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. あるプロジェクトに3つのルートがあり、それぞれ合計日数が「30日」「28日」「25日」の場合、クリティカルパスはどれか。</summary>
+        <p>ア）25日のルート　イ）28日のルート　ウ）30日のルート　エ）すべてのルート</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 最も長いルート（合計日数が最大）がクリティカルパス。この場合30日のルートがクリティカルパス。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. クリティカルパスを求める際の最初のステップは何か。</summary>
+        <p>ア）各作業の工数を確認する　イ）並行できる作業を除外する　ウ）依存関係を整理する　エ）最も長いルートを探す</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — クリティカルパスを求める最初のステップは「依存関係を整理する」こと。依存関係が正しくないと正しいクリティカルパスを求められない。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-6 クリティカルパス（Critical Path）（p72-p77）</p>
+    </section>
+  </main>
+</body>
+</html>

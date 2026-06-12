@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>品質管理・QC七つ道具 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>品質管理・QC七つ道具</h1>
+        <p class="lead">品質管理の目的・3つの柱と、品質を「見える化」するQC七つ道具を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#quality-overview">品質管理とは</a>
+        <a href="#three-pillars">品質管理の3つの柱</a>
+        <a href="#qc7-tools">QC七つ道具</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>品質管理・QC七つ道具</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>品質管理は「品質を後でチェックする」ではなく「最初から品質を作り込む」管理</li>
+          <li>品質管理の目的：品質基準の明確化、工程全体での品質作り込み、品質確認と改善</li>
+          <li>品質管理の3つの柱：品質計画（QP）・品質作り込み（QA）・品質確認（QC）</li>
+          <li>QC七つ道具：品質を「見える化」する7つの基本技法</li>
+          <li>代表的なQC道具：パレート図、特性要因図、散布図、管理図、ヒストグラム、チェックシート、グラフ</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>品質管理の目的、QAとQCの違い、パレート図・特性要因図の読み方</dd></div>
+          <div><dt>中</dt><dd>QC七つ道具の種類と役割、品質計画の重要性</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>品質管理</th>
+              <td>「品質を後でチェックする」のではなく「最初から品質を作り込む」ための管理</th>
+              <td>プロジェクト成功の根幹。品質が低いと不具合・手戻り・工数増・納期遅延につながる</th>
+            </tr>
+            <tr>
+              <td>品質計画（Quality Planning / QP）</th>
+              <td>どのレベルの品質を目指すか、どの工程で何を確認するかを決める</th>
+              <td>品質計画が曖昧だと、品質は偶然に任せることになる</th>
+            </tr>
+            </tr>
+              <td>品質作り込み（Quality Assurance / QA）</th>
+              <td>「品質を後でチェックする」ではなく「最初から作り込む」活動</th>
+              <td>レビュー、コーディング規約、ペアプログラミング、静的解析など。不具合の発生を未然に防ぐ</th>
+            </tr>
+            <tr>
+              <td>品質確認（Quality Control / QC）</th>
+              <td>成果物が品質基準を満たしているかを確認する活動</th>
+              <td>テスト、レビュー、チェックリスト、受け入れテスト。品質の最終チェック</th>
+            </tr>
+            <tr>
+              <td>パレート図</th>
+              <td>「どの問題が最も影響が大きいか」を見つけるための図</th>
+              <td>棒グラフ（問題件数）+ 折れ線（累積割合）。左側の棒が高いほど影響大</th>
+            </tr>
+            <tr>
+              <td>特性要因図（フィッシュボーン図）</th>
+              <td>問題の原因を体系的に洗い出す図</th>
+              <td>人・方法・機械・材料・環境などに分類して整理。魚の骨のような形</th>
+            </tr>
+            <tr>
+              <td>散布図</th>
+              <td>2つのデータの関係性（相関）を可視化する図</th>
+              <td>右上がり＝正の相関、右下がり＝負の相関、バラバラ＝相関なし</th>
+            </tr>
+            <tr>
+              <td>管理図</th>
+              <td>工程が安定しているか／異常があるかを判断する図</th>
+              <td>中央線（CL）、上限（UCL）、下限（LCL）を用いて管理</th>
+            </tr>
+            <tr>
+              <td>ヒストグラム</th>
+              <td>データがどの範囲にどれだけ分布しているかを見る図</th>
+              <td>山が1つ＝正常な分布、山が複数＝工程が混在、偏りがある場合は要確認</th>
+            </tr>
+            <tr>
+              <td>チェックシート</th>
+              <td>不具合の種類・発生箇所などを記録するための表</th>
+              <td>記録が多い項目が重点改善ポイント。パレート図の元データにもなる</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quality-overview" class="lesson-section">
+      <h2>2-9. 品質管理</h2>
+      <p>品質管理は、「品質を後でチェックする」のではなく、「最初から品質を作り込む」ための管理。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>品質が低いと起こる問題</figcaption>
+        <pre>
+【品質が低いと】
+
+  - 不具合が大量発生
+  - 手戻りが増える
+  - 工数が膨らむ
+  - スケジュールが遅れる
+  - 顧客満足度が下がる
+  - 信頼を失う
+
+  → 品質管理はプロジェクト成功の根幹
+        </pre>
+      </figure>
+
+      <h3>2-9-1. 品質管理の目的</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>目的</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 品質基準を明確にする</strong></th>
+              <td>品質は「なんとなく良い」では管理できない。画面のルール、APIの仕様、テストの基準、コーディング規約など「品質の基準」を最初に決める</th>
+            </tr>
+            <tr>
+              <td><strong>② 品質を工程全体で作り込む</strong></th>
+              <td>品質はテストだけで作るものではない。要件定義の品質、設計の品質、実装の品質、テストの品質、すべてが積み重なって最終品質になる</th>
+            </tr>
+            <tr>
+              <td><strong>③ 品質を確認し、改善する</strong></th>
+              <td>レビュー、テスト、静的解析、チェックリストを使って品質を確認し、改善する</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="three-pillars" class="lesson-section">
+      <h2>2-9-2. 品質管理の3つの柱</h2>
+
+      <figure class="wide-diagram">
+        <figcaption>品質管理の3つの柱</figcaption>
+        <pre>
+【品質管理の3つの柱】
+
+  +-----------------------------------------------------------+
+  |                                                           |
+  |  ① 品質計画（Quality Planning / QP）                       |
+  │     - どのレベルの品質を目指すか                          |
+  │     - どの工程で何を確認するか                            |
+  │     - どのレビューを実施するか                            |
+  │     - どのテストを行うか                                  |
+  │     - どのツールを使うか                                  |
+  |                                                           |
+  |  ② 品質作り込み（Quality Assurance / QA）                 |
+  │     - レビュー、コーディング規約の遵守                    │
+  │     - ペアプログラミング、静的解析ツール                  │
+  │     - 単体テストの自動化                                  │
+  │     → 不具合の発生を未然に防ぐ                           │
+  |                                                           |
+  |  ③ 品質確認（Quality Control / QC）                       |
+  │     - テスト（単体・結合・総合）                          │
+  │     - レビュー（コード・設計・要件）                      │
+  │     - チェックリスト、受け入れテスト                      │
+  │     → 成果物が品質基準を満たしているか確認               │
+  |                                                           |
+  +-----------------------------------------------------------+
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>柱</th><th>役割</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>品質計画（QP）</strong></th>
+              <td>品質の目標と方法を決める</th>
+              <td>品質基準の設定、レビュー計画、テスト計画、ツール選定</th>
+            </tr>
+            <tr>
+              <td><strong>品質作り込み（QA）</strong></th>
+              <td>不具合を未然に防ぐ</th>
+              <td>設計レビュー、コーディング規約、ペアプログラミング、静的解析</th>
+            </tr>
+            <tr>
+              <td><strong>品質確認（QC）</strong></th>
+              <td>品質基準を満たしているか確認する</th>
+              <td>単体テスト、結合テスト、総合テスト、受け入れテスト、コードレビュー</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="qc7-tools" class="lesson-section">
+      <h2>2-9-3. QC七つ道具</h2>
+      <p>QC七つ道具は、品質を“見える化”するための7つの基本技法。</p>
+
+      <h3>① パレート図</h3>
+      <p>「どの問題が最も影響が大きいか」を見つけるための図。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>構成</th><th>読み方のポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>棒グラフ：問題の件数<br>折れ線：累積割合</th>
+              <td>左側の棒が高いほど「影響が大きい問題」<br>折れ線が80%を超えるまでの項目が“重点改善ポイント”</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>パレート図のイメージ</figcaption>
+        <pre>
+【パレート図のイメージ】
+
+  件数
+    ↑
+  100|                    ● 100%
+    |                   ●
+    |  ███             ●
+    |  ███             ●
+   50|  ███  ██        ● 50%
+    |  ███  ██  █     ●
+    |  ███  ██  █  █  ●
+    |  ███  ██  █  █  █
+   0+------------------------→
+       A    B   C  D  E   問題
+
+  左側の棒Aが最も高い → 最優先で改善すべき問題
+        </pre>
+      </figure>
+
+      <h3>② 特性要因図（フィッシュボーン図）</h3>
+      <p>問題の原因を体系的に洗い出す図。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>構成</th><th>読み方のポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>背骨：問題<br>大骨：原因カテゴリ<br>中骨・小骨：具体的な原因</th>
+              <td>人・方法・機械・材料・環境などに分類して整理する<br>原因を体系的に洗い出すのに有効</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>特性要因図のイメージ</figcaption>
+        <pre>
+【特性要因図（フィッシュボーン図）のイメージ】
+
+  人                方法              機械
+    \                |                /
+     \               |               /
+      \              |              /
+       \             |             /
+        \            |            /
+         \           |           /
+          \          |          /
+           \         |         /
+            \        |        /
+             \       |       /
+              \      |      /
+               \     |     /
+                \    |    /
+                 \   |   /
+                  \  |  /
+                   \ | /
+                    \|/
+                   [問題]
+                    /|\
+                   / | \
+                  /  |  \
+                 /   |   \
+                /    |    \
+               /     |     \
+              /      |      \
+             /       |       \
+            /        |        \
+           /         |         \
+          /          |          \
+         /           |           \
+        /            |            \
+       /             |             \
+      /              |              \
+     /               |               \
+    /                |                \
+  材料              環境               測定
+
+  背骨＝問題、大骨＝原因カテゴリ、小骨＝具体的な原因
+        </pre>
+      </figure>
+
+      <h3>③ 散布図</h3>
+      <p>2つのデータの関係性（相関）を可視化する図。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>パターン</th><th>意味</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>右上がり</th>
+              <td>正の相関（一方が増えると他方も増える）</th>
+            </tr>
+            <tr>
+              <td>右下がり</th>
+              <td>負の相関（一方が増えると他方が減る）</th>
+            </tr>
+            <tr>
+              <td>バラバラ</th>
+              <td>相関なし（関係がない）</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>④ 管理図</h3>
+      <p>工程が安定しているか／異常があるかを判断する図。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>構成</th><th>読み方のポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>中央線（CL）、上限（UCL）、下限（LCL）</th>
+              <td>点がUCL/LCLを超える → 異常<br>連続して偏る → 工程が不安定</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>⑤ ヒストグラム</h3>
+      <p>データがどの範囲にどれだけ分布しているかを見る図。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>パターン</th><th>意味</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>山が1つ</th>
+              <td>正常な分布</th>
+            </tr>
+            <tr>
+              <td>山が複数</th>
+              <td>工程が混在している可能性</th>
+            </tr>
+            <tr>
+              <td>右に長い／左に長い</th>
+              <td>偏りがある</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>⑥ チェックシート</h3>
+      <p>不具合の種類・発生箇所などを記録するための表。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用途</th><th>読み方のポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>不具合の記録・集計</th>
+              <td>記録が多い項目が“重点改善ポイント”<br>パレート図の元データにもなる</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>⑦ グラフ</h3>
+      <p>折れ線・棒グラフなどで傾向や変化を把握するための図。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>読み方のポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>折れ線グラフ、棒グラフ、円グラフなど</th>
+              <td>時系列の変化を追う、異常値を見つける、他のQC手法の補助として使う</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>QC七つ道具まとめ</figcaption>
+        <pre>
+【QC七つ道具 一覧】
+
+  +------------------+----------------------------------------+
+  | 道具             | 主な用途                                |
+  +------------------+----------------------------------------+
+  | ① パレート図     | 重要問題の特定（どの問題が影響大か）    |
+  | ② 特性要因図     | 原因の体系的洗い出し                    |
+  | ③ 散布図         | 2項目間の相関関係を視覚化               |
+  | ④ 管理図         | 工程の安定性確認                        |
+  | ⑤ ヒストグラム   | データの分布状況を把握                  |
+  | ⑥ チェックシート | データ収集・記録                        |
+  | ⑦ グラフ         | 傾向や変化の把握                        |
+  +------------------+----------------------------------------+
+
+  これらは品質を“見える化”するための基本技法。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 品質管理の説明として、最も適切なものはどれか。</summary>
+        <p>ア）品質を最後のテストだけでチェックすること　イ）品質を後でチェックするのではなく、最初から作り込む管理　ウ）品質はテスト担当者だけの責任　エ）品質管理はコスト削減が目的</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 品質管理は「品質を後でチェックする」ではなく「最初から品質を作り込む」ための管理。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 品質管理の目的として、本文で挙げられているものはどれか。</summary>
+        <p>ア）品質基準の明確化、工程全体での品質作り込み、品質確認と改善　イ）予算内で完了させること　ウ）納期を守ること　エ）チームの結束を強めること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 品質管理の目的は「品質基準の明確化」「工程全体での品質作り込み」「品質確認と改善」の3つ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 品質管理の3つの柱に含まれないものはどれか。</summary>
+        <p>ア）品質計画（QP）　イ）品質作り込み（QA）　ウ）品質確認（QC）　エ）品質保証（Q保証）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 品質管理の3つの柱は「品質計画（QP）」「品質作り込み（QA）」「品質確認（QC）」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. QA（品質作り込み）の活動として、適切なものはどれか。</summary>
+        <p>ア）最終テストの実施　イ）設計レビュー、コーディング規約の遵守　ウ）顧客からの受け入れテスト　エ）不具合の修正</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — QAは不具合の発生を未然に防ぐ活動。設計レビュー、コーディング規約、ペアプログラミング、静的解析など。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. QC（品質確認）の活動として、適切なものはどれか。</summary>
+        <p>ア）コーディング規約の策定　イ）設計レビュー（品質作り込みにも該当するが、確認の側面も）　ウ）単体テスト・結合テスト　エ）プログラミング</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — QCは成果物が品質基準を満たしているか確認する活動。テストやチェックリストなど。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. パレート図の読み方として、適切なものはどれか。</summary>
+        <p>ア）右側の棒が高いほど重要　イ）左側の棒が高いほど影響が大きい　ウ）すべての棒が同じ高さが理想　エ）折れ線が重要</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — パレート図は左側の棒が高いほど「影響が大きい問題」。折れ線が80%を超えるまでの項目が重点改善ポイント。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 特性要因図（フィッシュボーン図）の説明として、適切なものはどれか。</summary>
+        <p>ア）2つのデータの関係性を見る図　イ）問題の原因を体系的に洗い出す図　ウ）データの分布状況を見る図　エ）工程の安定性を確認する図</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 特性要因図は問題の原因を人・方法・機械・材料・環境などに分類して体系的に洗い出す図。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 散布図で「右上がりのパターン」が示すものはどれか。</summary>
+        <p>ア）負の相関　イ）正の相関　ウ）相関なし　エ）完全な無関係</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 散布図で右上がりは正の相関（一方が増えると他方も増える）。右下がりは負の相関。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 管理図で「点がUCL（上限）を超えた場合」の判断として、適切なものはどれか。</summary>
+        <p>ア）正常な状態　イ）異常が発生している可能性　ウ）問題なし　エ）測定ミス</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 管理図で点がUCL（上限）やLCL（下限）を超えた場合は異常が発生している可能性がある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. QC七つ道具に含まれないものはどれか。</summary>
+        <p>ア）パレート図　イ）特性要因図　ウ）ガントチャート　エ）ヒストグラム</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — QC七つ道具は「パレート図」「特性要因図」「散布図」「管理図」「ヒストグラム」「チェックシート」「グラフ」。ガントチャートはスケジュール管理の道具。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-9 品質管理、QC七つ道具（p97-p108）</p>
+    </section>
+  </main>
+</body>
+</html>

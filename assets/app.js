@@ -122,10 +122,31 @@ const fallbackCurriculum = {
       id: "management",
       title: "マネジメント",
       category: "management",
-      status: "planned",
-      description: "PMBOK、サービスマネジメント、システム監査など。",
-      href: "fe/management/index.html",
-      items: []
+      status: "done",
+      description: "プロジェクト管理、開発モデル、PMBOK、WBS、スケジュール、コスト、品質、リスク、変更、調達。全20教材ページ完成。",
+      href: "fe/technology/management/index.html",
+      items: [
+        { title: "プロジェクトの基礎・開発モデル", href: "fe/technology/management/project-basics-development-models.html", status: "done" },
+        { title: "開発モデルの分類と選定基準", href: "fe/technology/management/development-model-selection.html", status: "done" },
+        { title: "ウォーターフォールモデル（詳細）", href: "fe/technology/management/waterfall-model.html", status: "done" },
+        { title: "アジャイル開発とスクラム", href: "fe/technology/management/agile-scrum.html", status: "done" },
+        { title: "スクラムのレビュー・レトロスペクティブ・比較", href: "fe/technology/management/scrum-review-retrospective.html", status: "done" },
+        { title: "PMBOK概要・10の管理領域（前半）", href: "fe/technology/management/pmbok-overview.html", status: "done" },
+        { title: "10の管理領域（後半）・スコープ管理詳細", href: "fe/technology/management/pmbok-scope-management.html", status: "done" },
+        { title: "WBS（作業分解構造）", href: "fe/technology/management/wbs.html", status: "done" },
+        { title: "スケジュール管理・ガントチャート", href: "fe/technology/management/schedule-gantt.html", status: "done" },
+        { title: "依存関係（FS/SS/FF）", href: "fe/technology/management/dependency-relationships.html", status: "done" },
+        { title: "クリティカルパス", href: "fe/technology/management/critical-path.html", status: "done" },
+        { title: "進捗管理", href: "fe/technology/management/progress-management.html", status: "done" },
+        { title: "コスト管理", href: "fe/technology/management/cost-management.html", status: "done" },
+        { title: "品質管理・QC七つ道具", href: "fe/technology/management/quality-management-qc-tools.html", status: "done" },
+        { title: "コミュニケーション管理", href: "fe/technology/management/communication-management.html", status: "done" },
+        { title: "リスク管理", href: "fe/technology/management/risk-management.html", status: "done" },
+        { title: "課題管理", href: "fe/technology/management/issue-management.html", status: "done" },
+        { title: "変更管理（前編）", href: "fe/technology/management/change-management-1.html", status: "done" },
+        { title: "変更管理（後編）", href: "fe/technology/management/change-management-2.html", status: "done" },
+        { title: "調達管理", href: "fe/technology/management/procurement-management.html", status: "done" }
+      ]
     },
     {
       id: "strategy",
@@ -189,8 +210,8 @@ const fallbackCurriculum = {
     {
       title: "1_マネジメント.pdf",
       category: "マネジメント",
-      status: "未作成",
-      next: "PMBOK、サービスマネジメント、監査に分けて精読"
+      status: "HTML化済み",
+      next: "p1-p179を20教材ページとしてGitHub Pages反映用に登録済み"
     },
     {
       title: "3_経営・戦略.pdf",

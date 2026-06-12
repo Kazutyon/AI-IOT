@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>調達管理 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>調達管理</h1>
+        <p class="lead">調達管理の目的・流れ・ベンダー選定・契約・管理方法を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#procurement-overview">調達管理とは</a>
+        <a href="#procurement-flow">調達管理の流れ</a>
+        <a href="#make-or-buy">調達の要否判断</a>
+        <a href="#vendor-selection">ベンダー選定</a>
+        <a href="#contract">契約締結</a>
+        <a href="#vendor-management">ベンダー管理</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>調達管理</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>調達管理とは：外部からモノ・サービスを調達し、契約・品質・納期を管理するプロセス</li>
+          <li>調達管理の目的：必要なものを適切に調達、契約内容を明確化、ベンダーを管理</li>
+          <li>調達管理の流れ：要否判断 → 計画作成 → ベンダー選定 → 契約締結 → ベンダー管理</li>
+          <li>契約で明確にする内容：作業範囲・納期・金額・品質基準・納品物・支払い条件</li>
+          <li>ベンダー管理のポイント：進捗・品質・納期・コミュニケーション・リスク</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>調達管理の目的、契約で明確にする項目</dd></div>
+          <div><dt>中</dt><dd>調達管理の流れ、ベンダー選定の観点</dd></div>
+          <div><dt>低</dt><dd>契約形態の詳細</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>調達管理（Procurement Management）</th>
+              <td>プロジェクトで必要なモノ・サービスを外部から適切に調達し、契約・品質・納期を管理するプロセス</th>
+              <td>外部ベンダー・クラウドサービス・機材など“自社だけでは完結しない要素”を管理</th>
+            </tr>
+            <tr>
+              <td>ベンダー</th>
+              <td>外部の調達先企業（開発会社、クラウドサービス事業者など）</th>
+              <td>適切なベンダー選定がプロジェクト成功の鍵</th>
+            </table>
+            <tr>
+              <td>請負契約</th>
+              <td>成果物の完成に対して報酬を支払う契約形態</th>
+              <td>成果物の完成が契約の対象。成果物の品質が重要</th>
+            </tr>
+            <tr>
+              <td>準委任契約</th>
+              <td>作業の実施に対して報酬を支払う契約形態</th>
+              <td>作業時間（工数）に対して支払う。成果物の完成は義務ではない</th>
+            </tr>
+            <tr>
+              <td>サブスクリプション</th>
+              <td>定額料金でサービスを利用する契約形態</th>
+              <td>クラウドサービスなどで一般的。月額・年額課金</th>
+            </tr>
+            <tr>
+              <td>ライセンス契約</th>
+              <td>ソフトウェアの利用権を購入する契約</th>
+              <td>利用期間や利用範囲などの制約がある</th>
+            </tr>
+            <tr>
+              <td>ステアリングコミッティ</th>
+              <td>プロジェクトの重要事項を審議・承認する会議体</th>
+              <td>経営層が参加し、大きな方向性や予算を決定</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="procurement-overview" class="lesson-section">
+      <h2>2-14. 調達管理（Procurement Management）</h2>
+      <p>調達管理とは、プロジェクトで必要なモノ・サービスを外部の企業・ベンダーから適切に調達し、契約・品質・納期を管理するプロセス。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>調達管理の重要性</figcaption>
+        <pre>
+【調達管理が必要な理由】
+
+  ITプロジェクトでは、以下のように“自社だけでは完結しない要素”が必ず発生する：
+    - 必要なスキルを持つ外部ベンダー
+    - サーバー・クラウドサービス
+    - 開発ツール
+    - 外部API利用契約
+    - ハードウェア機材
+
+  そのため調達管理は、プロジェクトの品質・コスト・納期を左右する重要な管理領域。
+        </pre>
+      </figure>
+
+      <h3>2-14-1. 調達管理の目的</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>目的</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 必要なモノ・サービスを適切に調達する</strong></th>
+              <td>必要なものを、必要なタイミングで確保する</th>
+            </tr>
+            <tr>
+              <td><strong>② 契約内容（範囲・金額・納期）を明確にする</strong></th>
+              <td>曖昧な契約は後のトラブルの原因。作業範囲、納期、金額、品質基準、納品物、支払い条件を明確に</th>
+            </tr>
+            <tr>
+              <td><strong>③ 外部ベンダーの成果物・進捗を管理する</strong></th>
+              <td>調達したら終わりではなく、外部ベンダーの進捗・品質・納期を管理することが必要</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="procurement-flow" class="lesson-section">
+      <h2>2-14-2. 調達管理の流れ</h2>
+
+      <figure class="wide-diagram">
+        <figcaption>調達管理5ステップ</figcaption>
+        <pre>
+【調達管理の流れ】
+
+  STEP1. 調達の要否判断
+         本当に外部調達が必要かを判断する
+
+  STEP2. 調達計画の作成
+         調達するもの、範囲、契約形態、スケジュールを整理
+
+  STEP3. ベンダー選定
+         技術力、実績、コスト、納期、コミュニケーション能力を評価
+
+  STEP4. 契約締結
+         作業範囲、納期、金額、品質基準などを明確にした契約を締結
+
+  STEP5. ベンダー管理（進捗・品質・納期）
+         定例ミーティングや成果物レビューで管理
+        </pre>
+      </figure>
+    </section>
+
+    <section id="make-or-buy" class="lesson-section">
+      <h2>2-14-3. 調達の要否判断</h2>
+      <p>まず、外部調達が本当に必要かを判断する。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>判断ポイント</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>自社にスキルがない</th>
+              <td>社内に必要な技術や知見がない場合は調達を検討</th>
+            </tr>
+            <tr>
+              <td>自社のリソースが不足している</th>
+              <td>人員や時間が足りない場合は調達を検討</th>
+            </tr>
+            <tr>
+              <td>外部サービスを使う方が早い／安い</th>
+              <td>コストや期間の面で外部が有利なら調達を検討</th>
+            </tr>
+            <tr>
+              <td>専門性が高い作業が必要</th>
+              <td>専門業者に任せた方が品質が高い場合は調達を検討</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>調達判断のフロー</figcaption>
+        <pre>
+【調達判断のフロー】
+
+  内部で対応可能か？
+        |
+        +-- 可能 --> 内部で実施
+        |
+        +-- 不可能 --> 調達を検討
+                        |
+                        v
+              コスト・期間・品質を比較
+                        |
+                        v
+              調達する vs 内部で対応
+        </pre>
+      </figure>
+    </section>
+
+    <section id="vendor-selection" class="lesson-section">
+      <h2>2-14-5. ベンダー選定</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>観点</th><th>確認内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>技術力</strong></th>
+              <td>必要なスキルを持っているか</th>
+            </tr>
+            <tr>
+              <td><strong>実績</strong></th>
+              <td>同様の案件を経験しているか</th>
+            </tr>
+            <tr>
+              <td><strong>コスト</strong></th>
+              <td>見積もりが妥当か</th>
+            </tr>
+            <tr>
+              <td><strong>納期</strong></th>
+              <td>プロジェクトに間に合うか</th>
+            </tr>
+            <tr>
+              <td><strong>コミュニケーション</strong></th>
+              <td>連絡がスムーズか</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="contract" class="lesson-section">
+      <h2>2-14-6. 契約締結</h2>
+      <p>契約では、以下を明確にする。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>契約で明確にする項目</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>作業範囲（スコープ）</th>
+              <td>何をどこまで依頼するか</th>
+            </tr>
+            <tr>
+              <td>納期</th>
+              <td>いつまでに納品するか</th>
+            </tr>
+            <tr>
+              <td>金額</th>
+              <td>いくら支払うか</th>
+            </tr>
+            <tr>
+              <td>納品物</th>
+              <td>何を納品するか（ドキュメント、ソースコードなど）</th>
+            </tr>
+            <tr>
+              <td>品質基準</th>
+              <td>どのレベルの品質を求めるか</th>
+            </tr>
+            <tr>
+              <td>支払い条件</th>
+              <td>いつ、どのように支払うか</th>
+            </tr>
+            <tr>
+              <td>変更時の扱い</th>
+              <td>追加費用の有無、変更手続き</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>契約形態の種類</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>契約形態</th><th>特徴</th><th>メリット</th><th>デメリット</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>請負契約</strong></th>
+              <td>成果物の完成に対して報酬を支払う</th>
+              <td>成果物が明確。完成しないと支払い不要</th>
+              <td>仕様変更に弱い。変更があると追加工数問題</th>
+            </tr>
+            <tr>
+              <td><strong>準委任契約</strong></th>
+              <td>作業の実施に対して報酬を支払う（工数課金）</th>
+              <td>変更に柔軟。作業量に応じて支払う</th>
+              <td>コストが膨らみやすい。進捗管理が重要</th>
+            </tr>
+            <tr>
+              <td><strong>サブスクリプション</strong></th>
+              <td>定額料金でサービスを利用</th>
+              <td>初期費用が低い。利用量に応じた課金も可能</th>
+              <td>長期的には高コストになる場合がある</th>
+            </tr>
+            <tr>
+              <td><strong>ライセンス契約</strong></th>
+              <td>ソフトウェアの利用権を購入</th>
+              <td>所有型。買い切りとサブスクリプションがある</th>
+              <td>初期費用が高い。バージョンアップ対応が必要</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="vendor-management" class="lesson-section">
+      <h2>2-14-7. ベンダー管理（進捗・品質・納期）</h2>
+      <p>調達後は、外部ベンダーの管理が必要。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>管理項目</th><th>内容</th><th>よくある問題</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>進捗</strong></th>
+              <td>計画通りに作業が進んでいるか</th>
+              <td>納期遅延</th>
+            </tr>
+            <tr>
+              <td><strong>品質</strong></th>
+              <td>成果物の品質は基準を満たしているか</th>
+              <td>品質不足、バグが多い</th>
+            </tr>
+            <tr>
+              <td><strong>納期</strong></th>
+              <td>約束された納期を守れるか</th>
+              <td>納期遅延</th>
+            </tr>
+            <tr>
+              <td><strong>コミュニケーション</strong></th>
+              <td>連絡はスムーズか、認識ズレはないか</th>
+              <td>仕様理解のズレ</th>
+            </tr>
+            <tr>
+              <td><strong>リスク</strong></th>
+              <td>ベンダー側のリスク（人員不足、経営状況など）</th>
+              <td>突然の撤退、担当者交代</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>ベンダー管理のポイント</figcaption>
+        <pre>
+【ベンダー管理のポイント】
+
+  定例ミーティングの実施
+    - 週次や隔週で進捗確認
+    - 課題やリスクの早期発見
+
+  成果物レビュー
+    - 設計書やコードのレビューを定期的に実施
+    - 品質を早期に確認
+
+  コミュニケーションの円滑化
+    - 窓口を明確にする
+    - 連絡手段を統一する
+
+  リスクの共有
+    - ベンダー側のリスクを早期に共有してもらう
+    - 対策を一緒に考える
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 調達管理（Procurement Management）の説明として、最も適切なものはどれか。</summary>
+        <p>ア）プロジェクトの予算を管理すること　イ）外部からモノ・サービスを調達し、契約・品質・納期を管理すること　ウ）チームメンバーの勤怠を管理すること　エ）プロジェクトのリスクを洗い出すこと</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 調達管理は、必要なモノ・サービスを外部から適切に調達し、契約・品質・納期を管理するプロセス。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 調達管理の目的として、本文で挙げられているものはどれか。</summary>
+        <p>ア）必要なモノ・サービスを適切に調達する　イ）すべてを社内で完結させる　ウ）ベンダーを減らす　エ）コストを無視する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 調達管理の目的は「必要なモノ・サービスを適切に調達する」「契約内容を明確にする」「外部ベンダーの成果物・進捗を管理する」の3つ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 調達管理の流れの中で、最初に行うステップはどれか。</summary>
+        <p>ア）契約締結　イ）ベンダー選定　ウ）調達の要否判断　エ）ベンダー管理</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 調達管理の流れは「要否判断 → 計画作成 → ベンダー選定 → 契約締結 → ベンダー管理」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 契約で明確にする項目として、本文で挙げられているものはどれか。</summary>
+        <p>ア）天気予報　イ）作業範囲、納期、金額、品質基準、納品物、支払い条件　ウ）オフィスの住所　エ）開発言語のバージョン</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 契約では作業範囲、納期、金額、品質基準、納品物、支払い条件、変更時の扱いを明確にする。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. ベンダー選定の観点として、本文で挙げられているものはどれか。</summary>
+        <p>ア）技術力、実績、コスト、納期、コミュニケーション　イ）社長の年齢、従業員数、オフィスの広さ　ウ）株価、売上高、純利益　エ）創業年数、ブランドカラー</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — ベンダー選定の観点は「技術力」「実績」「コスト」「納期」「コミュニケーション」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 「成果物の完成に対して報酬を支払う」契約形態はどれか。</summary>
+        <p>ア）請負契約　イ）準委任契約　ウ）サブスクリプション　エ）ライセンス契約</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 請負契約は成果物の完成に対して報酬を支払う。完成しないと支払いが発生しない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 「作業の実施に対して報酬を支払う（工数課金）」契約形態はどれか。</summary>
+        <p>ア）請負契約　イ）準委任契約　ウ）サブスクリプション　エ）ライセンス契約</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 準委任契約は作業時間（工数）に対して報酬を支払う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. ベンダー管理で管理すべき項目として、本文で挙げられているものはどれか。</summary>
+        <p>ア）進捗、品質、納期、コミュニケーション、リスク　イ）ベンダーの社員の年収　ウ）ベンダーのオフィス面積　エ）ベンダーの株価</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — ベンダー管理では進捗、品質、納期、コミュニケーション、リスクを管理する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 調達の要否判断で「外部調達を検討すべき」と判断されるのはどのような場合か。</summary>
+        <p>ア）自社にスキルがある場合　イ）自社のリソースが十分な場合　ウ）自社にスキルがない、またはリソースが不足している場合　エ）コストが高い場合</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 自社にスキルがない、リソースが不足している、外部サービスを使う方が早い／安い、専門性が高い作業が必要な場合に調達を検討する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. ベンダー管理で「よくある問題」として、本文で挙げられているものはどれか。</summary>
+        <p>ア）納期の前倒し、品質の向上　イ）納期遅延、品質不足、仕様理解のズレ　ウ）コスト削減、効率化　エ）コミュニケーションの円滑化</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ベンダー管理でのよくある問題は「納期遅延」「品質不足」「仕様理解のズレ」など。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-14 調達管理（Procurement Management）（p172-p179）</p>
+    </section>
+  </main>
+</body>
+</html>

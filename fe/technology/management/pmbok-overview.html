@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PMBOK概要・10の管理領域（前半） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>PMBOK概要・10の管理領域（前半）</h1>
+        <p class="lead">PMBOKの概要と、プロジェクトを成功に導くための10の管理領域のうち前半6つを理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#pmbok-overview">PMBOK概要</a>
+        <a href="#management-areas">10の管理領域（前半）</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>PMBOK概要・10の管理領域（前半）</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>PMBOKとは何か（Project Management Body of Knowledge）</li>
+          <li>10の管理領域は「見るべき視点」であること</li>
+          <li>10の管理領域は互いに連動していること</li>
+          <li>統合管理（司令塔として全体バランスを取る）</li>
+          <li>スコープ管理（作るもの・作らないものを明確にする）</li>
+          <li>スケジュール管理（時間軸を整える）</li>
+          <li>コスト管理（予算内で完了させる）</li>
+          <li>品質管理（良いものを作る）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>10の管理領域の各役割、特に統合管理・スコープ管理・スケジュール管理</dd></div>
+          <div><dt>中</dt><dd>コスト管理、品質管理、PMBOKの定義</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PMBOK（ピーボック）</td>
+              <td>Project Management Body of Knowledge。プロジェクト管理の知識体系をまとめた国際標準</td>
+              <td>10の管理領域を体系化。プロジェクトを成功に導くための指針</td>
+            </tr>
+            <tr>
+              <td>統合管理</td>
+              <td>プロジェクト全体を一貫性のある状態に保つための視点。司令塔の役割</td>
+              <td>全体最適で判断し、変更があれば影響を整理する</td>
+            </tr>
+            <tr>
+              <td>スコープ管理</td>
+              <td>「何を作るか」「どこまで作るか」を明確にする視点</td>
+              <td>スコープが明確だと、スケジュール・コスト・品質が安定する</td>
+            </tr>
+            <tr>
+              <td>スケジュール管理</td>
+              <td>プロジェクトの時間軸を整える視点</td>
+              <td>WBS、ガントチャート、クリティカルパスが重要</td>
+            </tr>
+            <tr>
+              <td>コスト管理</td>
+              <td>お金と工数を適切に扱う視点</td>
+              <td>見積り、実績把握、差分確認が重要</td>
+            </tr>
+            <tr>
+              <td>品質管理</td>
+              <td>「良いものを作る」ための視点</td>
+              <td>品質は最後にチェックするものではなく、工程全体で作り込むもの</td>
+            </tr>
+            <tr>
+              <td>資源管理</td>
+              <td>プロジェクトに必要な“力”を整える視点</td>
+              <td>必要なスキルの把握、人員配置、チームの働きやすさ</td>
+            </tr>
+            <tr>
+              <td>コミュニケーション管理</td>
+              <td>プロジェクトの“情報の流れ”を整える視点</td>
+              <td>会議体設計、議事録、報連相が重要</td>
+            </tr>
+            <tr>
+              <td>リスク管理</td>
+              <td>「起きるかもしれないこと」に備える視点</td>
+              <td>予防的な対応。問題が起きる前に備える</td>
+            </tr>
+            <tr>
+              <td>調達管理</td>
+              <td>外部の力を適切に使うための視点</td>
+              <td>契約形態、ベンダー調整、成果物受け入れ</td>
+            </tr>
+            <tr>
+              <td>ステークホルダー管理</td>
+              <td>プロジェクトに関わる人たちの期待を整える視点</td>
+              <td>関係者の洗い出し、期待の理解、適切なコミュニケーション</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pmbok-overview" class="lesson-section">
+      <h2>2-1. PMBOKが示す10の管理領域</h2>
+      <p>PMBOK（Project Management Body of Knowledge）は、プロジェクトを成功に導くために必要な「10の管理領域」を体系化した国際標準。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>PMBOKの考え方</figcaption>
+        <pre>
+【PMBOKの本質】
+
+  10の管理領域 = プロジェクトを進めるうえで「どこを見るべきか」を示す10の視点
+
+  重要なポイント：
+    - 「覚える項目」ではなく「見るべき視点」
+    - 10の管理領域は互いに連動している
+    - どれか1つだけで成功するわけではない
+    - 10の視点をバランスよく扱うことが成功の鍵
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>管理領域</th><th>役割のイメージ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>統合管理</td><td>プロジェクト全体の方向性を整える</td>
+            </tr>
+            <tr><td>スコープ管理</td><td>作るもの・作らないものを明確にする</td>
+            </tr>
+            <tr><td>スケジュール管理</td><td>いつ・誰が・何をするかを整理する</td>
+            </tr>
+            <tr><td>コスト管理</td><td>予算内で完了させる</td>
+            </tr>
+            <tr><td>品質管理</td><td>品質を計画し、作り込み、確認する</td>
+            </tr>
+            <tr><td>資源管理</td><td>人・設備・環境を適切に確保する</td>
+            </tr>
+            <tr><td>コミュニケーション管理</td><td>情報を正しく伝え、共有する</td>
+            </tr>
+            <tr><td>リスク管理</td><td>将来の不確実性に備える</td>
+            </tr>
+            <tr><td>調達管理</td><td>外部委託や契約を適切に扱う</td>
+            </tr>
+            <tr><td>ステークホルダー管理</td><td>関係者の期待を調整し、協力を得る</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="management-areas" class="lesson-section">
+      <h2>2-1-2. 統合管理</h2>
+      <p>統合管理は、プロジェクト全体を一貫性のある状態に保つための視点。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>役割</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>司令塔</td><td>複数の管理領域が同時に動く中で、全体のバランスを取る</td>
+            </tr>
+            <tr><td>主な活動</td><td>計画をまとめる、変更があれば影響を整理する、関係者と合意形成する、全体最適で判断する</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>統合管理が機能すると、プロジェクトは迷わず前に進める。</p>
+
+      <h3>2-1-3. スコープ管理</h3>
+      <p>スコープ管理は、「何を作るか」「どこまで作るか」を明確にする視点。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>役割</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>範囲の明確化</td><td>プロジェクトは“作るもの”が曖昧だと迷走する。スコープ管理はその迷いをなくすための基盤</td>
+            </tr>
+            <tr><td>主な活動</td><td>成果物を定義する、作業範囲を整理する、関係者と認識を揃える</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>スコープが明確だと、スケジュールもコストも品質も安定する。</p>
+
+      <h3>2-1-4. スケジュール管理</h3>
+      <p>スケジュール管理は、プロジェクトの時間軸を整える視点。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>役割</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>時間の可視化</td><td>作業を分解する、依存関係を整理する、重要な流れ（クリティカルパス）を把握する</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>スケジュールが見えると、チームは安心して作業に集中できる。</p>
+
+      <h3>2-1-5. コスト管理</h3>
+      <p>コスト管理は、お金と工数を適切に扱う視点。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>役割</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>予算管理</td><td>見積り、実績の把握、計画との差分を確認</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>コスト管理が機能すると、プロジェクトは“無理のないペース”で進められる。</p>
+
+      <h3>2-1-6. 品質管理</h3>
+      <p>品質管理は、「良いものを作る」ための視点。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>役割</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>品質保証</td><td>品質基準を決める、レビューで作り込む、テストで確認する</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>品質は“最後にチェックするもの”ではなく、工程全体で作り込むもの。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>10の管理領域の相互関係イメージ</figcaption>
+        <pre>
+【10の管理領域の連動イメージ】
+
+                    +-----------------+
+                    |    統合管理     |
+                    | （全体の司令塔  |
+                    +-----------------+
+                             |
+        +--------------------+--------------------+
+        |                    |                    |
+        v                    v                    v
+   +----------+       +------------+       +----------+
+   |スコープ  |       |スケジュール|       | コスト   |
+   |  管理    |       |   管理     |       |  管理    |
+   +----------+       +------------+       +----------+
+        |                    |                    |
+        +--------------------+--------------------+
+                             |
+                             v
+                    +-----------------+
+                    |    品質管理     |
+                    | （価値の確認）  |
+                    +-----------------+
+
+   ※ これらは全て連動している。1つを変更すると他に影響する
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. PMBOKに関する説明として、最も適切なものはどれか。</summary>
+        <p>ア）プログラミング言語の標準仕様を定めたもの　イ）プロジェクト管理の知識体系をまとめた国際標準　ウ）データベース設計のベストプラクティス　エ）セキュリティ対策のガイドライン</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — PMBOK（Project Management Body of Knowledge）は、プロジェクト管理の知識体系をまとめた国際標準。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. PMBOKが示す「10の管理領域」の役割として、適切なものはどれか。</summary>
+        <p>ア）絶対に守らなければならない法律　イ）プロジェクトを進めるうえで「どこを見るべきか」を示す視点　ウ）開発に使うプログラミング言語の一覧　エ）テスト手法の種類</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 10の管理領域は「覚える項目」ではなく、プロジェクトを進めるうえで「どこを見るべきか」を示す10の視点。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 統合管理の役割として、最も適切なものはどれか。</summary>
+        <p>ア）作るもの・作らないものを明確にする　イ）プロジェクト全体の方向性を整える司令塔の役割　ウ）予算内で完了させる　エ）情報を正しく伝え共有する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 統合管理はプロジェクト全体を一貫性のある状態に保つ司令塔の役割。アはスコープ管理、ウはコスト管理、エはコミュニケーション管理。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. スコープ管理の目的として、適切なものはどれか。</summary>
+        <p>ア）作業の順番を整理する　イ）お金と工数を適切に扱う　ウ）作るもの・作らないものを明確にする　エ）将来の不確実性に備える</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スコープ管理は「何を作るか」「どこまで作るか」を明確にする。アはスケジュール管理、イはコスト管理、エはリスク管理。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. スケジュール管理の主な活動として、適切なものはどれか。</summary>
+        <p>ア）品質基準を決める　イ）作業を分解し依存関係を整理する　ウ）契約形態を選択する　エ）関係者の期待を理解する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スケジュール管理では作業を分解し、依存関係を整理し、クリティカルパスを把握する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. コスト管理の主な活動として、適切なものはどれか。</summary>
+        <p>ア）会議体の設計　イ）リスクの洗い出し　ウ）見積り、実績の把握、差分確認　エ）成果物の定義</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — コスト管理では見積り、実績の把握、計画との差分確認を行う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 品質管理に関する説明として、適切なものはどれか。</summary>
+        <p>ア）品質は最後のテストだけでチェックすればよい　イ）品質は工程全体で作り込むもの　ウ）品質管理はコスト削減が目的　エ）品質管理はスコープ管理の一部である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 品質は“最後にチェックするもの”ではなく、工程全体で作り込むもの。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 10の管理領域に関する記述として、適切なものはどれか。</summary>
+        <p>ア）各管理領域は独立しており、連動しない　イ）統合管理だけでプロジェクトは成功する　ウ）10の管理領域は互いに連動し、バランスよく扱うことが重要　エ）最も重要なのはコスト管理だけである</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 10の管理領域は互いに連動しており、どれか1つだけでプロジェクトが成功するわけではない。10の視点をバランスよく扱うことが成功の鍵。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 次のうち、10の管理領域に含まれないものはどれか。</summary>
+        <p>ア）リスク管理　イ）調達管理　ウ）コード管理　エ）ステークホルダー管理</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 「コード管理」は10の管理領域に含まれない。10の管理領域は統合・スコープ・スケジュール・コスト・品質・資源・コミュニケーション・リスク・調達・ステークホルダー。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 「プロジェクトに関わる人たちの期待を整える」視点を持つ管理領域はどれか。</summary>
+        <p>ア）資源管理　イ）コミュニケーション管理　ウ）リスク管理　エ）ステークホルダー管理</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — ステークホルダー管理は、プロジェクトに関わる人たちの期待を整え、協力を得るための管理領域。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-1 10の管理領域（全体像） / 2-1-1〜2-1-6（p28-p35）</p>
+    </section>
+  </main>
+</body>
+</html>

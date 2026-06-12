@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>アジャイル開発とスクラム | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>アジャイル開発とスクラム</h1>
+        <p class="lead">アジャイル開発の特徴と、スクラムの役割（PO/SM/DevTeam）・イベント（スプリント/デイリースクラム）を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#agile">アジャイル開発</a>
+        <a href="#scrum-roles">スクラムの役割</a>
+        <a href="#scrum-events">スクラムのイベント</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>アジャイル開発とスクラム</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>アジャイル開発の特徴（短いサイクル・変更に柔軟・顧客との対話重視）</li>
+          <li>スクラムの3つの役割（プロダクトオーナー・スクラムマスター・開発チーム）</li>
+          <li>スクラムの4つのイベント（スプリント・デイリースクラム・スプリントレビュー・レトロスペクティブ）</li>
+          <li>スクラムの3つの価値基準（透明性・検査・適応）</li>
+          <li>スクラムが強力な理由</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>スクラムの3役割（PO/SM/DevTeamの責任区分）、スプリントの定義</dd></div>
+          <div><dt>中</dt><dd>アジャイルの特徴、デイリースクラム、レトロスペクティブ</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>アジャイル開発</td>
+                <td>短い期間（1～4週間）で計画→開発→テスト→振り返りを繰り返す開発手法</td>
+                <td>変更に柔軟。小～中規模に向く。ウォーターフォールと対比される</td>
+            </tr>
+            <tr><td>スクラム</td>
+                <td>アジャイル開発の代表的な手法。チーム全員で協力しながら進める仕組み</td>
+                <td>「複雑な開発をチームで進める」ための枠組み</td>
+            </tr>
+            <tr><td>プロダクトオーナー（PO）</td>
+                <td>「何を作るか」を決める役割。ユーザーニーズを理解し優先順位を決める</td>
+                <td>価値の最大化を担当。プロダクトバックログを管理</td>
+            </tr>
+            <tr><td>スクラムマスター</td>
+                <td>チームが働きやすい環境を整える役割。障害を取り除きコーチングする</td>
+                <td>「管理者」ではなく「チームのコーチ」</td>
+            </tr>
+            <tr><td>開発チーム</td>
+                <td>実際に設計・実装・テストなどを行い価値を生み出す人たち</td>
+                <td>「担当外だからやらない」は存在しない。チーム全員で成果を作る</td>
+            </tr>
+            <tr><td>スプリント</td>
+                <td>1～4週間の開発サイクル。計画・開発・テスト・振り返りをすべて行う</td>
+                <td>期間を固定することでチームのリズムが安定する</td>
+            </tr>
+            <tr><td>デイリースクラム</td>
+                <td>毎日15分程度の短いミーティング</td>
+                <td>「昨日やったこと」「今日やること」「困っていること」を共有</td>
+            </tr>
+            <tr><td>スプリントレビュー</td>
+                <td>スプリントの最後に実際に動くものを見せてフィードバックをもらう</td>
+                <td>「評価される場」ではなく、価値を最大化する対話の場</td>
+            </tr>
+            <tr><td>レトロスペクティブ</td>
+                <td>スプリントの最後に行う振り返り。チームの改善会議</td>
+                <td>うまくいったこと・改善したいこと・次に試すことを話し合う</td>
+            </tr>
+            <tr><td>プロダクトバックログ</td>
+                <td>作るべき機能の優先順位付き一覧</td>
+                <td>プロダクトオーナーが管理する</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="agile" class="lesson-section">
+      <h2>1-4. アジャイル開発</h2>
+      <p>アジャイル開発は、短い期間（1～4週間）で計画 → 開発 → テスト → 振り返りを繰り返す開発手法。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>アジャイル開発のサイクル</figcaption>
+        <pre>
+【スプリント1】      【スプリント2】      【スプリント3】
+  +--------+          +--------+          +--------+
+  | 計画   |          | 計画   |          | 計画   |
+  | 開発   | -------> | 開発   | -------> | 開発   | --> 繰り返し改善
+  | テスト |          | テスト |          | テスト |
+  | 振返り |          | 振返り |          | 振返り |
+  +--------+          +--------+          +--------+
+        </pre>
+      </figure>
+
+      <h3>アジャイル開発の特徴</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>特徴</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>変更に柔軟</td><td>変化を前提に進める。要件変更があっても対応しやすい</td></tr>
+            <tr><td>顧客と頻繁に確認</td><td>短いサイクルで成果物を見せ、フィードバックを得る</td></tr>
+            <tr><td>小～中規模に向く</td><td>少人数のチームで密なコミュニケーションが取れるプロジェクトに適する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>アジャイル開発の成功ポイント</h3>
+      <ul>
+        <li>顧客との対話を重視する</li>
+        <li>小さく作って早く見せる</li>
+        <li>チームの自律性を高める</li>
+      </ul>
+
+      <h3>スクラムの3つの価値基準</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>価値基準</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>透明性</td><td>状況が誰にでも見える状態を保つ</td></tr>
+            <tr><td>検査</td><td>こまめに確認する</td></tr>
+            <tr><td>適応</td><td>必要に応じて改善する</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="scrum-roles" class="lesson-section">
+      <h2>1-4-1-1. スクラムの役割</h2>
+      <p>スクラムには3つの役割がある。これは「上下関係」ではなく、責任の種類が違うだけ。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>スクラムの3役割（責任の流れ）</figcaption>
+        <pre>
+【プロダクトオーナー】
+        |
+        | 何を作るかの指示（優先順位の決定）
+        v
+【スクラムマスター】
+        |
+        | 環境を整える（障害除去・コーチング）
+        v
+【開発チーム】
+        |
+        +----> 設計・実装・テスト・価値を生み出す
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>役割</th><th>責任</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>プロダクトオーナー（PO）</strong><br>【何を作るかを決める】</td>
+              <td>価値の最大化</td>
+              <td>ユーザーニーズの理解、優先順位の決定、プロダクトバックログの管理、「何が価値か」をチームに伝える</td>
+            </tr>
+            <tr>
+              <td><strong>スクラムマスター</strong><br>【チームが働きやすい環境を整える】</td>
+              <td>チームのサポート</td>
+              <td>障害（ボトルネック）の除去、コミュニケーション円滑化、スクラムのルール遵守の支援、チームのコーチング</td>
+            </tr>
+            <tr>
+              <td><strong>開発チーム</strong><br>【実際に価値を生み出す】</td>
+              <td>成果物の作成</td>
+              <td>設計、実装、テスト、ドキュメント作成、改善提案。「担当外だからやらない」は存在しない</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="scrum-events" class="lesson-section">
+      <h2>1-4-1-2. スクラムのイベント</h2>
+      <p>スクラムには4つのイベントがあり、これらがチームのリズムを作る。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>スクラムのイベントの流れ</figcaption>
+        <pre>
+1. スプリント（1～4週間）
+   |
+   |---> 2. デイリースクラム（毎日15分）
+   |
+   |---> 3. スプリントレビュー（スプリント終了時）
+   |
+   |---> 4. レトロスペクティブ（スプリント終了時）
+
+【重要】スプリントを固定期間で繰り返すことでチームのリズムが安定する
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>イベント</th><th>頻度・時間</th><th>目的・内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>スプリント</strong></td>
+              <td>1～4週間／固定期間</td>
+              <td>スクラムの中心となる期間。計画・開発・テスト・振り返りをすべて行う。期間を固定することでリズムが安定し、予測しやすくなる</td>
+            </tr>
+            <tr>
+              <td><strong>デイリースクラム</strong></td>
+              <td>毎日／15分</td>
+              <td>「昨日やったこと」「今日やること」「困っていること」を共有。目的は状況共有と問題の早期発見。「報告会」ではなくチームで前に進むための調整</td>
+            </tr>
+            <tr>
+              <td><strong>スプリントレビュー</strong></td>
+              <td>スプリント終了時</td>
+              <td>実際に動くものを見せてフィードバックをもらう。「評価される場」ではなく、価値を最大化するための対話の場</td>
+            </tr>
+            <tr>
+              <td><strong>レトロスペクティブ</strong></td>
+              <td>スプリント終了時</td>
+              <td>「うまくいったこと」「改善したいこと」「次のスプリントで試すこと」を話し合う。チームが毎回少しずつ成長することがスクラムの強み</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>1-4-1-5. スクラムが強力な理由</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>理由</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>チーム全員が同じ方向を見る</strong></td>
+              <td>役割とイベントが明確なので、「誰が何をするのか」「今何を目指しているのか」が常に共有される</td>
+            </tr>
+            <tr>
+              <td><strong>小さく作って早く改善できる</strong></td>
+              <td>スプリントごとに成果を出すため、早く価値を届けられ、早く間違いに気づき、早く改善できる</td>
+            </tr>
+            <tr>
+              <td><strong>チームが毎回成長する</strong></td>
+              <td>レトロスペクティブで改善を続けるため、チームの生産性がスプリントごとに上がっていく</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. アジャイル開発の特徴として、最も適切なものはどれか。</summary>
+        <p>ア）計画を最初に全て決めてから進める　イ）短いサイクルで開発と改善を繰り返す　ウ）大規模なプロジェクトに向く　エ）文書を最も重視する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — アジャイル開発は短いサイクル（1～4週間）で計画→開発→テスト→振り返りを繰り返す。アはウォーターフォール、ウは誤り（小～中規模向き）、エはウォーターフォールの特徴。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. スクラムの3つの役割に含まれないものはどれか。</summary>
+        <p>ア）プロダクトオーナー　イ）プロジェクトマネージャー　ウ）スクラムマスター　エ）開発チーム</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スクラムの3役割は「プロダクトオーナー」「スクラムマスター」「開発チーム」。「プロジェクトマネージャー」という役割はスクラムには存在しない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. スクラムにおける「プロダクトオーナー」の主な責任はどれか。</summary>
+        <p>ア）チームの障害を取り除く　イ）何を作るかの優先順位を決める　ウ）実際にコードを書く　エ）チームのコーチングを行う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — プロダクトオーナーは「何を作るか」を決め、プロダクトバックログの優先順位を管理する。アとエはスクラムマスター、ウは開発チームの責任。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. スクラムマスターの説明として、適切なものはどれか。</summary>
+        <p>ア）チームの管理者であり、メンバーを指示する　イ）チームの障害を取り除き、働きやすい環境を整える　ウ）プロダクトバックログを管理する　エ）実際にプログラムを実装する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スクラムマスターは「管理者」ではなく「チームのコーチ」。障害を取り除き、チームがスクラムを正しく実践できるよう支援する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. スクラムにおける「スプリント」の説明として、適切なものはどれか。</summary>
+        <p>ア）毎日行う15分のミーティング　イ）1～4週間の開発サイクル　ウ）プロジェクト全体を指す用語　エ）スプリント終了後の振り返り会議</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スプリントは1～4週間の固定期間で、計画・開発・テスト・振り返りをすべて行うサイクル。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. デイリースクラムで話す内容として、本文で挙げられているものはどれか。</summary>
+        <p>ア）来週の計画　イ）予算の状況　ウ）昨日やったこと・今日やること・困っていること　エ）顧客との契約内容</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — デイリースクラムでは「昨日やったこと」「今日やること」「困っていること」の3点を共有する。15分以内で状況確認と問題の早期発見が目的。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. スプリントレビューの目的として、最も適切なものはどれか。</summary>
+        <p>ア）チーム内の良かった点・改善点を振り返る　イ）実際に動くものを見せてフィードバックをもらう　ウ）毎日の進捗を報告する　エ）予算の執行状況を確認する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スプリントレビューはスプリントの最後に実際に動くものを見せ、利害関係者からフィードバックをもらう場。「評価される場」ではなく価値最大化の対話の場。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. レトロスペクティブで話し合う内容として、本文で挙げられているものはどれか。</summary>
+        <p>ア）機能のデモンストレーション　イ）うまくいったこと・改善したいこと・次に試すこと　ウ）次のスプリントで作る機能の優先順位　エ）顧客からの要求事項</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — レトロスペクティブはチームの改善会議。「うまくいったこと」「改善したいこと」「次のスプリントで試すこと」を話し合う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. スクラムが強力な理由として、本文で挙げられていないものはどれか。</summary>
+        <p>ア）チーム全員が同じ方向を見る　イ）小さく作って早く改善できる　ウ）チームが毎回成長する　エ）文書を徹底的に作成する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 「文書を徹底的に作成する」はウォーターフォールの特徴。スクラムは必要最低限の文書で対話を重視する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. スクラムの3つの価値基準（透明性・検査・適応）に関する説明として、適切なものはどれか。</summary>
+        <p>ア）透明性とは、情報を一部の管理者だけが知る状態を指す　イ）検査とは、スプリントの終了時だけ確認すること　ウ）適応とは、必要に応じて計画や進め方を改善すること　エ）これらはスクラムとは関係のない概念である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 適応は「必要に応じて改善する」こと。透明性は「状況が誰にでも見える」こと。検査は「こまめに確認する」こと。これらはスクラムの基盤となる価値基準。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第1章 プロジェクトマネジメント(PM) / 1-4 アジャイル開発、1-4-1 スクラム（p15-p21）</p>
+    </section>
+  </main>
+</body>
+</html>

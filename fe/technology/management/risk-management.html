@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>リスク管理 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>リスク管理</h1>
+        <p class="lead">リスク管理の目的・流れ・リスクマトリクス・リスク台帳を理解し、「問題が起きる前に備える」。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#risk-overview">リスク管理とは</a>
+        <a href="#risk-flow">リスク管理の流れ</a>
+        <a href="#risk-matrix">リスクマトリクス</a>
+        <a href="#risk-register">リスク台帳</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>リスク管理</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>リスク管理は「問題が起きてから対処する」ではなく「起きる前に備える」管理</li>
+          <li>リスク管理の目的：リスクを事前に見える化、優先順位をつける、対策を事前に決める</li>
+          <li>リスク管理の5ステップ：特定 → 分析 → 評価 → 対応 → 監視</li>
+          <li>リスク対応4種類：回避・低減・移転・受容</li>
+          <li>リスクマトリクス：確率×影響度で優先順位を視覚化</li>
+          <li>リスク台帳：優先度の高いリスクを管理する表</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>リスク管理の目的、リスク対応4種類（回避・低減・移転・受容）</dd></div>
+          <div><dt>中</dt><dd>リスクマトリクス、リスク台帳、リスク管理の流れ</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>リスク管理</th>
+              <td>「問題が起きてから対処する」のではなく「起きる前に備える」ための管理</th>
+              <td>プロジェクト成功の生命線。予防的な管理が重要</th>
+            </tr>
+            <tr>
+              <td>リスク特定</th>
+              <td>プロジェクトに潜むリスクをすべて洗い出すこと</th>
+              <td>スケジュール・コスト・品質・人・技術・外部要因などのカテゴリで洗い出す</th>
+            </tr>
+            <tr>
+              <td>リスク分析</th>
+              <td>洗い出したリスクを発生確率×影響度で評価すること</th>
+              <td>確率と影響度の2軸で評価し、優先順位を決める基礎</th>
+            </td>
+            <tr>
+              <td>リスク対応</th>
+              <td>リスクに対する対策を決めること</th>
+              <td>回避・低減・移転・受容の4種類</th>
+            </tr>
+            <tr>
+              <td>リスクマトリクス</th>
+              <td>確率×影響度を視覚化した図</th>
+              <td>優先順位を一目で分かるようにする</th>
+            </tr>
+            <tr>
+              <td>リスク台帳</th>
+              <td>優先順位が決まったリスクを管理する表</th>
+              <td>リスクごとに原因・対策・担当者・期限・状況を記録</th>
+            </tr>
+            <tr>
+              <td>回避（Avoid）</th>
+              <td>リスクの原因そのものをなくす対応</th>
+              <td>例：難易度が高い機能を削除する</th>
+            </tr>
+            <tr>
+              <td>低減（Mitigate）</th>
+              <td>発生確率または影響度を下げる対応</th>
+              <td>例：技術調査を早めに行う</th>
+            </tr>
+            <tr>
+              <td>移転（Transfer）</th>
+              <td>外部にリスクを移す対応</th>
+              <td>例：外部ベンダーに委託する、保険を使う</th>
+            </tr>
+            <tr>
+              <td>受容（Accept）</th>
+              <td>対策せず、起きたら対応する</th>
+              <td>影響が小さいリスクに対して使う</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="risk-overview" class="lesson-section">
+      <h2>2-11. リスク管理</h2>
+      <p>リスク管理は、「問題が起きてから対処する」のではなく、「起きる前に備える」ための管理。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>リスク管理の考え方</figcaption>
+        <pre>
+【リスク管理が必要な理由】
+
+  ITプロジェクトは不確実性に囲まれている：
+    - 要件変更
+    - 人員不足
+    - 技術的難易度
+    - 外部ベンダー遅延
+    - 障害
+    - コスト超過
+    - 品質問題
+
+  これらは必ず発生する（または発生する可能性が高い）。
+  だからこそ、リスク管理はプロジェクト成功の生命線。
+
+  【リスク管理の本質】
+    - リスクは見えないから怖い
+    - 事前に見える化し、備えることが重要
+        </pre>
+      </figure>
+
+      <h3>2-11-1. リスク管理の目的</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>目的</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① リスクを事前に見える化する</strong></th>
+              <td>何が起きる可能性があるのか、どれくらいの影響があるのか、どれくらいの確率で起きるのかを事前に見える化する</th>
+            </tr>
+            <tr>
+              <td><strong>② 優先順位をつける</strong></th>
+              <td>すべてのリスクに同じ対策はできない。発生確率と影響度の2軸で評価し優先順位を決める</th>
+            </tr>
+            <tr>
+              <td><strong>③ 対策を事前に決めておく</strong></th>
+              <td>リスクは起きてから考えると手遅れ。回避・低減・移転・受容の対策を事前に決めておく</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="risk-flow" class="lesson-section">
+      <h2>2-11-2. リスク管理の流れ（実務で使う5ステップ）</h2>
+
+      <figure class="wide-diagram">
+        <figcaption>リスク管理5ステップ</figcaption>
+        <pre>
+【リスク管理の流れ】
+
+  STEP1. リスク特定（洗い出す）
+         プロジェクトに潜むリスクをすべて洗い出す
+         カテゴリ：スケジュール・コスト・品質・人・技術・外部要因・コミュニケーション・契約
+
+  STEP2. リスク分析（確率×影響度）
+         洗い出したリスクを発生確率×影響度で評価する
+
+  STEP3. リスク評価（優先順位を決める）
+         評価結果をもとに、どのリスクから対策すべきかを決める
+         優先順位：高確率×高影響 > 中確率×高影響 > 高確率×中影響
+
+  STEP4. リスク対応（回避・低減・移転・受容）
+         リスクごとに対応策を決める
+
+  STEP5. リスク監視（継続的に見直す）
+         リスクは時間とともに変化する。定例会議で毎週見直す
+        </pre>
+      </figure>
+
+      <h3>リスク特定のカテゴリ例</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>カテゴリ</th><th>リスク例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+               unlessスケジュール</th>
+              <td>テスト期間が不足、依存作業が遅延</th>
+            </tr>
+            <tr>
+               unlessコスト</th>
+              <td>見積り不足、工数超過</th>
+            </tr>
+            <tr>
+               unless品質</th>
+              <td>不具合多発、レビュー漏れ</th>
+            </tr>
+            <tr>
+               unless人</th>
+              <td>キーマンが多忙、メンバーの離脱</th>
+            </tr>
+            <tr>
+               unless技術</th>
+              <td>未経験技術、複雑なアーキテクチャ</th>
+            </tr>
+            <tr>
+               unless外部要因</th>
+              <td>ベンダー遅延、仕様変更</th>
+            </tr>
+            <tr>
+               unlessコミュニケーション</th>
+              <td>認識ズレ、情報共有不足</th>
+            </tr>
+            <tr>
+               unless契約・法務</th>
+              <td>契約条件の曖昧さ、法的リスク</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>リスク分析の例</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>リスク</th><th>発生確率</th><th>影響度</th><th>評価</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>要件変更</th>
+              <td>高</th>
+              <td>高</th>
+              <td>重大</th>
+            </tr>
+            <tr>
+              <td>技術難易度</th>
+              <td>中</th>
+              <td>高</th>
+              <td>高</th>
+            </tr>
+            <tr>
+              <td>人員不足</th>
+              <td>低</th>
+              <td>高</th>
+              <td>中</th>
+            </tr>
+            <tr>
+              <td>外部遅延</th>
+              <td>中</th>
+              <td>中</th>
+              <td>中</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>リスク対応4種類</h3>
+      <div class="table-wrap">
+        </table>
+          <thead>
+            <tr><th>対応</th><th>説明</th><th>例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>回避（Avoid）</strong></th>
+              <td>リスクの原因そのものをなくす</th>
+              <td>難易度が高い機能を削除する</th>
+            </tr>
+            <tr>
+              <td><strong>低減（Mitigate）</strong></th>
+              <td>発生確率または影響度を下げる</th>
+              <td>技術調査を早めに行う、レビューを強化する</th>
+            </tr>
+            <tr>
+              <td><strong>移転（Transfer）</strong></th>
+              <td>外部にリスクを移す</th>
+              <td>外部ベンダーに委託する、保険を使う</th>
+            </tr>
+            <tr>
+              <td><strong>受容（Accept）</strong></th>
+              <td>対策せず、起きたら対応する</th>
+              <td>影響が小さいリスクは監視のみ</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="risk-matrix" class="lesson-section">
+      <h2>2-11-3. リスクマトリクス</h2>
+      <p>リスクマトリクスは、確率 × 影響度 を視覚化する図。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>リスクマトリクスのイメージ</figcaption>
+        <pre>
+【リスクマトリクス】
+
+  影響度
+   ↑
+ 高 |   [中]     [高]     [最優先]
+    |   黄色     黄色       赤色
+    |
+ 中 |   [低]     [中]     [高]
+    |   緑色      黄色      黄色
+    |
+ 低 |   [低]     [低]     [中]
+    |   緑色      緑色      黄色
+    |
+    +------------------------→ 発生確率
+        低        中        高
+
+  色分け：
+    赤色：最優先（高×高）→ 即時対策
+    黄色：注意（中×高、高×中）→ 対策検討
+    緑色：監視（低×低〜中）→ 様子見
+
+  リスクマトリクスは“意思決定のための図”
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>エリア</th><th>優先度</th><th>対応</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>赤色（高×高）</th>
+              <td>最優先</th>
+              <td>即時対策が必要。最優先でリソースを割く</th>
+            </tr>
+            <tr>
+              <td>黄色（中×高、高×中）</th>
+              <td>注意</th>
+              <td>対策を検討する。監視を強化する</th>
+            </tr>
+            <tr>
+              <td>緑色（低×低〜中）</th>
+              <td>監視</th>
+              <td>優先度は低い。定期的に状況を確認する</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="risk-register" class="lesson-section">
+      <h2>2-11-4. リスク台帳</h2>
+      <p>リスク台帳は、優先順位が決まったリスクに対して“具体的にどう管理するか”を記述する表。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>リスク台帳の役割</figcaption>
+        <pre>
+【リスクマトリクスとリスク台帳の役割分担】
+
+  リスクマトリクス = 優先順位を決める図
+  リスク台帳 = 優先順位に基づいて管理する表
+
+  マトリクスで「どれから対策するか」を決め、
+  台帳で「どう対策するか」を管理する。
+        </pre>
+      </figure>
+
+      <h3>リスク台帳の作り方</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>リスク名</th>
+              <td>具体的なリスクの内容</th>
+            </tr>
+            <tr>
+              <td>確率</th>
+              <td>高・中・低</th>
+            </tr>
+            <tr>
+              <td>影響</th>
+              <td>高・中・低</th>
+            </tr>
+            <tr>
+              <td>原因</th>
+              <td>リスクが発生する根本原因（対策を作るために必須）</th>
+            </tr>
+            <tr>
+              <td>対策</th>
+              <td>回避・低減・移転・受容から選択</th>
+            </tr>
+            <tr>
+              <td>担当者</th>
+              <td>対策の責任者</th>
+            </tr>
+            <tr>
+              <td>期限</th>
+              <td>対策を完了すべき日</th>
+            </tr>
+            <tr>
+              <td>状況</th>
+              <td>新規・対応中・完了・監視中</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>リスク台帳の例</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>No</th><th>リスク</th><th>確率</th><th>影響</th><th>原因</th><th>対策</th><th>担当</th><th>期限</th><th>状況</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</th>
+              <td>要件変更</th>
+              <td>高</th>
+              <td>高</th>
+              <td>顧客の意思決定が遅い</th>
+              <td>仕様凍結日設定、変更管理プロセス強化</th>
+              <td>PM</th>
+              <td>6/30</th>
+              <td>対応中</th>
+            </tr>
+            <tr>
+              <td>2</th>
+              <td>技術難易度</th>
+              <td>中</th>
+              <td>高</th>
+              <td>新技術の採用</th>
+              <td>技術調査、PoC実施</th>
+              <td>SE</th>
+              <td>6/15</th>
+              <td>完了</th>
+            </tr>
+            <tr>
+              <td>3</th>
+              <td>外部遅延</th>
+              <td>中</th>
+              <td>中</th>
+              <td>ベンダーのリソース不足</th>
+              <td>週2回の進捗確認</th>
+              <td>PM</th>
+              <td>継続</th>
+              <td>監視中</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>リスク台帳の記入ポイント</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ポイント</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>原因を必ず書く</th>
+              <td>原因がないと対策が作れない</th>
+            </tr>
+            <tr>
+              <td>対策は4種類から選ぶ</th>
+              <td>回避・低減・移転・受容</th>
+            </tr>
+            <tr>
+              <td>担当者と期限を書く</th>
+              <td>責任の所在を明確にする</th>
+            </tr>
+            <tr>
+              <td>状況は毎週更新する</th>
+              <td>新規・対応中・完了・監視中</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. リスク管理の説明として、最も適切なものはどれか。</summary>
+        <p>ア）問題が起きてから迅速に対処する管理　イ）問題が起きる前に備える予防的な管理　ウ）予算を管理する管理　エ）品質をテストで確認する管理</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — リスク管理は「問題が起きてから対処する」ではなく「起きる前に備える」ための管理。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. リスク管理の目的として、本文で挙げられているものはどれか。</summary>
+        <p>ア）リスクを隠すこと　イ）リスクを事前に見える化し、優先順位をつけ、対策を事前に決めること　ウ）すべてのリスクを完全に除去すること　エ）リスクが発生したら報告しないこと</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — リスク管理の目的は「リスクを事前に見える化する」「優先順位をつける」「対策を事前に決めておく」の3つ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. リスク管理の5ステップのうち、最初に行うものはどれか。</summary>
+        <p>ア）リスク対応　イ）リスク分析　ウ）リスク特定　エ）リスク監視</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — リスク管理の流れは「特定 → 分析 → 評価 → 対応 → 監視」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. リスク対応の4種類に含まれないものはどれか。</summary>
+        <p>ア）回避　イ）低減　ウ）延期　エ）移転</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — リスク対応の4種類は「回避」「低減」「移転」「受容」。「延期」は含まれない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 「難易度が高い機能を削除する」はどのリスク対応に該当するか。</summary>
+        <p>ア）回避　イ）低減　ウ）移転　エ）受容</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 回避はリスクの原因そのものをなくす対応。難易度が高い機能を削除することでリスクを回避する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 「技術調査を早めに行う」はどのリスク対応に該当するか。</summary>
+        <p>ア）回避　イ）低減　ウ）移転　エ）受容</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 低減は発生確率または影響度を下げる対応。早めの技術調査でリスクを低減する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. リスクマトリクスで「赤色（高×高）」に該当するリスクの対応として適切なものはどれか。</summary>
+        <p>ア）様子見で良い　イ）最優先で即時対策が必要　ウ）後回しにして良い　エ）無視して良い</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — リスクマトリクスの赤色（高確率×高影響）は最優先。即時対策が必要。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. リスク台帳に必ず記載すべき項目として、本文で挙げられているものはどれか。</summary>
+        <p>ア）天気予報　イ）原因、対策、担当者、期限、状況　ウ）オフィスの住所　エ）開発言語</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — リスク台帳にはリスク名、確率、影響、原因、対策、担当者、期限、状況を記載する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. リスクマトリクスとリスク台帳の役割の違いとして、適切なものはどれか。</summary>
+        <p>ア）マトリクスは管理する表、台帳は優先順位を決める図　イ）マトリクスは優先順位を決める図、台帳は管理する表　ウ）両方とも同じ役割　エ）両方とも不要である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — リスクマトリクスは優先順位を決める図、リスク台帳は優先順位に基づいて管理する表。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 「影響が小さいリスク」に対する対応として最も適切なものはどれか。</summary>
+        <p>ア）回避　イ）低減　ウ）移転　エ）受容</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 受容は影響が小さいリスクに対して対策せず、起きたら対応する方針。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-11 リスク管理（p121-p134）</p>
+    </section>
+  </main>
+</body>
+</html>

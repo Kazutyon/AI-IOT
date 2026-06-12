@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>10の管理領域（後半）・スコープ管理詳細 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>10の管理領域（後半）・スコープ管理詳細</h1>
+        <p class="lead">PMBOKの10の管理領域の後半5つと、スコープ管理の詳細（成果物スコープ・作業スコープ・管理の流れ）を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#resource-management">資源管理</a>
+        <a href="#communication-management">コミュニケーション管理</a>
+        <a href="#risk-management">リスク管理</a>
+        <a href="#procurement-management">調達管理</a>
+        <a href="#stakeholder-management">ステークホルダー管理</a>
+        <a href="#scope-management">スコープ管理詳細</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>10の管理領域（後半）・スコープ管理詳細</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>資源管理（必要な“力”を整える）</li>
+          <li>コミュニケーション管理（“情報の流れ”を整える）</li>
+          <li>リスク管理（「起きるかもしれないこと」に備える）</li>
+          <li>調達管理（外部の力を適切に使う）</li>
+          <li>ステークホルダー管理（関係者の期待を整える）</li>
+          <li>スコープ管理の詳細（成果物スコープと作業スコープ）</li>
+          <li>スコープ管理の目的・流れ・価値</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>スコープ管理の目的と2つの範囲（成果物・作業）、スコープ管理の流れ</dd></div>
+          <div><dt>中</dt><dd>リスク管理、コミュニケーション管理、ステークホルダー管理の役割</dd></div>
+          <div><dt>低</dt><dd>資源管理、調達管理の詳細</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>資源管理<th>プロジェクトに必要な“力”（人・設備・環境）を整える視点</th>
+              <td>必要なスキルの把握、人員配置、チームの働きやすさを整える</th>
+              <td>良いチームは良い成果を生む</th>
+            </tr>
+            <tr>
+              <td>コミュニケーション管理</th>
+              <td>プロジェクトの“情報の流れ”を整える視点</th>
+              <td>会議体の設計、議事録、報連相、ステークホルダーへの共有</th>
+              <td>情報が正しく流れるとチームは迷わず動ける</th>
+            </tr>
+            <tr>
+              <td>リスク管理</th>
+              <td>「起きるかもしれないこと」に備える視点</th>
+              <td>リスクの洗い出し、影響の整理、対応策の検討</th>
+              <td>問題が起きる前に備える予防的な管理</th>
+            </tr>
+            <tr>
+              <td>調達管理</th>
+              <td>外部の力を適切に使うための視点</th>
+              <td>契約形態の選択、ベンダーとの調整、成果物の受け入れ</th>
+              <td>外部と協力するプロジェクトでは欠かせない</th>
+            </tr>
+            <tr>
+              <td>ステークホルダー管理</th>
+              <td>プロジェクトに関わる人たちの期待を整える視点</th>
+              <td>関係者の洗い出し、期待の理解、適切なコミュニケーション</th>
+              <td>プロジェクトは“人の活動”。関係者の協力が成功に近づく</th>
+            </tr>
+            <tr>
+              <td>成果物スコープ</th>
+              <td>プロジェクトの最終的なアウトプットを示すもの</th>
+              <td>画面・API・データベース・マニュアル・テスト結果など</th>
+              <td>「どんなものを完成させるのか」を共有</th>
+            </tr>
+            <tr>
+              <td>作業スコープ</th>
+              <td>成果物を作るために必要な作業の範囲</th>
+              <td>要件定義・設計・実装・テスト・リリース準備など</th>
+              <td>「どこまでがプロジェクトの作業か」を明確にする</th>
+            </tr>
+            <tr>
+              <td>WBS（Work Breakdown Structure）</th>
+              <td>作業分解構造。プロジェクトの作業を大→中→小へ分解</th>
+              <td>スコープ管理の基礎。抜け漏れ防止、見積りの基盤</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="resource-management" class="lesson-section">
+      <h2>2-1-7. 資源管理</h2>
+      <p>資源管理は、プロジェクトに必要な“力”を整える視点。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>役割</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>人的資源・設備・環境の確保</th>
+              <td>必要なスキルを把握する、人員を適切に配置する、チームの働きやすさを整える</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>良いチームは、良い成果を生む。</p>
+    </section>
+
+    <section id="communication-management" class="lesson-section">
+      <h2>2-1-8. コミュニケーション管理</h2>
+      <p>コミュニケーション管理は、プロジェクトの“情報の流れ”を整える視点。</p>
+      <div class="table-wrap">
+        </table>
+          <thead>
+            <tr><th>役割</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>情報の流れを設計</th>
+              <td>会議体の設計、議事録、報連相、ステークホルダーへの共有</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>情報が正しく流れると、チームは迷わず動ける。</p>
+    </section>
+
+    <section id="risk-management" class="lesson-section">
+      <h2>2-1-9. リスク管理</h2>
+      <p>リスク管理は、「起きるかもしれないこと」に備える視点。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>役割</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>予防的対応</th>
+              <td>リスクを洗い出す、影響を整理する、対応策を考える</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>リスク管理は“問題が起きたときの対応”ではなく、問題が起きる前に備えるための視点。</p>
+    </section>
+
+    <section id="procurement-management" class="lesson-section">
+      <h2>2-1-10. 調達管理</h2>
+      <p>調達管理は、外部の力を適切に使うための視点。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>役割</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>外部委託の管理</th>
+              <td>契約形態の選択、ベンダーとの調整、成果物の受け入れ</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>外部と協力するプロジェクトでは欠かせない。</p>
+    </section>
+
+    <section id="stakeholder-management" class="lesson-section">
+      <h2>2-1-11. ステークホルダー管理</h2>
+      <p>ステークホルダー管理は、プロジェクトに関わる人たちの期待を整える視点。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>役割</th><th>具体的な活動</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>関係者の期待調整</th>
+              <td>関係者を洗い出す、期待を理解する、適切にコミュニケーションする</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>プロジェクトは“人の活動”。関係者の協力が得られると、成功に近づく。</p>
+    </section>
+
+    <section id="scope-management" class="lesson-section">
+      <h2>2-2. スコープ管理</h2>
+      <p>スコープ管理は、「プロジェクトで作るもの・作らないものを明確にし、関係者の認識を揃えるための管理」。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>スコープ管理が重要な理由</figcaption>
+        <pre>
+【なぜスコープ管理が必要か】
+
+  プロジェクトは“何を作るのか”が曖昧なまま進むと：
+    - チームの動きがバラバラになる
+    - 成果物のイメージが揃わない
+    - 迷走して手戻りが発生する
+
+  だからこそスコープ管理は、プロジェクトの土台をつくる重要な視点
+        </pre>
+      </figure>
+
+      <h3>2-2-1. スコープ管理が扱う2つの範囲</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>意味</th><th>具体例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>成果物スコープ</strong></th>
+              <td>プロジェクトの最終的なアウトプットを示す</th>
+              <td>画面、API、データベース、マニュアル、テスト結果、運用手順書</th>
+            </tr>
+            <tr>
+              <td><strong>作業スコープ</strong></th>
+              <td>成果物を作るために必要な作業の範囲</th>
+              <td>要件定義、設計、実装、テスト、リリース準備</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2-2-4. スコープ管理の目的</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>目的</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>① 作るものを明確にする</th>
+              <td>成果物のイメージが揃うと、チームは迷わず作業に集中できる</th>
+            </tr>
+            <tr>
+              <td>② 作らないものも明確にする</th>
+              <td>「やらないこと」を明確にすると、プロジェクトの範囲がはっきりし、余計な作業が入りにくくなる</th>
+            </tr>
+            <tr>
+              <td>③ 関係者の認識を揃える</th>
+              <td>スコープはチームだけでなく、依頼者・ユーザー・上位者など、すべての関係者と共有することが重要</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2-2-5. スコープ管理の流れ</h3>
+      <figure class="wide-diagram">
+        <figcaption>スコープ管理の4ステップ</figcaption>
+        <pre>
+【スコープ管理の流れ】
+
+  STEP 1. 成果物を定義する（成果物スコープ）
+          - 画面一覧、API一覧、データ構造、マニュアルなど
+          - 成果物が具体的であるほど後の工程がスムーズ
+
+  STEP 2. 作業範囲を整理する（作業スコープ）
+          - 要件定義、設計、実装、テスト、リリース準備
+          - これはWBSの基礎になる
+
+  STEP 3. 関係者と合意する
+          - 依頼者、ユーザー、プロジェクトメンバー、上位者
+          - 全員が同じ認識を持つことでプロジェクトは安定
+
+  STEP 4. 変更があれば、影響を整理して合意する
+          - スコープは一度決めたら終わりではない
+          - 必要に応じて見直し、影響を整理してから合意
+        </pre>
+      </figure>
+
+      <h3>2-2-6. スコープ管理がプロジェクトにもたらす価値</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>価値</th><th>効果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>作業の迷いがなくなる</th>
+              <td>チーム全員が何をすべきか明確になる</th>
+            </tr>
+            <tr>
+              <td>関係者の認識が揃う</th>
+              <td>認識ズレによる手戻りが減る</th>
+            </tr>
+            <tr>
+              <td>スケジュールが作りやすくなる</th>
+              <td>作業の漏れがなくなり計画が現実的になる</th>
+            </tr>
+            <tr>
+              <td>コストの見積りが正確になる</th>
+              <td>作業量が明確になるため工数見積りが正確に</th>
+            </tr>
+            <tr>
+              <td>品質の基準が明確になる</th>
+              <td>何をどこまでテストすべきかが明確になる</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>スコープ管理の全体イメージ</figcaption>
+        <pre>
+【スコープ管理の全体像】
+
+  +-----------------------------------------------------------+
+  |                      スコープ管理                         |
+  |                                                           |
+  |   +-------------------+    +-------------------+          |
+  |   |   成果物スコープ   |    |    作業スコープ    |        |
+  |   |  （何を作るか）    |    |   （どう作るか）   |        |
+  |   +-------------------+    +-------------------+          |
+  |            |                          |                   |
+  |            +------------+-------------+                   |
+  |                         v                                 |
+  |              +---------------------+                      |
+  |              |   関係者と合意       |                     |
+  |              | （認識を揃える）      |                    |
+  |              +---------------------+                      |
+  |                         |                                 |
+  |                         v                                 |
+  |              +---------------------+                      |
+  |              |   変更管理           |                     |
+  |              | （影響分析→合意）    |                    |
+  |              +---------------------+                      |
+  |                                                           |
+  +-----------------------------------------------------------+
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 資源管理の役割として、最も適切なものはどれか。</summary>
+        <p>ア）情報の流れを整える　イ）必要なスキルを把握し人員を適切に配置する　ウ）将来の不確実性に備える　エ）外部委託の契約を管理する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 資源管理は必要なスキルの把握、人員配置、チームの働きやすさを整える。アはコミュニケーション管理、ウはリスク管理、エは調達管理。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. リスク管理に関する説明として、適切なものはどれか。</summary>
+        <p>ア）問題が起きてから対応する管理　イ）問題が起きる前に備える予防的な管理　ウ）プロジェクトの予算を管理すること　エ）チームの働きやすさを整えること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — リスク管理は問題が起きる前に備える予防的な管理。アは課題管理、ウはコスト管理、エは資源管理。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ステークホルダー管理の役割として、最も適切なものはどれか。</summary>
+        <p>ア）外部委託の契約を管理する　イ）プロジェクトに関わる人たちの期待を整える　ウ）作業を分解して見える化する　エ）品質基準を決める</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ステークホルダー管理は関係者の期待を理解し、適切にコミュニケーションする。アは調達管理、ウはWBS、エは品質管理。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 成果物スコープの例として、適切でないものはどれか。</summary>
+        <p>ア）画面　イ）API　ウ）要件定義という作業　エ）マニュアル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 「要件定義という作業」は作業スコープの例。成果物スコープは画面、API、データベース、マニュアルなどの完成物。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 作業スコープの例として、適切なものはどれか。</summary>
+        <p>ア）完成した画面　イ）テスト結果報告書　ウ）実装という作業　エ）データベース</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 「実装という作業」は作業スコープの例。ア、イ、エは成果物スコープ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. スコープ管理の目的として、本文で挙げられていないものはどれか。</summary>
+        <p>ア）作るものを明確にする　イ）作らないものも明確にする　ウ）関係者の認識を揃える　エ）予算内で完了させる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 「予算内で完了させる」はコスト管理の目的。スコープ管理の目的は作るもの・作らないものを明確にし、認識を揃えること。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. スコープ管理の流れの中で「STEP 3」に該当するものはどれか。</summary>
+        <p>ア）成果物を定義する　イ）作業範囲を整理する　ウ）関係者と合意する　エ）変更があれば影響を整理する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スコープ管理の流れは「成果物定義 → 作業範囲整理 → 関係者と合意 → 変更があれば影響整理して合意」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 調達管理が特に重要となるプロジェクトはどれか。</summary>
+        <p>ア）すべてを自社内で完結するプロジェクト　イ）外部ベンダーと協力するプロジェクト　ウ）1人で開発する小規模プロジェクト　エ）オープンソースのみを使用するプロジェクト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 調達管理は外部の力を適切に使うための管理。外部ベンダーと協力するプロジェクトでは欠かせない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. スコープ管理が機能するとプロジェクトにもたらす価値として、適切でないものはどれか。</summary>
+        <p>ア）作業の迷いがなくなる　イ）スケジュールが作りやすくなる　ウ）変更が一切発生しなくなる　エ）品質の基準が明確になる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — スコープ管理が機能しても変更が一切発生しなくなるわけではない。変更は発生するものであり、適切に管理することが重要。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. プロジェクトは“人の活動”であり、関係者の協力が成功に近づくという視点を持つ管理領域はどれか。</summary>
+        <p>ア）コスト管理　イ）品質管理　ウ）スケジュール管理　エ）ステークホルダー管理</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — ステークホルダー管理は関係者の期待を整え、協力を得るための管理領域。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-1-7〜2-1-11、2-2 スコープ管理（p33-p42）</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>進捗管理 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>進捗管理</h1>
+        <p class="lead">進捗管理の目的・流れ・進捗率の考え方・代表的な指標を理解し、プロジェクトを「予測可能な状態」に保つ。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#progress-overview">進捗管理とは</a>
+        <a href="#progress-flow">進捗管理の流れ</a>
+        <a href="#progress-rate">進捗率の考え方</a>
+        <a href="#metrics">代表的な指標</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>進捗管理</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>進捗管理とは「計画と実績の差」を把握し、遅延を早期発見するための管理</li>
+          <li>プロジェクト失敗の最大の理由は「遅れに気づくのが遅いこと」</li>
+          <li>進捗管理の目的は「遅れをゼロにする」ではなく「遅れを早く見つける」こと</li>
+          <li>進捗率は「感覚」ではなく「完了した作業」で決める</li>
+          <li>代表的な指標：予定工数vs実績工数、予定日数vs実績日数、完了タスク数vs予定タスク数</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>進捗管理の目的、進捗率の正しい考え方</dd></div>
+          <div><dt>中</dt><dd>進捗管理の流れ、代表的な指標、遅れの原因分析</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>進捗管理</th>
+              <td>計画（スケジュール）と実績の差を把握し、遅れを早期に発見して対策するための管理</th>
+              <td>プロジェクトを「予測可能な状態」に保つ仕組み</th>
+            </tr>
+            <tr>
+              <td>進捗率</th>
+              <td>作業がどれだけ終わったかを示す数字</th>
+              <td>「感覚」ではなく「完了した作業」で決める。遅れの早期発見のために使う</th>
+            </tr>
+            <tr>
+              <td>予定工数vs実績工数</th>
+              <td>計画した工数と実際にかかった工数を比較する指標</th>
+              <td>実績が予定を上回った場合は原因分析が必要</th>
+            </tr>
+            <tr>
+              <td>予定日数vs実績日数</th>
+              <td>計画した日数と実際にかかった日数を比較する指標</th>
+              <td>クリティカルパスに影響する可能性を判断する</th>
+            </tr>
+            <tr>
+              <td>完了タスク数vs予定タスク数</th>
+              <td>計画したタスク数と完了したタスク数を比較する指標</th>
+              <td>シンプルで分かりやすい進捗指標</th>
+            </tr>
+            <tr>
+              <td>リカバリ計画</th>
+              <td>遅れを回復するための対策計画</th>
+              <td>人を追加する、並行作業にする、作業を削る、順番を変えるなどの方法がある</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="progress-overview" class="lesson-section">
+      <h2>2-7. 進捗管理</h2>
+      <p>進捗管理は、「計画（スケジュール）と実績の差」を把握し、遅れを早期に発見して対策するための管理。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>進捗管理がないと起こる問題</figcaption>
+        <pre>
+【プロジェクトが失敗する最大の理由】
+
+  遅れに気づくのが遅いこと！
+
+  よくある失敗パターン：
+    - 気づいたら1週間遅れていた
+    - 気づいたらテスト期間が足りない
+    - 気づいたらリリース日に間に合わない
+
+  【本質】
+  これは「進捗管理が機能していない」状態。
+  進捗管理は、プロジェクトを“予測可能な状態”に保つための仕組み。
+        </pre>
+      </figure>
+
+      <h3>2-7-1. 進捗管理の目的</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>目的</th><th>説明</th>
+            <tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 遅れを早期に発見する</strong></th>
+              <td>遅れは早く見つければ修正できる。遅く見つかるほど修正が困難になる。進捗管理の目的は「遅れをゼロにする」ではなく「遅れを早く見つける」こと</th>
+            </tr>
+            <tr>
+              <td><strong>② 遅れの原因を特定し、対策を打つ</strong></th>
+              <td>遅れには必ず理由がある。作業量の見積りミス、依存作業の遅れ、レビュー待ち、担当者の負荷過多、外部要因などを特定する</th>
+            </tr>
+            <tr>
+              <td><strong>③ プロジェクトを“予測可能”にする</strong></th>
+              <td>このまま進めば間に合うのか、どこにリスクがあるのか、どこに人を追加すべきか、どこを短縮すべきかが明確になる</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="progress-flow" class="lesson-section">
+      <h2>2-7-2. 進捗管理の流れ</h2>
+
+      <figure class="wide-diagram">
+        <figcaption>進捗管理5ステップ</figcaption>
+        <pre>
+【進捗管理の流れ】
+
+  STEP1. 計画（ガントチャート）を基準にする
+         進捗管理は、ガントチャート（計画）と実績を比較する作業。
+         計画が曖昧だと、進捗管理は成立しない。
+
+  STEP2. 実績を収集する（毎日 or 毎週）
+         毎日の朝会（デイリー）、週次の進捗会議、タスク管理ツール、チャットでの報告。
+         重要なのは「作業が何％進んだか」ではなく「何が終わったか」を確認すること。
+
+  STEP3. 計画との差分を確認する
+         差分は「前倒し」「予定通り」「遅れ」の3種類。
+         特に重要なのは遅れの早期発見。
+
+  STEP4. 遅れの原因を特定する
+         作業量の見積りミス、依存作業の遅れ、レビュー待ち、担当者の負荷過多、外部要因。
+
+  STEP5. 対策を決める（リカバリ計画）
+         人を追加する、並行作業にする（SS）、作業を削る、作業の順番を変える、
+         レビューを前倒しする、クリティカルパス上の作業を優先する。
+        </pre>
+      </figure>
+
+      <h3>遅れの原因5種類</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>原因</th><th>具体例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>作業量の見積りミス</th>
+              <td>想定よりも実際の作業量が多かった</th>
+            </tr>
+            <tr>
+              <td>依存作業の遅れ</th>
+              <td>前工程が遅れた影響で自分の作業も遅れた</th>
+            </tr>
+            <tr>
+              <td>レビュー待ち</th>
+              <td>レビュアーの都合で承認が遅れている</th>
+            </tr>
+            <tr>
+              <td>担当者の負荷過多</th>
+              <td>複数のタスクを同時に抱えている</th>
+            </tr>
+            <tr>
+              <td>外部要因</th>
+              <td>仕様変更、障害発生、ベンダーの遅延</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>対策（リカバリ計画）の例</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>対策</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>人を追加する</th>
+              <td>遅れている作業に追加メンバーをアサイン</th>
+            </tr>
+            <tr>
+              <td>並行作業にする（SS）</th>
+              <td>直列になっている作業を並行化して期間短縮</th>
+            </tr>
+            <tr>
+              <td>作業を削る</th>
+              <td>必須でない作業を後続フェーズに移す</th>
+            </tr>
+            <tr>
+              <td>作業の順番を変える</th>
+              <td>依存関係を見直し、効率的な順序に変更</th>
+            </tr>
+            <tr>
+              <td>レビューを前倒しする</th>
+              <td>レビューを早めて承認を加速</th>
+            </tr>
+            <tr>
+              <td>クリティカルパス上の作業を優先する</th>
+              <td>リソースをクリティカルパスに集中させる</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="progress-rate" class="lesson-section">
+      <h2>2-7-3. 進捗率の考え方</h2>
+      <p>進捗率は、「作業がどれだけ終わったか」を示す数字。初心者はここで必ずつまずく。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ルール</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 進捗率は“感覚”で決めてはいけない</strong></th>
+              <td>×「たぶん半分くらい終わりました」、×「気持ち的には70%です」→ これは進捗管理ではない</th>
+            </tr>
+            <tr>
+              <td><strong>② 進捗率は“完了した作業”で決める</strong></th>
+              <td>5つの作業のうち2つ終わった → 40%。10時間の作業のうち4時間終わった → 40%。完了ベースで判断する</th>
+            </tr>
+            <tr>
+              <td><strong>③ 進捗率は“遅れの早期発見”のために使う</strong></th>
+              <td>進捗率は「数字を出すため」ではなく、遅れを早く見つけるための指標</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>進捗率の正しい計算例</figcaption>
+        <pre>
+【進捗率の計算例】
+
+  例1：タスクベース
+    総タスク数：10件
+    完了タスク：4件
+    進捗率 = 4 / 10 = 40%
+
+  例2：時間ベース
+    総工数：20時間
+    実績工数：8時間
+    進捗率 = 8 / 20 = 40%
+
+  【重要】「感覚」や「気持ち」で進捗率を決めてはいけない。
+  必ず客観的な完了ベースで計算する。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="metrics" class="lesson-section">
+      <h2>2-7-4. 進捗管理で使う代表的な指標</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>指標</th><th>計算方法</th><th>意味</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+               unless<strong>予定工数 vs 実績工数</strong></th>
+              <td>予定：8時間、実績：12時間</th>
+              <td>4時間の遅れ → 原因分析が必要</th>
+            </tr>
+            <tr>
+               unless<strong>予定日数 vs 実績日数</strong></th>
+              <td>予定：3日、実績：5日</th>
+              <td>2日の遅れ → クリティカルパスに影響する可能性</th>
+            </tr>
+            <tr>
+               unless<strong>完了タスク数 vs 予定タスク数</strong></th>
+              <td>予定：10件、完了：7件</th>
+              <td>3件の遅れ</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2-7-5. 進捗管理の効果</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>効果</th><th>結果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>遅れが早く見つかる</th>
+              <td>早期修正が可能になる</th>
+            </tr>
+            <tr>
+              <td>遅れの原因が明確になる</th>
+              <td>適切な対策を打てる</th>
+            </tr>
+            <tr>
+              <td>対策が早く打てる</th>
+              <td>ダメージを最小化できる</th>
+            </tr>
+            <tr>
+              <td>プロジェクトが予測可能になる</th>
+              <td>チームが迷わず動ける</th>
+            </tr>
+            <tr>
+              <td>ステークホルダーへの説明がしやすくなる</th>
+              <td>信頼関係を維持できる</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>進捗管理の全体イメージ</figcaption>
+        <pre>
+【進捗管理の全体像】
+
+  +-----------------------------------------------------------+
+  |                      進捗管理                             |
+  |                                                           |
+  |  計画（ガントチャート）                                   |
+  |         |                                                 |
+  |         | 比較                                            |
+  |         v                                                 |
+  |  実績収集（何が終わったか）                               |
+  |         |                                                 |
+  |         v                                                 |
+  |  差分確認（遅れの有無）                                   |
+  |         |                                                 |
+  |         +---> 遅れなし → 継続監視                        |
+  |         |                                                 |
+  |         +---> 遅れあり → 原因分析 → 対策実施            |
+  |                                                           |
+  +-----------------------------------------------------------+
+
+  進捗管理はプロジェクトの“健康診断”
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 進捗管理の説明として、最も適切なものはどれか。</summary>
+        <p>ア）計画通りに進めることを絶対に守る管理　イ）計画と実績の差を把握し、遅れを早期に発見する管理　ウ）プロジェクトの予算を管理すること　エ）チームメンバーの評価をすること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 進捗管理は「計画と実績の差」を把握し、遅れを早期に発見して対策するための管理。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. プロジェクトが失敗する最大の理由として本文で挙げられているものはどれか。</summary>
+        <p>ア）予算不足　イ）技術力不足　ウ）遅れに気づくのが遅いこと　エ）コミュニケーション不足</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — プロジェクトが失敗する最大の理由は「遅れに気づくのが遅いこと」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 進捗管理の目的として、適切なものはどれか。</summary>
+        <p>ア）遅れをゼロにすること　イ）遅れを早く見つけること　ウ）計画を絶対に変更しないこと　エ）進捗率を100%にすること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 進捗管理の目的は「遅れをゼロにする」ではなく「遅れを早く見つける」こと。早く見つければ修正可能。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 進捗管理で実績を収集する際に重要なことは何か。</summary>
+        <p>ア）作業が何％進んだかを感覚で報告する　イ）何が終わったかを客観的に確認する　ウ）気持ちを報告する　エ）将来の予測を報告する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 重要なのは「作業が何％進んだか」ではなく「何が終わったか」を確認すること。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 進捗率の正しい考え方はどれか。</summary>
+        <p>ア）感覚で「たぶん半分くらい」と決める　イ）気持ちを反映して決める　ウ）完了した作業ベースで決める　エ）チームの雰囲気で決める</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 進捗率は「感覚」ではなく「完了した作業」で決める。完了ベースで判断する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 総タスク数20件、完了タスク数8件の場合の進捗率は何％か。</summary>
+        <p>ア）20％　イ）40％　ウ）60％　エ）80％</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 進捗率 = 完了タスク数 ÷ 総タスク数 = 8 ÷ 20 = 40%</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 進捗管理で使う代表的な指標として、本文で挙げられているものはどれか。</summary>
+        <p>ア）顧客満足度　イ）予定工数vs実績工数　ウ）バグ件数　エ）チームの年齢構成</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 代表的な指標は「予定工数vs実績工数」「予定日数vs実績日数」「完了タスク数vs予定タスク数」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 遅れの原因として、本文で挙げられているものはどれか。</summary>
+        <p>ア）天候不良　イ）作業量の見積りミス　ウ）オフィスの立地　エ）社長の気分</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 遅れの原因は「作業量の見積りミス」「依存作業の遅れ」「レビュー待ち」「担当者の負荷過多」「外部要因」の5種類。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. リカバリ計画（遅れの対策）の例として、本文で挙げられているものはどれか。</summary>
+        <p>ア）計画を無視する　イ）人を減らす　ウ）人を追加する、並行作業にする、作業を削る　エ）残業を禁止する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — リカバリ計画の例は「人を追加する」「並行作業にする（SS）」「作業を削る」「作業の順番を変える」「レビューを前倒しする」など。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 進捗管理が機能すると得られる効果として、適切でないものはどれか。</summary>
+        <p>ア）遅れが早く見つかる　イ）プロジェクトが予測可能になる　ウ）必ず予算内で完了する　エ）ステークホルダーへの説明がしやすくなる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 進捗管理が機能しても「必ず予算内で完了する」わけではない。予算管理は別途必要な管理領域。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-7 進捗管理（p78-p86）</p>
+    </section>
+  </main>
+</body>
+</html>

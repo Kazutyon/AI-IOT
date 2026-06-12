@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>課題管理 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>課題管理</h1>
+        <p class="lead">課題管理の目的・流れ・リスク管理との違い・課題管理表の作り方を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#issue-overview">課題管理とは</a>
+        <a href="#risk-difference">リスク管理との違い</a>
+        <a href="#issue-flow">課題管理の流れ</a>
+        <a href="#issue-register">課題管理表</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>課題管理</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>課題管理は「すでに発生してしまった問題」を扱う管理</li>
+          <li>課題管理の目的：発生した問題を見える化し、責任と期限を明確にして解決する</li>
+          <li>リスク管理（未来の不確実性）と課題管理（現在の問題）は明確に区別する</li>
+          <li>課題管理の核心：担当者（OWNER）と期限（DUEDATE）を明確にすること</li>
+          <li>担当者と期限がない課題は、課題ではなく「愚痴」である</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>課題管理とリスク管理の違い、課題管理の核心（担当者・期限）</dd></div>
+          <div><dt>中</dt><dd>課題管理の流れ、課題管理表の項目</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <tr>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>課題管理（Issue Management）</th>
+              <td>すでに発生してしまった問題を、影響が広がる前に確実に解決するための管理</th>
+              <td>「今まさに起きている問題」を扱う。リスク管理と対比される</th>
+            </tr>
+            <tr>
+              <td>リスク管理</th>
+              <td>未来の不確実性に備える管理</th>
+              <td>「まだ起きていない問題」を扱う。予防が目的</th>
+            </tr>
+            <tr>
+              <td>課題管理表</th>
+              <td>課題を一覧化し、担当者・期限・状況を管理する表</th>
+              <td>課題管理の核心ツール</th>
+            </tr>
+            <tr>
+              <td>OWNER（担当者）</th>
+              <td>課題解決の責任者</th>
+              <td>担当者がいない課題は永遠に解決しない</th>
+            </tr>
+            <tr>
+              <td>DUEDATE（期限）</th>
+              <td>課題を解決すべき期日</th>
+              <td>期限がない課題は優先されず放置される</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="issue-overview" class="lesson-section">
+      <h2>2-12. 課題管理（Issue Management）</h2>
+      <p>課題管理は、すでに発生してしまった問題を、影響が広がる前に確実に解決するための管理。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>課題管理の重要性</figcaption>
+        <pre>
+【課題管理が必要な理由】
+
+  課題は放置すると必ず悪化する：
+    - 仕様が曖昧
+    - 外部ベンダーが遅れている
+    - テスト環境が準備できていない
+    - 顧客の承認が止まっている
+
+  これらを“見える状態”にし、確実に解決することが課題管理の役割。
+
+  課題管理の核心：
+    「誰が、いつまでに、どう解決するか」を明確にすること。
+    責任の所在が曖昧な課題は、永遠に解決しない。
+        </pre>
+      </figure>
+
+      <h3>2-12-1. 課題管理の目的</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>目的</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① 発生した問題を見える化する</strong></th>
+              <td>課題は見えない状態で放置すると必ず悪化する。一覧化して「見える状態」にする</th>
+            </tr>
+            <tr>
+              <td><strong>② 解決の責任と期限を明確にする</strong></th>
+              <td>誰が、いつまでに、どう解決するかを明確にする。責任の所在が曖昧な課題は永遠に解決しない</th>
+            </tr>
+            <tr>
+              <td><strong>③ プロジェクトの停滞を防ぐ</strong></th>
+              <td>課題を放置するとスケジュール遅延、コスト超過、品質低下、顧客不満、チーム混乱につながる</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>課題を放置した場合の影響</figcaption>
+        <pre>
+【課題放置の連鎖】
+
+  課題発生
+      |
+      v
+  放置する
+      |
+      +---> スケジュール遅延
+      |
+      +---> コスト超過
+      |
+      +---> 品質低下
+      |
+      +---> 顧客不満
+      |
+      +---> チーム混乱
+      |
+      v
+  プロジェクト失敗
+
+  課題管理は、プロジェクトを止めないための管理。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="risk-difference" class="lesson-section">
+      <h2>2-12-2. リスク管理との違い</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>リスク管理</th><th>課題管理</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>状態</th>
+              <td>まだ起きていない</th>
+              <td>すでに起きている</th>
+            </tr>
+            <tr>
+              <td>時間軸</th>
+              <td>未来</th>
+              <td>現在</th>
+            </tr>
+            <tr>
+              <td>性質</th>
+              <td>不確実性</th>
+              <td>発生済みの問題</th>
+            </tr>
+            <tr>
+              <td>対応</th>
+              <td>予防</th>
+              <td>解決</th>
+            </tr>
+            <tr>
+              <td>管理表</th>
+              <td>リスク台帳</th>
+              <td>課題管理表</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>リスク管理と課題管理の関係</figcaption>
+        <pre>
+【リスク管理 vs 課題管理】
+
+  時間軸：過去 ---------- 現在 ---------- 未来
+                         |              |
+                         |              |
+                    課題管理        リスク管理
+                    （発生済み）    （未発生）
+                         |              |
+                         v              v
+                    解決する        予防する
+
+  関係性：
+    リスクが現実化すると課題になる
+    課題を放置すると新たなリスクを生む
+
+  例：
+    リスク「顧客の承認が遅れるかもしれない」
+        ↓ 現実化
+    課題「顧客の承認が遅れている」
+        ↓ 放置
+    新リスク「納期遅延のリスク」
+        </pre>
+      </figure>
+    </section>
+
+    <section id="issue-flow" class="lesson-section">
+      <h2>2-12-3. 課題管理の流れ</h2>
+
+      <figure class="wide-diagram">
+        <figcaption>課題管理5ステップ</figcaption>
+        <pre>
+【課題管理の流れ】
+
+  STEP1. 課題を特定する（発生した問題を洗い出す）
+         事実ベースで書く。例：
+         「顧客の承認が遅れている」
+         「テスト環境が準備できていない」
+         「外部ベンダーの成果物が遅延」
+
+  STEP2. 課題の影響範囲を整理する
+         スケジュール・コスト・品質・顧客満足度への影響を明確にする
+
+  STEP3. 解決策を検討する
+         課題管理では“どう解決するか”が最重要
+
+  STEP4. 担当者と期限を決める
+         課題管理の本質はここ。担当者と期限がない課題は課題ではなく“愚痴”
+
+  STEP5. 状況を更新し、解決まで追跡する
+         状況：新規・対応中・保留・完了
+         課題管理は“追跡”が命
+        </pre>
+      </figure>
+
+      <h3>課題特定の良い例と悪い例</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>区分</th><th>例</th><th>問題点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>良い例（事実ベース）</strong></th>
+              <td>テスト環境が6/1時点で未構築</th>
+              <td>事実が明確。対策が立てやすい</th>
+            </tr>
+            <tr>
+              <td><strong>悪い例（曖昧）</strong></th>
+              <td>テスト環境が心配</th>
+              <td>事実ではない。対策が立てられない</th>
+            </tr>
+            <tr>
+              <td><strong>良い例（事実ベース）</strong></th>
+              <td>顧客承認が3日遅延</th>
+              <td>遅延日数が明確。影響分析ができる</th>
+            </tr>
+            <tr>
+              <td><strong>悪い例（曖昧）</strong></th>
+              <td>顧客が遅い気がする</th>
+              <td>感情・印象。事実ではない</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>影響の書き方テンプレート</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>影響種別</th><th>書き方例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>スケジュール</th>
+              <td>〇〇工程が△日遅延する可能性</th>
+            </tr>
+            <tr>
+              <td>品質</th>
+              <td>レビューが遅れ、品質低下の恐れ</th>
+            </tr>
+            <tr>
+              <td>コスト</th>
+              <td>追加工数が発生する可能性</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>原因の書き方テンプレート</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>カテゴリ</th><th>原因例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>人</th>
+              <td>担当者の負荷過多</th>
+            </tr>
+            <tr>
+              <td>物</th>
+              <td>環境が準備できていない</th>
+            </tr>
+            <tr>
+              <td>方法</th>
+              <td>手順が曖昧</th>
+            </tr>
+            <tr>
+              <td>外部</th>
+              <td>ベンダーのリソース不足</th>
+            </tr>
+            <tr>
+              <td>顧客</th>
+              <td>承認プロセスが遅い</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="issue-register" class="lesson-section">
+      <h2>2-12-5. 課題管理表</h2>
+
+      <figure class="wide-diagram">
+        <figcaption>課題管理表のテンプレート</figcaption>
+        <pre>
+   [課題管理表 テンプレート]
+  +----+------------------+--------+------------+------------------+--------+------+----------+
+  | No | 課題             | 影響   |原因        |対策              |担当    | 期限 | 状況     |
+  +----+------------------+--------+------------+------------------+--------+------+----------+
+  | 1  | テスト環境未構築 | 3日遅延|作業遅延    |優先度を上げて依頼|インフラ| 6/05 | 対応中   |
+  +----+------------------+--------+------------+------------------+--------+------+----------+
+  | 2  | 顧客承認遅延     |設計停止|判断不明    |承認期限を設定    | PM     | 6/10 | 対応中   | 
+  +----+------------------+--------+------------+------------------+--------+------+----------+
+  | 3  | ベンダー遅延     | 5日遅延|リソース不足|追加リソース依頼  |ベンダー| 6/15 | 監視中   |
+  +----+------------------+--------+------------+------------------+--------+------+----------+
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th><th>記入時の注意点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>No</th>
+              <td>課題を識別する番号</th>
+              <td>連番で管理する</th>
+            </tr>
+            <tr>
+              <td>課題</th>
+              <td>問題の内容</th>
+              <td>事実ベースで具体的に書く</th>
+            </tr>
+            <tr>
+              <td>影響</th>
+              <td>スケジュール・品質・コストへの影響</th>
+              <td>数字や具体的な影響を書く</th>
+            </tr>
+            <tr>
+              <td>原因</th>
+              <td>問題が発生した根本原因</th>
+              <td>原因が不明だと対策が作れない</th>
+            </tr>
+            <tr>
+              <td>対策</th>
+              <td>解決するための具体的な行動</th>
+              <td>原因に紐づけて書く</th>
+            </tr>
+            <tr>
+              <td>担当</th>
+              <td>解決責任者</th>
+              <td>必ず1人を指定する</th>
+            </td>
+            <tr>
+              <td>期限</th>
+              <td>解決すべき期日</th>
+              <td>具体的な日付を入れる</th>
+            </tr>
+            <tr>
+              <td>状況</th>
+              <td>新規・対応中・保留・完了・監視中</th>
+              <td>定期的に更新する</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>課題管理表を作る際のチェックポイント</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>チェック項目</th><th>確認内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>事実が書かれているか</th>
+              <td>「心配」「気がする」などの曖昧表現がないか</th>
+            </tr>
+            <tr>
+              <td>影響が明確か</th>
+              <td>どの程度の影響があるか具体的に書かれているか</th>
+            </tr>
+            <tr>
+              <td>原因が特定されているか</th>
+              <td>原因が不明だと対策が作れない</th>
+            </tr>
+            <tr>
+              <td>対策が原因に紐づいているか</th>
+              <td>原因に対して適切な対策が考えられているか</th>
+            </tr>
+            <tr>
+              <td>担当者と期限があるか</th>
+              <td>担当者と期限がない課題は「愚痴」である</th>
+            </tr>
+            <tr>
+              <td>状況が更新されているか</th>
+              <td>古い情報のままになっていないか</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>課題管理の全体イメージ</figcaption>
+        <pre>
+【課題管理の全体像】
+
+  +-----------------------------------------------------------+
+  |                      課題管理                             |
+  |                                                           |
+  |  課題発見（事実ベース）                                   |
+  |         |                                                 |
+  |         v                                                 |
+  |  影響分析（スケジュール・品質・コスト）                   |
+  |         |                                                 |
+  |         v                                                 |
+  |  原因特定（人・物・方法・外部・顧客）                     |
+  |         |                                                 |
+  |         v                                                 |
+  |  対策立案（原因に紐づけて）                               |
+  |         |                                                 |
+  |         v                                                 |
+  |  担当者・期限設定                                         |
+  |         |                                                 |
+  |         v                                                 |
+  |  追跡・状況更新 → 解決完了                               |
+  |                                                           |
+  +-----------------------------------------------------------+
+
+  課題管理の核心：「誰が、いつまでに、どう解決するか」
+  担当者と期限がない課題は、課題ではなく“愚痴”。
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 課題管理（Issue Management）の説明として、最も適切なものはどれか。</summary>
+        <p>ア）未来の不確実性に備える管理　イ）すでに発生してしまった問題を解決する管理　ウ）プロジェクトの予算を管理する管理　エ）品質をテストで確認する管理</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 課題管理は「すでに発生してしまった問題」を扱う管理。アはリスク管理の説明。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. リスク管理と課題管理の違いとして、適切なものはどれか。</summary>
+        <p>ア）リスク管理は現在、課題管理は未来を扱う　イ）リスク管理は予防、課題管理は解決　ウ）リスク管理は解決、課題管理は予防　エ）両者は全く同じである</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — リスク管理は「予防」、課題管理は「解決」が目的。リスクは未来、課題は現在を扱う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 課題管理の目的として、本文で挙げられているものはどれか。</summary>
+        <p>ア）課題を隠すこと　イ）発生した問題を見える化し、責任と期限を明確にして解決すること　ウ）課題を先送りにすること　エ）課題を無視すること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 課題管理の目的は「発生した問題を見える化する」「解決の責任と期限を明確にする」「プロジェクトの停滞を防ぐ」の3つ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 課題管理の核心として、本文で述べられているものはどれか。</summary>
+        <p>ア）課題を多く見つけること　イ）課題を詳しく分析すること　ウ）担当者と期限を明確にすること　エ）課題を報告書にまとめること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 課題管理の核心は「誰が、いつまでに、どう解決するか」を明確にすること。担当者と期限がない課題は永遠に解決しない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 「担当者と期限がない課題」を何と呼ぶか、本文で述べられているものはどれか。</summary>
+        <p>ア）重要な課題　イ）優先課題　ウ）愚痴　エ）リスク</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 担当者と期限がない課題は、課題ではなく「愚痴」である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 課題管理表の必須項目として、本文で挙げられているものはどれか。</summary>
+        <p>ア）天気予報　イ）担当者、期限、状況　ウ）オフィスの住所　エ）開発言語</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 課題管理表には課題、影響、原因、対策、担当者、期限、状況を記載する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 課題を特定する際に「良い例（事実ベース）」とされるものはどれか。</summary>
+        <p>ア）テスト環境が心配　イ）顧客が遅い気がする　ウ）テスト環境が6/1時点で未構築　エ）ベンダーが不安</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 事実ベースの例は「テスト環境が6/1時点で未構築」。ア、イ、エは曖昧な表現で対策が立てられない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. リスクが現実化すると何になるか。</summary>
+        <p>ア）課題になる　イ）消滅する　ウ）重要度が下がる　エ）自動的に解決する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — リスクは現実化すると課題になる。例：リスク「承認が遅れるかも」→ 現実化 → 課題「承認が遅れている」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 課題を放置した場合の影響として、本文で挙げられているものはどれか。</summary>
+        <p>ア）自動的に解決する　イ）スケジュール遅延、コスト超過、品質低下　ウ）プロジェクトが成功する　エ）チームの士気が上がる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 課題を放置するとスケジュール遅延、コスト超過、品質低下、顧客不満、チーム混乱につながる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 課題管理表の「状況」欄に記載する状態として、本文で挙げられているものはどれか。</summary>
+        <p>ア）良い・悪い　イ）新規・対応中・保留・完了・監視中　ウ）楽観・悲観　エ）緊急・非緊急</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 状況の例は「新規」「対応中」「保留」「完了」「監視中」など。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第2章 PMBOKが示す10の管理領域 / 2-12 課題管理（Issue Management）（p135-p145）</p>
+    </section>
+  </main>
+</body>
+</html>

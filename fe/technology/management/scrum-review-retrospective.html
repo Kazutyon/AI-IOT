@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>スクラムのレビュー・レトロスペクティブ・比較 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / マネジメント</p>
+        <h1>スクラムのレビュー・レトロスペクティブ・比較</h1>
+        <p class="lead">スプリントレビュー・レトロスペクティブの目的、スクラムが強力な理由、ウォーターフォールとアジャイルの違いを理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#scrum-events">スプリントレビュー</a>
+        <a href="#retrospective">レトロスペクティブ</a>
+        <a href="#scrum-strength">スクラムが強力な理由</a>
+        <a href="#comparison">比較表</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>スクラムのレビュー・レトロスペクティブ・比較</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>スプリントレビューの目的（動くものを見せてフィードバックをもらう）</li>
+          <li>レトロスペクティブの目的（チームの改善会議）</li>
+          <li>スクラムが強力な3つの理由</li>
+          <li>ウォーターフォールとアジャイルの違い（開発の進め方・変更対応・文書・チーム動き方）</li>
+          <li>各モデルが向いている案件の特徴</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ウォーターフォールとアジャイルの比較表、各モデルの向く案件</dd></div>
+          <div><dt>中</dt><dd>スプリントレビューとレトロスペクティブの違い、スクラムの強み</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>スプリントレビュー</td>
+              <td>スプリントの最後に、実際に動くものを見せてフィードバックをもらうイベント</td>
+              <td>「評価される場」ではなく、価値を最大化するための対話の場</td>
+            </tr>
+            <tr>
+              <td>レトロスペクティブ（振り返り）</td>
+              <td>スプリントの最後に行うチームの改善会議</td>
+              <td>「うまくいったこと」「改善したいこと」「次に試すこと」を話し合う</td>
+            </tr>
+            <tr>
+              <td>ウォーターフォール</td>
+              <td>上流から下流へ一方向に進む開発モデル。計画と設計を重視</td>
+              <td>大規模・長期・高信頼性プロジェクトに向く</td>
+            </tr>
+            <tr>
+              <td>アジャイル開発</td>
+              <td>小さく作って短いサイクルで改善を繰り返す開発手法</td>
+              <td>変更を前提に進める。小～中規模に向く</td>
+            </tr>
+            <tr>
+              <td>スコープクリープ</td>
+              <td>無制御な変更によるプロジェクト範囲の拡大</td>
+              <td>変更管理の不足が原因。プロジェクト失敗の主要因</td>
+            </tr>
+            <tr>
+              <td>変更管理</td>
+              <td>変更の影響を分析し、承認された変更だけを正式に反映する管理</td>
+              <td>ウォーターフォールで特に重要。口頭変更は禁止</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="scrum-events" class="lesson-section">
+      <h2>1-4-1-3. スプリントレビュー</h2>
+      <p>スプリントの最後に、実際に動くものを見せてフィードバックをもらうイベント。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>スプリントレビューの流れ</figcaption>
+        <pre>
+【スプリントレビューの目的】
+  完成した機能をデモする
+        |
+        v
+  利害関係者から意見をもらう
+        |
+        v
+  次のスプリントの方向性を調整する
+
+【重要】レビューは「評価される場」ではなく、価値を最大化するための対話の場
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>実施タイミング</td><td>スプリントの最後</td>
+            </tr>
+            <tr><td>参加者</td><td>スクラムチーム + 利害関係者（顧客・ユーザーなど）</td>
+            </tr>
+            <tr><td>主な活動</td><td>完成機能のデモ、フィードバック収集、次の方向性調整</td>
+            </tr>
+            <tr><td>注意点</td><td>「評価される場」ではなく「対話の場」</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="retrospective" class="lesson-section">
+      <h2>1-4-1-4. レトロスペクティブ（チームの改善会議）</h2>
+      <p>スプリントの最後に行う振り返り。チームが毎回少しずつ成長することがスクラムの強み。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>レトロスペクティブの3つの質問</figcaption>
+        <pre>
+【レトロスペクティブで話し合うこと】
+
+  +-------------------------------------+
+  |  1. うまくいったこと                |
+  |     -> 続けるべきプラクティス       |
+  |                                     |
+  |  2. 改善したいこと                  |
+  |     -> 問題点・課題                 |
+  |                                     |
+  |  3. 次のスプリントで試すこと        |
+  |     -> 具体的な改善アクション       |
+  +-------------------------------------+
+        </pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>実施タイミング</td><td>スプリントの最後（レビューの後）</td>
+            </tr>
+            <tr><td>参加者</td><td>スクラムチームのみ（開発者、PO、SM）</td>
+            </tr>
+            <tr><td>主な活動</td><td>振り返り、改善策の検討、次のアクション決定</td>
+            </tr>
+            <tr><td>目的</td><td>チームの生産性をスプリントごとに上げていく</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="scrum-strength" class="lesson-section">
+      <h2>1-4-1-5. スクラムが強力な理由</h2>
+      <p>スクラムは単なる開発手法ではなく、「チームが最大の成果を出すための仕組み」。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>理由</th><th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>① チーム全員が同じ方向を見る</strong></td>
+              <td>役割とイベントが明確なので、「誰が何をするのか」「今何を目指しているのか」が常に共有される</td>
+            </tr>
+            <tr>
+              <td><strong>② 小さく作って早く改善できる</strong></td>
+              <td>スプリントごとに成果を出すため、早く価値を届けられ、早く間違いに気づき、早く改善できる</td>
+            </tr>
+            <tr>
+              <td><strong>③ チームが毎回成長する</strong></td>
+              <td>レトロスペクティブで改善を続けるため、チームの生産性がスプリントごとに上がっていく</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>スクラムの成長サイクル</figcaption>
+        <pre>
+【スクラムの成長サイクル】
+
+   スプリント1 ---------> スプリント2 ---------> スプリント3
+        |                     |                     |
+        | レトロスペクティブ   | レトロスペクティブ |
+        v                     v                     v
+    改善点を発見          改善を適用          さらに改善
+        |                     |                     |
+        +---------------------+---------------------+
+                              |
+                              v
+                    チームの生産性が継続的に向上
+        </pre>
+      </figure>
+    </section>
+
+    <section id="comparison" class="lesson-section">
+      <h2>1-5. ウォーターフォールとアジャイルの違い</h2>
+
+      <h3>1-5-1. 開発の進め方の違い</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>観点</th><th>ウォーターフォール</th><th>アジャイル</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>開発の進め方</td>
+                <td>計画 → 設計 → 実装 → テスト → 運用の順に進む</td>
+                <td>小さく作って、短いサイクルで改善を繰り返す</td>
+            </tr>
+            <tr><td>変更への対応</td>
+                <td>変更は慎重に扱う（影響分析が重要）</td>
+                <td>変更を前提に進める（柔軟に対応）</td>
+            </tr>
+            <tr><td>文書</td>
+                <td>文書が中心。成果物として残す</td>
+                <td>必要最低限。対話を重視</td>
+            </tr>
+            <tr><td>コミュニケーション</td>
+                <td>工程ごとにレビューで認識合わせ</td>
+                <td>毎日・毎スプリントでこまめに認識合わせ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>1-5-4. 向いている案件の違い</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ウォーターフォールが向く</th><th>アジャイルが向く</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>要件が明確</td><td>要件が変わりやすい</td>
+            </tr>
+            <tr><td>文書が重要</td><td>ユーザーと近い</td>
+            </tr>
+            <tr><td>大規模・長期</td><td>小～中規模</td>
+            </tr>
+            <tr><td>高信頼性（金融・官公庁など）</td><td>早く価値を届けたい</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>1-5-5. チームの動き方の違い</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>観点</th><th>ウォーターフォール</th><th>アジャイル</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>チームの動き方</td>
+                <td>工程ごとに担当が変わる</td>
+                <td>チーム全員で価値を作る</td>
+            </tr>
+            <tr><td>役割分担</td>
+                <td>役割分担が明確。大人数でも管理しやすい</td>
+                <td>役割はあるが、境界は柔軟</td>
+            </tr>
+            <tr><td>チームの特性</td>
+                <td>工程管理が重要</td>
+                <td>自律的に動くチームが強い</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>開発モデル選択のイメージ</figcaption>
+        <pre>
+【プロジェクトの特徴によるモデル選択】
+
+  要件が明確 + 大規模 + 長期 + 高信頼性が必要
+        |
+        +---------------------> ウォーターフォール
+
+  要件が変わりやすい + 小規模 + 短期 + 早く価値を届けたい
+        |
+        +---------------------> アジャイル
+
+  中間的なプロジェクト
+        |
+        +---------------------> 反復型モデル または ハイブリッド
+        </pre>
+      </figure>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. スプリントレビューの目的として、最も適切なものはどれか。</summary>
+        <p>ア）チーム内の改善点を話し合う　イ）実際に動くものを見せてフィードバックをもらう　ウ）毎日の進捗を確認する　エ）予算の執行状況を報告する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スプリントレビューはスプリントの最後に実際に動くものを見せ、利害関係者からフィードバックをもらう場。アはレトロスペクティブ、ウはデイリースクラム。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. レトロスペクティブで話し合う内容として、本文で挙げられているものはどれか。</summary>
+        <p>ア）機能のデモンストレーション　イ）うまくいったこと・改善したいこと・次に試すこと　ウ）次のスプリントの優先順位　エ）顧客からの要求事項</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — レトロスペクティブでは「うまくいったこと」「改善したいこと」「次のスプリントで試すこと」を話し合う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. スクラムが強力な理由として、本文で挙げられているものはどれか。</summary>
+        <p>ア）計画を最初に全て決めるから　イ）チーム全員が同じ方向を見るから　ウ）文書を徹底的に作成するから　エ）管理者が全て指示するから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スクラムが強力な理由は「チーム全員が同じ方向を見る」「小さく作って早く改善できる」「チームが毎回成長する」の3つ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. ウォーターフォールとアジャイルの開発の進め方の違いとして、適切なものはどれか。</summary>
+        <p>ア）ウォーターフォールは短いサイクルで改善を繰り返す　イ）アジャイルは計画→設計→実装→テストの順に進む　ウ）ウォーターフォールは一方向に進み、アジャイルは短いサイクルを繰り返す　エ）両者の進め方は全く同じである</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ウォーターフォールは上流から下流へ一方向、アジャイルは短いサイクルで改善を繰り返す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 変更への対応に関する記述として、適切なものはどれか。</summary>
+        <p>ア）ウォーターフォールは変更を前提に進める　イ）アジャイルは変更を慎重に扱う　ウ）ウォーターフォールは影響分析が重要、アジャイルは変更を前提とする　エ）どちらのモデルも変更は一切認めない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ウォーターフォールは変更を慎重に扱い影響分析が重要。アジャイルは変更を前提に柔軟に対応する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 文書とコミュニケーションの違いとして、適切なものはどれか。</summary>
+        <p>ア）ウォーターフォールは対話を重視する　イ）アジャイルは文書が中心である　ウ）ウォーターフォールは文書中心、アジャイルは対話重視　エ）どちらのモデルも文書を全く作成しない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ウォーターフォールは文書中心。アジャイルは必要最低限の文書で対話を重視する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. ウォーターフォールが向いている案件はどれか。</summary>
+        <p>ア）要件が変わりやすいスマホアプリ　イ）小規模な実験的プロジェクト　ウ）金融機関の基幹システム　エ）ユーザーと対話しながら進める開発</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 金融機関の基幹システムは大規模・高信頼性・要件明確でウォーターフォールが向く。他はアジャイル向き。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. アジャイルが向いている案件はどれか。</summary>
+        <p>ア）官公庁の調達システム　イ）要件が明確な大規模プロジェクト　ウ）ユーザーと近く、早く価値を届けたいプロジェクト　エ）長期の基幹システム開発</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — アジャイルは小～中規模で変化が多く、ユーザーと近いプロジェクトに向く。他はウォーターフォール向き。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. チームの動き方の違いとして、適切なものはどれか。</summary>
+        <p>ア）ウォーターフォールはチーム全員で価値を作る　イ）アジャイルは工程ごとに担当が変わる　ウ）ウォーターフォールは役割分担が明確、アジャイルは境界が柔軟　エ）どちらも全く同じチーム構成で進める</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ウォーターフォールは役割分担が明確で大人数でも管理しやすい。アジャイルは役割の境界が柔軟で自律性が求められる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. スプリントレビューとレトロスペクティブの違いに関する記述として、適切なものはどれか。</summary>
+        <p>ア）レビューはチーム内での振り返り、レトロは顧客へのデモ　イ）レビューは外部からのフィードバック獲得、レトロはチーム内の改善　ウ）レビューは毎日実施、レトロはスプリントの最後　エ）レビューはプロダクトオーナーのみ参加、レトロは開発チームのみ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — スプリントレビューは外部からのフィードバックを得る場、レトロスペクティブはチーム内の振り返りと改善を行う場。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_マネジメント.pdf』 第1章 プロジェクトマネジメント(PM) / 1-4-1 スクラム（続き）、1-5 ウォーターフォールとアジャイルの違い（p20-p27）</p>
+    </section>
+  </main>
+</body>
+</html>
