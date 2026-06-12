@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AI・IoT DXエンジニア養成科 授業ノート</title>
+  <title>FE試験対策ノート | AI・IoT DXエンジニア養成科</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -16,75 +16,160 @@
     </div>
   </header>
 
-  <main style="max-width: 1100px; margin: 0 auto; padding: 32px 20px 60px;">
+  <main style="max-width: 1100px; margin: 0 auto; padding: 28px 20px 48px;">
 
-    <section style="margin-bottom: 48px;">
+    <!-- 対象者 -->
+    <div class="target-audience">
+      📖 このサイトは、基本情報技術者試験（FE）を学ぶ初心者・職業訓練生向けの復習ノートです。
+    </div>
+
+    <!-- テクノロジ系 -->
+    <section style="margin-bottom: 36px;">
       <h2 class="portal-section-title">テクノロジ系</h2>
       <div class="section-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;">
 
         <a class="portal-card portal-card--done" href="fe/technology/basic-theory/index.html">
           <span class="portal-card__label">基礎理論</span>
           <p>進数・補数・浮動小数点・誤差・文字コード・論理演算・集合・確率</p>
+          <span class="freq-badge freq-badge--high">★★★ 頻出</span>
         </a>
 
         <a class="portal-card portal-card--done" href="fe/technology/network/index.html">
           <span class="portal-card__label">ネットワーク</span>
           <p>OSI/TCP-IP・IPアドレス・DNS・Web・メール・無線・セキュリティ</p>
+          <span class="freq-badge freq-badge--high">★★★ 頻出</span>
         </a>
 
         <a class="portal-card portal-card--done" href="fe/technology/cloud/index.html">
           <span class="portal-card__label">クラウド</span>
           <p>SaaS/PaaS/IaaS・仮想化・信頼性設計・クラウドセキュリティ</p>
+          <span class="freq-badge freq-badge--mid">★★ 標準</span>
         </a>
 
         <a class="portal-card portal-card--done" href="fe/technology/algorithm/index.html">
           <span class="portal-card__label">アルゴリズム</span>
           <p>データ構造・探索・整列・計算量・擬似言語・制御構造</p>
+          <span class="freq-badge freq-badge--high">★★★ 頻出</span>
         </a>
 
         <a class="portal-card portal-card--done" href="fe/technology/security/index.html">
           <span class="portal-card__label">セキュリティ</span>
           <p>脅威・暗号・認証・アクセス制御・ネットワーク防御・リスク管理</p>
+          <span class="freq-badge freq-badge--high">★★★ 頻出</span>
         </a>
 
         <a class="portal-card portal-card--planned" href="fe/technology/database/index.html">
           <span class="portal-card__badge">準備中</span>
           <span class="portal-card__label">データベース</span>
           <p>関係DB・SQL・正規化・トランザクション</p>
+          <span class="freq-badge freq-badge--high">★★★ 頻出</span>
         </a>
 
         <a class="portal-card portal-card--done" href="fe/technology/computer/index.html">
           <span class="portal-card__label">コンピュータ概論</span>
           <p>コンピュータ構成・OS・ソフトウェア・ハードウェア基礎</p>
+          <span class="freq-badge freq-badge--mid">★★ 標準</span>
         </a>
 
         <a class="portal-card portal-card--planned" href="fe/technology/iot-security/index.html">
           <span class="portal-card__badge">準備中</span>
           <span class="portal-card__label">IoTセキュリティ</span>
           <p>AI・IoTの脅威・組込み機器・脆弱性・対策</p>
+          <span class="freq-badge freq-badge--low">★ 参考</span>
         </a>
 
       </div>
     </section>
 
-    <section>
+    <!-- マネジメント・ストラテジ系 -->
+    <section style="margin-bottom: 36px;">
       <h2 class="portal-section-title">マネジメント・ストラテジ系</h2>
       <div class="section-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;">
 
         <a class="portal-card portal-card--done" href="fe/technology/management/index.html">
           <span class="portal-card__label">マネジメント</span>
           <p>プロジェクト管理・PMBOK・WBS・スケジュール・コスト・品質・リスク</p>
+          <span class="freq-badge freq-badge--mid">★★ 標準</span>
         </a>
 
         <a class="portal-card portal-card--planned" href="fe/strategy/index.html">
           <span class="portal-card__badge">準備中</span>
           <span class="portal-card__label">ストラテジ</span>
           <p>経営戦略・法務・標準化・デジタル社会</p>
+          <span class="freq-badge freq-badge--mid">★★ 標準</span>
         </a>
 
       </div>
     </section>
 
+    <!-- おすすめ学習コース -->
+    <section style="margin-bottom: 36px;">
+      <h2 class="portal-section-title">おすすめ学習コース</h2>
+      <div class="course-steps">
+        <a href="fe/technology/basic-theory/index.html" class="course-step">
+          <span class="course-step__num">1</span>基礎理論（進数・論理演算）から始めよう
+        </a>
+        <a href="fe/technology/algorithm/index.html" class="course-step">
+          <span class="course-step__num">2</span>アルゴリズム（データ構造・探索・整列）
+        </a>
+        <a href="fe/technology/network/index.html" class="course-step">
+          <span class="course-step__num">3</span>ネットワーク（OSI・TCP/IP・DNS）
+        </a>
+        <a href="fe/technology/security/index.html" class="course-step">
+          <span class="course-step__num">4</span>セキュリティ（暗号・認証・脅威対策）
+        </a>
+        <a href="fe/technology/computer/index.html" class="course-step">
+          <span class="course-step__num">5</span>コンピュータ概論（CPU・メモリ・OS）
+        </a>
+      </div>
+    </section>
+
+    <!-- 今日の一問 -->
+    <section style="margin-bottom: 36px;">
+      <h2 class="portal-section-title">今日の一問</h2>
+      <div class="quiz-widget" id="daily-question" data-json-path="quiz-data.json">
+        <h3>📝 今日の問題</h3>
+        <p class="quiz-widget__question">読み込み中...</p>
+        <button class="quiz-widget__toggle">答えを見る ▼</button>
+        <div class="quiz-widget__answer">
+          <small class="quiz-widget__source"></small>
+        </div>
+      </div>
+    </section>
+
+    <!-- 最近学習したページ -->
+    <section style="margin-bottom: 36px;">
+      <h2 class="portal-section-title">最近学習したページ</h2>
+      <div class="recent-pages" id="recent-pages"></div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="site-footer">
+      本サイトは個人の学習用ノートです。内容に誤りが含まれる可能性があります。<br>
+      試験対策では公式資料も必ず確認してください。<br>
+      © 2026 Kazutyon
+    </footer>
+
   </main>
+
+  <!-- ボトムナビ（スマホのみ表示） -->
+  <nav class="bottom-nav" aria-label="メインナビゲーション">
+    <a href="index.html" class="bottom-nav__item is-active">
+      <span class="bottom-nav__icon">🏠</span>ホーム
+    </a>
+    <a href="search.html" class="bottom-nav__item">
+      <span class="bottom-nav__icon">🔍</span>検索
+    </a>
+    <a href="progress.html" class="bottom-nav__item">
+      <span class="bottom-nav__icon">📊</span>進捗
+    </a>
+    <a href="progress.html#history" class="bottom-nav__item">
+      <span class="bottom-nav__icon">🕐</span>更新履歴
+    </a>
+  </nav>
+
+  <script src="assets/app.js"></script>
+<script data-goatcounter="https://kazutyon.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
