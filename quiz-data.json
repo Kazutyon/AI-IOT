@@ -1,0 +1,62 @@
+[
+  {
+    "question": "OSI参照モデルで、IPアドレスを使ったルーティングを担うのは第何層か？",
+    "answer": "第3層（ネットワーク層）。IPプロトコルが動作する層で、異なるネットワーク間のパケット転送を行う。",
+    "source": "ネットワーク",
+    "url": "fe/technology/network/index.html"
+  },
+  {
+    "question": "二分探索の計算量（最悪の場合）はどれか？",
+    "answer": "O(log n)。データが半分ずつ減るため、n個のデータに対して最大 log₂n 回の比較で済む。",
+    "source": "アルゴリズム",
+    "url": "fe/technology/algorithm/algo-search.html"
+  },
+  {
+    "question": "CPUがデバイスを待ち続けずにI/Oを行う仕組みを何というか？",
+    "answer": "割り込み（インタラプト）。デバイスが処理完了時にCPUに通知するため、CPUは他の処理を続けられる。",
+    "source": "コンピュータ概論",
+    "url": "fe/technology/computer/io-devices-bus.html"
+  },
+  {
+    "question": "AES・RSAの違いを一言で言うと？",
+    "answer": "AESは共通鍵暗号（高速・同じ鍵を共有）、RSAは公開鍵暗号（鍵配送問題を解決）。実際はRSAでAESの鍵を安全に交換するハイブリッド方式が多い。",
+    "source": "セキュリティ",
+    "url": "fe/technology/security/index.html"
+  },
+  {
+    "question": "クラウドの IaaS / PaaS / SaaS の違いは？",
+    "answer": "IaaS=インフラ提供（VM・ストレージ）、PaaS=開発基盤提供（OS・ミドルウェア）、SaaS=アプリ提供（メール・オフィス）。ユーザーが管理する範囲が順に狭くなる。",
+    "source": "クラウド",
+    "url": "fe/technology/cloud/index.html"
+  },
+  {
+    "question": "スタックとキューの違いは？",
+    "answer": "スタックはLIFO（後入れ先出し）、キューはFIFO（先入れ先出し）。スタックは関数呼び出し管理、キューはプリンタ待ち行列などに使われる。",
+    "source": "アルゴリズム",
+    "url": "fe/technology/algorithm/algo-data-structure.html"
+  },
+  {
+    "question": "SQLのトランザクションの4つの性質（ACID特性）は？",
+    "answer": "原子性（Atomicity）・一貫性（Consistency）・独立性（Isolation）・永続性（Durability）。すべて満たすことでデータの信頼性が保証される。",
+    "source": "データベース",
+    "url": "fe/technology/database/index.html"
+  },
+  {
+    "question": "ページング方式の仮想記憶でページフォールトが発生するのはどんな時？",
+    "answer": "アクセスしたページが主記憶にない時。OSがディスクからページを読み込む（スワップイン）処理が発生し、一時的に処理が止まる。",
+    "source": "コンピュータ概論",
+    "url": "fe/technology/computer/virtual-memory-storage.html"
+  },
+  {
+    "question": "ファイアウォールとWAFの違いは？",
+    "answer": "ファイアウォールはIPアドレス・ポート単位で通信を制御（L3〜L4）。WAFはHTTP内容を解析してSQLインジェクション等を検知・遮断（L7）。",
+    "source": "セキュリティ",
+    "url": "fe/technology/security/index.html"
+  },
+  {
+    "question": "プロジェクトのスケジュール管理で使われる「クリティカルパス」とは？",
+    "answer": "プロジェクト完了までに必ず通る、余裕ゼロの作業経路。クリティカルパス上の作業が遅れると全体が遅延するため、重点管理が必要。",
+    "source": "マネジメント",
+    "url": "fe/technology/management/index.html"
+  }
+]
