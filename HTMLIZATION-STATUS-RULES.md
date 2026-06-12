@@ -59,6 +59,14 @@ Each target folder `README.md` must contain this block near the top:
 - Remaining:
 ```
 
+## study-map ナビのリンク数ルール
+
+フォルダ `index.html` のヘッダー内 `<nav class="study-map">` に入れるリンクは **5〜6個** に絞ること。
+
+- ページ数が多い場合はカテゴリ代表ページだけを選ぶ（全ページを列挙しない）
+- 根拠：basic-theory / cloud / management / network / security すべて 5〜6 個で統一済み
+- 違反例：computer/index.html が当初15個 → 6個に修正（2026-06-12）
+
 ## Done Checklist
 
 A PDF is not `done` until all are true:
