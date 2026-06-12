@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>グラフ構造（DFS・BFS・最短経路・最小全域木）| 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Algorithm</p>
+        <h1>グラフ構造（DFS・BFS・最短経路・最小全域木）</h1>
+        <p class="lead">木構造からグラフ構造への一般化。有向/無向グラフ、DFS/BFSグ、最短経路（ダイクストラ法）、最小全域木（クラスカル法・プリム法）を体系的に整理します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#graph-basic">基本</a>
+        <a href="#representation">表現</a>
+        <a href="#dfs">DFS</a>
+        <a href="#bfs">BFS</a>
+        <a href="#shortest">最短</a>
+        <a href="#spanning">全域木</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">アルゴリズム</a>
+      <span>グラフ構造</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>グラフの基本概念：頂点・辺・有向/無向・重み付き・閉路</li>
+          <li>グラフの表現方法：隣接行列（密グラフ向きO(V²)）と隣接リスト（疎グラフ向きO(V+E)）</li>
+          <li>DFSのグラフ版：visited配列の必要性・スタック動作・訪問順</li>
+          <li>BFSのグラフ版：キュー動作・重みなし最短経路</li>
+          <li><strong>ダイクストラ法：重み非負グラフの最短経路 O((V+E)log V)</strong></li>
+          <li><strong>最小全域木：クラスカル法（辺ベース）とプリム法（頂点ベース）</strong></li>
+          <li>木との最大の違い：閉路が存在する → visited管理が必須</li>
+          <li>各アルゴリズムの用途と計算量の比較</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>隣接行列と隣接リストの使い分け、DFS/BFSのグラフ版（visited管理・データ構造）</dd></div>
+          <div><dt>高</dt><dd>ダイクストラ法の動作と計算量、クラスカル法・プリム法の違い</dd></div>
+          <div><dt>中</dt><dd>有向/無向グラフの区別、最短経路の応用</dd></div>
+          <div><dt>中</dt><dd>アルゴリズム選択基準（疎グラフvs密グラフ）</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>グラフ</td><td>頂点と辺の集合で構成されるデータ構造</td><td>木との違い（閉路の有無）</td></tr>
+            <tr><td>頂点（Vertex）</td><td>グラフを構成する点</td><td>ノードとも呼ぶ</td></tr>
+            <tr><td>辺（Edge）</td><td>頂点間のつながり</td><td>有向/無向の区別</td></tr>
+            <tr><td>有向グラフ</td><td>辺に向きがあるグラフ</td><td>矢印で表現。一方通行</td></tr>
+            <tr><td>無向グラフ</td><td>辺に向きがないグラフ</td><td>双方向に行き来可能</td></tr>
+            <tr><td>重み付きグラフ</td><td>各辺に重み（コスト）が付いたグラフ</td><td>最短経路問題で使用</td></tr>
+            <tr><td>閉路（サイクル）</td><td>出発点に戻ってくる経路</td><td>木には閉路がない</td></tr>
+            <tr><td>隣接行列</td><td>V×Vの2次元配列で辺を表す</td><td>O(V²)メモリ。密グラフ向き</td></tr>
+            <tr><td>隣接リスト</td><td>各頂点に隣接頂点リストを持たせる</td><td>O(V+E)メモリ。疎グラフ向き</td></tr>
+            <tr><td>visited配列</td><td>訪問済み頂点を管理する配列</td><td>閉路対策として必須</td></tr>
+            <tr><td>DFS（グラフ版）</td><td>スタックで深く探索。visitedで重複防止</td><td>連結成分・経路の有無判定</td></tr>
+            <tr><td>BFS（グラフ版）</td><td>キューで幅広く探索。visitedで重複防止</td><td>重みなし最短経路</td></tr>
+            <tr><td>ダイクストラ法</td><td>重み非負グラフの最短経路アルゴリズム</td><td>貪欲法。O((V+E)log V)</td></tr>
+            <tr><td>最小全域木（MST）</td><td>全頂点を含み辺の重み和が最小の木</td><td>クラスカル法・プリム法で求める</td></tr>
+            <tr><td>クラスカル法</td><td>辺を昇順ソートし閉路を作らない辺を追加</td><td>辺ベース。Union-Find使用</td></tr>
+            <tr><td>プリム法</td><td>1頂点から始め最小重み辺で木を成長</td><td>頂点ベース。ダイクストラ類似</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="graph-basic" class="lesson-section">
+      <h2>1. グラフの基本概念</h2>
+      <p>グラフは<strong>頂点（Vertex）と辺（Edge）の集合</strong>で構成されるデータ構造です。木構造を一般化したもので、木と違い<strong>閉路（サイクル）があってもよい</strong>点が最大の違いです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>有向グラフと無向グラフの比較</figcaption>
+        <pre>【無向グラフ】                    【有向グラフ】
+        A ─── B                          A ──→ B
+        │   ╱ │                          │     │
+        │ ╱   │                          ↓     ↓
+        C ─── D                          C ←── D
+
+    ・辺に向きなし                   ・辺に向き（矢印）あり
+    ・双方向に行き来可               ・A→Bは行けるがB→Aは不可</pre>
+      </figure>
+
+      <figure class="wide-diagram">
+        <figcaption>重み付きグラフの例</figcaption>
+        <pre>           [A]
+        3 /   \ 5
+         /     \
+       [B]───[C]
+          \ 2
+           \
+           [D]─────[E]
+               4
+
+    ・各辺に重み（コスト）が付いている
+    ・最短経路問題や最小全域木問題で使う</pre>
+      </figure>
+    </section>
+
+    <section id="representation" class="lesson-section">
+      <h2>2. グラフの表現方法</h2>
+      <p>グラフをプログラムで扱うには<strong>隣接行列</strong>か<strong>隣接リスト</strong>の2つの方法があります。グラフの密度によって適切な方法を選びます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>隣接行列による表現（頂点数V=4）</figcaption>
+        <pre>グラフ:    A──B    隣接行列 (4×4):
+           │╲│        A B C D
+           C──D      ┌────────┐
+                   A │0 1 1 0│  A-B, A-C に辺あり
+                   B │1 0 0 1│  B-A, B-D に辺あり
+                   C │1 0 0 1│  C-A, C-D に辺あり
+                   D │0 1 1 0│  D-B, D-C に辺あり
+                   └────────┘
+    ・辺の有無を O(1) で判定可能
+    ・メモリ使用量: O(V²)</pre>
+      </figure>
+
+      <figure class="wide-diagram">
+        <figcaption>隣接リストによる表現</figcaption>
+        <pre>隣接リスト:
+    A → [B, C]
+    B → [A, D]
+    C → [A, D]
+    D → [B, C]
+
+    ・各頂点につながる頂点のリストだけ持つ
+    ・メモリ使用量: O(V+E)
+    ・辺が少ない疎グラフに適する</pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>隣接行列</th><th>隣接リスト</th></tr></thead>
+          <tbody>
+            <tr><td>メモリ使用量</td><td>O(V²)</td><td>O(V+E)</td></tr>
+            <tr><td>辺の有無判定</td><td>O(1)</td><td>O(度数)</td></tr>
+            <tr><td>隣接頂点の列挙</td><td>O(V)</td><td>O(度数)</td></tr>
+            <tr><td>適するグラフ</td><td>密グラフ（辺が多い）</td><td>疎グラフ（辺が少ない）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="dfs" class="lesson-section">
+      <h2>3. DFS（深さ優先探索）グラフ版</h2>
+      <p>グラフのDFSは<strong>スタックを使って深く潜りながら探索</strong>します。木と違い閉路があるため、<strong>visited配列で訪問済み頂点を管理</strong>することが必須です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>グラフDFSの動作トレース（スタック使用）</figcaption>
+        <pre>グラフ:    A──B
+           │╲ │
+           C  D
+           │
+           E
+
+    DFS（Aから開始）:
+    初期: stack=[A], visited={}
+    Step1: pop→A, push(B,C,D)    visited={A}
+    Step2: pop→D, 隣接(A)全訪問済 visited={A,D}
+    Step3: pop→C, push(E)        visited={A,D,C}
+    Step4: pop→E                 visited={A,D,C,E}
+    Step5: pop→B                 visited={A,D,C,E,B}
+
+    訪問順: A → D → C → E → B
+    ※visitedがないと A→B→A→B... と無限ループする</pre>
+      </figure>
+
+      <p>DFSの用途：連結成分の判定、経路の有無判定、トポロジカルソートなど。木構造のDFSと動作は同じですが、<strong>visited配列が追加される</strong>点だけが違いです。</p>
+    </section>
+
+    <section id="bfs" class="lesson-section">
+      <h2>4. BFS（幅優先探索）グラフ版</h2>
+      <p>グラフのBFSは<strong>キューを使って近い順に広がりながら探索</strong>します。こちらもvisited配列で訪問済み頂点を管理します。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>グラフBFSの動作トレース（キュー使用）</figcaption>
+        <pre>グラフ:    A──B
+           │╲ │
+           C  D
+           │
+           E
+
+    BFS（Aから開始）:
+    初期: queue=[A], visited={}
+    Step1: deq→A, enq(B,C,D)    visited={A}
+    Step2: deq→B, 隣接(A,D)全訪問 visited={A,B}
+    Step3: deq→C, enq(E)        visited={A,B,C}
+    Step4: deq→D                visited={A,B,C,D}
+    Step5: deq→E                visited={A,B,C,D,E}
+
+    訪問順: A → B → C → D → E
+    ★BFSの訪問順 = 始点からの距離順（重みなし最短経路）</pre>
+      </figure>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>DFS（グラフ版）</th><th>BFS（グラフ版）</th></tr></thead>
+          <tbody>
+            <tr><td>データ構造</td><td>スタック（LIFO）</td><td>キュー（FIFO）</td></tr>
+            <tr><td>探索順序</td><td>深く潜ってから戻る</td><td>近い順に広がる</td></tr>
+            <tr><td>得られる経路</td><td>とにかく到達する経路</td><td>重みなし最短経路</td></tr>
+            <tr><td>主な用途</td><td>連結成分・経路の有無</td><td>最短経路（重みなし）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="shortest" class="lesson-section">
+      <h2>5. 最短経路問題とダイクストラ法</h2>
+      <p>重み付きグラフで<strong>2頂点間の重みの和が最小となる経路</strong>を求めるのが最短経路問題です。最も有名なアルゴリズムが<strong>ダイクストラ法</strong>です。</p>
+
+      <h3>5-1. ダイクストラ法の条件</h3>
+      <ul>
+        <li><strong>全ての辺の重みが非負（0以上）</strong>であること。負の重みがある場合は使えない（ベルマン・フォード法を使う）。</li>
+        <li>単一始点からの最短経路を求める。</li>
+      </ul>
+
+      <figure class="wide-diagram">
+        <figcaption>ダイクストラ法の動作例</figcaption>
+        <pre>グラフ:       [A]────2────[B]
+              │ ╲         ╱ │
+             5│  4╲     ╱1  │3
+              │     ╲ ╱     │
+             [C]────3────[D]
+
+    Aから各頂点への最短距離を求める:
+
+    初期: dist[A]=0, 他=∞, 未確定={A,B,C,D}
+
+    Step1: Aを確定(距離0)
+           更新: dist[B]=min(∞,0+2)=2
+                 dist[C]=min(∞,0+5)=5
+                 dist[D]=min(∞,0+4)=4
+
+    Step2: 未確定中最小=B(距離2)を確定
+           更新: dist[D]=min(4,2+1)=3
+
+    Step3: 未確定中最小=D(距離3)を確定
+           更新: dist[C]=min(5,3+3)=6 → 5のまま
+
+    Step4: 未確定中最小=C(距離5)を確定
+
+    結果: dist[A]=0, B=2, C=5, D=3</pre>
+      </figure>
+
+      <h3>5-2. 計算量</h3>
+      <p>単純な実装では O(V²)。優先度付きキューを使うと <strong>O((V+E) log V)</strong> に改善できます。FE試験では計算量の違いが問われます。</p>
+    </section>
+
+    <section id="spanning" class="lesson-section">
+      <h2>6. 最小全域木（MST）</h2>
+      <p><strong>全域木（Spanning Tree）</strong>はグラフの全頂点を含む木（閉路なし）です。<strong>最小全域木（MST）</strong>は辺の重みの総和が最小となる全域木です。代表的なアルゴリズムが<strong>クラスカル法</strong>と<strong>プリム法</strong>です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>最小全域木の例</figcaption>
+        <pre>グラフ:              MST（重み合計=10）:
+         [A]                    [A]
+      4 / | \ 5              2 /   \ 3
+       /  |  \                /     \
+     [B]-3-[C]-2-[D]       [B]-3-[C]-2-[D]
+      |         |                      
+     1|         |6                    
+     [E]                            
+
+    辺の重み合計 = 4+5+3+2+1+6 = 21
+    MSTの重み合計 = 2+3+3+2 = 10（最小）</pre>
+      </figure>
+
+      <h3>6-1. クラスカル法（辺ベース）</h3>
+      <p>辺を重みの昇順にソートし、<strong>閉路を作らない辺だけを追加</strong>していきます。閉路チェックにはUnion-Findデータ構造を使います。計算量は <strong>O(E log E)</strong>。疎グラフに適します。</p>
+
+      <h3>6-2. プリム法（頂点ベース）</h3>
+      <p>1つの頂点から始め、<strong>木に接続する最小重みの辺で木を成長</strong>させます。動作はダイクストラ法と非常に似ています。計算量は O(V²) または O((V+E)log V)。密グラフに適します。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>項目</th><th>クラスカル法</th><th>プリム法</th></tr></thead>
+          <tbody>
+            <tr><td>アプローチ</td><td>辺ベース（軽い辺から追加）</td><td>頂点ベース（木を成長）</td></tr>
+            <tr><td>必要なデータ構造</td><td>Union-Find（閉路チェック）</td><td>優先度付きキュー</td></tr>
+            <tr><td>計算量</td><td>O(E log E)</td><td>O(V²) または O((V+E)log V)</td></tr>
+            <tr><td>適するグラフ</td><td>疎グラフ（辺が少ない）</td><td>密グラフ（辺が多い）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. グラフ構造と木構造の違いとして正しいものはどれか。</summary>
+        <p>ア）グラフには閉路が存在しない　イ）木には閉路があってもよい　ウ）グラフには閉路があってもよいが、木には閉路がない　エ）グラフには根が必ず1つ存在する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 木は閉路のないグラフの一種。グラフには閉路があってもよいが、木には閉路がない。またグラフには必ずしも根は存在しない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 頂点数V、辺数Eのグラフを隣接行列で表現した場合のメモリ使用量はどれか。</summary>
+        <p>ア）O(V)　イ）O(E)　ウ）O(V+E)　エ）O(V²)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 隣接行列はV×Vの2次元配列のためO(V²)。隣接リストはO(V+E)。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 辺の数が少ない疎グラフに適した表現方法はどれか。</summary>
+        <p>ア）隣接行列　イ）隣接リスト　ウ）配列　エ）ハッシュ表</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 隣接リストはO(V+E)メモリで、辺が少ないほど効率的。隣接行列は辺が少なくてもO(V²)メモリを使う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. グラフのDFS（深さ優先探索）でvisited配列が必要な理由はどれか。</summary>
+        <p>ア）辺の重みを管理するため　イ）閉路による無限ループを防ぐため　ウ）メモリ使用量を減らすため　エ）隣接頂点を列挙するため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — グラフには閉路があるため、visited配列がないと同じ頂点を繰り返し訪問して無限ループになる。木構造では閉路がないためvisitedは不要。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. グラフのBFS（幅優先探索）で使用するデータ構造はどれか。</summary>
+        <p>ア）スタック　イ）キュー　ウ）配列　エ）ハッシュ表</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — BFSはキュー（FIFO）を使う。DFSはスタック（LIFO）を使う。これは木構造でもグラフでも同じ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 重みなしグラフのBFSで得られる経路の性質はどれか。</summary>
+        <p>ア）最長経路　イ）ランダムな経路　ウ）最短経路（辺の数が最小）　エ）全ての経路</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — BFSは始点から近い順に訪問するため、重みなしグラフでは辺の数が最小の最短経路が得られる。重み付きではダイクストラ法が必要。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. ダイクストラ法が使用できる条件として正しいものはどれか。</summary>
+        <p>ア）辺の重みがすべて負であること　イ）辺の重みがすべて非負（0以上）であること　ウ）グラフが有向であること　エ）グラフに閉路がないこと</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ダイクストラ法は全ての辺の重みが非負であることが条件。負の重みがある場合はベルマン・フォード法を使う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. ダイクストラ法で優先度付きキューを使用した場合の計算量はどれか。</summary>
+        <p>ア）O(V)　イ）O(E)　ウ）O(V²)　エ）O((V+E)log V)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 優先度付きキューを使うとO((V+E)log V)。単純な配列実装ではO(V²)。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 最小全域木（MST）を求めるアルゴリズムとして正しい組み合わせはどれか。</summary>
+        <p>ア）バブルソートとクイックソート　イ）深さ優先探索と幅優先探索　ウ）クラスカル法とプリム法　エ）線形探索と二分探索</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 最小全域木を求める代表的なアルゴリズムはクラスカル法（辺ベース）とプリム法（頂点ベース）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. クラスカル法で閉路を作らないために使うデータ構造はどれか。</summary>
+        <p>ア）スタック　イ）キュー　ウ）Union-Find　エ）ハッシュ表</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — クラスカル法は辺を追加する際に閉路ができるかチェックする必要があり、Union-Find（素集合データ構造）を使う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q11. プリム法の動作と最も似ているアルゴリズムはどれか。</summary>
+        <p>ア）線形探索　イ）二分探索　ウ）ダイクストラ法　エ）バブルソート</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — プリム法は「未確定頂点から最小距離の頂点を選び確定させる」動作がダイクストラ法と非常に似ている。両者とも貪欲法の一種。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q12. クラスカル法の計算量はどれか。</summary>
+        <p>ア）O(V)　イ）O(V²)　ウ）O(E log E)　エ）O(2ⁿ)</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — クラスカル法は辺を重みでソートするのにO(E log E)、Union-Find操作にO(E α(V))で、全体でO(E log E)。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q13. グラフのDFSで使用するデータ構造はどれか。</summary>
+        <p>ア）キュー　イ）スタック（または再帰）　ウ）優先度付きキュー　エ）連結リスト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — グラフのDFSはスタック（明示的または再帰によるコールスタック）を使う。BFSはキューを使う。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『2_アルゴリズムとデータ構造.pdf』 第4章 グラフ構造（p106-p121）</p>
+    </section>
+  </main>
+</body>
+</html>
