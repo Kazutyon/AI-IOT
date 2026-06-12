@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>原価計算と財務指標 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Strategy</p>
+        <h1>原価計算と財務指標</h1>
+        <p class="lead">企業の活動にかかったコストを明らかにする「原価計算」と、財務諸表の数字を使って企業の健康状態を評価する「財務指標（安全性・収益性・効率性）」について学習します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#cost-accounting">原価計算</a>
+        <a href="#financial-ratios">財務指標</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">経営・戦略</a>
+      <span>原価計算と財務指標</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>原価が「材料費・労務費・経費」の3つで構成されることを説明できる</li>
+          <li>原価計算が価格設定・利益計算・改善ポイントの発見に役立つことを理解している</li>
+          <li>財務指標が「安全性・収益性・効率性」の3つの視点から企業の健康状態を評価することを把握している</li>
+          <li>自己資本比率・ROA・ROE・売上高営業利益率などの主要指標の意味と計算式を区別できる</li>
+          <li>業種（製造業とIT企業）によって財務指標の特性が異なることを説明できる</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>原価の3分類（材料費・労務費・経費）、財務指標の3分類（安全性・収益性・効率性）、主要指標の名称と意味</dd></div>
+          <div><dt>中</dt><dd>製造業とIT企業の原価構造の違い、ROAとROEの違い、自己資本比率の意味</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>用語</th><th>意味</th><th>試験ポイント</th></tr></thead>
+          <tbody>
+            <tr><td>原価計算</td><td>製品やサービスを作るのにかかったコストを明らかにする仕組み</td><td>価格設定・利益計算・改善ポイントの発見に活用</td></tr>
+            <tr><td>材料費</td><td>製品を直接構成する原材料の費用</td><td>製造業では大きい、IT企業ではゼロに近い</td></tr>
+            <tr><td>労務費</td><td>製造・サービスに直接関わる人件費</td><td>作業員の給与、エンジニアの開発工数など</td></tr>
+            <tr><td>経費（間接費）</td><td>製造に必要だが直接紐づかない費用</td><td>工場家賃、電気代、減価償却費など</td></tr>
+            <tr><td>財務指標</td><td>BS・PL・CFの数字を使って企業の状態を評価する指標</td><td>安全性・収益性・効率性の3分類</td></tr>
+            <tr><td>安全性指標</td><td>倒産リスクを測る指標</td><td>自己資本比率、流動比率など</td></tr>
+            <tr><td>収益性指標</td><td>どれだけ儲かっているかを測る指標</td><td>売上高営業利益率、ROA、ROEなど</td></tr>
+            <tr><td>効率性指標</td><td>資産を効率的に使えているかを測る指標</td><td>総資産回転率、棚卸資産回転率など</td></tr>
+            <tr><td>自己資本比率</td><td>総資本に占める自己資本の割合</td><td>高いほど財務は安定（倒産リスクが低い）</td></tr>
+            <tr><td>ROA</td><td>Return on Assets（総資産利益率）</td><td>総資産を使ってどれだけ利益を出したか</td></tr>
+            <tr><td>ROE</td><td>Return on Equity（自己資本利益率）</td><td>株主資本を使ってどれだけ利益を出したか</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cost-accounting" class="lesson-section">
+      <h2>1. 原価計算の基礎</h2>
+      <p>原価計算とは、製品やサービスを作るのにかかったコストを計算する仕組みです。企業が利益を出すためには、「いくらで作って、いくらで売れば、どれだけ儲かるのか」を正しく把握する必要があります。そのための基礎が原価計算です。</p>
+      <p>原価は大きく<strong>材料費</strong>（直接使う原材料）、<strong>労務費</strong>（直接関わる人件費）、<strong>経費</strong>（間接費：家賃・電気代・減価償却など）の3つに分類されます。これらを合計したものが「製造原価」または「サービス原価」となります。</p>
+      <p>業種によって原価構造は大きく異なります。製造業は材料費と経費（工場の固定費）が大きい一方、IT企業は材料費がほぼゼロで、労務費（エンジニアの人件費）が圧倒的に大きくなります。この違いは、損益分岐点や利益率にも直結します。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>分類</th><th>内容</th><th>製造業の例</th><th>IT企業の例</th></tr></thead>
+          <tbody>
+            <tr><td>材料費</td><td>製品を直接構成する原材料</td><td>鋼材、部品、原材料</td><td>ほぼゼロ（ソフトウェアは材料不要）</td></tr>
+            <tr><td>労務費</td><td>製造・サービスに直接関わる人件費</td><td>作業員の作業時間</td><td>エンジニアの開発工数</td></tr>
+            <tr><td>経費（間接費）</td><td>製造に必要だが直接紐づかない費用</td><td>工場家賃、電気代、減価償却</td><td>クラウド費用、サーバー代、オフィス家賃</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="financial-ratios" class="lesson-section">
+      <h2>2. 財務指標（企業の健康診断）</h2>
+      <p>財務指標とは、BS・PL・CFの数字を使って、企業の安全性・収益性・効率性を評価するための指標です。企業の健康状態を数値で読み解く「健康診断」のようなもので、投資判断や経営分析に不可欠です。</p>
+      <p><strong>安全性指標</strong>は「倒産しないか」を測ります。代表的なものが<strong>自己資本比率</strong>で、総資本に占める自己資本（返さなくてよい資本）の割合を示します。この比率が高いほど財務は安定しています。</p>
+      <p><strong>収益性指標</strong>は「どれだけ儲かっているか」を測ります。<strong>売上高営業利益率</strong>は本業の儲けやすさを、<strong>ROA（総資産利益率）</strong>は総資産を使ってどれだけ利益を出したかを、<strong>ROE（自己資本利益率）</strong>は株主資本を使ってどれだけ利益を出したかを示します。</p>
+      <p><strong>効率性指標</strong>は「資産を効率的に使えているか」を測ります。<strong>総資産回転率</strong>は、総資産に対してどのくらいの売上を上げているかを示し、この値が高いほど資産を効率的に活用していると言えます。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>分類</th><th>指標名</th><th>計算式</th><th>意味</th></tr></thead>
+          <tbody>
+            <tr><td>安全性</td><td>自己資本比率</td><td>自己資本 ÷ 総資本</td><td>高いほど財務は安定（倒産リスクが低い）</td></tr>
+            <tr><td>収益性</td><td>売上高営業利益率</td><td>営業利益 ÷ 売上高</td><td>本業の儲けやすさ</td></tr>
+            <tr><td>収益性</td><td>ROA（総資産利益率）</td><td>当期純利益 ÷ 総資産</td><td>総資産を使ってどれだけ利益を出したか</td></tr>
+            <tr><td>収益性</td><td>ROE（自己資本利益率）</td><td>当期純利益 ÷ 自己資本</td><td>株主資本を使ってどれだけ利益を出したか</td></tr>
+            <tr><td>効率性</td><td>総資産回転率</td><td>売上高 ÷ 総資産</td><td>資産をどれだけ効率的に使っているか</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 製品やサービスを作るために直接使う原材料の費用はどれか。</summary>
+        <p>ア）労務費 イ）経費 ウ）材料費 エ）固定費</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 材料費は、製品を直接構成する鋼材、部品、原材料などの費用です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 製造やサービス提供に直接関わる人件費はどれか。</summary>
+        <p>ア）材料費 イ）労務費 ウ）間接費 エ）変動費</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 労務費は、作業員の作業時間やエンジニアの開発工数など、直接関わる人件費です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 製造に必要だが直接紐づかない費用（工場家賃、電気代など）はどれか。</summary>
+        <p>ア）材料費 イ）労務費 ウ）経費（間接費） エ）変動費</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 経費（間接費）は、工場家賃、電気代、減価償却費など、製品に直接紐づかない費用です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. IT企業の原価構造の特徴として、最も適切なものはどれか。</summary>
+        <p>ア）材料費が大きく、経費が小さい イ）材料費がほぼゼロで、労務費が圧倒的に大きい ウ）材料費・労務費・経費が均等である エ）経費が最も大きく、労務費が小さい</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IT企業（ソフトウェア開発）は材料費がほぼゼロで、エンジニアの人件費（労務費）が原価の大半を占めます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 財務指標の3分類に含まれないものはどれか。</summary>
+        <p>ア）安全性 イ）収益性 ウ）効率性 エ）成長性</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 財務指標の3分類は「安全性・収益性・効率性」です。成長性は財務指標の主要分類には含まれません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 倒産リスクを測る「安全性指標」の代表はどれか。</summary>
+        <p>ア）売上高営業利益率 イ）ROA ウ）自己資本比率 エ）総資産回転率</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 自己資本比率は、総資本に占める自己資本（返さなくてよい資本）の割合を示し、高いほど財務は安定しています。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 本業の儲けやすさを示す収益性指標はどれか。</summary>
+        <p>ア）自己資本比率 イ）売上高営業利益率 ウ）総資産回転率 エ）流動比率</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 売上高営業利益率（営業利益 ÷ 売上高）は、本業でどれだけ効率的に利益を出しているかを示す指標です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. ROA（Return on Assets）が示すものはどれか。</summary>
+        <p>ア）自己資本を使ってどれだけ利益を出したか イ）総資産を使ってどれだけ利益を出したか ウ）売上高に対してどれだけ利益が出たか エ）流動資産で流動負債をどれだけカバーできるか</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ROA（総資産利益率）は、当期純利益 ÷ 総資産 で計算され、総資産を使ってどれだけ効率的に利益を出したかを示します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ROE（Return on Equity）の計算式はどれか。</summary>
+        <p>ア）当期純利益 ÷ 総資産 イ）当期純利益 ÷ 自己資本 ウ）営業利益 ÷ 売上高 エ）自己資本 ÷ 総資本</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ROE（自己資本利益率）は、当期純利益 ÷ 自己資本 で計算され、株主資本を使ってどれだけ利益を出したかを示します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 総資産に対してどのくらいの売上を上げているかを示す効率性指標はどれか。</summary>
+        <p>ア）自己資本比率 イ）売上高営業利益率 ウ）ROE エ）総資産回転率</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 総資産回転率（売上高 ÷ 総資産）は、総資産をどれだけ効率的に活用して売上を上げているかを示す指標です。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『3_経営・戦略.pdf』 第8章 会計・財務（4. 原価計算, 5. 財務指標）</p>
+    </section>
+  </main>
+<script data-goatcounter="https://kazutyon.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
