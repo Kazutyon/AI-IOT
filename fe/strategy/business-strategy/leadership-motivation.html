@@ -76,13 +76,47 @@
 
       <figure class="wide-diagram">
         <figcaption>SL理論：部下の成熟度とリーダーのスタイル</figcaption>
-        <pre>
-  [ 部下の成熟度 ]          [ リーダーのスタイル ]
-  M1 (能力低・意欲低)  →  S1 : 指示型 (Telling)   ※細かく指示
-  M2 (能力低・意欲高)  →  S2 : コーチ型 (Selling) ※指示しつつ励ます
-  M3 (能力高・意欲低)  →  S3 : 支援型 (Participating) ※相談し支援する
-  M4 (能力高・意欲高)  →  S4 : 委任型 (Delegating) ※任せて権限委譲
-        </pre>
+        <svg viewBox="0 0 600 250" width="100%">
+          <defs>
+            <marker id="arrSL" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="5" y="5" width="245" height="38" rx="6" fill="#1e40af" stroke="#1e40af" stroke-width="1"/>
+          <text x="127" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">部下の成熟度</text>
+          <text x="127" y="36" text-anchor="middle" font-size="10" fill="#dbeafe">（能力 × 意欲）</text>
+          <rect x="270" y="5" width="175" height="38" rx="6" fill="#166534" stroke="#166534" stroke-width="1"/>
+          <text x="357" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">リーダーのスタイル</text>
+          <text x="357" y="36" text-anchor="middle" font-size="10" fill="#dcfce7">（状況対応型）</text>
+          <rect x="5" y="50" width="245" height="42" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="127" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">M1：能力低・意欲低</text>
+          <text x="127" y="84" text-anchor="middle" font-size="10" fill="#475569">（指示が必要な段階）</text>
+          <line x1="250" y1="71" x2="268" y2="71" stroke="#64748b" stroke-width="2" marker-end="url(#arrSL)"/>
+          <rect x="270" y="50" width="175" height="42" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="357" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">S1：指示型 (Telling)</text>
+          <text x="357" y="84" text-anchor="middle" font-size="10" fill="#78716c">細かく指示する</text>
+          <rect x="5" y="98" width="245" height="42" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="127" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">M2：能力低・意欲高</text>
+          <text x="127" y="132" text-anchor="middle" font-size="10" fill="#475569">（学びたい意欲あり）</text>
+          <line x1="250" y1="119" x2="268" y2="119" stroke="#64748b" stroke-width="2" marker-end="url(#arrSL)"/>
+          <rect x="270" y="98" width="175" height="42" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="357" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">S2：コーチ型 (Selling)</text>
+          <text x="357" y="132" text-anchor="middle" font-size="10" fill="#78716c">指示しつつ励ます</text>
+          <rect x="5" y="146" width="245" height="42" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="127" y="164" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">M3：能力高・意欲低</text>
+          <text x="127" y="180" text-anchor="middle" font-size="10" fill="#475569">（自信不足・迷い）</text>
+          <line x1="250" y1="167" x2="268" y2="167" stroke="#64748b" stroke-width="2" marker-end="url(#arrSL)"/>
+          <rect x="270" y="146" width="175" height="42" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="357" y="164" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">S3：支援型 (Participating)</text>
+          <text x="357" y="180" text-anchor="middle" font-size="10" fill="#78716c">相談し支援する</text>
+          <rect x="5" y="194" width="245" height="42" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="127" y="212" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">M4：能力高・意欲高</text>
+          <text x="127" y="228" text-anchor="middle" font-size="10" fill="#475569">（自律的に行動可能）</text>
+          <line x1="250" y1="215" x2="268" y2="215" stroke="#64748b" stroke-width="2" marker-end="url(#arrSL)"/>
+          <rect x="270" y="194" width="175" height="42" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="357" y="212" text-anchor="middle" font-size="12" font-weight="bold" fill="#166534">S4：委任型 (Delegating)</text>
+          <text x="357" y="228" text-anchor="middle" font-size="10" fill="#475569">任せて権限委譲</text>
+        </svg>
       </figure>
     </section>
 
@@ -93,19 +127,36 @@
 
       <figure class="wide-diagram">
         <figcaption>マネジリアル・グリッドの5タイプ</figcaption>
-        <pre>
-  人への関心
-    高 ┌──────────────┐
-       │ 1,9          │9,9         │
-       │ 人間関係重視 │統合型(理想)│
-       ├───────┼──────┤
-       │ 1,1          │9,1         │
-       │ 放任型       │権威型      │
-    低 └───────┴──────┘
-       低           高
-           業績への関心
-    ※ 中央には「5,5 中庸型」が存在
-        </pre>
+        <svg viewBox="0 0 520 280" width="100%">
+          <rect x="55" y="15" width="420" height="205" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <line x1="55" y1="117" x2="475" y2="117" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="265" y1="15" x2="265" y2="220" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,4"/>
+          <text x="35" y="120" text-anchor="middle" font-size="11" fill="#64748b" transform="rotate(-90,35,120)">人への関心</text>
+          <text x="265" y="260" text-anchor="middle" font-size="11" fill="#64748b">業績への関心</text>
+          <text x="90" y="75" text-anchor="middle" font-size="10" fill="#64748b">高</text>
+          <text x="90" y="200" text-anchor="middle" font-size="10" fill="#64748b">低</text>
+          <text x="440" y="75" text-anchor="middle" font-size="10" fill="#64748b">高</text>
+          <text x="440" y="200" text-anchor="middle" font-size="10" fill="#64748b">低</text>
+          <rect x="65" y="25" width="180" height="80" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="155" y="58" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">1,9</text>
+          <text x="155" y="78" text-anchor="middle" font-size="11" fill="#475569">人間関係重視型</text>
+          <text x="155" y="95" text-anchor="middle" font-size="9" fill="#64748b">雰囲気○・成果×</text>
+          <rect x="285" y="25" width="180" height="80" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="375" y="58" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">9,9</text>
+          <text x="375" y="78" text-anchor="middle" font-size="11" fill="#475569">統合型（理想）</text>
+          <text x="375" y="95" text-anchor="middle" font-size="9" fill="#64748b">成果○・人○</text>
+          <rect x="65" y="125" width="180" height="80" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+          <text x="155" y="158" text-anchor="middle" font-size="14" font-weight="bold" fill="#475569">1,1</text>
+          <text x="155" y="178" text-anchor="middle" font-size="11" fill="#64748b">放任型</text>
+          <text x="155" y="195" text-anchor="middle" font-size="9" fill="#94a3b8">成果×・人×</text>
+          <rect x="285" y="125" width="180" height="80" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="375" y="158" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400e">9,1</text>
+          <text x="375" y="178" text-anchor="middle" font-size="11" fill="#475569">権威型</text>
+          <text x="375" y="195" text-anchor="middle" font-size="9" fill="#64748b">成果○・人×</text>
+          <rect x="215" y="75" width="100" height="70" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,3"/>
+          <text x="265" y="108" text-anchor="middle" font-size="12" font-weight="bold" fill="#64748b">5,5</text>
+          <text x="265" y="125" text-anchor="middle" font-size="10" fill="#94a3b8">中庸型</text>
+        </svg>
       </figure>
     </section>
 

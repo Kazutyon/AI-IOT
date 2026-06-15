@@ -164,29 +164,53 @@
 
       <figure class="wide-diagram">
         <figcaption>モデル選定の判断フロー</figcaption>
-        <pre>
-┌─────────────────────────┐
-│              開発モデル選定フロー                │
-├─────────────────────────┤
-│                                                  │
-│   START                                          │
-│     ↓                                           │
-│   Q1. プロジェクトの規模は？                     │
-│      ├─ 大規模 → ウォーターフォール寄り       │
-│      └─ 小～中規模 → アジャイルも検討         │
-│     ↓                                           │
-│   Q2. プロジェクト期間は？                       │
-│      ├─ 長期 → 計画重視 → ウォーターフォール │
-│      └─ 短期 → 価値優先 → アジャイル         │
-│     ↓                                           │
-│   Q3. 要件変更の頻度は？                         │
-│      ├─ 少ない（安定） → ウォーターフォール   │
-│      └─ 多い（不安定） → アジャイル           │
-│     ↓                                           │
-│    決定                                          │
-│                                                  │
-└─────────────────────────┘
-        </pre>
+        <svg viewBox="0 0 560 440" width="100%">
+          <defs>
+            <marker id="arrFlow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="10" y="5" width="540" height="425" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+          <text x="280" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">開発モデル選定フロー</text>
+          <rect x="215" y="42" width="130" height="36" rx="18" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="280" y="65" text-anchor="middle" font-size="13" font-weight="bold" fill="#166534">START</text>
+          <line x1="280" y1="78" x2="280" y2="95" stroke="#64748b" stroke-width="2" marker-end="url(#arrFlow)"/>
+          <polygon points="280,98 440,120 280,142 120,120" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="280" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">Q1. プロジェクトの規模は？</text>
+          <line x1="145" y1="142" x2="80" y2="172" stroke="#16a34a" stroke-width="2" marker-end="url(#arrFlow)"/>
+          <line x1="415" y1="142" x2="480" y2="172" stroke="#d97706" stroke-width="2" marker-end="url(#arrFlow)"/>
+          <rect x="10" y="174" width="205" height="36" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="112" y="190" text-anchor="middle" font-size="11" fill="#166534">大規模 → ウォーターフォール寄り</text>
+          <text x="112" y="204" text-anchor="middle" font-size="9" fill="#64748b">（計画重視・文書重視）</text>
+          <rect x="345" y="174" width="205" height="36" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="447" y="190" text-anchor="middle" font-size="11" fill="#92400e">小～中規模 → アジャイルも検討</text>
+          <text x="447" y="204" text-anchor="middle" font-size="9" fill="#64748b">（変化対応・顧客協調）</text>
+          <line x1="280" y1="175" x2="280" y2="190" stroke="#64748b" stroke-width="2" marker-end="url(#arrFlow)"/>
+          <polygon points="280,193 440,215 280,237 120,215" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="280" y="213" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">Q2. プロジェクト期間は？</text>
+          <line x1="145" y1="237" x2="80" y2="267" stroke="#16a34a" stroke-width="2" marker-end="url(#arrFlow)"/>
+          <line x1="415" y1="237" x2="480" y2="267" stroke="#d97706" stroke-width="2" marker-end="url(#arrFlow)"/>
+          <rect x="10" y="269" width="205" height="36" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="112" y="285" text-anchor="middle" font-size="11" fill="#166534">長期 → ウォーターフォール</text>
+          <text x="112" y="299" text-anchor="middle" font-size="9" fill="#64748b">（計画重視）</text>
+          <rect x="345" y="269" width="205" height="36" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="447" y="285" text-anchor="middle" font-size="11" fill="#92400e">短期 → アジャイル</text>
+          <text x="447" y="299" text-anchor="middle" font-size="9" fill="#64748b">（価値優先）</text>
+          <line x1="280" y1="270" x2="280" y2="285" stroke="#64748b" stroke-width="2" marker-end="url(#arrFlow)"/>
+          <polygon points="280,288 440,310 280,332 120,310" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="280" y="308" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">Q3. 要件変更の頻度は？</text>
+          <line x1="145" y1="332" x2="80" y2="362" stroke="#16a34a" stroke-width="2" marker-end="url(#arrFlow)"/>
+          <line x1="415" y1="332" x2="480" y2="362" stroke="#d97706" stroke-width="2" marker-end="url(#arrFlow)"/>
+          <rect x="10" y="364" width="205" height="36" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="112" y="380" text-anchor="middle" font-size="11" fill="#166534">少ない（安定）→ ウォーターフォール</text>
+          <text x="112" y="394" text-anchor="middle" font-size="9" fill="#64748b">（変更管理で対応）</text>
+          <rect x="345" y="364" width="205" height="36" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="447" y="380" text-anchor="middle" font-size="11" fill="#92400e">多い（不安定）→ アジャイル</text>
+          <text x="447" y="394" text-anchor="middle" font-size="9" fill="#64748b">（スプリント単位で対応）</text>
+          <line x1="280" y1="365" x2="280" y2="380" stroke="#64748b" stroke-width="2" marker-end="url(#arrFlow)"/>
+          <rect x="215" y="395" width="130" height="30" rx="15" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="280" y="415" text-anchor="middle" font-size="13" font-weight="bold" fill="#166534">決定</text>
+        </svg>
       </figure>
     </section>
 
@@ -249,24 +273,25 @@
 
       <figure class="wide-diagram">
         <figcaption>ウォーターフォール成功の3ポイント</figcaption>
-        <pre>
-┌──────────────────────────────┐
-│              ウォーターフォール成功の3ポイント             │
-├──────────────────────────────┤
-│                                                            │
-│  ① 目的と成果物を明確にする                               │
-│     → 最初に「何を作るか」を明確にすると後工程がスムーズ  │
-│                                                            │
-│  ② 認識合わせを丁寧に行う                                 │
-│     → 文書を最新に保つことで、設計・実装・テスト・運用が  │
-│       すべてスムーズに進む                                 │
-│                                                            │
-│  ③ 変更管理を適切に行う                                   │
-│     → 変更は避けるのではなく、影響を分析して合意して進める│ 
-│       姿勢が大切                                           │
-│                                                            │
-└──────────────────────────────┘
-        </pre>
+        <svg viewBox="0 0 560 240" width="100%">
+          <rect x="10" y="5" width="540" height="225" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+          <text x="280" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">ウォーターフォール成功の3ポイント</text>
+          <circle cx="42" cy="65" r="14" fill="#2563eb"/>
+          <text x="42" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">①</text>
+          <text x="64" y="62" font-size="13" font-weight="bold" fill="#1e40af">目的と成果物を明確にする</text>
+          <line x1="70" y1="70" x2="70" y2="82" stroke="#64748b" stroke-width="1.5"/>
+          <text x="80" y="95" font-size="11" fill="#475569">→ 最初に「何を作るか」を明確にすると後工程がスムーズ</text>
+          <circle cx="42" cy="120" r="14" fill="#2563eb"/>
+          <text x="42" y="125" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">②</text>
+          <text x="64" y="117" font-size="13" font-weight="bold" fill="#1e40af">認識合わせを丁寧に行う</text>
+          <line x1="70" y1="125" x2="70" y2="137" stroke="#64748b" stroke-width="1.5"/>
+          <text x="80" y="150" font-size="11" fill="#475569">→ 文書を最新に保つことで、設計・実装・テスト・運用がすべてスムーズに進む</text>
+          <circle cx="42" cy="175" r="14" fill="#2563eb"/>
+          <text x="42" y="180" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">③</text>
+          <text x="64" y="172" font-size="13" font-weight="bold" fill="#1e40af">変更管理を適切に行う</text>
+          <line x1="70" y1="180" x2="70" y2="192" stroke="#64748b" stroke-width="1.5"/>
+          <text x="80" y="205" font-size="11" fill="#475569">→ 変更は避けるのではなく、影響を分析して合意して進める姿勢が大切</text>
+        </svg>
       </figure>
     </section>
 
