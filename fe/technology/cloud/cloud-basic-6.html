@@ -9,7 +9,7 @@
   <header class="site-header lesson-header"><div class="header-inner"><div><p class="eyebrow">Technology / Cloud</p><h1>サーバー・ストレージ・ネットワーク</h1><p class="lead">クラウドを支える構成要素（サーバー形状・ストレージ種類・ネットワーク仮想化・負荷分散）を整理します。</p></div><nav class="study-map" aria-label="ページ内メニュー"><a href="#terms">用語</a><a href="#server">サーバー</a><a href="#storage">ストレージ</a><a href="#network">ネットワーク</a><a href="#quiz">確認問題</a></nav></div></header>
   <main class="lesson-page"><nav class="breadcrumb" aria-label="パンくず"><a href="../../../index.html">ポータル</a><span>クラウド</span><span>サーバー・ストレージ・ネットワーク</span></nav>
     <section class="lesson-summary"><div><h2>このページで覚えること</h2><ul class="check-list"><li>サーバーの形状と特徴</li><li>ストレージの種類（DAS/SAN/NAS/オブジェクト）</li><li>ネットワーク仮想化（VLAN/SDN）と負荷分散</li></ul></div><aside class="priority-box"><h2>出題優先度</h2><dl><div><dt>高</dt><dd>DAS/SAN/NAS/オブジェクトの区別</dd></div><div><dt>中</dt><dd>VLANとSDNの違い</dd></div><div><dt>低</dt><dd>サーバー形状の詳細</dd></div></dl><p>読了目安: 約12分</p></aside></section>
-    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap mobile-card-table"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
       <tr><td>1</td><td>DAS</td><td>サーバー直結ストレージ。シンプルだが拡張性低</td></tr>
       <tr><td>2</td><td>SAN</td><td>専用ネットワーク経由の高速ブロックストレージ</td></tr>
       <tr><td>3</td><td>NAS</td><td>LAN経由のファイル共有ストレージ</td></tr>
@@ -29,7 +29,7 @@ SAN（専用ネットワーク・ブロック・FC/iSCSI）
 NAS（LAN経由・ファイル・CIFS/NFS）
         ↓ 大規模化
 オブジェクト（HTTP/REST・S3）</pre></figure>
-      <div class="table-wrap"><table><thead><tr><th>種類</th><th>単位</th><th>プロトコル</th><th>特徴</th></tr></thead><tbody>
+      <div class="table-wrap mobile-card-table"><table><thead><tr><th>種類</th><th>単位</th><th>プロトコル</th><th>特徴</th></tr></thead><tbody>
         <tr><td>DAS</td><td>ブロック</td><td>SATA/SAS</td><td>サーバー直結、シンプル</td></tr>
         <tr><td>SAN</td><td>ブロック</td><td>FC/iSCSI</td><td>高速、データベース向け</td></tr>
         <tr><td>NAS</td><td>ファイル</td><td>CIFS/NFS</td><td>ファイル共有、導入容易</td></tr>

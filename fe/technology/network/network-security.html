@@ -21,7 +21,7 @@
           <div><dt>高</dt><dd>共通鍵vs公開鍵、SSL/TLS、ファイアウォール、DMZ</dd></div>
           <div><dt>中</dt><dd>電子署名、認証局、IDSとIPSの違い、VPNトンネル</dd></div></dl><p>読了目安: 約20分</p></aside></section>
 
-    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap mobile-card-table"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
           <tr><td>1</td><td>共通鍵暗号方式</td><td>同じ鍵で暗号化・復号。AES/RC4。鍵共有が必要</td></tr>
           <tr><td>2</td><td>公開鍵暗号方式</td><td>公開鍵で暗号化、秘密鍵で復号。RSA/DSA/ECDSA</td></tr>
           <tr><td>3</td><td>電子署名</td><td>送信者の秘密鍵で暗号化→公開鍵で検証で本人証明</td></tr>
@@ -37,7 +37,7 @@
 
     <section id="crypto" class="lesson-section"><h2>暗号化技術</h2>
       <h3>暗号方式の比較</h3>
-      <div class="table-wrap"><table><thead><tr><th>項目</th><th>共通鍵暗号方式</th><th>公開鍵暗号方式</th><th>ハッシュ関数</th></tr></thead><tbody>
+      <div class="table-wrap mobile-card-table"><table><thead><tr><th>項目</th><th>共通鍵暗号方式</th><th>公開鍵暗号方式</th><th>ハッシュ関数</th></tr></thead><tbody>
             <tr><td>鍵</td><td>1つ（共通鍵）</td><td>2つ（公開鍵+秘密鍵）</td><td>鍵なし</td></tr>
             <tr><td>暗号化/復号</td><td>同じ鍵</td><td>異なる鍵</td><td>復号不可（一方向）</td></tr>
             <tr><td>主な用途</td><td>VPN、WPA2、SSL/TLS</td><td>HTTPS、電子署名</td><td>パスワード保存、改ざん検知</td></tr>
@@ -57,7 +57,7 @@
 
     <section id="fw" class="lesson-section"><h2>ファイアウォールとDMZ</h2>
       <h3>ファイアウォールの種類</h3>
-      <div class="table-wrap"><table><thead><tr><th>種類</th><th>検査対象</th><th>特徴</th></tr></thead><tbody>
+      <div class="table-wrap mobile-card-table"><table><thead><tr><th>種類</th><th>検査対象</th><th>特徴</th></tr></thead><tbody>
             <tr><td>パケットフィルタリング型</td><td>IPアドレス、ポート番号（ヘッダ）</td><td>高速。ステートフル型が主流</td></tr>
             <tr><td>ゲートウェイ型（プロキシ型）</td><td>通信内容（アプリケーション層）まで</td><td>遅延あり。マルウェア防御可</td></tr>
           </tbody></table></div>
@@ -67,7 +67,7 @@
     </section>
 
     <section id="ids" class="lesson-section"><h2>IDS/IPS</h2>
-      <div class="table-wrap"><table><thead><tr><th>項目</th><th>IDS</th><th>IPS</th></tr></thead><tbody>
+      <div class="table-wrap mobile-card-table"><table><thead><tr><th>項目</th><th>IDS</th><th>IPS</th></tr></thead><tbody>
             <tr><td>役割</td><td>不正侵入の<strong>検知と通知</strong></td><td>検知＋<strong>自動遮断</strong></td></tr>
             <tr><td>設置形態</td><td>ホスト型/ネットワーク型</td><td>ホスト型/ネットワーク型</td></tr>
           </tbody></table></div>
@@ -76,7 +76,7 @@
 
     <section id="vpn" class="lesson-section"><h2>VPN</h2>
       <p>公開ネットワーク上に<strong>仮想的な専用線（トンネル）</strong>を構築し、暗号化で通信を保護する技術。</p>
-      <div class="table-wrap"><table><thead><tr><th>プロトコル</th><th>特徴</th></tr></thead><tbody>
+      <div class="table-wrap mobile-card-table"><table><thead><tr><th>プロトコル</th><th>特徴</th></tr></thead><tbody>
             <tr><td>IPsec</td><td>認証＋暗号化。標準的VPNプロトコル</td></tr>
             <tr><td>L2TP</td><td>経路構築のみ（暗号化なし）。IPsecと併用</td></tr>
             <tr><td>SSL-VPN</td><td>HTTPS(SSL/TLS)で暗号化＋トンネル。Webブラウザで利用可</td></tr>

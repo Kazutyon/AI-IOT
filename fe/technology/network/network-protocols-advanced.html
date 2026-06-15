@@ -20,7 +20,7 @@
           <div><dt>高</dt><dd>ICMP（Ping/タイプ3/8/11）、SSHとTELNETの違い、FTPポート番号</dd></div>
           <div><dt>中</dt><dd>NTP、FTPアクティブ/パッシブモード</dd></div></dl><p>読了目安: 約18分</p></aside></section>
 
-    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
+    <section id="terms" class="lesson-section"><h2>試験に出る用語</h2><div class="table-wrap mobile-card-table"><table><thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead><tbody>
           <tr><td>1</td><td>ICMP</td><td>通信のエラー通知や疎通確認を行うプロトコル</td></tr>
           <tr><td>2</td><td>Ping</td><td>ICMP Echo Request/Replyでホストの死活確認</td></tr>
           <tr><td>3</td><td>TELNET</td><td>リモートログインプロトコル。平文通信（TCP 23）</td></tr>
@@ -35,7 +35,7 @@
     <section id="icmp" class="lesson-section"><h2>ICMP</h2>
       <p>ICMPは<strong>通信のエラー通知や疎通確認</strong>を行うプロトコルです。IPパケットのペイロードに格納され、LAN内だけでなくインターネット上もルーター経由で流れます。</p>
       <h3>主なタイプ</h3>
-      <div class="table-wrap"><table><thead><tr><th>タイプ</th><th>名称</th><th>用途</th></tr></thead><tbody>
+      <div class="table-wrap mobile-card-table"><table><thead><tr><th>タイプ</th><th>名称</th><th>用途</th></tr></thead><tbody>
             <tr><td>0</td><td>Echo Reply</td><td>Pingの応答</td></tr>
             <tr><td>3</td><td>Destination Unreachable</td><td>宛先不達（ネットワーク/ホスト/ポート）</td></tr>
             <tr><td>8</td><td>Echo Request</td><td>Pingの要求</td></tr>
@@ -58,7 +58,7 @@
     <section id="ftp" class="lesson-section"><h2>FTP</h2>
       <p>ファイル転送プロトコル。<strong>TCP 21</strong>（制御）+ <strong>TCP 20</strong>（データ）の2ポート使用。平文通信のため、現在はSFTP/FTPSが推奨。</p>
       <h3>アクティブモードとパッシブモード</h3>
-      <div class="table-wrap"><table><thead><tr><th>モード</th><th>データ接続</th><th>特徴</th></tr></thead><tbody>
+      <div class="table-wrap mobile-card-table"><table><thead><tr><th>モード</th><th>データ接続</th><th>特徴</th></tr></thead><tbody>
             <tr><td>アクティブ</td><td>サーバー→クライアント（TCP 20）</td><td>FW越え困難</td></tr>
             <tr><td>パッシブ</td><td>クライアント→サーバー（任意ポート）</td><td>FW越えに適する。現在主流</td></tr>
           </tbody></table></div>
