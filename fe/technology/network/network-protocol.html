@@ -5,25 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>プロトコルとOSI/TCP/IP階層モデル | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
-  <script type="module">
-    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: "base",
-      themeVariables: {
-        primaryColor: "#eef4f8",
-        primaryTextColor: "#182230",
-        primaryBorderColor: "#8aa4bf",
-        lineColor: "#2563eb",
-        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
-      },
-      flowchart: {
-        curve: "basis",
-        nodeSpacing: 34,
-        rankSpacing: 42
-      }
-    });
-  </script>
 </head>
 <body>
   <header class="site-header lesson-header">
@@ -135,11 +116,11 @@
       <p>データは<strong>ヘッダー</strong>（封筒の宛名）と<strong>ペイロード</strong>（手紙の中身）で構成されます。階層を下るごとに各層のヘッダーが付加されます。この仕組みを<strong>カプセル化</strong>と呼びます。</p>
       <figure class="wide-diagram">
         <figcaption>カプセル化フロー（送信時）</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[アプリケーション層: データ作成] --> B[トランスポート層: TCPヘッダー追加]
-    B --> C[ネットワーク層: IPヘッダー追加]
-    C --> D[データリンク層: MACヘッダー+FCS追加]
-    D --> E[物理層: ビット信号に変換して伝送]</pre>
+        <pre>アプリケーション層: データ作成
+  └── トランスポート層: TCPヘッダー追加
+       └── ネットワーク層: IPヘッダー追加
+            └── データリンク層: MACヘッダー+FCS追加
+                 └── 物理層: ビット信号に変換して伝送</pre>
       </figure>
       <p class="hint">試験対策：「下位層が付加する制御情報を何と呼ぶか」→ <strong>ヘッダー</strong>。「上位層のデータを下位層が包み込むことを何と呼ぶか」→ <strong>カプセル化</strong></p>
     </section>
@@ -169,13 +150,13 @@
 
       <figure class="wide-diagram">
         <figcaption>OSI参照モデル7層 役割早見</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[第7層 アプリケーション層: 通信処理] --> B[第6層 プレゼンテーション層: 変換・暗号化]
-    B --> C[第5層 セッション層: 接続管理]
-    C --> D[第4層 トランスポート層: 分割・再送制御]
-    D --> E[第3層 ネットワーク層: 経路決定]
-    E --> F[第2層 データリンク層: LAN内通信]
-    F --> G[第1層 物理層: 信号伝送]</pre>
+        <pre>第7層 アプリケーション層: 通信処理
+  └── 第6層 プレゼンテーション層: 変換・暗号化
+       └── 第5層 セッション層: 接続管理
+            └── 第4層 トランスポート層: 分割・再送制御
+                 └── 第3層 ネットワーク層: 経路決定
+                      └── 第2層 データリンク層: LAN内通信
+                           └── 第1層 物理層: 信号伝送</pre>
       </figure>
     </section>
 
@@ -250,20 +231,19 @@
       <div class="diagram-grid">
         <figure>
           <figcaption>IP・UDP・TCPの特徴</figcaption>
-          <pre class="mermaid">flowchart TD
-    A[IP: 経路決定のみ] --> B[UDP: 軽量・高速]
-    B --> C[TCP: 信頼性重視]
-    A -->|特徴| A1[ベストエフォート型]
-    B -->|特徴| B1[データグラム・再送なし]
-    C -->|特徴| C1[3ウェイハンドシェイク]</pre>
+          <pre>IP（経路決定のみ）
+  └── ベストエフォート型
+UDP（軽量・高速）
+  └── データグラム・再送なし
+TCP（信頼性重視）
+  └── 3ウェイハンドシェイク</pre>
         </figure>
         <figure>
           <figcaption>TCPの3ウェイハンドシェイク</figcaption>
-          <pre class="mermaid">flowchart TD
-    Client[クライアント] -->|1. SYN送信| Server[サーバー]
-    Server -->|2. SYN+ACK応答| Client
-    Client -->|3. ACK送信| Server
-    Server --> Connected[接続確立・データ通信開始]</pre>
+          <pre>① クライアント ──SYN──→ サーバー
+② クライアント ←──SYN+ACK── サーバー
+③ クライアント ──ACK──→ サーバー
+    → 接続確立・データ通信開始</pre>
         </figure>
       </div>
     </section>

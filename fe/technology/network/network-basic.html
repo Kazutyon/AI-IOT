@@ -5,25 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ネットワークの基本とデータ伝送 | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
-  <script type="module">
-    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: "base",
-      themeVariables: {
-        primaryColor: "#eef4f8",
-        primaryTextColor: "#182230",
-        primaryBorderColor: "#8aa4bf",
-        lineColor: "#2563eb",
-        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
-      },
-      flowchart: {
-        curve: "basis",
-        nodeSpacing: 34,
-        rankSpacing: 42
-      }
-    });
-  </script>
 </head>
 <body>
   <header class="site-header lesson-header">
@@ -117,22 +98,17 @@
       <div class="diagram-grid">
         <figure>
           <figcaption>トポロジー前半</figcaption>
-          <pre class="mermaid">flowchart TD
-    A[ライン型<br>直線状に接続] --> B[リング型<br>輪状に接続]
-    B --> C[スター型<br>中心装置に接続]
-    A --> A1[途中故障で全体に影響]
-    B --> B1[1ノード故障で全体停止]
-    C --> C1[中心装置故障で全体停止]</pre>
+          <pre>ライン型 ──→ リング型 ──→ スター型
+ライン型 → 途中故障で全体に影響
+リング型 → 1ノード故障で全体停止
+スター型 → 中心装置故障で全体停止</pre>
         </figure>
         <figure>
           <figcaption>トポロジー後半</figcaption>
-          <pre class="mermaid">flowchart TD
-    D[バス型<br>共通ケーブル] --> E[ツリー型<br>階層構造]
-    E --> F[メッシュ型<br>複数経路]
-    D --> D1[衝突が起こりやすい]
-    E --> E1[DNSやディレクトリ構造]
-    F --> F1[耐障害性が高い]
-    F --> F2[フルメッシュ]</pre>
+          <pre>バス型 ──→ ツリー型 ──→ メッシュ型
+バス型 → 衝突が起こりやすい
+ツリー型 → DNSやディレクトリ構造
+メッシュ型 → 耐障害性が高い（フルメッシュ）</pre>
         </figure>
       </div>
     </section>
@@ -173,41 +149,39 @@
           <p>半二重は送信と受信を交互に行います。全二重は同時に送受信できます。トランシーバーは半二重、電話回線は全二重の例です。</p>
         </article>
       </div>
-      <figure class="wide-diagram">
-        <figcaption>伝送方式の分類 1</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[データ伝送] --> B[シリアル伝送]
-    B --> C[1本の信号線で1ビットずつ送信]
-    C --> D[長距離通信向き]
-    D --> E[USB・SATA・LAN]</pre>
-      </figure>
-      <figure class="wide-diagram">
-        <figcaption>伝送方式の分類 2</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[シリアル伝送] --> B[非同期通信]
-    A --> C[同期通信]
-    B --> B1[スタート/ストップビット]
-    C --> C1[クロック信号]
-    B1 --> D[低速通信向き]
-    C1 --> E[大量データ向き]</pre>
-      </figure>
+      <div class="diagram-grid">
+        <figure>
+          <figcaption>伝送方式の分類</figcaption>
+          <pre>データ伝送
+ └── シリアル伝送（1本の信号線で1ビットずつ）
+      ├── 非同期通信（スタート/ストップビット）
+      │    └── 低速通信向き
+      └── 同期通信（クロック信号）
+           └── 大量データ向き</pre>
+        </figure>
+      </div>
     </section>
 
     <section id="calculation" class="lesson-section">
       <h2>計算・手順</h2>
-      <figure class="wide-diagram">
-        <figcaption>伝送時間の計算手順</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[データ量 バイト] --> B[ビットへ換算 ×8]
-    B --> C[伝送速度 bps で割る]
-    C --> D[伝送時間 秒]</pre>
-      </figure>
-      <figure class="wide-diagram">
-        <figcaption>伝送効率の計算手順</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[有効データ量] --> B[総データ量 ヘッダ込み]
-    B --> C[伝送効率 %]</pre>
-      </figure>
+      <div class="diagram-grid">
+        <figure>
+          <figcaption>伝送時間の計算手順</figcaption>
+          <pre>ステップ1: データ量（バイト）
+    ↓ ×8
+ステップ2: データ量（ビット）
+    ↓ ÷伝送速度（bps）
+ステップ3: 伝送時間（秒）</pre>
+        </figure>
+        <figure>
+          <figcaption>伝送効率の計算手順</figcaption>
+          <pre>ステップ1: 有効データ量
+    ÷
+ステップ2: 総データ量（ヘッダ込み）
+    =
+ステップ3: 伝送効率（%）</pre>
+        </figure>
+      </div>
       <article class="formula-box">
         <h3>伝送時間</h3>
         <p><strong>伝送時間 = データ量（ビット） ÷ 伝送速度（bps）</strong></p>

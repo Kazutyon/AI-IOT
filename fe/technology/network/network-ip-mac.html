@@ -1,29 +1,10 @@
-<!doctype html>
+<!doctypeml>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>IPアドレスとMACアドレス | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
-  <script type="module">
-    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: "base",
-      themeVariables: {
-        primaryColor: "#eef4f8",
-        primaryTextColor: "#182230",
-        primaryBorderColor: "#8aa4bf",
-        lineColor: "#2563eb",
-        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
-      },
-      flowchart: {
-        curve: "basis",
-        nodeSpacing: 34,
-        rankSpacing: 42
-      }
-    });
-  </script>
 </head>
 <body>
   <header class="site-header lesson-header">
@@ -117,11 +98,11 @@
 
       <figure class="wide-diagram">
         <figcaption>IPv4アドレスの構造（32ビット→4オクテット）</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[IPv4アドレス: 32ビット] --> B[8ビット×4 に分割]
-    B --> C[各オクテットを10進数に変換]
-    C --> D[ピリオドで区切る]
-    D --> E[例: 192.168.0.1]</pre>
+        <pre>IPv4アドレス: 32ビット
+  └── 8ビット×4 = 4オクテットに分割
+       └── 各オクテットを10進数に変換
+            └── ピリオドで区切る
+                 → 例: 192.168.0.1</pre>
       </figure>
 
       <h3>グローバルIPアドレスとプライベートIPアドレス</h3>
@@ -130,10 +111,10 @@
 
       <figure class="wide-diagram">
         <figcaption>グローバルIPとプライベートIPの使い分け</figcaption>
-        <pre class="mermaid">flowchart TD
-    PC[PC: プライベートIP] --> NAT[NAT/NAPT: アドレス変換]
-    NAT --> Internet[インターネット: グローバルIP]
-    Internet --> Server[Webサーバー]</pre>
+        <pre>PC（プライベートIP）
+  └── NAT/NAPT（アドレス変換）
+       └── インターネット（グローバルIP）
+            └── Webサーバー</pre>
       </figure>
 
       <h3>IPv6</h3>
@@ -171,11 +152,9 @@
 
       <figure class="wide-diagram">
         <figcaption>MACアドレスの構造（48ビット→OUI＋ノード番号）</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[MACアドレス: 48ビット] --> B[上位24ビット: OUI]
-    A --> C[下位24ビット: ノード番号]
-    B -->|IEEEが管理| B1[メーカーを識別]
-    C -->|メーカーが管理| C1[機器ごとに割当]</pre>
+        <pre>MACアドレス: 48ビット
+  ├── 上位24ビット: OUI（IEEEが管理）→ メーカーを識別
+  └── 下位24ビット: ノード番号（メーカーが管理）→ 機器ごとに割当</pre>
       </figure>
 
       <h3>特別なMACアドレス</h3>
@@ -200,11 +179,12 @@
 
       <figure class="wide-diagram">
         <figcaption>ARPの動作フロー</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[送信元: このIPのMACが知りたい] -->|ARP要求 ブロードキャスト| B[FF:FF:FF:FF:FF:FF]
-    B --> C[該当機器が自分のMACアドレスを返信]
-    C -->|ARP応答 ユニキャスト| D[送信元: MACアドレスを取得]
-    D --> E[ARPテーブルにキャッシュ]</pre>
+        <pre>① 送信元: ARP要求（ブロードキャスト FF:FF:FF:FF:FF:FF）
+    └── 「このIPのMACアドレスを知りたい」
+② 該当機器: ARP応答（ユニキャスト）
+    └── 自分のMACアドレスを返信
+③ 送信元: MACアドレス取得
+    └── ARPテーブルにキャッシュ保存</pre>
       </figure>
     </section>
 
@@ -219,11 +199,12 @@
 
       <figure class="wide-diagram">
         <figcaption>ポート番号の役割イメージ</figcaption>
-        <pre class="mermaid">flowchart TD
-    Client[クライアント: 送信元ポート 50000番台] -->|パケット| Server[サーバー]
-    Server -->|宛先ポート80| Web[Webアプリ]
-    Server -->|宛先ポート25| Mail[メールアプリ]
-    Server -->|宛先ポート53| DNS[DNSアプリ]</pre>
+        <pre>クライアント（送信元ポート: 50000番台）
+  └── パケット送信
+       └── サーバー（宛先ポートでアプリ振り分け）
+            ├── ポート80 → Webアプリ
+            ├── ポート25 → メールアプリ
+            └── ポート53 → DNSアプリ</pre>
       </figure>
 
       <h3>暗記必須のウェルノウンポート</h3>

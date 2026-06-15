@@ -544,6 +544,23 @@ th {
   font: 0.9rem/1.65 ui-monospace, "SFMono-Regular", Consolas, monospace;
 }
 
+.lesson-section pre,
+.source-note pre {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lesson-section pre code,
+.source-note pre code {
+  white-space: inherit;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
 .formula-box {
   margin-bottom: 12px;
 }
@@ -708,6 +725,25 @@ th {
     overflow-wrap: anywhere;
     font-size: 0.82rem;
     line-height: 1.55;
+  }
+
+  .lesson-section pre,
+  .source-note pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .lesson-section pre code,
+  .source-note pre code {
+    white-space: inherit;
+  }
+
+  .mermaid {
+    max-width: 100%;
+    overflow-x: auto;
   }
 
   .mobile-card-table {

@@ -1,25 +1,10 @@
-<!doctype html>
+もう<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ネットワーク機器とパケット交換 | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
-  <script type="module">
-    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: "base",
-      themeVariables: {
-        primaryColor: "#eef4f8",
-        primaryTextColor: "#182230",
-        primaryBorderColor: "#8aa4bf",
-        lineColor: "#2563eb",
-        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
-      },
-      flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 }
-    });
-  </script>
 </head>
 <body>
   <header class="site-header lesson-header">
@@ -105,17 +90,14 @@
 
       <figure class="wide-diagram">
         <figcaption>パケット交換方式の流れ</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[送信データ] --> B[パケットに分割]
-    B --> C[ヘッダーを付与]
-    C --> D[ネットワークへ送出]
-    D --> E{経路選択}
-    E -->|通常経路| F[ルーター中継]
-    E -->|障害発生| G[別経路で迂回]
-    F --> H[宛先で受信]
-    G --> H
-    H --> I[パケットを再構成]
-    I --> J[元のデータを復元]</pre>
+        <pre>送信データ
+  └── パケットに分割
+       └── ヘッダーを付与
+            └── ネットワークへ送出
+                 ├── 経路選択（通常）→ ルーター中継
+                 └── 経路選択（障害）→ 別経路で迂回
+                      └── 宛先で受信
+                           └── パケットを再構成 → 元のデータを復元</pre>
       </figure>
 
       <h3>利点</h3>
@@ -134,20 +116,18 @@
       </ul>
 
       <h3>回線交換方式との比較</h3>
-      <figure class="wide-diagram">
-        <figcaption>パケット交換方式と回線交換方式</figcaption>
-        <pre class="mermaid">flowchart TD
-    subgraph パケット交換
-        P1[データ分割] --> P2[各パケット独立転送]
-        P2 --> P3[複数通信が混在]
-        P3 --> P4[宛先で再構成]
-    end
-    subgraph 回線交換
-        C1[通信前に回線確保] --> C2[1対1の専有回線]
-        C2 --> C3[安定した通信]
-        C3 --> C4[同時通信不可]
-    end</pre>
-      </figure>
+      <div class="diagram-grid">
+        <figure>
+          <figcaption>パケット交換方式</figcaption>
+          <pre>データ分割 → 各パケット独立転送
+          → 複数通信が混在 → 宛先で再構成</pre>
+        </figure>
+        <figure>
+          <figcaption>回線交換方式</figcaption>
+          <pre>通信前に回線確保 → 1対1の専有回線
+          → 安定した通信 → 同時通信不可</pre>
+        </figure>
+      </div>
 
       <div class="table-wrap">
         <table>
@@ -169,13 +149,11 @@
 
       <figure class="wide-diagram">
         <figcaption>ルーターの動作</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[パケット受信] --> B[宛先IPアドレスを確認]
-    B --> C{自LAN内の宛先?}
-    C -->|Yes| D[宛先機器に直接配送]
-    C -->|No| E[隣接ルーターへ転送]
-    E --> F[次のルーターで同様に判断]
-    F --> C</pre>
+        <pre>パケット受信 → 宛先IPアドレスを確認
+  ├── 自LAN内の宛先? → YES → 宛先機器に直接配送
+  └── 自LAN内の宛先? → NO
+       └── 隣接ルーターへ転送
+            └── 次のルーターで同様に判断（繰り返し）</pre>
       </figure>
 
       <p><strong>エッジルーター</strong>: LANとインターネットの境界に設置され、WAN側でグローバルIPアドレスを使用します。</p>
@@ -208,17 +186,22 @@
       <h3>スイッチ（スイッチングハブ）</h3>
       <p>スイッチはMACアドレスで宛先ポートを判断するL2機器で、通信効率がハブより格段に高いです。</p>
 
-      <figure class="wide-diagram">
-        <figcaption>L2スイッチとL3スイッチの動作比較</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[フレーム受信] --> B{動作層は?}
-    B -->|L2スイッチ| C[MACアドレスで転送先決定]
-    C --> D[該当ポートへ転送]
-    D --> E[同一LAN内通信]
-    B -->|L3スイッチ| F[IPアドレスで経路判断]
-    F --> G[ルーティング実行]
-    G --> H[異なるネットワーク間通信]</pre>
-      </figure>
+      <div class="diagram-grid">
+        <figure>
+          <figcaption>L2スイッチの動作</figcaption>
+          <pre>フレーム受信
+  └── MACアドレスで転送先決定
+       └── 該当ポートへ転送
+            └── 同一LAN内通信</pre>
+        </figure>
+        <figure>
+          <figcaption>L3スイッチの動作</figcaption>
+          <pre>フレーム受信
+  └── IPアドレスで経路判断
+       └── ルーティング実行
+            └── 異なるネットワーク間通信</pre>
+        </figure>
+      </div>
 
       <div class="table-wrap">
         <table>

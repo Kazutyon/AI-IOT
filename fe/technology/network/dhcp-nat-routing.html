@@ -5,25 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DHCP・NAT/NAPT・ルーティング・デフォルトゲートウェイ | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
-  <script type="module">
-    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: "base",
-      themeVariables: {
-        primaryColor: "#eef4f8",
-        primaryTextColor: "#182230",
-        primaryBorderColor: "#8aa4bf",
-        lineColor: "#2563eb",
-        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
-      },
-      flowchart: {
-        curve: "basis",
-        nodeSpacing: 34,
-        rankSpacing: 42
-      }
-    });
-  </script>
 </head>
 <body>
   <header class="site-header lesson-header">
@@ -128,12 +109,11 @@
 
       <figure class="wide-diagram">
         <figcaption>DHCPのDORAシーケンス</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[クライアント] -->|DHCP Discover ブロードキャスト| B[DHCPサーバー]
-    B -->|DHCP Offer IP提案| A
-    A -->|DHCP Request 正式要求| B
-    B -->|DHCP Ack 割当確定| A
-    A --> C[IP・ゲートウェイ・DNS 確定]</pre>
+        <pre>① クライアント ──DHCP Discover（ブロードキャスト）──→ DHCPサーバー
+② クライアント ←──DHCP Offer（IP提案）── DHCPサーバー
+③ クライアント ──DHCP Request（正式要求）──→ DHCPサーバー
+④ クライアント ←──DHCP Ack（割当確定）── DHCPサーバー
+    → IP・ゲートウェイ・DNS 確定</pre>
       </figure>
 
       <h3>リース期間</h3>
@@ -141,15 +121,13 @@
 
       <figure class="wide-diagram">
         <figcaption>DHCPによる自動設定の流れ</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[端末 ネットワーク接続] --> B[DHCPサーバーを探索]
-    B --> C[DORAシーケンスでIP取得]
-    C --> D[サブネットマスク 設定]
-    C --> E[デフォルトゲートウェイ 設定]
-    C --> F[DNSサーバー 設定]
-    D --> G[即 通信可能]
-    E --> G
-    F --> G</pre>
+        <pre>端末 ネットワーク接続
+  └── DHCPサーバーを探索
+       └── DORAシーケンスでIP取得
+            ├── サブネットマスク設定
+            ├── デフォルトゲートウェイ設定
+            └── DNSサーバー設定
+                 → 即通信可能</pre>
       </figure>
     </section>
 
@@ -174,21 +152,22 @@
       </ul>
       <p class="hint">頻出：「NATとNAPTの違いは？」→ <strong>NATはIPのみ1対1変換、NAPTはIPとポート番号を使い多対1変換</strong>。「家庭用ルーターで使われる技術は？」→ <strong>NAPT（IPマスカレード）</strong></p>
 
-      <figure class="wide-diagram">
-        <figcaption>NATとNAPTの違い</figcaption>
-        <pre class="mermaid">flowchart TD
-    subgraph NAT方式
-    A1[PC1 プライベートIP] -->|1対1変換| B1[グローバルIP A]
-    A2[PC2 プライベートIP] -->|1対1変換| B2[グローバルIP B]
-    end
-    subgraph NAPT方式
-    C1[PC1 プライベートIP] -->|ポート番号で区別| D[1つのグローバルIP]
-    C2[PC2 プライベートIP] -->|ポート番号で区別| D
-    end
-    B1 --> E[インターネット]
-    B2 --> E
-    D --> E</pre>
-      </figure>
+      <div class="diagram-grid">
+        <figure>
+          <figcaption>NAT方式（1対1変換）</figcaption>
+          <pre>PC1（プライベートIP） ──1対1変換──→ グローバルIP A
+PC2（プライベートIP） ──1対1変換──→ グローバルIP B
+                                         ↓
+                                    インターネット</pre>
+        </figure>
+        <figure>
+          <figcaption>NAPT方式（多対1変換）</figcaption>
+          <pre>PC1 ┐
+PC2 ┤─ ポート番号で区別 ─→ 1つのグローバルIP
+PC3 ┘                        ↓
+                        インターネット</pre>
+        </figure>
+      </div>
     </section>
 
     <section id="routing" class="lesson-section">
@@ -229,13 +208,13 @@
 
       <figure class="wide-diagram">
         <figcaption>ルーティングプロトコルの分類</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[ルーティングプロトコル] --> B[IGP AS内]
-    A --> C[EGP AS間]
-    B --> D[ディスタンスベクタ型: RIP]
-    B --> E[リンクステート型: OSPF]
-    B --> F[ハイブリッド型: EIGRP]
-    C --> G[パスベクタ型: BGP]</pre>
+        <pre>ルーティングプロトコル
+  ├── IGP（AS内）
+  │    ├── ディスタンスベクタ型: RIP
+  │    ├── リンクステート型: OSPF
+  │    └── ハイブリッド型: EIGRP
+  └── EGP（AS間）
+       └── パスベクタ型: BGP</pre>
       </figure>
     </section>
 
@@ -251,13 +230,11 @@
 
       <figure class="wide-diagram">
         <figcaption>デフォルトゲートウェイの動作フロー</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[パケット受信] --> B{ルーティングテーブルに経路あり?}
-    B -->|あり| C[該当ルーターへ転送]
-    B -->|なし| D{デフォルトGW設定あり?}
-    D -->|あり| E[デフォルトゲートウェイへ転送]
-    D -->|なし| F[パケット破棄]
-    E --> G[上位ネットワークへ]</pre>
+        <pre>パケット受信
+  ├── ルーティングテーブルに経路あり? → YES → 該当ルーターへ転送
+  └── 経路なし?
+       ├── デフォルトGW設定あり? → YES → GWへ転送 → 上位ネットワークへ
+       └── デフォルトGW設定なし? → パケット破棄</pre>
       </figure>
     </section>
 
