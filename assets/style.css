@@ -721,10 +721,10 @@ th {
   }
 
   .wide-diagram pre {
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    font-size: 0.82rem;
-    line-height: 1.55;
+    white-space: pre;
+    overflow-x: auto;
+    font-size: 0.72rem;
+    line-height: 1.5;
   }
 
   .lesson-section pre,
