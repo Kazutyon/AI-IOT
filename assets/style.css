@@ -585,9 +585,20 @@ th {
     font-size: 15px;
   }
 
-  /* モバイルではヘッダー内 study-map を非表示（教材一覧に同リンクあり） */
+  /* モバイルではヘッダー内 study-map を小さいピル形式に */
   .site-header .study-map {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .site-header .study-map a,
+  .site-header .study-map span {
+    min-height: unset;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
   }
 
   .header-inner,
