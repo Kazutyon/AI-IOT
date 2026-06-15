@@ -585,6 +585,11 @@ th {
     font-size: 15px;
   }
 
+  /* モバイルではヘッダー内 study-map を非表示（教材一覧に同リンクあり） */
+  .site-header .study-map {
+    display: none;
+  }
+
   .header-inner,
   .toolbar,
   .two-column,
