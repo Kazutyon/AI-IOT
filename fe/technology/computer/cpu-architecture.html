@@ -153,24 +153,33 @@
 
       <figure class="wide-diagram">
         <figcaption>CPUの基本構造</figcaption>
-        <pre>
-【CPUの基本構成】
-
-    主記憶装置（メモリ）
-           ↕
- ┌─────────────────────────┐
- │ ┌─────────┐ ┌─────────┐ │
- │ │ 制御装置│↔│ 演算装置│ │
- │ │   CU    │ │  ALU    │ │
- │ └────┬────┘ └────┬────┘ │
- │      └─────┬─────┘      │
- │        ┌───┴───┐        │
- │        │レジスタ│       │
- │        └───────┘        │
- └───────────┬─────────────┘
-             ↕
-           出力装置
-        </pre>
+        <svg viewBox="0 0 720 420" width="100%" role="img" aria-label="CPUの基本構成。主記憶装置、制御装置、演算装置、レジスタ、出力装置の関係">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="60" y="90" width="600" height="230" rx="18" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+          <text x="360" y="120" text-anchor="middle" font-weight="700" fill="#334155">CPU</text>
+          <rect x="120" y="150" width="180" height="82" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="210" y="185" text-anchor="middle" font-weight="700" fill="#1e3a8a">制御装置</text>
+          <text x="210" y="210" text-anchor="middle" fill="#1e3a8a">CU</text>
+          <rect x="420" y="150" width="180" height="82" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="510" y="185" text-anchor="middle" font-weight="700" fill="#1e3a8a">演算装置</text>
+          <text x="510" y="210" text-anchor="middle" fill="#1e3a8a">ALU</text>
+          <rect x="270" y="250" width="180" height="54" rx="10" fill="#e0e7ff" stroke="#4338ca" stroke-width="2"/>
+          <text x="360" y="283" text-anchor="middle" font-weight="700" fill="#312e81">レジスタ</text>
+          <rect x="250" y="20" width="220" height="48" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="360" y="51" text-anchor="middle" font-weight="700" fill="#14532d">主記憶装置（メモリ）</text>
+          <rect x="280" y="355" width="160" height="42" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="360" y="382" text-anchor="middle" font-weight="700" fill="#14532d">出力装置</text>
+          <line x1="360" y1="68" x2="360" y2="90" stroke="#64748b" stroke-width="3" marker-end="url(#arr)"/>
+          <line x1="300" y1="191" x2="420" y2="191" stroke="#64748b" stroke-width="3" marker-end="url(#arr)"/>
+          <line x1="420" y1="204" x2="300" y2="204" stroke="#64748b" stroke-width="3" marker-end="url(#arr)"/>
+          <line x1="210" y1="232" x2="310" y2="250" stroke="#64748b" stroke-width="3" marker-end="url(#arr)"/>
+          <line x1="510" y1="232" x2="410" y2="250" stroke="#64748b" stroke-width="3" marker-end="url(#arr)"/>
+          <line x1="360" y1="320" x2="360" y2="355" stroke="#64748b" stroke-width="3" marker-end="url(#arr)"/>
+        </svg>
       </figure>
 
       <h3>命令実行サイクル</h3>

@@ -248,22 +248,25 @@
     for (i ← 1; i ≦ 5; i ← i + 1)
         sum ← sum + i
     endfor
-    出力(sum)
-
-    【トレース表】
-    ┌──────┬─────┬─────┬────────────┐
-    │ 行   │  i  │ sum │ 説明       │
-    ├──────┼─────┼─────┼────────────┤
-    │ 初期 │  -  │  0  │ sumを0で初期化│
-    │ i=1  │  1  │  1  │ 0+1=1      │
-    │ i=2  │  2  │  3  │ 1+2=3      │
-    │ i=3  │  3  │  6  │ 3+3=6      │
-    │ i=4  │  4  │ 10  │ 6+4=10     │
-    │ i=5  │  5  │ 15  │ 10+5=15    │
-    │ 出力 │  -  │ 15  │ 結果15     │
-    └──────┴─────┴─────┴────────────┘
-
-    ★トレースのコツ:
+    出力(sum)</pre>
+        <div class="table-wrap mobile-card-table">
+          <table>
+            <caption>トレース表</caption>
+            <thead>
+              <tr><th>行</th><th>i</th><th>sum</th><th>説明</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>初期</td><td>-</td><td>0</td><td>sumを0で初期化</td></tr>
+              <tr><td>i=1</td><td>1</td><td>1</td><td>0+1=1</td></tr>
+              <tr><td>i=2</td><td>2</td><td>3</td><td>1+2=3</td></tr>
+              <tr><td>i=3</td><td>3</td><td>6</td><td>3+3=6</td></tr>
+              <tr><td>i=4</td><td>4</td><td>10</td><td>6+4=10</td></tr>
+              <tr><td>i=5</td><td>5</td><td>15</td><td>10+5=15</td></tr>
+              <tr><td>出力</td><td>-</td><td>15</td><td>結果15</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <pre>★トレースのコツ:
     1. 初期値を最初に書く
     2. 1行ずつ実行して変数値を更新
     3. ループのたびに条件チェックを忘れずに</pre>

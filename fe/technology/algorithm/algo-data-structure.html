@@ -271,15 +271,27 @@
 
       <figure class="wide-diagram">
         <figcaption>チェイン法による衝突解決</figcaption>
-        <pre>h("Alice") = 2, h("Bob") = 2  → 衝突！
-
-    バケット[2]:
-    ┌────┬────┐    ┌────┬────┐
-    │Alice│ ●─┼───→│Bob  │ / │    ← 連結リストでチェイン
-    └────┴────┘    └────┴────┘
-
-    ・探索時: h(key)でバケット特定 → チェインを線形探索
-    ・衝突が少なければ平均O(1)、衝突が多いとO(n)に近づく</pre>
+        <pre>h("Alice") = 2, h("Bob") = 2  → 衝突！</pre>
+        <svg viewBox="0 0 760 210" width="100%" role="img" aria-label="バケット2にAliceとBobが連結リストでつながるチェイン法">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <text x="60" y="35" font-weight="700" fill="#334155">バケット[2]</text>
+          <rect x="70" y="70" width="150" height="68" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="145" y="111" text-anchor="middle" font-weight="700" fill="#1e3a8a">Alice</text>
+          <rect x="220" y="70" width="54" height="68" rx="8" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+          <circle cx="247" cy="104" r="6" fill="#2563eb"/>
+          <line x1="253" y1="104" x2="365" y2="104" stroke="#64748b" stroke-width="3" marker-end="url(#arr)"/>
+          <rect x="365" y="70" width="130" height="68" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="430" y="111" text-anchor="middle" font-weight="700" fill="#1e3a8a">Bob</text>
+          <rect x="495" y="70" width="54" height="68" rx="8" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+          <text x="522" y="111" text-anchor="middle" font-weight="700" fill="#334155">/</text>
+          <text x="390" y="170" text-anchor="middle" fill="#334155">連結リストでチェイン</text>
+        </svg>
+        <pre>・探索時: h(key)でバケット特定 → チェインを線形探索
+・衝突が少なければ平均O(1)、衝突が多いとO(n)に近づく</pre>
       </figure>
 
       <h3>チェイン法 vs オープンアドレス法</h3>

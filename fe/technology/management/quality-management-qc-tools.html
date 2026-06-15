@@ -165,32 +165,33 @@
 
       <figure class="wide-diagram">
         <figcaption>品質管理の3つの柱</figcaption>
-        <pre>
-【品質管理の3つの柱】
-
-  +-----------------------------------------------------------+
-  |                                                           |
-  |  ① 品質計画（Quality Planning / QP）                       |
-  │     - どのレベルの品質を目指すか                          |
-  │     - どの工程で何を確認するか                            |
-  │     - どのレビューを実施するか                            |
-  │     - どのテストを行うか                                  |
-  │     - どのツールを使うか                                  |
-  |                                                           |
-  |  ② 品質作り込み（Quality Assurance / QA）                 |
-  │     - レビュー、コーディング規約の遵守                    │
-  │     - ペアプログラミング、静的解析ツール                  │
-  │     - 単体テストの自動化                                  │
-  │     → 不具合の発生を未然に防ぐ                           │
-  |                                                           |
-  |  ③ 品質確認（Quality Control / QC）                       |
-  │     - テスト（単体・結合・総合）                          │
-  │     - レビュー（コード・設計・要件）                      │
-  │     - チェックリスト、受け入れテスト                      │
-  │     → 成果物が品質基準を満たしているか確認               │
-  |                                                           |
-  +-----------------------------------------------------------+
-        </pre>
+        <svg viewBox="0 0 900 360" width="100%" role="img" aria-label="品質管理の3つの柱。品質計画、品質作り込み、品質確認">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="40" y="55" width="240" height="250" rx="12" fill="#e0e7ff" stroke="#4338ca" stroke-width="2"/>
+          <rect x="330" y="55" width="240" height="250" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <rect x="620" y="55" width="240" height="250" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="160" y="92" text-anchor="middle" font-size="20" font-weight="700" fill="#312e81">品質計画（QP）</text>
+          <text x="160" y="130" text-anchor="middle" fill="#334155">どの品質を目指すか</text>
+          <text x="160" y="160" text-anchor="middle" fill="#334155">どの工程で確認するか</text>
+          <text x="160" y="190" text-anchor="middle" fill="#334155">レビュー・テスト計画</text>
+          <text x="160" y="220" text-anchor="middle" fill="#334155">利用ツールを決める</text>
+          <text x="450" y="92" text-anchor="middle" font-size="20" font-weight="700" fill="#1e3a8a">品質作り込み（QA）</text>
+          <text x="450" y="130" text-anchor="middle" fill="#334155">レビュー</text>
+          <text x="450" y="160" text-anchor="middle" fill="#334155">コーディング規約の遵守</text>
+          <text x="450" y="190" text-anchor="middle" fill="#334155">静的解析・単体テスト自動化</text>
+          <text x="450" y="220" text-anchor="middle" font-weight="700" fill="#1e3a8a">不具合を未然に防ぐ</text>
+          <text x="740" y="92" text-anchor="middle" font-size="20" font-weight="700" fill="#14532d">品質確認（QC）</text>
+          <text x="740" y="130" text-anchor="middle" fill="#334155">単体・結合・総合テスト</text>
+          <text x="740" y="160" text-anchor="middle" fill="#334155">コード・設計・要件レビュー</text>
+          <text x="740" y="190" text-anchor="middle" fill="#334155">チェックリスト</text>
+          <text x="740" y="220" text-anchor="middle" font-weight="700" fill="#14532d">品質基準を満たすか確認</text>
+          <line x1="280" y1="180" x2="330" y2="180" stroke="#64748b" stroke-width="3" marker-end="url(#arr)"/>
+          <line x1="570" y1="180" x2="620" y2="180" stroke="#64748b" stroke-width="3" marker-end="url(#arr)"/>
+        </svg>
       </figure>
 
       <div class="table-wrap mobile-card-table">
