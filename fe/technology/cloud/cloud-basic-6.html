@@ -4,7 +4,6 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>サーバー・ストレージ・ネットワーク | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
-  <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:true,theme:"base",themeVariables:{primaryColor:"#eef4f8",primaryTextColor:"#182230",primaryBorderColor:"#8aa4bf",lineColor:"#2563eb",fontFamily:"system-ui,-apple-system,Segoe UI,sans-serif"},flowchart:{curve:"basis",nodeSpacing:34,rankSpacing:42}});</script>
 </head>
 <body>
   <header class="site-header lesson-header"><div class="header-inner"><div><p class="eyebrow">Technology / Cloud</p><h1>サーバー・ストレージ・ネットワーク</h1><p class="lead">クラウドを支える構成要素（サーバー形状・ストレージ種類・ネットワーク仮想化・負荷分散）を整理します。</p></div><nav class="study-map" aria-label="ページ内メニュー"><a href="#terms">用語</a><a href="#server">サーバー</a><a href="#storage">ストレージ</a><a href="#network">ネットワーク</a><a href="#quiz">確認問題</a></nav></div></header>
@@ -17,18 +16,19 @@
       <tr><td>4</td><td>VLAN</td><td>物理スイッチを論理分割する技術</td></tr>
       <tr><td>5</td><td>SDN</td><td>ソフトウェアでネットワークを一元制御する技術</td></tr>
     </tbody></table></div></section>
-    <section id="server" class="lesson-section"><h2>サーバーの形状</h2><figure class="wide-diagram"><figcaption>サーバー形状の分類</figcaption><pre class="mermaid">flowchart TD
-    T[タワー型 単体設置・小規模向け] --> R[ラックマウント型 ラック収納・DC主力]
-    R --> D[高密度型 省電力・小型化]</pre></figure></section>
+    <section id="server" class="lesson-section"><h2>サーバーの形状</h2><figure class="wide-diagram"><figcaption>サーバー形状の分類</figcaption><pre>タワー型（単体設置・小規模向け）
+        ↓
+ラックマウント型（ラック収納・DC主力）
+        ↓
+高密度型（省電力・小型化）</pre></figure></section>
     <section id="storage" class="lesson-section"><h2>ストレージの種類</h2>
-      <figure class="wide-diagram"><figcaption>ストレージ分類</figcaption><pre class="mermaid">flowchart TD
-    D1[DAS サーバー直結 ブロック SATA/SAS]
-    D2[SAN 専用ネットワーク ブロック FC/iSCSI]
-    D3[NAS LAN経由 ファイル CIFS/NFS]
-    D4[オブジェクト HTTP/REST オブジェクト S3]
-    D1 -->|高速化| D2
-    D2 -->|共有化| D3
-    D3 -->|大規模化| D4</pre></figure>
+      <figure class="wide-diagram"><figcaption>ストレージ分類</figcaption><pre>DAS（サーバー直結・ブロック・SATA/SAS）
+        ↓ 高速化
+SAN（専用ネットワーク・ブロック・FC/iSCSI）
+        ↓ 共有化
+NAS（LAN経由・ファイル・CIFS/NFS）
+        ↓ 大規模化
+オブジェクト（HTTP/REST・S3）</pre></figure>
       <div class="table-wrap"><table><thead><tr><th>種類</th><th>単位</th><th>プロトコル</th><th>特徴</th></tr></thead><tbody>
         <tr><td>DAS</td><td>ブロック</td><td>SATA/SAS</td><td>サーバー直結、シンプル</td></tr>
         <tr><td>SAN</td><td>ブロック</td><td>FC/iSCSI</td><td>高速、データベース向け</td></tr>
@@ -39,11 +39,12 @@
       <h3>VLAN（Virtual LAN）</h3><p>1台の物理スイッチを複数の仮想的なLANに分割。営業部・開発部・管理部を論理的に分離。</p>
       <h3>SDN（Software Defined Networking）</h3><p>ネットワークの制御をソフトウェアで一元管理。制御層と転送層を分離。</p>
       <h3>ロードバランシング</h3><p>複数サーバーにトラフィックを分散。ラウンドロビン、最小接続数などのアルゴリズムで処理性能向上と障害回避。</p>
-      <figure class="wide-diagram"><figcaption>負荷分散の仕組み</figcaption><pre class="mermaid">flowchart TD
-    U[ユーザー] --> LB[ロードバランサ]
-    LB --> S1[サーバー1]
-    LB --> S2[サーバー2]
-    LB --> S3[サーバー3]</pre></figure></section>
+      <figure class="wide-diagram"><figcaption>負荷分散の仕組み</figcaption><pre>ユーザー
+        ↓
+ロードバランサ
+  ├── サーバー1
+  ├── サーバー2
+  └── サーバー3</pre></figure></section>
     <section class="lesson-section"><h2>間違えやすいポイント</h2><ul class="mistake-list"><li>SAN=高速ブロックストレージ、NAS=<strong>ファイル共有</strong>。用途が異なる。</li><li>VLAN=スイッチの論理分割。SDN=<strong>ソフトウェア制御</strong>。</li><li>オブジェクトストレージは<strong>AWS S3</strong>が代表。HTTP/RESTでアクセス。</li></ul></section>
     <section id="quiz" class="lesson-section"><h2>確認問題</h2>
       <details class="quiz-card"><summary>Q1. NASの説明として適切なものはどれか。</summary><p>ア）サーバーに直接接続するストレージ<br>イ）専用ネットワークで接続する高速ストレージ<br>ウ）LAN経由でファイル共有するストレージ<br>エ）データをオブジェクトとして管理するストレージ</p><details class="answer-toggle">

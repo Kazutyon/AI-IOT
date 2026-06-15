@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>クラウドの種類 | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
-  <script type="module">
-    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({ startOnLoad: true, theme: "base", themeVariables: { primaryColor: "#eef4f8", primaryTextColor: "#182230", primaryBorderColor: "#8aa4bf", lineColor: "#2563eb", fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif" }, flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 } });
-  </script>
 </head>
 <body>
   <header class="site-header lesson-header">
@@ -75,18 +71,11 @@
       <p><strong>パブリッククラウド</strong>は、クラウド事業者が不特定多数の企業・団体・個人に向けてインターネット経由で提供するサービスです。代表的な事業者は<strong>AWS（Amazon）・Azure（Microsoft）・GCP（Google）</strong>の三大メガベンダーです。</p>
       <figure class="wide-diagram">
         <figcaption>パブリッククラウドの構造</figcaption>
-        <pre class="mermaid">flowchart TD
-    subgraph パブリッククラウド
-        A[AWS]
-        B[Azure]
-        C[GCP]
-    end
-    D[インターネット] --> A
-    D --> B
-    D --> C
-    A --> U1[企業A]
-    B --> U2[企業B]
-    C --> U3[個人]</pre>
+        <pre>インターネット
+  ├── AWS   → 企業A
+  ├── Azure → 企業B
+  └── GCP   → 個人ユーザー
+（事業者リソースを複数利用者で共有）</pre>
       </figure>
       <p>特徴: 初期費用なし／低額、従量課金制、拡張性が非常に高い、事業者が運用・保守を担当、<strong>どのサーバーを使っているか「見えない」</strong>（抽象化）。</p>
     </section>
@@ -113,13 +102,11 @@
       <p><strong>ハイブリッドクラウド</strong>は、パブリッククラウドとプライベートクラウド（またはオンプレミス）を組み合わせて利用する形態です。機密データはプライベート、Webサービスはパブリックという使い分けができます。</p>
       <figure class="wide-diagram">
         <figcaption>ハイブリッドクラウド構成</figcaption>
-        <pre class="mermaid">flowchart TD
-    O[オンプレミス 重要データ・基幹システム]
-    P[プライベートクラウド 社内専用アプリ]
-    Q[パブリッククラウド Webサービス・開発環境]
-    O <--> P
-    P <--> Q
-    O <-.-> Q</pre>
+        <pre>オンプレミス（重要データ・基幹システム）
+        ↕
+プライベートクラウド（社内専用アプリ）
+        ↕
+パブリッククラウド（Webサービス・開発環境）</pre>
       </figure>
       <div class="table-wrap">
         <table>

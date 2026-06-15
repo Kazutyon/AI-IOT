@@ -5,21 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>クラウドの定義と歴史 | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
-  <script type="module">
-    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: "base",
-      themeVariables: {
-        primaryColor: "#eef4f8",
-        primaryTextColor: "#182230",
-        primaryBorderColor: "#8aa4bf",
-        lineColor: "#2563eb",
-        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
-      },
-      flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 }
-    });
-  </script>
 </head>
 <body>
   <header class="site-header lesson-header">
@@ -122,13 +107,17 @@
       </div>
       <figure class="wide-diagram">
         <figcaption>3形態の構造比較</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[オンプレミス] --> A1[自社で機器保有]
-    A1 --> A2[自社施設で運用]
-    B[データセンター利用] --> B1[自社で機器保有]
-    B1 --> B2[施設のみ借りる]
-    C[クラウド] --> C1[事業者から機器を借りる]
-    C1 --> C2[事業者が運用]</pre>
+        <pre>オンプレミス
+  → 自社で機器保有
+  → 自社施設で運用
+
+データセンター利用
+  → 自社で機器保有
+  → 施設のみ借りる
+
+クラウド
+  → 事業者から機器を借りる
+  → 事業者が運用</pre>
       </figure>
     </section>
 
@@ -151,11 +140,15 @@
       </div>
       <figure class="wide-diagram">
         <figcaption>クラウド発展の流れ</figcaption>
-        <pre class="mermaid">flowchart TD
-    A[1990年代: データセンター登場] --> B[2000年頃: サーバー集約]
-    B --> C[2005年頃: 仮想化技術登場]
-    C --> D[2010年代〜: クラウド本格普及]
-    D --> E[AWS / Azure / GCP が市場牽引]</pre>
+        <pre>1990年代: データセンター登場
+        ↓
+2000年頃: サーバー集約
+        ↓
+2005年頃: 仮想化技術登場
+        ↓
+2010年代〜: クラウド本格普及
+        ↓
+AWS / Azure / GCP が市場牽引</pre>
       </figure>
     </section>
 

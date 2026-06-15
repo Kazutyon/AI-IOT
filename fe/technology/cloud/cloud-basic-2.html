@@ -5,21 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>クラウドの基本特徴 | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
-  <script type="module">
-    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: "base",
-      themeVariables: {
-        primaryColor: "#eef4f8",
-        primaryTextColor: "#182230",
-        primaryBorderColor: "#8aa4bf",
-        lineColor: "#2563eb",
-        fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif"
-      },
-      flowchart: { curve: "basis", nodeSpacing: 34, rankSpacing: 42 }
-    });
-  </script>
 </head>
 <body>
   <header class="site-header lesson-header">
@@ -126,17 +111,13 @@
       <h2>クラウド導入のメリット（運用視点）</h2>
       <figure class="wide-diagram">
         <figcaption>従来方式とクラウドの比較</figcaption>
-        <pre class="mermaid">flowchart TD
-    subgraph 従来[従来方式]
-        A1[機器購入] --> A2[設置]
-        A2 --> A3[設定]
-        A3 --> A4[運用監視]
-        A4 --> A5[故障対応]
-    end
-    subgraph クラウド[クラウド]
-        B1[Web申込み] --> B2[すぐ使える]
-        B2 --> B3[事業者が運用]
-    end</pre>
+        <pre>【従来方式】
+機器購入 → 設置 → 設定 → 運用監視 → 故障対応
+（全て自社対応）
+
+【クラウド】
+Web申込み → すぐ使える → 事業者が運用
+（インフラ管理は事業者に任せる）</pre>
       </figure>
 
       <div class="table-wrap">

@@ -4,7 +4,6 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>信頼性と障害対策 | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
-  <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:true,theme:"base",themeVariables:{primaryColor:"#eef4f8",primaryTextColor:"#182230",primaryBorderColor:"#8aa4bf",lineColor:"#2563eb",fontFamily:"system-ui,-apple-system,Segoe UI,sans-serif"},flowchart:{curve:"basis",nodeSpacing:34,rankSpacing:42}});</script>
 </head>
 <body>
   <header class="site-header lesson-header"><div class="header-inner"><div><p class="eyebrow">Technology / Cloud</p><h1>信頼性と障害対策</h1><p class="lead">SLA、リージョンとAZ、冗長化方式（ホット/ウォーム/コールド）、バックアップと障害対策を基本情報技術者試験向けに整理します。</p></div><nav class="study-map" aria-label="ページ内メニュー"><a href="#terms">用語</a><a href="#sla">SLA</a><a href="#az">リージョン/AZ</a><a href="#redundancy">冗長化</a><a href="#quiz">確認問題</a></nav></div></header>
@@ -30,15 +29,11 @@
     </tbody></table></div></section>
 
     <section id="az" class="lesson-section"><h2>リージョンとアベイラビリティゾーン（AZ）</h2>
-    <figure class="wide-diagram"><figcaption>リージョンとAZの構造</figcaption><pre class="mermaid">flowchart TD
-    subgraph 東京リージョン
-        AZ1[AZ1 データセンターA]
-        AZ2[AZ2 データセンターB]
-        AZ3[AZ3 データセンターC]
-    end
-    AZ1 <--> AZ2
-    AZ2 <--> AZ3
-    AZ1 <--> AZ3</pre></figure>
+    <figure class="wide-diagram"><figcaption>リージョンとAZの構造</figcaption><pre>東京リージョン
+  ├── AZ1（データセンターA）
+  ├── AZ2（データセンターB）
+  └── AZ3（データセンターC）
+（AZ間は高速専用回線で相互接続）</pre></figure>
     <div class="table-wrap"><table><thead><tr><th>概念</th><th>説明</th><th>例</th></tr></thead><tbody>
       <tr><td>リージョン</td><td>地理的に独立した地域。複数AZで構成</td><td>東京、大阪、バージニア北部</td></tr>
       <tr><td>AZ</td><td>リージョン内の独立DC。異なる障害ドメイン</td><td>東京AZ1, AZ2, AZ3</td></tr>
@@ -46,13 +41,10 @@
     <p>同一AZ内=低遅延だが同一障害リスク。異なるAZ=高可用性。異なるリージョン=ディザスタリカバリに有効。</p></section>
 
     <section id="redundancy" class="lesson-section"><h2>冗長化の3方式</h2>
-    <figure class="wide-diagram"><figcaption>ホット/ウォーム/コールドスタンバイ</figcaption><pre class="mermaid">flowchart TD
-    A[冗長化方式] --> B[ホットスタンバイ]
-    A --> C[ウォームスタンバイ]
-    A --> D[コールドスタンバイ]
-    B -->|常時同期・即時切替| E[コスト最高]
-    C -->|最小稼働・切替数分| F[コスト中]
-    D -->|停止待機・切替数十分| G[コスト最低]</pre></figure>
+    <figure class="wide-diagram"><figcaption>ホット/ウォーム/コールドスタンバイ</figcaption><pre>冗長化方式
+  ├── ホットスタンバイ   → 常時同期・即時切替 → コスト最高
+  ├── ウォームスタンバイ → 最小稼働・切替数分 → コスト中
+  └── コールドスタンバイ → 停止待機・切替数十分 → コスト最低</pre></figure>
     <div class="table-wrap"><table><thead><tr><th>方式</th><th>待機系状態</th><th>切替時間</th><th>コスト</th></tr></thead><tbody>
       <tr><td>ホット</td><td>常時稼働・同期</td><td>即時（数秒）</td><td>高</td></tr>
       <tr><td>ウォーム</td><td>最小機能で稼働</td><td>数分</td><td>中</td></tr>

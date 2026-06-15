@@ -4,7 +4,6 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>導入メリットと事業者選定 | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
-  <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";mermaid.initialize({startOnLoad:true,theme:"base",themeVariables:{primaryColor:"#eef4f8",primaryTextColor:"#182230",primaryBorderColor:"#8aa4bf",lineColor:"#2563eb",fontFamily:"system-ui,-apple-system,Segoe UI,sans-serif"},flowchart:{curve:"basis",nodeSpacing:34,rankSpacing:42}});</script>
 </head>
 <body>
   <header class="site-header lesson-header"><div class="header-inner"><div><p class="eyebrow">Technology / Cloud</p><h1>導入メリットと事業者選定</h1><p class="lead">クラウド導入のメリット・課題、TCO/ROIによる経済性評価、リージョン選定、事業者比較について基本情報技術者試験向けに整理します。</p></div><nav class="study-map" aria-label="ページ内メニュー"><a href="#terms">用語</a><a href="#benefits">導入メリット</a><a href="#economics">経済性</a><a href="#vendors">事業者比較</a><a href="#quiz">確認問題</a></nav></div></header>
@@ -32,11 +31,13 @@
       <tr><td>CAPEX</td><td>設備投資（初期に大きな支出）</td><td>オンプレミス型。減価償却で複数年処理</td></tr>
       <tr><td>OPEX</td><td>運用費用（毎月のランニング）</td><td>クラウド型。その期の費用として処理</td></tr>
     </tbody></table></div>
-    <figure class="wide-diagram"><figcaption>CAPEXからOPEXへの変換</figcaption><pre class="mermaid">flowchart TD
-    A[オンプレミス] -->|大きな初期投資| B[CAPEX 設備投資]
-    B -->|減価償却| C[複数年で費用化]
-    D[クラウド移行] -->|月額利用料| E[OPEX 運用費用]
-    E -->|その期の費用| F[費用平準化・柔軟性向上]</pre></figure></section>
+    <figure class="wide-diagram"><figcaption>CAPEXからOPEXへの変換</figcaption><pre>【オンプレミス】
+大きな初期投資 → CAPEX（設備投資）
+                → 減価償却 → 複数年で費用化
+
+【クラウド移行】
+月額利用料 → OPEX（運用費用）
+           → その期の費用として処理 → 費用平準化・柔軟性向上</pre></figure></section>
 
     <section id="vendors" class="lesson-section"><h2>主要クラウド事業者の比較</h2>
     <div class="table-wrap"><table><thead><tr><th>項目</th><th>AWS</th><th>Azure</th><th>GCP</th></tr></thead><tbody>
