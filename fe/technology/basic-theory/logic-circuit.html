@@ -179,26 +179,24 @@
         <article>
           <h3>第1法則：¬(P・Q) = ¬P + ¬Q</h3>
           <p>ANDの否定はORの否定に変わる。「両方必要」の否定は「どちらか欠けていればよい」</p>
-          <figure class="wide-diagram"><pre><code>P Q | P・Q | ¬(P・Q) | ¬P | ¬Q | ¬P+¬Q
------------------------------------------
-0 0 |  0   |    1     |  1  |  1  |   1
-0 1 |  0   |    1     |  1  |  0  |   1
-1 0 |  0   |    1     |  0  |  1  |   1
-1 1 |  1   |    0     |  0  |  0  |   0
-
-→ ¬(P・Q)列 と ¬P+¬Q列 が完全一致</code></pre></figure>
+          <div class="table-wrap"><table><thead><tr><th>P</th><th>Q</th><th>P・Q</th><th>¬(P・Q)</th><th>¬P</th><th>¬Q</th><th>¬P+¬Q</th></tr></thead><tbody>
+            <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          </tbody></table></div>
+          <p>→ ¬(P・Q)列 と ¬P+¬Q列 が完全一致</p>
         </article>
         <article>
           <h3>第2法則：¬(P+Q) = ¬P・¬Q</h3>
           <p>ORの否定はANDの否定に変わる。「どちらかでよい」の否定は「両方ダメ」</p>
-          <figure class="wide-diagram"><pre><code>P Q | P+Q | ¬(P+Q) | ¬P | ¬Q | ¬P・¬Q
------------------------------------------
-0 0 |  0  |    1    |  1  |  1  |   1
-0 1 |  1  |    0    |  1  |  0  |   0
-1 0 |  1  |    0    |  0  |  1  |   0
-1 1 |  1  |    0    |  0  |  0  |   0
-
-→ ¬(P+Q)列 と ¬P・¬Q列 が完全一致</code></pre></figure>
+          <div class="table-wrap"><table><thead><tr><th>P</th><th>Q</th><th>P+Q</th><th>¬(P+Q)</th><th>¬P</th><th>¬Q</th><th>¬P・¬Q</th></tr></thead><tbody>
+            <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          </tbody></table></div>
+          <p>→ ¬(P+Q)列 と ¬P・¬Q列 が完全一致</p>
         </article>
       </div>
 
