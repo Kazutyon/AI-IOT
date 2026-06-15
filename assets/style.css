@@ -534,6 +534,16 @@ th {
   font-weight: 800;
 }
 
+.wide-diagram pre {
+  overflow-x: auto;
+  margin: 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: #102033;
+  color: #eef8ff;
+  font: 0.9rem/1.65 ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+
 .formula-box {
   margin-bottom: 12px;
 }
@@ -671,6 +681,65 @@ th {
 
   table {
     min-width: 620px;
+  }
+
+  .wide-diagram {
+    padding: 12px;
+  }
+
+  .wide-diagram pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .mobile-card-table {
+    overflow-x: visible;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .mobile-card-table table,
+  .mobile-card-table thead,
+  .mobile-card-table tbody,
+  .mobile-card-table tr,
+  .mobile-card-table th,
+  .mobile-card-table td {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .mobile-card-table thead {
+    display: none;
+  }
+
+  .mobile-card-table table {
+    background: transparent;
+  }
+
+  .mobile-card-table tr {
+    margin-bottom: 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fbfcff;
+    overflow: hidden;
+  }
+
+  .mobile-card-table td {
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 10px 12px;
+  }
+
+  .mobile-card-table td:first-child {
+    background: #eef4f8;
+    font-weight: 800;
+  }
+
+  .mobile-card-table td:last-child {
+    border-bottom: 0;
   }
 
   th,
