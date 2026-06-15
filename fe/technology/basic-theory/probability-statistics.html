@@ -121,14 +121,32 @@
 
       <figure class="wide-diagram">
         <figcaption>標本空間と事象の関係</figcaption>
-        <pre><code>標本空間 S = {1,2,3,4,5,6}  ← 起こりうる結果の全体（分母）
-    ┌─────────────────┐
-    │  1  2  3  4  5  6 │
-    │      ██████       │
-    │      █事象E█       │  E = {2,4,6}（偶数）
-    │      ██████       │
-    └─────────────────┘
-確率 P(E) = |E| / |S| = 3/6 = 1/2</code></pre>
+        <svg viewBox="0 0 500 130" width="100%" role="img" aria-label="標本空間S={1,2,3,4,5,6}。事象E={2,4,6}を青でハイライト。">
+          <!-- 標本空間 S の外枠 -->
+          <rect x="10" y="15" width="480" height="80" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+          <text x="20" y="34" font-size="11" fill="#64748b">S（標本空間 = {1,2,3,4,5,6}）</text>
+          <!-- 要素1: 灰色 -->
+          <rect x="46" y="42" width="48" height="38" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+          <text x="70" y="67" text-anchor="middle" font-size="18" font-weight="bold" fill="#475569">1</text>
+          <!-- 要素2: 青（E） -->
+          <rect x="120" y="42" width="48" height="38" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="144" y="67" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e40af">2</text>
+          <!-- 要素3: 灰色 -->
+          <rect x="194" y="42" width="48" height="38" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+          <text x="218" y="67" text-anchor="middle" font-size="18" font-weight="bold" fill="#475569">3</text>
+          <!-- 要素4: 青（E） -->
+          <rect x="268" y="42" width="48" height="38" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="292" y="67" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e40af">4</text>
+          <!-- 要素5: 灰色 -->
+          <rect x="342" y="42" width="48" height="38" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1"/>
+          <text x="366" y="67" text-anchor="middle" font-size="18" font-weight="bold" fill="#475569">5</text>
+          <!-- 要素6: 青（E） -->
+          <rect x="416" y="42" width="48" height="38" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="440" y="67" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e40af">6</text>
+          <!-- 凡例 -->
+          <rect x="10" y="105" width="14" height="14" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="30" y="116" font-size="11" fill="#475569">事象 E = {2,4,6}（偶数）　P(E) = |E|/|S| = 3/6 = 1/2</text>
+        </svg>
       </figure>
     </section>
 

@@ -147,15 +147,28 @@
 
       <figure class="wide-diagram">
         <figcaption>IEEE 754 単精度（32ビット）ビット構造</figcaption>
-        <pre>
- 1ビット      8ビット             23ビット
-┌──────┬────────────┬────────────────────────┐
-│ 符号 │   指数部   │   仮数部（正規化・先頭1省略）│
-├──────┼────────────┼────────────────────────┤
-│  0   │ 10000001  │ 10000000000000000000000 │
-│  正  │ 129→2²の指数│ 1.1₂ = 1.5（実質）       │
-└──────┴────────────┴────────────────────────┘
-値 = (−1)⁰ × 1.5 × 2² = 6.0</pre>
+        <svg viewBox="0 0 560 115" width="100%" role="img" aria-label="IEEE754単精度フォーマット。符号1bit、指数部8bit、仮数部23bit">
+          <!-- 符号 (1bit) -->
+          <rect x="10" y="15" width="60" height="52" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="40" y="37" text-anchor="middle" font-size="11" font-weight="bold" fill="#78350f">符号</text>
+          <text x="40" y="54" text-anchor="middle" font-size="10" fill="#92400e">1ビット</text>
+          <text x="40" y="69" text-anchor="middle" font-size="11" fill="#78350f">0（正）</text>
+          <!-- 指数部 (8bit) -->
+          <rect x="70" y="15" width="160" height="52" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+          <text x="150" y="37" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e40af">指数部</text>
+          <text x="150" y="54" text-anchor="middle" font-size="10" fill="#1e40af">8ビット</text>
+          <text x="150" y="69" text-anchor="middle" font-size="11" fill="#1e40af">10000001 = 129</text>
+          <!-- 仮数部 (23bit) -->
+          <rect x="230" y="15" width="320" height="52" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="390" y="37" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">仮数部（先頭1省略）</text>
+          <text x="390" y="54" text-anchor="middle" font-size="10" fill="#14532d">23ビット</text>
+          <text x="390" y="69" text-anchor="middle" font-size="11" fill="#14532d">10000000000000000000000</text>
+          <!-- ラベル -->
+          <text x="40" y="100" text-anchor="middle" font-size="9" fill="#64748b">bit 31</text>
+          <text x="150" y="100" text-anchor="middle" font-size="9" fill="#64748b">bit 30─23</text>
+          <text x="390" y="100" text-anchor="middle" font-size="9" fill="#64748b">bit 22─0</text>
+          <text x="300" y="113" text-anchor="middle" font-size="10" fill="#475569">値 = (−1)⁰ × 1.5 × 2² = 6.0　（129 − バイアス127 = 指数2）</text>
+        </svg>
       </figure>
 
       <h3>バイアス付き指数</h3>
@@ -214,7 +227,7 @@
         <pre>
 0.1 を2進数に変換すると:
 0.0001100110011001100110011… （無限循環）
-         │← 仮数部23ビット →│
+         ←── 仮数部23ビット ──→
          ↓ ここで打ち切る
 → 0.1 は内部では近似値として保存される
 → 0.1 + 0.2 = 0.30000000000000004 ≠ 0.3</pre>
