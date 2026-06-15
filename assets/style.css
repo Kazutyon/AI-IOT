@@ -29,9 +29,49 @@ body {
 }
 
 .site-header {
-  background: #112033;
+  background: url('header-bg.png') center center / cover no-repeat;
   color: #fff;
-  border-bottom: 6px solid #0f766e;
+  border-bottom: none;
+}
+
+.site-header h1 {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.site-header p,
+.site-header .eyebrow {
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+  color: #e0f2f1;
+}
+
+.header-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.header-nav__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: background 0.15s;
+}
+
+.header-nav__item:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.header-nav__item--all {
+  background: rgba(255, 255, 255, 0.35);
 }
 
 .header-inner {
@@ -900,6 +940,107 @@ div.section-card.is-planned { opacity: .45; cursor: default; }
   font-weight: 700;
   color: var(--blue);
   text-decoration: none;
+}
+
+/* 更新履歴タイムライン */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--line);
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding-bottom: 20px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -24px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  flex-shrink: 0;
+}
+
+.timeline-dot--new    { background: var(--blue); }
+.timeline-dot--update { background: var(--teal); }
+.timeline-dot--launch { background: var(--green); }
+
+.timeline-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.timeline-date {
+  color: var(--muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
+  min-width: 82px;
+}
+
+.timeline-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.timeline-badge--new    { background: #dbeafe; color: #1d4ed8; }
+.timeline-badge--update { background: #ccfbf1; color: #0f766e; }
+.timeline-badge--launch { background: #dcfce7; color: #15803d; }
+
+.timeline-text {
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+.timeline-hidden {
+  display: none;
+}
+
+.timeline-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  margin-left: 28px;
+  padding: 6px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.timeline-more:hover {
+  background: var(--bg);
 }
 
 /* サイトフッター */
