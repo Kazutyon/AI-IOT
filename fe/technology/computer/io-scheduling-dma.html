@@ -55,7 +55,7 @@
 
     <section id="terms" class="lesson-section">
       <h2>試験に出る用語</h2>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -114,7 +114,7 @@
       <h2>6.5 I/Oスケジューリング</h2>
       <p>ストレージ（HDD/SSD）などのデバイスは、複数のI/O要求が同時に発生します。しかし、ディスクは一度に1つの要求しか処理できないため、OSは要求の順番を最適化する必要があります。</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -147,14 +147,11 @@
 【SCAN方式（エレベータ方式）】
 
   ディスクヘッドの動き：
-    +---------------------------------------------------+
-    |                                                   |
-    |  端  ----->  ----->  ----->  ----->  端           |
-    |  (シリンダ0)    (要求処理)       (最大シリンダ)   |
-    |                                                   |
-    |   ← 端まで行ったら反対方向に折り返す ←          |
-    |                                                   |
-    +---------------------------------------------------+
+    1. シリンダ0側の端から開始
+    2. 一方向へ移動しながら途中の要求を処理
+    3. 最大シリンダ側の端まで進む
+    4. 端まで行ったら反対方向に折り返す
+    5. 戻りながら要求を処理する
 
   エレベータが上下に動きながら階を順番に処理する動きに似ている。
   HDD時代に広く利用された（シーク時間が支配的だったため）。
@@ -166,7 +163,7 @@
       <h2>6.6 割り込み（Interrupt）とI/O</h2>
       <p>割り込み（Interrupt）は、I/Oデバイスが処理完了やイベント発生をCPUに通知する仕組みです。CPUがデバイスを待ち続ける必要がなくなり、効率的なI/Oが可能になります。</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -191,7 +188,7 @@
         </table>
       </div>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -250,7 +247,7 @@
       <h2>6.7 DMA（Direct Memory Access）</h2>
       <p>DMAは、CPUを介さずにデバイスがメモリへ直接データ転送を行う仕組みです。大量データを扱う組み込みシステムでは特に重要なI/O技術です。</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -275,7 +272,7 @@
         </table>
       </div>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -314,13 +311,22 @@
 【DMAの動作の流れ】
 
   通常のI/O：
-    デバイス → CPU → メモリ
+    デバイス
+      ↓
+    CPU
+      ↓
+    メモリ
     （CPUが転送処理で占有される）
 
   DMA使用時：
-    1. CPU → DMAコントローラ：「転送元・転送先・サイズ」を設定
-    2. DMAコントローラ：デバイス ↔ メモリ（直接転送）
-    3. DMAコントローラ → CPU：「転送完了」割り込み
+    1. CPU
+       DMAコントローラに転送元・転送先・サイズを設定
+
+    2. DMAコントローラ
+       デバイスとメモリの間で直接転送
+
+    3. DMAコントローラ
+       CPUへ「転送完了」割り込みを通知
 
   CPUは「開始指示」と「完了通知」だけを担当。
   転送そのものには関与しないため、他の処理に専念できる。
@@ -332,7 +338,7 @@
       <h2>6.8 組み込み・IoT・RTOSにおけるI/O管理</h2>
 
       <h3>組み込みシステムのI/O管理の特徴</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -366,7 +372,7 @@
       </div>
 
       <h3>RTOSにおけるI/O管理</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -392,7 +398,7 @@
       </div>
 
       <h3>IoTデバイスにおけるI/O特性</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>

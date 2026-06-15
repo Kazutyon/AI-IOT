@@ -54,7 +54,7 @@
 
     <section id="terms" class="lesson-section">
       <h2>試験に出る用語</h2>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr><th>用語</th><th>意味</th><th>試験ポイント</th>
@@ -125,7 +125,7 @@
       </figure>
 
       <h3>2-4-1. スケジュール管理の目的</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr><th>目的</th><th>説明</th>
@@ -179,7 +179,7 @@
       <h2>2-4-3. ガントチャート</h2>
       <p>ガントチャートは、WBSで分解した作業を“時間軸に並べて”可視化したもの。</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr><th>ガントチャートで分かること</th>
@@ -207,7 +207,7 @@
 
       <h3>2-4-3-1. ガントチャートの本質は“配置の考え方”</h3>
       <p>ガントチャートは次の3つを同時に満たすように配置する図。</p>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr><th>配置ルール</th><th>説明</th>
@@ -261,23 +261,36 @@
         <pre>
 【ガントチャート例】
 
-  No. 作業名         | 4/1 | 4/2 | 4/3 | 4/4 | 4/5 | 4/6 | 4/7 | 4/8
-  ----+-------------+-----+-----+-----+-----+-----+-----+-----+-----
-   1  要件ヒアリング  [===]
-   2  要件定義書作成  [=====]
-   3  要件定義書レビュー     [==]
-   4  画面設計              [=====]
-   5  画面設計レビュー           [=]
-   6  実装                        [=======]
-   7  単体テスト                         [===]
-   8  結合テスト                             [====]
+  4/1-4/3
+  [===] 要件ヒアリング
+
+  4/1-4/5
+  [=====] 要件定義書作成
+
+  4/5-4/6
+  [==] 要件定義書レビュー
+
+  4/4-4/8
+  [=====] 画面設計
+
+  4/8
+  [=] 画面設計レビュー
+
+  4/6-4/12
+  [=======] 実装
+
+  4/12-4/14
+  [===] 単体テスト
+
+  4/15-4/18
+  [====] 結合テスト
 
   凡例：[===] 作業期間、 ◆ マイルストーン
         </pre>
       </figure>
 
       <h3>マイルストーンの例</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr><th>マイルストーン</th><th>意味</th>
@@ -300,7 +313,7 @@
     <section id="gantt-points" class="lesson-section">
       <h2>2-4-3-3. ガントチャートで必ず意識するポイント</h2>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr><th>ポイント</th><th>内容</th>
@@ -324,7 +337,7 @@
       </div>
 
       <h3>2-4-3-4. ガントチャートを「読める／使える」ようになる視点</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr><th>見るべきポイント</th><th>意味</th>

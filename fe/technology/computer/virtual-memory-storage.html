@@ -55,7 +55,7 @@
 
     <section id="terms" class="lesson-section">
       <h2>試験に出る用語</h2>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -129,30 +129,27 @@
         <pre>
 【仮想記憶の構造】
 
-  仮想アドレス空間                    物理メモリ
-  （プログラムから見える）            （実際のRAM）
-  +-----------------+                +-----------------+
-  |   ページ0       | ------------>  | ページフレーム0 |
-  +-----------------+                +-----------------+
-  |   ページ1       | ------------>  | ページフレーム1 |
-  +-----------------+                +-----------------+
-  |   ページ2       |     未割り当て | ページフレーム2 |
-  +-----------------+    （スワップ）+-----------------+
-  |   ページ3       | ------------>  | ページフレーム3 |
-  +-----------------+                +-----------------+
-        |                                  |
-        | 主記憶にないページ                |
-        v                                  v
-  +---------------------------------------------------+
-  |                 スワップ領域（HDD/SSD）           |
-  |  ページ2  |  ページ5  |  ページ8  |  ...          |
-  +---------------------------------------------------+
+  仮想アドレス空間
+    - ページ0 -> 物理メモリのページフレーム0
+    - ページ1 -> 物理メモリのページフレーム1
+    - ページ2 -> 主記憶にないためスワップ領域
+    - ページ3 -> 物理メモリのページフレーム3
+
+  物理メモリ（実際のRAM）
+    - ページフレーム0
+    - ページフレーム1
+    - ページフレーム2
+    - ページフレーム3
+
+  スワップ領域（HDD/SSD）
+    - 主記憶に入りきらないページを一時保存
+    - 例: ページ2、ページ5、ページ8
 
   ページテーブル：各プロセスが持ち、仮想ページ→物理フレームの対応を管理
         </pre>
       </figure>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -217,7 +214,7 @@
         </pre>
       </figure>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -246,7 +243,7 @@
       <h2>2.1.5 外部記憶装置（ストレージ）</h2>
       <p>外部記憶装置（ストレージ）は、主記憶装置では容量や保存期間が不足するデータを長期間保存する装置です。</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -276,7 +273,7 @@
       </div>
 
       <h3>外部記憶装置の種類と比較</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -322,7 +319,7 @@
       </div>
 
       <h3>主記憶装置と外部記憶装置の違い</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -360,7 +357,7 @@
     <section id="access-method" class="lesson-section">
       <h2>アクセス方法（ランダムアクセス vs シーケンシャルアクセス）</h2>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -388,7 +385,7 @@
       </div>
 
       <h3>性能指標</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>

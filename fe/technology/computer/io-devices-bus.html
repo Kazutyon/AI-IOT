@@ -55,7 +55,7 @@
 
     <section id="terms" class="lesson-section">
       <h2>試験に出る用語</h2>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -74,7 +74,7 @@
               <td>バス（Bus）</td>
               <td>コンピュータ内部でCPU・主記憶装置・入出力装置をつなぐ共通の通路</td>
               <td>データバス・アドレスバス・制御バスの3種類で構成</td>
-            </td>
+            </tr>
             <tr>
               <td>データバス</td>
               <td>データそのものを運ぶバス</td>
@@ -85,7 +85,7 @@
               <td>どのメモリやI/Oにアクセスするかを指定するバス</td>
               <td>アドレスバスの幅が最大メモリ容量を決定</td>
             </tr>
-            </tr>
+            <tr>
               <td>制御バス</td>
               <td>読み込み・書き込みなどの制御信号を伝えるバス</td>
               <td>メモリリード/ライト、割り込み要求など</td>
@@ -125,7 +125,7 @@
       <p>入出力装置（I/Oデバイス）は、コンピュータと外部の世界（人間や他の機器）との橋渡しをする装置です。</p>
 
       <h3>入力装置の種類</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -170,14 +170,14 @@
       </div>
 
       <h3>出力装置の種類</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
               <th>種類</th>
               <th>具体例</th>
               <th>主な用途・特徴</th>
-            </table>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -190,7 +190,7 @@
               <td>事務機器</td>
               <td>文書・画像を紙に印刷</td>
             </tr>
-            </tr>
+            <tr>
               <td>スピーカ</td>
               <td>PC、スマホ</td>
               <td>音声・音楽などを再生</td>
@@ -214,7 +214,7 @@
       <h2>2.1.7 バス構造（Bus Architecture）</h2>
       <p>バスとは、コンピュータ内部でCPU・主記憶装置・入出力装置をつなぐ“共通の通路”のことです。</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -244,17 +244,23 @@
         <pre>
 【バス構造のイメージ】
 
-  +----------------+         +----------------+         +----------------+
-  |      CPU       |         |   主記憶装置   |         |   I/O装置      |
-  |                |         |   （メモリ）   |         |  (周辺機器)    |
-  +----------------+         +----------------+         +----------------+
-          |                           |                           |
-          +---------------------------+---------------------------+
-                                      |
-                              +-----------------+
-                              |     バス        |
-                              | （共通の通路）  |
-                              +-----------------+
+  CPU
+    |
+    | 共通の通路
+    v
+  バス
+    |- データバス
+    |  データそのものを運ぶ
+    |
+    |- アドレスバス
+    |  アクセス先を指定する
+    |
+    `- 制御バス
+       読み込み/書き込みを指示する
+    |
+    +--> 主記憶装置（メモリ）
+    |
+    `--> I/O装置（周辺機器）
 
   バスの3つの信号線：
     [データバス] -------- データそのものを運ぶ
@@ -264,7 +270,7 @@
       </figure>
 
       <h3>バスの種類（接続範囲による分類）</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -294,7 +300,7 @@
       </div>
 
       <h3>主なバス規格</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -328,7 +334,7 @@
       <h2>2.1.8 入出力制御方式（I/O Control）</h2>
       <p>入出力装置はCPUや主記憶装置に比べて動作速度が非常に遅いため、CPUとI/Oデバイスのデータのやり取りを効率よく制御する仕組みが必要です。</p>
 
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
@@ -389,16 +395,25 @@
 
 【DMA方式（Direct Memory Access）】
 
-  CPU：「このデータをメモリに転送して」（DMAコントローラに指示）
-  DMA：デバイスとメモリ間で転送実行（CPUは別の処理）
-  DMA：（転送完了）「終わったよ！」（割込み）
-  CPU：完了を確認
+  1. CPU
+     DMAコントローラに転送条件を設定する
+
+  2. DMAコントローラ
+     デバイスとメモリ間で転送を実行する
+     CPUは別の処理を進められる
+
+  3. DMAコントローラ
+     転送完了をCPUへ割込みで通知する
+
+  4. CPU
+     完了を確認する
+
   → CPUは開始指示と完了確認だけ。転送自体はDMAが担当
         </pre>
       </figure>
 
       <h3>入出力インタフェース</h3>
-      <div class="table-wrap">
+      <div class="table-wrap mobile-card-table">
         <table>
           <thead>
             <tr>
