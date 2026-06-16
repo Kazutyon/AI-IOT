@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ネットワーク基礎②（ポート/TCP/ファイアウォール） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>ネットワーク基礎②</h1>
+        <p class="lead">ポート番号の役割、TCPによる通信路確立の仕組み、ファイアウォールの重要性と許可すべき通信を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>ネットワーク基礎②</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>ポート番号の役割と代表的なポート（80/443/22）</li>
+          <li>1つのサーバーで複数サービスが動作する仕組み</li>
+          <li>TCPの役割と3ウェイハンドシェイク</li>
+          <li>TCPとHTTP/HTTPSの関係</li>
+          <li>ファイアウォールの役割と許可すべき通信</li>
+          <li>Webサーバー公開で通すべきポートと通してはいけないポート</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ポート番号（80/443/22）、TCPの3ウェイハンドシェイク、ファイアウォールの基本</dd></div>
+          <div><dt>中</dt><dd>TCPとHTTPの関係、ファイアウォールの処理の流れ</dd></div>
+          <div><dt>低</dt><dd>MySQLのポート番号（3306）などの詳細</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead></tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><th>ポート番号</th><td>同じIPの中で、どのサービスに通信を届けるかを決める番号</td></tr>
+            <tr><td>2</td><th>80番ポート</th><td>HTTP（暗号化なし）が使用するポート</td></tr>
+            <tr><td>3</td><th>443番ポート</th><td>HTTPS（暗号化あり）が使用するポート</td></tr>
+            <tr><td>4</td><th>22番ポート</th><td>SSH（サーバー管理）が使用するポート</td></tr>
+            <tr><td>5</td><th>TCP</th><td>通信路を作るプロトコル。接続の確立・維持・終了を担当</td></tr>
+            <tr><td>6</td><th>3ウェイハンドシェイク</th><td>TCP接続を確立するための3段階の手順（SYN→SYN/ACK→ACK）</td></tr>
+            <tr><td>7</td><th>ファイアウォール（FW）</th><td>「どの通信を通し、どの通信を拒否するか」を決める境界装置</td></tr>
+            <tr><td>8</td><th>SYN</th><td>TCP接続要求を送るフラグ</td></tr>
+            <tr><td>9</td><th>ACK</th><td>TCP接続応答を送るフラグ</td></tr>
+            <tr><td>10</td><th>FIN</th><td>TCP接続切断を要求するフラグ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. ポート番号</h2>
+      <p>ポート番号とは、同じIPの中で、どのサービスに通信を届けるかを決める番号。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>ポート番号</th><th>用途</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>80</td><th>HTTP</th><td>暗号化なしのWeb通信</td></tr>
+            <tr><td>443</td><th>HTTPS</th><td>暗号化ありのWeb通信</td></tr>
+            <tr><td>22</td><th>SSH</th><td>サーバー管理用の安全な接続</td></tr>
+            <tr><td>3306</td><th>MySQL</th><td>データベース接続用（内部のみ公開）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>ブラウザはURLのプロトコルによって自動でポートを選ぶ。http:// → 80、https:// → 443。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>ポート番号の役割</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- サーバー -->
+          <rect x="140" y="30" width="120" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="53" text-anchor="middle" font-size="13" fill="#1e3a5f">1台のサーバー</text>
+          <!-- サービス -->
+          <rect x="30" y="100" width="100" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="80" y="118" text-anchor="middle" font-size="11" fill="#14532d">Webサーバー</text>
+          <text x="80" y="133" text-anchor="middle" font-size="10" fill="#14532d">ポート80/443</text>
+          <rect x="150" y="100" width="100" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="118" text-anchor="middle" font-size="11" fill="#92400e">SSHサーバー</text>
+          <text x="200" y="133" text-anchor="middle" font-size="10" fill="#92400e">ポート22</text>
+          <rect x="270" y="100" width="100" height="40" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="320" y="118" text-anchor="middle" font-size="11" fill="#14532d">DBサーバー</text>
+          <text x="320" y="133" text-anchor="middle" font-size="10" fill="#14532d">ポート3306</text>
+          <!-- 矢印 -->
+          <line x1="200" y1="66" x2="80" y2="98" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="200" y1="66" x2="200" y2="98" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="200" y1="66" x2="320" y2="98" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="60" y="90" text-anchor="middle" font-size="10" fill="#64748b">Web通信</text>
+          <text x="200" y="90" text-anchor="middle" font-size="10" fill="#64748b">管理</text>
+          <text x="320" y="90" text-anchor="middle" font-size="10" fill="#64748b">DB接続</text>
+        </svg>
+      </figure>
+
+      <h3>2. TCP（Webサーバーが通信路を作る仕組み）</h3>
+      <p>WebサーバーはHTTP/HTTPSを使って通信するが、HTTP/HTTPSはTCPの上で動くプロトコル。つまり、WebサーバーはTCPが作った通信路の上でしか動けない。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <tr>
+          <thead>
+            <tr><th>層</th><th>役割</th><th>Webサーバーとの関係</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>TCP</td><td>通信路を作る（接続の確立・維持・終了）</td><td>Webサーバーが通信できる状態を作る</td></tr>
+            <tr><td>HTTP/HTTPS</td><td>リクエストとレスポンスの中身</td><td>Webサーバーが処理するデータそのもの</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>つまり：TCPが「道」を作り、HTTPが「荷物」を運ぶ、Webサーバーは荷物を受け取り返す。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>TCP 3ウェイハンドシェイク</figcaption>
+        <svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- クライアント -->
+          <rect x="30" y="10" width="120" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="90" y="33" text-anchor="middle" font-size="13" fill="#1e3a5f">ブラウザ</text>
+          <!-- サーバー -->
+          <rect x="250" y="10" width="120" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="310" y="33" text-anchor="middle" font-size="13" fill="#1e3a5f">Webサーバー</text>
+
+          <!-- ① SYN -->
+          <line x1="150" y1="46" x2="248" y2="80" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="170" y="55" width="80" height="24" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="210" y="72" text-anchor="middle" font-size="10" fill="#92400e">① SYN</text>
+
+          <!-- ② SYN/ACK -->
+          <line x1="250" y1="100" x2="152" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="175" y="108" width="95" height="24" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="222" y="125" text-anchor="middle" font-size="10" fill="#92400e">② SYN/ACK</text>
+
+          <!-- ③ ACK -->
+          <line x1="150" y1="155" x2="248" y2="190" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="175" y="168" width="80" height="24" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+          <text x="215" y="185" text-anchor="middle" font-size="10" fill="#14532d">③ ACK</text>
+
+          <!-- 通信中 -->
+          <rect x="120" y="215" width="160" height="30" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1"/>
+          <text x="200" y="235" text-anchor="middle" font-size="11" fill="#1e1b4f">TCP接続確立（通信中）</text>
+
+          <!-- ④ FIN -->
+          <line x1="150" y1="245" x2="248" y2="260" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="175" y="252" width="80" height="24" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+          <text x="215" y="269" text-anchor="middle" font-size="10" fill="#7f1d1d">④ FIN</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>工程</th><th>TCPの動作</th><th>Webサーバー側の意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>① SYN</td><td>接続要求を送信</td><td>「接続要求が来た」と認識</td></tr>
+            <tr><td>② SYN/ACK</td><td>接続を受け入れ応答</td><td>「接続を許可した」状態</td></tr>
+            <tr><td>③ ACK</td><td>応答を確認</td><td>TCP接続が確立（通信路ができる）</td></tr>
+            <tr><td>④ HTTP通信</td><td>TCPの上でデータを送受信</td><td>リクエストを受け取りレスポンスを返す</td></tr>
+            <tr><td>⑤ FIN</td><td>切断要求</td><td>接続終了を開始</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3. ファイアウォールの重要性</h3>
+      <p>ファイアウォール（FW）は、Webサーバーがインターネットからアクセスされる工程の中で、「どの通信を通し、どの通信を拒否するか」を決める境界装置。WebサーバーはLAN内のプライベートIPで動作しているため、外部からの通信は必ず NAT → ファイアウォール → Webサーバー の順に通過する。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>ファイアウォールの処理の流れ</figcaption>
+        <svg viewBox="0 0 400 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 外部 -->
+          <rect x="20" y="10" width="120" height="250" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="80" y="35" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a5f">外部</text>
+          <text x="80" y="55" text-anchor="middle" font-size="10" fill="#475569">インターネット</text>
+
+          <!-- ファイアウォール -->
+          <rect x="160" y="50" width="80" height="170" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="200" y="80" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">ファイア</text>
+          <text x="200" y="96" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">ウォール</text>
+          <text x="200" y="120" text-anchor="middle" font-size="10" fill="#92400e">許可/拒否</text>
+
+          <!-- 内部 -->
+          <rect x="260" y="10" width="120" height="250" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="320" y="35" text-anchor="middle" font-size="12" font-weight="bold" fill="#14532d">内部</text>
+          <text x="320" y="55" text-anchor="middle" font-size="10" fill="#475569">LAN</text>
+
+          <!-- Webサーバー -->
+          <rect x="280" y="200" width="80" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="320" y="225" text-anchor="middle" font-size="11" fill="#1e3a5f">Web</text>
+          <text x="320" y="238" text-anchor="middle" font-size="9" fill="#1e3a5f">サーバー</text>
+
+          <!-- 矢印 -->
+          <line x1="140" y1="80" x2="158" y2="80" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <text x="150" y="75" text-anchor="middle" font-size="9" fill="#64748b">通信</text>
+
+          <line x1="240" y1="135" x2="258" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <text x="250" y="130" text-anchor="middle" font-size="9" fill="#64748b">許可</text>
+
+          <path d="M 240 80 L 280 80 L 280 198" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <text x="260" y="75" text-anchor="middle" font-size="9" fill="#16a34a">拒否</text>
+          <line x1="240" y1="80" x2="200" y2="80" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="200" y="40" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">× 拒否</text>
+
+          <!-- 許可リスト -->
+          <rect x="165" y="165" width="70" height="50" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+          <text x="200" y="182" text-anchor="middle" font-size="9" fill="#14532d">許可</text>
+          <text x="200" y="196" text-anchor="middle" font-size="9" fill="#14532d">80/443</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>ポート</th><th>用途</th><th>必要性</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>80</td><td>HTTP</td><td>暗号化なしのWebアクセス</td></tr>
+            <tr><td>443</td><td>HTTPS</td><td>暗号化されたWebアクセス（実質必須）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>逆に通してはいけない代表的な通信：</p>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>ポート</th><th>用途</th><th>なぜ拒否するか</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>22</td><td>SSH</td><td>外部に公開すると不正ログイン攻撃を受ける</td></tr>
+            <tr><td>3306</td><td>MySQL</td><td>DBを外部公開すると情報漏洩リスク</td></tr>
+            <tr><td>21</td><td>FTP</td><td>パスワード盗聴の危険</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Webサーバーは80/443以外は基本的に外部へ公開しない。</p>
+
+      <h3>4. ファイアウォールが関わる工程</h3>
+      <p>Webサーバーに通信が届くまでの工程：</p>
+      <ol>
+        <li>DNS：ドメイン名 → グローバルIP</li>
+        <li>NAT：グローバルIP → プライベートIP</li>
+        <li>ファイアウォール：通信を許可/拒否</li>
+        <li>Webサーバー：リクエストを処理</li>
+      </ol>
+      <p>ファイアウォールはNATの後に通信をチェックする。</p>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>ポート番号とIPアドレスの混同</strong>：IPは「どのコンピュータか」、ポートは「そのコンピュータのどのサービスか」を識別する。</li>
+        <li><strong>TCPとHTTPの関係の誤解</strong>：TCPが通信路を作り、その上でHTTPが動作する。WebサーバーはTCP接続の上でHTTPを処理する。</li>
+        <li><strong>3ウェイハンドシェイクの順序の混乱</strong>：SYN（要求）→ SYN/ACK（応答）→ ACK（確認）の順序を覚える。</li>
+        <li><strong>ファイアウォールで通すべきポートの誤り</strong>：Webサーバー公開では80と443のみを通し、22や3306は通さない。</li>
+        <li><strong>ファイアウォールとNATの順序</strong>：正しい順序は「NAT → ファイアウォール → Webサーバー」。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. HTTPSが使用するポート番号はどれか。</summary>
+        <p>ア）20　イ）80　ウ）443　エ）8080</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — HTTPSは443番ポートを使用する。80番ポートはHTTPが使用する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. SSH（サーバー管理）が使用するポート番号はどれか。</summary>
+        <p>ア）22　イ）80　ウ）443　エ）3306</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — SSHは22番ポートを使用する。Webサーバー公開時は通常外部に公開しない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. TCPの3ウェイハンドシェイクの正しい順序はどれか。</summary>
+        <p>ア）ACK → SYN → SYN/ACK　イ）SYN → ACK → SYN/ACK　ウ）SYN → SYN/ACK → ACK　エ）SYN/ACK → SYN → ACK</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 3ウェイハンドシェイクは「SYN（接続要求）→ SYN/ACK（受理）→ ACK（確認）」の順序で行われる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. TCPの役割として正しいものはどれか。</summary>
+        <p>ア）リクエストとレスポンスの中身を決める　イ）通信路を作る（接続の確立・維持・終了）　ウ）データを暗号化する　エ）ドメイン名をIPアドレスに変換する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — TCPは通信路を作るプロトコル。HTTP/HTTPSはTCPの上で動く。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. Webサーバーをインターネットに公開する際、ファイアウォールで許可すべきポートはどれか。</summary>
+        <p>ア）22と80　イ）80と443　ウ）443と3306　エ）22と3306</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Webサーバー公開ではHTTP（80）とHTTPS（443）を通す。SSH（22）やMySQL（3306）は通さない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. ファイアウォールの役割として正しいものはどれか。</summary>
+        <p>ア）ドメイン名をIPアドレスに変換する　イ）プライベートIPとグローバルIPを変換する　ウ）どの通信を通し、どの通信を拒否するか決める　エ）通信内容を暗号化する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ファイアウォールはポート番号・IPアドレス・プロトコルを基準に通信の許可/拒否を判断する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. Webサーバーに通信が届くまでの工程として正しい順序はどれか。</summary>
+        <p>ア）DNS → NAT → ファイアウォール → Webサーバー　イ）NAT → DNS → ファイアウォール → Webサーバー　ウ）ファイアウォール → DNS → NAT → Webサーバー　エ）DNS → ファイアウォール → NAT → Webサーバー</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 正しい順序は「DNS（名前解決）→ NAT（IP変換）→ ファイアウォール（通信許可）→ Webサーバー」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 「1つのサーバーに複数のサービスが動作している」とき、どのサービスに通信を届けるかを区別するために使われるものはどれか。</summary>
+        <p>ア）MACアドレス　イ）ポート番号　ウ）サブネットマスク　エ）デフォルトゲートウェイ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ポート番号は同じIPの中で、どのサービスに通信を届けるかを決める番号である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. TCP接続の切断を要求するときに送信されるフラグはどれか。</summary>
+        <p>ア）SYN　イ）ACK　ウ）FIN　エ）RST</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — FINフラグはTCP接続の切断を要求するときに送信される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. Webサーバー公開において、外部に公開してはいけないポートの例として適切なものはどれか。</summary>
+        <p>ア）80　イ）443　ウ）22　エ）8080</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — SSHの22番ポートは外部に公開すると不正ログイン攻撃の対象となるため、公開してはいけない。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第3章 Webサーバーのためのネットワーク基礎（p38-p46）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

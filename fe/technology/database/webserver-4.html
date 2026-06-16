@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>公開手順・性能概念（Keep-Alive/gzip/CDN/キャッシュ） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>公開手順・性能概念</h1>
+        <p class="lead">Webサーバーをインターネットに公開する手順、ドメイン・DNS・Aレコードの設定、Keep-Alive・gzip・CDN・キャッシュによる性能改善を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>公開手順・性能概念</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>Webサイト公開の4ステップ（ドメイン取得・DNS設定・Webサーバー起動・仮想ホスト設定）</li>
+          <li>ドメインとDNSの役割</li>
+          <li>Aレコードの設定方法</li>
+          <li>Keep-Aliveによる接続再利用の仕組みと効果</li>
+          <li>gzipによるレスポンス圧縮の仕組みと効果</li>
+          <li>キャッシュ制御（Cache-Control）による高速化</li>
+          <li>CDN（Content Delivery Network）の仕組みと効果</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>DNSとAレコード、Keep-Aliveの効果、キャッシュ制御</dd></div>
+          <div><dt>中</dt><dd>gzip圧縮、CDNの仕組み、公開手順の全体像</dd></div>
+          <div><dt>低</dt><dd>systemctlコマンドの詳細</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>ドメイン</th>的那样IPアドレスを人間が覚えやすい名前にしたもの</th></tr>
+            <tr><th>2</th><th>DNS</th>的那样ドメイン名をIPアドレスに変換する仕組み</th></tr>
+            <tr><th>3</th><th>Aレコード</th>的那样ドメイン名とIPv4アドレスの対応を定義するDNSレコード</th></tr>
+            <tr><th>4</th><th>Keep-Alive</th>的那样1つのTCP接続を複数のリクエストで使い回す仕組み</th></tr>
+            <tr><th>5</th><th>gzip</th>的那样レスポンスを圧縮して転送量を減らす仕組み</th></tr>
+            <tr><th>6</th><th>キャッシュ</th>的那样一度取得したデータを再利用する仕組み</th></tr>
+            <td><th>7</th><th>Cache-Control</th>的那样ブラウザや中間サーバーがキャッシュをどう扱うか指示するヘッダ</th></td>
+            <tr><th>8</th><th>CDN</th>的那样世界中にキャッシュサーバーを配置し、地理的に近いサーバーから配信する仕組み</th></tr>
+            <tr><th>9</th><th>Expires</th>的那样キャッシュの有効期限を指定するヘッダ</th></tr>
+            <tr><th>10</th><th>オリジンサーバー</th>那样コンテンツの原本を持つ元のWebサーバー</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. 公開手順</h2>
+      <p>Webサーバーをインターネット上に公開するには、ドメイン名 → DNS → Aレコード → Webサーバーという一連の仕組みを正しく設定する必要がある。Webサーバーの設定（Apache/Nginx）だけでは公開できず、ドメインとDNSの設定が揃って初めてWebサイトが表示される。</p>
+
+      <h3>公開手順の全体像（4ステップ）</h3>
+
+      <figure class="wide-diagram">
+        <figcaption>Webサイト公開の4ステップ</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="120" y="10" width="160" height="36" rx="18" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="12" fill="#14532d">① ドメインを取得</text>
+          
+          <line x1="200" y1="46" x2="200" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="120" y="70" width="160" height="36" rx="18" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="93" text-anchor="middle" font-size="12" fill="#14532d">② DNSにAレコード設定</text>
+          
+          <line x1="200" y1="106" x2="200" y2="125" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="120" y="130" width="160" height="36" rx="18" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="153" text-anchor="middle" font-size="12" fill="#14532d">③ Webサーバー起動</text>
+          
+          <line x1="200" y1="166" x2="200" y2="185" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="120" y="190" width="160" height="36" rx="18" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="213" text-anchor="middle" font-size="12" fill="#14532d">④ 仮想ホスト設定</text>
+        </svg>
+      </figure>
+
+      <h4>① ドメインを取得する</h4>
+      <p>お名前.com、Google Domains、AWS Route53などで取得。</p>
+
+      <h4>② DNSにAレコードを設定する</h4>
+      <p>DNS管理画面で次のように設定。これで、example.com → 203.0.113.10という対応が作られる。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>名前</th><th>値</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">A</th><td>example.com</th><td>203.0.113.10</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>③ Webサーバーを起動する</h4>
+      <p>サーバー側でApache/Nginxを起動しておく。</p>
+      <figure class="wide-diagram">
+        <figcaption>Webサーバー起動コマンド</figcaption>
+        <svg viewBox="0 0 400 50" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="100" y="30" text-anchor="middle" font-size="10" fill="#1e3a5f">systemctl start nginx</text>
+          <rect x="195" y="10" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="275" y="30" text-anchor="middle" font-size="10" fill="#1e3a5f">systemctl start httpd</text>
+        </svg>
+      </figure>
+
+      <h4>④ 仮想ホストでドメインを受け取る設定をする</h4>
+      <p>ApacheやNginxの仮想ホスト設定で、example.comへのアクセスをこのサイトとして扱う設定をする。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>仮想ホスト設定例</figcaption>
+        <svg viewBox="0 0 400 120" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="175" height="100" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="35" y="30" font-size="10" fill="#1e3a5f">&lt;VirtualHost *:80&gt;</text>
+          <text x="45" y="48" font-size="10" fill="#334155">  ServerName example.com</text>
+          <text x="45" y="66" font-size="10" fill="#334155">  DocumentRoot /var/www/example</text>
+          <text x="45" y="84" font-size="10" fill="#334155">  ErrorLog logs/example.com-error_log</text>
+          <text x="45" y="102" font-size="10" fill="#334155">  CustomLog logs/example.com-access_log common</text>
+          <text x="35" y="118" font-size="10" fill="#1e3a5f">&lt;/VirtualHost&gt;</text>
+          
+          <rect x="210" y="10" width="175" height="100" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="225" y="30" font-size="10" fill="#1e3a5f">server {</text>
+          <text x="235" y="48" font-size="10" fill="#334155">  listen 80;</text>
+          <text x="235" y="66" font-size="10" fill="#334155">  server_name example.com;</text>
+          <text x="235" y="84" font-size="10" fill="#334155">  root /var/www/example;</text>
+          <text x="235" y="102" font-size="10" fill="#334155">  access_log logs/example.com-access_log;</text>
+          <text x="225" y="118" font-size="10" fill="#1e3a5f">}</text>
+        </svg>
+      </figure>
+
+      <h2>2. 性能概念</h2>
+      <p>Webサーバーの性能は、ネットワーク・圧縮・キャッシュ・配信経路といった複数の要素で決まる。Apache/Nginxは、これらの性能要素を設定ファイルで制御できる。</p>
+
+      <h3>Keep-Alive（接続の再利用）</h3>
+      <p>HTTPは本来、リクエストごとにTCP接続を張り直す仕組み。接続確立には時間がかかるため、画像・CSS・JSなど多数のファイルを読み込むページでは毎回接続を張り直すと遅くなる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Keep-Aliveの効果比較</figcaption>
+        <svg viewBox="0 0 400 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- 左：なし -->
+          <rect x="20" y="10" width="170" height="195" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="105" y="35" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">Keep-Aliveなし</text>
+          
+          <rect x="35" y="50" width="140" height="25" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="105" y="67" text-anchor="middle" font-size="9" fill="#92400e">TCP接続①</text>
+          <text x="105" y="85" text-anchor="middle" font-size="9" fill="#92400e">GET /index.html</text>
+          
+          <rect x="35" y="95" width="140" height="25" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="105" y="112" text-anchor="middle" font-size="9" fill="#92400e">切断</text>
+          
+          <rect x="35" y="130" width="140" height="25" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="105" y="147" text-anchor="middle" font-size="9" fill="#92400e">TCP接続②</text>
+          <text x="105" y="165" text-anchor="middle" font-size="9" fill="#92400e">GET /style.css</text>
+          
+          <rect x="35" y="175" width="140" height="25" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="105" y="192" text-anchor="middle" font-size="9" fill="#92400e">切断</text>
+          
+          <!-- 右：あり -->
+          <rect x="210" y="10" width="170" height="195" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="295" y="35" text-anchor="middle" font-size="12" font-weight="bold" fill="#14532d">Keep-Aliveあり</text>
+          
+          <rect x="225" y="50" width="140" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="295" y="67" text-anchor="middle" font-size="9" fill="#1e3a5f">TCP接続（維持）</text>
+          
+          <rect x="225" y="85" width="140" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="295" y="102" text-anchor="middle" font-size="9" fill="#1e3a5f">GET /index.html</text>
+          
+          <rect x="225" y="120" width="140" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="295" y="137" text-anchor="middle" font-size="9" fill="#1e3a5f">GET /style.css</text>
+          
+          <rect x="225" y="155" width="140" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="295" y="172" text-anchor="middle" font-size="9" fill="#1e3a5f">GET /app.js</text>
+          
+          <text x="105" y="215" text-anchor="middle" font-size="9" fill="#dc2626">× 毎回接続→切断</text>
+          <text x="295" y="215" text-anchor="middle" font-size="9" fill="#16a34a">✓ 1接続で複数リクエスト</text>
+        </svg>
+      </figure>
+
+      <p>Keep-Aliveを有効にすると、1回接続したTCPを一定時間維持し、同じ接続で複数のリクエストを処理する。効果：ページ表示が高速化、サーバー負荷が軽減。</p>
+
+      <h3>gzip（レスポンスの圧縮）</h3>
+      <p>HTML/CSS/JSはテキストなので、圧縮すると大幅にサイズが小さくなる。Webサーバーがレスポンスをgzip圧縮し、ブラウザが解凍して表示する。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>ファイル</th><th>圧縮前</th><th>圧縮後</th><th>削減率</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">HTML</th><td>100KB</th><td>20KB</th><td>80%</th></tr>
+            <tr><td style="font-weight: bold;">CSS</th><td>50KB</th><td>10KB</th><td>80%</th></tr>
+            <tr><td style="font-weight: bold;">JS</th><td>200KB</th><td>40KB</th><td>80%</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>効果：転送量が減る、表示速度が向上、モバイル回線で特に効果が大きい。</p>
+
+      <h3>キャッシュ（再利用による高速化）</h3>
+      <p>同じファイルを毎回ダウンロードすると遅い。ロゴ画像、CSS、JavaScriptなど頻繁に変わらないファイルはキャッシュが効果的。Webサーバーがレスポンスにキャッシュ有効期限（Expires/Cache-Control）を付与する。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>キャッシュの仕組み</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="110" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="75" y="33" text-anchor="middle" font-size="11" fill="#1e3a5f">初回アクセス</text>
+          
+          <line x1="130" y1="28" x2="155" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="160" y="10" width="110" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="215" y="33" text-anchor="middle" font-size="11" fill="#92400e">Webサーバー</text>
+          
+          <line x1="270" y1="28" x2="295" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="300" y="10" width="85" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="342" y="33" text-anchor="middle" font-size="11" fill="#14532d">レスポンス</text>
+          
+          <line x1="342" y1="46" x2="342" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="280" y="70" width="120" height="40" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="340" y="88" text-anchor="middle" font-size="10" fill="#1e293b">ブラウザ</text>
+          <text x="340" y="102" text-anchor="middle" font-size="9" fill="#475569">キャッシュ保存</text>
+          
+          <path d="M 75 46 L 75 130 L 340 130 L 340 110" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <text x="200" y="125" text-anchor="middle" font-size="9" fill="#16a34a">次回アクセス時はキャッシュを使用</text>
+        </svg>
+      </figure>
+
+      <p>ブラウザは有効期限内→ローカルのキャッシュを使用、有効期限切れ→再取得。効果：ページ表示が大幅に高速化、サーバー負荷が減る。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>Cache-Controlの値</th><th>意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">max-age=3600</th><td>3600秒間は再取得しなくてよい</th></tr>
+            <tr><td style="font-weight: bold;">no-cache</th><td>再利用前に必ず確認</th></tr>
+            <tr><td style="font-weight: bold;">no-store</th><td>キャッシュ禁止</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>CDN（地理的に近いサーバーから配信）</h3>
+      <p>ユーザーが世界中にいる場合、距離が遠いほど通信が遅くなる。例：日本のサーバー → アメリカのユーザー、物理距離が長い → レイテンシが大きい。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>CDNの仕組み</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- オリジンサーバー -->
+          <rect x="150" y="10" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="11" fill="#1e3a5f">オリジンサーバー</text>
+          
+          <!-- キャッシュ配置 -->
+          <line x1="200" y1="46" x2="200" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr4)"/>
+          
+          <rect x="10" y="70" width="100" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="60" y="93" text-anchor="middle" font-size="10" fill="#14532d">キャッシュ</text>
+          <text x="60" y="108" text-anchor="middle" font-size="9" fill="#14532d">（日本）</text>
+          
+          <rect x="150" y="70" width="100" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="93" text-anchor="middle" font-size="10" fill="#14532d">キャッシュ</text>
+          <text x="200" y="108" text-anchor="middle" font-size="9" fill="#14532d">（欧州）</text>
+          
+          <rect x="290" y="70" width="100" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="340" y="93" text-anchor="middle" font-size="10" fill="#14532d">キャッシュ</text>
+          <text x="340" y="108" text-anchor="middle" font-size="9" fill="#14532d">（米国）</text>
+          
+          <!-- ユーザー -->
+          <text x="60" y="145" text-anchor="middle" font-size="9" fill="#64748b">日本ユーザー</text>
+          <text x="200" y="145" text-anchor="middle" font-size="9" fill="#64748b">欧州ユーザー</text>
+          <text x="340" y="145" text-anchor="middle" font-size="9" fill="#64748b">米国ユーザー</text>
+          
+          <line x1="200" y1="46" x2="60" y2="70" stroke="#64748b" stroke-width="1" marker-end="url(#arr4)"/>
+          <line x1="200" y1="46" x2="200" y2="70" stroke="#64748b" stroke-width="1" marker-end="url(#arr4)"/>
+          <line x1="200" y1="46" x2="340" y2="70" stroke="#64748b" stroke-width="1" marker-end="url(#arr4)"/>
+        </svg>
+      </figure>
+
+      <p>CDN（Content Delivery Network）は、世界中にキャッシュサーバーを配置し、ユーザーに最も近いサーバーから配信する。効果：世界中どこでも高速表示、大量アクセスにも強い。</p>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>AレコードとCNAMEの混同</strong>：AレコードはIPアドレスを直接指定。CNAMEは別のドメイン名を指定する。</li>
+        <li><strong>DNS反映のタイミング</strong>：DNS設定変更後、反映までに時間がかかる（DNS伝播）。すぐにアクセスできない場合がある。</li>
+        <li><strong>Keep-Aliveの過信</strong>：接続を維持しすぎるとサーバーのメモリ消費が増える。適切なタイムアウト設定が必要。</li>
+        <li><strong>キャッシュによる更新漏れ</strong>：CSSやJSを更新したときに、ユーザーのブラウザに古いキャッシュが残っていると更新が反映されない。バージョニングが重要。</li>
+        <li><strong>CDNのキャッシュヒット率</strong>：CDNを使っても、キャッシュヒット率が低いと効果が薄い。適切なキャッシュ設定が必要。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. Webサイト公開において、ドメイン名とIPアドレスの対応を設定するDNSレコードはどれか。</summary>
+        <p>ア）MXレコード　イ）CNAMEレコード　ウ）Aレコード　エ）TXTレコード</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Aレコードはドメイン名とIPv4アドレスの対応を定義するDNSレコード。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. Webサイト公開の手順として正しい順序はどれか。</summary>
+        <p>ア）Webサーバー起動 → 仮想ホスト設定 → ドメイン取得 → DNS設定　イ）ドメイン取得 → DNS設定 → Webサーバー起動 → 仮想ホスト設定　ウ）仮想ホスト設定 → DNS設定 → ドメイン取得 → Webサーバー起動　エ）DNS設定 → ドメイン取得 → Webサーバー起動 → 仮想ホスト設定</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 正しい順序は「ドメイン取得 → DNSにAレコード設定 → Webサーバー起動 → 仮想ホスト設定」。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. Keep-Aliveの説明として正しいものはどれか。</summary>
+        <p>ア）レスポンスを圧縮して転送量を減らす　イ）1つのTCP接続を複数のリクエストで使い回す　ウ）地理的に近いサーバーから配信する　エ）ブラウザにデータをキャッシュさせる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Keep-Aliveは1つのTCP接続を複数のリクエストで使い回す仕組み。接続確立のオーバーヘッドを減らす。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. gzip圧縮の主な効果はどれか。</summary>
+        <p>ア）サーバーのCPU負荷を軽減する　イ）転送量を減らして表示速度を向上させる　ウ）セキュリティを向上させる　エ）データベース接続を高速化する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — gzip圧縮によりテキストデータを圧縮し、転送量を減らして表示速度を向上させる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. CDN（Content Delivery Network）の説明として正しいものはどれか。</summary>
+        <p>ア）Webサーバーの設定ファイルを管理する　イ）世界中にキャッシュサーバーを配置し、地理的に近いサーバーから配信する　ウ）データベースの負荷を分散する　エ）HTTPリクエストを暗号化する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — CDNは世界中にキャッシュサーバーを配置し、ユーザーに最も近いサーバーからコンテンツを配信する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. キャッシュの有効期限をブラウザに指示するHTTPヘッダはどれか。</summary>
+        <p>ア）Host　イ）User-Agent　ウ）Cache-Control　エ）Content-Type</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Cache-Controlヘッダはブラウザや中間サーバーがキャッシュをどう扱うか指示する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. DNSのAレコード設定で指定するものはどれか。</summary>
+        <p>ア）メールサーバーのアドレス　イ）ドメイン名とIPアドレスの対応　ウ）別名（エイリアス）　エ）ドメインの所有者情報</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Aレコードはドメイン名とIPv4アドレスの対応を指定する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. Keep-Aliveを有効にしない場合に発生する問題はどれか。</summary>
+        <p>ア）レスポンスが圧縮されない　イ）毎回TCP接続を張り直すため遅くなる　ウ）キャッシュが効かない　エ）CDNが使えない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Keep-Aliveなしでは、リクエストごとにTCP接続を張り直すため、接続確立のオーバーヘッドが発生し遅くなる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. gzip圧縮が特に効果的なファイルの種類はどれか。</summary>
+        <p>ア）JPEG画像　イ）PNG画像　ウ）テキストファイル（HTML/CSS/JS）　エ）動画ファイル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — テキストファイルは圧縮率が高く、gzip圧縮が効果的。画像や動画はすでに圧縮されているため効果が小さい。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. Cache-Control: no-store の意味として正しいものはどれか。</summary>
+        <p>ア）3600秒間キャッシュする　イ）再利用前に必ず確認する　ウ）キャッシュを絶対に保存しない　エ）共有キャッシュを許可する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — no-storeはキャッシュを絶対に保存しないよう指示する。個人情報やログインページのレスポンスに使用する。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第6章 Webサーバーソフトウェア（p198-p206）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

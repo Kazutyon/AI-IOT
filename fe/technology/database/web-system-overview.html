@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webシステムの全体像 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>Webシステムの全体像</h1>
+        <p class="lead">Webシステムがどのように動作するか、クライアント・Webサーバー・アプリケーション・データベースの役割分担と処理の流れを理解します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>Webシステムの全体像</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>Webシステムの定義と構成要素</li>
+          <li>クライアント（ブラウザ）の役割と内部動作</li>
+          <li>Webサーバーの役割と処理フロー</li>
+          <li>静的コンテンツと動的コンテンツの違い</li>
+          <li>Webシステム全体の処理の流れ（12工程）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>Webシステムの処理の流れ、静的/動的コンテンツの違い</dd></div>
+          <div><dt>中</dt><dd>クライアントの役割、Webサーバーの基本動作</dd></div>
+          <div><dt>低</dt><dd>URLの詳細な構成要素</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><th>Webシステム</th><td>ブラウザの要求（リクエスト）に対しサーバーが応答（レスポンス）を返す仕組み</td></tr>
+            <tr><td>2</td><th>クライアント</th><td>ブラウザを中心とした「処理を依頼する側」のソフトウェア役割</td></tr>
+            <tr><td>3</td><th>Webサーバー</th><td>リクエストを受け取り適切なレスポンスを返すソフトウェア（Apache/Nginx）</td></tr>
+            <tr><td>4</td><th>静的コンテンツ</th><td>サーバー上にファイルとして存在する内容をそのまま返す仕組み</td></tr>
+            <tr><td>5</td><th>動的コンテンツ</th><td>リクエストを受けてアプリケーションがその場で生成する内容</td></tr>
+            <tr><td>6</td><th>HTTPリクエスト</th><td>ブラウザからWebサーバーに送信される要求</td></tr>
+            <tr><td>7</td><th>HTTPレスポンス</th><td>Webサーバーからブラウザに返される応答</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. Webシステムとは何か</h2>
+      <p>Webシステムとは、利用者がブラウザを使って送った要求（リクエスト）に対し、サーバーが応答（レスポンス）を返すことで動作する仕組みを指す。Webページが表示されるとき、ブラウザ・Webサーバー・アプリケーション・データベースが決められた順序で連携して動作する。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Webシステムの基本構成</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- クライアント -->
+          <rect x="30" y="30" width="100" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="80" y="55" text-anchor="middle" font-size="13" fill="#1e3a5f">ブラウザ</text>
+          <!-- 矢印 -->
+          <line x1="130" y1="50" x2="160" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="145" y="45" text-anchor="middle" font-size="10" fill="#64748b">リクエスト</text>
+          <!-- Webサーバー -->
+          <rect x="165" y="30" width="100" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="215" y="55" text-anchor="middle" font-size="13" fill="#1e3a5f">Webサーバー</text>
+          <!-- 矢印 -->
+          <line x1="265" y1="50" x2="295" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="280" y="45" text-anchor="middle" font-size="10" fill="#64748b">処理依頼</text>
+          <!-- アプリ -->
+          <rect x="300" y="30" width="80" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="340" y="55" text-anchor="middle" font-size="13" fill="#1e3a5f">アプリ</text>
+          <!-- DBとの連携 -->
+          <line x1="340" y1="70" x2="340" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="290" y="105" width="100" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="340" y="130" text-anchor="middle" font-size="13" fill="#92400e">データベース</text>
+          <!-- レスポンス戻り -->
+          <path d="M 340 50 L 340 10 L 80 10 L 80 30" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="210" y="8" text-anchor="middle" font-size="10" fill="#16a34a">レスポンス</text>
+        </svg>
+      </figure>
+
+      <h3>2. クライアントとは何か</h3>
+      <p>クライアントとは、Webシステムに対して「処理を依頼する側」を指す。「スマホ」「PC」などのデバイスを指すのではなく、ブラウザを中心としたソフトウェアの役割を指す。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>クライアント（ブラウザ）の内部動作</figcaption>
+        <svg viewBox="0 0 400 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="140" y="10" width="120" height="36" rx="18" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="13" fill="#14532d">URLを解析</text>
+          <line x1="200" y1="46" x2="200" y2="74" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="110" y="75" width="180" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="100" text-anchor="middle" font-size="12" fill="#1e3a5f">HTTPリクエストを生成</text>
+          <line x1="200" y1="115" x2="200" y2="143" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="110" y="144" width="180" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="169" text-anchor="middle" font-size="12" fill="#1e3a5f">Webサーバーに送信</text>
+          <line x1="200" y1="184" x2="200" y2="212" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="80" y="213" width="240" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="236" text-anchor="middle" font-size="12" fill="#1e3a5f">レスポンスを解析し描画</text>
+        </svg>
+      </figure>
+
+      <p>クライアントの役割：要求を送る（リクエスト）、応答を受け取り画面に表示する（レンダリング）、Cookieを保持し必要に応じて送信する、JavaScriptを実行し動的な画面を作る。</p>
+
+      <h3>3. Webサーバーとは何か</h3>
+      <p>Webサーバーとは、クライアントから送られたリクエストを受け取り、適切なレスポンスを返すソフトウェア。代表例はApacheとNginx。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Webサーバーの処理フロー</figcaption>
+        <svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="140" y="10" width="120" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="13" fill="#1e3a5f">1. リクエスト受信</text>
+          <line x1="200" y1="46" x2="200" y2="74" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <polygon points="200,76 280,106 200,136 120,106" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="110" text-anchor="middle" font-size="11" fill="#92400e">2. 静的or動的?</text>
+          <line x1="120" y1="106" x2="70" y2="106" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <text x="75" y="100" font-size="11" fill="#64748b">静的</text>
+          <line x1="280" y1="106" x2="330" y2="106" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <text x="288" y="100" font-size="11" fill="#64748b">動的</text>
+          <rect x="30" y="120" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="110" y="143" text-anchor="middle" font-size="12" fill="#1e3a5f">3. 静的ファイル返却</text>
+          <rect x="240" y="120" width="140" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="310" y="143" text-anchor="middle" font-size="12" fill="#92400e">3. アプリに処理渡す</text>
+          <line x1="110" y1="156" x2="110" y2="184" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <line x1="310" y1="156" x2="310" y2="184" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <rect x="30" y="185" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="110" y="208" text-anchor="middle" font-size="12" fill="#1e3a5f">4. レスポンス返却</text>
+          <rect x="240" y="185" width="140" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="310" y="208" text-anchor="middle" font-size="12" fill="#1e3a5f">4. アプリから結果を受け取る</text>
+        </svg>
+      </figure>
+
+      <h3>4. 静的コンテンツと動的コンテンツ</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>項目</th><th>静的コンテンツ</th><th>動的コンテンツ</th></tr></thead>
+          <tbody>
+            <tr><td>定義</td><td>サーバー上にファイルとして存在する内容をそのまま返す</td><td>リクエストを受けてアプリケーションがその場で生成する</td></tr>
+            <tr><td>例</td><td>index.html, style.css, logo.png</td><td>ログイン後のマイページ、商品検索結果</td></tr>
+            <tr><td>特徴</td><td>内容が固定、キャッシュしやすい、高速</td><td>ユーザーによって変わる、DBと連携、処理が重い</td></tr>
+            <tr><td>生成工程</td><td>開発者が作成→配置→読み取り→返却</td><td>リクエスト→アプリ→DB問合せ→HTML組立→返却</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5. Webシステムの処理の流れ（12工程）</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>工程</th><th>担当する層</th><th>具体的な処理内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>① URL解析</td><td>クライアント</td><td>プロトコル・ホスト名・パスを分解しHTTPリクエストを準備</td></tr>
+            <tr><td>② DNSでIP取得</td><td>クライアント</td><td>ドメイン名をIPアドレスに変換</td></tr>
+            <tr><td>③ TCP接続確立</td><td>クライアント↔Webサーバー</td><td>3ウェイハンドシェイクで通信路を作る</td></tr>
+            <tr><td>④ HTTPリクエスト送信</td><td>クライアント</td><td>GET /index.htmlなどを送信</td></tr>
+            <tr><td>⑤ リクエスト受信</td><td>Webサーバー</td><td>URL・メソッド・ヘッダを解析</td></tr>
+            <tr><td>⑥ 静的/動的判定</td><td>Webサーバー</td><td>ファイル存在確認、アプリに渡すべきか判断</td></tr>
+            <tr><td>⑦ 静的ファイル返却</td><td>Webサーバー</td><td>HTML/CSS/画像を読み取り返却</td></tr>
+            <tr><td>⑧ アプリに処理渡し</td><td>Webサーバー→アプリ</td><td>FastCGI/Proxyなどで処理依頼</td></tr>
+            <tr><td>⑨ DB問い合わせ</td><td>アプリ→DB</td><td>SQLを実行しデータ取得</td></tr>
+            <tr><td>⑩ HTML/JSON生成</td><td>アプリ</td><td>テンプレートにデータを埋め込み</td></tr>
+            <tr><td>⑪ レスポンス返却</td><td>Webサーバー</td><td>アプリの生成結果をHTTPレスポンスとして返す</td></tr>
+            <tr><td>⑫ 画面描画</td><td>クライアント</td><td>HTML解析、CSS適用、JavaScript実行</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「クライアント＝デバイス」ではない</strong>：クライアントはブラウザを中心としたソフトウェアの役割であり、スマホやPCのデバイスそのものを指すわけではない。</li>
+        <li><strong>静的コンテンツと動的コンテンツの混同</strong>：静的＝ファイルそのまま、動的＝プログラムが生成。DBの有無が判断基準になる。</li>
+        <li><strong>Webサーバーの役割の狭い理解</strong>：「ファイルを返すだけ」ではなく、Webシステム全体の入口としてすべての通信を制御している。</li>
+        <li><strong>工程の順序の混乱</strong>：特に「静的判定」「アプリ連携」「DB問合せ」の順序を正確に覚える必要がある。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. Webシステムにおいて、クライアントの役割として適切なものはどれか。</summary>
+        <p>ア）データベースを管理する　イ）HTTPリクエストを生成し送信する　ウ）アプリケーションの実行環境を提供する　エ）ファイルシステムを管理する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — クライアント（ブラウザ）はURLを解析しHTTPリクエストを生成してWebサーバーに送信する役割を担う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 静的コンテンツの特徴として、適切なものはどれか。</summary>
+        <p>ア）リクエストごとにデータベースから取得する　イ）ユーザーごとに表示内容が変わる　ウ）サーバー上にファイルとして存在する内容をそのまま返す　エ）アプリケーションがその場でHTMLを生成する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 静的コンテンツはサーバー上にファイルとして存在する内容をそのまま返す仕組みである。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 動的コンテンツの説明として正しいものはどれか。</summary>
+        <p>ア）キャッシュしやすいため高速である　イ）ユーザーや状況によって内容が変わる　ウ）開発者が作成したHTMLをそのまま返す　エ）ファイルとしてサーバーに保存されている</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 動的コンテンツはリクエストを受けてアプリケーションがその場で生成するため、ユーザーや状況によって内容が変わる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. Webシステムの処理工程で、Webサーバーが「静的ファイルを返す」と「アプリに処理を渡す」の分岐判断を行うのはどの工程か。</summary>
+        <p>ア）リクエスト受信　イ）静的/動的の判定　ウ）レスポンス返却　エ）画面描画</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Webサーバーはリクエスト受信後、ファイルが存在するか・アプリに渡すべきかを判断する「静的/動的の判定」工程で分岐する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. Webシステムにおいて、データベースへの問い合わせを行う層はどこか。</summary>
+        <p>ア）クライアント　イ）Webサーバー　ウ）アプリケーション　エ）ロードバランサー</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — データベースへの問い合わせはアプリケーションが行う。Webサーバーはアプリに処理を渡すだけでDBには直接アクセスしない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. Webサーバーの代表的なソフトウェアとして、正しい組み合わせはどれか。</summary>
+        <p>ア）Chrome / Safari　イ）Apache / Nginx　ウ）MySQL / PostgreSQL　エ）Windows / Linux</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Webサーバーの代表例はApacheとNginxである。Chrome/Safariはブラウザ、MySQL/PostgreSQLはデータベース、Windows/LinuxはOSである。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. クライアントの役割として適切でないものはどれか。</summary>
+        <p>ア）HTTPリクエストを生成する　イ）Cookieを保持する　ウ）データベースのバックアップを取る　エ）JavaScriptを実行する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — データベースのバックアップはサーバー側の運用業務であり、クライアントの役割ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 次のうち、動的コンテンツの例として適切なものはどれか。</summary>
+        <p>ア）企業サイトのトップページのHTML　イ）商品検索結果ページ　ウ）会社概要ページの画像　エ）共通CSSファイル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 商品検索結果ページは検索条件によって内容が変わるため動的コンテンツの例である。他はすべて静的コンテンツ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. Webシステムの処理工程で、「TCP接続を確立する」工程はどの順番か。</summary>
+        <p>ア）①URL解析の後、DNSでIP取得の前　イ）②DNSでIP取得の後、④HTTPリクエスト送信の前　ウ）⑤リクエスト受信の後　エ）⑪レスポンス返却の後</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — TCP接続はDNSでIPアドレスを取得した後、HTTPリクエストを送信する前に確立される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 静的コンテンツのメリットとして適切でないものはどれか。</summary>
+        <p>ア）高速である　イ）キャッシュしやすい　ウ）ユーザーごとに内容を変えられる　エ）Webサーバーの負荷が低い</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ユーザーごとに内容を変えられるのは動的コンテンツの特徴であり、静的コンテンツは内容が固定されている。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第1章 Webシステムの全体像（p1-p10）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

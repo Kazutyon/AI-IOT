@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webページ生成の仕組み①（静的/動的ページ） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>Webページ生成の仕組み①</h1>
+        <p class="lead">静的ページと動的ページの違い、それぞれの特徴とメリット・デメリット、静的ページが返るまでの流れを学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>Webページ生成の仕組み①</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>Webページ生成に関わる層（ブラウザ・Webサーバー・アプリケーション・DB）</li>
+          <li>静的ページの定義と特徴</li>
+          <li>静的ページが返るまでの処理の流れ</li>
+          <li>静的ページのメリット・デメリット・使われる場面</li>
+          <li>動的ページの定義と特徴</li>
+          <li>動的ページが返るまでの処理の流れ</li>
+          <li>動的ページのメリット・デメリット・使われる場面</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>静的ページと動的ページの違い、それぞれのメリット・デメリット</dd></div>
+          <div><dt>中</dt><dd>静的ページの返却フロー、動的ページの返却フロー</dd></div>
+          <div><dt>低</dt><dd>Content-Typeの詳細な値</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>静的ページ</th><td>サーバー上にファイルとして存在する内容をそのまま返すページ</th></tr>
+            <tr><th>2</th><th>動的ページ</th><td>リクエストを受けてアプリケーションがその場で生成するページ</th></tr>
+            <tr><th>3</th><th>DocumentRoot</th><td>Webサーバーが公開するファイルを探す起点ディレクトリ</th></tr>
+            <tr><th>4</th><th>Content-Type</th>-thanレスポンスボディの種類をブラウザに伝えるヘッダ</th></tr>
+            <tr><th>5</th><th>MIMEタイプ</th>-thanデータの種類を表す標準化された形式名（text/htmlなど）</th></tr>
+            <tr><th>6</th><th>クエリ文字列</th>-thanURLの末尾に「?」以降で付ける追加情報</th></td>
+            <tr><th>7</th><th>FastCGI</th>-thanWebサーバーがアプリケーションに処理を渡す方式</th></tr>
+            <tr><th>8</th><th>404 Not Found</th>-thanリクエストされたファイルが存在しない場合のステータスコード</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. Webページ生成の全体像</h2>
+      <p>Webページが表示されるまでには、ブラウザ → Webサーバー → アプリケーション → データベースという複数の層が、決められた順序で連携して動作している。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Webページ生成の全体像</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- ブラウザ -->
+          <rect x="20" y="10" width="80" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="60" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">ブラウザ</text>
+          
+          <line x1="100" y1="30" x2="115" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="108" y="25" text-anchor="middle" font-size="8" fill="#64748b">①</text>
+          
+          <!-- Webサーバー -->
+          <rect x="120" y="10" width="80" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="160" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">Webサーバー</text>
+          
+          <line x1="200" y1="30" x2="215" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="208" y="25" text-anchor="middle" font-size="8" fill="#64748b">②</text>
+          
+          <!-- アプリケーション -->
+          <rect x="220" y="10" width="80" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="260" y="35" text-anchor="middle" font-size="12" fill="#92400e">アプリ</text>
+          
+          <line x1="300" y1="30" x2="315" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="308" y="25" text-anchor="middle" font-size="8" fill="#64748b">③</text>
+          
+          <!-- データベース -->
+          <rect x="320" y="10" width="60" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="350" y="35" text-anchor="middle" font-size="11" fill="#14532d">DB</text>
+          
+          <!-- 戻り矢印 -->
+          <path d="M 350 50 L 350 130 L 160 130 L 160 50" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="255" y="125" text-anchor="middle" font-size="9" fill="#16a34a">レスポンス</text>
+          
+          <!-- 説明 -->
+          <text x="60" y="80" text-anchor="middle" font-size="9" fill="#475569">リクエスト送信</text>
+          <text x="160" y="80" text-anchor="middle" font-size="9" fill="#475569">受信・振り分け</text>
+          <text x="260" y="80" text-anchor="middle" font-size="9" fill="#475569">処理・ロジック</text>
+          <text x="350" y="80" text-anchor="middle" font-size="9" fill="#475569">データ保存</text>
+        </svg>
+      </figure>
+
+      <h2>2. 静的ページ</h2>
+      <p>静的ページとは、サーバー上に「ファイルとして存在する内容」を、そのまま返す仕組みのこと。例：index.html、style.css、logo.png、script.js。これらは、WebサーバーのDocumentRootに置かれたファイルをそのまま読み取り、ブラウザへ返すだけで動作する。</p>
+
+      <h3>静的ページが返るまでの流れ</h3>
+      
+      <figure class="wide-diagram">
+        <figcaption>静的ページの処理フロー</figcaption>
+        <svg viewBox="0 0 400 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="120" y="10" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="30" text-anchor="middle" font-size="11" fill="#1e3a5f">① リクエスト受信</text>
+          <line x1="200" y1="40" x2="200" y2="58" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="120" y="60" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="80" text-anchor="middle" font-size="11" fill="#1e3a5f">② DocumentRootからファイルを探す</text>
+          <line x1="200" y1="90" x2="200" y2="108" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <polygon points="200,110 280,140 200,170 120,140" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="144" text-anchor="middle" font-size="10" fill="#92400e">③ ファイル存在確認</text>
+          
+          <line x1="200" y1="170" x2="200" y2="188" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="208" y="182" font-size="9" fill="#64748b">Yes</text>
+          
+          <rect x="120" y="190" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="210" text-anchor="middle" font-size="11" fill="#1e3a5f">④ Content-Typeを決定</text>
+          <line x1="200" y1="220" x2="200" y2="238" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="120" y="240" width="160" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="260" text-anchor="middle" font-size="11" fill="#14532d">⑤ レスポンスとして返す</text>
+          
+          <!-- Noの場合 -->
+          <line x1="280" y1="140" x2="330" y2="140" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="288" y="134" font-size="9" fill="#64748b">No</text>
+          <rect x="310" y="125" width="70" height="30" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="345" y="145" text-anchor="middle" font-size="9" fill="#7f1d1d">404</text>
+        </svg>
+      </figure>
+
+      <h3>静的ページの特徴</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="background-color: #dcfce7; font-weight: bold;">メリット</td>
+            <td>高速（ファイルを返すだけ）、キャッシュしやすい、Webサーバーの負荷が低い、セキュリティリスクが少ない</td>
+          </tr>
+          <tr><td style="background-color: #fecaca; font-weight: bold;">デメリット</td>
+            <td>内容が固定でユーザーごとに変えられない、更新のたびにファイルを修正・再配置する必要がある</td>
+          </tr>
+          <tr><td style="background-color: #fef3c7; font-weight: bold;">制約</td>
+            <td>HTML/CSS/JS/画像など「ファイルとして存在するもの」しか返せない、DBとの連携は不可</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>静的ページが使われる場面</h3>
+      <ul>
+        <li>企業サイトのトップページ</li>
+        <li>会社概要・アクセス情報</li>
+        <li>画像・CSS・JavaScript</li>
+        <li>ランディングページ</li>
+        <li>CDNで配信される静的アセット</li>
+      </ul>
+
+      <h2>3. 動的ページ</h2>
+      <p>動的ページとは、リクエストを受けてからアプリケーションが「その場で内容を生成する」ページのこと。例：ログイン後のマイページ、商品検索結果、投稿一覧、APIが返すJSON。静的ページと異なり、ユーザーや状況によって内容が変わるのが特徴。</p>
+
+      <h3>動的ページが返るまでの流れ</h3>
+
+      <figure class="wide-diagram">
+        <figcaption>動的ページの処理フロー</figcaption>
+        <svg viewBox="0 0 400 380" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="120" y="10" width="160" height="28" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="30" text-anchor="middle" font-size="10" fill="#1e3a5f">① ブラウザがリクエスト送信</text>
+          <line x1="200" y1="38" x2="200" y2="53" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="120" y="55" width="160" height="28" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="75" text-anchor="middle" font-size="10" fill="#1e3a5f">② Webサーバーがリクエスト受信</text>
+          <line x1="200" y1="83" x2="200" y2="98" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="100" y="100" width="200" height="28" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="120" text-anchor="middle" font-size="10" fill="#92400e">③ Webサーバーがアプリに処理を渡す</text>
+          <line x1="200" y1="128" x2="200" y2="143" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="100" y="145" width="200" height="28" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="165" text-anchor="middle" font-size="10" fill="#92400e">④ アプリがDBからデータを取得</text>
+          <line x1="200" y1="173" x2="200" y2="188" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="100" y="190" width="200" height="28" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="210" text-anchor="middle" font-size="10" fill="#92400e">⑤ アプリがHTML/JSONを生成</text>
+          <line x1="200" y1="218" x2="200" y2="233" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="120" y="235" width="160" height="28" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="255" text-anchor="middle" font-size="10" fill="#1e3a5f">⑥ Webサーバーがレスポンス返却</text>
+          <line x1="200" y1="263" x2="200" y2="278" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="120" y="280" width="160" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="300" text-anchor="middle" font-size="10" fill="#14532d">⑦ ブラウザが画面描画</text>
+          
+          <!-- 矢印アノテーション -->
+          <rect x="310" y="145" width="70" height="28" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1"/>
+          <text x="345" y="165" text-anchor="middle" font-size="9" fill="#1e1b4f">SQL実行</text>
+          <line x1="300" y1="159" x2="308" y2="159" stroke="#64748b" stroke-width="1" marker-end="url(#arr3)"/>
+        </svg>
+      </figure>
+
+      <h3>動的ページの特徴</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="background-color: #dcfce7; font-weight: bold;">メリット</td>
+            <td>ユーザーごとに内容を変えられる、DBと連携できる、アプリケーションロジックを実行できる</td>
+          </tr>
+          <tr><td style="background-color: #fecaca; font-weight: bold;">デメリット</td>
+            <td>静的ページより処理が重い、レスポンスが遅くなる可能性がある、負荷が高いとスケールが必要</td>
+          </tr>
+          <tr><td style="background-color: #fef3c7; font-weight: bold;">制約</td>
+            <td>Webサーバーだけでは生成できない（必ずアプリケーションが必要）、DBが落ちると500エラー</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3>動的ページが使われる場面</h3>
+      <ul>
+        <li>ログイン後のマイページ</li>
+        <li>商品検索結果</li>
+        <li>投稿一覧・コメント一覧</li>
+        <li>予約システム</li>
+        <li>API（JSONを返す）</li>
+        <li>管理画面（CMS / ダッシュボード）</li>
+      </ul>
+
+      <h3>静的 vs 動的 比較</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>観点</th><th>静的ページ</th><th>動的ページ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>生成タイミング</td><td>事前にファイルとして作成</td><td>リクエスト時にアプリが生成</td></tr>
+            <tr><td>データベース</td><td>不要</td><td>必要（多くの場合）</td></tr>
+            <tr><td>応答速度</td><td>高速</td><td>処理によって変動</td></tr>
+            <tr><td>キャッシュ</td><td>しやすい</td><td>状況による</td></tr>
+            <tr><td>サーバー負荷</td><td>低い</td><td>高い</td></tr>
+            <tr><td>ユーザー個別化</td><td>不可</td><td>可能</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「静的＝遅い」「動的＝速い」という誤解</strong>：実際は逆。静的ページはファイルを返すだけなので高速、動的ページはアプリ処理とDBアクセスが必要なため相対的に遅い。</li>
+        <li><strong>すべてのページを動的にすべきという誤解</strong>：企業トップページなど頻繁に更新しないページは静的ページの方が適している。</li>
+        <li><strong>動的ページにしかDBはいらないという誤解</strong>：その通り。静的ページはDBにアクセスしない。</li>
+        <li><strong>Content-Typeの重要性の軽視</strong>：Content-Typeが正しく設定されていないと、ブラウザはHTMLをテキストとして表示したり、CSSを適用できなかったりする。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 静的ページの説明として正しいものはどれか。</summary>
+        <p>ア）リクエストごとにアプリケーションがHTMLを生成する　イ）サーバー上にファイルとして存在する内容をそのまま返す　ウ）ユーザーごとに表示内容が変わる　エ）必ずデータベースと連携する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 静的ページはサーバー上にファイルとして存在する内容（HTML/CSS/画像など）をそのまま返す仕組みである。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 動的ページの説明として正しいものはどれか。</summary>
+        <p>ア）ファイルとしてサーバーに保存されている　イ）キャッシュしやすいため高速である　ウ）リクエストを受けてアプリケーションがその場で生成する　エ）Webサーバーだけで完結する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 動的ページはリクエストを受けてからアプリケーションがその場で内容を生成するページである。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 静的ページのメリットとして適切でないものはどれか。</summary>
+        <p>ア）高速である　イ）ユーザーごとに内容を変えられる　ウ）キャッシュしやすい　エ）セキュリティリスクが少ない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ユーザーごとに内容を変えられるのは動的ページの特徴である。静的ページの内容は固定されている。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 動的ページのデメリットとして適切なものはどれか。</summary>
+        <p>ア）内容が固定されている　イ）DBが落ちると表示できない　ウ）Webサーバーの負荷が低い　エ）更新のたびにファイルを再配置する必要がある</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 動的ページはDBからデータを取得するため、DBが落ちるとページを生成できず500エラーになる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 静的ページが返るまでの流れで、Webサーバーがファイルの種類を判断するために使用するヘッダはどれか。</summary>
+        <p>ア）Host　イ）User-Agent　ウ）Content-Type　エ）Cache-Control</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Webサーバーはファイルの拡張子からContent-Typeを決定し、ブラウザに伝える。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 次のうち、動的ページの例として適切なものはどれか。</summary>
+        <p>ア）企業サイトのトップページのHTML　イ）会社概要ページの画像　ウ）ログイン後のマイページ　エ）共通CSSファイル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ログイン後のマイページはユーザーごとに内容が変わるため動的ページの例である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 静的ページが返される際、リクエストされたファイルがDocumentRoot内に存在しない場合に返されるステータスコードはどれか。</summary>
+        <p>ア）200 OK　イ）302 Found　ウ）404 Not Found　エ）500 Internal Server Error</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — リクエストされたファイルが存在しない場合、Webサーバーは404 Not Foundを返す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 動的ページの生成に必要な要素として適切でないものはどれか。</summary>
+        <p>ア）Webサーバー　イ）アプリケーション　ウ）データベース（多くの場合）　エ）静的ファイルのみ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 動的ページはアプリケーションが生成するため、静的ファイルだけでは実現できない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. Webサーバーがアプリケーションに処理を渡す方式として使われるものはどれか。</summary>
+        <p>ア）DNS　イ）NAT　ウ）FastCGI　エ）HTTP/2</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — FastCGIはWebサーバーがアプリケーション（PHPなど）に処理を渡す方式。php-fpmなどが該当する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 静的ページと動的ページの比較として正しいものはどれか。</summary>
+        <p>ア）静的ページは動的ページよりも処理が重い　イ）動的ページは静的ページよりもキャッシュしやすい　ウ）静的ページはDBと連携できない　エ）動的ページはファイルを返すだけなので高速</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 静的ページはファイルをそのまま返す仕組みであり、データベースとの連携はできない。動的ページはDBと連携できる。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第5章 Webページ生成の仕組み（p97-p109）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

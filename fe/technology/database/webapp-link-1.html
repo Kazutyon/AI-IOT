@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webアプリ連携（CGI/FastCGI/リバースプロキシ） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>Webアプリ連携</h1>
+        <p class="lead">Webサーバーとアプリケーションをつなぐ仕組みとして、CGI、FastCGI、リバースプロキシの違いと役割を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>Webアプリ連携</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>Webサーバーとアプリケーションをつなぐ仕組みの必要性</li>
+          <li>CGIの仕組みと課題（リクエストごとにプロセス起動）</li>
+          <li>FastCGIの仕組みとメリット（常駐プロセス）</li>
+          <li>リバースプロキシの仕組みと役割</li>
+          <li>FastCGIとリバースプロキシの使い分け</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>FastCGIの仕組み、CGIの課題、リバースプロキシの役割</dd></div>
+          <div><dt>中</dt><dd>CGIの仕組み、言語ごとの連携方式の違い</dd></div>
+          <div><dt>低</dt><dd>WSGI、Rackなどの詳細</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        </table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>CGI</th>的那样Webサーバーがアプリケーションを呼び出す方式（リクエストごとに起動）</th></tr>
+            <tr><th>2</th><th>FastCGI</th>的那样アプリを常駐させて呼び出す方式（php-fpmなど）</th></tr>
+            <tr><th>3</th><th>php-fpm</th>的那样PHPのFastCGI実装。現代のPHP実行の標準</th></tr>
+            <tr><th>4</th><th>リバースプロキシ</th>的那样Webサーバーがアプリケーションの代理としてリクエストを転送する仕組み</th></td>
+            <tr><th>5</th><th>ProxyPass</th>的那样Apacheでリバースプロキシを設定するディレクティブ</th></tr>
+            <tr><th>6</th><th>WSGI</th>的那样PythonのWebアプリケーション連携方式</th></tr>
+            <tr><th>7</th><th>常駐プロセス</th>那样起動しっぱなしで動作し続けるプログラム</th></tr>
+            <tr><th>8</th><th>mod_php</th>那样ApacheにPHPを組み込むモジュール方式</th></td>
+            <tr><th>9</th><th>localhost</th>那样自分自身を指すIPアドレス（127.0.0.1）</th></td>
+            <tr><th>10</th><th>ポート番号</th>那样同じIPの中でどのサービスに通信を届けるかを決める番号</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. CGI / FastCGI</h2>
+      <p>Webサーバー（Apache/Nginx）は、静的ファイルは自分で返せるが、動的ページ（商品一覧、ログイン処理など）はアプリケーションに処理を渡す必要がある。その「アプリケーションの呼び出し方式」がCGI / FastCGIである。以前はCGIが使われていたが、今はFastCGIが標準。</p>
+
+      <h3>Webサーバーとアプリをつなぐ仕組み</h3>
+      <p>WebサーバーはHTMLや画像などの静的ファイルしか返せない。しかし現代のWebでは、ログイン処理、DBから商品一覧を取得、注文処理、JSONの生成（API）など動的処理が必要。これらはWebサーバーでは実行できないため、アプリケーションに処理を渡す仕組みが必要になる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Webサーバーとアプリケーションの連携</figcaption>
+        <svg viewBox="0 0 400 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="100" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">ブラウザ</text>
+          
+          <line x1="120" y1="30" x2="145" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="150" y="10" width="100" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="35" text-anchor="middle" font-size="12" fill="#92400e">Webサーバー</text>
+          
+          <line x1="250" y1="30" x2="275" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="262" y="25" text-anchor="middle" font-size="8" fill="#64748b">FastCGI</text>
+          
+          <rect x="280" y="10" width="100" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="330" y="35" text-anchor="middle" font-size="12" fill="#14532d">アプリ</text>
+          
+          <text x="200" y="90" text-anchor="middle" font-size="10" fill="#64748b">静的ファイル → Webサーバーが直接返す</text>
+          <text x="200" y="110" text-anchor="middle" font-size="10" fill="#64748b">動的処理 → FastCGIでアプリに渡す</text>
+        </svg>
+      </figure>
+
+      <h3>CGI（Common Gateway Interface）</h3>
+      <p>CGIは、リクエストごとにアプリケーションを新しく起動して実行する方式。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>CGIの動作イメージ</figcaption>
+        <svg viewBox="0 0 400 170" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="33" text-anchor="middle" font-size="11" fill="#1e3a5f">リクエスト</text>
+          
+          <line x1="120" y1="28" x2="145" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="150" y="10" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="11" fill="#92400e">Webサーバー</text>
+          
+          <line x1="250" y1="28" x2="275" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="280" y="10" width="100" height="36" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="330" y="33" text-anchor="middle" font-size="11" fill="#7f1d1d">アプリ起動</text>
+          
+          <line x1="330" y1="46" x2="330" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="280" y="70" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="330" y="93" text-anchor="middle" font-size="11" fill="#1e3a5f">処理実行</text>
+          
+          <line x1="330" y1="106" x2="330" y2="125" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="280" y="130" width="100" height="36" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="330" y="153" text-anchor="middle" font-size="11" fill="#7f1d1d">アプリ終了</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">動作イメージ</th><td>Webサーバーがリクエストを受け取る → アプリケーションを新しく起動 → 入力（クエリ文字列、POSTデータ）を渡す → アプリがHTML/JSONを生成 → Webサーバーがその結果を返す</th></tr>
+            <tr><td style="font-weight: bold;">特徴</th><td>仕組みが単純でわかりやすい</th></tr>
+            <tr><td style="font-weight: bold;">欠点</th><td>リクエストごとにプロセスを起動するため非常に遅い。現代のWebのアクセス量には耐えられない</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>FastCGI（常駐方式）</h3>
+      <p>FastCGIは、アプリを常駐プロセスとして起動し、Webサーバーはリクエストを渡すだけ。プロセス起動のオーバーヘッドがゼロに近い。CGIの欠点（毎回起動）を完全に解消した方式。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>FastCGIの動作イメージ</figcaption>
+        <svg viewBox="0 0 400 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="33" text-anchor="middle" font-size="11" fill="#1e3a5f">リクエスト①</text>
+          
+          <line x1="120" y1="28" x2="145" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="150" y="10" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="11" fill="#92400e">Webサーバー</text>
+          
+          <line x1="250" y1="28" x2="275" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <!-- 常駐アプリ -->
+          <rect x="280" y="10" width="100" height="60" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="330" y="35" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">FastCGI</text>
+          <text x="330" y="55" text-anchor="middle" font-size="9" fill="#14532d">常駐プロセス</text>
+          
+          <line x1="200" y1="46" x2="200" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="20" y="70" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="93" text-anchor="middle" font-size="11" fill="#1e3a5f">リクエスト②</text>
+          
+          <line x1="120" y1="88" x2="145" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <line x1="250" y1="88" x2="275" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <text x="200" y="125" text-anchor="middle" font-size="10" fill="#64748b">プロセス起動のオーバーヘッドなし！</text>
+        </svg>
+      </figure>
+
+      <h3>現代のWebの言語別連携方式</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>言語</th><th>従来方式</th><th>現代の標準方式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">PHP</th><td>CGI</th><td>FastCGI（php-fpm）</th></tr>
+            <tr><td style="font-weight: bold;">Python</th><td>CGI</th><td>WSGI（Gunicorn / uWSGI）</th></tr>
+            <tr><td style="font-weight: bold;">Ruby</th><td>CGI</th><td>Rack / Puma / Unicorn</th></tr>
+            <tr><td style="font-weight: bold;">Node.js</th>那样CGIという概念自体を使わない</th><td>アプリサーバーとして常駐</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. リバースプロキシ</h2>
+      <p>リバースプロキシとは、ApacheやNginxがアプリケーションの「代理」としてリクエストを受け取り、内部のアプリケーションへ転送する仕組み。</p>
+
+      <h3>なぜリバースプロキシが必要なのか</h3>
+      <p>PHPならApache + php-fpm（FastCGI）で動くが、Node.js / Python / RubyはApacheだけでは動かない。理由：Apacheはアプリケーションを直接実行できない、アプリは3000番など別ポートで動く、Apacheが「入口」になってアプリへ転送する必要がある。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>リバースプロキシの動作イメージ</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="100" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">ブラウザ</text>
+          
+          <line x1="120" y1="30" x2="145" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr4)"/>
+          
+          <rect x="150" y="10" width="100" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="200" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">Apache / Nginx</text>
+          <text x="200" y="45" text-anchor="middle" font-size="9" fill="#92400e">リバースプロキシ</text>
+          
+          <line x1="250" y1="30" x2="275" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr4)"/>
+          <text x="262" y="25" text-anchor="middle" font-size="8" fill="#64748b">転送</text>
+          
+          <rect x="280" y="10" width="100" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="330" y="30" text-anchor="middle" font-size="12" fill="#14532d">アプリ</text>
+          <text x="330" y="45" text-anchor="middle" font-size="9" fill="#14532d">localhost:3000</text>
+          
+          <!-- 戻り -->
+          <path d="M 330 50 L 330 130 L 70 130 L 70 50" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr4)"/>
+          <text x="200" y="125" text-anchor="middle" font-size="9" fill="#16a34a">レスポンスを返却</text>
+        </svg>
+      </figure>
+
+      <h3>Apacheのリバースプロキシ設定例</h3>
+      <p>Node.jsやPythonアプリをApacheが受ける例：example.comへのアクセスはApacheが受け取り、内部のlocalhost:3000（アプリ）に転送する。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Apacheリバースプロキシ設定</figcaption>
+        <svg viewBox="0 0 400 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="110" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="40" y="30" font-size="10" fill="#1e3a5f">&lt;VirtualHost *:80&gt;</text>
+          <text x="50" y="48" font-size="10" fill="#334155">  ServerName example.com</text>
+          <text x="50" y="66" font-size="10" fill="#fef3c7" stroke="#d97706" fill="#92400e">  ProxyPass "/" "http://127.0.0.1:3000/"</text>
+          <text x="50" y="84" font-size="10" fill="#fef3c7" stroke="#d97706" fill="#92400e">  ProxyPassReverse "/" "http://127.0.0.1:3000/"</text>
+          <text x="40" y="102" font-size="10" fill="#1e3a5f">&lt;/VirtualHost&gt;</text>
+        </svg>
+      </figure>
+
+      <h3>リバースプロキシのメリット</h3>
+      <ul>
+        <li><strong>HTTPS（SSL）をApache側で処理できる</strong>：アプリ側でSSLを扱う必要がなくなる。証明書管理が簡単、アプリはHTTPのままでよい。</li>
+        <li><strong>静的ファイルをApacheが高速に返せる</strong>：アプリに負荷をかけずに画像、CSS、JavaScriptを返せる。</li>
+        <li><strong>ログ・アクセス制御をApacheに集約できる</strong>：access.log、error.log、IP制限、Basic認証、リダイレクトをApache側で統一管理できる。</li>
+        <li><strong>アプリを外部に直接公開しなくてよい（安全）</strong>：アプリを3000番で直接公開すると危険。Apacheが前段に立つことで安全性が高まる。</li>
+      </ul>
+
+      <h3>FastCGIとリバースプロキシの違い</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>方式</th><th>主に使う言語</th><th>仕組み</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">FastCGI（php-fpm）</th><td>PHP</th><td>Apache → php-fpm（FastCGI）</th></tr>
+            <tr><td style="font-weight: bold;">リバースプロキシ</th><td>Node.js / Python / Ruby</th><td>Apache → アプリ（HTTP）</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>CGIとFastCGIの混同</strong>：CGIはリクエストごとにプロセス起動（遅い）、FastCGIは常駐（速い）。現代はFastCGIが標準。</li>
+        <li><strong>リバースプロキシとフォワードプロキシの混同</strong>：リバースプロキシはサーバー側、フォワードプロキシはクライアント側に設置。</li>
+        <li><strong>ProxyPassの設定忘れ</strong>：リバースプロキシを使うには適切な転送設定が必要。設定がないとアプリに到達しない。</li>
+        <li><strong>localhostとポート番号の誤解</strong>：localhost（127.0.0.1）は自分自身を指す。アプリは3000番などで待ち受ける。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. CGIの問題点として正しいものはどれか。</summary>
+        <p>ア）アプリケーションが常駐できない　イ）リクエストごとにプロセスを起動するため遅い　ウ）HTTPしか使えない　エ）セキュリティが弱い</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — CGIはリクエストごとにアプリケーションを新しく起動するため、プロセス起動のオーバーヘッドが大きく遅い。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. FastCGIの特徴として正しいものはどれか。</summary>
+        <p>ア）リクエストごとにアプリを起動する　イ）アプリを常駐プロセスとして起動する　ウ）HTTP通信しかできない　エ）PHPでは使えない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — FastCGIはアプリを常駐プロセスとして起動し、Webサーバーはリクエストを渡すだけ。プロセス起動のオーバーヘッドがない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. PHPの現代的な実行方式として標準的なものはどれか。</summary>
+        <p>ア）CGI　イ）mod_php　ウ）php-fpm（FastCGI）　エ）リバースプロキシ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 現代のPHP実行の標準はphp-fpm（FastCGI実装）である。CGIは過去の方式。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. リバースプロキシの説明として正しいものはどれか。</summary>
+        <p>ア）クライアントの通信を代理で外部に送信する　イ）Webサーバーがアプリケーションの代理としてリクエストを転送する　ウ）データベースの負荷を分散する　エ）DNS名前解決を高速化する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — リバースプロキシはWebサーバーがアプリケーションの代理としてリクエストを受け取り、内部のアプリケーションへ転送する仕組み。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. Apacheでリバースプロキシを設定するディレクティブはどれか。</summary>
+        <p>ア）ProxyPass / ProxyPassReverse　イ）FastCGI / PHP-FPM　ウ）VirtualHost / Directory　エ）ServerName / DocumentRoot</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — Apacheでリバースプロキシを設定するにはProxyPassとProxyPassReverseディレクティブを使用する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. リバースプロキシを使用するメリットとして適切でないものはどれか。</summary>
+        <p>ア）HTTPS処理をWebサーバー側で集約できる　イ）静的ファイルを高速に返せる　ウ）アプリケーションの実行速度が向上する　エ）アプリを外部に直接公開しなくてよい</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — リバースプロキシはアプリケーションの実行速度そのものを向上させるわけではない。通信の前段を担当する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. Node.js / PythonアプリとApacheを連携させる際に使用される方式はどれか。</summary>
+        <p>ア）FastCGI　イ）mod_php　ウ）リバースプロキシ　エ）CGI</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Node.jsやPythonアプリはApacheだけでは動かないため、リバースプロキシを使ってApacheからアプリに転送する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. FastCGIとリバースプロキシの違いとして正しいものはどれか。</summary>
+        <p>ア）FastCGIはPHP向け、リバースプロキシはNode.js/Python向けの連携方式　イ）FastCGIはクライアント側、リバースプロキシはサーバー側の技術　ウ）両方とも同じ方式である　エ）FastCGIはHTTPしか使えない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — FastCGI（php-fpm）は主にPHP、リバースプロキシは主にNode.js/Python/Ruby向けの連携方式。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. PythonのWebアプリケーション連携方式として標準的なものはどれか。</summary>
+        <p>ア）CGI　イ）mod_python　ウ）WSGI（Gunicorn / uWSGI）　エ）Rack</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Pythonの標準的な連携方式はWSGI（Web Server Gateway Interface）で、GunicornやuWSGIが実装。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. リバースプロキシを使用する際、アプリケーションが待ち受けるアドレスとして適切なものはどれか。</summary>
+        <p>ア）203.0.113.10:80　イ）example.com:443　ウ）127.0.0.1:3000　エ）192.168.1.10:3306</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — アプリケーションは通常localhost（127.0.0.1）の任意のポート（3000番など）で待ち受け、Webサーバーがリバースプロキシとして転送する。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第7章 Webアプリケーションとの連携（p207-p216）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ApacheとNginxの比較・設定ファイル構造 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>ApacheとNginxの比較・設定ファイル構造</h1>
+        <p class="lead">ApacheとNginxの内部構造の違い、それぞれの特徴と向いている用途、設定ファイルの構造の違いを学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>ApacheとNginxの比較・設定ファイル構造</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>Apacheのプロセス/スレッド方式（MPM）の特徴</li>
+          <li>Nginxのイベント駆動方式（非同期）の特徴</li>
+          <li>両者の内部構造の違いと動作の違い</li>
+          <li>それぞれの向いている用途</li>
+          <li>設定ファイルの構造（ApacheとNginxの違い）</li>
+          <li>設定ファイルで扱う主な項目</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ApacheとNginxの内部構造の違い、それぞれの特徴</dd></div>
+          <div><dt>中</dt><dd>設定ファイルの構造の違い、向いている用途</dd></div>
+          <div><dt>低</dt><dd>設定ファイルの具体的な記述例の詳細</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>MPM</th>的那样Apacheのプロセス/スレッド管理方式（Multi-Processing Module）</th></tr>
+            <tr><th>2</th><th>プロセス方式</th>的那样リクエスト1つにつき1プロセスを割り当てる方式</th></tr>
+            <tr><th>3</th><th>イベント駆動方式</th>的那样少数のワーカーで大量のリクエストを処理する方式</th></tr>
+            <tr><th>4</th><th>.htaccess</th>的那样Apacheでディレクトリ単位の設定を可能にするファイル</th></tr>
+            <tr><th>5</th><th>mod_php</th>的那样ApacheにPHPを組み込むモジュール</th></tr>
+            <tr><th>6</th><th>php-fpm</th>那样PHPのFastCGI実装。Nginxと組み合わせて使う</th></tr>
+            <tr><th>7</th><th>リバースプロキシ</th>的那样Webサーバーがアプリケーションの代理としてリクエストを転送する機能</th></tr>
+            </table><th>8</th><th>設定ファイル</th>的那样Webサーバーの動作を記述するファイル</th></tr>
+            <tr><th>9</th><th>ディレクティブ</th>的那样設定ファイルに記述する個々の設定項目</th></tr>
+            <tr><th>10</th><th>serverブロック</th>的那样Nginxの仮想ホスト設定ブロック</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. ApacheとNginxの違い</h2>
+      <p>ApacheとNginxはどちらもWebサーバーソフトウェアだが、内部構造（リクエスト処理方式）が大きく異なる。この構造の違いが、同時アクセス数、メモリ使用量、静的ファイルの速度、アプリ連携の方式に影響する。</p>
+
+      <h3>Apache: プロセス/スレッド方式（MPM）</h3>
+      <p>Apacheはプロセス（またはスレッド）を増やして処理する方式。</p>
+      
+      <figure class="wide-diagram">
+        <figcaption>Apacheの処理方式</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="150" y="10" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="12" fill="#1e3a5f">リクエスト到着</text>
+          
+          <line x1="200" y1="46" x2="200" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="30" y="70" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="80" y="93" text-anchor="middle" font-size="11" fill="#92400e">プロセス1</text>
+          
+          <rect x="150" y="70" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="93" text-anchor="middle" font-size="11" fill="#92400e">プロセス2</text>
+          
+          <rect x="270" y="70" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="320" y="93" text-anchor="middle" font-size="11" fill="#92400e">プロセス3</text>
+          
+          <line x1="200" y1="65" x2="80" y2="70" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="200" y1="65" x2="200" y2="70" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="200" y1="65" x2="320" y2="70" stroke="#64748b" stroke-width="1.5"/>
+          
+          <text x="200" y="140" text-anchor="middle" font-size="11" fill="#64748b">リクエストが増える → プロセスが増える</text>
+          <text x="200" y="160" text-anchor="middle" font-size="11" fill="#64748b">→ メモリ消費が大きくなる</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">動作イメージ</th><td>リクエスト1つにつき1プロセス（または1スレッド）。同時アクセスが増えるとプロセス数が増える</th></tr>
+            <tr><td style="font-weight: bold;">特徴</th>那样柔軟な設定（.htaccessなど）、古くから使われ情報が豊富、動的ページ（PHPなど）との相性が良い</th></tr>
+            <tr><td style="font-weight: bold;">欠点</th>那样同時アクセスが多いとメモリ消費が増える</th></tr>
+            <tr><td style="font-weight: bold;">向いている用途</th>那样小～中規模サイト、WordPress/PHPサイト、.htaccessを使う必要がある環境</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Nginx: イベント駆動方式（非同期）</h3>
+      <p>Nginxは少数のワーカーで大量のリクエストを捌く方式。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Nginxの処理方式</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="150" y="10" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="12" fill="#1e3a5f">複数リクエスト</text>
+          
+          <line x1="200" y1="46" x2="200" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="130" y="70" width="140" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="200" y="93" text-anchor="middle" font-size="12" font-weight="bold" fill="#14532d">ワーカー（少数固定）</text>
+          
+          <line x1="200" y1="106" x2="200" y2="125" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="30" y="130" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="80" y="153" text-anchor="middle" font-size="11" fill="#92400e">リクエストA</text>
+          
+          <rect x="150" y="130" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="153" text-anchor="middle" font-size="11" fill="#92400e">リクエストB</text>
+          
+          <rect x="270" y="130" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="320" y="153" text-anchor="middle" font-size="11" fill="#92400e">リクエストC</text>
+          
+          <line x1="200" y1="125" x2="80" y2="130" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="200" y1="125" x2="200" y2="130" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="200" y1="125" x2="320" y2="130" stroke="#64748b" stroke-width="1.5"/>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">動作イメージ</th><td>ワーカー数は固定（例：4つ）。1ワーカーが多数のリクエストを同時に処理</th></tr>
+            <tr><td style="font-weight: bold;">特徴</th>那样静的ファイルが非常に高速、高負荷に強い、リバースプロキシとして優秀</th></tr>
+            <tr><td style="font-weight: bold;">欠点</th>那样.htaccessのような「ディレクトリ単位の設定」は不可</th></tr>
+            <tr><td style="font-weight: bold;">向いている用途</th>那样大規模サイト、APIサーバー、CDN/リバースプロキシ構成、静的ファイル配信が多いサイト</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>構造の違い→動作の違い</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>観点</th><th>Apache</th><th>Nginx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">内部構造</th><td>プロセス/スレッド方式</th><td>イベント駆動方式</th></tr>
+            <tr><td style="font-weight: bold;">同時アクセス</th><td>増えるとプロセスが増えメモリ消費大</th><td>少数ワーカーで大量処理</th></tr>
+            <tr><td style="font-weight: bold;">静的ファイル</th><td>速いがNginxほどではない</th><td>非常に高速</th></tr>
+            <tr><td style="font-weight: bold;">動的ページ</th><td>PHPなどと密接（mod_php）</th>那样外部アプリに渡す前提（php-fpm）</th></tr>
+            <tr><td style="font-weight: bold;">設定の柔軟性</th>那样.htaccessで細かく制御可能</th>那样設定は一括（柔軟性は低い）</th></tr>
+            <tr><td style="font-weight: bold;">用途</th>那样小～中規模 / PHPサイト</th>那样大規模 / 高負荷 / API</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ApacheとNginxの組み合わせ</h3>
+      <p>実務では、Nginx（フロント）＋ Apache（バックエンド）という構成もよく使われる。理由：Nginxが静的ファイルと大量アクセスを高速処理、ApacheがPHPなどの動的処理を担当。両者の強みを組み合わせる構成。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Nginx + Apache の組み合わせ構成</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="80" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="60" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">ブラウザ</text>
+          
+          <line x1="100" y1="30" x2="125" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="130" y="10" width="120" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="190" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#14532d">Nginx（フロント）</text>
+          <text x="190" y="45" text-anchor="middle" font-size="9" fill="#14532d">静的ファイル・大量アクセス</text>
+          
+          <line x1="250" y1="30" x2="275" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="280" y="10" width="100" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="330" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">Apache</text>
+          <text x="330" y="45" text-anchor="middle" font-size="9" fill="#92400e">動的処理（PHP）</text>
+          
+          <text x="190" y="100" text-anchor="middle" font-size="10" fill="#475569">両者の強みを組み合わせた構成</text>
+          <text x="190" y="120" text-anchor="middle" font-size="10" fill="#475569">Nginxが入口となり、静的は自分で返し、動的はApacheに渡す</text>
+        </svg>
+      </figure>
+
+      <h2>2. 設定ファイルの構造</h2>
+      <p>Apache / Nginxの設定ファイルは、「どのURLに対して、どのディレクトリを公開し、どの動作を行うか」を記述するためのファイルである。設定ファイルは「階層構造（ブロック）」と「ディレクティブ（設定項目）」で構成される。</p>
+
+      <h3>Apacheの設定ファイルの構造</h3>
+      <p>Apacheはディレクティブ（設定項目）を並べる形式。特徴：&lt;VirtualHost&gt;でドメインごとに設定、&lt;Directory&gt;でディレクトリ単位の設定、.htaccessによる上書きが可能、モジュールを読み込んで機能を追加。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Apache設定ファイルの例</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="180" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="40" y="30" font-size="10" fill="#1e3a5f"># 全体設定</text>
+          <text x="40" y="48" font-size="10" fill="#1e3a5f">ServerRoot "/etc/httpd"</text>
+          <text x="40" y="66" font-size="10" fill="#1e3a5f">LoadModule ...</text>
+          <text x="40" y="84" font-size="10" fill="#1e3a5f"># 仮想ホスト</text>
+          <text x="40" y="102" font-size="10" fill="#fef3c7" stroke="#d97706" fill="#92400e">&lt;VirtualHost *:80&gt;</text>
+          <text x="55" y="118" font-size="10" fill="#334155">  DocumentRoot "/var/www/html"</text>
+          <text x="55" y="134" font-size="10" fill="#334155">  ServerName example.com</text>
+          <text x="55" y="150" font-size="10" fill="#334155">  &lt;Directory "/var/www/html"&gt;</text>
+          <text x="70" y="166" font-size="10" fill="#334155">    AllowOverride All</text>
+          <text x="55" y="182" font-size="10" fill="#334155">  &lt;/Directory&gt;</text>
+          <text x="40" y="198" font-size="10" fill="#fef3c7" stroke="#d97706" fill="#92400e">&lt;/VirtualHost&gt;</text>
+        </svg>
+      </figure>
+
+      <h3>Nginxの設定ファイルの構造</h3>
+      <p>Nginxはブロック（server / location）で階層化する形式。特徴：serverブロックでドメインごとに設定、locationブロックでURLパスごとに設定、.htaccessのような上書きは不可（設定は一括管理）、階層構造が明確で読みやすい。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Nginx設定ファイルの例</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="180" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="40" y="30" font-size="10" fill="#1e3a5f"># 全体設定</text>
+          <text x="40" y="48" font-size="10" fill="#1e3a5f">worker_processes 4;</text>
+          <text x="40" y="66" font-size="10" fill="#1e3a5f">http {</text>
+          <text x="55" y="82" font-size="10" fill="#334155">  # 仮想ホスト</text>
+          <text x="55" y="98" font-size="10" fill="#fef3c7" stroke="#d97706" fill="#92400e">  server {</text>
+          <text x="70" y="114" font-size="10" fill="#334155">    listen 80;</text>
+          <text x="70" y="130" font-size="10" fill="#334155">    server_name example.com;</text>
+          <text x="70" y="146" font-size="10" fill="#334155">    root /var/www/html;</text>
+          <text x="70" y="162" font-size="10" fill="#334155">    location / {</text>
+          <text x="85" y="178" font-size="10" fill="#334155">      index index.html;</text>
+          <text x="70" y="194" font-size="10" fill="#334155">    }</text>
+          <text x="55" y="210" font-size="10" fill="#fef3c7" stroke="#d97706" fill="#92400e">  }</text>
+        </svg>
+      </figure>
+
+      <h3>ApacheとNginxの設定構造の違い</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>観点</th><th>Apache</th><th>Nginx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">構造</th><td>ディレクティブ中心</th><td>ブロック階層中心</th></tr>
+            <tr><td style="font-weight: bold;">仮想ホスト</th><td>&lt;VirtualHost&gt;</th><td>server</th></tr>
+            <tr><td style="font-weight: bold;">URL単位の設定</th><td>&lt;Directory&gt; / &lt;Location&gt;</th><td>location</th></tr>
+            <tr><td style="font-weight: bold;">上書き</th>那样.htaccessあり</th>那样なし（全て設定ファイルで管理）</th></tr>
+            <tr><td style="font-weight: bold;">読みやすさ</th>那样柔軟だが複雑になりやすい</th>那样階層が明確で読みやすい</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>設定ファイルで扱う主な項目</h3>
+      <ul>
+        <li>DocumentRoot（公開ディレクトリ）</li>
+        <li>仮想ホスト（複数サイトの公開）</li>
+        <li>エラーページ（404 / 500）</li>
+        <li>ログ（access.log / error.log）</li>
+        <li>性能設定（Keep-Alive / gzip / キャッシュ）</li>
+        <li>HTTPS（TLS）設定</li>
+        <li>アプリケーション連携（php-fpmなど）</li>
+      </ul>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>.htaccessはApacheだけの機能</strong>：.htaccessはApacheの機能であり、Nginxでは使用できない。Nginxではすべて設定ファイルで一括管理する。</li>
+        <li><strong>プロセス方式とイベント駆動方式の混同</strong>：Apacheはリクエストごとにプロセス/スレッドを増やす方式。Nginxは少数のワーカーで非同期処理する方式。</li>
+        <li><strong>「Nginxは動的処理ができない」という誤解</strong>：Nginxは動的処理を自分では実行しないが、php-fpmなどに処理を渡すことで動的ページを生成できる。</li>
+        <li><strong>設定ファイルの編集ミス</strong>：設定ファイルに誤りがあるとWebサーバーが起動しなくなる。設定変更後は構文チェックを行う習慣が重要。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. Apacheのリクエスト処理方式として正しいものはどれか。</summary>
+        <p>ア）イベント駆動方式　イ）プロセス/スレッド方式　ウ）シングルスレッド方式　エ）非同期I/O方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Apacheはプロセス/スレッド方式（MPM）で、リクエスト1つにつき1プロセス（またはスレッド）を割り当てる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. Nginxのリクエスト処理方式として正しいものはどれか。</summary>
+        <p>ア）プロセス方式　イ）スレッド方式　ウ）イベント駆動方式（非同期）　エ）バッチ方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Nginxはイベント駆動方式（非同期）で、少数のワーカーで大量のリクエストを処理する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. Apacheの特徴として適切でないものはどれか。</summary>
+        <p>ア）.htaccessによるディレクトリ単位の設定が可能　イ）同時アクセスが増えるとメモリ消費が大きくなる　ウ）動的ページ（PHP）との相性が良い　エ）大規模サイトでの大量アクセス処理に最も適している</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 大量アクセス処理にはNginxの方が適している。Apacheは小～中規模サイトに向く。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. Nginxの特徴として適切なものはどれか。</summary>
+        <p>ア）.htaccessで細かい設定ができる　イ）静的ファイルの配信が非常に高速　ウ）PHPをモジュールとして組み込める　エ）リクエストごとにプロセスを生成する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Nginxは静的ファイルの配信が非常に高速。イベント駆動方式による効率的な処理が可能。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. Apacheの設定ファイルで仮想ホストを定義するディレクティブはどれか。</summary>
+        <p>ア）serverブロック　イ）VirtualHost　ウ）location　エ）Directory</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Apacheでは&lt;VirtualHost&gt;ディレクティブで仮想ホストを定義する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. Nginxの設定ファイルで仮想ホストを定義するブロックはどれか。</summary>
+        <p>ア）VirtualHost　イ）Directory　ウ）serverブロック　エ）locationブロック</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Nginxではserverブロックで仮想ホストを定義する。locationブロックはURLパス単位の設定。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. Apacheだけが持つ機能で、ディレクトリ単位の設定を可能にするファイルはどれか。</summary>
+        <p>ア）nginx.conf　イ）httpd.conf　ウ）.htaccess　エ）php.ini</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — .htaccessはApacheの機能で、ディレクトリ単位の設定を可能にする。Nginxにはこの機能がない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 実務でよく使われる「Nginx（フロント）+ Apache（バックエンド）」構成の目的として正しいものはどれか。</summary>
+        <p>ア）セキュリティを完全にするため　イ）Nginxが静的ファイルと大量アクセスを処理し、Apacheが動的処理を担当するため　ウ）両方のライセンスを満たすため　エ）設定ファイルを共有するため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Nginxの高速な静的ファイル処理とApacheの柔軟な動的処理の両方の強みを活かす構成。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. NginxがPHPを処理する際に使用するものはどれか。</summary>
+        <p>ア）mod_php　イ）.htaccess　ウ）php-fpm　エ）PHPモジュール</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Nginxはphp-fpm（PHP-FastCGI Process Manager）と連携してPHPを処理する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. ApacheとNginxの設定構造の違いとして正しいものはどれか。</summary>
+        <p>ア）Apacheは階層構造が明確で読みやすい　イ）Nginxは.htaccessで設定を上書きできる　ウ）Apacheはディレクティブ中心、Nginxはブロック階層中心　エ）両方とも同じ設定構造を持つ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Apacheはディレクティブを並べる形式、Nginxはブロックを階層化する形式。構造が異なる。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第6章 Webサーバーソフトウェア（p161-p170）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

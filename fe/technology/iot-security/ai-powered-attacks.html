@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIを使った攻撃｜ディープフェイク・自動化・実例 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / セキュリティ</p>
+        <h1>AIを使った攻撃<br>〜ディープフェイク・自動化・実例〜</h1>
+        <p class="lead">攻撃者がAIを悪用することで、攻撃の質（精度）と量（自動化）が劇的に変化している。ディープフェイク、AI生成フィッシング、攻撃自動化の最新手法を学ぶ。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">セキュリティ</a>
+      <span>AIを使った攻撃</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>攻撃者がAIを利用する理由（大量生成・高精度偽装・自動化）</li>
+          <li>ディープフェイクの仕組みと危険性（香港企業・英国CEO事件）</li>
+          <li>AI生成フィッシングメールの特徴と従来型との違い</li>
+          <li>攻撃の自動化・最適化（パスワード推測・脆弱性探索・ボットネット制御）</li>
+          <li>AIによる攻撃の実例（BISS SCANNER・大規模スキャン・資格情報窃取）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ディープフェイクの仕組みとリスク、AI生成フィッシングの特徴</dd></div>
+          <div><dt>中</dt><dd>攻撃自動化の種類（パスワード推測・脆弱性探索・ボットネット）</dd></div>
+          <div><dt>低</dt><dd>各事件の詳細な被害金額や年号</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>ディープフェイク</td><td>AIを使って本人そっくりの音声・映像を生成・合成する技術</td></tr>
+            <tr><td>2</td><td>AI生成フィッシングメール</td><td>AIを使って自然な文章の詐欺メールを大量生成する攻撃</td></tr>
+            <tr><td>3</td><td>BEC（ビジネスメール詐欺）</td><td>AIに上司の文体を学習させ、本物そっくりのメールを生成する詐欺手法</td></tr>
+            <tr><td>4</td><td>プロンプトインジェクション</td><td>AIへ不正な指示を与え、本来と異なる動作をさせる攻撃</td></tr>
+            <tr><td>5</td><td>ボットネット</td><td>多数の感染デバイスを遠隔操作するネットワーク。AIで自動制御される</td></tr>
+            <tr><td>6</td><td>ゼロデイ攻撃</td><td>未知の脆弱性を突く攻撃。AIによる自動探索でリスク増大</td></tr>
+            <tr><td>7</td><td>資格情報</td><td>IDやパスワードなどの認証情報。AI攻撃で大量に窃取される</td></tr>
+            <tr><td>8</td><td>幻覚（Hallucination）</td><td>AIがもっともらしい誤情報を生成する現象</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. なぜAIが攻撃に使われるのか（背景）</h2>
+      <p>攻撃者がAIを悪用する側面も持つ。攻撃者がAIを使うことで、攻撃の質（精度）と量（自動化）が大きく変化している。</p>
+      <p>攻撃者がAIを利用する理由は明確である：</p>
+      <ul>
+        <li>大量生成ができる（メール・画像・音声など）</li>
+        <li>人間では気づけない精度で偽装できる</li>
+        <li>ターゲットに合わせて内容を最適化できる</li>
+        <li>攻撃の自動化・高速化が可能</li>
+      </ul>
+      <p>つまりAIは、攻撃者にとって「コストを下げ、成功率を上げる道具」になっている。</p>
+
+      <h2>2. AIが使われる主な攻撃手法</h2>
+
+      <h3>◆ ディープフェイク（AIを使った音声・映像の偽造）</h3>
+      <p><strong>手法の本質：</strong>AIを使って本人そっくりの音声・映像を「生成・合成」し、なりすます攻撃。「本物のように見える／聞こえる偽物」を作り、送金指示・詐欺・信用失墜に使う。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>ディープフェイク生成の流れ</figcaption>
+        <svg viewBox="0 0 400 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="20" y="10" width="80" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="60" y="35" text-anchor="middle" font-size="11" fill="#1e3a5f">素材収集</text>
+          <line x1="100" y1="30" x2="128" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="130" y="10" width="80" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="170" y="35" text-anchor="middle" font-size="11" fill="#1e3a5f">AI学習</text>
+          <line x1="210" y1="30" x2="238" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="240" y="10" width="80" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="280" y="35" text-anchor="middle" font-size="11" fill="#92400e">上書き合成</text>
+          <line x1="320" y1="30" x2="348" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="300" y="70" width="80" height="40" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="340" y="95" text-anchor="middle" font-size="11" fill="#7f1d1d">完成</text>
+          <!-- 矢印を曲げる -->
+          <path d="M 280,50 L 280,90 L 298,90" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="30" y="80" font-size="11" fill="#334155">1. SNS/YouTubeから顔・声データ収集</text>
+          <text x="30" y="100" font-size="11" fill="#334155">2. 顔の動き・声の特徴を学習</text>
+          <text x="30" y="120" font-size="11" fill="#334155">3. 別人の映像にターゲットの顔・声を合成</text>
+          <text x="30" y="140" font-size="11" fill="#334155">4. AIが口の動き・瞬きを補正し違和感を除去</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>主な用途</td><td>送金指示・なりすまし詐欺・信用失墜・偽情報拡散</td></tr>
+            <tr><td>危険性</td><td>人間が見ても聞いても本物と区別できない。「映像・音声だから信頼できる」という前提が崩壊</td></tr>
+            <tr><td>リモートワーク時代のリスク</td><td>対面確認が減ったことで攻撃成功率が高い</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>ディープフェイクの実例</h4>
+      <ul>
+        <li><strong>香港企業の「偽オンライン会議」事件（2023年）</strong>：攻撃者が複数社員の顔と声をAIで偽造。Zoom会議に偽物の同僚が参加し、財務担当者に送金指示。約2億円を送金。</li>
+        <li><strong>英国企業の「CEOなりすまし音声」事件（2019年）</strong>：AIでCEOの声を模倣し、経理担当者に電話。担当者は本物と思い込み、約3,300万円を送金。</li>
+      </ul>
+
+      <h3>◆ AI生成フィッシングメール（AIを使った文章の偽造）</h3>
+      <p><strong>手法の本質：</strong>AIを使って自然な文章の詐欺メールを大量生成する攻撃。従来の「怪しい日本語」が消え、見抜くのが難しくなる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>AI生成フィッシングメールの作成プロセス</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="20" y="10" width="85" height="45" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="62" y="28" text-anchor="middle" font-size="10" fill="#1e3a5f">ターゲット</text>
+          <text x="62" y="42" text-anchor="middle" font-size="10" fill="#1e3a5f">情報収集</text>
+          <line x1="105" y1="32" x2="128" y2="32" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="130" y="10" width="85" height="45" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="172" y="28" text-anchor="middle" font-size="10" fill="#1e3a5f">AIに指示</text>
+          <text x="172" y="42" text-anchor="middle" font-size="10" fill="#1e3a5f">（プロンプト）</text>
+          <line x1="215" y1="32" x2="238" y2="32" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="240" y="10" width="85" height="45" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="282" y="28" text-anchor="middle" font-size="10" fill="#92400e">自然な</text>
+          <text x="282" y="42" text-anchor="middle" font-size="10" fill="#92400e">メール生成</text>
+          <line x1="325" y1="32" x2="348" y2="32" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="300" y="70" width="85" height="45" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="342" y="88" text-anchor="middle" font-size="10" fill="#7f1d1d">添付ファイル</text>
+          <text x="342" y="102" text-anchor="middle" font-size="10" fill="#7f1d1d">/偽サイト</text>
+          <path d="M 282,55 L 282,92 L 298,92" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="30" y="100" font-size="11" fill="#334155">・会社HP・SNSから会社名・部署名・役職を収集</text>
+          <text x="30" y="120" font-size="11" fill="#334155">・「○○株式会社の人事部になりきって内定通知を書いて」と指示</text>
+          <text x="30" y="140" font-size="11" fill="#334155">・名前・部署・役職を差し込み「自分宛ての本物」に見せる</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>従来のフィッシングメール</th><th>AI生成フィッシングメール</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>文法ミス・不自然な日本語</td><td>自然な文法・敬語</td></tr>
+            <tr><td>一律の内容</td><td>ターゲットごとに最適化</td></tr>
+            <tr><td>見抜きやすい</td><td>本物と区別が困難</td></tr>
+            <tr><td>スパム判定で検知されやすい</td><td>従来のスパム判定が通用しにくい</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>AI生成フィッシングの実例</h4>
+      <ul>
+        <li><strong>ChatGPT悪用フィッシング（2023年・世界各国）</strong>：攻撃者がChatGPTを使って自然な日本語のフィッシングメールを大量生成していた。</li>
+        <li><strong>BEC（ビジネスメール詐欺）でAI文体模倣（2023〜2024年）</strong>：攻撃者がAIに「上司の文体」を学習させ、本物そっくりのメールを生成。複数企業で実際に送金被害が発生。</li>
+      </ul>
+
+      <h3>◆ 攻撃の自動化・最適化（AIによる攻撃作業の高速化）</h3>
+      <p><strong>手法の本質：</strong>AIを使って攻撃の準備・実行・調整を自動化する攻撃。人間が手作業でやっていたことをAIが24時間・大規模に実行する。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>AIによる攻撃自動化の3つの領域</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="110" height="70" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="75" y="35" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a5f">パスワード推測</text>
+          <text x="75" y="52" text-anchor="middle" font-size="10" fill="#334155">SNSから情報収集</text>
+          <text x="75" y="67" text-anchor="middle" font-size="10" fill="#334155">パスワード自動生成</text>
+          <rect x="145" y="10" width="110" height="70" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="35" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a5f">脆弱性探索</text>
+          <text x="200" y="52" text-anchor="middle" font-size="10" fill="#334155">Webサイト構造解析</text>
+          <text x="200" y="67" text-anchor="middle" font-size="10" fill="#334155">攻撃パターン自動生成</text>
+          <rect x="270" y="10" width="110" height="70" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="325" y="35" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a5f">ボットネット制御</text>
+          <text x="325" y="52" text-anchor="middle" font-size="10" fill="#334155">対象・タイミング分析</text>
+          <text x="325" y="67" text-anchor="middle" font-size="10" fill="#334155">数千〜数万台自動制御</text>
+          <text x="200" y="120" text-anchor="middle" font-size="11" fill="#64748b">→ 実行 → 結果を分析 → 次の攻撃を最適化（フィードバックループ）</text>
+        </svg>
+      </figure>
+
+      <h4>攻撃自動化の実例</h4>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>実例</th><th>内容</th><th>AIの役割</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>BISS SCANNER</strong><br>（2025〜2026年）</td>
+                <td>900社以上から30,000件以上の認証情報を窃取。7ヶ月間自動稼働。</td>
+                <td>コード解析・修正自動化、攻撃パイプライン全体のオーケストレーション</td></tr>
+            <tr><td><strong>大規模自動スキャン</strong><br>（2024〜2025年）</td>
+                <td>毎秒36,000回のスキャン。数十億件のスキャンを毎月観測。</td>
+                <td>スキャン対象自動選択、脆弱性のあるサービスを優先探索</td></tr>
+            <tr><td><strong>資格情報大量窃取</strong><br>（2025年）</td>
+                <td>30万件以上のChatGPTアカウント情報が流出。</td>
+                <td>脆弱な公開アプリを高速特定、攻撃優先順位を自動決定</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>実例詳細：BISS SCANNERによる900社侵害事件（2025〜2026年）</h4>
+      <p>2026年4月、DFIR REPORTの研究者が攻撃者のサーバが誤って公開状態になっているのを発見。そこには以下が残っていた：</p>
+      <ul>
+        <li>900社以上の企業から盗まれた30,000件以上の認証情報</li>
+        <li>攻撃の自動化に使われたAIツール（CLAUDE CODE / OPENCLAW）</li>
+        <li>7ヶ月間稼働していた攻撃ログ</li>
+        <li>自動スキャン→資格情報収集→仕分け→送信の完全自動パイプライン</li>
+      </ul>
+      <p><strong>何がAIだったのか：</strong>AIがコード解析・修正を自動化。AIが攻撃パイプライン全体をオーケストレーション。1人の攻撃者が「本来はチーム規模の攻撃」を実行できた。</p>
+      <p><strong>被害：</strong>900社以上が侵害。APIキー、クラウド認証情報、AIプラットフォームの鍵などが大量流出。</p>
+
+      <h4>実例詳細：大規模自動スキャン攻撃（2024〜2025年）</h4>
+      <p>AIと自動化を組み合わせた「大規模自動スキャン攻撃」が世界的に急増。</p>
+      <ul>
+        <li>毎秒36,000回のスキャン</li>
+        <li>数十億件のスキャンが毎月観測</li>
+        <li>攻撃者がAIを使って「脆弱なサービス」を高速に特定</li>
+      </ul>
+      <p><strong>結果：</strong>公開アプリケーションの脆弱性悪用が44%増加。中小企業を中心に多数の侵害が発生。</p>
+
+      <h4>実例詳細：AIによる資格情報大量窃取（2025年）</h4>
+      <p>IBMの2026年レポートで、AIを使った資格情報窃取攻撃が急増していると報告。</p>
+      <ul>
+        <li>30万件以上のChatGPTアカウント情報が流出</li>
+        <li>攻撃者がAIを使って脆弱な公開アプリを高速に特定</li>
+        <li>そこから資格情報を盗む攻撃が増加</li>
+      </ul>
+      <p><strong>まとめ：</strong>AIが攻撃のスピードと規模を劇的に増加させている。</p>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「ディープフェイク＝画像だけ」ではない</strong>：音声も生成可能。CEOの声を模倣した送金詐欺の実例がある。</li>
+        <li><strong>「AIフィッシングは日本語が不自然」という前提は崩れた</strong>：現代のAIは敬語やビジネス文体を自然に生成できる。</li>
+        <li><strong>「攻撃自動化は未来の話」ではない</strong>：BISS SCANNER事件のように2025〜2026年時点で実際に発生している。</li>
+        <li><strong>「1人の攻撃者が小規模」という前提は崩れた</strong>：AIを使うことで1人の攻撃者が従来はチーム規模だった攻撃を実行可能。</li>
+        <li><strong>プロンプトインジェクションとの違い</strong>：プロンプトインジェクションはAIへ不正な指示を与える攻撃。AI生成フィッシングはAIを使ってメールを生成する攻撃。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 攻撃者がAIを利用する理由として適切でないものはどれか。</summary>
+        <p>ア）大量のメール・画像・音声を生成できる　イ）人間では気づけない精度で偽装できる　ウ）攻撃の自動化・高速化が可能　エ）AIは必ず無料で利用できる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — AIの利用コストは攻撃の動機としては重要だが、「必ず無料」というのは誤り。他の選択肢はすべてPDFに記載されている理由である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. ディープフェイクの生成プロセスとして正しい順序はどれか。</summary>
+        <p>ア）AI学習 → 素材収集 → 上書き合成 → 調整　イ）素材収集 → AI学習 → 上書き合成 → 調整　ウ）上書き合成 → 素材収集 → AI学習 → 調整　エ）調整 → AI学習 → 素材収集 → 上書き合成</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 正しい順序は「素材収集（顔・声データ）→ AI学習（特徴を学習）→ 上書き合成（別人の映像に合成）→ 調整（違和感を除去）」である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 香港企業の「偽オンライン会議」事件（2023年）で使用された攻撃手法はどれか。</summary>
+        <p>ア）AI生成フィッシングメール　イ）ディープフェイク　ウ）パスワード総当たり攻撃　エ）モデル汚染</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 攻撃者が複数社員の顔と声をAIで偽造し、Zoom会議に参加させて送金指示を行ったディープフェイク攻撃である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. AI生成フィッシングメールの特徴として適切でないものはどれか。</summary>
+        <p>ア）文法や敬語が自然である　イ）ターゲットごとに内容を最適化できる　ウ）従来のスパム判定が通用しにくい　エ）必ず添付ファイルにウイルスが含まれている</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — AI生成フィッシングメールには必ずしもウイルス付きファイルが含まれるとは限らない。偽サイトへの誘導など様々な手法がある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. BEC（ビジネスメール詐欺）でAIがどのように悪用されたか。</summary>
+        <p>ア）AIが自動的に送金を実行した　イ）AIに上司の文体を学習させ本物そっくりのメールを生成した　ウ）AIがサーバに侵入した　エ）AIがパスワードを破棄した</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — BECでは攻撃者がAIに「上司の文体」を学習させ、本物そっくりのメールを生成して送金詐欺を行う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. AIによる攻撃自動化の例として適切でないものはどれか。</summary>
+        <p>ア）パスワード推測の自動化　イ）脆弱性探索の自動化　ウ）ボットネットの自動制御　エ）データバックアップの自動化</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — データバックアップの自動化は防御・運用のための自動化であり、攻撃自動化ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. BISS SCANNER事件（2025〜2026年）に関する説明として正しいものはどれか。</summary>
+        <p>ア）100社未満の企業が侵害された　イ）攻撃は人間の手作業だけで行われた　ウ）AIが攻撃パイプライン全体をオーケストレーションした　エ）被害総額は約100万円だった</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — BISS SCANNER事件ではAIがコード解析・修正を自動化し、攻撃パイプライン全体をオーケストレーションした。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 大規模自動スキャン攻撃（2024〜2025年）の特徴として正しいものはどれか。</summary>
+        <p>ア）毎秒36,000回のスキャンを実行した　イ）スキャン回数は毎月数回程度だった　ウ）脆弱性悪用は減少した　エ）AIはスキャンに全く使われなかった</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 大規模自動スキャン攻撃では毎秒36,000回のスキャンが実行され、数十億件のスキャンが毎月観測された。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. IBMの2026年レポートで報告されたAIによる資格情報窃取攻撃の特徴はどれか。</summary>
+        <p>ア）30万件以上のChatGPTアカウント情報が流出した　イ）資格情報の窃取は発生しなかった　ウ）攻撃は全て手動で行われた　エ）影響を受けたのは10社未満だった</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — IBMの2026年レポートでは30万件以上のChatGPTアカウント情報が流出し、AIを使った資格情報窃取攻撃が急増していると報告された。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. AIを悪用した攻撃の今後のリスクとして適切なものはどれか。</summary>
+        <p>ア）1人の攻撃者が大規模な攻撃を実行できるようになる　イ）攻撃の速度は従来よりも遅くなる　ウ）攻撃の自動化は技術的に不可能である　エ）ディープフェイクは簡単に見抜ける</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — AIにより1人の攻撃者が「本来はチーム規模の攻撃」を実行できるようになり、攻撃のスピードと規模が劇的に増加している。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_2_AIの_IoTセキュリティー.pdf』 1-1-3 AIを使った攻撃（p30-p39）</p>
+      <p>※本ページは基本情報技術者試験対策用に編集・再構成したものです。</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

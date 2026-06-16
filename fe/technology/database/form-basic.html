@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>フォーム送信と文字コード・リダイレクト・Cookie基礎 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>フォーム送信と文字コード・リダイレクト・Cookie基礎</h1>
+        <p class="lead">HTMLフォームの仕組み、フォーム送信の流れ、文字コードの重要性、リダイレクトの仕組み、Cookieの基礎を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>フォーム送信と文字コード・リダイレクト・Cookie基礎</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>HTMLフォームの基本構造（action, method, name属性）</li>
+          <li>フォーム送信の流れ（GETとPOSTの場合）</li>
+          <li>フォーム送信で使われるContent-Type</li>
+          <li>文字コードの基礎とUTF-8の重要性</li>
+          <li>リダイレクトの仕組み（302/Locationヘッダ）</li>
+          <li>リダイレクトが使われる代表的な場面</li>
+          <li>Cookieの仕組みと属性</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>フォーム送信の流れ、GETとPOSTの使い分け、リダイレクトの仕組み、Cookieの基礎</dd></div>
+          <div><dt>中</dt><dd>文字コード（UTF-8）、Cookieの属性</dd></div>
+          <div><dt>低</dt><dd>multipart/form-dataの詳細な構造</dd></div>
+        </dl>
+        <p>読了目安: 約20分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>フォーム</th><td>ユーザーが入力した内容をHTTPリクエストとして送信するHTML要素</th></tr>
+            <tr><th>2</th><th>action属性</th><td>フォームの送信先URLを指定する属性</th></tr>
+            <tr><th>3</th><th>method属性</th><td>フォームの送信方法（GET/POST）を指定する属性</th></tr>
+            <tr><th>4</th><th>name属性</th><td>フォーム入力項目のキー名を指定する属性</th></tr>
+            <tr><th>5</th><th>リダイレクト</th><td>Webサーバーが「別のURLに移動してください」と指示する仕組み</th></tr>
+            <tr><th>6</th><th>Locationヘッダ</th>了一样リダイレクト先のURLを指定するレスポンスヘッダ</th></tr>
+            <tr><th>7</th><th>文字コード</th><td>文字を数値（バイト列）で表すルール</th></tr>
+            <tr><th>8</th><th>UTF-8</th><td>現在のWeb標準の文字コード</th></td>
+            <tr><th>9</th><th>Cookie</th><td>Webサーバーがブラウザに保存させる小さなデータ</th></td>
+            <tr><th>10</th><th>Set-Cookieヘッダ</th>了一样WebサーバーがCookieを設定するレスポンスヘッダ</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. フォーム送信の流れ</h2>
+      <p>HTMLのフォームは、ユーザーが入力した内容をHTTPリクエストとしてWebサーバーに送信する仕組み。フォーム送信では、method（GET/POST）、action（送信先URL）、入力項目（name属性）が重要になる。</p>
+
+      <h3>フォームの基本構造</h3>
+      <figure class="wide-diagram">
+        <figcaption>HTMLフォームの例</figcaption>
+        <svg viewBox="0 0 400 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="130" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="40" y="35" font-size="11" fill="#1e3a5f">&lt;form action="/login" method="POST"&gt;</text>
+          <text x="40" y="55" font-size="11" fill="#334155">  &lt;input type="text" name="username"&gt;</text>
+          <text x="40" y="75" font-size="11" fill="#334155">  &lt;input type="password" name="password"&gt;</text>
+          <text x="40" y="95" font-size="11" fill="#334155">  &lt;button type="submit"&gt;ログイン&lt;/button&gt;</text>
+          <text x="40" y="120" font-size="11" fill="#1e3a5f">&lt;/form&gt;</text>
+          
+          <!-- 属性説明 -->
+          <rect x="220" y="55" width="140" height="65" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="290" y="75" text-anchor="middle" font-size="9" fill="#92400e">action="/login"</text>
+          <text x="290" y="92" text-anchor="middle" font-size="9" fill="#92400e">method="POST"</text>
+          <text x="290" y="109" text-anchor="middle" font-size="9" fill="#92400e">name属性でキーを指定</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>属性</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">action</td><td>送信先URL（どこに送るか）</td></tr>
+            <tr><td style="font-weight: bold;">method</td><td>送信方法（GETまたはPOST）</td></tr>
+            <tr><td style="font-weight: bold;">name</td><td>送信されるキー名（入力項目の識別子）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>フォーム送信の流れ（POSTの場合）</h3>
+      
+      <figure class="wide-diagram">
+        <figcaption>フォーム送信の流れ（POST）</figcaption>
+        <svg viewBox="0 0 400 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="120" y="10" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="30" text-anchor="middle" font-size="11" fill="#1e3a5f">① ユーザーがフォームに入力</text>
+          <line x1="200" y1="40" x2="200" y2="58" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="120" y="60" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="80" text-anchor="middle" font-size="11" fill="#1e3a5f">② 送信ボタンを押す</text>
+          <line x1="200" y1="90" x2="200" y2="108" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="90" y="110" width="220" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="130" text-anchor="middle" font-size="10" fill="#92400e">③ ブラウザがHTTPリクエストを送信</text>
+          <line x1="200" y1="140" x2="200" y2="158" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="90" y="160" width="220" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="180" text-anchor="middle" font-size="10" fill="#92400e">④ Webサーバーがリクエストを受信</text>
+          <line x1="200" y1="190" x2="200" y2="208" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="90" y="210" width="220" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="230" text-anchor="middle" font-size="10" fill="#14532d">⑤ アプリケーションが処理</text>
+          <line x1="200" y1="240" x2="200" y2="258" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="90" y="260" width="220" height="25" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1"/>
+          <text x="200" y="278" text-anchor="middle" font-size="10" fill="#1e1b4f">⑥ Webサーバーがレスポンスを返却</text>
+        </svg>
+      </figure>
+
+      <h4>POSTリクエストの実体</h4>
+      <figure class="wide-diagram">
+        <figcaption>POSTリクエストの例</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="30" y="28" font-size="10" fill="#1e3a5f">POST /login HTTP/1.1</text>
+          
+          <rect x="20" y="40" width="360" height="20" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="55" font-size="10" fill="#334155">Host: example.com</text>
+          
+          <rect x="20" y="65" width="360" height="20" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="80" font-size="10" fill="#334155">Content-Type: application/x-www-form-urlencoded</text>
+          
+          <rect x="20" y="90" width="360" height="20" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="105" font-size="10" fill="#334155">Content-Length: 27</text>
+          
+          <rect x="20" y="115" width="360" height="20" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="30" y="130" font-size="10" fill="#92400e">（空行）</text>
+          
+          <rect x="20" y="140" width="360" height="20" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+          <text x="30" y="155" font-size="10" fill="#14532d">username=hiro&amp;password=1234</text>
+        </svg>
+      </figure>
+
+      <h4>GETリクエストの実体（フォームがGETの場合）</h4>
+      <figure class="wide-diagram">
+        <figcaption>GETリクエストの例</figcaption>
+        <svg viewBox="0 0 400 120" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="30" y="28" font-size="10" fill="#1e3a5f">GET /search?keyword=apple&amp;page=2 HTTP/1.1</text>
+          
+          <rect x="20" y="40" width="360" height="20" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="55" font-size="10" fill="#334155">Host: example.com</text>
+          
+          <rect x="20" y="65" width="360" height="20" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="80" font-size="10" fill="#334155">User-Agent: Mozilla/5.0</text>
+          
+          <rect x="20" y="90" width="360" height="20" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="30" y="105" font-size="10" fill="#92400e">（空行）</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>Content-Type</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">application/x-www-form-urlencoded</td><td>最も一般的。キー=値&amp;キー=値の形式</td></tr>
+            <tr><td style="font-weight: bold;">multipart/form-data</td><td>ファイルアップロード時に使用</td></tr>
+            <tr><td style="font-weight: bold;">application/json</td><td>JavaScriptからのJSON送信（SPAなど）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>フォーム送信の注意点</h3>
+      <ul>
+        <li>GETはURLに残るため機密情報を送ってはいけない</li>
+        <li>POSTは再読み込みで「再送信」になる</li>
+        <li>name属性がない入力項目は送信されない</li>
+        <li>method省略するとGETになる（HTMLの仕様）</li>
+        <li>ファイルアップロードはmultipart/form-dataが必須</li>
+      </ul>
+
+      <h2>2. 文字コード</h2>
+      <p>文字コードとは、文字を数値（バイト列）で表すルールのこと。Webページでは、文字をどの番号で表すかをブラウザとサーバーが正しく共有する必要がある。文字コードが一致しないと、文字化けが発生する。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">UTF-8</td><td>現在の標準。世界中の文字を扱える</td></tr>
+            <tr><td style="font-weight: bold;">Shift_JIS</td><td>日本語の旧来の文字コード</td></tr>
+            <tr><td style="font-weight: bold;">EUC-JP</td><td>UNIX系で使われていた日本語コード</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Webシステムでは<strong>UTF-8</strong>が標準。ブラウザは次の順で文字コードを判断する：HTTPレスポンスヘッダのcharset → HTML内の&lt;meta charset="UTF-8"&gt; → ブラウザの自動判別。最も優先されるのはHTTPレスポンスヘッダ。</p>
+
+      <p>統一すべき場所：HTMLファイル、CSS/JS、サーバー側のソースコード、DB（文字コード設定）、HTTPレスポンスヘッダ、APIのレスポンス。どこか一つでも異なると、文字化けの原因になる。</p>
+
+      <h2>3. リダイレクト</h2>
+      <p>リダイレクトとは、Webサーバーが「別のURLに移動してください」とブラウザに指示する仕組み。ブラウザはリダイレクトを受け取ると、自動的に次のURLへアクセスし直す。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>リダイレクトの流れ</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="33" text-anchor="middle" font-size="11" fill="#1e3a5f">ブラウザ</text>
+          <line x1="120" y1="28" x2="145" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="132" y="23" text-anchor="middle" font-size="8" fill="#64748b">POST</text>
+          
+          <rect x="150" y="10" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="11" fill="#92400e">Webサーバー</text>
+          <line x1="250" y1="28" x2="275" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="262" y="23" text-anchor="middle" font-size="8" fill="#64748b">302</text>
+          
+          <rect x="280" y="10" width="100" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="330" y="33" text-anchor="middle" font-size="11" fill="#14532d">/mypage</text>
+          
+          <!-- 戻り -->
+          <path d="M 70 46 L 70 100 L 330 100 L 330 46" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="200" y="95" text-anchor="middle" font-size="9" fill="#16a34a">自動でGET /mypage にアクセス</text>
+          
+          <!-- レスポンス -->
+          <rect x="20" y="130" width="360" height="50" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="200" y="150" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e293b">リダイレクトレスポンス</text>
+          <text x="40" y="170" font-size="10" fill="#334155">HTTP/1.1 302 Found</text>
+          <text x="40" y="185" font-size="10" fill="#334155">Location: /mypage</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        </table>
+          <thead>
+            <tr><th>ステータスコード</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">301 Moved Permanently</td><td>恒久的な移動（URL変更時）</td></tr>
+            <tr><td style="font-weight: bold;">302 Found</td><td>一時的な移動（ログイン後など）</td></tr>
+            <tr><td style="font-weight: bold;">303 See Other</td><td>POST → GETのリダイレクトに使われる</td></tr>
+            <tr><td style="font-weight: bold;">307 Temporary Redirect</td><td>メソッドを変えずに移動</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>リダイレクトが使われる代表的な場面</h4>
+      <ul>
+        <li><strong>POSTの再送信を防ぐため</strong>：フォーム送信後にリダイレクトを挟むことで、再読み込み時の二重登録を防止（Post/Redirect/Getパターン）</li>
+        <li><strong>URLを正しいものに統一するため</strong>：http:// → https:// へのリダイレクト</li>
+        <li><strong>古いURLから新しいURLへ誘導するため</strong>：サイト構造変更時に必須</li>
+      </ul>
+
+      <h2>4. Cookieの基礎</h2>
+      <p>Cookie（クッキー）とは、Webサーバーがブラウザに保存させる小さなデータのこと。ブラウザはCookieを保存し、同じサイトにアクセスするときに自動で送り返す。これにより、Webサーバーは「同じユーザーからのアクセスである」と判断できる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Cookieの仕組み</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- サーバー -->
+          <rect x="20" y="10" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="33" text-anchor="middle" font-size="11" fill="#1e3a5f">Webサーバー</text>
+          <line x1="120" y1="28" x2="145" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <text x="132" y="23" text-anchor="middle" font-size="8" fill="#64748b">Set-Cookie</text>
+          
+          <!-- ブラウザ -->
+          <rect x="150" y="10" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="11" fill="#92400e">ブラウザ</text>
+          
+          <!-- Cookie保存 -->
+          <rect x="120" y="60" width="160" height="50" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="80" text-anchor="middle" font-size="10" fill="#14532d">Cookieを保存</text>
+          <text x="200" y="98" text-anchor="middle" font-size="9" fill="#14532d">user=hiro; path=/</text>
+          
+          <!-- 次回アクセス -->
+          <path d="M 200 110 L 200 130 L 70 130 L 70 46" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <text x="135" y="125" text-anchor="middle" font-size="8" fill="#2563eb">次回アクセス時、自動送信</text>
+          
+          <rect x="150" y="140" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="163" text-anchor="middle" font-size="11" fill="#92400e">ブラウザ</text>
+          <line x1="150" y1="158" x2="122" y2="158" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <text x="136" y="153" text-anchor="middle" font-size="8" fill="#2563eb">Cookie送信</text>
+        </svg>
+      </figure>
+
+      <h4>Cookieの属性</h4>
+      <div class="table-wrap mobile-card-table">
+        <tr>
+          <thead>
+            <tr><th>属性</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">Path</td><td>Cookieを送るパスの範囲</td></tr>
+            <tr><td style="font-weight: bold;">Max-Age / Expires</td><td>有効期限</td></tr>
+            <tr><td style="font-weight: bold;">Secure</td><td>HTTPSのときだけ送信</td></tr>
+            <tr><td style="font-weight: bold;">HttpOnly</td><td>JavaScriptから参照不可（XSS対策）</td></tr>
+            <tr><td style="font-weight: bold;">SameSite</td><td>他サイトへの送信制御（CSRF対策）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Cookieの制約</h4>
+      <ul>
+        <li>保存できるサイズは1 Cookieあたり約4KB</li>
+        <li>1ドメインあたり20～50個程度（ブラウザ依存）</li>
+        <li>機密情報をそのまま保存してはいけない</li>
+        <li>ユーザーが削除できる</li>
+      </ul>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>name属性の付け忘れ</strong>：name属性がない入力項目はフォーム送信時にサーバーに送信されない。</li>
+        <li><strong>GETとPOSTの誤った使い分け</strong>：ログインフォームにGETを使うとパスワードがURLに表示されてしまう。必ずPOSTを使う。</li>
+        <li><strong>文字コードの不一致</strong>：HTML、サーバー、DBで文字コードが異なると文字化けが発生。すべてUTF-8に統一する。</li>
+        <li><strong>リダイレクトループ</strong>：リダイレクト先がまたリダイレクトするような設定になると、ブラウザが無限にリダイレクトし続ける。</li>
+        <li><strong>Cookieへの機密情報保存</strong>：Cookieはブラウザに保存され、漏洩リスクがあるため、パスワードなどの機密情報は保存しない。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. HTMLフォームで、送信先URLを指定する属性はどれか。</summary>
+        <p>ア）method　イ）action　ウ）name　エ）type</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — action属性はフォームの送信先URLを指定する。method属性は送信方法（GET/POST）を指定する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. フォーム送信時に、入力項目のキー名を指定する属性はどれか。</summary>
+        <p>ア）action　イ）method　ウ）name　エ）value</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — name属性はフォーム入力項目のキー名を指定する。サーバーはこのキー名で値を受け取る。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. フォーム送信後、再読み込み時に二重登録を防ぐために使われるパターンはどれか。</summary>
+        <p>ア）GETリダイレクト　イ）Post/Redirect/Getパターン　ウ）Cookie保存　エ）キャッシュ制御</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Post/Redirect/Getパターンは、POST送信後にリダイレクトを挟むことで、再読み込み時の二重登録を防止する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 現在のWeb標準の文字コードはどれか。</summary>
+        <p>ア）Shift_JIS　イ）EUC-JP　ウ）UTF-8　エ）ASCII</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — UTF-8が現在のWeb標準の文字コード。世界中の文字を扱える。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. リダイレクト時にWebサーバーがブラウザに返すレスポンスヘッダはどれか。</summary>
+        <p>ア）Content-Type　イ）Set-Cookie　ウ）Location　エ）Host</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Locationヘッダにリダイレクト先のURLを指定する。ブラウザは自動的にそのURLにアクセスする。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. Cookieの属性で、HTTPSのときだけ送信するよう制御するものはどれか。</summary>
+        <p>ア）HttpOnly　イ）Secure　ウ）SameSite　エ）Path</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Secure属性を付与すると、CookieはHTTPS通信時のみ送信され、盗聴を防げる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. リダイレクトにおいて、恒久的な移動を示すステータスコードはどれか。</summary>
+        <p>ア）200 OK　イ）302 Found　ウ）301 Moved Permanently　エ）404 Not Found</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 301は恒久的なリダイレクト（URL変更時など）、302は一時的なリダイレクト（ログイン後など）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 文字コードが一致しない場合に発生する現象はどれか。</summary>
+        <p>ア）ページが表示されない　イ）文字化け　ウ）リダイレクト　エ）タイムアウト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 文字コードが一致しないと、文字化けが発生する。ブラウザとサーバーで同じ文字コードを使用する必要がある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. Cookieの制約として正しいものはどれか。</summary>
+        <p>ア）1 Cookieあたり無制限に保存できる　イ）パスワードなどの機密情報を保存するのに適している　ウ）保存サイズは約4KBが上限　エ）ユーザーは削除できない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 1 Cookieあたり約4KBが上限。また、パスワードなどの機密情報はCookieに保存すべきではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. ファイルアップロードを行うフォームで使用すべきContent-Typeはどれか。</summary>
+        <p>ア）application/x-www-form-urlencoded　イ）application/json　ウ）multipart/form-data　エ）text/plain</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ファイルアップロードにはmultipart/form-dataが必要。バイナリデータを正しく送信するため。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第5章 Webページ生成の仕組み（p129-p152）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

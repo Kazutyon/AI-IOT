@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIを守るセキュリティ｜4種類の攻撃と対策 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / セキュリティ</p>
+        <h1>AIを守るセキュリティ<br>〜4種類の攻撃と対策〜</h1>
+        <p class="lead">AIは「学習データ」「モデル」「推論結果」という新しい攻撃面を持つ。データ汚染、モデル汚染、敵対的サンプル、メンバーシップ推論攻撃の4つの手法を理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">セキュリティ</a>
+      <span>AIを守るセキュリティ</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>AIが攻撃される理由と4種類の攻撃手法の分類</li>
+          <li>データ汚染（バックドア攻撃）の仕組みと危険性（Microsoft Tay事件）</li>
+          <li>モデル汚染の仕組みと外部モデルの危険性（PyPI事件）</li>
+          <li>敵対的サンプル（回避攻撃）の仕組みと自動運転への影響</li>
+          <li>メンバーシップ推論攻撃による学習データの漏えいリスク</li>
+          <li>AIを守るために必要な考え方</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>敵対的サンプル（回避攻撃）、データ汚染（バックドア攻撃）の仕組み</dd></div>
+          <div><dt>中</dt><dd>モデル汚染、メンバーシップ推論攻撃、各攻撃が狙う工程</dd></div>
+          <div><dt>低</dt><dd>Microsoft Tay・PyPI・医療AI事件の詳細年号</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>データ汚染（バックドア攻撃）</td><td>学習データに細工したデータを混ぜ込み、特定のトリガーでAIを誤動作させる攻撃</td></tr>
+            <tr><td>2</td><td>モデル汚染</td><td>悪意あるコードや細工が仕込まれた事前学習モデルを配布・使用させる攻撃</td></tr>
+            <tr><td>3</td><td>敵対的サンプル（回避攻撃）</td><td>入力データに微小なノイズを加え、AIを誤認識させる攻撃</td></tr>
+            <tr><td>4</td><td>摂動</td><td>敵対的サンプルを作る際に加えられる微小なノイズ</td></tr>
+            <tr><td>5</td><td>メンバーシップ推論攻撃</td><td>AIの出力結果から学習データに含まれる情報を推測する攻撃</td></tr>
+            <tr><td>6</td><td>トリガー</td><td>バックドア攻撃で攻撃者だけが知る特定の入力パターン</td></tr>
+            <tr><td>7</td><td>事前学習モデル</td><td>外部からダウンロードして利用できる学習済みのAIモデル</td></tr>
+            <tr><td>8</td><td>回避攻撃</td><td>敵対的サンプルの別名。AIを誤認識させる攻撃手法</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. なぜAIが攻撃されるのか（背景）</h2>
+      <p>AIは「守る側」として活用される一方で、AI自体が攻撃される側にもなる。AIは従来のシステムにはなかった「学習データ」「モデル」「推論結果」という新しい攻撃面を持つため、攻撃者にとって格好の標的になる。</p>
+      <p>AIが従来のシステムと異なる特徴：</p>
+      <ul>
+        <li>外部データを大量に取り込む（＝データが汚されやすい）</li>
+        <li>モデルの内部構造が複雑で検証が難しい</li>
+        <li>推論結果から内部情報が漏れやすい</li>
+        <li>学習済みモデルを外部からダウンロードして使うことが多い</li>
+      </ul>
+      <p>このため、攻撃者は「AIの仕組みそのもの」を狙う攻撃を行う。</p>
+
+      <h2>2. AIが攻撃される主な手法（4つの分類）</h2>
+
+      <figure class="wide-diagram">
+        <figcaption>AIへの攻撃手法の分類</figcaption>
+        <svg viewBox="0 0 400 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- タイトル -->
+          <rect x="120" y="10" width="160" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e1b4b">AIへの攻撃手法</text>
+
+          <!-- 4つの手法 -->
+          <rect x="20" y="70" width="160" height="70" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="100" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">データ汚染</text>
+          <text x="100" y="112" text-anchor="middle" font-size="10" fill="#7f1d1d">（バックドア攻撃）</text>
+          <text x="100" y="128" text-anchor="middle" font-size="10" fill="#7f1d1d">学習データ工程</text>
+
+          <rect x="220" y="70" width="160" height="70" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="300" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">モデル汚染</text>
+          <text x="300" y="112" text-anchor="middle" font-size="10" fill="#7f1d1d">学習/作成工程</text>
+          <text x="300" y="128" text-anchor="middle" font-size="10" fill="#7f1d1d">＋配布工程</text>
+
+          <rect x="20" y="165" width="160" height="70" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="100" y="190" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">敵対的サンプル</text>
+          <text x="100" y="207" text-anchor="middle" font-size="10" fill="#7f1d1d">（回避攻撃）</text>
+          <text x="100" y="223" text-anchor="middle" font-size="10" fill="#7f1d1d">設置工程</text>
+
+          <rect x="220" y="165" width="160" height="70" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="300" y="190" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">データ・モデル搾取</text>
+          <text x="300" y="207" text-anchor="middle" font-size="10" fill="#7f1d1d">設置工程</text>
+          <text x="300" y="223" text-anchor="middle" font-size="10" fill="#7f1d1d">（推論攻撃）</text>
+        </svg>
+      </figure>
+
+      <h3>◆ データ汚染（バックドア攻撃）</h3>
+      <p><strong>狙う工程：</strong>学習データの収集/作成工程</p>
+      <p><strong>引き起こされる事象：</strong>入力データの誤分類</p>
+      <p><strong>仕組み：</strong>AIは大量のデータを使って学習するため、1つ1つのデータが正しいかどうかを人間が確認することは難しい。攻撃者はこの弱点を利用し、特定の印（トリガー）を付けたデータを大量に混ぜ込む。AIは誤って「この印があるときはこう判断する」と学習してしまう。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>データ汚染（バックドア攻撃）の仕組み</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="20" y="10" width="110" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="75" y="35" text-anchor="middle" font-size="11" fill="#1e3a5f">正規学習データ</text>
+          <line x1="130" y1="30" x2="158" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="160" y="10" width="110" height="40" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="215" y="35" text-anchor="middle" font-size="11" fill="#7f1d1d">汚染データ注入</text>
+          <line x1="270" y1="30" x2="298" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="300" y="10" width="80" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="340" y="35" text-anchor="middle" font-size="11" fill="#92400e">学習</text>
+          <text x="30" y="85" font-size="11" fill="#334155">例：特定の模様があると「無害」と判断するよう学習</text>
+          <text x="30" y="105" font-size="11" fill="#334155">　　特定の色があると「別人」と認識するよう学習</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>なぜ危険か</td><td>普段は正常に動くため発覚しにくく、攻撃者だけが知るトリガーでAIを操れる。自動運転・監視カメラなど社会インフラに深刻な影響。</td></tr>
+            <tr><td>事例</td><td>Microsoft Tay（2016年）— Twitter上で公開されたAIに攻撃者が悪意ある投稿を大量投下。AIが不適切発言を連発し公開停止。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>◆ モデル汚染</h3>
+      <p><strong>狙う工程：</strong>モデルの学習/作成工程 + 配布工程</p>
+      <p><strong>引き起こされる事象：</strong>入力データの誤分類、AIが稼働するシステムの破壊</p>
+      <p><strong>仕組み：</strong>攻撃者が細工したノードが注入された事前学習モデルを作成し、これを被害者に配布して使用させる。また、悪意のあるコードを実行するレイヤーを事前学習モデルに注入する攻撃手法も存在する。この場合、AIが稼働するシステム上で悪意のあるコードが実行され、システムの破壊や情報漏えいが引き起こされる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>モデル汚染の仕組み</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="20" y="10" width="110" height="50" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="75" y="32" text-anchor="middle" font-size="11" fill="#7f1d1d">攻撃者が</text>
+          <text x="75" y="48" text-anchor="middle" font-size="11" fill="#7f1d1d">細工したモデル</text>
+          <line x1="130" y1="35" x2="158" y2="35" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <rect x="160" y="10" width="110" height="50" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="215" y="32" text-anchor="middle" font-size="11" fill="#1e3a5f">公開・配布</text>
+          <text x="215" y="48" text-anchor="middle" font-size="11" fill="#1e3a5f">（PyPIなど）</text>
+          <line x1="270" y1="35" x2="298" y2="35" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <rect x="300" y="10" width="80" height="50" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="340" y="32" text-anchor="middle" font-size="11" fill="#92400e">開発者が</text>
+          <text x="340" y="48" text-anchor="middle" font-size="11" fill="#92400e">ダウンロード</text>
+          <text x="30" y="100" font-size="11" fill="#334155">背景：AIモデルは外部からダウンロードして利用することが多い。</text>
+          <text x="30" y="120" font-size="11" fill="#334155">危険性：「正常に見えるモデル」ほど危険。開発者が気づかないまま利用。</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>例</td><td>特定の入力だけ誤分類する／内部に悪意あるコードが仕込まれている／推論結果が攻撃者に送信される</td></tr>
+            <tr><td>事例</td><td>Pythonパッケージ（PyPI）で悪意あるAIモデルが配布（2023年）— AIモデルを装ったパッケージに情報窃取マルウェアが含まれていた</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>◆ 敵対的サンプル（回避攻撃）</h3>
+      <p><strong>狙う工程：</strong>モデルの設置工程</p>
+      <p><strong>引き起こされる事象：</strong>入力データの誤分類</p>
+      <p><strong>仕組み：</strong>入力データ（主に画像）に「摂動」と呼ばれる微小なノイズを加えることで、入力データの特徴量を変化させる。攻撃者は敵対的サンプルをAIに入力することで、これを攻撃者が意図したクラスに誤分類させることができる。敵対的サンプルに加えられる摂動は微小であるため、人間の目で異常を検知することは困難。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>敵対的サンプルの仕組み</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="20" y="10" width="100" height="50" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="32" text-anchor="middle" font-size="11" fill="#1e3a5f">元の画像</text>
+          <text x="70" y="48" text-anchor="middle" font-size="11" fill="#1e3a5f">（パンダ）</text>
+          <line x1="120" y1="35" x2="148" y2="35" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr4)"/>
+          <rect x="150" y="10" width="100" height="50" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="200" y="32" text-anchor="middle" font-size="11" fill="#7f1d1d">＋摂動</text>
+          <text x="200" y="48" text-anchor="middle" font-size="11" fill="#7f1d1d">（微小ノイズ）</text>
+          <line x1="250" y1="35" x2="278" y2="35" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr4)"/>
+          <rect x="280" y="10" width="100" height="50" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="330" y="32" text-anchor="middle" font-size="11" fill="#92400e">敵対的</text>
+          <text x="330" y="48" text-anchor="middle" font-size="11" fill="#92400e">サンプル</text>
+          <text x="30" y="100" font-size="11" fill="#334155">例：パンダの画像 → AIが「テナガザル」と誤認識</text>
+          <text x="30" y="120" font-size="11" fill="#334155">　　交通標識に小さなシール → AIが別の標識と誤認識</text>
+          <text x="30" y="140" font-size="11" fill="#334155">危険性：人間には普通に見える。AIだけが誤認識するため検知が難しい。</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>別名</td><td>回避攻撃</td></tr>
+            <tr><td>特徴</td><td>摂動は微小で人間の目では異常を検知できない</td></tr>
+            <tr><td>事例</td><td>自動運転車の標識誤認識事件（2017〜2020年）— STOP標識に小さなステッカーを貼るだけで速度制限標識と誤認。実車で再現され安全性が問題に。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>◆ データ・モデル搾取（メンバーシップ推論攻撃）</h3>
+      <p><strong>狙う工程：</strong>モデルの設置工程</p>
+      <p><strong>引き起こされる事象：</strong>データやモデルの窃取。敵対的サンプルなどの攻撃の足掛かりとして利用される。</p>
+      <p><strong>仕組み：</strong>標的AIに複数のデータを入力し、AIの分類結果や信頼スコア（分類の確度を示す確率値）を観察することで、AIの学習データを推論する。AIの学習データに機微情報が含まれていた場合、情報漏えいが引き起こされる。また、AIの内部情報（決定境界やパラメータなど）を推論することもできる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>メンバーシップ推論攻撃の仕組み</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="20" y="10" width="100" height="50" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="32" text-anchor="middle" font-size="11" fill="#1e3a5f">攻撃者が</text>
+          <text x="70" y="48" text-anchor="middle" font-size="11" fill="#1e3a5f">複数データ入力</text>
+          <line x1="120" y1="35" x2="148" y2="35" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr5)"/>
+          <rect x="150" y="10" width="100" height="50" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="32" text-anchor="middle" font-size="11" fill="#92400e">AIの</text>
+          <text x="200" y="48" text-anchor="middle" font-size="11" fill="#92400e">出力を観察</text>
+          <line x1="250" y1="35" x2="278" y2="35" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr5)"/>
+          <rect x="280" y="10" width="100" height="50" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="330" y="32" text-anchor="middle" font-size="11" fill="#7f1d1d">学習データ</text>
+          <text x="330" y="48" text-anchor="middle" font-size="11" fill="#7f1d1d">を推測</text>
+          <text x="30" y="100" font-size="11" fill="#334155">何が盗まれるか：学習に使われた個人情報、モデルの内部構造、機密データの特徴</text>
+          <text x="30" y="120" font-size="11" fill="#334155">事例：米国医療AIで学習データ漏えい（2021年）— AIの出力から患者データが推測可能と判明</text>
+        </svg>
+      </figure>
+
+      <h2>3. AIを守るために必要な考え方</h2>
+      <p>AIを守るには、従来のセキュリティとは異なる視点が必要になる。</p>
+      <ul>
+        <li>学習データの安全性を確保する</li>
+        <li>モデルの信頼性を検証する</li>
+        <li>推論結果から情報が漏れないようにする</li>
+        <li>外部モデルを利用する際は出所を確認する</li>
+        <li>AI開発工程そのものにセキュリティを組み込む</li>
+      </ul>
+      <p>AIは「新しい攻撃面を持つシステム」であり、従来のセキュリティ対策だけでは守りきれない。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>AIを守るための対策ポイント</figcaption>
+        <svg viewBox="0 0 400 140" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="85" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="62" y="32" text-anchor="middle" font-size="10" fill="#14532d">学習データの</text>
+          <text x="62" y="48" text-anchor="middle" font-size="10" fill="#14532d">安全性確保</text>
+          <rect x="115" y="10" width="85" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="157" y="32" text-anchor="middle" font-size="10" fill="#14532d">モデルの</text>
+          <text x="157" y="48" text-anchor="middle" font-size="10" fill="#14532d">信頼性検証</text>
+          <rect x="210" y="10" width="85" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="252" y="32" text-anchor="middle" font-size="10" fill="#14532d">推論結果の</text>
+          <text x="252" y="48" text-anchor="middle" font-size="10" fill="#14532d">情報漏えい防止</text>
+          <rect x="305" y="10" width="80" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="345" y="32" text-anchor="middle" font-size="10" fill="#14532d">開発工程への</text>
+          <text x="345" y="48" text-anchor="middle" font-size="10" fill="#14532d">セキュリティ組込み</text>
+          <text x="200" y="100" text-anchor="middle" font-size="11" fill="#64748b">→ 従来のセキュリティ対策だけでは守りきれない</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「データ汚染」と「モデル汚染」の混同</strong>：データ汚染は学習データに細工を混ぜる攻撃。モデル汚染はモデル自体に悪意ある処理を仕込む攻撃。狙う工程が異なる。</li>
+        <li><strong>「敵対的サンプル」はデジタルだけではない</strong>：自動運転の標識のように物理世界（貼り紙など）でも成立する。実車で再現された事例がある。</li>
+        <li><strong>「メンバーシップ推論攻撃」は学習データの有無を推測する</strong>：個人情報そのものを取り出すわけではないが、「そのデータが学習に使われたか」を推測できればプライバシー侵害になる。</li>
+        <li><strong>外部モデルは「便利」だが「危険」も伴う</strong>：PyPI事件のように、一見正常なモデルにマルウェアが仕込まれている可能性がある。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 学習データに細工を混ぜ込み、特定のトリガーでAIを誤動作させる攻撃はどれか。</summary>
+        <p>ア）モデル汚染　イ）敵対的サンプル　ウ）データ汚染（バックドア攻撃）　エ）メンバーシップ推論攻撃</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — データ汚染（バックドア攻撃）は学習データに細工したデータを混ぜ込み、特定のトリガーでAIを誤動作させる攻撃である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 敵対的サンプル（回避攻撃）の説明として最も適切なものはどれか。</summary>
+        <p>ア）学習データに悪意あるデータを混入する　イ）入力データに微小なノイズを加えAIを誤認識させる　ウ）モデルに悪意あるコードを仕込む　エ）AIの出力から学習データを推測する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 敵対的サンプルは入力データに「摂動」と呼ばれる微小なノイズを加え、人間には分からない形でAIを誤認識させる攻撃である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. Microsoft Tay（2016年）の事件はどの攻撃の典型例か。</summary>
+        <p>ア）モデル汚染　イ）敵対的サンプル　ウ）データ汚染　エ）メンバーシップ推論攻撃</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Microsoft Tayは攻撃者が悪意ある投稿（汚染データ）を大量に投げ込んだ結果、AIが不適切発言を連発したデータ汚染の典型例である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. モデル汚染の危険性として適切でないものはどれか。</summary>
+        <p>ア）外部からダウンロードしたモデルにマルウェアが仕込まれている可能性がある　イ）一見正常に動作するモデルほど危険性に気づきにくい　ウ）モデル汚染は学習データの工程のみを狙う　エ）PyPIで悪意あるAIモデルが配布された事例がある</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — モデル汚染は学習/作成工程に加え、配布工程も狙う。データ汚染が学習データ工程を狙うのとは異なる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 敵対的サンプルに加えられる微小なノイズを何と呼ぶか。</summary>
+        <p>ア）トリガー　イ）バックドア　ウ）摂動　エ）シグネチャ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 敵対的サンプルに加えられる微小なノイズを「摂動」と呼ぶ。摂動は人間の目では検知できないほど微小である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. メンバーシップ推論攻撃によって何が引き起こされる可能性があるか。</summary>
+        <p>ア）AIモデルの動作速度低下　イ）学習データに含まれる個人情報の推測　ウ）AIの起動失敗　エ）ネットワーク通信の遅延</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — メンバーシップ推論攻撃はAIの出力結果から学習データに含まれる情報を推測し、個人情報漏えいを引き起こす可能性がある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 自動運転車の標識誤認識事件（STOP標識を速度制限標識と誤認）はどの攻撃の実例か。</summary>
+        <p>ア）データ汚染　イ）モデル汚染　ウ）敵対的サンプル　エ）メンバーシップ推論攻撃</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 敵対的サンプルは物理世界でも成立する。交通標識に小さなステッカーを貼ることでAIが誤認識する事例が実車で再現された。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. AIを守るために必要な考え方として適切でないものはどれか。</summary>
+        <p>ア）学習データの安全性を確保する　イ）従来のセキュリティ対策だけで十分である　ウ）外部モデルを利用する際は出所を確認する　エ）AI開発工程にセキュリティを組み込む</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — AIは「新しい攻撃面を持つシステム」であり、従来のセキュリティ対策だけでは守りきれない。AI特有の対策が必要である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. PythonパッケージリポジトリPyPIで悪意あるAIモデルが配布された事件はどの攻撃に該当するか。</summary>
+        <p>ア）データ汚染　イ）モデル汚染　ウ）敵対的サンプル　エ）メンバーシップ推論攻撃</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — PyPI事件はAIモデルを装ったパッケージにマルウェアが仕込まれていた「モデル汚染」の実例である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 米国医療AIで発生した学習データ漏えいのリスクはどの攻撃によるものか。</summary>
+        <p>ア）データ汚染　イ）モデル汚染　ウ）敵対的サンプル　エ）メンバーシップ推論攻撃</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 医療画像AIの出力から「この患者のデータが学習に使われたか」が判定可能となった。これはメンバーシップ推論攻撃の実例である。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_2_AIの_IoTセキュリティー.pdf』 1-1-2 AIを守るセキュリティ（p16-p29）</p>
+      <p>※本ページは基本情報技術者試験対策用に編集・再構成したものです。</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

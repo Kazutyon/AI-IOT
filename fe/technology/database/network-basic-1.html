@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ネットワーク基礎①（WAN/LAN/NAT/DNS） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>ネットワーク基礎①</h1>
+        <p class="lead">Webサーバーを理解するために必要なネットワークの基礎概念として、WAN/LANの違い、グローバルIPとプライベートIP、NATの仕組み、DNSの役割を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>ネットワーク基礎①</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>Webサーバーにネットワーク知識が必要な理由</li>
+          <li>WANとLANの違いと役割</li>
+          <li>グローバルIPとプライベートIPの違い</li>
+          <li>NATの仕組みと役割</li>
+          <li>WebサーバーがプライベートIPでLAN内に置かれる理由</li>
+          <li>DNSの役割と名前解決の仕組み</li>
+          <li>DNSレコードの種類（Aレコード、CNAMEなど）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>グローバルIPとプライベートIPの違い、NATの仕組み、DNSの役割とAレコード</dd></div>
+          <div><dt>中</dt><dd>WANとLANの違い、DNSの階層構造</dd></div>
+          <div><dt>低</dt><dd>DNSの詳細な問い合わせ階層（ルートDNS、TLD DNSなど）</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><th>WAN（インターネット）</th><td>世界中のネットワークがつながった領域</th></tr>
+            <tr><td>2</th><th>LAN（内部ネットワーク）</th><td>企業内・データセンター内などの閉じたネットワーク</th></tr>
+            <tr><th>3</th><th>グローバルIP</th><td>WANで使われるIPアドレス。誰からでも届く公開の住所</th></tr>
+            <tr><th>4</th><th>プライベートIP</th><td>LAN内だけで使われるIPアドレス。外からは直接届かない</th></tr>
+            <tr><th>5</th><th>NAT</th><td>グローバルIPとプライベートIPを相互変換する仕組み</th></tr>
+            <tr><th>6</th><th>DNAT</th><td>宛先IPを書き換えるNATの一種</th></tr>
+            <tr><th>7</th><th>SNAT</th><td>送信元IPを書き換えるNATの一種</th></tr>
+            <tr><th>8</th><th>DNS</th><td>ドメイン名をIPアドレスに変換する仕組み</th></tr>
+            <tr><th>9</th><th>Aレコード</th><td>ドメイン名とIPv4アドレスの対応を定義するDNSレコード</th></tr>
+            <tr><th>10</th><th>CNAMEレコード</th><td>ドメインの別名（エイリアス）を定義するDNSレコード</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. なぜWebサーバーにネットワークの知識が必要なのか</h2>
+      <p>Webサーバーは、ネットワークを通じてクライアント（ブラウザ）と通信する仕組みで動いている。そのため、Webサーバーを理解するには次の知識が必須：WebサーバーがどのIPで待ち受けているのか、ブラウザがどうやってWebサーバーを見つけるのか、80番/443番ポートとは何か、HTTPSの通信路はどう確立されるのか、なぜアクセスできないことがあるのか、なぜレンタルサーバーは外部からSSHできないのか。</p>
+
+      <h3>2. Webサーバーはどこに存在し、どのIPで公開されるのか（WAN/LAN/NATの構造）</h3>
+      <p>Webサーバーは、インターネット（WAN）と内部ネットワーク（LAN）の境界にある機器を通して公開される。そのためWebサーバーは次の2種類のIPを使う：外側（WAN）→グローバルIP、内側（LAN）→プライベートIP。Webサーバー自身がグローバルIPを持つとは限らず、多くの場合はルータ・FW・ロードバランサーがグローバルIPを持ち、WebサーバーはプライベートIPで動作する。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>WAN / LAN / NAT の全体構造</figcaption>
+        <svg viewBox="0 0 400 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- WAN（外側） -->
+          <rect x="20" y="10" width="160" height="180" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="100" y="35" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e3a5f">WAN（インターネット）</text>
+          <!-- ユーザーブラウザ -->
+          <rect x="45" y="55" width="110" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="100" y="78" text-anchor="middle" font-size="12" fill="#14532d">ブラウザ</text>
+          <!-- グローバルIP -->
+          <text x="100" y="110" text-anchor="middle" font-size="10" fill="#475569">グローバルIP</text>
+          <text x="100" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#2563eb">203.0.113.10</text>
+          <!-- 境界機器 -->
+          <rect x="210" y="80" width="160" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="290" y="105" text-anchor="middle" font-size="12" fill="#92400e">ルータ / FW / LB</text>
+          <!-- LAN（内側） -->
+          <rect x="210" y="140" width="160" height="60" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="290" y="158" text-anchor="middle" font-size="12" font-weight="bold" fill="#14532d">LAN（内部ネットワーク）</text>
+          <!-- Webサーバー -->
+          <rect x="235" y="170" width="110" height="24" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="290" y="187" text-anchor="middle" font-size="11" fill="#1e3a5f">Webサーバー</text>
+          <text x="290" y="210" text-anchor="middle" font-size="10" fill="#475569">プライベートIP: 192.168.1.10</text>
+          <!-- 矢印（ブラウザ→境界） -->
+          <line x1="155" y1="73" x2="208" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <!-- 矢印（境界→Webサーバー） -->
+          <line x1="290" y1="120" x2="290" y2="168" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+        </svg>
+      </figure>
+
+      <h3>3. WANとLANとIPの役割</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>ネットワーク</th><th>特徴</th><th>使用されるIP</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>WAN（インターネット）</td><td>世界中のネットワークがつながった領域</td><td>グローバルIP</td></tr>
+            <tr><td>LAN（内部ネットワーク）</td><td>企業内・データセンター内などの閉じたネットワーク</td><td>プライベートIP</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Webサーバーの実態：Webサーバーが持っているのはプライベートIP。つまり、WebサーバーはLANの中にいるサーバーであり、インターネットから直接は届かない位置にいる。</p>
+
+      <h3>4. NAT（Network Address Translation）の仕組み</h3>
+      <p>Webサーバーをインターネットから利用できるようにするには、WANとLANの境界にある装置（ルータ/ファイアウォール/ロードバランサー）がNATを行う。外側から見えるのはグローバルIP、実際に処理しているのはWebサーバーのプライベートIP。この「外側のIP」と「内側のIP」の橋渡しをしているのがNAT。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>NATの処理イメージ</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 左：外側 -->
+          <rect x="20" y="20" width="140" height="160" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="90" y="45" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">外側（WAN）</text>
+          <rect x="40" y="65" width="100" height="50" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="90" y="85" text-anchor="middle" font-size="11" fill="#14532d">ブラウザからの</text>
+          <text x="90" y="100" text-anchor="middle" font-size="11" fill="#14532d">アクセス</text>
+          <text x="90" y="140" text-anchor="middle" font-size="11" fill="#475569">宛先:</text>
+          <text x="90" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#2563eb">203.0.113.10</text>
+          <!-- NAT変換 -->
+          <rect x="190" y="75" width="160" height="50" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="270" y="95" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">NAT</text>
+          <text x="270" y="112" text-anchor="middle" font-size="10" fill="#92400e">203.0.113.10 → 192.168.1.10</text>
+          <!-- 右：内側 -->
+          <rect x="240" y="20" width="140" height="160" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <text x="310" y="45" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">内側（LAN）</text>
+          <rect x="260" y="130" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="310" y="153" text-anchor="middle" font-size="11" fill="#1e3a5f">Webサーバー</text>
+          <text x="310" y="175" text-anchor="middle" font-size="10" fill="#475569">192.168.1.10</text>
+          <!-- 矢印 -->
+          <line x1="140" y1="100" x2="188" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <line x1="270" y1="100" x2="262" y2="128" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="220" y="160" text-anchor="middle" font-size="10" fill="#64748b">変換</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>工程</th><th>NATがしていること</th><th>IPの変化</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>① ユーザーがアクセス</td><td>グローバルIP宛の通信を受け取る</td><td>203.0.113.10:443</td></tr>
+            <tr><td>② DNAT（宛先変換）</td><td>宛先IPをWebサーバーのプライベートIPに書き換え</td><td>203.0.113.10:443 → 192.168.1.10:443</td></tr>
+            <tr><td>③ Webサーバー処理</td><td>NATは関与しない。Webサーバーがリクエストを処理</td><td>192.168.1.10 がレスポンス生成</td></tr>
+            <tr><td>④ SNAT（送信元変換）</td><td>Webサーバーの送信元IPをグローバルIPに書き換え</td><td>192.168.1.10 → 203.0.113.10</td></tr>
+            <tr><td>⑤ ユーザーへ返却</td><td>変換済みの通信をインターネットへ送る</td><td>203.0.113.10 として返る</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5. なぜWebサーバーはプライベートIPでLAN内に置くのか</h3>
+      <p>グローバルIPを直接サーバーに付与すると危険：世界中から直接攻撃される、ファイアウォールより内側にむき出しで置くことになる。LAN内に置き、プライベートIPで動かすことで守れる：外側からは直接届かない、境界装置（FW/LB）で「どの通信を通すか」を制御できる、内部構成（サーバー台数・IP）は外から見えない。グローバルIPは境界装置が持つ：外側の窓口は1つのグローバルIP、内側には複数のWebサーバーがいてもよい。</p>
+
+      <h3>6. DNS（ドメイン名をIPに変換する仕組み）</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>理由</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>① IPアドレスは人間が覚えられない</td><td>203.0.113.10 のような数字列は扱いづらい</td></tr>
+            <tr><td>② WebサーバーはIPを変更することがある</td><td>サーバー移転・クラウド再配置でIPが変わる。ドメイン名なら変更不要</td></tr>
+            <tr><td>③ Webサーバーは複数のIP/サーバーで構成されることがある</td><td>ロードバランサー配下など、1つのドメインに複数サーバーが紐づく</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>7. DNSレコードの種類</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>レコード種別</th><th>何を返すか</th><th>役割</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Aレコード</td><td>IPv4アドレス</td><td>WebサーバーのグローバルIPを返す</td></tr>
+            <tr><td>AAAAレコード</td><td>IPv6アドレス</td><td>IPv6で公開する場合に必要</td></tr>
+            <tr><td>CNAMEレコード</td><td>別名（別ドメイン）</td><td>wwwあり/なしを統一する</td></tr>
+            <tr><td>MXレコード</td><td>メールサーバーの情報</td><td>Webではなくメール用</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>DNS名前解決の流れ</figcaption>
+        <svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- ブラウザ -->
+          <rect x="140" y="10" width="120" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="12" fill="#1e3a5f">ブラウザ</text>
+          <!-- 問い合わせ -->
+          <line x1="200" y1="46" x2="200" y2="74" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <rect x="120" y="75" width="160" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="98" text-anchor="middle" font-size="11" fill="#92400e">ローカルDNSに問い合わせ</text>
+          <line x1="200" y1="111" x2="200" y2="139" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <rect x="120" y="140" width="160" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="163" text-anchor="middle" font-size="11" fill="#92400e">権威DNSからIPを取得</text>
+          <line x1="200" y1="176" x2="200" y2="204" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <rect x="110" y="205" width="180" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="228" text-anchor="middle" font-size="11" fill="#14532d">IPアドレスを取得して接続</text>
+          <!-- 戻り -->
+          <path d="M 310 157 L 340 157 L 340 20 L 260 20" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <text x="325" y="50" text-anchor="middle" font-size="10" fill="#16a34a">IP返却</text>
+          <!-- 権威DNS -->
+          <rect x="280" y="140" width="80" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="320" y="163" text-anchor="middle" font-size="10" fill="#1e3a5f">権威DNS</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>工程</th><th>DNSが何をするか</th><th>返す情報</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>① ブラウザがURLを入力</td><td>DNSはまだ動かない</td><td>—</td></tr>
+            <tr><td>② ローカルDNSへ問い合わせ</td><td>「example.comの情報を教えて」と問い合わせ</td><td>まだIPは不明</td></tr>
+            <tr><td>③ ルートDNS</td><td>.comを管理するDNSの場所を返す</td><td>.com DNSの場所</td></tr>
+            <tr><td>④ TLD DNS（.com）</td><td>example.comの権威DNSの場所を返す</td><td>権威DNSの場所</td></tr>
+            <tr><td>⑤ 権威DNS</td><td>Aレコードを参照してIPを返す</td><td>203.0.113.10</td></tr>
+            <tr><td>⑥ ブラウザがWebサーバーへ接続</td><td>DNSは関与しない</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>グローバルIPとプライベートIPの混同</strong>：グローバルIPはインターネット上で一意、プライベートIPはLAN内でのみ有効。Webサーバーは通常プライベートIPで動く。</li>
+        <li><strong>NATの役割の誤解</strong>：NATは単なる「変換」だけでなく、セキュリティ面でも内部ネットワークを隠蔽する効果がある。</li>
+        <li><strong>DNSとNATの混同</strong>：DNSは「名前→IP」の変換、NATは「IP→別のIP」の変換。役割が異なる。</li>
+        <li><strong>AレコードとCNAMEの混同</strong>：AレコードはIPアドレスを直接返す。CNAMEは別のドメイン名を返す（エイリアス）。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. インターネット（WAN）で使用されるIPアドレスはどれか。</summary>
+        <p>ア）プライベートIP　イ）ループバックアドレス　ウ）グローバルIP　エ）リンクローカルアドレス</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — グローバルIPはインターネット（WAN）で使用されるIPアドレスで、世界中で一意に割り当てられる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. LAN内だけで使用されるIPアドレスはどれか。</summary>
+        <p>ア）グローバルIP　イ）プライベートIP　ウ）マルチキャストIP　エ）エニーキャストIP</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — プライベートIPはLAN（内部ネットワーク）内だけで使用されるIPアドレスで、インターネットからは直接届かない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. NATの説明として正しいものはどれか。</summary>
+        <p>ア）ドメイン名をIPアドレスに変換する仕組み　イ）グローバルIPとプライベートIPを相互変換する仕組み　ウ）通信内容を暗号化する仕組み　エ）パケットを複製して複数の宛先に送信する仕組み</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — NAT（Network Address Translation）は、グローバルIPとプライベートIPを相互変換する仕組みである。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. DNSの役割として正しいものはどれか。</summary>
+        <p>ア）IPアドレスをドメイン名に変換する　イ）ドメイン名をIPアドレスに変換する　ウ）MACアドレスをIPアドレスに変換する　エ）ポート番号をサービス名に変換する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DNS（Domain Name System）は、人間が覚えやすいドメイン名をコンピュータが処理しやすいIPアドレスに変換する仕組みである。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. WebサーバーのグローバルIPを返すDNSレコードはどれか。</summary>
+        <p>ア）MXレコード　イ）CNAMEレコード　ウ）AAAAレコード　エ）Aレコード</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — Aレコードはドメイン名とIPv4アドレスの対応を定義するDNSレコードで、WebサーバーのグローバルIPを返す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. なぜWebサーバーはプライベートIPでLAN内に置かれるのか。その理由として適切でないものはどれか。</summary>
+        <p>ア）世界中から直接攻撃されるのを防ぐため　イ）境界装置で通信を制御できるようにするため　ウ）内部構成を外から見えなくするため　エ）パケットの転送速度を向上させるため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — プライベートIPでLAN内に置く主な理由はセキュリティ上の理由であり、転送速度の向上が目的ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. DNSの名前解決の流れで、権威DNSの前に問い合わせるDNSサーバーはどれか。</summary>
+        <p>ア）ルートDNS　イ）ローカルDNS　ウ）メールDNS　エ）キャッシュDNS</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ブラウザはまずローカルDNS（プロバイダのDNSサーバーなど）に問い合わせる。その後、ルートDNS、TLD DNS、権威DNSの順に問い合わせる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. NATの処理において、宛先IPを書き換える処理は何と呼ばれるか。</summary>
+        <p>ア）SNAT　イ）DNAT　ウ）PNAT　エ）RNAT</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DNAT（Destination NAT）は宛先IPを書き換えるNATの一種。SNATは送信元IPを書き換える。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 別のドメイン名へのエイリアス（別名）を定義するDNSレコードはどれか。</summary>
+        <p>ア）Aレコード　イ）MXレコード　ウ）CNAMEレコード　エ）TXTレコード</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — CNAMEレコードはドメインの別名（エイリアス）を定義するDNSレコードで、wwwあり/なしを統一する場合などに使われる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. Webサーバーがインターネットに公開されるまでの経路として正しい順序はどれか。</summary>
+        <p>ア）DNS → NAT → ファイアウォール → Webサーバー　イ）NAT → DNS → ファイアウォール → Webサーバー　ウ）ファイアウォール → DNS → NAT → Webサーバー　エ）Webサーバー → NAT → DNS → ファイアウォール</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 正しい順序は「DNS（名前解決）→ NAT（IP変換）→ ファイアウォール（通信許可）→ Webサーバー」である。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第3章 Webサーバーのためのネットワーク基礎（p27-p37）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

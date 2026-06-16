@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>REST API/JSONと役割分担 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>REST API/JSONと役割分担</h1>
+        <p class="lead">REST APIとJSONの基礎、Webサーバーとアプリケーションの役割分担、認証とエラーハンドリングの境界を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>REST API/JSONと役割分担</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>REST APIの基本概念と設計原則</li>
+          <li>JSONデータ形式の特徴</li>
+          <li>Webサーバーとアプリケーションの役割分担</li>
+          <li>認証情報の扱い（Cookie/Session/Token）の役割分担</li>
+          <li>エラーハンドリングの役割分担（Webサーバー vs アプリケーション）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>REST APIの基本原則、JSONの特徴、役割分担の境界</dd></div>
+          <div><dt>中</dt><dd>Cookie/Session/Tokenの違い、エラーハンドリングの分担</dd></div>
+          <div><dt>低</dt><dd>APIレスポンスの詳細な形式設計</dd></div>
+        </dl>
+        <p>読了目安: 約18分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <tr>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>REST API</th>的那样HTTPを使ってデータをやり取りするAPIの設計方式</th></tr>
+            <tr><th>2</th><th>JSON</th>的那样軽量で読みやすいデータ形式。APIの標準形式</th></tr>
+            <tr><th>3</th><th>リソース</th>那样APIで扱うデータの単位（ユーザー、商品など）</th></tr>
+            <tr><th>4</th><th>エンドポイント</th>那样APIのURL（/api/users, /api/itemsなど）</th></tr>
+            <tr><th>5</th><th>Cookie</th>的那样ブラウザが保存し自動送信するデータ</th></tr>
+            <tr><th>6</th><th>Session</th>的那样Webサーバー側に保存されるユーザー情報</th></tr>
+            <tr><th>7</th><th>Token（JWT）</th>的那样APIで使用される認証方式</th></tr>
+            <tr><th>8</th><th>400 Bad Request</th>的那样入力エラー（バリデーションエラー）</th></tr>
+            <tr><th>9</th><th>401 Unauthorized</th>的那样認証エラー（ログインが必要）</th></tr>
+            <tr><th>10</th><th>502 Bad Gateway</th>那样アプリが応答しない場合にWebサーバーが返すエラー</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. REST API / JSON</h2>
+      <p>現代のWebアプリケーションは、HTMLを直接生成するのではなく、API（データ）とフロントエンド（画面）を分離して構築する。その中心となる仕組みがREST APIとJSON。</p>
+
+      <h3>なぜREST API / JSONが必要なのか</h3>
+      <p>従来のWeb（LAMP時代）はPHPがHTMLを生成、サーバー側で画面を作る、ブラウザは表示するだけという構造だった。しかし現代はSPA（React/Vue）、モバイルアプリ、外部サービス連携、非同期通信（Ajax/fetch）など、画面とデータを分離する必要がある。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>従来型Web vs 現代型Web</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- 従来型 -->
+          <rect x="20" y="10" width="170" height="80" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="105" y="30" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">従来型Web</text>
+          <rect x="35" y="40" width="140" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="105" y="54" text-anchor="middle" font-size="9" fill="#334155">サーバーがHTMLを生成</text>
+          <rect x="35" y="65" width="140" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="105" y="79" text-anchor="middle" font-size="9" fill="#334155">ブラウザは表示するだけ</text>
+          
+          <!-- 現代型 -->
+          <rect x="210" y="10" width="170" height="80" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="295" y="30" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">現代型Web</text>
+          <rect x="225" y="40" width="140" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="295" y="54" text-anchor="middle" font-size="9" fill="#334155">APIがJSONを返す</text>
+          <rect x="225" y="65" width="140" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="295" y="79" text-anchor="middle" font-size="9" fill="#334155">フロントエンドが表示</text>
+          
+          <!-- 矢印 -->
+          <line x1="105" y1="90" x2="105" y2="115" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="295" y1="90" x2="295" y2="115" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <text x="105" y="135" text-anchor="middle" font-size="9" fill="#92400e">❌ 密結合</text>
+          <text x="295" y="135" text-anchor="middle" font-size="9" fill="#16a34a">✓ 疎結合</text>
+          
+          <text x="105" y="155" text-anchor="middle" font-size="9" fill="#64748b">画面とデータが一体化</text>
+          <text x="295" y="155" text-anchor="middle" font-size="9" fill="#64748b">画面とデータを分離</text>
+        </svg>
+      </figure>
+
+      <h3>REST APIとは</h3>
+      <p>REST APIは、HTTPを使ってデータをやり取りするAPIの設計方式。特徴：URLが「リソース」を表す、HTTPメソッド（GET/POST/PUT/DELETE）で操作を表す、レスポンスはJSONが基本。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>操作</th><th>HTTPメソッド</th><th>URL</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">商品一覧を取得</th><td>GET</th><td>/api/items</th></tr>
+            <tr><td style="font-weight: bold;">商品詳細を取得</th><td>GET</th><td>/api/items/10</th></tr>
+            <tr><td style="font-weight: bold;">商品を登録</th><td>POST</th><td>/api/items</th></tr>
+            <tr><td style="font-weight: bold;">商品を更新</th><td>PUT</th><td>/api/items/10</th></tr>
+            <tr><td style="font-weight: bold;">商品を削除</th><td>DELETE</th><td>/api/items/10</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>REST APIのリクエスト/レスポンスの流れ</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="100" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="30" text-anchor="middle" font-size="11" fill="#1e3a5f">フロント</text>
+          <text x="70" y="45" text-anchor="middle" font-size="9" fill="#1e3a5f">エンド</text>
+          
+          <line x1="120" y1="30" x2="145" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="132" y="25" text-anchor="middle" font-size="8" fill="#64748b">GET</text>
+          
+          <rect x="150" y="10" width="100" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="35" text-anchor="middle" font-size="11" fill="#92400e">Apache/Nginx</text>
+          
+          <line x1="250" y1="30" x2="275" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="262" y="25" text-anchor="middle" font-size="8" fill="#64748b">転送</text>
+          
+          <rect x="280" y="10" width="100" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="330" y="30" text-anchor="middle" font-size="11" fill="#14532d">アプリ</text>
+          <text x="330" y="45" text-anchor="middle" font-size="9" fill="#14532d">JSON生成</text>
+          
+          <path d="M 330 50 L 330 130 L 70 130 L 70 50" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="200" y="125" text-anchor="middle" font-size="9" fill="#16a34a">JSONレスポンス</text>
+        </svg>
+      </figure>
+
+      <h3>JSONとは</h3>
+      <p>JSON（JavaScript Object Notation）は、軽量で読みやすいデータ形式。特徴：人間が読める、JavaScriptと相性が良い、ほぼすべての言語で扱える、APIの標準形式。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>JSONデータの例</figcaption>
+        <svg viewBox="0 0 400 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="110" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="40" y="30" font-size="11" fill="#1e3a5f">{</text>
+          <text x="50" y="48" font-size="10" fill="#334155">  "id": 10,</text>
+          <text x="50" y="66" font-size="10" fill="#334155">  "name": "Tシャツ",</text>
+          <text x="50" y="84" font-size="10" fill="#334155">  "price": 1980,</text>
+          <text x="50" y="102" font-size="10" fill="#334155">  "stock": true</text>
+          <text x="40" y="118" font-size="11" fill="#1e3a5f">}</text>
+        </svg>
+      </figure>
+
+      <h3>JSONの成功/失敗の標準形</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        </table>
+          <thead>
+            <tr><th>ケース</th><th>レスポンス例</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">成功時</th>
+            <td>{
+  "status": "ok",
+  "data": {
+    "id": 10,
+    "name": "Tシャツ",
+    "price": 1980
+  }
+}</th>
+            <td>status: okで成功を明示、dataに実際のデータ</th>
+          </tr>
+          <tr><td style="font-weight: bold;">失敗時</th>
+            <td>{
+  "status": "error",
+  "message": "無効なパラメータです"
+}</th>
+            <td>status: errorで失敗を明示、messageにエラー内容</th>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2>2. 役割分担</h2>
+      <p>Webサーバーとアプリケーションは役割が明確に分かれている。この役割分担を理解しないと、Webサーバーに不要な処理をさせてしまう、アプリ側に負荷が集中する、セキュリティが弱くなる、設計が破綻するという問題が起きる。</p>
+
+      <h3>Webサーバーの役割</h3>
+      <ul>
+        <li><strong>リクエストの受付（入口）</strong>：ドメインを受け取る、HTTPS（SSL/TLS）を処理する、仮想ホストでサイトを振り分ける</li>
+        <li><strong>静的ファイルの配信</strong>：HTML、CSS、JavaScript、画像を高速に返す</li>
+        <li><strong>アプリへの転送</strong>：PHP → FastCGI（php-fpm）、Node.js/Python → リバースプロキシ</li>
+        <li><strong>アクセス制御・ログ・キャッシュ</strong>：access.log/error.log、IP制限、Basic認証、キャッシュ制御、リダイレクト</li>
+      </ul>
+
+      <h3>アプリケーションの役割</h3>
+      <ul>
+        <li><strong>ビジネスロジック</strong>：ログイン処理、商品検索、注文処理、バリデーション</li>
+        <li><strong>DBアクセス</strong>：SQL実行、データ取得、更新・削除（WebサーバーはDBに触れない）</li>
+        <li><strong>JSONの生成（REST API）</strong>：APIのレスポンス（JSON）はアプリが生成</li>
+        <li><strong>HTMLテンプレートの生成</strong>：Blade（PHP）、Jinja2（Python）、EJS（Node）</li>
+      </ul>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>領域</th><th>Webサーバー（Apache）</th><th>アプリ（PHP/Python/Node）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">入口</th><td>ドメイン/HTTPS</th><td>触れない</th></tr>
+            <tr><td style="font-weight: bold;">静的ファイル</th><td>高速に返す</th><td>返さない</th></tr>
+            <tr><td style="font-weight: bold;">動的処理</th><td>アプリへ転送</th><td>実行する</th></tr>
+            <tr><td style="font-weight: bold;">DB</th><td>触れない</th><td>アクセスする</th></tr>
+            <tr><td style="font-weight: bold;">ログ</th><td>access.log/error.log</th><td>アプリログ</th></tr>
+            <tr><td style="font-weight: bold;">認証</th><td>Basic認証</th><td>ログイン処理</th></tr>
+            <tr><td style="font-weight: bold;">API</th>那样入口として受ける</th>那样JSONを生成</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>認証の役割分担（Cookie / Session / Token）</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>領域</th><th>役割</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">ブラウザ</th><td>Cookieの保存</th><td>Session IDやTokenを保持</th></tr>
+            <tr><td style="font-weight: bold;">Webサーバー（Apache）</th><td>入口</th><td>Cookie/Tokenを「転送するだけ」</th></tr>
+            <tr><td style="font-weight: bold;">アプリケーション</th><td>認証処理の本体</th><td>Session管理/Token検証/ログイン処理</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>エラーハンドリングの役割分担</h3>
+      <p>Webサーバーとアプリケーションは、返すべきエラーの種類が明確に分かれている。</p>
+
+      <h4>Webサーバー（Apache）が返すエラー</h4>
+      <ul>
+        <li><strong>404 Not Found</strong>：静的ファイルが存在しない、ルーティングに到達する前にApacheが判断</li>
+        <li><strong>403 Forbidden</strong>：ディレクトリへのアクセス禁止、Basic認証の失敗、Apacheの設定による拒否</li>
+        <li><strong>413 Payload Too Large</strong>：Apacheの設定値を超えるファイルサイズ</li>
+        <li><strong>502 / 503</strong>：アプリが応答しない、FastCGI/リバースプロキシ先がダウンしている、php-fpmが停止している</li>
+      </ul>
+
+      <h4>アプリケーションが返すエラー（API側）</h4>
+      <ul>
+        <li><strong>400 Bad Request</strong>：パラメータ不足、バリデーションエラー、不正な形式のリクエスト</li>
+        <li><strong>401 Unauthorized</strong>：ログインが必要、Tokenが無効、Sessionが切れている</li>
+        <li><strong>404 Not Found</strong>：商品IDが存在しない、ユーザーが見つからない（※Apacheの404とは意味が異なる）</li>
+        <li><strong>500 Internal Server Error</strong>：例外発生、DBエラー、ロジックのバグ</li>
+      </ul>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>領域</th><th>返すエラー</th><th>意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">Webサーバー（Apache）</th><td>403 / 404 / 413 / 502 / 503</th><td>入口・静的ファイル・プロキシの問題</th></tr>
+            <tr><td style="font-weight: bold;">アプリケーション</th><td>400 / 401 / 404 / 500</th><td>入力・認証・データ・内部処理の問題</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>404の違い（重要）</h4>
+      <div class="table-wrap mobile-card-table">
+        <tr>
+          <thead>
+            <tr><th>発生元</th><th>意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">Apacheの404</th><td>ファイルが存在しない、ルーティングに到達していない、URLが間違っている</th></tr>
+            <tr><td style="font-weight: bold;">APIの404</th><td>データが存在しない、商品IDが見つからない、ユーザーが存在しない</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>Webサーバーとアプリの役割の混同</strong>：Webサーバーは「入口」、アプリは「処理」。DBアクセスはアプリの責務。</li>
+        <li><strong>Cookieに認証情報を直接保存する誤り</strong>：CookieにはSession IDだけを保存し、実際のユーザー情報はSession（サーバー側）に保存する。</li>
+        <li><strong>404エラーの原因特定ミス</strong>：Apacheの404（ファイル不在）とAPIの404（データ不在）は意味が異なる。ログで確認が必要。</li>
+        <li><strong>Basic認証とログイン処理の混同</strong>：Basic認証はWebサーバーが担当、フォームログインはアプリが担当。</li>
+        <li><strong>502エラーの原因</strong>：502 Bad Gatewayはアプリがダウンしている可能性。Webサーバーの問題ではない。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. REST APIの説明として正しいものはどれか。</summary>
+        <p>ア）HTMLを生成するためのテンプレートエンジン　イ）HTTPを使ってデータをやり取りするAPIの設計方式　ウ）データベースのクエリ言語　エ）Webサーバーの設定ファイル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — REST APIはHTTPを使ってデータをやり取りするAPIの設計方式。URLがリソースを表し、HTTPメソッドで操作を表す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. JSONの特徴として適切でないものはどれか。</summary>
+        <p>ア）軽量で読みやすい　イ）APIの標準形式　ウ）HTMLを記述するための言語　エ）ほとんどの言語で扱える</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — JSONはデータ形式であり、HTMLを記述するための言語ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. REST APIで商品削除を行う際に使用するHTTPメソッドはどれか。</summary>
+        <p>ア）GET　イ）POST　ウ）PUT　エ）DELETE</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — REST APIではDELETEメソッドでリソースの削除を表す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. Webサーバーの役割として適切でないものはどれか。</summary>
+        <p>ア）静的ファイルの配信　イ）ビジネスロジックの実行　ウ）HTTPSの処理　エ）アクセスログの記録</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ビジネスロジックの実行はアプリケーションの役割。Webサーバーは入口と配信を担当する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. アプリケーションの役割として適切なものはどれか。</summary>
+        <p>ア）静的ファイルの配信　イ）データベースアクセス　ウ）仮想ホストの設定　エ）アクセスログの記録</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DBアクセスはアプリケーションの役割。WebサーバーはDBに触れない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 認証情報の役割分担として正しいものはどれか。</summary>
+        <p>ア）Cookieの管理はアプリの役割　イ）Sessionの管理はWebサーバーの役割　ウ）認証処理の本体はアプリの役割　エ）Tokenの検証はWebサーバーの役割</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 認証処理の本体（ログイン処理、Session管理、Token検証）はすべてアプリケーションの役割。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. アプリケーションが応答しない場合にWebサーバーが返すエラーはどれか。</summary>
+        <p>ア）400 Bad Request　イ）401 Unauthorized　ウ）404 Not Found　エ）502 Bad Gateway</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 502 Bad Gatewayはアプリがダウンしている、FastCGI/リバースプロキシ先が応答しない場合にWebサーバーが返す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. APIの404エラーが示す意味として正しいものはどれか。</summary>
+        <p>ア）リクエストされたファイルがサーバーに存在しない　イ）リクエストされたデータが存在しない　ウ）認証エラー　エ）サーバー内部エラー</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — APIの404は「商品IDが見つからない」「ユーザーが存在しない」など、データが存在しないことを示す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. バリデーションエラー（パラメータ不足）の場合にAPIが返すべきステータスコードはどれか。</summary>
+        <p>ア）200 OK　イ）400 Bad Request　ウ）404 Not Found　エ）500 Internal Server Error</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — バリデーションエラーやパラメータ不足はクライアント側の問題であり、400 Bad Requestを返す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. Webサーバーとアプリケーションの役割分担の目的として適切でないものはどれか。</summary>
+        <p>ア）性能向上（静的ファイルはWebサーバーが高速に返す）　イ）セキュリティ強化（アプリを直接公開しない）　ウ）処理の二重化による冗長性向上　エ）保守性向上（ログやアクセス制御を集約）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 役割分担の目的は処理の二重化（冗長性）ではない。性能、セキュリティ、保守性の向上が目的。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第7章 Webアプリケーションとの連携（p217-p239）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

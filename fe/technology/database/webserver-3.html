@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>仮想ホスト・DocumentRoot・エラーページ・ログ | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>仮想ホスト・DocumentRoot・エラーページ・ログ</h1>
+        <p class="lead">仮想ホストの仕組み、DocumentRootとpublic_htmlの違い、カスタムエラーページの設定、access.logとerror.logの詳細を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>仮想ホスト・DocumentRoot・エラーページ・ログ</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>仮想ホスト（Virtual Host / Server Block）の仕組み</li>
+          <li>仮想ホストが必要な理由と構造</li>
+          <li>DocumentRootとpublic_htmlの違い</li>
+          <li>カスタムエラーページ（404/500）の設定方法</li>
+          <li>access.log（アクセスログ）の詳細</li>
+          <li>error.log（エラーログ）の詳細</li>
+          <li>ログの読み方（ステータスコード・レスポンス時間・User-Agent）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>仮想ホストの仕組み、DocumentRootの概念、access.logとerror.logの違い</dd></div>
+          <div><dt>中</dt><dd>カスタムエラーページ、public_html、ログの読み方</dd></div>
+          <div><dt>低</dt><dd>ApacheとNginxの具体的な設定構文の詳細</dd></div>
+        </dl>
+        <p>読了目安: 約18分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>仮想ホスト</th>的那样1台のサーバーで複数のWebサイトを公開する仕組み</th></tr>
+            <tr><th>2</th><th>Hostヘッダ</th>的那样ブラウザがリクエスト先のドメイン名を伝えるヘッダ</th></tr>
+            <tr><th>3</th><th>DocumentRoot</th>的那样Webサーバーが公開するファイルを探す起点ディレクトリ</th></tr>
+            <tr><th>4</th><th>public_html</th>的那样レンタルサーバーでユーザーごとに与えられる公開ディレクトリ</th></tr>
+            <tr><th>5</th><th>ErrorDocument</th>的那样Apacheでカスタムエラーページを設定するディレクティブ</th></tr>
+            <tr><th>6</th><th>error_page</th>的那样Nginxでカスタムエラーページを設定するディレクティブ</th></tr>
+            <tr><th>7</th><th>access.log</th>的那样すべてのリクエストを記録するアクセスログ</th></tr>
+            <tr><th>8</th><th>error.log</th>的那样エラーを記録するエラーログ</th></tr>
+            <tr><th>9</th><th>リファラ</th>的那样どのページから遷移してきたかを示す情報</th></tr>
+            <tr><th>10</th><th>User-Agent</th>的那样ブラウザやOSの情報を示すヘッダ</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. 仮想ホスト</h2>
+      <p>仮想ホスト（Virtual Host / Server Block）とは、1台のサーバーで複数のWebサイトを公開するための仕組み。例：example.com、shop.example.com、test.example.comを1つのApache/Nginxで同時に公開できる。</p>
+
+      <h3>なぜ仮想ホストが必要なのか</h3>
+      <p>Webサーバーは通常、1つのIPアドレスで動作する。しかし実際の運用では：1台のサーバーで複数のサイトを公開したい、サイトごとに公開ディレクトリを分けたい、サイトごとにログを分けたい、サイトごとにSSL証明書を設定したい、サイトごとに設定（エラーページ・リダイレクト）を変えたい。これを実現する仕組みが仮想ホスト。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>仮想ホストの概念</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- サーバー -->
+          <rect x="130" y="10" width="140" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">1台のWebサーバー</text>
+          <text x="200" y="55" text-anchor="middle" font-size="10" fill="#475569">IP: 203.0.113.10</text>
+          
+          <line x1="200" y1="60" x2="200" y2="80" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <!-- 仮想ホスト -->
+          <rect x="20" y="85" width="110" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="75" y="108" text-anchor="middle" font-size="11" fill="#14532d">example.com</text>
+          
+          <rect x="145" y="85" width="110" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="108" text-anchor="middle" font-size="11" fill="#14532d">shop.example.com</text>
+          
+          <rect x="270" y="85" width="110" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="325" y="108" text-anchor="middle" font-size="11" fill="#14532d">test.example.com</text>
+          
+          <line x1="200" y1="80" x2="75" y2="85" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="200" y1="80" x2="200" y2="85" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="200" y1="80" x2="325" y2="85" stroke="#64748b" stroke-width="1.5"/>
+          
+          <text x="200" y="160" text-anchor="middle" font-size="10" fill="#64748b">Hostヘッダの値によって振り分け</text>
+        </svg>
+      </figure>
+
+      <h3>仮想ホストの構造（3階層）</h3>
+      <ol>
+        <li><strong>サーバー全体の設定</strong>（共通設定）：ポート番号（80/443）、モジュール読み込み、ログ形式、性能設定（gzip/Keep-Alive）</li>
+        <li><strong>仮想ホスト</strong>（ドメイン単位の設定）：ServerName/server_name（どのドメインか）、DocumentRoot/root（公開ディレクトリ）、サイトごとのログ、サイトごとのエラーページ、HTTPS設定（証明書）</li>
+        <li><strong>ロケーション</strong>（URLパス単位の設定）：/img/は静的ファイル、/api/はアプリケーションへ渡す、/admin/はアクセス制限</li>
+      </ol>
+
+      <h3>仮想ホストの仕組み</h3>
+      <p>ブラウザはリクエスト時にHostヘッダを送る。例：GET / HTTP/1.1 Host: example.com。WebサーバーはHostヘッダを確認し、example.comに一致する仮想ホストを探し、その仮想ホストのDocumentRootを使ってレスポンスを返す。これにより、同じIPアドレスでも複数サイトを公開できる。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <tr>
+          <thead>
+            <tr><th>項目</th><th>Apache（VirtualHost）</th><th>Nginx（serverブロック）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">仮想ホスト定義</th>那样&lt;VirtualHost *:80&gt;</th><td>server { listen 80; }</th></tr>
+            <tr><td style="font-weight: bold;">ドメイン指定</th><td>ServerName example.com</th><td>server_name example.com;</th></tr>
+            <tr><td style="font-weight: bold;">公開ディレクトリ</th><td>DocumentRoot /var/www/example</th><td>root /var/www/example;</th></tr>
+            <tr><td style="font-weight: bold;">設定の上書き</th>那样.htaccess可能</th>那样不可（一括管理）</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. ファイル配置（DocumentRoot / public_html）</h2>
+      <p>Webサーバー（Apache/Nginx）は、「どのディレクトリをWeb公開するか」を設定する必要がある。その公開ディレクトリをDocumentRoot（ドキュメントルート）と呼ぶ。</p>
+
+      <h3>DocumentRootの役割</h3>
+      <p>DocumentRootは、URLの「/」に対応するフォルダ。URL → ファイルパスの変換の起点になる。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>URL</th><th>実際のファイルパス（DocumentRoot=/var/www/example）</th></tr>
+          </thead>
+          <tbody>
+            <td><td style="font-weight: bold;">/</th><td>/var/www/example/index.html</th></tr>
+            <tr><td style="font-weight: bold;">/img/a.png</th><td>/var/www/example/img/a.png</th></tr>
+            <tr><td style="font-weight: bold;">/css/style.css</th><td>/var/www/example/css/style.css</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>public_htmlとは</h3>
+      <p>サーバーによっては、ユーザーごとにWeb公開ディレクトリを持つ仕組みがある。例：/home/hiro/public_html。URLは：http://example.com/~hiro/。共有サーバーでユーザーごとに公開領域を分ける。ApacheのUserDir機能で実現される。Nginxでは一般的ではない。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>DocumentRoot</th><th>public_html</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">単位</th><td>サイト単位</th><td>ユーザー単位</th></tr>
+            <tr><td style="font-weight: bold;">設定場所</th><td>仮想ホスト</th><td>UserDir（Apache）</th></tr>
+            <tr><td style="font-weight: bold;">URL</th><td>/ から始まる</th><td>/~ユーザー名/</th></tr>
+            <tr><td style="font-weight: bold;">用途</th><td>通常のWebサイト公開</th><td>共有サーバーでの個人公開</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ファイル配置の基本ルール</h3>
+      <p>WebサーバーはDocumentRoot以下のファイルだけを公開する。DocumentRootの外のファイルは公開されない。セキュリティ上、公開領域と非公開領域を分ける。アプリケーションのソースコードはDocumentRootの外に置くのが基本。</p>
+
+      <h2>3. カスタムエラーページ（404 / 500）</h2>
+      <p>Webサーバーは、リクエストされたファイルが存在しない場合（404）やアプリケーションがエラーを返した場合（500）に、エラーページを返す。このエラーページは、Webサーバー側で自由に差し替えることができる。これをカスタムエラーページと呼ぶ。</p>
+
+      <h3>なぜカスタムエラーページが必要なのか</h3>
+      <p>デフォルトのエラーページは、デザインが統一されていない、サイトの世界観と合わない、ユーザーが次に何をすべきかわからない、セキュリティ上内部情報が表示される場合がある。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>カスタムエラーページの構造</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="120" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="80" y="35" text-anchor="middle" font-size="11" fill="#1e3a5f">DocumentRoot</text>
+          <text x="80" y="55" text-anchor="middle" font-size="9" fill="#475569">/var/www/example/</text>
+          
+          <line x1="140" y1="30" x2="160" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="165" y="10" width="100" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="215" y="30" text-anchor="middle" font-size="11" fill="#92400e">エラー発生</text>
+          <text x="215" y="45" text-anchor="middle" font-size="9" fill="#92400e">404 / 500</text>
+          
+          <line x1="265" y1="30" x2="285" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="290" y="10" width="90" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="335" y="30" text-anchor="middle" font-size="11" fill="#14532d">404.html</text>
+          <text x="335" y="45" text-anchor="middle" font-size="11" fill="#14532d">500.html</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>エラーページのポイント</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">404ページ</th><td>「ページが見つかりません」、トップページへのリンク、検索フォーム、サイトマップへの導線</th></tr>
+            <tr><td style="font-weight: bold;">500ページ</th><td>「サーバーエラーが発生しました」、時間を置いて再度アクセスする案内、問い合わせ先の提示（必要に応じて）</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>4. ログ（access.log / error.log）</h2>
+      <p>Webサーバー（Apache/Nginx）は、すべてのアクセスとエラーをログとして記録する。ログは、障害調査、性能分析、不正アクセス検知、運用改善に不可欠な情報源である。</p>
+
+      <h3>なぜログが必要なのか</h3>
+      <p>Webサイトを運用する側は、サーバー内部で何が起きているかをブラウザから直接知ることができない。そのため、サーバー側では次の情報をログとして記録しておく必要がある：どのURLにアクセスされたか、どのIPからアクセスされたか、どのステータスコードが返されたか、どのページでエラーが発生したか、処理に何秒かかったか、どのブラウザ/端末からのアクセスか。</p>
+
+      <h3>access.log（アクセスログ）</h3>
+      <p>access.logは、すべてのリクエストを記録するログ。記録される主な情報：アクセス元IPアドレス、アクセスされたURL、ステータスコード（200/404/500など）、レスポンスサイズ、レスポンス時間、User-Agent（ブラウザ情報）、リファラ（どこから来たか）。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>access.logの例</figcaption>
+        <svg viewBox="0 0 400 120" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="100" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="30" font-size="9" fill="#334155">192.168.1.10 - - [10/Jun/2026:12:30:15 +0900]</text>
+          <text x="30" y="48" font-size="9" fill="#334155">"GET /index.html HTTP/1.1" 200 532</text>
+          <text x="30" y="66" font-size="9" fill="#334155">"-" "Mozilla/5.0"</text>
+          
+          <text x="30" y="90" font-size="9" fill="#64748b">アクセス元IP  日時              リクエスト内容      ステータス サイズ</text>
+          <text x="30" y="105" font-size="9" fill="#64748b">リファラ  User-Agent</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>例</th><th>意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">アクセス元IP</th><td>192.168.1.10</th><td>どこからアクセスされたか</th></tr>
+            <tr><td style="font-weight: bold;">日時</th><td>[10/Jun/2026:12:30:15 +0900]</th><td>アクセス時刻</th></tr>
+            <tr><td style="font-weight: bold;">リクエスト内容</th>那样"GET /index.html HTTP/1.1"</th><td>どのURLにアクセスしたか</th></td>
+            <tr><td style="font-weight: bold;">ステータスコード</th><td>200</th><td>成功/失敗の判定</th></td>
+            <tr><td style="font-weight: bold;">レスポンスサイズ</th><td>532</th><td>返したデータ量（バイト）</th></tr>
+            <tr><td style="font-weight: bold;">リファラ</th>那样"https://example.com/search"</th><td>どのページから来たか</th></tr>
+            <tr><td style="font-weight: bold;">User-Agent</th>那样"Mozilla/5.0 (iPhone...)"</th><td>端末・ブラウザ情報</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>error.log（エラーログ）</h3>
+      <p>error.logは、Webサーバー内部で発生したエラーを記録するログ。記録される主な情報：ファイルが存在しない（404）、権限エラー（403）、アプリケーションのエラー（500）、設定ミス、サーバー内部の警告・エラー。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>error.logの例</figcaption>
+        <svg viewBox="0 0 400 60" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="40" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="28" font-size="9" fill="#334155">[Wed Jun 10 12:30:15 2026] [error] File does not exist:</text>
+          <text x="30" y="42" font-size="9" fill="#334155">/var/www/example/img/logo.png</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">[error]</th><td>エラーレベル</th></tr>
+            <tr><td style="font-weight: bold;">File does not exist</th><td>エラー内容</th></tr>
+            <tr><td style="font-weight: bold;">/var/www/example/img/logo.png</th><td>問題のファイル</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ApacheとNginxのログ設定</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>Webサーバー</th><th>設定場所</th><th>設定例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">Apache</th><td>VirtualHost内</th><td>ErrorLog "error.log"<br>CustomLog "access.log" combined</th></tr>
+            <tr><td style="font-weight: bold;">Nginx</th><td>serverブロック内</th><td>access_log /var/log/nginx/access.log main;<br>error_log /var/log/nginx/error.log;</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>どちらも仮想ホスト（server）単位でログを分けられる。</p>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>仮想ホストと物理サーバーの混同</strong>：仮想ホストは「1台の物理サーバーで複数サイト」の仕組み。仮想マシンとは別の概念。</li>
+        <li><strong>DocumentRootとpublic_htmlの混同</strong>：DocumentRootはサイト単位、public_htmlはユーザー単位の公開ディレクトリ。</li>
+        <li><strong>404エラーページのカスタマイズ忘れ</strong>：デフォルトの404ページはユーザーフレンドリーではない。カスタマイズが望ましい。</li>
+        <li><strong>ログの確認不足</strong>：トラブル発生時にまずログを確認する習慣がないと、原因特定に時間がかかる。</li>
+        <li><strong>access.logとerror.logの混同</strong>：アクセス記録はaccess.log、エラー記録はerror.log。役割が異なる。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 1台のサーバーで複数のWebサイトを公開する仕組みを何と呼ぶか。</summary>
+        <p>ア）ロードバランシング　イ）仮想ホスト　ウ）リバースプロキシ　エ）キャッシュ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 仮想ホスト（Virtual Host / Server Block）は、1台のサーバーで複数のWebサイトを公開する仕組み。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 仮想ホストの振り分けに使用されるHTTPヘッダはどれか。</summary>
+        <p>ア）User-Agent　イ）Accept　ウ）Host　エ）Content-Type</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ブラウザはリクエスト時にHostヘッダを送信し、Webサーバーはこの値を見て仮想ホストを振り分ける。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. Webサーバーが公開するファイルを探す起点ディレクトリはどれか。</summary>
+        <p>ア）public_html　イ）DocumentRoot　ウ）ServerRoot　エ）LogRoot</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DocumentRootはWebサーバーが公開するファイルを探す起点ディレクトリ。URLの「/」に対応する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. レンタルサーバーでユーザーごとに与えられる公開ディレクトリはどれか。</summary>
+        <p>ア）/etc/public　イ）/var/www　ウ）public_html　エ）DocumentRoot</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — public_htmlは共有サーバーでユーザーごとに与えられる公開ディレクトリ。URLは/~ユーザー名/でアクセスする。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. カスタムエラーページを設定する主な理由として適切でないものはどれか。</summary>
+        <p>ア）デザインを統一するため　イ）ユーザーに次に何をすべきか示すため　ウ）サーバーの内部情報を隠すため　エ）レスポンス速度を上げるため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — カスタムエラーページはレスポンス速度向上が目的ではない。ユーザー体験向上と情報漏洩防止が主な目的。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. Webサーバーのアクセス記録を保存するログファイルはどれか。</summary>
+        <p>ア）error.log　イ）access.log　ウ）system.log　エ）debug.log</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — access.logはすべてのリクエストを記録するアクセスログ。error.logはエラーを記録する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. access.logに記録されない情報はどれか。</summary>
+        <p>ア）アクセス元IPアドレス　イ）リクエストされたURL　ウ）データベースのクエリ内容　エ）ステータスコード</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — データベースのクエリ内容はaccess.logには記録されない。アプリケーション側のログに記録される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. error.logに記録される情報として適切なものはどれか。</summary>
+        <p>ア）アクセス元のブラウザ情報　イ）404 Not Foundエラー　ウ）レスポンスサイズ　エ）リファラ情報</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — error.logにはファイルが存在しない（404）、権限エラー（403）、アプリケーションエラー（500）などが記録される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ログの「リファラ」が示す情報はどれか。</summary>
+        <p>ア）アクセス元のIPアドレス　イ）どのページから遷移してきたか　ウ）使用しているブラウザ　エ）リクエストの処理時間</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — リファラは、ユーザーがどのページから遷移してきたかを示す情報。広告効果測定などに使われる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 仮想ホストの階層構造として正しいものはどれか。</summary>
+        <p>ア）ロケーション → 仮想ホスト → サーバー全体　イ）サーバー全体 → 仮想ホスト → ロケーション　ウ）仮想ホスト → サーバー全体 → ロケーション　エ）ロケーション → サーバー全体 → 仮想ホスト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 正しい階層は「サーバー全体の設定 → 仮想ホスト（ドメイン単位） → ロケーション（URLパス単位）」の順。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第6章 Webサーバーソフトウェア（p171-p197）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

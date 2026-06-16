@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI×IoT融合リスクと日本の法制度 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / セキュリティ</p>
+        <h1>AI×IoT融合リスクと日本の法制度</h1>
+        <p class="lead">AIとIoTの融合により新たなリスクが生まれている。また日本ではAISI（AI Safety Institute Japan）を中心に、AI時代に対応した法制度の整備が進んでいる。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">セキュリティ</a>
+      <span>AI×IoT融合リスクと法制度</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>AIとIoTの融合による新しいリスク（誤検知・誤作動・不正制御）</li>
+          <li>AISI（AI Safety Institute Japan）の役割と設立背景</li>
+          <li>現行法の5つの限界（責任主体の曖昧さ・ディープフェイク規制不在など）</li>
+          <li>現行法でも対処できる範囲とできない範囲</li>
+          <li>EU AI ACTと日本版AI法の動向</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>AISIの役割、現行法の限界（責任主体・ディープフェイク・推論データ）</dd></div>
+          <div><dt>中</dt><dd>EU AI ACT、日本版AI法の方向性</dd></div>
+          <div><dt>低</dt><dd>各法律の具体的条文、AISI設立の政治的背景詳細</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>AISI</td><td>AI Safety Institute Japan。日本政府がIPA内に設置したAI安全性評価機関</td></tr>
+            <tr><td>2</td><td>EU AI ACT</td><td>EUが制定した世界初の包括的なAI規制法</td></tr>
+            <tr><td>3</td><td>日本版AI法（AI基本法）</td><td>2025年に成立したAIの研究開発・利用に関する国家方針</td></tr>
+            <tr><td>4</td><td>ディープフェイク</td><td>AIで生成された偽の音声・映像。現行法では個別規制がない</td></tr>
+            <tr><td>5</td><td>プロンプトインジェクション</td><td>AIへ不正な指示を与え本来と異なる動作をさせる攻撃</td></tr>
+            <tr><td>6</td><td>幻覚（Hallucination）</td><td>AIがもっともらしい誤情報を生成する現象</td></tr>
+            <tr><td>7</td><td>メンバーシップ推論攻撃</td><td>AIの出力から学習データを推測する攻撃</td></tr>
+            <tr><td>8</td><td>リスクベース規制</td><td>AIのリスクレベルに応じて規制を段階分けする考え方</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. AIとIoTの融合による新しいリスク</h2>
+      <p>近年はIoT機器にAIを組み込むケースが増えている。例えば、AI監視カメラ、自動運転支援、スマート工場、顔認証システム、医療AI機器などである。これにより、IoTは単に「データを送る機器」ではなく、AIによって自動判断を行うシステムへ変化している。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>AI×IoT融合によるリスク</figcaption>
+        <svg viewBox="0 0 400 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="120" y="10" width="160" height="40" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="35" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e1b4b">AI + IoT 融合システム</text>
+          <line x1="200" y1="50" x2="200" y2="70" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="200" y="85" text-anchor="middle" font-size="11" fill="#64748b">以下の問題が発生すると…</text>
+          <line x1="200" y1="95" x2="200" y2="110" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="20" y="115" width="110" height="40" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="75" y="132" text-anchor="middle" font-size="10" fill="#7f1d1d">IoT機器への侵入</text>
+          <text x="75" y="146" text-anchor="middle" font-size="10" fill="#7f1d1d">センサー改ざん</text>
+          <rect x="145" y="115" width="110" height="40" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="200" y="132" text-anchor="middle" font-size="10" fill="#7f1d1d">偽データ注入</text>
+          <text x="200" y="146" text-anchor="middle" font-size="10" fill="#7f1d1d">AIの誤認識</text>
+          <rect x="270" y="115" width="110" height="40" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="325" y="132" text-anchor="middle" font-size="10" fill="#7f1d1d">プロンプト</text>
+          <text x="325" y="146" text-anchor="middle" font-size="10" fill="#7f1d1d">インジェクション</text>
+          <line x1="75" y1="155" x2="75" y2="175" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="200" y1="155" x2="200" y2="175" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="325" y1="155" x2="325" y2="175" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="50" y="178" width="300" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="198" text-anchor="middle" font-size="11" fill="#92400e">AIが誤った判断 → 誤検知・誤作動・不正制御・危険な動作</text>
+        </svg>
+      </figure>
+
+      <p>AIとIoTが連携することで便利さは大きく向上する一方、セキュリティでは「AI」と「IoT」を別々ではなく、<strong>一体のシステムとして考える必要がある</strong>。</p>
+
+      <h2>2. 日本の法制度とAI犯罪</h2>
+
+      <h3>2.1 AISIとは何か</h3>
+      <p><strong>AISI（AI Safety Institute Japan）</strong>は、日本政府が2024年にIPA（情報処理推進機構）内に設置した「AIの安全性を国家として評価する専門機関」である。AISIは研究所ではなく、AIモデルの安全性評価・悪用可能性分析・国際基準との整合・法制度への技術的根拠提供を行う「政策実装機関」である。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>AISIの位置づけ</figcaption>
+        <svg viewBox="0 0 400 140" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="120" y="10" width="160" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="35" text-anchor="middle" font-size="12" font-weight="bold" fill="#14532d">AISI</text>
+          <text x="200" y="70" text-anchor="middle" font-size="11" fill="#334155">｜</text>
+          <text x="200" y="85" text-anchor="middle" font-size="11" fill="#334155">AIモデルの安全性評価</text>
+          <text x="200" y="100" text-anchor="middle" font-size="11" fill="#334155">悪用可能性分析</text>
+          <text x="200" y="115" text-anchor="middle" font-size="11" fill="#334155">国際基準との整合</text>
+          <text x="200" y="130" text-anchor="middle" font-size="11" fill="#334155">法制度への技術的根拠提供</text>
+          <text x="30" y="35" text-anchor="middle" font-size="11" fill="#64748b">←</text>
+          <text x="30" y="70" text-anchor="middle" font-size="10" fill="#64748b">政策実装機関</text>
+          <text x="370" y="35" text-anchor="middle" font-size="11" fill="#64748b">→</text>
+          <text x="370" y="70" text-anchor="middle" font-size="10" fill="#64748b">研究所ではない</text>
+        </svg>
+      </figure>
+
+      <h3>2.2 AISIが設立された背景</h3>
+      <p>AISIは国内の危機、国際情勢、政治判断の3つが重なって誕生した。</p>
+      <ul>
+        <li><strong>①国内でAI犯罪とAIリスクが急増</strong>：ディープフェイク詐欺、AI自動攻撃、AI生成詐欺など、現行法では十分に対応できない領域が増えた。</li>
+        <li><strong>②国際的なAI Safety Institute設立の流れ</strong>：米国・英国・EUが同様の機関を設立。日本も国際基準に合わせる必要があった。</li>
+        <li><strong>③国際ルール形成への関与</strong>：日本が「ルール作りに参加する側」として振る舞うためには、国内にAI安全性を評価できる国家レベルの体制が必要だった。</li>
+      </ul>
+
+      <h3>2.3 AISIの役割</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>役割</th><th>具体的な内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>① AIモデルの安全性評価</td><td>マルウェア生成能力、詐欺文書生成能力、ディープフェイク生成能力、プロンプトインジェクション耐性、幻覚（誤情報生成）、バイアス、セキュリティ脆弱性を評価</td></tr>
+            <tr><td>② 安全性評価の基準・ガイドライン策定</td><td>安全性チェックツール、偽情報対策技術、AIとサイバーセキュリティの調査、安全性ガイドラインの作成</td></tr>
+            <tr><td>③ 国際連携</td><td>米国AISI、英国AISI、EU AI Officeと連携し国際的に共通の安全基準を作る</td></tr>
+            <tr><td>④ 政府への技術的支援</td><td>AI犯罪の傾向、悪用可能性、技術的限界、安全性評価の結果を政府に提供し法制度のアップデートを技術的に支える</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>3. 現行法の限界</h2>
+      <p>AI犯罪は既存の刑法・特別法を前提にしているが、AI特有の行為・責任主体・因果関係を想定していないため、以下の領域で明確な限界がある。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>現行法の5つの限界</figcaption>
+        <svg viewBox="0 0 400 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="180" height="70" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="100" y="30" text-anchor="middle" font-size="11" font-weight="bold" fill="#7f1d1d">①責任主体が曖昧</text>
+          <text x="100" y="48" text-anchor="middle" font-size="10" fill="#7f1d1d">AIが自律的に生成した</text>
+          <text x="100" y="63" text-anchor="middle" font-size="10" fill="#7f1d1d">犯罪行為の責任は誰か？</text>
+          <rect x="210" y="10" width="180" height="70" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="300" y="30" text-anchor="middle" font-size="11" font-weight="bold" fill="#7f1d1d">②ディープフェイク規制不在</text>
+          <text x="300" y="48" text-anchor="middle" font-size="10" fill="#7f1d1d">ディープフェイクそのものを</text>
+          <text x="300" y="63" text-anchor="middle" font-size="10" fill="#7f1d1d">規制する個別法が存在しない</text>
+          <rect x="10" y="95" width="180" height="70" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="100" y="115" text-anchor="middle" font-size="11" font-weight="bold" fill="#7f1d1d">③攻撃想定が古い</text>
+          <text x="100" y="133" text-anchor="middle" font-size="10" fill="#7f1d1d">AIの自律的スキャン・</text>
+          <text x="100" y="148" text-anchor="middle" font-size="10" fill="#7f1d1d">自動脆弱性探索を想定外</text>
+          <rect x="210" y="95" width="180" height="70" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="300" y="115" text-anchor="middle" font-size="11" font-weight="bold" fill="#7f1d1d">④推論データ規制外</text>
+          <text x="300" y="133" text-anchor="middle" font-size="10" fill="#7f1d1d">AIが推論した個人情報は</text>
+          <text x="300" y="148" text-anchor="middle" font-size="10" fill="#7f1d1d">個人情報保護法の対象外</text>
+          <rect x="100" y="185" width="200" height="70" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="200" y="205" text-anchor="middle" font-size="11" font-weight="bold" fill="#7f1d1d">⑤なりすまし規制不十分</text>
+          <text x="200" y="223" text-anchor="middle" font-size="10" fill="#7f1d1d">音声・映像の生成精度が高く</text>
+          <text x="200" y="238" text-anchor="middle" font-size="10" fill="#7f1d1d">本人確認の根拠が信用できない</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>問題点</th><th>具体的な課題</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>責任主体の曖昧さ</td><td>AIが自動生成した場合、作成者・利用者・提供者のどこに責任があるか判断できない。「意図」が要件となる犯罪でAIに責任能力はない</td></tr>
+            <tr><td>ディープフェイク規制不在</td><td>名誉毀損・プライバシー侵害に該当するが、ディープフェイクそのものを規制する法律は存在しない</td></tr>
+            <tr><td>攻撃想定の古さ</td><td>不正アクセス禁止法は人間が行う攻撃を前提。AIの自律的スキャン・自動脆弱性探索は想定外</td></tr>
+            <tr><td>推論データ規制外</td><td>個人情報保護法は「取得した情報」が対象。AIが推論で生成した年齢・性別・思想などは保護対象外</td></tr>
+            <tr><td>なりすまし対応不十分</td><td>本人の声で詐欺電話を生成しても「誰が詐欺を行ったか」が曖昧。本人確認の根拠が信用できない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>4. 現行法での対処（どこまで対応できているか）</h2>
+      <p>AI犯罪は急速に高度化しているが、現行法でも対処できる領域は存在する。ただし、対応できる範囲は<strong>「人間が意図してAIを使った場合」に限定される</strong>ことが多く、AIが自律的に生成した行為への対応は不十分という構造的な限界がある。</p>
+
+      <div class="table-wrap mobile-card-table">
+        </table>
+          <thead>
+            <tr><th>法律</th><th>対処できる範囲</th><th>対処できない範囲</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>刑法（詐欺罪・名誉毀損罪）</td><td>AIを「道具として使った」場合は処罰可能</td><td>AIが勝手に生成した場合は責任主体が曖昧</td></tr>
+            <tr><td>不正アクセス禁止法</td><td>利用者がAI生成コードを使って攻撃すれば処罰可能</td><td>AIが自律的に脆弱性を探索・攻撃したケースは想定外</td></tr>
+            <tr><td>個人情報保護法</td><td>取得した顔画像・音声・位置情報は保護対象</td><td>AIが推論した年齢・性別・性格・思想は対象外</td></tr>
+            <tr><td>プロバイダ責任制限法</td><td>ディープフェイク動画の削除要請は可能</td><td>削除まで時間がかかり被害拡大。海外プラットフォームの対応が遅い</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>5. 法整備の動き（未来：どこに向かっているか）</h2>
+
+      <h3>5.1 国際潮流：EU AI ACTを中心としたリスクベース規制</h3>
+      <p>EUは世界で初めて包括的なAI規制法（AI ACT）を制定し、高リスクAIの厳格規制、生成AIの透明性義務、ディープフェイクの明示義務を導入した。日本もこの流れを踏まえ、リスクベースの規制を検討している。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>EU AI ACTのリスクベース規制</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="10" width="90" height="50" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="55" y="30" text-anchor="middle" font-size="10" fill="#14532d">低リスク</text>
+          <text x="55" y="45" text-anchor="middle" font-size="9" fill="#14532d">自主規制</text>
+          <rect x="110" y="10" width="90" height="50" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="155" y="30" text-anchor="middle" font-size="10" fill="#92400e">限定リスク</text>
+          <text x="155" y="45" text-anchor="middle" font-size="9" fill="#92400e">透明性義務</text>
+          <rect x="210" y="10" width="90" height="50" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="255" y="30" text-anchor="middle" font-size="10" fill="#7f1d1d">高リスク</text>
+          <text x="255" y="45" text-anchor="middle" font-size="9" fill="#7f1d1d">厳格規制</text>
+          <rect x="310" y="10" width="80" height="50" rx="4" fill="#7f1d1d" stroke="#4c0519" stroke-width="1.5"/>
+          <text x="350" y="30" text-anchor="middle" font-size="10" fill="#ffffff">禁止</text>
+          <text x="350" y="45" text-anchor="middle" font-size="9" fill="#ffffff">許容せず</text>
+        </svg>
+      </figure>
+
+      <h3>5.2 日本の法整備の方向性</h3>
+      <p>日本は「ソフトロー中心」から「ハードロー併用」へ移行しつつある。2025年には日本版AI法（AI基本法）が成立し、AIの研究開発・利用に関する国家方針が法制化された。</p>
+      <p><strong>重点領域：</strong>AIの透明性、安全性評価、国際基準との整合、企業の説明責任、個人情報保護との整合性。特に生成AIのリスク管理が重視されている。</p>
+
+      <h3>5.3 検討中の新しい法体系</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>検討中の法律</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>AI生成物の責任法制</td><td>AIが生成した内容の責任主体を明確化する</td></tr>
+            <tr><td>AI悪用防止法</td><td>攻撃コード生成、詐欺文書生成、自動攻撃などの悪用を規制する枠組み</td></tr>
+            <tr><td>ディープフェイク規制法</td><td>性的・政治的ディープフェイクの禁止、明示義務</td></tr>
+            <tr><td>推論データ保護法</td><td>AIが推論した個人情報を保護対象に含める</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5.4 AISIを中心とした技術に基づく法制度アップデート</h3>
+      <p>AISIは法制度の根拠となるリスク評価、悪用可能性分析、技術的限界の提示、国際基準との整合を担う。つまり、<strong>AISIの評価結果が今後の法整備の基盤になる</strong>。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>AISIを中心とした法整備の流れ</figcaption>
+        <svg viewBox="0 0 400 120" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="10" y="15" width="110" height="50" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="65" y="35" text-anchor="middle" font-size="10" fill="#1e3a5f">AISI</text>
+          <text x="65" y="52" text-anchor="middle" font-size="9" fill="#1e3a5f">リスク評価</text>
+          <line x1="120" y1="40" x2="148" y2="40" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="150" y="15" width="110" height="50" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="205" y="35" text-anchor="middle" font-size="10" fill="#92400e">政府</text>
+          <text x="205" y="52" text-anchor="middle" font-size="9" fill="#92400e">法制度検討</text>
+          <line x1="260" y1="40" x2="288" y2="40" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="290" y="15" width="100" height="50" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="340" y="35" text-anchor="middle" font-size="10" fill="#14532d">新法・改正</text>
+          <text x="340" y="52" text-anchor="middle" font-size="9" fill="#14532d">法制化</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「AISIは研究所」ではない</strong>：AISIは政策実装機関であり、技術研究が目的ではない。安全性評価や法制度への根拠提供が主な役割。</li>
+        <li><strong>「現行法で全て対処できる」は誤り</strong>：現行法は「人間が意図してAIを使った場合」には対応できるが、AIの自律的行為には対応できない領域が多い。</li>
+        <li><strong>「推論データ」と「取得した個人情報」の違い</strong>：現行の個人情報保護法は「取得した情報」を保護する。AIが推論で生成した情報は保護対象外という大きなギャップがある。</li>
+        <li><strong>「ディープフェイクは既存法で規制できる」は不十分</strong>：名誉毀損やプライバシー侵害として対応できる場合もあるが、ディープフェイクそのものを規制する法律は存在しない。</li>
+        <li><strong>「日本版AI法はまだない」は誤り（2025年成立）</strong>：2025年に日本版AI法（AI基本法）が成立している。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. AISI（AI Safety Institute Japan）の説明として最も適切なものはどれか。</summary>
+        <p>ア）AIの基礎研究を行う研究所　イ）AIの安全性を国家として評価する政策実装機関　ウ）民間企業のAI開発を支援する団体　エ）国際的なAI競争を促進する機関</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — AISIは研究所ではなく、AIモデルの安全性評価・悪用可能性分析・国際基準との整合・法制度への技術的根拠提供を行う政策実装機関である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 現行法の限界として挙げられているものはどれか。複数選択可。</summary>
+        <p>ア）AIの自律的行為の責任主体が曖昧　イ）ディープフェイクを規制する個別法がない　ウ）AIの推論データは個人情報保護法の対象外　エ）AIの計算速度が遅すぎる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア、イ、ウ</strong> — ア・イ・ウはPDFに記載されている現行法の限界。エの計算速度は法制度の問題ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. EU AI ACTの特徴として最も適切なものはどれか。</summary>
+        <p>ア）全てのAIを一律に禁止する　イ）リスクベースで規制を段階分けする　ウ）AIの開発のみを規制する　エ）EU域外のAIには適用されない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — EU AI ACTは世界初の包括的なAI規制法で、低リスクから禁止までリスクレベルに応じて規制を段階分けする。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. AIとIoTの融合による新しいリスクとして適切でないものはどれか。</summary>
+        <p>ア）IoT機器への侵入によるAIの誤判断　イ）センサー改ざんによるAIの誤作動　ウ）AIの誤認識が現実世界への影響を引き起こす　エ）融合によりセキュリティリスクが必ずゼロになる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — AIとIoTの融合により便利さは向上するが、セキュリティリスクがゼロになるわけではない。むしろ新たなリスクが生まれる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 現行の個人情報保護法で保護対象外となるものはどれか。</summary>
+        <p>ア）顔画像データ　イ）AIが推論した年齢・性格・思想　ウ）音声データ　エ）位置情報</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 現行の個人情報保護法は「取得した情報」が保護対象。AIが推論で生成した年齢・性別・性格・思想などは保護対象外である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 日本版AI法（AI基本法）が成立した年はいつか。</summary>
+        <p>ア）2023年　イ）2024年　ウ）2025年　エ）2026年</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 2025年に日本版AI法（AI基本法）が成立し、AIの研究開発・利用に関する国家方針が法制化された。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 現行法で「人間が意図してAIを使った場合」に処罰可能な法律はどれか。</summary>
+        <p>ア）刑法（詐欺罪）　イ）AI悪用防止法　ウ）ディープフェイク規制法　エ）推論データ保護法</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 現行の刑法はAIを「道具として使った」場合に処罰可能。イ・ウ・エは検討中の新しい法体系である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. AISIの役割として適切でないものはどれか。</summary>
+        <p>ア）AIモデルの安全性評価　イ）AIの高速計算処理の研究　ウ）国際基準との整合　エ）法制度への技術的根拠提供</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — AISIは政策実装機関であり、技術研究（高速計算処理の研究など）は主な役割ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 検討中の新しい法体系に含まれないものはどれか。</summary>
+        <p>ア）AI生成物の責任法制　イ）AI悪用防止法　ウ）AI高速化促進法　エ）推論データ保護法</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 検討中の法体系は「AI生成物の責任法制」「AI悪用防止法」「ディープフェイク規制法」「推論データ保護法」である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. AISIの評価結果は何の基盤になるとされているか。</summary>
+        <p>ア）企業のマーケティング戦略　イ）今後の法整備　ウ）AIの販売価格決定　エ）国際的なAI競争の順位</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — AISIの評価結果（リスク評価、悪用可能性分析、技術的限界の提示など）が今後の法整備の基盤になる。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_2_AIの_IoTセキュリティー.pdf』 1-4 AIとIoTの融合による新しいリスク および 1-7 日本の法制度とAI犯罪（p65-p87）</p>
+      <p>※本ページは基本情報技術者試験対策用に編集・再構成したものです。</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

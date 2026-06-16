@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTTP基礎②（ステータスコード/HTTPS） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>HTTP基礎②</h1>
+        <p class="lead">HTTPステータスコードの種類と意味、HTTPSによる安全な通信の仕組み、SSL証明書の役割を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>HTTP基礎②</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>HTTPステータスコードの分類と代表的なコード（200/301/302/404/500）</li>
+          <li>ステータスコードがブラウザの動作に与える影響</li>
+          <li>HTTPSが必要な理由（盗聴防止・改ざん防止・なりすまし防止）</li>
+          <li>TLSハンドシェイクの概要</li>
+          <li>SSL証明書の役割と入手方法</li>
+          <li>HTTP（80）からHTTPS（443）へのリダイレクト</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ステータスコードの分類（2xx/3xx/4xx/5xx）、200/404/500の意味、HTTPSの必要性</dd></div>
+          <div><dt>中</dt><dd>301/302リダイレクトの違い、SSL証明書の役割</dd></div>
+          <div><dt>低</dt><dd>TLSハンドシェイクの詳細な手順、認証局の種類</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>ステータスコード</th><td>Webサーバーの処理結果をブラウザに伝える結果コード</th></tr>
+            <tr><th>2</th><th>200 OK</th><td>リクエストが成功したことを示す</th></tr>
+            <tr><th>3</th><th>301 Moved Permanently</th><td>恒久的にURLが移動したことを示す</th></tr>
+            <tr><th>4</th><th>302 Found</th><td>一時的にURLが移動したことを示す</th></tr>
+            <tr><th>5</th><th>404 Not Found</th><td>リクエストされたリソースが存在しない</th></tr>
+            <tr><th>6</th><th>500 Internal Server Error</th><td>サーバー内部でエラーが発生した</th></tr>
+            <tr><th>7</th><th>HTTPS</th><td>HTTPをTLSで暗号化し安全に通信する仕組み</th></tr>
+            <tr><th>8</th><th>TLSハンドシェイク</th><td>HTTPS通信開始時の鍵交換と証明書提示の手順</th></tr>
+            <tr><th>9</th><th>SSL証明書</th><td>サーバーの正当性を証明する電子証明書</th></tr>
+            <tr><th>10</th><th>認証局（CA）</th><td>SSL証明書を発行する信頼できる第三者機関</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. ステータスコード</h2>
+      <p>ステータスコードは、Webサーバーが「リクエストをどう処理したか」をブラウザに伝えるための結果コード。HTTPレスポンスの1行目に必ず含まれる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>ステータスコードの分類</figcaption>
+        <svg viewBox="0 0 400 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- 1xx -->
+          <rect x="20" y="10" width="85" height="50" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="62" y="32" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e1b4f">1xx</text>
+          <text x="62" y="50" text-anchor="middle" font-size="9" fill="#4338ca">処理中</text>
+          
+          <line x1="105" y1="35" x2="120" y2="35" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="112" y="30" text-anchor="middle" font-size="8" fill="#64748b">ほぼ使わない</text>
+
+          <!-- 2xx -->
+          <rect x="125" y="10" width="85" height="50" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="167" y="32" text-anchor="middle" font-size="14" font-weight="bold" fill="#14532d">2xx</text>
+          <text x="167" y="50" text-anchor="middle" font-size="9" fill="#16a34a">成功</text>
+
+          <line x1="210" y1="35" x2="225" y2="35" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="218" y="30" text-anchor="middle" font-size="8" fill="#64748b">正常処理</text>
+
+          <!-- 3xx -->
+          <rect x="230" y="10" width="85" height="50" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="272" y="32" text-anchor="middle" font-size="14" font-weight="bold" fill="#92400e">3xx</text>
+          <text x="272" y="50" text-anchor="middle" font-size="9" fill="#d97706">リダイレクト</text>
+
+          <line x1="315" y1="35" x2="330" y2="35" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="323" y="30" text-anchor="middle" font-size="8" fill="#64748b">別URLへ</text>
+
+          <!-- 4xx -->
+          <rect x="72" y="80" width="85" height="50" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="114" y="102" text-anchor="middle" font-size="14" font-weight="bold" fill="#7f1d1d">4xx</text>
+          <text x="114" y="120" text-anchor="middle" font-size="9" fill="#dc2626">クライアントエラー</text>
+
+          <line x1="157" y1="105" x2="172" y2="105" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="164" y="100" text-anchor="middle" font-size="8" fill="#64748b">URL間違い・権限なし</text>
+
+          <!-- 5xx -->
+          <rect x="177" y="80" width="85" height="50" rx="4" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
+          <text x="219" y="102" text-anchor="middle" font-size="14" font-weight="bold" fill="#9a3412">5xx</text>
+          <text x="219" y="120" text-anchor="middle" font-size="9" fill="#ea580c">サーバーエラー</text>
+
+          <line x1="262" y1="105" x2="277" y2="105" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="270" y="100" text-anchor="middle" font-size="8" fill="#64748b">バグ・障害</text>
+
+          <!-- 凡例 -->
+          <rect x="20" y="160" width="360" height="100" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="200" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e293b">ステータスコードの分類</text>
+          
+          <text x="40" y="205" font-size="11" fill="#4338ca">1xx: 処理中（ほとんど使われない）</text>
+          <text x="40" y="225" font-size="11" fill="#16a34a">2xx: 成功（正常に処理できた）</text>
+          <text x="40" y="245" font-size="11" fill="#d97706">3xx: リダイレクト（別のURLへ誘導）</text>
+          <text x="220" y="205" font-size="11" fill="#dc2626">4xx: クライアントエラー（URL間違い・権限なし）</text>
+          <text x="220" y="225" font-size="11" fill="#ea580c">5xx: サーバーエラー（バグ・例外・障害）</text>
+        </svg>
+      </figure>
+
+      <h3>代表的なステータスコード</h3>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>コード</th><th>意味</th><th>発生する状況</th><th>ブラウザの動作</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>200 OK</td><td>成功</td><td>リクエストを正常に処理できた</td><td>そのまま表示する</td></tr>
+            <tr><td>301 Moved Permanently</td><td>恒久的リダイレクト</td><td>URL変更・常時HTTPS化</td><td>新しいURLをブックマーク</td></tr>
+            <tr><td>302 Found</td><td>一時的リダイレクト</td><td>ログイン後の遷移</td><td>毎回リクエスト</td></tr>
+            <tr><td>404 Not Found</td><td>存在しない</td><td>URLの間違い・削除済み</td><td>「見つかりません」と表示</td></tr>
+            <tr><td>500 Internal Server Error</td><td>サーバー内部エラー</td><td>バグ・例外・DBエラー</td><td>再試行しても改善しない</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>リダイレクトの種類</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>コード</th><th>メソッドの扱い</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>301</td><td>GETに変わる可能性あり</td><td>URL変更・常時HTTPS化</td></tr>
+            <tr><td>308</td><td>メソッドを変えない</td><td>APIの恒久移動</td></tr>
+            <tr><td>302</td><td>GETに変わる可能性あり</td><td>ログイン後の遷移</td></tr>
+            <tr><td>307</td><td>メソッドを変えない</td><td>POSTの再送防止</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2. HTTPS（Webサーバーが安全に通信するための仕組み）</h3>
+      <p>HTTPSとは、HTTPの通信内容をTLSによって暗号化し、Webサーバーとブラウザ間の通信を安全にする仕組み。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>理由</th><th>Webサーバー側の意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>通信内容の盗聴防止</td><td>パスワード・Cookie・個人情報を守る</td></tr>
+            <tr><td>通信内容の改ざん防止</td><td>中間者攻撃（MITM）を防ぐ</td></tr>
+            <tr><td>ブラウザの警告回避</td><td>Chrome/Edge/Safariが警告を出さない</td></tr>
+            <tr><td>CookieのSecure属性に必須</td><td>セッション管理の安全性向上</td></tr>
+            <tr><td>SEO（検索順位）にも影響</td><td>GoogleがHTTPSを推奨</td></td>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>HTTPS通信の流れ</figcaption>
+        <svg viewBox="0 0 400 250" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- ブラウザ -->
+          <rect x="30" y="10" width="120" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="90" y="35" text-anchor="middle" font-size="13" fill="#1e3a5f">ブラウザ</text>
+          
+          <line x1="150" y1="30" x2="180" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+          <!-- ① TCP接続 -->
+          <rect x="185" y="10" width="190" height="30" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1"/>
+          <text x="280" y="30" text-anchor="middle" font-size="11" fill="#1e1b4f">① TCP接続（443番ポート）</text>
+          
+          <line x1="280" y1="40" x2="280" y2="55" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+          <!-- ② TLSハンドシェイク -->
+          <rect x="185" y="60" width="190" height="50" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="280" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">② TLSハンドシェイク</text>
+          <text x="280" y="98" text-anchor="middle" font-size="10" fill="#92400e">鍵交換・証明書提示</text>
+          
+          <line x1="280" y1="110" x2="280" y2="125" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+          <!-- ③ HTTP通信 -->
+          <rect x="185" y="130" width="190" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="280" y="150" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">③ HTTP通信開始</text>
+          <text x="280" y="165" text-anchor="middle" font-size="10" fill="#14532d">GET / POST（暗号化）</text>
+
+          <line x1="280" y1="170" x2="280" y2="185" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+          <!-- Webサーバー -->
+          <rect x="30" y="190" width="120" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="90" y="215" text-anchor="middle" font-size="13" fill="#1e3a5f">Webサーバー</text>
+
+          <line x1="150" y1="210" x2="180" y2="210" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+          <!-- 暗号化の表現 -->
+          <rect x="185" y="190" width="190" height="40" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1"/>
+          <text x="280" y="210" text-anchor="middle" font-size="11" fill="#1e1b4f">🔒 暗号化通信</text>
+          <text x="280" y="225" text-anchor="middle" font-size="10" fill="#4338ca">内容は第三者から見えない</text>
+        </svg>
+      </figure>
+
+      <h3>3. SSL証明書</h3>
+      <p>SSL証明書は、TLSハンドシェイクの工程でWebサーバーがブラウザに提示する「身分証明書」。ブラウザは証明書を見て、このサーバーは本物か、信頼できるCAが発行しているか、有効期限内かを確認する。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>SSL証明書の役割</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- Webサーバー -->
+          <rect x="20" y="20" width="100" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="45" text-anchor="middle" font-size="12" fill="#1e3a5f">Webサーバー</text>
+          
+          <line x1="120" y1="40" x2="145" y2="40" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <!-- 証明書 -->
+          <rect x="150" y="10" width="100" height="60" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="30" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">SSL証明書</text>
+          <text x="200" y="48" text-anchor="middle" font-size="9" fill="#92400e">example.com</text>
+          <text x="200" y="62" text-anchor="middle" font-size="8" fill="#92400e">有効期限: 2026/12/31</text>
+          
+          <line x1="250" y1="40" x2="275" y2="40" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <!-- ブラウザ -->
+          <rect x="280" y="20" width="100" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="330" y="45" text-anchor="middle" font-size="12" fill="#14532d">ブラウザ</text>
+          
+          <!-- 確認事項 -->
+          <rect x="20" y="100" width="360" height="65" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="200" y="120" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e293b">ブラウザの確認事項</text>
+          <text x="40" y="140" font-size="10" fill="#334155">① このサーバーは本物か？（ドメイン一致）</text>
+          <text x="40" y="155" font-size="10" fill="#334155">② 信頼できる認証局（CA）が発行しているか？</text>
+          <text x="250" y="155" font-size="10" fill="#334155">③ 有効期限内か？</text>
+        </svg>
+      </figure>
+
+      <h3>4. HTTPS導入の流れ</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>工程</th><th>作業内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>① 証明書を入手する</td><td>認証局（CA）からSSL証明書を発行してもらう。Let's Encrypt（無料）や商用CAがある。</td></tr>
+            <tr><td>② CSRを作成する</td><td>ドメイン名・組織名・公開鍵を含む申請書を作成しCAに提出</td></tr>
+            <tr><td>③ Webサーバーに証明書を組み込む</td><td>証明書（CRT）・秘密鍵（KEY）・中間証明書を443番ポートのHTTPS設定に紐づける</td></tr>
+            <tr><td>④ 443番ポートを公開する</td><td>ファイアウォールで443番を許可、NATでグローバルIP:443 → Webサーバー:443に転送</td></tr>
+            <tr><td>⑤ HTTP→HTTPSにリダイレクト</td><td>80番で受け取り「HTTPSに移動してください」（301/308）を返す</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>5. HTTPからHTTPSへの誘導</h3>
+      <p>ユーザーが http://example.com にアクセスする場合がある。そのためWebサーバーは：</p>
+      <ol>
+        <li>80番で受け取る</li>
+        <li>「HTTPSに移動してください」（301/308）を返す</li>
+        <li>ブラウザが自動で https://example.com に移動する</li>
+      </ol>
+
+      <figure class="wide-diagram">
+        <figcaption>HTTP→HTTPSリダイレクト</figcaption>
+        <svg viewBox="0 0 400 120" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="10" y="10" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="60" y="33" text-anchor="middle" font-size="11" fill="#1e3a5f">ブラウザ</text>
+          
+          <line x1="110" y1="28" x2="135" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr4)"/>
+          <text x="122" y="23" text-anchor="middle" font-size="8" fill="#64748b">http://</text>
+          
+          <rect x="140" y="10" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="190" y="33" text-anchor="middle" font-size="11" fill="#92400e">Webサーバー</text>
+          
+          <line x1="240" y1="28" x2="265" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr4)"/>
+          <text x="252" y="23" text-anchor="middle" font-size="8" fill="#64748b">301/308</text>
+          
+          <rect x="270" y="10" width="100" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="320" y="33" text-anchor="middle" font-size="11" fill="#14532d">HTTPSへ</text>
+          
+          <!-- 戻り -->
+          <path d="M 320 46 L 320 70 L 60 70 L 60 46" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr4)"/>
+          <text x="190" y="65" text-anchor="middle" font-size="9" fill="#16a34a">自動で再アクセス（https://）</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>ステータスコードの分類の混同</strong>：4xxはクライアント側の問題（URL間違い・権限不足）、5xxはサーバー側の問題（バグ・障害）。原因を区別することが重要。</li>
+        <li><strong>301と302の違い</strong>：301は恒久的な移動（ブラウザは新しいURLを覚える）、302は一時的な移動（毎回元のURLにアクセス）。</li>
+        <li><strong>HTTPS＝完全な安全ではない</strong>：HTTPSは通信路の暗号化であり、サーバー内部の脆弱性やアプリケーションのバグは防げない。</li>
+        <li><strong>SSL証明書と暗号化の関係の誤解</strong>：証明書は「サーバーの身元証明」が主目的。暗号化自体は証明書に含まれる公開鍵を使って行う。</li>
+        <li><strong>ポート番号の混同</strong>：HTTPは80、HTTPSは443。HTTPSサイトにhttp://でアクセスするとポート80に接続しようとしてエラーになる。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. HTTPステータスコードの分類で、「サーバーエラー」を示すものはどれか。</summary>
+        <p>ア）2xx　イ）3xx　ウ）4xx　エ）5xx</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 5xx（500番台）はサーバーエラーを示す。4xxはクライアントエラー、2xxは成功、3xxはリダイレクト。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. リクエストされたリソースが存在しない場合に返されるステータスコードはどれか。</summary>
+        <p>ア）200 OK　イ）302 Found　ウ）404 Not Found　エ）500 Internal Server Error</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 404 Not FoundはリクエストされたURLに対応するリソースがサーバー上に存在しない場合に返される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 恒久的なリダイレクト（URLが永久に移動した）を示すステータスコードはどれか。</summary>
+        <p>ア）200 OK　イ）301 Moved Permanently　ウ）302 Found　エ）307 Temporary Redirect</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 301は恒久的なリダイレクト。302/307は一時的なリダイレクト。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. HTTPSが必要な理由として適切でないものはどれか。</summary>
+        <p>ア）通信内容の盗聴防止　イ）通信内容の改ざん防止　ウ）サーバー内部のバグ防止　エ）サーバーの正当性証明</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — HTTPSは通信路の暗号化であり、サーバー内部のバグやアプリケーションの脆弱性は防げない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. HTTPSが使用するポート番号はどれか。</summary>
+        <p>ア）80　イ）443　ウ）8080　エ）3306</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — HTTPSは443番ポートを使用する。80番はHTTP、3306はMySQL。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. SSL証明書の主な役割はどれか。</summary>
+        <p>ア）通信内容を圧縮する　イ）サーバーの正当性を証明する　ウ）データベースに接続する　エ）HTMLをキャッシュする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SSL証明書は「このサーバーは本物のexample.comです」と証明する電子証明書。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. Webサーバー内部でバグや例外が発生した場合に返されるステータスコードはどれか。</summary>
+        <p>ア）403 Forbidden　イ）404 Not Found　ウ）500 Internal Server Error　エ）503 Service Unavailable</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 500 Internal Server Errorはサーバー内部で予期せぬエラーが発生した場合に返される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. HTTPからHTTPSへのリダイレクトを設定する際、Webサーバーが返すべきステータスコードはどれか。</summary>
+        <p>ア）200 OK　イ）301 Moved Permanently　ウ）404 Not Found　エ）500 Internal Server Error</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — HTTPSへの移行は恒久的な変更であるため、301 Moved Permanentlyを使用するのが一般的。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. TLSハンドシェイクの説明として正しいものはどれか。</summary>
+        <p>ア）HTTPリクエストを送信する手順　イ）鍵交換と証明書提示を行う手順　ウ）HTMLを解析する手順　エ）データベースに接続する手順</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — TLSハンドシェイクはHTTPS通信開始時の鍵交換と証明書提示の手順。この後で暗号化されたHTTP通信が始まる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 認証局（CA）の役割として正しいものはどれか。</summary>
+        <p>ア）Webサーバーの負荷を分散する　イ）SSL証明書を発行する　ウ）HTMLをキャッシュする　エ）DNSを管理する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 認証局（Certificate Authority）はSSL証明書を発行する信頼できる第三者機関。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第4章 HTTPとHTTPS（通信の仕組み）（p57-p70）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

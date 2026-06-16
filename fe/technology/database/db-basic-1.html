@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>データベース概論①（RDB/テーブル/データ型） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Database</p>
+        <h1>データベース概論①</h1>
+        <p class="lead">RDB（リレーショナルデータベース）の基本概念、テーブルとレコードの構造、データ型の種類と選び方を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>データベース概論①</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>RDB（リレーショナルデータベース）の基本概念</li>
+          <li>テーブル・レコード・カラムの構造</li>
+          <li>テーブル設計の基本ルール</li>
+          <li>データ型の種類（数値型/文字列型/日付型/真偽値/NULL）</li>
+          <li>データ型選びの重要性</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>RDBの特徴、テーブル/レコードの概念、主なデータ型</dd></div>
+          <div><dt>中</dt><dd>テーブル設計の基本ルール、NULLの概念</dd></div>
+          <div><dt>低</dt><dd>詳細なデータ型の種類（DECIMALの精度など）</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>RDB</th>的那样表（テーブル）同士の関係を使ってデータを管理する仕組み</th></tr>
+            <tr><th>2</th><th>テーブル</th>的那样データを項目（列）ごとに整理した表</th></tr>
+            <tr><th>3</th><th>レコード（行）</th>的那样テーブルに格納される1件分のデータ</th></tr>
+            <tr><th>4</th><th>カラム（列）</th>的那样データの項目名（id, name, emailなど）</th></tr>
+            <tr><th>5</th><th>SQL</th>的那样RDBを操作するための標準言語</th></tr>
+            <tr><th>6</th><th>INT</th>的那样整数を扱うデータ型</th></tr>
+            <tr><th>7</th><th>VARCHAR</th>的那样可変長文字列を扱うデータ型</th></tr>
+            <tr><th>8</th><th>DECIMAL</th>的那样小数（金額など）を正確に扱うデータ型</th></tr>
+            <tr><th>9</th><th>DATE/DATETIME</th>的那样日付や時刻を扱うデータ型</th></tr>
+            <tr><th>10</th><th>NULL</th>的那样「値が存在しない」を表す特殊な値</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. RDBとは</h2>
+      <p>RDB（Relational DataBase：リレーショナルデータベース）は、「表（テーブル）同士の関係（リレーション）を使ってデータを管理する仕組み」である。現在のWebアプリケーションの多くは、このRDBを基盤として動作している。</p>
+
+      <h3>RDBの3つの特徴</h3>
+
+      <figure class="wide-diagram">
+        <figcaption>RDBの3つの特徴</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="360" height="140" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          
+          <rect x="40" y="25" width="100" height="50" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="90" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a5f">表（テーブル）</text>
+          <text x="90" y="63" text-anchor="middle" font-size="9" fill="#475569">Excelのような</text>
+          <text x="90" y="75" text-anchor="middle" font-size="9" fill="#475569">行と列の形式</text>
+          
+          <line x1="140" y1="50" x2="160" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="165" y="25" width="100" height="50" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="215" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">関係</text>
+          <text x="215" y="63" text-anchor="middle" font-size="9" fill="#92400e">テーブル同士を</text>
+          <text x="215" y="75" text-anchor="middle" font-size="9" fill="#92400e">関連付け</text>
+          
+          <line x1="265" y1="50" x2="285" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="290" y="25" width="70" height="50" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="325" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">SQL</text>
+          <text x="325" y="63" text-anchor="middle" font-size="9" fill="#14532d">データを</text>
+          <text x="325" y="75" text-anchor="middle" font-size="9" fill="#14532d">操作</text>
+          
+          <text x="200" y="115" text-anchor="middle" font-size="10" fill="#64748b">この3つがRDBの本質</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>特徴</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">① 表（テーブル）として管理</th><td>データをExcelのような行と列の表形式で管理する</th></tr>
+            <tr><td style="font-weight: bold;">② テーブル同士の関係</th><td>テーブル同士を関連付けてデータを管理できる（例：ユーザーと注文）</th></tr>
+            <tr><td style="font-weight: bold;">③ SQLで操作</th><td>SQL（Structured Query Language）を使ってデータを操作する</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>なぜRDBがWebアプリで使われるのか</h3>
+      <ul>
+        <li>データの整合性を保てる</li>
+        <li>関係性を正しく管理できる</li>
+        <li>SQLによる柔軟な検索が可能</li>
+        <li>大量データでも高速に処理できる</li>
+        <li>トランザクションで安全に更新できる</li>
+      </ul>
+
+      <h2>2. テーブル / レコード</h2>
+      <p>RDBの基本単位はテーブル（表）とレコード（行）である。Webアプリケーションが扱うデータは、すべてこのテーブルとレコードの組み合わせで管理される。</p>
+
+      <h3>テーブル（表）とは</h3>
+      <p>テーブルは、データを項目（列）ごとに整理した表のこと。テーブル名＝データの種類を表す名前。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>テーブルの構造（usersテーブルの例）</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- ヘッダ -->
+          <rect x="20" y="10" width="360" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="40" y="30" font-size="11" font-weight="bold" fill="#1e3a5f">id</text>
+          <text x="120" y="30" font-size="11" font-weight="bold" fill="#1e3a5f">name</text>
+          <text x="220" y="30" font-size="11" font-weight="bold" fill="#1e3a5f">email</text>
+          <text x="330" y="30" font-size="11" font-weight="bold" fill="#1e3a5f">password</text>
+          
+          <!-- 行1 -->
+          <rect x="20" y="45" width="360" height="25" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="40" y="63" font-size="10" fill="#334155">1</text>
+          <text x="120" y="63" font-size="10" fill="#334155">山田太郎</text>
+          <text x="220" y="63" font-size="10" fill="#334155">taro@example.com</text>
+          <text x="330" y="63" font-size="10" fill="#334155">hashed_pw</text>
+          
+          <!-- 行2 -->
+          <rect x="20" y="75" width="360" height="25" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="40" y="93" font-size="10" fill="#334155">2</text>
+          <text x="120" y="93" font-size="10" fill="#334155">鈴木花子</text>
+          <text x="220" y="93" font-size="10" fill="#334155">hanako@example.com</text>
+          <text x="330" y="93" font-size="10" fill="#334155">hashed_pw2</text>
+          
+          <!-- 行3 -->
+          <rect x="20" y="105" width="360" height="25" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="40" y="123" font-size="10" fill="#334155">3</text>
+          <text x="120" y="123" font-size="10" fill="#334155">佐藤一郎</text>
+          <text x="220" y="123" font-size="10" fill="#334155">ichiro@example.com</text>
+          <text x="330" y="123" font-size="10" fill="#334155">hashed_pw3</text>
+          
+          <!-- カラム名の下線 -->
+          <line x1="20" y1="45" x2="380" y2="45" stroke="#2563eb" stroke-width="1"/>
+          
+          <!-- 凡例 -->
+          <text x="200" y="150" text-anchor="middle" font-size="9" fill="#64748b">カラム（列）← → レコード（行）</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>用語</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">テーブル</th><td>同じ種類のデータをまとめて管理する箱。例：users（ユーザー情報）</th></tr>
+            <tr><td style="font-weight: bold;">レコード（行）</th><td>テーブルに格納される1件分のデータ。例：1人のユーザー情報</th></tr>
+            <tr><td style="font-weight: bold;">カラム（列）</th><td>データの項目名。例：id, name, email, password</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>テーブル設計の基本ルール</h3>
+      <ol>
+        <li><strong>1つのテーブルは「1つの意味」に絞る</strong>：users → ユーザー情報、orders → 注文情報、items → 商品情報</li>
+        <li><strong>カラムは「属性」を表す</strong>：ユーザーの属性（名前、メールアドレス、パスワード）</li>
+        <li><strong>レコードは「実体」を表す</strong>：1人のユーザー、1件の注文、1つの商品</li>
+      </ol>
+
+      <h2>3. データ型</h2>
+      <p>RDBでは、テーブルの各カラムに「どの種類のデータを入れるか」を明確にする必要がある。この「データの種類」をデータ型（Data Type）と呼ぶ。データ型は、データの正しさ、検索性能、ストレージ効率、インデックスの有効性に直接影響する。</p>
+
+      <h3>① 数値型（整数/小数）</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>例</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">INT（整数）</th><td>1, 100, 9999</th><td>ユーザーID、商品ID、在庫数、注文数</th></tr>
+            <tr><td style="font-weight: bold;">DECIMAL（小数）</th><td>1980.50, 0.08</th><td>価格、重量、割引率（誤差が出ない）</th></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mistake-list">ポイント：IDは整数型で管理する。金額は誤差が出ないDECIMALを使う（浮動小数点は使わない）。</p>
+
+      <h3>② 文字列型（短文/長文）</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>例</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">VARCHAR（可変長文字列）</th>那样"山田太郎", "taro@example.com"</th>那样名前、メールアドレス、パスワード（ハッシュ値）</th></tr>
+            <tr><td style="font-weight: bold;">TEXT（長文）</th>那样長い商品説明やコメント</th>那样商品説明、コメント、メモ</th></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mistake-list">ポイント：VARCHARは必要な分だけ保存できる。長文はTEXTを使う。</p>
+
+      <h3>③ 日付・時刻型</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>例</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">DATE</th><td>2026-06-16</th><td>誕生日、登録日</th></tr>
+            <tr><td style="font-weight: bold;">DATETIME / TIMESTAMP</th><td>2026-06-16 12:30:15</th><td>注文日時、更新日時</th></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mistake-list">ポイント：日付を文字列で保存すると検索が遅くなる。日付型を使うことで範囲検索が高速になる。</p>
+
+      <h3>④ 真偽値（Boolean）</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>値</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">true / false</th><td>有効フラグ（is_active）、削除フラグ（is_deleted）、公開フラグ（is_public）</th></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mistake-list">ポイント：0/1で管理されることが多い。状態管理に必須。</p>
+
+      <h3>⑤ NULL（値が存在しない）</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>意味</th><th>例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">値が未設定</th><td>電話番号（未登録の場合）</th></tr>
+            <tr><td style="font-weight: bold;">値が存在しない</th><td>退会日時（退会していない場合）</th></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mistake-list">ポイント：NULLは「空文字」や「0」とは異なる概念。NULLを許可するかどうかは設計で決める。検索条件でNULLは特別扱いになる（=では比較できない）。</p>
+
+      <h3>データ型が重要な理由</h3>
+      <ul>
+        <li>データの正しさ（型が違うと不正データが入る）</li>
+        <li>SQLの検索性能</li>
+        <li>インデックスの効き方</li>
+        <li>ストレージ容量</li>
+        <li>アプリとの連携（型が合わないとエラーになる）</li>
+      </ul>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>RDBとNoSQLの混同</strong>：RDBは表形式で関係を持つ。NoSQLはそれ以外のデータモデルを持つ。</li>
+        <li><strong>テーブルとデータベースの混同</strong>：データベースはテーブルの集合。テーブルはその中の1つの表。</li>
+        <li><strong>VARCHARとTEXTの使い分け</strong>：短い文字列はVARCHAR（例：名前、メール）、長文はTEXT（例：商品説明、コメント）。</li>
+        <li><strong>金額にFLOATを使う誤り</strong>：FLOAT（浮動小数点）は誤差が発生する。金額はDECIMALを使う。</li>
+        <li><strong>NULLと空文字の混同</strong>：NULLは「値がない」、空文字は「長さ0の文字列」。検索条件が異なる。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. RDBの説明として正しいものはどれか。</summary>
+        <p>ア）キーと値のペアでデータを管理する　イ）表（テーブル）同士の関係を使ってデータを管理する　ウ）グラフ構造でデータを管理する　エ）階層構造でデータを管理する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — RDB（リレーショナルデータベース）は、表（テーブル）同士の関係を使ってデータを管理する仕組み。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. テーブルの中で1件分のデータを表すものはどれか。</summary>
+        <p>ア）カラム　イ）レコード　ウ）データベース　エ）インデックス</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — レコード（行）はテーブルに格納される1件分のデータを表す。例：1人のユーザー情報。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. データの項目名（id, name, emailなど）を何と呼ぶか。</summary>
+        <p>ア）レコード　イ）テーブル　ウ）カラム　エ）データベース</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — カラム（列）はデータの項目名で、id, name, emailなどが該当する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 金額を正確に扱うために使用すべきデータ型はどれか。</summary>
+        <p>ア）INT　イ）FLOAT　ウ）DECIMAL　エ）VARCHAR</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 金額は誤差が出ないDECIMAL型を使用する。FLOAT（浮動小数点）は誤差が発生する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 可変長の文字列を保存する際に使用するデータ型はどれか。</summary>
+        <p>ア）INT　イ）VARCHAR　ウ）DATE　エ）DECIMAL</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — VARCHARは可変長の文字列を保存するデータ型。必要な分だけ保存できる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. NULLの説明として正しいものはどれか。</summary>
+        <p>ア）空文字と同じ意味　イ）数値の0と同じ意味　ウ）値が存在しないことを表す　エ）デフォルト値のことを指す</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — NULLは「値が存在しない」を表す特殊な値。空文字や0とは異なる概念。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. RDBを操作するための標準言語はどれか。</summary>
+        <p>ア）HTML　イ）CSS　ウ）SQL　エ）JavaScript</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — SQL（Structured Query Language）はRDBを操作するための標準言語。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 注文日時を保存する際に最も適切なデータ型はどれか。</summary>
+        <p>ア）INT　イ）VARCHAR　ウ）DATE　エ）DATETIME</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 日時（年月日＋時刻）を保存するにはDATETIME型またはTIMESTAMP型が適切。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 商品説明のような長い文章を保存する際に最も適切なデータ型はどれか。</summary>
+        <p>ア）INT　イ）VARCHAR　ウ）TEXT　エ）DATE</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 長い文章はTEXT型を使用する。VARCHARは短い文字列向け。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. テーブル設計の基本ルールとして適切でないものはどれか。</summary>
+        <p>ア）1つのテーブルは1つの意味に絞る　イ）カラムは属性を表す　ウ）1つのテーブルに複数の意味を混ぜる　エ）レコードは実体を表す</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — テーブル設計では「1つのテーブルは1つの意味に絞る」が基本。複数の意味を混ぜると後々の管理が困難になる。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第8章 データベース概論（p240-p254）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

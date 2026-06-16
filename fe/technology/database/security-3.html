@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webサーバーのセキュリティ③（CSRF/ディレクトリトラバーサル/入力値バリデーション） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>Webサーバーのセキュリティ③</h1>
+        <p class="lead">CSRF攻撃、ディレクトリトラバーサル攻撃、入力値バリデーションの重要性と防御策を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>Webサーバーのセキュリティ③</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>CSRF攻撃の仕組みと防御（CSRFトークン/SameSite）</li>
+          <li>ディレクトリトラバーサル攻撃の仕組みと防御（ホワイトリスト方式）</li>
+          <li>入力値バリデーションの重要性とホワイトリスト方式</li>
+          <li>各攻撃の原因と根本的な防御策</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>CSRF攻撃と防御、ディレクトリトラバーサルと防御、入力値バリデーションの重要性</dd></div>
+          <div><dt>中</dt><dd>SameSite属性、ホワイトリスト方式</dd></div>
+          <div><dt>低</dt><dd>Referer/Originチェックの詳細</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>CSRF</th>的那样ログイン状態を悪用し、攻撃者サイトから勝手に操作を実行させる攻撃</th></td>
+            <tr><th>2</th><th>CSRFトークン</th>的那样フォームに埋め込むランダムな値。CSRF対策の最重要手段</th></tr>
+            <tr><th>3</th><th>SameSite属性</th>的那样他サイトからのリクエスト時にCookieを送信するか制御（CSRF対策）</th><tr>
+            <tr><th>4</th><th>ディレクトリトラバーサル</th>那样../を利用して本来アクセスできないファイルを読み取る攻撃</th></tr>
+            <tr><th>5</th><th>ホワイトリスト方式</th>那样許可する値だけを通すバリデーション方式</th></tr>
+            <tr><th>6</th><th>ブラックリスト方式</th>那样禁止する値を列挙する方式（不完全）</th></td>
+            <tr><th>7</th><th>入力値バリデーション</th>那样外部から渡される値が想定された形式・範囲かを確認する工程</th></td>
+            <tr><th>8</th><th>パス正規化</th>那样../などのパス操作を解決して絶対パスを得る処理</th></tr>
+            <tr><th>9</th><th>ID方式</th>那样実ファイル名と公開名を分離する防御手法</th></td>
+            <tr><th>10</th><th>型チェック</th>那样整数・文字列など型が正しいか確認するバリデーション</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. CSRF（クロスサイトリクエストフォージェリ）</h2>
+      <p>CSRFとは、ユーザーがログイン中であることを悪用し、攻撃者が用意した別サイトから「勝手に操作を実行させる攻撃」。</p>
+
+      <h3>攻撃の本質</h3>
+      <p>「ユーザーのブラウザが、攻撃者の意図したリクエストを“正規ユーザーとして送ってしまう”」→サーバーは攻撃者の操作を正規ユーザーの操作と誤認する。</p>
+
+      <h3>何が起きるのか</h3>
+      <ul>
+        <li>パスワード変更</li>
+        <li>メールアドレス変更</li>
+        <li>退会処理</li>
+        <li>商品購入・送金処理</li>
+        <li>管理者操作（ユーザー削除・設定変更）</li>
+      </ul>
+
+      <h3>攻撃の仕組み</h3>
+      <figure class="wide-diagram">
+        <figcaption>CSRF攻撃の仕組み</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="33" text-anchor="middle" font-size="11" fill="#1e3a5f">被害者</text>
+          
+          <line x1="120" y1="28" x2="145" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="150" y="10" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="11" fill="#92400e">攻撃者サイト</text>
+          
+          <line x1="250" y1="28" x2="275" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="280" y="10" width="100" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="330" y="33" text-anchor="middle" font-size="11" fill="#14532d">正規サイト</text>
+          
+          <text x="200" y="80" text-anchor="middle" font-size="10" fill="#64748b">攻撃者のサイトに埋め込まれた悪意あるタグ</text>
+          
+          <rect x="100" y="95" width="200" height="40" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+          <text x="200" y="112" text-anchor="middle" font-size="9" fill="#7f1d1d">&lt;img src="https://example.com/transfer?amount=10000"&gt;</text>
+          <text x="200" y="128" text-anchor="middle" font-size="9" fill="#7f1d1d">&lt;form action="https://example.com/delete"&gt;...&lt;/form&gt;</text>
+          
+          <text x="200" y="165" text-anchor="middle" font-size="10" fill="#64748b">Cookieは自動送信される → サーバーは正規リクエストと誤認</text>
+          <text x="200" y="185" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">これがCSRFの根本原因</text>
+        </svg>
+      </figure>
+
+      <h3>防御（どう防ぐのか）</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>防御方法</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">CSRFトークン（最重要）</th>那样フォーム生成時にランダムなトークンを埋め込み、リクエスト時に検証する</th></tr>
+            <tr><td style="font-weight: bold;">SameSite属性</th>那样CookieにSameSite=Lax/Strictを設定し、外部サイトからのリクエスト時にCookieを送信しない</th></tr>
+            <tr><td style="font-weight: bold;">重要操作はPOST + トークン必須</th>那样GETで状態変更を行わない</th></tr>
+            <tr><td style="font-weight: bold;">Referer/Originチェック（補助）</th>那样リクエストの送信元が自サイトか確認</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>CSRFトークンの仕組み</figcaption>
+        <svg viewBox="0 0 400 120" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="170" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="105" y="28" text-anchor="middle" font-size="10" fill="#1e3a5f">フォーム生成時</text>
+          <text x="105" y="42" text-anchor="middle" font-size="9" fill="#1e3a5f">サーバーがランダムなトークンを発行</text>
+          
+          <line x1="190" y1="30" x2="210" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="215" y="10" width="165" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="297" y="28" text-anchor="middle" font-size="10" fill="#92400e">フォーム送信時</text>
+          <text x="297" y="42" text-anchor="middle" font-size="9" fill="#92400e">Cookie + トークンを送信</text>
+          
+          <text x="200" y="85" text-anchor="middle" font-size="10" fill="#64748b">サーバーはトークンを検証</text>
+          <text x="200" y="105" text-anchor="middle" font-size="10" font-weight="bold" fill="#16a34a">✅ トークンが一致しない → リクエスト拒否</text>
+        </svg>
+      </figure>
+
+      <h2>2. ディレクトリトラバーサル</h2>
+      <p>ディレクトリトラバーサルとは、ユーザー入力に含まれる ../ を利用して、本来アクセスできないディレクトリ階層へ移動し、機密ファイルを読み取る攻撃。</p>
+
+      <h3>攻撃の本質</h3>
+      <p>「アプリがファイルパスをユーザー入力で構築している」→攻撃者がOSのパス解釈を利用して「本来のディレクトリ外」に出られる。</p>
+
+      <h3>何が起きるのか</h3>
+      <ul>
+        <li>/etc/passwd（ユーザー情報）の読み取り</li>
+        <li>アプリの設定ファイル（DBパスワード含む）の読み取り</li>
+        <li>.env（APIキー・秘密鍵）の読み取り</li>
+        <li>ソースコードの読み取り</li>
+        <li>ログファイルの読み取り</li>
+      </ul>
+
+      <h3>攻撃の例</h3>
+      <figure class="wide-diagram">
+        <figcaption>ディレクトリトラバーサル攻撃の例</figcaption>
+        <svg viewBox="0 0 400 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="360" height="35" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="28" font-size="10" fill="#1e3a5f">アプリ内部コード:</text>
+          <text x="30" y="42" font-size="10" fill="#1e3a5f">file_path = "/var/www/files/" + input</text>
+          
+          <line x1="200" y1="50" x2="200" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="20" y="70" width="360" height="35" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+          <text x="30" y="88" font-size="10" fill="#7f1d1d">攻撃者の入力:</text>
+          <text x="30" y="102" font-size="10" fill="#7f1d1d">../../../../etc/passwd</text>
+          
+          <line x1="200" y1="110" x2="200" y2="125" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="20" y="130" width="360" height="35" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="148" font-size="10" fill="#1e3a5f">最終パス: /var/www/files/../../../../etc/passwd → /etc/passwd</text>
+        </svg>
+      </figure>
+
+      <h3>防御（どう防ぐのか）</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>防御方法</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <td><td style="font-weight: bold;">ホワイトリスト方式（最重要）</th>那样許可するファイル名を固定する。例：allowed = ["report.pdf", "manual.pdf"]</th></tr>
+            <tr><td style="font-weight: bold;">実ファイル名と公開名を分離（ID方式）</th>那样ユーザーはIDだけ指定し、アプリがDBから実ファイル名を取得する</th></tr>
+            <tr><td style="font-weight: bold;">パス正規化＋禁止文字チェック（補助）</th>那样../を含む入力を拒否する（ただしこれだけでは不十分）</th></tr>
+            <tr><td style="font-weight: bold;">ファイルを公開ディレクトリ外に置かない</th>那样Webサーバーから直接アクセスできない場所に置く</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>3. 入力値バリデーション</h2>
+      <p>入力値バリデーションは、Webアプリに渡されるすべての値が「想定された形式・範囲」に収まっているかを確認する工程である。Web攻撃（SQLインジェクション・XSS・CSRF・ディレクトリトラバーサル）の多くは、「想定外の値がアプリ内部に侵入する」ことで成立する。</p>
+
+      <h3>攻撃の本質</h3>
+      <p>「外部から渡される値はすべて攻撃の可能性がある」→“想定外の値”を排除しないと、内部処理が破壊される。</p>
+
+      <h3>バリデーション不足による被害</h3>
+      <ul>
+        <li>SQLインジェクション（SQL構文を混入される）</li>
+        <li>XSS（JavaScriptを混入される）</li>
+        <li>ディレクトリトラバーサル（../を混入される）</li>
+        <li>認可バイパス（本来アクセスできないIDを指定される）</li>
+        <li>DoS（巨大データを送りつけられる）</li>
+      </ul>
+
+      <h3>防御（どう防ぐのか）</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <tr>
+          <thead>
+            <tr><th>防御方法</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">ホワイトリスト方式（最重要）</th>那样許可する値だけを通す。例：メールアドレス形式、整数のみ、ファイル名形式</th></tr>
+            <tr><td style="font-weight: bold;">ブラックリスト方式は無意味</th>那样攻撃パターンは無限、エンコードで回避される</th></tr>
+            <tr><td style="font-weight: bold;">型チェック</th>那样整数・文字列・真偽値など型が正しいか確認する</th></tr>
+            <tr><td style="font-weight: bold;">長さチェック</th>那样最大文字数を制限し、巨大データ攻撃（DoS）を防ぐ</th></tr>
+            <tr><td style="font-weight: bold;">値の範囲チェック</th>那样年齢は0〜120など、妥当な範囲を確認する</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>ホワイトリスト方式の例</figcaption>
+        <svg viewBox="0 0 400 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="170" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="105" y="28" text-anchor="middle" font-size="10" fill="#1e3a5f">ユーザー入力</text>
+          <text x="105" y="42" text-anchor="middle" font-size="9" fill="#1e3a5f">' OR 1=1 --</text>
+          
+          <line x1="190" y1="30" x2="210" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr4)"/>
+          
+          <rect x="215" y="10" width="165" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="297" y="28" text-anchor="middle" font-size="10" fill="#92400e">バリデーション</text>
+          <text x="297" y="42" text-anchor="middle" font-size="9" fill="#92400e">ホワイトリスト方式</text>
+          
+          <text x="200" y="85" text-anchor="middle" font-size="10" fill="#64748b">許可する値だけを通す</text>
+          <text x="200" y="105" text-anchor="middle" font-size="10" font-weight="bold" fill="#16a34a">✅ 想定外の値 → 拒否</text>
+          <text x="200" y="125" text-anchor="middle" font-size="10" fill="#64748b">例：数字のみ許可 → ' OR 1=1 -- は拒否</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>CSRFトークンを付け忘れる</strong>：重要な操作（パスワード変更、退会、購入）には必ずCSRFトークンを実装する。</li>
+        <li><strong>ブラックリスト方式のバリデーション</strong>：危険な文字列をリストアップしても、新しい攻撃パターンやエンコードで回避される。ホワイトリスト方式が必須。</li>
+        <li><strong>ディレクトリトラバーサル対策でエスケープのみに頼る</strong>：../を削除するだけでは不十分。ホワイトリスト方式やID方式が根本解決。</li>
+        <li><strong>入力値バリデーションはサーバー側で行う</strong>：クライアント側（JavaScript）のバリデーションは回避可能。必ずサーバー側でも検証する。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. CSRF攻撃の本質は何か。</summary>
+        <p>ア）ユーザー入力がSQL文の一部として扱われる　イ）ユーザー入力がHTMLとして解釈される形で出力される　ウ）ログイン状態を悪用して勝手に操作を実行させる　エ）../でディレクトリを遡ってファイルを読む</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — CSRFは、ユーザーがログイン中であることを悪用し、攻撃者サイトから勝手に操作を実行させる攻撃。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. CSRF対策として最も重要なものはどれか。</summary>
+        <p>ア）エスケープ処理　イ）プレースホルダ　ウ）CSRFトークン　エ）パスワードの長大化</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — CSRFトークンをフォームに埋め込み、リクエスト時に検証することがCSRF対策の最重要手段。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ディレクトリトラバーサル攻撃の本質は何か。</summary>
+        <p>ア）ユーザー入力がSQL文の一部として扱われる　イ）ユーザー入力がHTMLとして解釈される形で出力される　ウ）ログイン状態を悪用して操作を実行させる　エ）../を利用して本来アクセスできないファイルを読む</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — ディレクトリトラバーサルは、../を利用して本来アクセスできないディレクトリ階層へ移動し、機密ファイルを読み取る攻撃。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. ディレクトリトラバーサルの最も効果的な防御策はどれか。</summary>
+        <p>ア）../をエスケープする　イ）ホワイトリスト方式で許可するファイルを固定する　ウ）入力をすべて大文字に変換する　エ）パスワードを長くする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ホワイトリスト方式で許可するファイル名を固定すれば、攻撃者は../を使っても無効。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 入力値バリデーションの最も重要な原則はどれか。</summary>
+        <p>ア）ブラックリスト方式　イ）ホワイトリスト方式　ウ）エスケープ方式　エ）暗号化方式</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ホワイトリスト方式（許可する値だけを通す）が最も重要。ブラックリスト方式は不完全。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. CSRF対策としてCookieに付与すべき属性はどれか。</summary>
+        <p>ア）Secure　イ）HttpOnly　ウ）SameSite　エ）Domain</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — SameSite属性をLaxまたはStrictに設定すると、他サイトからのリクエスト時にCookieが送信されずCSRFを防げる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. ディレクトリトラバーサル攻撃の例として正しいものはどれか。</summary>
+        <p>ア）&lt;script&gt;steal()&lt;/script&gt;　イ）' OR 1=1 --　ウ）../../../etc/passwd　エ）123456</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ../../../etc/passwd はディレクトリトラバーサルの代表的な攻撃文字列。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 入力値バリデーションはどこで行うべきか。</summary>
+        <p>ア）クライアント側のみ　イ）サーバー側のみ　ウ）クライアント側とサーバー側の両方　エ）データベース側のみ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — クライアント側バリデーションはUXのため、サーバー側バリデーションはセキュリティのため。両方で行うのが基本。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ブラックリスト方式が不十分な理由はどれか。</summary>
+        <p>ア）実装が難しいから　イ）攻撃パターンは無限であり、エンコードで回避されるから　ウ）処理が遅いから　エ）メモリを多く消費するから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 攻撃パターンは無限であり、エンコードや新しい手法で簡単に回避されるため、ブラックリスト方式は不十分。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. CSRF攻撃で被害者がログインしているサイトはどれか。</summary>
+        <p>ア）攻撃者のサイト　イ）正規のターゲットサイト　ウ）検索エンジン　エ）メールサーバー</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — CSRF攻撃は、被害者が正規のターゲットサイトにログインしている状態を悪用して行われる。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第9章 Webサーバーのセキュリティ（p344-p366）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

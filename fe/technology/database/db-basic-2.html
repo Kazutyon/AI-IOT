@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>データベース概論②（主キー/外部キー・正規化） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Database</p>
+        <h1>データベース概論②</h1>
+        <p class="lead">主キーと外部キーの役割、テーブル間の関係、正規化の考え方と必要性を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>データベース概論②</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>主キー（Primary Key）の役割と条件</li>
+          <li>外部キー（Foreign Key）の役割と制約</li>
+          <li>主キーと外部キーの関係（1対多）</li>
+          <li>正規化の目的と必要性</li>
+          <li>第1正規形（1NF）〜第3正規形（3NF）の考え方</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>主キーの条件、外部キーの役割、正規化の目的</dd></div>
+          <div><dt>中</dt><dd>第1〜第3正規形の具体例、1対多の関係</dd></div>
+          <div><dt>低</dt><dd>複合主キーの詳細</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>主キー（PK）</th>的那样テーブル内の1行を一意に識別するためのカラム</th></tr>
+            <tr><th>2</th><th>外部キー（FK）</th>的那样他のテーブルの主キーを参照するカラム</th></tr>
+            <tr><th>3</th><th>1対多（one-to-many）</th>的那样1つの親レコードに複数の子レコードが紐づく関係</th></tr>
+            <tr><th>4</th><th>参照整合性</th>的那样外部キー制約によって保証されるデータの整合性</th></tr>
+            <tr><th>5</th><th>正規化</th>的那样データの重複を排除し、整合性を保つためのテーブル設計</th></tr>
+            <tr><th>6</th><th>第1正規形（1NF）</th>那样繰り返しをなくす（1つのカラムに複数の値を入れない）</th></tr>
+            <tr><th>7</th><th>第2正規形（2NF）</th>那样主キーと関係のない項目を排除する</th></tr>
+            <tr><th>8</th><th>第3正規形（3NF）</th>那样間接的な依存を排除する</th></tr>
+            <tr><th>9</th><th>AUTO_INCREMENT</th>那样主キーを自動で採番する機能</th></tr>
+            <tr><th>10</th><th>CASCADE</th>那样親データ削除時に子データも自動削除する外部キー制約の動作</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. 主キー / 外部キー</h2>
+      <p>RDBでは、テーブル同士の関係を正しく管理するために主キー（Primary Key）と外部キー（Foreign Key）が重要な役割を持つ。この2つを理解することで、データの整合性・検索性能・テーブル設計の品質が大きく向上する。</p>
+
+      <h3>主キー（Primary Key：PK）</h3>
+      <p>主キーは、テーブル内の1行を一意に識別するためのカラム。</p>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>主キーの条件</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">重複してはいけない</th><td>unique（一意）</th></tr>
+            <tr><td style="font-weight: bold;">NULLを許可しない</th>那樣not null</th></tr>
+            <tr><td style="font-weight: bold;">1行を確実に特定できる</th>那样識別子として機能</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>主キーの例（usersテーブル）</figcaption>
+        <svg viewBox="0 0 400 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="55" y="30" font-size="11" font-weight="bold" fill="#1e3a5f">id（主キー）</text>
+          <text x="150" y="30" font-size="11" font-weight="bold" fill="#1e3a5f">name</text>
+          <text x="280" y="30" font-size="11" font-weight="bold" fill="#1e3a5f">email</text>
+          
+          <rect x="20" y="45" width="360" height="25" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="55" y="63" font-size="10" fill="#dc2626">1</text>
+          <text x="150" y="63" font-size="10" fill="#334155">山田太郎</text>
+          <text x="280" y="63" font-size="10" fill="#334155">taro@example.com</text>
+          
+          <rect x="20" y="75" width="360" height="25" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="55" y="93" font-size="10" fill="#dc2626">2</text>
+          <text x="150" y="93" font-size="10" fill="#334155">鈴木花子</text>
+          <text x="280" y="93" font-size="10" fill="#334155">hanako@example.com</text>
+          
+          <text x="200" y="120" text-anchor="middle" font-size="10" fill="#64748b">idカラムが主キー：重複なし・NULLなし</text>
+        </svg>
+      </figure>
+
+      <p>主キーが必要な理由：UPDATE/DELETEの対象を正確に特定できる、JOINの基準になる、データの整合性を保てる。主キーはテーブルの「軸」となるカラムであり、id（整数）を主キーにするのが一般的。</p>
+
+      <h3>外部キー（Foreign Key：FK）</h3>
+      <p>外部キーは、他のテーブルの主キーを参照するカラム。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>外部キーの例（ordersテーブル）</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- ordersテーブル -->
+          <rect x="20" y="10" width="170" height="90" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="105" y="28" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a5f">ordersテーブル</text>
+          
+          <rect x="30" y="38" width="150" height="20" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="0.5"/>
+          <text x="40" y="52" font-size="9" fill="#1e3a5f">id（主キー）</text>
+          
+          <rect x="30" y="62" width="150" height="20" rx="2" fill="#fef3c7" stroke="#d97706" stroke-width="0.5"/>
+          <text x="40" y="76" font-size="9" fill="#92400e">user_id（外部キー）</text>
+          
+          <rect x="30" y="86" width="150" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="40" y="100" font-size="9" fill="#334155">item_id（外部キー）</text>
+          
+          <!-- 矢印 -->
+          <line x1="195" y1="55" x2="215" y2="55" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <!-- usersテーブル -->
+          <rect x="220" y="10" width="160" height="90" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="300" y="28" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a5f">usersテーブル</text>
+          
+          <rect x="230" y="38" width="140" height="20" rx="2" fill="#dcfce7" stroke="#16a34a" stroke-width="0.5"/>
+          <text x="240" y="52" font-size="9" fill="#14532d">id（主キー）</text>
+          
+          <rect x="230" y="62" width="140" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="240" y="76" font-size="9" fill="#334155">name</text>
+          
+          <rect x="230" y="86" width="140" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="240" y="100" font-size="9" fill="#334155">email</text>
+          
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <text x="200" y="140" text-anchor="middle" font-size="10" fill="#64748b">user_id は users.id を参照する外部キー</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        </table>
+          <thead>
+            <tr><th>外部キーの役割</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">関係を表す</th><td>テーブル同士の関係（リレーション）を表す</th></tr>
+            <tr><td style="font-weight: bold;">整合性の保証</th><td>存在しないデータを登録できないようにする</th></tr>
+            <tr><td style="font-weight: bold;">参照整合性</th><td>親データ削除時の動作（CASCADE/RESTRICT）を制御できる</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>主キーと外部キーの関係（1対多）</h3>
+      <p>RDBの基本的な関係は1対多（one-to-many）。例：1人のユーザー → 複数の注文、1つの商品 → 複数の注文。この関係を表すために、親テーブル：主キー、子テーブル：外部キーという構造になる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>1対多の関係</figcaption>
+        <svg viewBox="0 0 400 140" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- 親テーブル -->
+          <rect x="30" y="10" width="120" height="50" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="90" y="32" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">users</text>
+          <text x="90" y="48" text-anchor="middle" font-size="9" fill="#14532d">主キー: id</text>
+          
+          <line x1="150" y1="35" x2="170" y2="35" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <!-- 子テーブル -->
+          <rect x="175" y="10" width="200" height="50" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="275" y="32" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">orders</text>
+          <text x="275" y="48" text-anchor="middle" font-size="9" fill="#92400e">外部キー: user_id</text>
+          
+          <text x="200" y="95" text-anchor="middle" font-size="10" fill="#64748b">1人のユーザーに複数の注文が紐づく</text>
+          
+          <!-- 具体例 -->
+          <rect x="60" y="110" width="80" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="100" y="124" text-anchor="middle" font-size="9" fill="#334155">ユーザー1</text>
+          
+          <rect x="160" y="110" width="80" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="200" y="124" text-anchor="middle" font-size="9" fill="#334155">注文A</text>
+          
+          <rect x="250" y="110" width="80" height="20" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="290" y="124" text-anchor="middle" font-size="9" fill="#334155">注文B</text>
+          
+          <line x1="100" y1="110" x2="200" y2="110" stroke="#64748b" stroke-width="1"/>
+          <line x1="100" y1="110" x2="290" y2="110" stroke="#64748b" stroke-width="1"/>
+        </svg>
+      </figure>
+
+      <h3>主キー/外部キーの設計ルール</h3>
+      <ol>
+        <li><strong>主キーは必ず設定する</strong>：id（整数）を主キーにするのが一般的。複合主キーは避ける。</li>
+        <li><strong>外部キーは「関係」を表す</strong>：user_id、item_id、post_idなど「〜_id」形式で命名すると分かりやすい。</li>
+        <li><strong>外部キー制約は必ず設定する</strong>：データの整合性を自動で保証できる。</li>
+        <li><strong>主キーと外部キーはJOINの基準になる</strong></li>
+      </ol>
+
+      <h2>2. 正規化</h2>
+      <p>正規化（Normalization）は、データの重複を排除し、整合性を保つためのテーブル設計の考え方。</p>
+
+      <h3>正規化とは何か</h3>
+      <p>「1つのテーブルに複数の意味を混ぜない」という設計思想。目的：データの重複をなくす、更新時の不整合を防ぐ、テーブル同士の関係を明確にする。</p>
+
+      <h3>第1正規形（1NF）：繰り返しをなくす</h3>
+      <p>1つのカラムに複数の値を入れない。</p>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>NG例</th><th>OK例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>favorite_items = "A, B, C"</td>
+            <td>
+              user_id | item_id<br>
+              1 | A<br>
+              1 | B<br>
+              1 | C
+            </td>
+          </tr>
+        </tbody>
+      </div>
+
+      <h3>第2正規形（2NF）：主キーと関係のない項目を排除</h3>
+      <p>主キーと直接関係しないカラムを同じテーブルに置かない。</p>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>NG例（ordersテーブルに商品名を入れる）</th><th>OK例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>
+              orders<br>
+              id | user_id | item_id | item_name<br>
+              ※ item_nameはitem_idと関係があるが、ordersとは関係がない
+            </td>
+            <td>
+              itemsテーブルにitem_nameを置く<br>
+              ordersはitem_idだけを持つ
+            </td>
+          </tr>
+        </tbody>
+      </div>
+
+      <h3>第3正規形（3NF）：間接的な依存を排除</h3>
+      <p>カラム同士が間接的に依存している場合は分離する。</p>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>NG例</th><th>OK例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>
+              users<br>
+              id | postal_code | prefecture_name<br>
+              ※ prefecture_nameはpostal_codeから導出できる
+            </td>
+            <td>
+              住所マスタを別テーブルに分ける<br>
+              usersはpostal_codeのみ保持
+            </td>
+          </tr>
+        </tbody>
+      </div>
+
+      <h3>正規化が必要な理由</h3>
+      <ul>
+        <li><strong>更新時の不整合</strong>：同じ情報が複数の場所にあると、更新漏れが発生する</li>
+        <li><strong>データの重複</strong>：無駄なデータが増え、容量が増加する</li>
+        <li><strong>意味の混在</strong>：テーブルの役割が曖昧になり、JOINが複雑化する</li>
+        <li><strong>アプリのバグ</strong>：不整合データが原因で、アプリ側の処理が破綻する</li>
+      </ul>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>主キーと外部キーの混同</strong>：主キーは自分のテーブル内の行を識別。外部キーは他のテーブルの行を参照。</li>
+        <li><strong>外部キー制約を設定しないリスク</strong>：存在しないuser_idの注文データが作られてしまう可能性がある。</li>
+        <li><strong>正規化＝テーブルを細かく分ける作業ではない</strong>：「意味ごとに整理する作業」と理解する。</li>
+        <li><strong>過剰な正規化</strong>：正規化しすぎると結合（JOIN）が増え、検索性能が低下する場合がある。状況に応じて非正規化も検討。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 主キー（Primary Key）の条件として適切でないものはどれか。</summary>
+        <p>ア）重複してはいけない　イ）NULLを許可する　ウ）1行を一意に識別できる　エ）テーブルに1つ設定する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 主キーはNULLを許可してはいけない。主キーは必ず値を持つ必要がある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 他のテーブルの主キーを参照するカラムは何と呼ばれるか。</summary>
+        <p>ア）主キー　イ）外部キー　ウ）インデックス　エ）ビュー</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 外部キー（Foreign Key）は他のテーブルの主キーを参照するカラム。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 1人のユーザーに複数の注文が紐づく関係を何と呼ぶか。</summary>
+        <p>ア）1対1　イ）1対多　ウ）多対多　エ）多対1</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 1人のユーザーに複数の注文が紐づく関係は「1対多」と呼ぶ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 外部キー制約（参照整合性）の役割として正しいものはどれか。</summary>
+        <p>ア）データの検索を高速化する　イ）存在しない外部キーの値を登録できなくする　ウ）データを暗号化する　エ）テーブルを自動的に削除する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 外部キー制約により、存在しない親データを参照する子データの登録を防ぎ、データの整合性を保証する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 正規化の目的として適切でないものはどれか。</summary>
+        <p>ア）データの重複をなくす　イ）更新時の不整合を防ぐ　ウ）検索速度を常に向上させる　エ）テーブル同士の関係を明確にする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 正規化はデータの整合性が目的。場合によっては検索速度が低下することもある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 第1正規形（1NF）の説明として正しいものはどれか。</summary>
+        <p>ア）主キーと関係のない項目を排除する　イ）繰り返しをなくす（1つのカラムに複数の値を入れない）　ウ）間接的な依存を排除する　エ）テーブルを分割しない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 第1正規形は「繰り返しをなくす」こと。1つのカラムに複数の値を入れない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 第2正規形（2NF）の説明として正しいものはどれか。</summary>
+        <p>ア）繰り返しをなくす　イ）主キーと関係のない項目を排除する　ウ）間接的な依存を排除する　エ）すべてのテーブルを結合する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 第2正規形は「主キーと関係のない項目を排除する」こと。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 第3正規形（3NF）の説明として正しいものはどれか。</summary>
+        <p>ア）繰り返しをなくす　イ）主キーと関係のない項目を排除する　ウ）間接的な依存を排除する　エ）すべてのデータを1つのテーブルにまとめる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 第3正規形は「間接的な依存を排除する」こと。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 親データ削除時に子データも自動削除する外部キー制約の動作は何と呼ばれるか。</summary>
+        <p>ア）RESTRICT　イ）SET NULL　ウ）NO ACTION　エ）CASCADE</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — CASCADEは親データ削除時に子データも自動削除する動作。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 主キーに使用するデータ型として最も一般的なものはどれか。</summary>
+        <p>ア）VARCHAR　イ）DATE　ウ）INT（整数）　エ）TEXT</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 主キーには整数型（INT）を使用し、AUTO_INCREMENTで自動採番するのが一般的。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第8章 データベース概論（p255-p265）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

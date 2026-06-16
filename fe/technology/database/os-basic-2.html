@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WebサーバーのためのOS基礎②（DocumentRoot・サービス・権限） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>WebサーバーのためのOS基礎②</h1>
+        <p class="lead">ディレクトリ構造の概念、DocumentRootとpublic_htmlの違い、index.htmlの役割、サービスの仕組み、ログの種類、ファイル権限とWebサーバーの関係を理解します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>WebサーバーのためのOS基礎②</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>サーバーOSの代表的なディレクトリ構造</li>
+          <li>DocumentRootの概念とpublic_htmlとの違い</li>
+          <li>index.htmlが自動表示される仕組み</li>
+          <li>サービス（常駐プログラム）の仕組み</li>
+          <li>access.logとerror.logの役割</li>
+          <li>ファイル権限（rwx）とWebサーバーの関係</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>DocumentRootの概念、ファイル権限と403エラーの関係、index.htmlの役割</dd></div>
+          <div><dt>中</dt><dd>サービスの仕組み、ログの種類、public_html</dd></div>
+          <div><dt>低</dt><dd>具体的なディレクトリパス（/etc, /var, /usrなど）の詳細</dd></div>
+        </dl>
+        <p>読了目安: 約10分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><th>DocumentRoot</th><td>Webサーバーが公開するファイルを探す場所</td></tr>
+            <tr><td>2</td><th>public_html</th><td>レンタルサーバーでユーザーごとに与えられる公開ディレクトリ</td></tr>
+            <tr><td>3</td><th>index.html</th><td>ディレクトリの代表ページとして自動表示されるファイル</td></tr>
+            <tr><td>4</td><th>サービス（常駐プログラム）</th><td>OS上で常に動き続ける仕組み</td></tr>
+            <tr><td>5</td><th>access.log</th><td>Webサーバーへのアクセス記録を保存するログファイル</td></tr>
+            <tr><td>6</td><th>error.log</th><td>Webサーバーで発生したエラーを記録するログファイル</td></tr>
+            <tr><td>7</td><th>ファイル権限（rwx）</th><td>読み取り(r)・書き込み(w)・実行(x)を制御するOSの仕組み</td></tr>
+            <tr><td>8</td><th>403 Forbidden</th><td>権限不足などでアクセスが拒否された際に返されるステータスコード</td></tr>
+            <tr><td>9</td><th>/var/www</th><td>Web公開用のファイルが置かれる代表的なディレクトリ</td></tr>
+            <tr><td>10</td><th>/etc</th><td>設定ファイルを置くディレクトリ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. ディレクトリ構造の概念</h2>
+      <p>Webサーバーは、OSのファイルシステムからファイルを読み取る。そのため、ディレクトリ構造の概念を理解する必要がある。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>ディレクトリ</th><th>役割</th></tr></thead>
+          <tbody>
+            <tr><td>/etc</td><td>設定ファイルを置く場所（Webサーバーの設定もここ）</td></tr>
+            <tr><td>/var</td><td>変化するデータ（ログ、キャッシュ）</td></tr>
+            <tr><td>/usr</td><td>アプリケーション本体</td></tr>
+            <tr><td>/home</td><td>ユーザーのデータ</td></tr>
+            <tr><td>/var/www</td><td>Web公開用のファイル（静的コンテンツ）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2. DocumentRoot（ドキュメントルート）とは</h3>
+      <p>DocumentRootとは、Webサーバーが「公開するファイルを探す場所」のこと。例：/var/www/html/index.html ブラウザが https://example.com/ にアクセスすると、WebサーバーはDocumentRootの中からindex.htmlを探して返す。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>DocumentRootの仕組み</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- ブラウザ -->
+          <rect x="20" y="20" width="100" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="45" text-anchor="middle" font-size="12" fill="#1e3a5f">ブラウザ</text>
+          <text x="70" y="70" text-anchor="middle" font-size="10" fill="#475569">https://example.com/</text>
+          <!-- 矢印 -->
+          <line x1="120" y1="40" x2="155" y2="40" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <!-- Webサーバー -->
+          <rect x="160" y="20" width="100" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="210" y="45" text-anchor="middle" font-size="12" fill="#1e3a5f">Webサーバー</text>
+          <text x="210" y="70" text-anchor="middle" font-size="10" fill="#475569">DocumentRootを確認</text>
+          <!-- 矢印 -->
+          <line x1="260" y1="40" x2="295" y2="40" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <!-- ファイルシステム -->
+          <rect x="300" y="10" width="90" height="60" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="345" y="35" text-anchor="middle" font-size="10" fill="#92400e">/var/www/</text>
+          <text x="345" y="50" text-anchor="middle" font-size="10" fill="#92400e">html/</text>
+          <text x="345" y="63" text-anchor="middle" font-size="9" fill="#92400e">index.html</text>
+          <!-- 戻り矢印 -->
+          <path d="M 345 70 L 345 100 L 210 100 L 210 60" fill="none" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="280" y="95" text-anchor="middle" font-size="10" fill="#16a34a">ファイルを返す</text>
+        </svg>
+      </figure>
+
+      <h3>3. public_htmlとは</h3>
+      <p>レンタルサーバーでよく使われる構造。ユーザーごとに公開領域が分かれており、public_htmlに置いたファイルだけが公開される。例：/home/user/public_html/index.html</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>項目</th><th>DocumentRoot</th><th>public_html</th></tr></thead>
+          <tbody>
+            <tr><td>単位</td><td>サイト単位</td><td>ユーザー単位</td></tr>
+            <tr><td>設定場所</td><td>仮想ホスト</td><td>UserDir（Apache）</td></tr>
+            <tr><td>URL</td><td>/ から始まる</td><td>/~ユーザー名/</td></tr>
+            <tr><td>用途</td><td>通常のWebサイト公開</td><td>共有サーバーでの個人公開</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4. index.htmlの役割</h3>
+      <p>ブラウザで https://example.com/ と入力すると、index.htmlが自動で表示される。これはWebサーバーが次のように動作するため。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>index.html自動表示の仕組み</figcaption>
+        <svg viewBox="0 0 400 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="140" y="10" width="120" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="12" fill="#1e3a5f">1. DocumentRootを確認</text>
+          <line x1="200" y1="46" x2="200" y2="74" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="110" y="75" width="180" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="100" text-anchor="middle" font-size="12" fill="#1e3a5f">2. デフォルトファイルを探す</text>
+          <line x1="200" y1="115" x2="200" y2="143" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <polygon points="200,145 280,175 200,205 120,175" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="179" text-anchor="middle" font-size="11" fill="#92400e">3. 見つかった？</text>
+          <line x1="200" y1="205" x2="200" y2="233" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="208" y="222" font-size="11" fill="#64748b">Yes</text>
+          <rect x="110" y="234" width="180" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="257" text-anchor="middle" font-size="12" fill="#14532d">4. index.htmlを返す</text>
+          <line x1="280" y1="175" x2="330" y2="175" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="288" y="168" font-size="11" fill="#64748b">No</text>
+          <rect x="300" y="155" width="80" height="40" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="340" y="179" text-anchor="middle" font-size="11" fill="#7f1d1d">403/404</text>
+        </svg>
+      </figure>
+
+      <p>つまり、index.htmlは「そのディレクトリの代表ページ」として扱われる。</p>
+
+      <h3>5. Webサーバーが動き続ける仕組み（サービス）</h3>
+      <p>WebサーバーはOSの上で常に動き続ける必要がある。ブラウザからのアクセスはいつ来るか分からないため、WebサーバーはOSによって次のように管理されている：OS起動時に自動で立ち上がる、24時間待ち受け状態を維持する、リクエストが来たら即座に処理する、OSが停止するまで動き続ける。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>サービスの特徴</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>常駐プログラム</td><td>常に動き続ける仕組み</td></tr>
+            <tr><td>自動起動</td><td>OS起動時に自動で立ち上がる</td></tr>
+            <tr><td>待ち受け状態</td><td>24時間リクエストを待ち続ける</td></tr>
+            <tr><td>即時処理</td><td>リクエストが来たら即座に処理する</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>6. Webサーバーのログ</h3>
+      <p>Webサーバーは、受け取ったリクエスト・返したレスポンス・エラー・攻撃の痕跡をすべてログに記録する。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>ログの種類</th><th>役割</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>access.log</td><td>アクセスの記録。どのURLに誰がアクセスしたか。</td></tr>
+            <tr><td>error.log</td><td>エラーの記録。404や500の原因がここに記録される。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>理解すべきこと：Webサーバーの動作は画面には表示されない、正常動作か異常かはログで判断する、404や500の原因はログを見ないと分からない、セキュリティ攻撃の痕跡もログに残る、Webサーバー運用の基本は「ログを読むこと」。</p>
+
+      <h3>7. ファイル権限</h3>
+      <p>Webサーバーが静的ファイルを返すには、そのファイルに対してr（read：読み取り）権限が必要。もし権限が不足していると、Webサーバーはファイルを読み取れず、結果として403 Forbiddenが返される。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>権限とWebサーバーの関係</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 権限の3要素 -->
+          <rect x="20" y="20" width="100" height="50" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="42" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e3a5f">r</text>
+          <text x="70" y="58" text-anchor="middle" font-size="11" fill="#475569">読み取り</text>
+          <rect x="130" y="20" width="100" height="50" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="42" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e3a5f">w</text>
+          <text x="180" y="58" text-anchor="middle" font-size="11" fill="#475569">書き込み</text>
+          <rect x="240" y="20" width="100" height="50" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="290" y="42" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e3a5f">x</text>
+          <text x="290" y="58" text-anchor="middle" font-size="11" fill="#475569">実行</text>
+          <!-- 矢印 -->
+          <line x1="180" y1="70" x2="180" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <!-- Webサーバー -->
+          <rect x="120" y="105" width="120" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="180" y="128" text-anchor="middle" font-size="12" fill="#92400e">Webサーバーに必要</text>
+          <text x="180" y="170" text-anchor="middle" font-size="13" font-weight="bold" fill="#16a34a">r 権限（読み取り）</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>場面</th><th>権限がどう関係するか</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>静的ファイルの公開</td><td>WebサーバーがHTML/CSS/画像を読むにはr権限が必要</td></tr>
+            <tr><td>public_htmlの公開範囲</td><td>public_html以外のディレクトリは権限で公開不可にしている</td></tr>
+            <tr><td>ログファイルの保護</td><td>error.logやaccess.logは一般ユーザーが読めないように権限で保護</td></tr>
+            <tr><td>設定ファイルの保護</td><td>DBパスワードが書かれた設定ファイルはr権限を制限して守る</td></tr>
+            <tr><td>アプリの実行</td><td>PHPやCGIが動くにはx（実行）権限が必要</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>8. 権限が間違っているとどうなるか</h3>
+      <p>実務で最も多いトラブル：ファイルを置いたのに表示されない、画像だけ403になる、CSSが読み込まれずデザインが崩れる、アプリが設定ファイルを読めず500エラーになる、ログが書けず原因調査ができない。これらはすべて権限が原因。Webサーバーのトラブルの多くは設定ミスではなく権限ミスで起きる。</p>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>DocumentRootとpublic_htmlの混同</strong>：DocumentRootはサイト単位の公開ディレクトリ、public_htmlはユーザー単位の公開ディレクトリ。用途が異なる。</li>
+        <li><strong>index.htmlが自動表示される仕組みの誤解</strong>：Webサーバーが「デフォルトファイル」として設定しているから自動表示される。</li>
+        <li><strong>ログの重要性の軽視</strong>：404や500の原因はログを見ないと分からない。運用の基本は「ログを読むこと」。</li>
+        <li><strong>権限不足による403エラー</strong>：ファイルを置いたのに表示されない場合、設定ミスではなく権限ミスであることが多い。</li>
+        <li><strong>権限の「r」「w」「x」の混同</strong>：Webサーバーが静的ファイルを返すために必要なのは「r」（読み取り）権限。x権限は実行ファイルに必要。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. DocumentRootの説明として正しいものはどれか。</summary>
+        <p>ア）Webサーバーの設定ファイルが置かれるディレクトリ　イ）Webサーバーが公開するファイルを探す場所　ウ）ユーザーのホームディレクトリ　エ）ログファイルが保存される場所</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DocumentRootはWebサーバーが「公開するファイルを探す場所」のこと。URLの「/」に対応するフォルダである。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. ブラウザで https://example.com/ と入力したときに自動で表示されるファイルはどれか。</summary>
+        <p>ア）404.html　イ）default.html　ウ）index.html　エ）error.html</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Webサーバーはディレクトリが指定された場合、デフォルトファイルとして「index.html」を探して返す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. Webサーバーのアクセス記録を保存するログファイルはどれか。</summary>
+        <p>ア）error.log　イ）access.log　ウ）system.log　エ）security.log</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — access.logはアクセスの記録を保存するログファイル。error.logはエラーの記録を保存する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. Webサーバーが静的ファイルを返すために必要なファイル権限はどれか。</summary>
+        <p>ア）w（書き込み）　イ）x（実行）　ウ）r（読み取り）　エ）rwx（すべて）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Webサーバーが静的ファイルを返すには、そのファイルに対してr（読み取り）権限が必要である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. ファイル権限が不足している場合にWebサーバーが返すステータスコードはどれか。</summary>
+        <p>ア）200 OK　イ）404 Not Found　ウ）403 Forbidden　エ）500 Internal Server Error</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 権限が不足しているとWebサーバーはファイルを読み取れず、結果として403 Forbiddenが返される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. レンタルサーバーでユーザーごとに与えられる公開ディレクトリはどれか。</summary>
+        <p>ア）/etc/public　イ）/var/www　ウ）public_html　エ）DocumentRoot</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — public_htmlはレンタルサーバーでユーザーごとに与えられる公開ディレクトリ。この中に置いたファイルだけが公開される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. Webサーバーが「サービス（常駐プログラム）」として動作する理由として正しいものはどれか。</summary>
+        <p>ア）起動と終了を繰り返すことで負荷を分散するため　イ）ブラウザからのアクセスはいつ来るか分からないため　ウ）夜間は停止することで省電力を実現するため　エ）定期的に再起動することでメモリを解放するため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Webサーバーはブラウザからのアクセスがいつ来るか分からないため、OSによって常に動き続ける「サービス」として管理されている。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. Webサーバー運用の基本として正しいものはどれか。</summary>
+        <p>ア）画面の表示だけで動作確認ができる　イ）ログを読むことで原因を特定する　ウ）エラーが発生したらサーバーを再起動する　エ）設定ファイルを頻繁に変更する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Webサーバーの動作は画面には表示されないため、正常動作か異常かはログで判断する。運用の基本は「ログを読むこと」である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 実務で最も多いWebサーバーのトラブルの原因は何か。</summary>
+        <p>ア）ネットワーク障害　イ）設定ミス　ウ）権限ミス　エ）ハードウェア故障</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Webサーバーのトラブルの多くは設定ミスではなく権限ミスで起きる。ファイルを置いたのに表示されない場合、まず権限を確認する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. サーバーOSのディレクトリ構造で、設定ファイルを置く場所はどれか。</summary>
+        <p>ア）/var　イ）/home　ウ）/usr　エ）/etc</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — /etcは設定ファイルを置く場所。Webサーバーの設定ファイルもこのディレクトリに配置されることが多い。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第2章 WebサーバーのためのOS基礎（p21-p26）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

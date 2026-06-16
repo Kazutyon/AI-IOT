@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WebサーバーのためのOS基礎①（OS概要・Linux・開発環境） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>WebサーバーのためのOS基礎①</h1>
+        <p class="lead">OSの役割と管理領域、サーバーOSとしてLinuxが選ばれる理由、主要なディストリビューション、開発環境パッケージの特徴を理解します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>WebサーバーのためのOS基礎①</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>OS（オペレーティングシステム）の役割と管理する4つの領域</li>
+          <li>サーバーOSとしてLinuxが使われる理由</li>
+          <li>Linuxディストリビューションの考え方と代表例</li>
+          <li>開発環境パッケージ（XAMPP/MAMP/WAMP）の特徴</li>
+          <li>開発環境と本番環境の違い</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>OSの役割と管理領域、サーバーOSとしてLinuxが使われる理由</dd></div>
+          <div><dt>中</dt><dd>Linuxディストリビューションの種類、開発環境と本番環境の違い</dd></div>
+          <div><dt>低</dt><dd>開発環境パッケージの詳細な製品名と特徴</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><th>OS（オペレーティングシステム）</th><td>ハードウェアとアプリケーションの仲介をする基盤ソフトウェア</td></tr>
+            <tr><td>2</td><th>ファイル管理</th><td>OSがHTML・画像・ログなどのデータを保存・管理する機能</td></tr>
+            <tr><td>3</td><th>プロセス</th><td>OS上で動いているプログラム（Webサーバーやアプリケーション）</td></tr>
+            <tr><td>4</td><th>権限（アクセス制御）</th><td>どのユーザーがどのファイルを読めるかを決めるOSの仕組み</td></tr>
+            <tr><td>5</td><th>Linux</th><td>オープンソースのOS。Webサーバーの大半がLinux上で動作</td></tr>
+            <tr><td>6</td><th>ディストリビューション</th><td>Linuxカーネルを元に組織が独自に構成したOSの種類</td></tr>
+            <tr><td>7</td><th>Ubuntu Server</th><td>世界的に利用者が多い初心者向けLinuxディストリビューション</td></tr>
+            <tr><td>8</td><th>Debian</th><td>安定性が高く、Ubuntuの元となったLinuxディストリビューション</td></tr>
+            <tr><td>9</td><th>Rocky Linux / AlmaLinux</th><td>CentOSの後継となる企業向けLinuxディストリビューション</td></tr>
+            <tr><td>10</td><th>開発環境パッケージ</th><td>Webサーバー・DB・PHPなどを一括インストールできるセット</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. OS（オペレーティングシステム）とは何か</h2>
+      <p>OS（Operating System）は、コンピュータのハードウェアとアプリケーションの間に入り、両者を仲介する基盤ソフトウェア。Webサーバーを理解するためには、OSがどのように「ファイル」「プロセス」「ネットワーク」「権限」を管理しているかを概念として正確に理解する必要がある。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>OSが管理する4つの領域</figcaption>
+        <svg viewBox="0 0 400 240" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- ハードウェア -->
+          <rect x="150" y="190" width="100" height="40" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="215" text-anchor="middle" font-size="13" fill="#1e1b4f">ハードウェア</text>
+          <!-- 矢印（上向き） -->
+          <line x1="200" y1="190" x2="200" y2="170" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <!-- OSの層 -->
+          <rect x="100" y="130" width="200" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="155" text-anchor="middle" font-size="14" fill="#92400e">OS（オペレーティングシステム）</text>
+          <!-- 矢印（上向き） -->
+          <line x1="200" y1="130" x2="200" y2="110" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <!-- 4つの管理領域 -->
+          <rect x="20" y="20" width="80" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="60" y="45" text-anchor="middle" font-size="12" fill="#1e3a5f">ファイル</text>
+          <rect x="110" y="20" width="80" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="150" y="45" text-anchor="middle" font-size="12" fill="#1e3a5f">プロセス</text>
+          <rect x="200" y="20" width="80" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="240" y="45" text-anchor="middle" font-size="12" fill="#1e3a5f">ネットワーク</text>
+          <rect x="290" y="20" width="80" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="330" y="45" text-anchor="middle" font-size="12" fill="#1e3a5f">権限</text>
+          <!-- 説明テキスト -->
+          <text x="60" y="80" text-anchor="middle" font-size="9" fill="#475569">HTML・画像・ログ</text>
+          <text x="150" y="80" text-anchor="middle" font-size="9" fill="#475569">動いている</text>
+          <text x="150" y="92" text-anchor="middle" font-size="9" fill="#475569">プログラム</text>
+          <text x="240" y="80" text-anchor="middle" font-size="9" fill="#475569">通信の管理</text>
+          <text x="330" y="80" text-anchor="middle" font-size="9" fill="#475569">アクセス制御</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>管理領域</th><th>説明</th><th>Webサーバーとの関係</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ファイル</td><td>HTML、画像、ログなどのデータを保存する場所</td><td>WebサーバーはOSのファイル管理機能を使って静的ファイルを読み取る</td></tr>
+            <tr><td>プロセス</td><td>動いているプログラム</td><td>Webサーバー（Apache/Nginx）もアプリケーションもOS上で動く</td></tr>
+            <tr><td>ネットワーク</td><td>ネットワークインターフェースの管理</td><td>WebサーバーはOSを通じて通信を行う</td></tr>
+            <tr><td>権限</td><td>アクセス制御</td><td>Webサーバーが読み取れるファイルはOSの権限設定で決まる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2. サーバーOSの特徴</h3>
+      <p>WebサーバーはWindowsでもLinuxでも動作するが、世界のWebサーバーの大半はLinux上で動いている。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>理由</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>常時稼働に強い</td><td>安定性が高く、長時間の連続動作に適している</td></tr>
+            <tr><td>不要な機能が少なく軽量</td><td>サーバー用途に必要な機能に絞られている</td></tr>
+            <tr><td>サーバー用途に最適化されている</td><td>大量アクセス処理やネットワーク性能に優れる</td></tr>
+            <tr><td>権限管理が明確</td><td>セキュリティ面での管理が容易</td></tr>
+            <tr><td>WebサーバーがLinuxを前提に設計されている</td><td>Apache/NginxはLinux環境での動作を想定している</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3. Linuxの種類（ディストリビューション）</h3>
+      <p>Linuxは1つのOSではなく、共通のLinuxカーネルをもとに、さまざまな組織が独自に構成した「種類」が存在する。これをディストリビューション（Distribution）と呼ぶ。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Linuxディストリビューションの分類</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- カーネル -->
+          <rect x="140" y="10" width="120" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="13" fill="#1e1b4f">Linuxカーネル</text>
+          <!-- 枝線 -->
+          <line x1="200" y1="46" x2="200" y2="70" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="60" y1="70" x2="340" y2="70" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="60" y1="70" x2="60" y2="94" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <line x1="200" y1="70" x2="200" y2="94" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <line x1="340" y1="70" x2="340" y2="94" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <!-- Debian系 -->
+          <rect x="10" y="95" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="60" y="118" text-anchor="middle" font-size="11" fill="#1e3a5f">Debian系</text>
+          <!-- Red Hat系 -->
+          <rect x="150" y="95" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="118" text-anchor="middle" font-size="11" fill="#1e3a5f">Red Hat系</text>
+          <!-- その他 -->
+          <rect x="290" y="95" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="340" y="118" text-anchor="middle" font-size="11" fill="#1e3a5f">その他</text>
+          <!-- 具体例 -->
+          <text x="60" y="160" text-anchor="middle" font-size="10" fill="#475569">Ubuntu / Debian</text>
+          <text x="200" y="160" text-anchor="middle" font-size="10" fill="#475569">Rocky / AlmaLinux</text>
+          <text x="340" y="160" text-anchor="middle" font-size="10" fill="#475569">Amazon Linux</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>ディストリビューション</th><th>特徴</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Ubuntu Server</td><td>世界的に利用者が多い。設定情報が豊富。初心者向け。</td></tr>
+            <tr><td>Debian</td><td>安定性が高い。Ubuntuの元になっている。</td></tr>
+            <tr><td>CentOS（終了）</td><td>企業サーバーで長く使われた。現在は後継へ移行。</td></tr>
+            <tr><td>Rocky Linux / AlmaLinux</td><td>CentOSの後継。企業サーバーで採用が増えている。</td></tr>
+            <tr><td>Amazon Linux</td><td>AWS専用。クラウドでよく使われる。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>レンタルサーバーで使われるLinux：多くのレンタルサーバーはCentOS系（現在はRocky/AlmaLinux）をベースにしている。理由は安定性が高く、Webサーバー用途に最適化されており、管理ツール（cPanel、Plesk）が対応しているため。</p>
+
+      <h3>4. 開発環境を構築するためのパッケージ</h3>
+      <p>Webサーバーの学習では、本番サーバー（Linux）とは別に、ローカルPC上で動作する開発環境を用意することが多い。開発環境では、Webサーバー・データベース・PHPなどをまとめてインストールできるパッケージがよく使われる。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>パッケージ名</th><th>対応OS</th><th>内容</th><th>特徴</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>XAMPP</td><td>Windows / macOS / Linux</td><td>Apache / MySQL / PHP / phpMyAdmin</td><td>最も有名。学習用として広く使われる。</td></tr>
+            <tr><td>MAMP</td><td>macOS / Windows</td><td>Apache / MySQL / PHP</td><td>Macユーザーに人気。UIが使いやすい。</td></tr>
+            <tr><td>WAMP</td><td>Windows</td><td>Apache / MySQL / PHP</td><td>Windows専用。設定が簡単。</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>開発環境パッケージを使う理由：本番サーバーと同じ構成をローカルで再現できる、ApacheやMySQLを個別にインストールする必要がない、設定が簡単で初心者でも扱いやすい。</p>
+
+      <h3>5. 本番環境（Linux）との違い</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>開発環境パッケージ</th><th>本番環境（Linux）</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>目的</td><td>学習・開発</td><td>公開・運用</td></tr>
+            <tr><td>OS</td><td>Windows / macOS</td><td>Linux</td></tr>
+            <tr><td>インストール</td><td>一括</td><td>個別（Apache, PHP, MySQL）</td></tr>
+            <tr><td>設定</td><td>GUI中心</td><td>設定ファイル中心</td></tr>
+            <tr><td>安定性</td><td>低い</td><td>高い</td></tr>
+            <tr><td>セキュリティ</td><td>弱い</td><td>強い</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「OS＝Windows」という思い込み</strong>：Webサーバーの大半はLinuxで動作する。試験ではLinuxを前提とした出題が多い。</li>
+        <li><strong>ディストリビューションの混同</strong>：「Linux」という1つのOSがあるわけではなく、複数のディストリビューションが存在することを理解する必要がある。</li>
+        <li><strong>開発環境と本番環境の同一視</strong>：XAMPPなどのパッケージは学習用であり、本番環境はLinuxで設定ファイル中心の運用になる。</li>
+        <li><strong>OSの管理領域のイメージ不足</strong>：「ファイル・プロセス・ネットワーク・権限」の4つをセットで覚えること。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. OS（オペレーティングシステム）が管理するものとして、適切でないものはどれか。</summary>
+        <p>ア）ファイル　イ）プロセス　ウ）ブラウザ　エ）権限</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — OSが管理する4つの領域は「ファイル」「プロセス」「ネットワーク」「権限」である。ブラウザはOS上で動作するアプリケーション。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. Webサーバーの大半がLinux上で動作する理由として、適切でないものはどれか。</summary>
+        <p>ア）常時稼働に強い　イ）グラフィカルなデスクトップ環境が標準装備されている　ウ）権限管理が明確　エ）WebサーバーがLinuxを前提に設計されている</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — LinuxサーバーはGUIデスクトップ環境が標準ではなく、不要な機能を省いて軽量に動作することが特徴である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. Linuxディストリビューションの説明として正しいものはどれか。</summary>
+        <p>ア）Linuxは1つのOSであり、ディストリビューションは存在しない　イ）共通のLinuxカーネルをもとに、さまざまな組織が独自に構成した種類　ウ）ディストリビューションはWindows専用のOSである　エ）すべてのディストリビューションは商用ライセンスが必要である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Linuxはオープンソースであり、誰でも自由に改良・再配布できるため、目的に応じて多くのディストリビューションが作られている。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 次のLinuxディストリビューションのうち、CentOSの後継として企業サーバーで採用が増えているものはどれか。</summary>
+        <p>ア）Ubuntu Server　イ）Debian　ウ）Rocky Linux / AlmaLinux　エ）Amazon Linux</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Rocky LinuxとAlmaLinuxはCentOSの後継ディストリビューションであり、企業サーバーでの採用が増えている。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 開発環境パッケージ（XAMPP/MAMP/WAMP）の特徴として適切なものはどれか。</summary>
+        <p>ア）本番環境としても安定して使える　イ）Webサーバー・DB・PHPなどを一括でインストールできる　ウ）Linuxでしか動作しない　エ）設定はすべて設定ファイルで行う必要がある</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 開発環境パッケージはWebサーバー・DB・PHPなどを一括でインストールでき、初心者でも簡単にWebアプリの動作確認ができる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 本番環境（Linux）と開発環境パッケージの違いとして正しいものはどれか。</summary>
+        <p>ア）本番環境はGUI中心の設定、開発環境は設定ファイル中心　イ）本番環境は安定性が高い、開発環境はセキュリティが強い　ウ）本番環境は設定ファイル中心、開発環境はGUI中心の設定が多い　エ）本番環境は学習目的、開発環境は公開・運用が目的</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 本番環境（Linux）は設定ファイル中心の設定を行い、開発環境パッケージはGUI中心の設定が多い。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. OSの「プロセス」管理についての説明として正しいものはどれか。</summary>
+        <p>ア）HTMLや画像を保存する場所を管理する　イ）WebサーバーもアプリケーションもOS上でプロセスとして動作する　ウ）ネットワーク通信の経路を管理する　エ）ユーザーのアクセス権限を管理する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — プロセスは「動いているプログラム」のことで、WebサーバーやアプリケーションもOS上でプロセスとして動作する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. レンタルサーバーでCentOS系（Rocky/AlmaLinux）がよく使われる理由として適切でないものはどれか。</summary>
+        <p>ア）安定性が高い　イ）Webサーバー用途に最適化されている　ウ）ゲーム用途に特化している　エ）管理ツール（cPanel、Plesk）が対応している</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ゲーム用途はレンタルサーバーの主要な用途ではなく、Webサーバーとしての安定性や管理ツールの対応が採用理由である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. OSの「権限（アクセス制御）」の説明として正しいものはどれか。</summary>
+        <p>ア）どのユーザーがどのファイルを読めるかを決める仕組み　イ）ネットワーク通信の速度を制限する仕組み　ウ）CPUの処理時間を割り当てる仕組み　エ）メモリの使用量を制限する仕組み</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 権限（アクセス制御）は、どのユーザーがどのファイルを読めるか、Webサーバーが読み取れるファイルはOSの権限設定で決まる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. Ubuntu Serverの特徴として適切なものはどれか。</summary>
+        <p>ア）AWS専用のLinuxディストリビューション　イ）安定性が非常に高く、Ubuntuの元になっている　ウ）世界的に利用者が多く、初心者向け　エ）CentOSの後継ディストリビューション</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Ubuntu Serverは世界的に利用者が多く、設定情報が豊富で初心者向けのLinuxディストリビューションである。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第2章 WebサーバーのためのOS基礎（p11-p20）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

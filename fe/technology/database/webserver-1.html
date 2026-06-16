@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webサーバーソフトウェア概要（Apache/Nginxの機能） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>Webサーバーソフトウェア概要</h1>
+        <p class="lead">ApacheとNginxの全体像、Webサーバーソフトウェアが提供する主な機能、設定可能な対象について学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>Webサーバーソフトウェア概要</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>Webサーバーソフトウェア（Apache/Nginx）の全体像</li>
+          <li>Webサーバーソフトウェアが提供する主な機能</li>
+          <li>Apache/Nginxが設定可能な対象（URLパス・ファイルパス・ポートなど）</li>
+          <li>設定でできること（URL対応付け・仮想ホスト・エラーページなど）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>Webサーバーの主な機能、静的ファイル配信と動的処理の受け渡し</dd></div>
+          <div><dt>中</dt><dd>仮想ホスト、エラーページ制御、ログ記録</dd></div>
+          <div><dt>低</dt><dd>FastCGIの詳細、リバースプロキシの詳細</dd></div>
+        </dl>
+        <p>読了目安: 約10分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>Apache</th><td>世界的に広く使われているWebサーバーソフトウェア</th></tr>
+            <tr><th>2</th><th>Nginx</th><td>イベント駆動方式の高速なWebサーバーソフトウェア</th></tr>
+            <tr><th>3</th><th>静的ファイル配信</th><td>HTML/CSS/JS/画像などをそのまま返す機能</th></tr>
+            <tr><th>4</th><th>動的処理の受け渡し</th><td>PHPやNode.jsなどに処理を渡す機能</th></tr>
+            <tr><th>5</th><th>仮想ホスト</th><td>1台のサーバーで複数のWebサイトを公開する仕組み</th></tr>
+            <tr><th>6</th><th>ドキュメントルート</th><td>Webサーバーが公開するファイルを探す起点ディレクトリ</th></td>
+            <tr><th>7</th><th>アクセスログ</th><td>すべてのリクエストを記録するログ（access.log）</th></tr>
+            <tr><th>8</th><th>エラーログ</th><td>エラーを記録するログ（error.log）</th></tr>
+            <tr><th>9</th><th>リバースプロキシ</th><td>Webサーバーがアプリケーションの代理としてリクエストを転送する機能</th></tr>
+            <tr><th>10</th><th>FastCGI</th><td>Webサーバーがアプリケーションに処理を渡す方式</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. Webサーバーソフトウェアの全体像</h2>
+      <p>Webページは、ブラウザ → Webサーバー → アプリケーションという流れで処理される。実際にリクエストを受け取り、ファイルを返したり、アプリケーションに処理を渡したりしている「本体」がWebサーバーソフトウェア（Apache / Nginx）である。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Webサーバーソフトウェアの位置づけ</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- ブラウザ -->
+          <rect x="20" y="10" width="90" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="65" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">ブラウザ</text>
+          
+          <line x1="110" y1="30" x2="135" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="122" y="25" text-anchor="middle" font-size="8" fill="#64748b">HTTP</text>
+          
+          <!-- Webサーバーソフトウェア -->
+          <rect x="140" y="10" width="120" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="200" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">Apache / Nginx</text>
+          <text x="200" y="45" text-anchor="middle" font-size="9" fill="#92400e">Webサーバーソフトウェア</text>
+          
+          <line x1="260" y1="30" x2="285" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="272" y="25" text-anchor="middle" font-size="8" fill="#64748b">FastCGI</text>
+          
+          <!-- アプリケーション -->
+          <rect x="290" y="10" width="90" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="335" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">アプリ</text>
+          
+          <!-- 静的ファイル -->
+          <rect x="140" y="80" width="120" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="100" text-anchor="middle" font-size="11" fill="#14532d">静的ファイル</text>
+          <text x="200" y="115" text-anchor="middle" font-size="9" fill="#14532d">（HTML/CSS/画像）</text>
+          
+          <line x1="200" y1="50" x2="200" y2="78" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <!-- 説明 -->
+          <rect x="20" y="140" width="360" height="35" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="200" y="158" text-anchor="middle" font-size="10" fill="#475569">Webサーバーソフトウェアはリクエストを受け取り、</text>
+          <text x="200" y="172" text-anchor="middle" font-size="10" fill="#475569">静的ファイルは自分で返し、動的処理はアプリに渡す</text>
+        </svg>
+      </figure>
+
+      <h3>2. Webサーバーソフトウェアが提供する主な機能</h3>
+      <p>Apache / Nginxは、次のような機能を設定できる。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>機能</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">静的ファイルの配信</th><td>HTML、CSS、JS、画像などをクライアントに返す</th></tr>
+            <tr><td style="font-weight: bold;">アプリケーションへの処理受け渡し</th><td>PHP（php-fpm）、Node.js、Pythonなどに処理を渡す</th></tr>
+            <tr><td style="font-weight: bold;">ログの記録</th><td>access.log（アクセス記録）とerror.log（エラー記録）</th></tr>
+            <tr><td style="font-weight: bold;">エラーページの制御</th><td>404や500のエラーページをカスタマイズ</th></tr>
+            <tr><td style="font-weight: bold;">仮想ホスト</th><td>1台のサーバーで複数のWebサイトを公開</th></tr>
+            <tr><td style="font-weight: bold;">ファイル配置のルール</th><td>DocumentRootやpublic_htmlの設定</th></tr>
+            <tr><td style="font-weight: bold;">HTTPS（TLS）の設定</th>那样SSL証明書の設定、暗号化通信の開始</th></tr>
+            <tr><td style="font-weight: bold;">性能改善</th><td>Keep-Alive、gzip圧縮、キャッシュ制御</th></tr>
+            <tr><td style="font-weight: bold;">アクセス制御</th>那样IP制限、Basic認証</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3. Apache / Nginxが扱う「対象」の一覧</h3>
+      <p>Webサーバーソフトウェアは、次のような「対象」を設定することで動作を制御する。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>対象</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">URLパス</th><td>どのURLに対してどの処理を行うか</th></tr>
+            <tr><td style="font-weight: bold;">ファイルパス</th><td>どのディレクトリを公開するか</th></tr>
+            <tr><td style="font-weight: bold;">ホスト名（ドメイン）</th><td>example.com / api.example.com など</th></tr>
+            <tr><td style="font-weight: bold;">ポート番号</th><td>80 / 443</th></tr>
+            <tr><td style="font-weight: bold;">ログファイル</th><td>記録場所・形式</th></tr>
+            <tr><td style="font-weight: bold;">エラーページ</th><td>404.html / 500.html</th></tr>
+            <tr><td style="font-weight: bold;">プロセス/ワーカー数</th><td>同時処理数（性能に関係）</th></td>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4. Apache / Nginxの設定でできること</h3>
+
+      <h4>① URLとファイルの対応付け（DocumentRoot）</h4>
+      <p>/ にアクセスされたら /var/www/html/index.html を返す、/img/ は /var/www/html/img/ を返す、といったURL → ファイルの対応を設定する。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>URLとファイルパスの対応付け</figcaption>
+        <svg viewBox="0 0 400 120" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="33" text-anchor="middle" font-size="11" fill="#1e3a5f">/index.html</text>
+          
+          <line x1="120" y1="28" x2="145" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="132" y="23" text-anchor="middle" font-size="8" fill="#64748b">→</text>
+          
+          <rect x="150" y="10" width="200" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="250" y="33" text-anchor="middle" font-size="11" fill="#92400e">/var/www/html/index.html</text>
+          
+          <text x="200" y="80" text-anchor="middle" font-size="10" fill="#64748b">URLのパス → ファイルシステムのパス に変換</text>
+          <text x="200" y="98" text-anchor="middle" font-size="10" fill="#64748b">DocumentRootが変換の起点になる</text>
+        </svg>
+      </figure>
+
+      <h4>② 複数サイトの公開（仮想ホスト）</h4>
+      <p>1台のサーバーで、example.com、shop.example.com、test.example.comのように複数のサイトを同時に公開できる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>仮想ホストの概念</figcaption>
+        <svg viewBox="0 0 400 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="150" y="10" width="100" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="12" fill="#1e3a5f">1台のサーバー</text>
+          
+          <line x1="180" y1="46" x2="60" y2="70" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <line x1="200" y1="46" x2="200" y2="70" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <line x1="220" y1="46" x2="340" y2="70" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="10" y="75" width="100" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="60" y="98" text-anchor="middle" font-size="10" fill="#14532d">example.com</text>
+          
+          <rect x="150" y="75" width="100" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="98" text-anchor="middle" font-size="10" fill="#14532d">shop.example.com</text>
+          
+          <rect x="290" y="75" width="100" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="340" y="98" text-anchor="middle" font-size="10" fill="#14532d">test.example.com</text>
+        </svg>
+      </figure>
+
+      <h4>③ エラーページの制御（404 / 500）</h4>
+      <p>ファイルがない → 404.html、アプリがエラー → 500.htmlといった独自のエラーページを設定できる。</p>
+
+      <h4>④ ログの記録と分析（access.log / error.log）</h4>
+      <p>どのURLにアクセスされたか、ステータスコード、レスポンス時間、エラー内容などを記録し、運用に役立てる。</p>
+
+      <h4>⑤ アプリケーションとの連携</h4>
+      <p>PHP（php-fpm）、Node.js、Python（WSGI）など、動的ページを生成するアプリケーションに処理を渡す。</p>
+
+      <h4>⑥ 性能改善（Keep-Alive / gzip / キャッシュ）</h4>
+      <ul>
+        <li>接続を維持して高速化（Keep-Alive）</li>
+        <li>HTML/CSS/JSを圧縮（gzip）</li>
+        <li>キャッシュ制御（Expires / Cache-Control）</li>
+        <li>CDNと連携して高速化</li>
+      </ul>
+
+      <h4>⑦ HTTPS（TLS）の設定</h4>
+      <ul>
+        <li>証明書の設定</li>
+        <li>暗号化通信の開始</li>
+        <li>HTTP → HTTPS のリダイレクト</li>
+      </ul>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>WebサーバーソフトウェアとOSの混同</strong>：Apache/Nginxはソフトウェアであり、OS（Windows/Linux）とは別物。</li>
+        <li><strong>静的ファイル配信と動的処理の違い</strong>：静的ファイルはWebサーバー自身が返し、動的処理はアプリケーションに渡す。</li>
+        <li><strong>設定ファイルの重要性</strong>：Webサーバーの動作はすべて設定ファイルで制御される。GUIで設定するものではない。</li>
+        <li><strong>仮想ホストの誤解</strong>：1台のサーバーで複数サイトを公開するにはIPアドレスが複数必要と思われがちだが、Hostヘッダを使えば1つのIPで可能。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. Webサーバーソフトウェアの代表的な例として正しい組み合わせはどれか。</summary>
+        <p>ア）Chrome / Safari　イ）Apache / Nginx　ウ）Windows / Linux　エ）MySQL / PostgreSQL</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ApacheとNginxは代表的なWebサーバーソフトウェア。Chrome/Safariはブラウザ、Windows/LinuxはOS、MySQL/PostgreSQLはDB。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. Webサーバーソフトウェアが提供する機能として適切でないものはどれか。</summary>
+        <p>ア）静的ファイルの配信　イ）アプリケーションへの処理受け渡し　ウ）データベースの管理　エ）ログの記録</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — データベースの管理はDBMSの役割。WebサーバーはDBを直接管理しない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 1台のサーバーで複数のWebサイトを公開する仕組みを何と呼ぶか。</summary>
+        <p>ア）ロードバランシング　イ）仮想ホスト　ウ）リバースプロキシ　エ）キャッシュ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 仮想ホスト（Virtual Host / Server Block）は、1台のサーバーで複数のWebサイトを公開する仕組み。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. Webサーバーのログとして正しい組み合わせはどれか。</summary>
+        <p>ア）system.log / debug.log　イ）access.log / error.log　ウ）security.log / audit.log　エ）query.log / slow.log</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Webサーバーの主なログはaccess.log（アクセス記録）とerror.log（エラー記録）の2種類。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. Webサーバーが静的ファイルを返す際の処理として正しいものはどれか。</summary>
+        <p>ア）アプリケーションでHTMLを生成する　イ）データベースからデータを取得する　ウ）ファイルシステムからファイルを読み取って返す　エ）リクエストを別のサーバーに転送する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 静的ファイルはファイルシステムに保存されており、Webサーバーはそれを読み取ってそのまま返す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. Webサーバーソフトウェアが動的処理をアプリケーションに渡す方式として使われるものはどれか。</summary>
+        <p>ア）DNS　イ）NAT　ウ）FastCGI　エ）DHCP</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — FastCGI（php-fpmなど）はWebサーバーがアプリケーションに処理を渡す方式。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. Webサーバーソフトウェアの設定ファイルで制御できる項目として適切でないものはどれか。</summary>
+        <p>ア）DocumentRootの設定　イ）エラーページのカスタマイズ　ウ）CPUのクロック周波数　エ）HTTPSの設定</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — CPUのクロック周波数はハードウェアの設定であり、Webサーバーの設定ファイルでは制御できない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. Webサーバーがレスポンスをgzip圧縮する目的はどれか。</summary>
+        <p>ア）セキュリティの向上　イ）転送量の削減と表示速度の向上　ウ）データベース接続の高速化　エ）CPU負荷の軽減</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — gzip圧縮によりHTML/CSS/JSなどのテキストデータを圧縮し、転送量を減らして表示速度を向上させる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. Webサーバーにアクセスがあった記録を保存するログファイルはどれか。</summary>
+        <p>ア）error.log　イ）access.log　ウ）system.log　エ）debug.log</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — access.logはすべてのリクエストを記録する。error.logはエラーを記録する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. WebサーバーソフトウェアがHTTPSを提供するために必要なものはどれか。</summary>
+        <p>ア）DNSレコード　イ）SSL証明書　ウ）ロードバランサー　エ）ファイアウォール</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — HTTPSを提供するにはSSL証明書が必要。証明書をWebサーバーに設定し、443番ポートで待ち受ける。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第6章 Webサーバーソフトウェア（p153-p160）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

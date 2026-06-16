@@ -369,10 +369,36 @@
       "id": "database",
       "title": "データベース",
       "category": "technology",
-      "status": "planned",
-      "description": "関係データベース、SQL、正規化、トランザクションを扱う分野。",
+      "status": "done",
+      "description": "Webシステム・OS基礎・ネットワーク・HTTP/HTTPS・Webサーバーソフトウェア・データベース概論・Webセキュリティ。全25教材ページ完成。",
       "href": "fe/technology/database/index.html",
-      "items": []
+      "items": [
+        { "title": "Webシステムの全体像", "href": "fe/technology/database/web-system-overview.html", "status": "done" },
+        { "title": "OS基礎① ― プロセス管理", "href": "fe/technology/database/os-basic-1.html", "status": "done" },
+        { "title": "OS基礎② ― メモリ管理・ファイルシステム", "href": "fe/technology/database/os-basic-2.html", "status": "done" },
+        { "title": "ネットワーク基礎① ― LAN・WAN・IP", "href": "fe/technology/database/network-basic-1.html", "status": "done" },
+        { "title": "ネットワーク基礎② ― TCP/UDP・DNS・ポート", "href": "fe/technology/database/network-basic-2.html", "status": "done" },
+        { "title": "HTTP基本① ― メソッド・ステータスコード", "href": "fe/technology/database/http-basic-1.html", "status": "done" },
+        { "title": "HTTP基本② ― ヘッダー・Cookie・キャッシュ", "href": "fe/technology/database/http-basic-2.html", "status": "done" },
+        { "title": "HTTPSとTLSの詳細", "href": "fe/technology/database/http-details.html", "status": "done" },
+        { "title": "Webページ生成① ― 静的・動的", "href": "fe/technology/database/page-generation-1.html", "status": "done" },
+        { "title": "Webページ生成② ― MVC・テンプレート", "href": "fe/technology/database/page-generation-2.html", "status": "done" },
+        { "title": "フォームとユーザー入力処理", "href": "fe/technology/database/form-basic.html", "status": "done" },
+        { "title": "Webサーバー① ― Apache・Nginx", "href": "fe/technology/database/webserver-1.html", "status": "done" },
+        { "title": "Webサーバー② ― 仮想ホスト・ログ", "href": "fe/technology/database/webserver-2.html", "status": "done" },
+        { "title": "Webサーバー③ ― パフォーマンス", "href": "fe/technology/database/webserver-3.html", "status": "done" },
+        { "title": "Webサーバー④ ― HTTPS・証明書", "href": "fe/technology/database/webserver-4.html", "status": "done" },
+        { "title": "Webアプリ連携の基本", "href": "fe/technology/database/webapp-link-1.html", "status": "done" },
+        { "title": "REST API設計と実装", "href": "fe/technology/database/rest-api.html", "status": "done" },
+        { "title": "DB基礎① ― RDBMS・テーブル設計", "href": "fe/technology/database/db-basic-1.html", "status": "done" },
+        { "title": "DB基礎② ― 正規化・ER図", "href": "fe/technology/database/db-basic-2.html", "status": "done" },
+        { "title": "SQLの基本構文", "href": "fe/technology/database/sql-basic.html", "status": "done" },
+        { "title": "DBパフォーマンスとチューニング", "href": "fe/technology/database/db-performance.html", "status": "done" },
+        { "title": "DB運用管理", "href": "fe/technology/database/db-operation.html", "status": "done" },
+        { "title": "Webセキュリティ① ― 攻撃手法", "href": "fe/technology/database/security-1.html", "status": "done" },
+        { "title": "Webセキュリティ② ― 認証・認可", "href": "fe/technology/database/security-2.html", "status": "done" },
+        { "title": "Webセキュリティ③ ― サーバー堅牢化", "href": "fe/technology/database/security-3.html", "status": "done" }
+      ]
     },
     {
       "id": "computer",
@@ -387,10 +413,16 @@
       "id": "iot-security",
       "title": "IoTセキュリティ",
       "category": "technology",
-      "status": "planned",
-      "description": "AI・IoTの脅威、組込み機器の脆弱性、対策、関連制度を扱う分野。",
+      "status": "done",
+      "description": "AIセキュリティ（3つの視点）・AI防御/悪用・IoT脆弱性・法制度。全5教材ページ完成。",
       "href": "fe/technology/iot-security/index.html",
-      "items": []
+      "items": [
+        { "title": "AIセキュリティ基礎：3つの視点とAI防御", "href": "fe/technology/iot-security/ai-security-basics.html", "status": "done" },
+        { "title": "AIを守るセキュリティ：4種類の攻撃と対策", "href": "fe/technology/iot-security/ai-defense-attacks.html", "status": "done" },
+        { "title": "AIを使った攻撃：ディープフェイク・自動化", "href": "fe/technology/iot-security/ai-powered-attacks.html", "status": "done" },
+        { "title": "IoTの脆弱性とセキュリティ対策", "href": "fe/technology/iot-security/iot-vulnerability.html", "status": "done" },
+        { "title": "AI×IoT融合リスクと法制度", "href": "fe/technology/iot-security/ai-iot-legal-framework.html", "status": "done" }
+      ]
     },
     {
       "id": "management",
@@ -562,8 +594,14 @@
     {
       "title": "1_2_AIの_IoTセキュリティー.pdf",
       "category": "セキュリティ / IoT",
-      "status": "未作成",
-      "next": "情報セキュリティ本編と重複を整理してIoTセキュリティページ化"
+      "status": "HTML化済み",
+      "next": "全87ページ5教材ページHTML化完了。fe/technology/iot-security/に配置"
+    },
+    {
+      "title": "1_Webサーバー・データベース概論.pdf",
+      "category": "データベース",
+      "status": "HTML化済み",
+      "next": "全366ページ25教材ページHTML化完了。fe/technology/database/に配置"
     },
     {
       "title": "コンピュータ概論.pdf",

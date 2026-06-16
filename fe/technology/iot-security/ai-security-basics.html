@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIセキュリティ基礎｜3つの視点とAIを活用した防御 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / セキュリティ</p>
+        <h1>AIセキュリティ基礎<br>〜3つの視点とAIを活用した防御〜</h1>
+        <p class="lead">AIは「守る技術」「攻撃される対象」「攻撃に悪用される技術」の3つの立場がある。本ページではAIを活用したセキュリティ製品の仕組みと種類を学ぶ。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">セキュリティ</a>
+      <span>AIセキュリティ基礎</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>AIとセキュリティの3つの視点（守る側・攻撃される側・攻撃に使う側）</li>
+          <li>AIを活用したセキュリティが必要な背景（既知パターン依存の限界）</li>
+          <li>振る舞い分析・リスクスコアリング・自動対処の仕組み</li>
+          <li>NGAV・IDS/IPS・WAFなどAIセキュリティ製品の種類と役割</li>
+          <li>AIセキュリティ導入時の注意点（万能ではない・誤検知・人間の最終判断）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>AIとセキュリティの3つの視点、NGAVの振る舞い分析、未知の攻撃への対応</dd></div>
+          <div><dt>中</dt><dd>リスクスコアリング、自動対処、IDS/IPS・WAFの役割</dd></div>
+          <div><dt>低</dt><dd>具体的な製品名の詳細仕様</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>振る舞い分析</td><td>マルウェアの行動パターンを学習し、未知のマルウェアを検知する技術</td></tr>
+            <tr><td>2</td><td>NGAV（次世代アンチウイルス）</td><td>AIを使い、振る舞いから未知のマルウェアを検知する</td></tr>
+            <tr><td>3</td><td>IDS/IPS</td><td>ネットワーク上の不審な通信を検知・遮断する仕組み</td></tr>
+            <tr><td>4</td><td>WAF</td><td>Webサイトへの攻撃（SQLインジェクションなど）を防ぐ</td></tr>
+            <tr><td>5</td><td>ゼロデイ攻撃</td><td>未知の脆弱性を突く攻撃。従来のパターンマッチングでは防げない</td></tr>
+            <tr><td>6</td><td>リスクスコアリング</td><td>AIが検知した異常の危険度を数値化する仕組み</td></tr>
+            <tr><td>7</td><td>CAPTCHA</td><td>AIで人間とボットの行動パターンの違いを見分ける</td></tr>
+            <tr><td>8</td><td>シグネチャ</td><td>既知の攻撃パターン。従来型セキュリティの依存先</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. AIとセキュリティの背景</h2>
+      <p>近年、ディープラーニングをはじめとする機械学習技術の発展により、AIは社会のあらゆる領域に急速に浸透している。日本国内でも、顔認証システム、防犯システム、自動運転、チャットボット、医療診断支援など、AIを活用したサービスや製品が日常的に利用されるようになった。</p>
+      <p>しかし、AIの普及と同時に、AIを狙った攻撃、AIを悪用した攻撃、そしてAIを活用した防御技術が複雑に絡み合う新たなセキュリティ課題が生まれている。従来のサイバー攻撃はOSやアプリケーションの脆弱性を突くものが中心であったが、AIに対する攻撃は「学習データ」「モデル」「推論プロセス」といった従来とは全く異なる層を標的とする。そのため、従来のセキュリティ技術だけでは防ぎきれないケースが増えている。</p>
+      <p>さらに攻撃者側もAIを積極的に活用し始めており、高度なフィッシングメールの自動生成、ディープフェイクによるなりすまし、攻撃の自動化・高速化など、攻撃の質と量が急速に変化している。AIの活用が進むほど、「AIをどう使うか」だけでなく「AIをどう守るか」が重要なテーマとなる。</p>
+
+      <h2>2. AIとセキュリティの3つの視点</h2>
+      <p>AI技術が社会に広く使われるようになり、情報セキュリティの考え方は大きく変化している。AIは「守るための技術」であると同時に、「攻撃される対象」にもなり、さらに「攻撃に悪用される技術」にもなる。この3つの立場を理解することが、AI時代のセキュリティを学ぶ最初のステップとなる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>AIとセキュリティの3つの視点</figcaption>
+        <svg viewBox="0 0 400 260" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 中央のAI -->
+          <rect x="140" y="100" width="120" height="50" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="2"/>
+          <text x="200" y="130" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e1b4b">AI</text>
+          <!-- 左：守る側 -->
+          <rect x="20" y="40" width="100" height="50" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="70" y="70" text-anchor="middle" font-size="11" fill="#14532d">①AIを活用した</text>
+          <text x="70" y="84" text-anchor="middle" font-size="11" fill="#14532d">セキュリティ</text>
+          <line x1="120" y1="65" x2="138" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="110" y="58" text-anchor="end" font-size="10" fill="#64748b">守る側</text>
+
+          <!-- 右：攻撃される側 -->
+          <rect x="280" y="40" width="100" height="50" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="330" y="70" text-anchor="middle" font-size="11" fill="#7f1d1d">②AIを守る</text>
+          <text x="330" y="84" text-anchor="middle" font-size="11" fill="#7f1d1d">セキュリティ</text>
+          <line x1="280" y1="65" x2="262" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="270" y="58" text-anchor="start" font-size="10" fill="#64748b">攻撃される側</text>
+
+          <!-- 下：攻撃に使う側 -->
+          <rect x="140" y="190" width="120" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="220" text-anchor="middle" font-size="11" fill="#92400e">③AIを使った</text>
+          <text x="200" y="234" text-anchor="middle" font-size="11" fill="#92400e">攻撃</text>
+          <line x1="200" y1="150" x2="200" y2="188" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="210" y="172" font-size="10" fill="#64748b">悪用する側</text>
+        </svg>
+      </figure>
+
+      <h3>① AIを活用したセキュリティ（AI＝守る側）</h3>
+      <p>AIを防御に活用する視点である。従来のセキュリティは「既知の攻撃パターン」に依存していたため、新しい攻撃や変化した攻撃に弱かった。AIは大量のデータを分析し、「いつもと違う動き」を見つけることで攻撃の兆候を検知できる。</p>
+      <ul>
+        <li>普段とは異なるログイン場所を検知</li>
+        <li>マルウェアの不自然な動作を検知</li>
+        <li>通信量の急増を検知</li>
+      </ul>
+
+      <h3>② AIを守るセキュリティ（AI＝攻撃される側）</h3>
+      <p>AI自体が攻撃対象になる視点である。AIは「学習データ」「モデル」「AIの判断結果（推論結果）」という新しい攻撃面を持つため、従来のセキュリティでは守りきれない。</p>
+      <ul>
+        <li>学習データに細工を混ぜて誤学習させる（データ汚染）</li>
+        <li>モデルに悪意ある処理を仕込む（モデル汚染）</li>
+        <li>微小なノイズでAIを誤認識させる（敵対的サンプル）</li>
+      </ul>
+
+      <h3>③ AIを使った攻撃（AI＝攻撃に利用する側）</h3>
+      <p>攻撃者がAIを悪用する視点である。AIにより、攻撃の質と量が急速に変化している。</p>
+      <ul>
+        <li>本人そっくりの音声・映像を生成するディープフェイク</li>
+        <li>自然な文章のフィッシングメールを大量生成</li>
+        <li>攻撃手法の自動生成／最適化</li>
+        <li>プロンプトインジェクション（AIへ不正な指示を与える）</li>
+      </ul>
+
+      <h2>3. AIを活用したセキュリティ製品の詳細</h2>
+
+      <h3>3.1 なぜAIを使う必要があるのか（背景）</h3>
+      <p>従来のセキュリティ製品は「既知の攻撃パターン（シグネチャ）」に依存していた。しかし現在は以下の問題が生じている：</p>
+      <ul>
+        <li>マルウェアが自動生成され、名前を変えて大量に出回る</li>
+        <li>攻撃者が手口を高速に変化させる</li>
+        <li>ゼロデイ攻撃（未知の攻撃）が増加</li>
+        <li>ログ量が膨大で人間では追いきれない</li>
+      </ul>
+      <p>こうした理由から、「過去の攻撃パターンだけでは守れない時代」になった。そこで登場したのが、AIによる異常検知と振る舞い分析を使った防御である。</p>
+
+      <h3>3.2 振る舞い分析（マルウェアの行動パターンを見つける）</h3>
+      <p>マルウェアは名前を変えても、やること（振る舞い）は似ている。AIはこうした行動パターンを学習し、未知のマルウェアでも検知できる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>振る舞い分析の仕組み</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="20" y="10" width="110" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="75" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">マルウェア実行</text>
+          <line x1="130" y1="30" x2="158" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="160" y="10" width="110" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="215" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">行動パターン観測</text>
+          <line x1="270" y1="30" x2="298" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <rect x="300" y="10" width="80" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="340" y="35" text-anchor="middle" font-size="12" fill="#92400e">検知</text>
+          <text x="50" y="80" font-size="11" fill="#334155">例：権限奪取・外部通信・ファイル暗号化</text>
+        </svg>
+      </figure>
+
+      <h3>3.3 リスクスコアリング（危険度を数値化）</h3>
+      <p>AIは検知した異常に対して「どれくらい危険か」を数値化する。これにより管理者は優先順位をつけて対応できる。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>異常の内容</th><th>リスクレベル</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>単なる設定ミス</td><td>低リスク</td></tr>
+            <tr><td>外部への大量通信</td><td>高リスク</td></tr>
+            <tr><td>権限奪取＋外部通信</td><td>非常に高リスク</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3.4 自動対処（隔離・遮断）</h3>
+      <p>AIは異常を検知した後、以下のような自動対処を行う。「見つける」だけでなく「止める」ところまで担当する。</p>
+      <ul>
+        <li>感染した端末をネットワークから隔離</li>
+        <li>不審な通信を遮断</li>
+        <li>危険なファイルを隔離</li>
+        <li>管理者にアラート通知</li>
+      </ul>
+
+      <h3>3.5 守る対象と検知する兆候</h3>
+      <p><strong>守る対象：</strong>企業や組織の重要な資産（端末・サーバ・ネットワーク・アカウント・データ）</p>
+      <p><strong>検知する兆候：</strong>攻撃そのものではなく、攻撃の兆候（不自然な動き）を検知する。マルウェアの不自然な動作、不正アクセスの兆候、通信の異常パターン、不審なファイルの振る舞いなどを早期に検知することで被害を最小限に抑える。</p>
+
+      <h3>3.6 具体的なAIセキュリティ製品</h3>
+
+      <figure class="wide-diagram">
+        <figcaption>AIセキュリティ製品の分類</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="10" width="160" height="80" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="110" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">NGAV</text>
+          <text x="110" y="55" text-anchor="middle" font-size="10" fill="#334155">次世代アンチウイルス</text>
+          <text x="110" y="70" text-anchor="middle" font-size="10" fill="#334155">振る舞いから検知</text>
+          <rect x="210" y="10" width="160" height="80" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="290" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">IDS/IPS</text>
+          <text x="290" y="55" text-anchor="middle" font-size="10" fill="#334155">侵入検知・防御</text>
+          <text x="290" y="70" text-anchor="middle" font-size="10" fill="#334155">通信パターンを分析</text>
+          <rect x="30" y="105" width="160" height="80" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="110" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">WAF</text>
+          <text x="110" y="150" text-anchor="middle" font-size="10" fill="#334155">Webアプリケーションファイアウォール</text>
+          <text x="110" y="165" text-anchor="middle" font-size="10" fill="#334155">不自然なリクエストを検知</text>
+          <rect x="210" y="105" width="160" height="80" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="290" y="130" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">メールフィルタ</text>
+          <text x="290" y="150" text-anchor="middle" font-size="10" fill="#334155">スパム・フィッシング対策</text>
+          <text x="290" y="165" text-anchor="middle" font-size="10" fill="#334155">自然な偽メールを検知</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>製品種別</th><th>機能</th><th>AIの役割</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>NGAV</td><td>未知のマルウェア検知</td><td>権限昇格・外部通信・ファイル暗号化などの振る舞いを学習</td></tr>
+            <tr><td>IDS/IPS</td><td>ネットワーク上の不審な通信を検知・遮断</td><td>通常とは異なる通信パターンを見つける</td></tr>
+            <tr><td>WAF</td><td>Webサイトへの攻撃を防御</td><td>攻撃者が手口を変えても不自然なリクエストを検知</td></tr>
+            <tr><td>メールフィルタ</td><td>スパム・フィッシング対策</td><td>メール本文を解析し自然な偽装メールを検知</td></tr>
+            <tr><td>CAPTCHA</td><td>ボット判定</td><td>人間とボットの行動パターンの違いを見分ける</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「AIは万能ではない」</strong>：AIを活用したセキュリティは強力だが、誤検知・過検知が起きることがある。最終判断は人間が行う必要がある。</li>
+        <li><strong>「AIは人間の代わりではない」</strong>：AIは人間を支える強力な補助ツールであり、人間の判断を完全に代替するものではない。</li>
+        <li><strong>「学習データの質が重要」</strong>：AIの検知精度は学習データの質に大きく依存する。偏ったデータでは正しく学習できない。</li>
+        <li><strong>「従来型セキュリティと併用が必要」</strong>：AIセキュリティは従来型のセキュリティ（ファイアウォール、パスワード認証など）を置き換えるものではなく、補完するもの。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. AIとセキュリティの3つの視点として適切でないものはどれか。</summary>
+        <p>ア）AIを活用したセキュリティ（守る側）　イ）AIを守るセキュリティ（攻撃される側）　ウ）AIを無視したセキュリティ（放置する側）　エ）AIを使った攻撃（悪用する側）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — AIとセキュリティの3つの視点は「①守る側」「②攻撃される側」「③悪用する側」であり、「放置する側」という視点は存在しない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 従来のセキュリティ製品が依存していた攻撃検知手法はどれか。</summary>
+        <p>ア）振る舞い分析　イ）リスクスコアリング　ウ）既知の攻撃パターン（シグネチャ）　エ）異常検知</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 従来のセキュリティ製品は「既知の攻撃パターン（シグネチャ）」に依存していた。AIは振る舞い分析や異常検知を用いて未知の攻撃にも対応する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. NGAV（次世代アンチウイルス）の特徴として最も適切なものはどれか。</summary>
+        <p>ア）既知のウイルスパターンのみを検知する　イ）AIを使ってマルウェアの振る舞いから検知する　ウ）WebサイトへのSQLインジェクションを防ぐ　エ）ネットワーク上の通信パターンのみを監視する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — NGAVはAIを使い、マルウェアの「振る舞い」（権限昇格・外部通信・ファイル暗号化など）を学習し、未知のマルウェアでも検知できる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. AIを活用したセキュリティにおける「リスクスコアリング」の説明として正しいものはどれか。</summary>
+        <p>ア）全ての異常を同じリスクレベルで扱う　イ）検知した異常の危険度を数値化する　ウ）人間の判断を完全に不要にする　エ）既知の攻撃パターンのみを評価する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — リスクスコアリングはAIが検知した異常に対して「どれくらい危険か」を数値化し、管理者が優先順位をつけて対応できるようにする。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 自動対処としてAIが実行できるものとして適切でないものはどれか。</summary>
+        <p>ア）感染した端末のネットワーク隔離　イ）不審な通信の遮断　ウ）危険なファイルの隔離　エ）サーバOSの完全再インストール</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — AIの自動対処は隔離や遮断などが中心であり、OSの再インストールのような大規模な操作は通常自動では行わない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. WAF（Webアプリケーションファイアウォール）の説明として正しいものはどれか。</summary>
+        <p>ア）ネットワーク上の不審な通信を検知する　イ）Webサイトへの攻撃（SQLインジェクションなど）を防ぐ　ウ）マルウェアの振る舞いを分析する　エ）メールのスパムをフィルタリングする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — WAFはWebサイトへの攻撃を防ぐ。AIにより攻撃者が手口を変えても「不自然なリクエスト」を検知できる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. AIを活用したセキュリティ製品の導入時の注意点として適切でないものはどれか。</summary>
+        <p>ア）AIは万能ではない　イ）誤検知・過検知が起きることがある　ウ）AIだけで完全な防御が可能であり人間の判断は不要　エ）学習データの質が重要である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — AIは強力な補助ツールだが万能ではなく、誤検知も起こりうる。最終判断は人間が行う必要がある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. CAPTCHAの目的として最も適切なものはどれか。</summary>
+        <p>ア）パスワードを自動生成する　イ）人間とボットの行動パターンの違いを見分ける　ウ）マルウェアを駆除する　エ）ネットワークの暗号化を行う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — CAPTCHAはAIにより人間とボットの行動パターンの違いを見分け、自動化された悪意のあるアクセスを防ぐ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 振る舞い分析の説明として最も適切なものはどれか。</summary>
+        <p>ア）ファイル名やハッシュ値でマルウェアを識別する　イ）マルウェアの行動パターンを学習し未知のマルウェアを検知する　ウ）通信先のIPアドレスのみを監視する　エ）既知のウイルス定義ファイルを常に更新する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 振る舞い分析はマルウェアが「何をするか」（権限奪取、外部通信、ファイル暗号化など）に着目し、名前を変えても検知できる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. AIを活用したセキュリティの守る対象として適切でないものはどれか。</summary>
+        <p>ア）端末（PC・スマホ）　イ）サーバ　ウ）ネットワーク　エ）攻撃者のIPアドレス</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — AIを活用したセキュリティが守る対象は「端末」「サーバ」「ネットワーク」「アカウント」「データ」など自組織の重要な資産である。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『1_2_AIの_IoTセキュリティー.pdf』 表紙〜1-1-1 AIを活用したセキュリティ製品（p1-p15）</p>
+      <p>※本ページは基本情報技術者試験対策用に編集・再構成したものです。</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

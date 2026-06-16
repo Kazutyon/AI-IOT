@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webサーバーのセキュリティ②（パスワード管理/SQLインジェクション/XSS） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>Webサーバーのセキュリティ②</h1>
+        <p class="lead">パスワード管理の原則、SQLインジェクションとXSSの攻撃手法と防御策を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>Webサーバーのセキュリティ②</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>サーバー側パスワードの種類と管理原則</li>
+          <li>SQLインジェクションの攻撃手法と防御（プレースホルダ）</li>
+          <li>XSS（クロスサイトスクリプティング）の攻撃手法と防御（エスケープ）</li>
+          <li>パスワード管理のベストプラクティス</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>SQLインジェクションの攻撃と防御、XSSの攻撃と防御</dd></div>
+          <div><dt>中</dt><dd>パスワード管理の原則、環境変数によるパスワード管理</dd></div>
+          <div><dt>低</dt><dd>各パスワードの詳細な管理方法</dd></div>
+        </dl>
+        <p>読了目安: 約18分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>SQLインジェクション</th>那样アプリがユーザー入力をSQL文の一部として扱ってしまう攻撃</th></tr>
+            <tr><th>2</th><th>プレースホルダ</th>那样SQL文と値を分離してDBに送信する方式</th></tr>
+            <tr><th>3</th><th>プリペアドステートメント</th>那样プレースホルダを使ったSQL実行方式</th></tr>
+            <tr><th>4</th><th>XSS</th>那样攻撃者のJavaScriptが他ユーザーのブラウザ上で実行される攻撃</th></tr>
+            <tr><th>5</th><th>エスケープ</th>那样特殊文字を無害化して出力する処理</th></tr>
+            <tr><th>6</th><th>HttpOnly</th>那样JavaScriptからCookieを読み取れなくする属性（XSS対策）</th></td>
+            <tr><th>7</th><th>.envファイル</th>那样環境変数を保存するファイル</th></tr>
+            <tr><th>8</th><th>ブルートフォース攻撃</th>那样パスワードを総当たりで試す攻撃</th></tr>
+            <tr><th>9</th><th>中間者攻撃（MITM）</th>那样通信途中でデータを盗聴・改ざんする攻撃</th></td>
+            <tr><th>10</th><th>ハッシュ化</th>那样パスワードを元に戻せない形式で保存する方式</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. パスワード管理</h2>
+      <p>Webサーバー・アプリケーション・データベースには、運用者・アプリ・サービス間で使用される複数のパスワードが存在する。これらが適切に管理されていないと、サーバー侵入、DB乗っ取り、アプリ改ざん、情報漏洩といった重大事故につながる。</p>
+
+      <h3>サーバー側パスワードの種類</h3>
+      <ul>
+        <li>SSHアカウントのパスワード</li>
+        <li>DB（MySQL/PostgreSQL）のユーザーパスワード</li>
+        <li>アプリケーションの環境変数に設定するパスワード（DB接続パスワード、メールサーバーパスワード、APIキー）</li>
+        <li>管理画面（CMS/管理ツール）のパスワード</li>
+      </ul>
+
+      <h3>SSHのパスワード管理</h3>
+      <p>SSHではパスワードログインを禁止する。理由：パスワード推測攻撃（ブルートフォース）が大量に行われる、公開鍵認証に比べて圧倒的に弱い。設定方針：PasswordAuthentication no、公開鍵認証のみ許可、rootログイン禁止。</p>
+
+      <h3>DBパスワード管理</h3>
+      <p>DBのパスワードは、アプリケーションが接続するための最重要情報。管理の原則：推測されにくい長いパスワードを使用、アプリケーションユーザーは必要最小限の権限のみにする、root（superuser）パスワードはアプリで使用しない、パスワードはアプリ内にハードコードしない。</p>
+
+      <h3>アプリケーションのパスワード管理（環境変数）</h3>
+      <p>アプリケーションは、DB接続パスワード、メールサーバーパスワード、外部APIキーなどを使用する。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>正しい管理方法</th><th>NG例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">.envファイルに保存</th>那样ソースコードに直書き</th></tr>
+            <tr><td style="font-weight: bold;">サーバー内のみに置く</th>那样GitHubにアップロード</th></tr>
+            <tr><td style="font-weight: bold;">権限は600に設定</th>那样共有フォルダに保存</th></tr>
+            <tr><td style="font-weight: bold;">デプロイ時に環境変数として設定</th>那样—</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. SQLインジェクション</h2>
+      <p>SQLインジェクションとは、アプリケーションが本来「データ」として扱うべきユーザー入力を、誤って「SQL文の一部」として扱ってしまうことで、攻撃者が任意のSQLを実行できてしまう攻撃。</p>
+
+      <h3>攻撃の本質</h3>
+      <p>「アプリがSQL文とユーザー入力の境界を管理できていない」→攻撃者がSQL文を「書き換えられる」。</p>
+
+      <h3>何が起きるのか</h3>
+      <ul>
+        <li>全ユーザー情報の取得</li>
+        <li>パスワードハッシュの窃取</li>
+        <li>任意の行の削除・改ざん</li>
+        <li>管理者アカウントの作成</li>
+        <li>テーブル削除（DROP TABLE）</li>
+        <li>認証処理の完全バイパス</li>
+      </ul>
+
+      <h3>攻撃の例</h3>
+      <figure class="wide-diagram">
+        <figcaption>SQLインジェクション攻撃の例</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="360" height="40" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="28" font-size="10" fill="#1e3a5f">アプリ内部コード:</text>
+          <text x="30" y="42" font-size="10" fill="#1e3a5f">"SELECT * FROM users WHERE email = '" + input + "';"</text>
+          
+          <line x1="200" y1="50" x2="200" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="20" y="70" width="360" height="40" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+          <text x="30" y="88" font-size="10" fill="#7f1d1d">攻撃者の入力:</text>
+          <text x="30" y="102" font-size="10" fill="#7f1d1d">' OR 1=1 --</text>
+          
+          <line x1="200" y1="110" x2="200" y2="125" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="20" y="130" width="360" height="60" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="148" font-size="10" fill="#1e3a5f">最終的にDBに送られるSQL:</text>
+          <text x="30" y="162" font-size="10" fill="#dc2626" font-weight="bold">SELECT * FROM users WHERE email = '' OR 1=1 -- ';</text>
+          <text x="30" y="180" font-size="9" fill="#64748b">※ WHERE条件が常に真になり全件取得、--以降はコメント扱い</text>
+        </svg>
+      </figure>
+
+      <h3>防御（どう防ぐのか）</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>防御方法</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">プレースホルダ（プリペアドステートメント）</th>那样SQL文と値が別々のパケットでDBに送られる。値は絶対にSQLとして解釈されない</th></tr>
+            <tr><td style="font-weight: bold;">構造の分離が本質</th>那样エスケープではなく「SQLと入力値の境界を強制的に分離」することが重要</th></tr>
+            <tr><td style="font-weight: bold;">DBユーザーの権限最小化</th>那样アプリ用ユーザーはSELECTのみ、DROP/DELETE/UPDATEを禁止</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>プレースホルダの仕組み</figcaption>
+        <svg viewBox="0 0 400 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="100" y="30" text-anchor="middle" font-size="10" fill="#1e3a5f">SELECT * FROM users WHERE email = ?</text>
+          
+          <line x1="180" y1="25" x2="205" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="210" y="10" width="160" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="290" y="30" text-anchor="middle" font-size="10" fill="#14532d">値: ' OR 1=1 --</text>
+          
+          <text x="200" y="70" text-anchor="middle" font-size="10" font-weight="bold" fill="#16a34a">✅ SQLと値が分離 → 攻撃無効</text>
+        </svg>
+      </figure>
+
+      <h2>3. XSS（クロスサイトスクリプティング）</h2>
+      <p>XSSとは、攻撃者が入力した悪意あるJavaScriptが、他ユーザーのブラウザ上で実行されてしまう攻撃。</p>
+
+      <h3>攻撃の本質</h3>
+      <p>「アプリがユーザー入力を“HTMLとして解釈される形”で出力してしまう」→攻撃者のJavaScriptが被害者のブラウザで実行される。</p>
+
+      <h3>何が起きるのか</h3>
+      <ul>
+        <li>Cookieの盗難（セッションIDの奪取）</li>
+        <li>ログイン中のユーザーになりすまし</li>
+        <li>偽フォームを表示して情報を盗む（フィッシング）</li>
+        <li>管理画面の不正操作</li>
+        <li>ページ改ざん・広告挿入</li>
+      </ul>
+
+      <h3>攻撃の例</h3>
+      <figure class="wide-diagram">
+        <figcaption>XSS攻撃の例</figcaption>
+        <svg viewBox="0 0 400 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="360" height="35" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="28" font-size="10" fill="#1e3a5f">攻撃者の入力:</text>
+          <text x="30" y="42" font-size="10" fill="#dc2626">&lt;script&gt;steal()&lt;/script&gt;</text>
+          
+          <line x1="200" y1="50" x2="200" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="20" y="70" width="360" height="35" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="88" font-size="10" fill="#1e3a5f">アプリが出力するHTML:</text>
+          <text x="30" y="102" font-size="10" fill="#dc2626">&lt;div class="comment"&gt;&lt;script&gt;steal()&lt;/script&gt;&lt;/div&gt;</text>
+          
+          <line x1="200" y1="110" x2="200" y2="125" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="20" y="130" width="360" height="35" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+          <text x="30" y="148" font-size="10" fill="#7f1d1d">結果: ブラウザが&lt;script&gt;をJavaScriptとして実行</text>
+        </svg>
+      </figure>
+
+      <h3>防御（どう防ぐのか）</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <tr>
+          <thead>
+            <tr><th>防御方法</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">出力時エスケープ</th>那样HTMLとして解釈される特殊文字を変換する</th></tr>
+            <tr><td style="font-weight: bold;">コンテキストに応じたエスケープ</th>那样HTML本文・属性値・JavaScript内・URL内で適切なエスケープが必要</th></tr>
+            <tr><td style="font-weight: bold;">CookieにHttpOnly属性</th>那样JavaScriptからCookieを読めなくする（セッション奪取防止）</th></tr>
+            <tr><td style="font-weight: bold;">入力値をHTMLとして扱わない設計</th>那样Markdown変換やテキストとして保存</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>エスケープの例</figcaption>
+        <svg viewBox="0 0 400 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="100" y="30" text-anchor="middle" font-size="10" fill="#1e3a5f">入力: &lt;script&gt;steal()&lt;/script&gt;</text>
+          
+          <line x1="180" y1="25" x2="205" y2="25" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr4)"/>
+          
+          <rect x="210" y="10" width="160" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="290" y="30" text-anchor="middle" font-size="10" fill="#14532d">出力: &amp;lt;script&amp;gt;steal()&amp;lt;/script&amp;gt;</text>
+          
+          <text x="200" y="70" text-anchor="middle" font-size="10" font-weight="bold" fill="#16a34a">✅ ブラウザはタグとして解釈せず文字列として表示</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>エスケープだけではSQLインジェクションは防げない</strong>：DBごとにエスケープ仕様が異なり、漏れが発生する。プレースホルダが根本解決。</li>
+        <li><strong>.envファイルをGitHubにアップロードする誤り</strong>：.envファイルは絶対にリポジトリに含めない。.gitignoreに追加する。</li>
+        <li><strong>XSS対策で入力時エスケープをする誤り</strong>：XSS対策は「出力時」のエスケープが正しい。入力時エスケープはデータを破壊する。</li>
+        <li><strong>HttpOnly属性の付け忘れ</strong>：HttpOnlyがないと、XSS攻撃でJavaScriptからCookieを読み取られ、セッションが奪取される。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. SQLインジェクション攻撃の本質は何か。</summary>
+        <p>ア）ユーザー入力がHTMLとして解釈される　イ）ユーザー入力がSQL文の一部として扱われる　ウ）パスワードが総当たりで推測される　エ）通信内容が盗聴される</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SQLインジェクションは、ユーザー入力がSQL文の一部として扱われ、攻撃者が任意のSQLを実行できる攻撃。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. SQLインジェクションの最も効果的な防御策はどれか。</summary>
+        <p>ア）エスケープ処理　イ）入力値のバリデーション　ウ）プレースホルダ（プリペアドステートメント）　エ）パスワードの長大化</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — プレースホルダ（プリペアドステートメント）はSQLと値を分離するため、SQLインジェクションを根本的に防げる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. XSS攻撃の本質は何か。</summary>
+        <p>ア）ユーザー入力がSQL文の一部として扱われる　イ）ユーザー入力がHTMLとして解釈される形で出力される　ウ）パスワードが総当たりで推測される　エ）通信内容が盗聴される</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — XSSは、ユーザー入力がHTMLとして解釈される形で出力され、攻撃者のJavaScriptが実行される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. XSS攻撃で奪取される可能性があるものはどれか。</summary>
+        <p>ア）データベースのパスワード　イ）Cookie（セッションID）　ウ）サーバーの設定ファイル　エ）SSL証明書</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — XSS攻撃でJavaScriptを実行されると、Cookie（セッションID）が盗まれ、なりすましが可能になる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. XSS対策としてCookieに付与すべき属性はどれか。</summary>
+        <p>ア）Secure　イ）HttpOnly　ウ）SameSite　エ）Domain</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — HttpOnly属性を付与すると、JavaScriptからCookieを読み取れなくなり、XSSによるセッション奪取を防げる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. アプリケーションのパスワードを管理する際の正しい方法はどれか。</summary>
+        <p>ア）ソースコードに直接記述する　イ）.envファイルに保存しGitHubにアップロードしない　ウ）共有フォルダに保存する　エ）パスワードをハッシュ化せずに保存する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — .envファイルに保存し、.gitignoreで除外してGitHubにアップロードしないのが正しい管理方法。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. SQLインジェクション攻撃の例として正しいものはどれか。</summary>
+        <p>ア）&lt;script&gt;steal()&lt;/script&gt;　イ）' OR 1=1 --　ウ）../../../etc/passwd　エ）123456</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ' OR 1=1 -- はSQLインジェクションの代表的な攻撃文字列。WHERE条件を常に真にする。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. XSS対策のエスケープ処理はいつ行うべきか。</summary>
+        <p>ア）データベース保存時　イ）入力受信時　ウ）出力時　エ）バリデーション時</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — XSS対策のエスケープは「出力時」に行う。入力時エスケープはデータを破壊するため誤り。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. SQLインジェクションでプレースホルダが有効な理由はどれか。</summary>
+        <p>ア）入力値を暗号化するから　イ）SQL文と値が別々のパケットで送られ、値がSQLとして解釈されないから　ウ）データベースの接続を暗号化するから　エ）入力値を圧縮するから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — プレースホルダではSQL文と値が分離してDBに送られるため、値がSQLとして解釈されることはない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. XSS攻撃によって引き起こされる被害として適切でないものはどれか。</summary>
+        <p>ア）Cookieの盗難　イ）なりすましログイン　ウ）データベースの全削除　エ）フィッシング表示</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — データベースの全削除はSQLインジェクションの被害。XSSはブラウザ上での攻撃。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第9章 Webサーバーのセキュリティ（p323-p343）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

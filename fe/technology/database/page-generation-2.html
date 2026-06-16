@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webページ生成の仕組み②（レスポンス/パラメータ/GET-POST） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>Webページ生成の仕組み②</h1>
+        <p class="lead">HTTPレスポンスの構造、レスポンスボディの種類、URLパラメータの仕組み、GETとPOSTの違いと使い分けを学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>Webページ生成の仕組み②</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>HTTPレスポンスの基本構造（ステータスライン/ヘッダ/ボディ）</li>
+          <li>レスポンスボディの種類（HTML/CSS/JS/JSON/画像など）</li>
+          <li>Content-TypeとMIMEタイプの役割</li>
+          <li>URLパラメータ（クエリ文字列）の仕組み</li>
+          <li>GETメソッドとPOSTメソッドの違い</li>
+          <li>GETとPOSTの適切な使い分け</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>GETとPOSTの違い、URLパラメータの仕組み、Content-Typeの役割</dd></div>
+          <div><dt>中</dt><dd>レスポンスボディの種類、MIMEタイプ</dd></div>
+          <div><dt>低</dt><dd>MIMEタイプの詳細な種類</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>レスポンスヘッダ</th><td>HTTPの情報（Content-Type, Cache-Controlなど）を伝える</th></tr>
+            <tr><th>2</th><th>レスポンスボディ</th>-than実際の中身（HTML/JSON/画像など）</th></tr>
+            <tr><th>3</th><th>MIMEタイプ</th>-thanデータの種類を表す標準化された形式名（text/htmlなど）</th></tr>
+            <tr><th>4</th><th>URLパラメータ</th>-thanURLの末尾に「?」以降で付ける追加情報</th></tr>
+            <tr><th>5</th><th>クエリ文字列</th>-thanURLパラメータの「キー=値」の部分</th></tr>
+            <tr><th>6</th><th>GETメソッド</th>-thanデータ取得用のHTTPメソッド。URLにパラメータを付ける</th></tr>
+            <tr><th>7</th><th>POSTメソッド</th>-thanデータ送信用のHTTPメソッド。ボディにデータを入れる</th></tr>
+            <tr><th>8</th><th>application/json</th>-thanJSONデータのMIMEタイプ</th></tr>
+            <tr><th>9</th><th>image/png</th>-thanPNG画像のMIMEタイプ</th></tr>
+            <tr><th>10</th><th>text/css</th>-thanCSSファイルのMIMEタイプ</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. Webサーバーのレスポンスの中身</h2>
+      <p>Webサーバーは、ブラウザからのリクエストに対してHTTPレスポンスを返すことでWebページを表示させる。レスポンスは次の2つで構成される：レスポンスヘッダ（HTTPの情報）、レスポンスボディ（実際の中身：HTML/JSON/CSS/JS/画像）。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>HTTPレスポンスの基本構造</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="360" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="30" text-anchor="middle" font-size="11" fill="#1e3a5f">ステータスライン: HTTP/1.1 200 OK</text>
+          
+          <line x1="200" y1="40" x2="200" y2="55" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="20" y="60" width="360" height="55" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">レスポンスヘッダ</text>
+          <text x="40" y="100" font-size="10" fill="#92400e">Content-Type: text/html; charset=UTF-8</text>
+          <text x="40" y="112" font-size="10" fill="#92400e">Content-Length: 1234</text>
+          
+          <line x1="200" y1="115" x2="200" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="20" y="135" width="360" height="50" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="155" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">レスポンスボディ</text>
+          <text x="40" y="175" font-size="10" fill="#14532d">&lt;html&gt;...&lt;/html&gt;（実際のデータ）</text>
+        </svg>
+      </figure>
+
+      <h3>レスポンスボディの種類</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>MIMEタイプ</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">HTML</td><td>text/html</td><td>画面の本体。ブラウザが解析して画面を構築</td></tr>
+            <tr><td style="font-weight: bold;">CSS</td><td>text/css</td><td>デザイン情報。HTMLの見た目を整える</td></tr>
+            <tr><td style="font-weight: bold;">JavaScript</td><td>text/javascript<br>application/javascript</td><td>動的処理。画面の動作やAPI通信を担当</td></tr>
+            <tr><td style="font-weight: bold;">JSON</td><td>application/json</td><td>APIの返却データ。ブラウザやアプリが処理</td></tr>
+            <tr><td style="font-weight: bold;">画像（PNG）</td><td>image/png</td><td>画像データ。ブラウザはContent-Typeを見て画像として扱う</td></tr>
+            <tr><td style="font-weight: bold;">画像（JPEG）</td><td>image/jpeg</td><td>画像データ</td></tr>
+            <tr><td style="font-weight: bold;">PDF</td><td>application/pdf</td><td>PDF文書</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2. Content-TypeとMIMEタイプ</h3>
+      <p>Content-Typeは、レスポンスボディの種類（形式）をブラウザに伝えるヘッダ。ブラウザはContent-Typeを見て、HTMLとして表示するのか、CSSとして適用するのか、JavaScriptとして実行するのか、JSONとしてデータ処理するのか、画像として描画するのかを判断する。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>MIMEタイプ</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">text/html</td><td>HTML（Webページ本体）</td></tr>
+            <tr><td style="font-weight: bold;">text/css</td><td>CSS（デザイン情報）</td></tr>
+            <tr><td style="font-weight: bold;">text/javascript</td><td>JavaScript（動的処理）</td></tr>
+            <tr><td style="font-weight: bold;">application/json</td><td>JSON（APIの返却データ）</td></tr>
+            <tr><td style="font-weight: bold;">image/png</td><td>PNG画像</td></tr>
+            <tr><td style="font-weight: bold;">image/jpeg</td><td>JPEG画像</td></tr>
+            <tr><td style="font-weight: bold;">application/pdf</td><td>PDF文書</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>日本語を扱う場合は、charset（文字コード）の指定が重要。Content-Type: text/html; charset=UTF-8のように指定する。</p>
+
+      <h3>3. URLパラメータ（?id=10の仕組み）</h3>
+      <p>URLパラメータとは、URLの末尾に「?」以降で付ける追加情報のこと。例：https://example.com/item?id=10&amp;sort=asc</p>
+
+      <figure class="wide-diagram">
+        <figcaption>URLの構造（パスとクエリ文字列）</figcaption>
+        <svg viewBox="0 0 400 120" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <text x="200" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a5f">https://example.com/item?id=10&amp;sort=asc</text>
+          
+          <rect x="20" y="45" width="90" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="65" y="65" text-anchor="middle" font-size="10" fill="#1e3a5f">スキーム</text>
+          
+          <rect x="120" y="45" width="90" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="165" y="65" text-anchor="middle" font-size="10" fill="#92400e">ホスト名</text>
+          
+          <rect x="220" y="45" width="60" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="250" y="65" text-anchor="middle" font-size="10" fill="#14532d">パス</text>
+          
+          <rect x="290" y="45" width="90" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="335" y="65" text-anchor="middle" font-size="10" fill="#14532d">クエリ文字列</text>
+          
+          <text x="65" y="95" text-anchor="middle" font-size="9" fill="#64748b">https</text>
+          <text x="165" y="95" text-anchor="middle" font-size="9" fill="#64748b">example.com</text>
+          <text x="250" y="95" text-anchor="middle" font-size="9" fill="#64748b">/item</text>
+          <text x="335" y="95" text-anchor="middle" font-size="9" fill="#64748b">id=10&amp;sort=asc</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <tr>
+          <thead>
+            <tr><th>要素</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">パス</td><td>どの処理かを判断する</td></tr>
+            <tr><td style="font-weight: bold;">クエリ文字列</td><td>どのデータかを判断する。キー=値の形式（&amp;で複数指定）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>URLパラメータが使われる場面</h4>
+      <ul>
+        <li>商品詳細ページ（/item?id=10）</li>
+        <li>検索結果（/search?keyword=apple&amp;page=2）</li>
+        <li>一覧のページ切り替え（?page=3）</li>
+        <li>並び替え（?sort=price）</li>
+        <li>フィルタリング（?category=book&amp;limit=20）</li>
+      </ul>
+
+      <h4>URLパラメータの制約・注意点</h4>
+      <ul>
+        <li>URLに含まれるためブラウザのアドレスバーに見える</li>
+        <li>機密情報（パスワード・個人情報）を載せてはいけない</li>
+        <li>日本語などはURLエンコードが必要</li>
+        <li>長すぎるとブラウザやサーバーの制限にかかることがある</li>
+        <li>GETのURLパラメータはキャッシュの対象になる</li>
+      </ul>
+
+      <h3>4. GETとPOST</h3>
+      <p>HTTPには複数のメソッドがあるが、Webページ生成で最も重要なのはGETとPOSTの2つ。GETはデータ取得（URLにパラメータ）、POSTはデータ送信（ボディにデータ）。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>GETとPOSTの比較</figcaption>
+        <svg viewBox="0 0 400 250" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- GET -->
+          <rect x="20" y="10" width="170" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="105" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">GET</text>
+          
+          <rect x="20" y="55" width="170" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="105" y="75" text-anchor="middle" font-size="10" fill="#334155">データ取得</text>
+          
+          <rect x="20" y="90" width="170" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="105" y="110" text-anchor="middle" font-size="9" fill="#92400e">URLにパラメータ</text>
+          
+          <rect x="20" y="125" width="170" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="105" y="145" text-anchor="middle" font-size="9" fill="#92400e">アドレスバーに表示</text>
+          
+          <rect x="20" y="160" width="170" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+          <text x="105" y="180" text-anchor="middle" font-size="9" fill="#14532d">ブックマーク可能</text>
+          
+          <rect x="20" y="195" width="170" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+          <text x="105" y="215" text-anchor="middle" font-size="9" fill="#14532d">キャッシュされる</text>
+          
+          <!-- POST -->
+          <rect x="210" y="10" width="170" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="295" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">POST</text>
+          
+          <rect x="210" y="55" width="170" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="295" y="75" text-anchor="middle" font-size="10" fill="#334155">データ送信</text>
+          
+          <rect x="210" y="90" width="170" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="295" y="110" text-anchor="middle" font-size="9" fill="#92400e">HTTPボディ</text>
+          
+          <rect x="210" y="125" width="170" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="295" y="145" text-anchor="middle" font-size="9" fill="#92400e">アドレスバー非表示</text>
+          
+          <rect x="210" y="160" width="170" height="30" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+          <text x="295" y="180" text-anchor="middle" font-size="9" fill="#7f1d1d">ブックマーク不可</text>
+          
+          <rect x="210" y="195" width="170" height="30" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+          <text x="295" y="215" text-anchor="middle" font-size="9" fill="#7f1d1d">キャッシュされない</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>GET</th><th>POST</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">データの送信先</td><td>URL（クエリ文字列）</td><td>HTTPボディ</td></tr>
+            <tr><td style="font-weight: bold;">アドレスバー表示</td><td>表示される</td><td>表示されない</td></tr>
+            <tr><td style="font-weight: bold;">ブックマーク</td><td>できる</td><td>できない</td></tr>
+            <tr><td style="font-weight: bold;">再読み込み</td><td>安全（副作用なし）</td><td>再送信になる（注意）</td></tr>
+            <tr><td style="font-weight: bold;">キャッシュ</td><td>される</td><td>されない</td></tr>
+            <tr><td style="font-weight: bold;">主な用途</td><td>ページ表示・検索</td><td>フォーム送信・登録処理</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>なぜGETはアドレスバーに残るのか</h4>
+      <ol>
+        <li>GETは「リソース取得」のためのメソッド。必要な情報はすべてURLに含めるという設計</li>
+        <li>URLパラメータは「URLの一部」だからアドレスバーに表示される</li>
+        <li>GETは「再読み込みしても安全」副作用がないため、URLをそのまま再利用できる</li>
+        <li>ブックマーク・共有が前提。URLが見える必要がある</li>
+      </ol>
+
+      <h4>なぜPOSTはアドレスバーに残らないのか</h4>
+      <ul>
+        <li>データはURLではなくHTTPボディに入る</li>
+        <li>副作用があるため再読み込みが危険</li>
+        <li>ブックマークや共有に向かない</li>
+        <li>履歴に残すべきではない</li>
+      </ul>
+
+      <h4>GET / POST の使い分け</h4>
+      <ul>
+        <li>ページを開く → GET</li>
+        <li>データを送信する → POST</li>
+      </ul>
+      <p>この原則を守ることで、URLが整理される、セキュリティ事故を防げる、ブラウザの動作（キャッシュ・履歴）が正しく働く。</p>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>GETでパスワードを送信してはいけない</strong>：GETはURLにパラメータが表示されるため、パスワードなどの機密情報を送信するのは絶対にNG。</li>
+        <li><strong>Content-Typeの指定漏れ</strong>：Content-Typeが正しく設定されていないと、ブラウザが正しく表示できない。</li>
+        <li><strong>URLパラメータのエンコード忘れ</strong>：日本語や特殊文字を含む場合はURLエンコードが必要。</li>
+        <li><strong>POSTの再読み込み問題</strong>：POSTページで再読み込みすると「再送信」の確認ダイアログが表示される。重要な処理ではリダイレクト（Post/Redirect/Getパターン）を使う。</li>
+        <li><strong>MIMEタイプの誤り</strong>：JSONを返すAPIでtext/htmlを返すと、フロントエンドが正しく処理できない。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. HTTPレスポンスの構成要素として正しい組み合わせはどれか。</summary>
+        <p>ア）リクエストライン / ヘッダ / ボディ　イ）ステータスライン / ヘッダ / ボディ　ウ）メソッド / URL / HTTPバージョン　エ）ステータスコード / メソッド / ボディ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — HTTPレスポンスは「ステータスライン」「ヘッダ」「ボディ」で構成される。リクエストラインはリクエストの構成要素。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. JSONデータのMIMEタイプはどれか。</summary>
+        <p>ア）text/html　イ）text/css　ウ）application/json　エ）image/png</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — JSONのMIMEタイプはapplication/json。APIのレスポンスでよく使用される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. URLパラメータ（クエリ文字列）の説明として正しいものはどれか。</summary>
+        <p>ア）HTTPボディに格納されるデータ　イ）URLの末尾に「?」以降で付ける追加情報　ウ）HTTPヘッダに含まれる情報　エ）Cookieに保存される情報</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — URLパラメータはURLの末尾に「?」以降で付けるキー=値形式の追加情報である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. GETメソッドの特徴として適切でないものはどれか。</summary>
+        <p>ア）データ取得に使用する　イ）URLにパラメータを付ける　ウ）パスワードなどの機密情報を送信するのに適している　エ）ブックマーク可能</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — GETはURLにパラメータが表示されるため、パスワードなどの機密情報を送信するのには適していない。そのような場合はPOSTを使用する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. POSTメソッドの特徴として適切なものはどれか。</summary>
+        <p>ア）データはURLのクエリ文字列に格納される　イ）アドレスバーにパラメータが表示される　ウ）ブックマーク可能　エ）ログインや登録処理に使用される</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — POSTはデータ送信に使用され、ログインや会員登録などの処理に適している。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. CSSファイルのMIMEタイプはどれか。</summary>
+        <p>ア）text/html　イ）text/css　ウ）text/javascript　エ）application/json</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — CSSファイルのMIMEタイプはtext/css。ブラウザはこれを見てスタイルシートとして適用する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. URLパラメータの制約として正しいものはどれか。</summary>
+        <p>ア）パスワードなどの機密情報を載せてもよい　イ）日本語はそのまま使える　ウ）長すぎるとブラウザやサーバーの制限にかかることがある　エ）キャッシュの対象にならない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — URLパラメータが長すぎると、ブラウザやWebサーバーの制限（約2000〜8000文字）にかかることがある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 次のうち、GETメソッドが適切に使われている例はどれか。</summary>
+        <p>ア）ログインフォームの送信　イ）会員登録フォームの送信　ウ）商品検索フォームの送信　エ）クレジットカード情報の送信</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 商品検索はデータ取得が目的であり、検索キーワードをURLパラメータとして送信するGETが適切。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 日本語を含むURLパラメータを扱う際に必要な処理はどれか。</summary>
+        <p>ア）Base64エンコード　イ）URLエンコード　ウ）暗号化　エ）圧縮</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 日本語や特殊文字を含むURLパラメータは、URLエンコード（パーセントエンコーディング）が必要。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. POSTメソッドでデータを送信する際、データが格納される場所はどれか。</summary>
+        <p>ア）URLのクエリ文字列　イ）HTTPヘッダ　ウ）HTTPボディ　エ）ステータスライン</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — POSTメソッドでは、送信データはHTTPボディに格納される。GETメソッドではURLのクエリ文字列に格納される。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第5章 Webページ生成の仕組み（p110-p128）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

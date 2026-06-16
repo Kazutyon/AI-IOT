@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webサーバーのセキュリティ①（HTTPS/SSH/アカウント管理） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Security</p>
+        <h1>Webサーバーのセキュリティ①</h1>
+        <p class="lead">HTTPSによる通信の暗号化、SSHによる安全なサーバー接続、アカウント管理の基本原則を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>Webサーバーのセキュリティ①</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>HTTPSが必要な理由（盗聴防止・改ざん防止・なりすまし防止）</li>
+          <li>SSL証明書の役割と導入の流れ</li>
+          <li>SSHによる安全なサーバー接続の仕組み</li>
+          <li>公開鍵認証の仕組みとメリット</li>
+          <li>アカウント管理の基本原則（root不使用・権限最小限・共有禁止）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>HTTPSの必要性、SSL証明書の役割、SSHの役割、rootを使用しない理由</dd></div>
+          <div><dt>中</dt><dd>公開鍵認証の仕組み、アカウント管理の基本原則</dd></div>
+          <div><dt>低</dt><dd>Let's Encryptの詳細、SSHポート番号変更の詳細</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>HTTPS</th>的那样HTTPをTLSで暗号化し安全に通信する仕組み</th></tr>
+            <tr><th>2</th><th>SSL証明書</th>的那样サーバーの正当性を証明する電子証明書</th></tr>
+            <tr><th>3</th><th>認証局（CA）</th>的那样SSL証明書を発行する信頼できる第三者機関</th></tr>
+            <tr><th>4</th><th>TLSハンドシェイク</th>的那样HTTPS通信開始時の鍵交換と証明書提示の手順</th></tr>
+            <tr><th>5</th><th>SSH</th>的那样暗号化された通信でサーバーに接続するプロトコル</th></tr>
+            <tr><th>6</th><th>公開鍵認証</th>那样秘密鍵と公開鍵のペアでログインする方式</th></td>
+            <tr><th>7</th><th>秘密鍵</th>那样ユーザーだけが持つ鍵（絶対に外部に漏らさない）</th></tr>
+            <tr><th>8</th><th>公開鍵</th>那样サーバーに登録する鍵</th></td>
+            <tr><th>9</th><th>rootアカウント</th>那样最上位権限を持つ管理者アカウント</th></tr>
+            <tr><th>10</th><th>sudo</th>那样一般ユーザーが一時的にroot権限を取得する仕組み</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. HTTPS（通信の暗号化）</h2>
+      <p>Webサーバーとブラウザの通信は、盗聴・改ざん・なりすましのリスクに常にさらされている。これを防ぐために使用されるのがHTTPS（HTTP Secure）である。HTTPSは、通信内容を暗号化し、安全にデータを送受信する仕組みであり、ログイン情報・個人情報・決済情報を扱うWebアプリでは必須となる。</p>
+
+      <h3>HTTPSが必要な理由</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>理由</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <td><td style="font-weight: bold;">通信の盗聴防止</th><td>ログイン情報（メールアドレス・パスワード）が平文で流れると、ネットワーク上で簡単に盗まれる</th></tr>
+            <tr><td style="font-weight: bold;">通信の改ざん防止</th><td>攻撃者が途中でデータを書き換える「中間者攻撃（MITM）」を防止できる</th></tr>
+            <tr><td style="font-weight: bold;">サーバーの正当性証明</th><td>証明書により、「このサーバーは本物である」ことをブラウザが確認できる</th></tr>
+            <tr><td style="font-weight: bold;">SEO・ブラウザ警告対策</th>那样GoogleはHTTPSを推奨、HTTPサイトはブラウザで「安全ではありません」と表示される</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>HTTPSの仕組み</h3>
+      <p>HTTPSは以下の2つの技術で成り立つ：①暗号化（SSL/TLSにより通信内容を暗号化）、②証明書（サーバーの正当性を保証）。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>HTTPS通信の流れ</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="100" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">ブラウザ</text>
+          
+          <line x1="120" y1="30" x2="145" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="150" y="10" width="100" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="35" text-anchor="middle" font-size="12" fill="#92400e">Webサーバー</text>
+          
+          <line x1="250" y1="30" x2="275" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="280" y="10" width="100" height="40" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="330" y="30" text-anchor="middle" font-size="10" fill="#1e293b">暗号化通信</text>
+          <text x="330" y="45" text-anchor="middle" font-size="9" fill="#64748b">🔒 TLS</text>
+          
+          <text x="200" y="90" text-anchor="middle" font-size="10" fill="#64748b">ポート443番を使用</text>
+          <text x="200" y="110" text-anchor="middle" font-size="10" fill="#64748b">認証局（CA）が発行したSSL証明書が必要</text>
+          
+          <rect x="100" y="130" width="200" height="50" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+          <text x="200" y="150" text-anchor="middle" font-size="10" font-weight="bold" fill="#14532d">SSL証明書の役割</text>
+          <text x="200" y="168" text-anchor="middle" font-size="9" fill="#14532d">「このサーバーは本物のexample.comです」</text>
+          <text x="200" y="180" text-anchor="middle" font-size="9" fill="#14532d">と証明する身分証明書</text>
+        </svg>
+      </figure>
+
+      <h3>HTTPS導入の流れ</h3>
+      <ol>
+        <li><strong>ドメインを取得する</strong>：HTTPSはドメイン単位で設定される</li>
+        <li><strong>SSL証明書を取得する</strong>：Let's Encrypt（無料）または商用証明書（有料）</li>
+        <li><strong>Webサーバーに設定する</strong>：証明書ファイルをサーバーに配置し、HTTPS用の設定を行う</li>
+        <li><strong>HTTP → HTTPS にリダイレクトする</strong>：すべての通信をHTTPSに統一する</li>
+      </ol>
+
+      <h2>2. SSH（安全なサーバー接続）</h2>
+      <p>SSH（Secure Shell）は、サーバーに安全に接続するための仕組みである。Webサーバーの運用では、ファイル操作、設定変更、アプリのデプロイ、ログ確認など、サーバーへ直接アクセスする作業が必ず発生する。このとき、SSHを使わずに接続するとパスワード盗聴・なりすまし・不正侵入のリスクが極めて高くなる。</p>
+
+      <h3>SSHとは何か</h3>
+      <p>SSHは、暗号化された通信でサーバーに接続するためのプロトコル。特徴：通信内容が暗号化される、パスワードが盗まれない、公開鍵認証により安全にログインできる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>SSHの仕組み</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="100" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="30" text-anchor="middle" font-size="11" fill="#1e3a5f">クライアント</text>
+          <text x="70" y="45" text-anchor="middle" font-size="9" fill="#1e3a5f">（開発者PC）</text>
+          
+          <line x1="120" y1="30" x2="145" y2="30" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="132" y="25" text-anchor="middle" font-size="8" fill="#64748b">SSH</text>
+          
+          <rect x="150" y="10" width="100" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="30" text-anchor="middle" font-size="11" fill="#92400e">サーバー</text>
+          <text x="200" y="45" text-anchor="middle" font-size="9" fill="#92400e">ポート22</text>
+          
+          <text x="200" y="90" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e293b">公開鍵認証の仕組み</text>
+          
+          <rect x="50" y="110" width="130" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="115" y="130" text-anchor="middle" font-size="9" fill="#1e293b">秘密鍵（手元）</text>
+          
+          <line x1="180" y1="125" x2="210" y2="125" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          
+          <rect x="215" y="110" width="130" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="280" y="130" text-anchor="middle" font-size="9" fill="#1e293b">公開鍵（サーバー）</text>
+          
+          <text x="200" y="165" text-anchor="middle" font-size="9" fill="#64748b">秘密鍵を持つ人だけがログインできる</text>
+        </svg>
+      </figure>
+
+      <h3>公開鍵認証</h3>
+      <p>公開鍵認証は、秘密鍵（手元）と公開鍵（サーバー）のペアでログインする方式。仕組み：ユーザーだけが持つ秘密鍵、サーバーに登録する公開鍵。サーバーは、「秘密鍵を持っている人だけがログインできる」という仕組みで認証を行う。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>メリット</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">パスワード不要</th>那样パスワードを入力する手間がない</th></tr>
+            <tr><td style="font-weight: bold;">推測攻撃に強い</th>那样ブルートフォース攻撃を受けない</th></tr>
+            <tr><td style="font-weight: bold;">実務では必須</th>那样セキュリティ標準のログイン方式</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>SSHの安全な運用</h3>
+      <ul>
+        <li><strong>パスワードログインを禁止する</strong>：公開鍵認証のみ許可する</li>
+        <li><strong>rootログインを禁止する</strong>：rootで直接ログインすると被害が大きい</li>
+        <li><strong>ポート番号の変更（22 → 任意）</strong>：攻撃のスキャン対象から外れやすくなる</li>
+        <li><strong>鍵の管理</strong>：秘密鍵は絶対に外部に漏らさない</li>
+      </ul>
+
+      <h2>3. アカウント管理</h2>
+      <p>Webサーバーには、SSH接続、ファイル操作、設定変更、デプロイなど、重要な操作を行うためのユーザーアカウントが存在する。このアカウント管理が適切でないと、不正ログイン・権限濫用・サーバー乗っ取りといった重大なリスクが発生する。</p>
+
+      <h3>アカウント管理の目的</h3>
+      <p>「必要な人だけが、必要な範囲でサーバーを操作できる状態を維持する」こと。これにより、不正アクセスの防止、誤操作の防止、権限の乱用防止、退職者・外部委託者のアクセス遮断といった安全性が確保される。</p>
+
+      <h3>rootアカウントを直接使わない（最重要）</h3>
+      <p>Linuxサーバーにはroot（最上位権限）が存在するが、rootを直接使うことは非常に危険。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>root直接使用のリスク</th><th>正しい運用</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">すべての操作が可能</th>那样通常は一般ユーザーでログイン</th></tr>
+            <tr><td style="font-weight: bold;">誤操作でサーバー破壊</th>那样必要なときだけsudoで権限昇格</th></tr>
+            <tr><td style="font-weight: bold;">攻撃突破時の被害最大</th>那样「誰が何をしたか」を明確に</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>アカウント管理の基本原則</h3>
+      
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>原則</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">rootを直接使わない</th>那样sudoで権限昇格</th></tr>
+            <tr><td style="font-weight: bold;">不要なアカウントを残さない</th>那样退職者・外部委託者のアカウントは即削除</th></tr>
+            <tr><td style="font-weight: bold;">権限を最小限にする</th>那样必要最小限の権限だけを与える</th></tr>
+            <tr><td style="font-weight: bold;">アカウント共有は禁止</th>那样1人1アカウント</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>アカウント管理とログ監視の関係</h3>
+      <p>アカウント管理はログ監視とセットで運用する。誰がログインしたか、どのIPからアクセスしたか、何のコマンドを実行したかを記録することで、不正アクセスや内部不正を検知できる。</p>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>HTTPSがあれば完全に安全という誤解</strong>：HTTPSは通信路の暗号化であり、サーバー内部の脆弱性やアプリのバグは防げない。</li>
+        <li><strong>SSL証明書の更新忘れ</strong>：証明書には有効期限があり、更新しないとブラウザで警告が表示される。</li>
+        <li><strong>SSHのパスワード認証を無効化していない</strong>：パスワード認証を残しているとブルートフォース攻撃の対象になる。</li>
+        <li><strong>秘密鍵の管理ミス</strong>：秘密鍵をGitHubなどにアップロードしてしまった場合、即座に無効化する必要がある。</li>
+        <li><strong>アカウント共有のリスク軽視</strong>：複数人で同じアカウントを使うと、誰が何をしたか特定できなくなる。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. HTTPSが必要な理由として適切でないものはどれか。</summary>
+        <p>ア）通信の盗聴防止　イ）通信の改ざん防止　ウ）サーバーの負荷軽減　エ）サーバーの正当性証明</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — HTTPSはサーバーの負荷を軽減するための仕組みではない。むしろ暗号化処理で負荷は増加する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. SSL証明書の主な役割はどれか。</summary>
+        <p>ア）通信内容を圧縮する　イ）サーバーの正当性を証明する　ウ）データベースに接続する　エ）HTMLをキャッシュする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SSL証明書は「このサーバーは本物のexample.comです」と証明する電子証明書。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. SSHの説明として正しいものはどれか。</summary>
+        <p>ア）HTTP通信を暗号化する仕組み　イ）暗号化された通信でサーバーに接続するプロトコル　ウ）DNS名前解決を行う仕組み　エ）メールを送信するプロトコル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SSHは暗号化された通信でサーバーに安全に接続するためのプロトコル。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 公開鍵認証の説明として正しいものはどれか。</summary>
+        <p>ア）パスワードと同じように安全ではない　イ）秘密鍵をサーバーに置き、公開鍵を手元に持つ　ウ）秘密鍵を手元に持ち、公開鍵をサーバーに登録する　エ）パスワード認証より安全性が低い</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 公開鍵認証は秘密鍵を手元に持ち、公開鍵をサーバーに登録する。秘密鍵を持つ人だけがログインできる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. Linuxサーバーでrootアカウントを直接使うべきでない理由として適切でないものはどれか。</summary>
+        <p>ア）すべての操作が可能で誤操作のリスクが高い　イ）攻撃者に突破された場合の被害が最大　ウ）rootでログインすると通信が暗号化されない　エ）ログに「誰が操作したか」が残らない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — SSH自体はrootでも一般ユーザーでも暗号化される。root直接使用の問題点は権限と監査の面。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. HTTPSが使用するポート番号はどれか。</summary>
+        <p>ア）22　イ）80　ウ）443　エ）3306</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — HTTPSは443番ポートを使用する。HTTPは80、SSHは22、MySQLは3306。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. SSHでパスワード認証ではなく公開鍵認証を使用する主な理由はどれか。</summary>
+        <p>ア）パスワードより入力が簡単だから　イ）パスワード推測攻撃（ブルートフォース）に強いから　ウ）通信速度が速くなるから　エ）設定が簡単だから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 公開鍵認証はパスワード推測攻撃（ブルートフォース）に強く、実務では必須のログイン方式。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. アカウント管理の基本原則として適切でないものはどれか。</summary>
+        <p>ア）rootは直接使わずsudoを使用する　イ）不要なアカウントは即削除する　ウ）権限は必要最小限にする　エ）複数人で1つのアカウントを共有する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — アカウント共有は「誰が何をしたか」が分からなくなるため禁止。1人1アカウントが原則。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. SSHのポート番号をデフォルトの22から変更する目的はどれか。</summary>
+        <p>ア）通信速度を向上させる　イ）暗号化を強化する　ウ）攻撃のスキャン対象から外れやすくする　エ）メモリ使用量を削減する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ポート番号を変更すると、自動化された攻撃スキャンの対象から外れやすくなる（セキュリティ・バイ・オブスキュリティ）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 一般ユーザーが一時的にroot権限を取得するための仕組みはどれか。</summary>
+        <p>ア）SSH　イ）sudo　ウ）su　エ）chmod</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — sudoは一般ユーザーが一時的にroot権限を取得するための仕組み。ログで操作履歴が残る。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第9章 Webサーバーのセキュリティ（p302-p322）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

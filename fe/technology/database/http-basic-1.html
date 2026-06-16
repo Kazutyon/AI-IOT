@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTTP基礎①（URL/リクエスト/レスポンス/メソッド/ヘッダ） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>HTTP基礎①</h1>
+        <p class="lead">HTTPプロトコルの基礎として、URLの構造、HTTPリクエストとレスポンスの形式、HTTPメソッド、HTTPヘッダの役割を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>HTTP基礎①</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>URLの構造と各要素の役割</li>
+          <li>HTTPリクエストの構成（リクエストライン・ヘッダ・ボディ）</li>
+          <li>HTTPレスポンスの構成（ステータスライン・ヘッダ・ボディ）</li>
+          <li>HTTPメソッド（GET/POST/PUT/DELETE）の役割</li>
+          <li>HTTPヘッダの種類と役割（Host/User-Agent/Content-Typeなど）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>URLの構造、HTTPメソッド（特にGET/POST）、Hostヘッダの役割</dd></div>
+          <div><dt>中</dt><dd>HTTPリクエスト/レスポンスの基本構成、ステータスコードの概要</dd></div>
+          <div><dt>低</dt><dd>HTTPバージョンの詳細、各ヘッダの詳細な値</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</th><th>URL</th><td>Webサーバーに「どのプロトコルで」「どのサーバーに」「どのリソースを要求するか」伝える情報</th></tr>
+            <tr><th>2</th><th>HTTPリクエスト</th><td>ブラウザからWebサーバーに送信される要求</th></tr>
+            <tr><th>3</th><th>HTTPレスポンス</th><td>Webサーバーからブラウザに返される応答</th></tr>
+            <tr><th>4</th><th>HTTPメソッド</th><td>ブラウザがWebサーバーに「何をしたいか」伝える指示（GET/POSTなど）</th></tr>
+            <tr><th>5</th><th>GETメソッド</th><td>データ取得を指示するHTTPメソッド</th></tr>
+            <tr><th>6</th><th>POSTメソッド</th><td>データ送信を指示するHTTPメソッド</th></tr>
+            <tr><th>7</th><th>HTTPヘッダ</th><td>リクエスト/レスポンスに付けられる追加情報</th></tr>
+            <tr><th>8</th><th>Hostヘッダ</th><td>どのドメイン宛かを伝えるヘッダ（バーチャルホスト判定に使用）</th></td>
+            <tr><th>9</th><th>User-Agentヘッダ</th><td>ブラウザ情報を伝えるヘッダ</th></tr>
+            <tr><th>10</th><th>Content-Typeヘッダ</th><td>送信データの形式を伝えるヘッダ</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. URLの構造</h2>
+      <p>URLは、Webサーバーに「どのプロトコルで」「どのサーバーに」「どのリソースを要求するか」を伝えるための情報。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>URLの構造</figcaption>
+        <svg viewBox="0 0 400 140" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <text x="200" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">https://example.com/products/list?id=10</text>
+          
+          <rect x="10" y="45" width="60" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="40" y="68" text-anchor="middle" font-size="11" fill="#1e3a5f">https</text>
+          
+          <rect x="85" y="45" width="110" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="140" y="68" text-anchor="middle" font-size="11" fill="#92400e">example.com</text>
+          
+          <rect x="210" y="45" width="100" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="260" y="68" text-anchor="middle" font-size="11" fill="#14532d">/products/list</text>
+          
+          <rect x="325" y="45" width="60" height="36" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="355" y="68" text-anchor="middle" font-size="10" fill="#14532d">?id=10</text>
+
+          <text x="40" y="105" text-anchor="middle" font-size="10" fill="#475569">プロトコル</text>
+          <text x="140" y="105" text-anchor="middle" font-size="10" fill="#475569">ホスト名</text>
+          <text x="260" y="105" text-anchor="middle" font-size="10" fill="#475569">パス</text>
+          <text x="355" y="105" text-anchor="middle" font-size="10" fill="#475569">クエリ</text>
+          <text x="200" y="130" text-anchor="middle" font-size="10" fill="#64748b">Webサーバーに「どのリソースを要求するか」伝える情報</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>要素</th><th>役割</th><th>Webサーバー側の意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>https://</th><td>使用するプロトコル</th><td>443番ポートで待ち受ける</th></tr>
+            <tr><td>example.com</th><td>サーバーの名前</th><td>Hostヘッダと一致する必要がある</th></tr>
+            <tr><td>/products/list</th><td>リソースのパス</th><td>どの処理を実行するか決まる</th></tr>
+            <tr><td>?id=10</th><td>クエリパラメータ</th><td>アプリに渡す入力値</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2. HTTPリクエスト</h3>
+      <p>HTTPは「リクエスト→レスポンス」の1往復で成り立つ。ブラウザからWebサーバーに送信される要求。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>HTTPリクエストの例</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="28" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="30" y="29" font-size="11" fill="#1e3a5f">GET /products/list?id=10 HTTP/1.1</text>
+          
+          <rect x="20" y="45" width="360" height="24" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="61" font-size="11" fill="#334155">Host: example.com</text>
+          
+          <rect x="20" y="75" width="360" height="24" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="91" font-size="11" fill="#334155">User-Agent: Chrome/125</text>
+          
+          <rect x="20" y="105" width="360" height="24" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="121" font-size="11" fill="#334155">Accept: text/html</text>
+          
+          <rect x="20" y="135" width="360" height="24" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="30" y="151" font-size="11" fill="#92400e">（空行）</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>行</th><th>内容</th><th>Webサーバー側の意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1行目</th><td>メソッド / パス / HTTPバージョン</th><td>何を要求しているか</th></tr>
+            <tr><td>Host</th><td>どのドメイン宛か</th><td>バーチャルホスト判定</th></tr>
+            <tr><td>User-Agent</th><td>ブラウザ情報</th><td>振り分け・ログ</th></tr>
+            <tr><td>Accept</th><td>受け取れる形式</th><td>HTML/JSONの切替</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>3. HTTPレスポンス</h3>
+      <p>Webサーバーからブラウザに返される応答。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>HTTPレスポンスの例</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="30" y="29" font-size="11" fill="#14532d">HTTP/1.1 200 OK</text>
+          
+          <rect x="20" y="45" width="360" height="24" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="61" font-size="11" fill="#334155">Content-Type: text/html</text>
+          
+          <rect x="20" y="75" width="360" height="24" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="91" font-size="11" fill="#334155">Cache-Control: no-cache</text>
+          
+          <rect x="20" y="105" width="360" height="24" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="121" font-size="11" fill="#334155">Set-Cookie: sessionid=abc123</text>
+          
+          <rect x="20" y="135" width="360" height="24" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="30" y="151" font-size="11" fill="#92400e">（空行）</text>
+          
+          <rect x="20" y="165" width="360" height="24" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="30" y="181" font-size="11" fill="#1e3a5f">&lt;html&gt;...&lt;/html&gt;</text>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        </table>
+          <thead>
+            <tr><th>行</th><th>内容</th><th>Webサーバー側の意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1行目</th><td>HTTPバージョン ステータスコード メッセージ</th><td>処理結果をブラウザに伝える</th></tr>
+            <tr><td>Content-Type</th><td>返すデータの形式</th><td>HTML/JSON/画像などを指定</th></tr>
+            <tr><td>Cache-Control</th><td>キャッシュしてよいか</th><td>ブラウザに指示</th></tr>
+            <tr><td>Set-Cookie</th><td>Cookieを発行</th><td>ログイン状態の維持</th></tr>
+            <tr><td>ボディ</th><td>実際のデータ</th><td>ブラウザが表示するHTML</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4. HTTPメソッド</h3>
+      <p>HTTPメソッドは、ブラウザ（またはクライアント）がWebサーバーに「何をしたいか」を伝えるための指示。URLだけでは「どのリソースか」しか分からない。メソッドがあることで「どう扱うか」が決まる。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>役割</th><th>Webサーバー側の意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>GET</th><td>データ取得</th><td>表示処理を実行する</th></tr>
+            <tr><td>POST</th><td>データ送信</th><td>ログイン・登録・更新などの処理</th></tr>
+            <tr><td>PUT</th><td>データの置換（API）</th><td>指定リソースを丸ごと更新</th></tr>
+            <tr><td>DELETE</th><td>データ削除（API）</th><td>指定リソースを削除</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Webサーバーはリクエスト行を見て、メソッド × パスの組み合わせで処理を決める。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>メソッドとパスの組み合わせ例</figcaption>
+        <svg viewBox="0 0 400 120" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="30" y="28" font-size="11" fill="#1e3a5f">GET    /users       → ユーザー一覧を表示</text>
+          <rect x="20" y="40" width="360" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="30" y="58" font-size="11" fill="#1e3a5f">POST   /users       → 新規ユーザーを登録</text>
+          <rect x="20" y="70" width="360" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="30" y="88" font-size="11" fill="#1e3a5f">GET    /users/10    → ID=10のユーザーを表示</text>
+          <rect x="20" y="100" width="360" height="25" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1"/>
+          <text x="30" y="118" font-size="11" fill="#7f1d1d">DELETE /users/10    → ID=10のユーザーを削除</text>
+        </svg>
+      </figure>
+
+      <h3>5. HTTPヘッダ</h3>
+      <p>HTTPヘッダとは、HTTPリクエスト/レスポンスに付けられる「追加情報」であり、Webサーバーが処理内容を判断するための指示書のようなもの。ヘッダがないと、Webサーバーは「誰から来たのか」「何を返せばいいのか」「どの形式で返すべきか」が分からない。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>不足する情報</th><th>ヘッダが補う内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>どのドメイン宛か</th><td>Host</th></tr>
+            <tr><td>どの形式を返せばよいか</th><td>Accept</th></tr>
+            <tr><td>どの形式で送ってきたか</th><td>Content-Type</th></tr>
+            <tr><td>キャッシュしてよいか</th><td>Cache-Control</th></tr>
+            <tr><td>認証情報はあるか</th><td>Cookie / Authorization</th></tr>
+            <tr><td>どのブラウザか</th><td>User-Agent</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>6. 主要なHTTPヘッダ</h3>
+      <div class="table-wrap mobile-card-table">
+        </table>
+          <thead>
+            <tr><th>ヘッダ名</th><th>役割</th><th>Webサーバー側の意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Host</th><td>どのドメイン宛か</th><td>バーチャルホスト判定（同一IPで複数サイト運用）</th></tr>
+            <tr><td>User-Agent</th><td>ブラウザ情報</th><td>ログ・振り分け・互換対応</th></tr>
+            <tr><td>Accept</th><td>受け取れる形式</th><td>HTML/JSONの切替</th></tr>
+            <tr><td>Content-Type</th><td>送信データの形式</th><td>JSON/formの判定</th></tr>
+            <tr><td>Cache-Control</th><td>キャッシュ制御</th><td>再取得の必要性</th></tr>
+            <tr><td>Cookie</th><td>ブラウザが保持する情報</th><td>セッション識別</th></td>
+            <tr><td>Set-Cookie</th><td>Cookieを発行</th><td>ログイン状態の維持</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>7. Webサーバーはヘッダをどう使っているか</h3>
+      <figure class="wide-diagram">
+        <figcaption>ヘッダからWebサーバーが判断する処理</figcaption>
+        <svg viewBox="0 0 400 260" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="360" height="55" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="30" y="28" font-size="10" fill="#1e3a5f">GET /api/user?id=10 HTTP/1.1</text>
+          <text x="30" y="43" font-size="10" fill="#1e3a5f">Host: example.com</text>
+          <text x="30" y="58" font-size="10" fill="#1e3a5f">Cookie: sessionid=abc123</text>
+
+          <line x1="200" y1="65" x2="200" y2="90" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+          <rect x="20" y="95" width="360" height="140" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="115" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">Webサーバーの判断</text>
+          
+          <text x="40" y="140" font-size="10" fill="#92400e">• Host: example.com → example.com宛と判断</text>
+          <text x="40" y="158" font-size="10" fill="#92400e">• User-Agent → ブラウザ種別をログ記録</text>
+          <text x="40" y="176" font-size="10" fill="#92400e">• Accept → HTMLではなくJSONを返すべき</text>
+          <text x="40" y="194" font-size="10" fill="#92400e">• Cookie → セッションIDを読み取り、</text>
+          <text x="50" y="210" font-size="10" fill="#92400e">ユーザー情報を復元</text>
+
+          <line x1="200" y1="235" x2="200" y2="255" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="200" y="252" text-anchor="middle" font-size="10" fill="#16a34a">処理実行</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>URLとURIの混同</strong>：URLは「場所」を示す。URIはより広い概念で「識別子」。試験ではURLとして覚えておけば十分。</li>
+        <li><strong>GETとPOSTの役割の混同</strong>：GETはデータ取得、POSTはデータ送信。検索フォームにGETを使うのはOKだが、ログインにGETを使うのはNG。</li>
+        <li><strong>Hostヘッダの重要性の軽視</strong>：1台のサーバーで複数サイトを運用するバーチャルホストでは、Hostヘッダが必須。</li>
+        <li><strong>ヘッダとボディの境界</strong>：空行がヘッダとボディの区切り。空行を見つけるまでがヘッダ、その後がボディ。</li>
+        <li><strong>ステータスコードとメソッドの関係</strong>：GETは200 OK、POSTは201 Createdや302 Foundなど、メソッドによって返すべきステータスコードが異なる。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. URLの構成要素のうち、Webサーバー上のリソースの場所を示す部分はどれか。</summary>
+        <p>ア）プロトコル　イ）ホスト名　ウ）パス　エ）クエリパラメータ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — パスはWebサーバー上のリソースの場所を示す。例：/products/list</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. HTTPリクエストの1行目に含まれないものはどれか。</summary>
+        <p>ア）HTTPメソッド　イ）リクエストURI　ウ）HTTPバージョン　エ）Hostヘッダ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — リクエストライン（1行目）には「メソッド」「パス」「HTTPバージョン」が含まれる。Hostヘッダは2行目以降のヘッダ領域に含まれる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. HTTPメソッドのうち、データ取得に使用されるものはどれか。</summary>
+        <p>ア）POST　イ）PUT　ウ）GET　エ）DELETE</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — GETメソッドはデータ取得のために使用される。POSTはデータ送信、PUTは更新、DELETEは削除に使用される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. バーチャルホスト（1台のサーバーで複数サイトを公開）で、どのドメインへのリクエストかを判断するために使用されるHTTPヘッダはどれか。</summary>
+        <p>ア）User-Agent　イ）Accept　ウ）Host　エ）Content-Type</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Hostヘッダはリクエスト先のドメイン名を伝える。Webサーバーはこれを見てバーチャルホストを判定する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. HTTPレスポンスの1行目に含まれる情報はどれか。</summary>
+        <p>ア）HTTPメソッド　イ）リクエストURI　ウ）ステータスコード　エ）Hostヘッダ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ステータスライン（1行目）には「HTTPバージョン」「ステータスコード」「ステータスメッセージ」が含まれる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. HTTPヘッダの役割として適切でないものはどれか。</summary>
+        <p>ア）リクエストの追加情報を伝える　イ）レスポンスの追加情報を伝える　ウ）実際のデータ本体を運ぶ　エ）キャッシュ制御の指示を伝える</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 実際のデータ本体を運ぶのはHTTPボディの役割。ヘッダは追加情報を伝えるためのもの。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. ブラウザの種類やバージョンをWebサーバーに伝えるHTTPヘッダはどれか。</summary>
+        <p>ア）Host　イ）User-Agent　ウ）Accept　エ）Content-Type</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — User-Agentヘッダはブラウザの種類やバージョン、OSなどの情報をWebサーバーに伝える。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 次のうち、POSTメソッドの説明として適切なものはどれか。</summary>
+        <p>ア）リソースの取得に使用する　イ）データの送信に使用する　ウ）リソースの削除に使用する　エ）リソースの置換に使用する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — POSTメソッドはログイン・登録・更新などのデータ送信に使用される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. Webサーバーがレスポンスで「このデータはHTMLです」とブラウザに伝えるために使用するヘッダはどれか。</summary>
+        <p>ア）Host　イ）User-Agent　ウ）Accept　エ）Content-Type</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — Content-Typeヘッダはレスポンスボディのデータ形式（text/html, application/jsonなど）をブラウザに伝える。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. HTTPリクエストにおいて、ヘッダとボディの区切りは何か。</summary>
+        <p>ア）改行コード（\n）　イ）カンマ（,）　ウ）空行　エ）セミコロン（;）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — HTTPでは空行（CRLF+CRLF）がヘッダとボディの境界を示す。空行を見つけるまでがヘッダ、その後がボディ。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第4章 HTTPとHTTPS（通信の仕組み）（p47-p56）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

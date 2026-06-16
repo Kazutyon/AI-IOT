@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>データベース | 基本情報技術者試験 対策ポータル</title>
+  <title>Webサーバー・データベース概論 | 基本情報技術者試験 対策ポータル</title>
   <link rel="stylesheet" href="../../../assets/style.css">
 </head>
 <body>
@@ -11,28 +11,210 @@
     <div class="header-inner">
       <div>
         <p class="eyebrow">Technology / Database</p>
-        <h1>データベース</h1>
-        <p class="lead">関係データベース、SQL、正規化、トランザクションを教材化する予定です。</p>
+        <h1>Webサーバー・データベース概論</h1>
+        <p class="lead">Webシステムの全体像からOS・ネットワーク・HTTP/HTTPS・Webサーバーソフトウェア・データベースまで。全9章・366ページを25教材に分割。</p>
       </div>
+      <nav class="study-map" aria-label="データベース教材マップ">
+        <a href="#ch1">Web全体像</a>
+        <a href="#ch2">OS基礎</a>
+        <a href="#ch3">ネットワーク</a>
+        <a href="#ch4">HTTP/HTTPS</a>
+        <a href="#ch5">ページ生成</a>
+        <a href="#ch6">Webサーバー</a>
+        <a href="#ch7">DB概論</a>
+      </nav>
     </div>
   </header>
+
   <main class="lesson-page">
     <nav class="breadcrumb" aria-label="パンくず">
       <a href="../../../index.html">ポータル</a>
       <span>データベース</span>
     </nav>
+
     <section class="lesson-section">
-      <h2>準備中教材</h2>
+      <h2>第1章 Webシステムの全体像（p1-p10）</h2>
       <div class="list">
         <article class="list-item">
-          <h3>関係データベース・SQL・正規化・トランザクション</h3>
-          <p>PDF配置とページ分割後に、教材ページを追加します。</p>
+          <h3>Webシステムの全体像</h3>
+          <p>クライアントとサーバーの役割、リクエストとレスポンスの基本フロー。読了約15分。</p>
+          <a href="web-system-overview.html">ページを開く</a>
         </article>
       </div>
     </section>
+
+    <section class="lesson-section">
+      <h2>第2章 WebサーバーのためのOS基礎（p11-p26）</h2>
+      <div class="list">
+        <article class="list-item">
+          <h3>OSの基本機能とプロセス管理</h3>
+          <p>OSの役割、プロセスとスレッド、マルチタスク、割り込みの仕組み。読了約15分。</p>
+          <a href="os-basic-1.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>メモリ管理・ファイルシステム・ユーザー管理</h3>
+          <p>仮想記憶、ファイルシステムの種類、アクセス権とユーザー管理の基礎。読了約15分。</p>
+          <a href="os-basic-2.html">ページを開く</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>第3章 Webサーバーのためのネットワーク基礎（p27-p46）</h2>
+      <div class="list">
+        <article class="list-item">
+          <h3>ネットワークの基礎 ① ― LAN・WAN・IPアドレス</h3>
+          <p>ネットワークの種類、IPアドレスの基本、サブネットマスク、デフォルトゲートウェイ。読了約15分。</p>
+          <a href="network-basic-1.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>ネットワークの基礎 ② ― TCP/UDP・DNS・ポート番号</h3>
+          <p>TCPとUDPの違い、3ウェイハンドシェイク、DNSの名前解決、ポート番号の役割。読了約15分。</p>
+          <a href="network-basic-2.html">ページを開く</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>第4章 HTTPとHTTPS（通信の仕組み）（p47-p96）</h2>
+      <div class="list">
+        <article class="list-item">
+          <h3>HTTPの基本① ― リクエストメソッド・ステータスコード</h3>
+          <p>GET/POST/PUT/DELETE、ステータスコード（200/301/404/500）の意味と使い分け。読了約15分。</p>
+          <a href="http-basic-1.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>HTTPの基本② ― ヘッダー・Cookie・キャッシュ</h3>
+          <p>リクエスト/レスポンスヘッダー、Cookieとセッション管理、キャッシュ制御（Cache-Control）。読了約15分。</p>
+          <a href="http-basic-2.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>HTTPSとTLSの詳細</h3>
+          <p>TLSハンドシェイクの流れ、証明書と認証局（CA）、HTTPS通信の安全性の仕組みを詳しく解説。読了約15分。</p>
+          <a href="http-details.html">ページを開く</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>第5章 Webページ生成の仕組み（p97-p152）</h2>
+      <div class="list">
+        <article class="list-item">
+          <h3>Webページの生成① ― 静的・動的・サーバーサイド</h3>
+          <p>静的ページと動的ページの違い、サーバーサイド処理（PHP・Python・Node.js）の基本。読了約15分。</p>
+          <a href="page-generation-1.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>Webページの生成② ― テンプレートエンジン・MVC</h3>
+          <p>テンプレートエンジンの仕組み、MVCアーキテクチャ、ルーティングの基礎。読了約15分。</p>
+          <a href="page-generation-2.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>フォームとユーザー入力の処理</h3>
+          <p>HTMLフォームの基本、入力バリデーション、CSRF対策、フォームデータの送信と処理。読了約15分。</p>
+          <a href="form-basic.html">ページを開く</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>第6章 Webサーバーソフトウェア（p153-p206）</h2>
+      <div class="list">
+        <article class="list-item">
+          <h3>Webサーバーソフトウェア① ― Apache・Nginxの基本</h3>
+          <p>代表的なWebサーバーソフトウェアの役割、ApacheとNginxの特徴と違い。読了約15分。</p>
+          <a href="webserver-1.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>Webサーバーソフトウェア② ― 仮想ホスト・ログ管理</h3>
+          <p>名前ベース/IPベースの仮想ホスト設定、アクセスログ・エラーログの解析と活用法。読了約15分。</p>
+          <a href="webserver-2.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>Webサーバーソフトウェア③ ― パフォーマンスチューニング</h3>
+          <p>KeepAlive、圧縮転送（gzip）、キャッシュ設定、リバースプロキシによる負荷分散。読了約15分。</p>
+          <a href="webserver-3.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>Webサーバーソフトウェア④ ― HTTPS設定・証明書管理</h3>
+          <p>SSL/TLS証明書の種類と取得方法、Let's Encryptによる自動更新、HTTPSリダイレクト設定。読了約15分。</p>
+          <a href="webserver-4.html">ページを開く</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>第7章 Webアプリケーションとの連携（p207-p239）</h2>
+      <div class="list">
+        <article class="list-item">
+          <h3>Webアプリケーション連携の基本</h3>
+          <p>CGI・FastCGI・WSGIなどWebサーバーとアプリケーションの連携方式の比較。読了約15分。</p>
+          <a href="webapp-link-1.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>REST APIの設計と実装</h3>
+          <p>RESTful設計原則（リソース指向・HTTPメソッド・ステートレス）、JSONの基本、API認証。読了約15分。</p>
+          <a href="rest-api.html">ページを開く</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>第8章 データベース概論（p240-p301）</h2>
+      <div class="list">
+        <article class="list-item">
+          <h3>データベース基礎① ― RDBMSとテーブル設計</h3>
+          <p>リレーショナルデータベースの基本概念、テーブル・行・列・主キー・外部キーの役割。読了約15分。</p>
+          <a href="db-basic-1.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>データベース基礎② ― 正規化とER図</h3>
+          <p>正規化（第1〜第3正規形）の手順、ER図の読み方・書き方、トランザクションの基本。読了約15分。</p>
+          <a href="db-basic-2.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>SQLの基本構文</h3>
+          <p>SELECT/INSERT/UPDATE/DELETEの基本、WHERE句・JOIN・GROUP BY・ORDER BYの使い方。読了約15分。</p>
+          <a href="sql-basic.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>データベースのパフォーマンスとチューニング</h3>
+          <p>インデックスの仕組みと効果、クエリ最適化、スロークエリの特定と改善方法。読了約15分。</p>
+          <a href="db-performance.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>データベースの運用管理</h3>
+          <p>バックアップ戦略（フル/差分/増分）、レプリケーション、障害復旧（DR）の基本。読了約15分。</p>
+          <a href="db-operation.html">ページを開く</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <h2>第9章 Webサーバーのセキュリティ（p302-p366）</h2>
+      <div class="list">
+        <article class="list-item">
+          <h3>Webセキュリティ① ― 代表的な攻撃手法</h3>
+          <p>SQLインジェクション、XSS、CSRF、ファイルインクルード攻撃の仕組みと対策。読了約15分。</p>
+          <a href="security-1.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>Webセキュリティ② ― 認証・認可とセッション管理</h3>
+          <p>パスワードハッシュ化（bcrypt）、多要素認証、セッション固定化攻撃対策、JWTの基本。読了約15分。</p>
+          <a href="security-2.html">ページを開く</a>
+        </article>
+        <article class="list-item">
+          <h3>Webセキュリティ③ ― サーバー堅牢化と監視</h3>
+          <p>ファイアウォール設定、不要サービスの停止、ファイルパーミッション、ログ監視と侵入検知。読了約15分。</p>
+          <a href="security-3.html">ページを開く</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="lesson-section" id="sources">
+      <h2>出典</h2>
+      <p>PDF教材: <code>1_Webサーバー・データベース概論.pdf</code>（全366ページ、9章・25セクション構成）</p>
+    </section>
   </main>
-<script data-goatcounter="https://kazutyon.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
-

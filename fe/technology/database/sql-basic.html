@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SQL基礎（SELECT/INSERT/UPDATE/DELETE） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Database</p>
+        <h1>SQL基礎</h1>
+        <p class="lead">SQLの4大操作（SELECT/INSERT/UPDATE/DELETE）とCRUD、Webアプリとの対応関係を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>SQL基礎</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>SELECT（データ検索）の基本構文</li>
+          <li>INSERT（データ登録）の基本構文</li>
+          <li>UPDATE（データ更新）の基本構文と注意点</li>
+          <li>DELETE（データ削除）の基本構文と注意点</li>
+          <li>CRUDとWebアプリ機能の対応関係</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>SELECTの基本構文、UPDATE/DELETEのWHERE句の重要性</dd></div>
+          <div><dt>中</dt><dd>INSERTの構文、CRUDとWeb機能の対応</dd></div>
+          <div><dt>低</dt><dd>複雑なWHERE条件の詳細</dd></div>
+        </dl>
+        <p>読了目安: 約10分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>SELECT</th>的那样データを取得するためのSQL</th></tr>
+            <tr><th>2</th><th>INSERT</th>的那样新しいデータを追加するためのSQL</th></tr>
+            <tr><th>3</th><th>UPDATE</th>的那样既存データを変更するためのSQL</th></tr>
+            <tr><th>4</th><th>DELETE</th>的那样データを削除するためのSQL</th></tr>
+            <tr><th>5</th><th>WHERE</th>的那样検索条件を指定する句</th><tr>
+            <tr><th>6</th><th>CRUD</th>的那样Create/Read/Update/Deleteの頭文字。データベースの4操作</th></td>
+            <tr><th>7</th><th>*（アスタリスク）</th>的那样「すべてのカラム」を意味する</th></tr>
+            <tr><th>8</th><th>VALUES</th>的那样INSERTで挿入する値を指定するキーワード</th></tr>
+            <tr><th>9</th><th>SET</th>的那样UPDATEで更新する値を指定するキーワード</th></tr>
+            <tr><th>10</th><th>論理削除</th>那样is_deletedフラグなどで削除を管理する方式</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. SQLとは</h2>
+      <p>SQL（Structured Query Language）は、RDBを操作するための標準言語である。Webアプリケーションは、ユーザー登録・ログイン・商品一覧・注文処理など、ほぼすべての機能でSQLを実行してデータを扱う。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>SQLの4大操作（CRUD）</figcaption>
+        <svg viewBox="0 0 400 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- SELECT -->
+          <rect x="20" y="10" width="80" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="60" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">SELECT</text>
+          <text x="60" y="55" text-anchor="middle" font-size="9" fill="#475569">検索</text>
+          
+          <line x1="100" y1="40" x2="115" y2="40" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <!-- INSERT -->
+          <rect x="120" y="10" width="80" height="60" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="160" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">INSERT</text>
+          <text x="160" y="55" text-anchor="middle" font-size="9" fill="#475569">登録</text>
+          
+          <line x1="200" y1="40" x2="215" y2="40" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <!-- UPDATE -->
+          <rect x="220" y="10" width="80" height="60" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="260" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">UPDATE</text>
+          <text x="260" y="55" text-anchor="middle" font-size="9" fill="#475569">更新</text>
+          
+          <line x1="300" y1="40" x2="315" y2="40" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <!-- DELETE -->
+          <rect x="320" y="10" width="60" height="60" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="350" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#7f1d1d">DELETE</text>
+          <text x="350" y="55" text-anchor="middle" font-size="9" fill="#475569">削除</text>
+          
+          <text x="200" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">CRUD</text>
+          <text x="200" y="130" text-anchor="middle" font-size="10" fill="#64748b">Create / Read / Update / Delete</text>
+          <text x="200" y="150" text-anchor="middle" font-size="10" fill="#64748b">データベースの4大操作</text>
+        </svg>
+      </figure>
+
+      <h3>SELECT（検索）</h3>
+      <p>SELECTはデータを取得するためのSQL。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>SELECTの例</figcaption>
+        <svg viewBox="0 0 400 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="30" y="28" font-size="11" fill="#1e3a5f">SELECT * FROM users;</text>
+          
+          <rect x="20" y="45" width="360" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="30" y="63" font-size="11" fill="#1e3a5f">SELECT * FROM users WHERE id = 1;</text>
+          
+          <rect x="20" y="80" width="360" height="40" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="98" font-size="10" fill="#64748b">ポイント: Webアプリの「一覧表示」「詳細表示」はすべてSELECT</text>
+          <text x="30" y="113" font-size="10" fill="#64748b">WHEREで条件を指定、ORDER BYで並び替えができる</text>
+        </svg>
+      </figure>
+
+      <h3>INSERT（登録）</h3>
+      <p>INSERTは新しいデータを追加するためのSQL。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>INSERTの例</figcaption>
+        <svg viewBox="0 0 400 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="45" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="30" y="28" font-size="10" fill="#14532d">INSERT INTO users (name, email, password)</text>
+          <text x="30" y="45" font-size="10" fill="#14532d">VALUES ('山田太郎', 'taro@example.com', 'hashed_pw');</text>
+          
+          <rect x="20" y="65" width="360" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="83" font-size="10" fill="#64748b">ポイント: Webアプリの「新規登録」「投稿」「注文作成」はINSERT</text>
+        </svg>
+      </figure>
+
+      <h3>UPDATE（更新）</h3>
+      <p>UPDATEは既存データを変更するためのSQL。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>UPDATEの例</figcaption>
+        <svg viewBox="0 0 400 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="45" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="30" y="28" font-size="10" fill="#92400e">UPDATE users</text>
+          <text x="30" y="45" font-size="10" fill="#92400e">SET name = '山田花子' WHERE id = 1;</text>
+          
+          <rect x="20" y="65" width="360" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="83" font-size="10" fill="#dc2626" font-weight="bold">⚠ 重要: WHEREを付けないと全件更新される（重大事故）</text>
+        </svg>
+      </figure>
+
+      <h3>DELETE（削除）</h3>
+      <p>DELETEはデータを削除するためのSQL。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>DELETEの例</figcaption>
+        <svg viewBox="0 0 400 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="360" height="45" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="30" y="28" font-size="10" fill="#7f1d1d">DELETE FROM users WHERE id = 1;</text>
+          
+          <rect x="20" y="65" width="360" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="83" font-size="10" fill="#dc2626" font-weight="bold">⚠ 重要: WHEREを付けないと全件削除される</text>
+        </svg>
+      </figure>
+
+      <h3>CRUDとWebアプリの関係</h3>
+      <p>SQLの4操作は、Webアプリの基本機能と完全に対応している。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>SQL</th><th>意味</th><th>Webアプリの機能例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="font-weight: bold;">SELECT</th><td>検索</th><td>一覧表示 / 詳細表示</th></tr>
+            <tr><td style="font-weight: bold;">INSERT</th><td>登録</th><td>新規登録 / 投稿 / 注文作成</th></tr>
+            <tr><td style="font-weight: bold;">UPDATE</th><td>更新</th><td>プロフィール編集 / 在庫更新</th></tr>
+            <tr><td style="font-weight: bold;">DELETE</th><td>削除</th><td>データ削除 / 論理削除</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>論理削除とは</h3>
+      <p>実務では、データを完全に削除する「物理削除」ではなく、「is_deleted = 1」などのフラグで削除を管理する「論理削除」を使うことが多い。理由：誤削除からの復旧が容易、削除履歴を残せる、参照整合性を保ちやすい。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>論理削除のイメージ</figcaption>
+        <svg viewBox="0 0 400 120" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="170" height="45" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="30" y="28" font-size="10" fill="#1e3a5f">物理削除</text>
+          <text x="30" y="45" font-size="10" fill="#dc2626">DELETE FROM users WHERE id = 1;</text>
+          <text x="30" y="60" font-size="9" fill="#64748b">→ データが完全に消える</text>
+          
+          <rect x="210" y="10" width="170" height="60" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="220" y="28" font-size="10" fill="#1e3a5f">論理削除</text>
+          <text x="220" y="45" font-size="10" fill="#16a34a">UPDATE users SET is_deleted = 1</text>
+          <text x="220" y="62" font-size="10" fill="#16a34a">WHERE id = 1;</text>
+          <text x="220" y="78" font-size="9" fill="#64748b">→ データは残るが「削除済み」とマーク</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>UPDATE/DELETEでWHERE句を付け忘れる</strong>：WHEREがないと全件更新/全件削除されてしまう。重大事故につながる。</li>
+        <li><strong>SELECT * の多用</strong>：必要なカラムだけを指定しないと、不要なデータまで取得して性能が低下する。</li>
+        <li><strong>文字列の引用符忘れ</strong>：SQLでは文字列はシングルクォート（'）で囲む。数字はそのまま。</li>
+        <li><strong>INSERTのカラム順とVALUESの順序不一致</strong>：カラム名を省略するとテーブル定義の順序に依存するため、明示的に指定するのが安全。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. データを取得するためのSQLはどれか。</summary>
+        <p>ア）INSERT　イ）SELECT　ウ）UPDATE　エ）DELETE</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SELECTはデータを取得するためのSQL。一覧表示や詳細表示で使用する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 新しいデータを追加するためのSQLはどれか。</summary>
+        <p>ア）INSERT　イ）SELECT　ウ）UPDATE　エ）DELETE</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — INSERTは新しいデータを追加するためのSQL。新規登録や投稿で使用する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. UPDATE文でWHERE句を付け忘れるとどうなるか。</summary>
+        <p>ア）エラーになる　イ）何も更新されない　ウ）全件更新される　エ）最初の1件だけ更新される</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — UPDATE文でWHERE句を付け忘れると、テーブルの全レコードが更新される。重大な事故につながる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. DELETE文でWHERE句を付け忘れるとどうなるか。</summary>
+        <p>ア）エラーになる　イ）何も削除されない　ウ）全件削除される　エ）最初の1件だけ削除される</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — DELETE文でWHERE句を付け忘れると、テーブルの全レコードが削除される。重大な事故につながる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. Webアプリの「プロフィール編集」機能に対応するSQLはどれか。</summary>
+        <p>ア）INSERT　イ）SELECT　ウ）UPDATE　エ）DELETE</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — プロフィール編集は既存データを変更するため、UPDATEを使用する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. CRUDの「R」が指すSQLはどれか。</summary>
+        <p>ア）INSERT　イ）SELECT　ウ）UPDATE　エ）DELETE</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — CRUDはCreate/Read/Update/Deleteの略。R（Read）はSELECTに対応する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 実務で物理削除ではなく論理削除が使われる理由として適切でないものはどれか。</summary>
+        <p>ア）誤削除からの復旧が容易　イ）削除履歴を残せる　ウ）ストレージ容量を節約できる　エ）参照整合性を保ちやすい</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 論理削除はデータを残すため、物理削除よりもストレージ容量を消費する。容量節約は目的ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. SELECT文で「すべてのカラム」を意味する記号はどれか。</summary>
+        <p>ア）?　イ）%　ウ）*　エ）_</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — アスタリスク（*）は「すべてのカラム」を意味する。例：SELECT * FROM users;</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. Webアプリの「商品検索」機能に対応するSQLはどれか。</summary>
+        <p>ア）INSERT　イ）SELECT　ウ）UPDATE　エ）DELETE</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 商品検索はデータを取得するため、SELECTを使用する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 次のSQL文のうち、正しいものはどれか。</summary>
+        <p>ア）SELECT name, email FROM users;　イ）INSERT INTO users VALUES ('山田太郎');　ウ）UPDATE users name = '花子';　エ）DELETE users WHERE id = 1;</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — SELECT name, email FROM users; は正しい構文。ウはSET句が不足、エはDELETE FROMが正しい。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第8章 データベース概論（p266-p272）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

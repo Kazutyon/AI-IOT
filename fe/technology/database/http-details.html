@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTTP詳細（ボディ/Cookie/Session/キャッシュ/Keep-Alive） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / Network</p>
+        <h1>HTTP詳細</h1>
+        <p class="lead">HTTPボディの形式と解析方法、CookieとSessionによる状態管理、キャッシュ制御、Keep-AliveによるTCP接続の再利用を学びます。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">Technology</a>
+      <a href="index.html">Network</a>
+      <span>HTTP詳細</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>HTTPボディの役割と3つの形式（フォーム/JSON/マルチパート）</li>
+          <li>HTTPがステートレスであることの意味と課題</li>
+          <li>Cookieの仕組みと属性（HttpOnly/Secure/SameSite）</li>
+          <li>Sessionによるサーバー側の状態管理</li>
+          <li>CookieとSessionの関係</li>
+          <li>Cache-ControlとETagによるキャッシュ制御</li>
+          <li>Keep-AliveによるTCP接続の再利用と効果</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>HTTPのステートレス性、CookieとSessionの違い、Cache-Controlの値</dd></div>
+          <div><dt>中</dt><dd>HTTPボディの形式、Keep-Aliveの仕組み、Cookie属性</dd></div>
+          <div><dt>低</dt><dd>multipart/form-dataの詳細な構造、ETagの詳細</dd></div>
+        </dl>
+        <p>読了目安: 約20分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><th>1</th><th>HTTPボディ</th><td>POST/PUTなどで送信されるデータ本体</th></tr>
+            <tr><th>2</th><th>ステートレス</th><td>Webサーバーが前回のリクエスト情報を覚えない性質</th></tr>
+            <tr><th>3</th><th>Cookie</th><td>ブラウザに保存され、次回アクセス時に自動送信される小さなデータ</th></tr>
+            <tr><th>4</th><th>Session</th><td>Webサーバー側に保存されるユーザーごとの状態情報</th></tr>
+            <tr><th>5</th><th>HttpOnly属性</th><td>JavaScriptからCookieを読み取れなくする属性（XSS対策）</th></tr>
+            <tr><th>6</th><th>SameSite属性</th><td>他サイトからのリクエスト時にCookieを送信するか制御（CSRF対策）</th></tr>
+            <tr><th>7</th><th>Cache-Control</th><td>ブラウザや中間サーバーがキャッシュをどう扱うか指示するヘッダ</th></tr>
+            <tr><th>8</th><th>ETag</th><td>ファイルの内容が変わったか判定するタグ</th></tr>
+            <tr><th>9</th><th>304 Not Modified</th><td>キャッシュが有効でデータ本体を返さないことを示すステータスコード</th></tr>
+            <tr><th>10</th><th>Keep-Alive</th><td>1つのTCP接続を複数のリクエストで使い回す仕組み</th></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. HTTPボディ</h2>
+      <p>HTTPボディは、POST/PUTなどのメソッドで、ブラウザがWebサーバーに送る「データ本体」のこと。URLやヘッダだけでは伝えられないユーザー入力・フォーム内容・JSONデータ・ファイルなどを送るために使われる。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>ボディ</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>POST</th><td>あり</th><td>ログイン・登録・更新</th></tr>
+            <tr><td>PUT</th><td>あり</th><td>APIの更新処理</th></tr>
+            <tr><td>PATCH</th><td>あり</th><td>APIの部分更新</th></tr>
+            <tr><td>GET</th><td>基本なし</th><td>URLで指定するため不要</th></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ボディの3つの形式</h3>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>形式</th><th>Content-Type</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>application/x-www-form-urlencoded</td><td>キー=値&amp;キー=値</td><td>一般的なフォーム送信</td></tr>
+            <tr><td>multipart/form-data</td><td>境界で区切られた複数パート</td><td>ファイルアップロード</td></tr>
+            <tr><td>application/json</td><td>JSON形式</td><td>API（REST APIなど）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ログイン処理の流れ（ボディ解析）</h3>
+
+      <figure class="wide-diagram">
+        <figcaption>HTTPボディ解析の流れ</figcaption>
+        <svg viewBox="0 0 400 340" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="120" y="10" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="30" text-anchor="middle" font-size="11" fill="#1e3a5f">① ブラウザがフォーム送信</text>
+          <line x1="200" y1="40" x2="200" y2="58" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="120" y="60" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="80" text-anchor="middle" font-size="11" fill="#1e3a5f">② Webサーバーがメソッド確認</text>
+          <line x1="200" y1="90" x2="200" y2="108" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="90" y="110" width="220" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="130" text-anchor="middle" font-size="11" fill="#92400e">③ Content-Typeを確認し解析方法決定</text>
+          <line x1="200" y1="140" x2="200" y2="158" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="120" y="160" width="160" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="180" text-anchor="middle" font-size="11" fill="#1e3a5f">④ ボディを読み取る</text>
+          <line x1="200" y1="190" x2="200" y2="208" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="90" y="210" width="220" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="230" text-anchor="middle" font-size="11" fill="#92400e">⑤ キーと値に分解（username=hiroなど）</text>
+          <line x1="200" y1="240" x2="200" y2="258" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="90" y="260" width="220" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="280" text-anchor="middle" font-size="11" fill="#14532d">⑥ アプリケーションに渡す</text>
+          <line x1="200" y1="290" x2="200" y2="308" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+          
+          <rect x="90" y="310" width="220" height="25" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1"/>
+          <text x="200" y="328" text-anchor="middle" font-size="10" fill="#1e1b4f">⑦ 結果をレスポンスとして返す</text>
+        </svg>
+      </figure>
+
+      <h2>2. CookieとSession</h2>
+      <p>HTTPはステートレス（stateless）なプロトコルである。ステートレスとは、Webサーバーが「前回のリクエストの情報」を一切覚えない性質のこと。つまりWebサーバーは、毎回のリクエストを「初めて来た人」として扱う。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>概念</th><th>保存場所</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Cookie</td><td>ブラウザ</td><td>sessionid（鍵）</td></tr>
+            <tr><td>Session</td><td>Webサーバー</td><td>ユーザー情報（値）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>CookieとSessionの連携</figcaption>
+        <svg viewBox="0 0 400 250" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- ブラウザ -->
+          <rect x="20" y="20" width="110" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="75" y="42" text-anchor="middle" font-size="12" fill="#1e3a5f">ブラウザ</text>
+          <text x="75" y="60" text-anchor="middle" font-size="10" fill="#475569">Cookie:</text>
+          <text x="75" y="72" text-anchor="middle" font-size="9" fill="#475569">sessionid=abc123</text>
+          
+          <line x1="130" y1="50" x2="155" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="142" y="45" text-anchor="middle" font-size="8" fill="#64748b">送信</text>
+          
+          <!-- Webサーバー -->
+          <rect x="160" y="20" width="110" height="60" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="215" y="42" text-anchor="middle" font-size="12" fill="#92400e">Webサーバー</text>
+          <text x="215" y="60" text-anchor="middle" font-size="10" fill="#92400e">SessionIDをキーに</text>
+          <text x="215" y="72" text-anchor="middle" font-size="9" fill="#92400e">ユーザー情報を復元</text>
+          
+          <line x1="270" y1="50" x2="295" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <text x="282" y="45" text-anchor="middle" font-size="8" fill="#64748b">参照</text>
+          
+          <!-- Sessionストア -->
+          <rect x="300" y="10" width="85" height="80" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="342" y="30" text-anchor="middle" font-size="11" fill="#14532d">Session</text>
+          <text x="342" y="45" text-anchor="middle" font-size="8" fill="#14532d">ストア</text>
+          <line x1="310" y1="55" x2="375" y2="55" stroke="#cbd5e1" stroke-width="0.5"/>
+          <text x="342" y="68" text-anchor="middle" font-size="8" fill="#14532d">abc123: user_id=1</text>
+          <text x="342" y="80" text-anchor="middle" font-size="8" fill="#14532d">ログイン済み</text>
+          
+          <!-- 説明 -->
+          <rect x="20" y="110" width="360" height="120" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="200" y="135" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e293b">ログイン処理の流れ</text>
+          <text x="40" y="160" font-size="10" fill="#334155">① ログインフォーム送信 → Webサーバーが認証</text>
+          <text x="40" y="180" font-size="10" fill="#334155">② 認証成功 → Sessionを作成しsessionidを発行</text>
+          <text x="40" y="200" font-size="10" fill="#334155">③ Set-Cookie: sessionid=abc123 を返す</text>
+          <text x="40" y="220" font-size="10" fill="#334155">④ 次回アクセス時、ブラウザがCookieを自動送信</text>
+        </svg>
+      </figure>
+
+      <h3>Cookieの属性</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>属性</th><th>役割</th><th>Webサーバー側の意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>HttpOnly</td><td>JSから読み取れない</td><td>XSS対策</td></tr>
+            <tr><td>Secure</td><td>HTTPSのときだけ送信</td><td>SessionIDの盗聴防止</td></tr>
+            <tr><td>SameSite</td><td>他サイトから送られない</td><td>CSRF対策</td></tr>
+            <tr><td>Expires / Max-Age</td><td>有効期限</td><td>自動ログインの制御</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>3. キャッシュ制御</h2>
+      <p>HTTPのキャッシュ制御とは、ブラウザや中間サーバー（プロキシ）が、Webサーバーから取得したデータを再利用する仕組み。キャッシュを正しく制御しないと、更新されない、古い画像が表示される、CSSが反映されないなどの問題が発生する。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>Cache-Controlの値</th><th>意味</th><th>Webサーバー側の意図</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>max-age=3600</td><td>3600秒間は再取得不要</td><td>更新頻度が低いファイル</td></tr>
+            <tr><td>no-cache</td><td>再利用前に必ず確認</td><td>HTMLなど更新が多い</td></tr>
+            <tr><td>no-store</td><td>キャッシュ禁止</td><td>個人情報・ログインページ</td></tr>
+            <tr><td>public</td><td>共有キャッシュ可</td><td>CDNなどで利用</td></tr>
+            <tr><td>private</td><td>個人キャッシュのみ</td><td>ユーザー固有ページ</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ETagによるキャッシュ検証</h3>
+      <figure class="wide-diagram">
+        <figcaption>ETagを使ったキャッシュ制御</figcaption>
+        <svg viewBox="0 0 400 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <rect x="20" y="10" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="100" y="33" text-anchor="middle" font-size="11" fill="#1e3a5f">初回アクセス</text>
+          <line x1="180" y1="28" x2="195" y2="28" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <rect x="200" y="10" width="180" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="290" y="33" text-anchor="middle" font-size="11" fill="#14532d">レスポンス: ETag: "abc123"</text>
+          
+          <line x1="100" y1="46" x2="100" y2="70" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="20" y="75" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="100" y="98" text-anchor="middle" font-size="11" fill="#1e3a5f">次回アクセス</text>
+          <line x1="180" y1="93" x2="195" y2="93" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <rect x="200" y="75" width="180" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="290" y="98" text-anchor="middle" font-size="11" fill="#92400e">リクエスト: If-None-Match: "abc123"</text>
+          
+          <line x1="290" y1="111" x2="290" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3)"/>
+          
+          <rect x="200" y="140" width="180" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="290" y="163" text-anchor="middle" font-size="11" fill="#14532d">一致 → 304 Not Modified</text>
+        </svg>
+      </figure>
+
+      <h2>4. Keep-Alive</h2>
+      <p>HTTP/1.1では、1つのTCP接続を複数のリクエストで使い回す（Keep-Alive）という仕組みが標準になっている。これにより、Webサーバーは高速に応答できる。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>Keep-Aliveの効果</figcaption>
+        <svg viewBox="0 0 400 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- 左：なし -->
+          <rect x="20" y="10" width="160" height="190" rx="4" fill="#fecaca" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="100" y="35" text-anchor="middle" font-size="12" font-weight="bold" fill="#7f1d1d">Keep-Aliveなし</text>
+          
+          <rect x="40" y="55" width="120" height="25" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="100" y="72" text-anchor="middle" font-size="9" fill="#92400e">TCP接続①</text>
+          <text x="100" y="95" text-anchor="middle" font-size="9" fill="#92400e">GET /index.html</text>
+          
+          <rect x="40" y="105" width="120" height="25" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="100" y="122" text-anchor="middle" font-size="9" fill="#92400e">切断</text>
+          
+          <rect x="40" y="140" width="120" height="25" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+          <text x="100" y="157" text-anchor="middle" font-size="9" fill="#92400e">TCP接続②</text>
+          <text x="100" y="180" text-anchor="middle" font-size="9" fill="#92400e">GET /style.css</text>
+          
+          <!-- 右：あり -->
+          <rect x="210" y="10" width="160" height="190" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="290" y="35" text-anchor="middle" font-size="12" font-weight="bold" fill="#14532d">Keep-Aliveあり</text>
+          
+          <rect x="230" y="55" width="120" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="290" y="72" text-anchor="middle" font-size="9" fill="#1e3a5f">TCP接続（維持）</text>
+          
+          <rect x="230" y="90" width="120" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="290" y="107" text-anchor="middle" font-size="9" fill="#1e3a5f">GET /index.html</text>
+          
+          <rect x="230" y="125" width="120" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="290" y="142" text-anchor="middle" font-size="9" fill="#1e3a5f">GET /style.css</text>
+          
+          <rect x="230" y="160" width="120" height="25" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1"/>
+          <text x="290" y="177" text-anchor="middle" font-size="9" fill="#1e3a5f">GET /app.js</text>
+          
+          <text x="100" y="210" text-anchor="middle" font-size="9" fill="#dc2626">× 毎回接続→切断</text>
+          <text x="290" y="210" text-anchor="middle" font-size="9" fill="#16a34a">✓ 1接続で複数リクエスト</text>
+        </svg>
+      </figure>
+
+      <p>Keep-Aliveの処理の流れ（Webサーバー視点）：TCP接続を受け付ける → 最初のHTTPリクエストを処理 → Connection: keep-aliveを返す → 同じTCP接続で次のリクエストを受け取る → タイムアウトまで接続を維持 → 一定時間リクエストが来なければ切断。</p>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>Cookieにパスワードを保存してはいけない</strong>：Cookieはブラウザに保存され、漏洩リスクがある。パスワードなどの機密情報は保存しない。</li>
+        <li><strong>SessionとCookieの混同</strong>：Cookieはブラウザ側の保存領域、Sessionはサーバー側の保存領域。CookieにはSessionIDだけを保存する。</li>
+        <li><strong>HttpOnly属性の誤解</strong>：HttpOnlyはJavaScriptからの読み取りを防ぐだけで、通信の盗聴を防ぐわけではない。盗聴防止にはSecure属性とHTTPSが必要。</li>
+        <li><strong>Cache-Controlのno-cacheとno-storeの違い</strong>：no-cacheは「再利用前に確認」、no-storeは「絶対に保存しない」。個人情報を含むレスポンスにはno-storeが適切。</li>
+        <li><strong>Keep-Aliveの過信</strong>：Keep-Aliveは接続を維持するため、同時接続数が多いサーバーではメモリ消費が増える。適切なタイムアウト設定が必要。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. POSTメソッドで送信されるデータが格納される場所はどれか。</summary>
+        <p>ア）URLのクエリ文字列　イ）HTTPヘッダ　ウ）HTTPボディ　エ）ステータスライン</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — POSTメソッドで送信されるデータはHTTPボディに格納される。GETメソッドのデータはURLのクエリ文字列に格納される。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. HTTPがステートレスであることの説明として正しいものはどれか。</summary>
+        <p>ア）サーバーがクライアントの状態を常に保持する　イ）サーバーが前回のリクエスト情報を一切覚えない　ウ）通信内容がすべて暗号化される　エ）リクエストごとに新しいTCP接続を張る</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — HTTPはステートレスであり、Webサーバーは前回のリクエストの情報を覚えていない。そのため、毎回のリクエストを「初めて来た人」として扱う。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. Webサーバー側に保存されるユーザーごとの状態情報はどれか。</summary>
+        <p>ア）Cookie　イ）Session　ウ）Cache　エ）ETag</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — SessionはWebサーバー側に保存されるユーザーごとの状態情報（ログイン状態、ユーザーID、カートの中身など）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. XSS（クロスサイトスクリプティング）対策として、JavaScriptからCookieを読み取れなくする属性はどれか。</summary>
+        <p>ア）Secure　イ）HttpOnly　ウ）SameSite　エ）Max-Age</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — HttpOnly属性を付与すると、JavaScriptからCookieを読み取れなくなり、XSS攻撃によるセッションIDの盗難を防げる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. キャッシュを絶対に保存しないようブラウザに指示するCache-Controlの値はどれか。</summary>
+        <p>ア）max-age=0　イ）no-cache　ウ）no-store　エ）private</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — no-storeはキャッシュを絶対に保存しないよう指示する。個人情報やログインページのレスポンスに使用する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. ETagの役割として正しいものはどれか。</summary>
+        <p>ア）キャッシュの有効期限を設定する　イ）ファイルの内容が変わったか判定するタグを返す　ウ）Cookieを暗号化する　エ）TCP接続を維持する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ETagはファイルの内容に基づくタグ。ブラウザは次回アクセス時にIf-None-Matchで送り返し、サーバーは一致すれば304を返す。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. Keep-Aliveの説明として正しいものはどれか。</summary>
+        <p>ア）通信内容を暗号化する　イ）1つのTCP接続を複数のリクエストで使い回す　ウ）HTTPリクエストを圧縮する　エ）DNSキャッシュを保持する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Keep-Aliveは1つのTCP接続を複数のリクエストで使い回す仕組み。接続確立のオーバーヘッドを減らし、高速化する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. ファイルアップロードで使用されるContent-Typeはどれか。</summary>
+        <p>ア）application/x-www-form-urlencoded　イ）application/json　ウ）multipart/form-data　エ）text/plain</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ファイルアップロードではmultipart/form-dataを使用する。boundaryと呼ばれる区切り文字でパートを区切る。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. CSRF（クロスサイトリクエストフォージェリ）対策として、他サイトからのリクエスト時にCookieを送信しないよう制御する属性はどれか。</summary>
+        <p>ア）Secure　イ）HttpOnly　ウ）SameSite　エ）Domain</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — SameSite属性をLaxまたはStrictに設定すると、他サイトからのリクエスト時にCookieが送信されなくなり、CSRF攻撃を防げる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. キャッシュが有効でデータ本体を返さないことを示すステータスコードはどれか。</summary>
+        <p>ア）200 OK　イ）301 Moved Permanently　ウ）304 Not Modified　エ）404 Not Found</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 304 Not Modifiedは、ブラウザが持っているキャッシュが有効であり、データ本体を返す必要がないことを示す。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『Webサーバー・データベース概論.pdf』 第4章 HTTPとHTTPS（通信の仕組み）（p71-p96）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
