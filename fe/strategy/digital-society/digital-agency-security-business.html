@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>デジタル庁の司令塔機能とセキュリティ・企業実務 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Management / Digital-Society</p>
+        <h1>デジタル庁の司令塔機能とセキュリティ・企業実務</h1>
+        <p class="lead">デジタル庁の司令塔機能によるシステム統一や、サイバーセキュリティ基本法との関わり、およびデジタル政策が企業実務に与える影響について解説します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>デジタル庁の司令塔機能とセキュリティ・企業実務</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>デジタル庁の司令塔機能（システム統括・予算一括計上・アジャイル調達）</li>
+          <li>サイバーセキュリティ基本法の役割とデジタル庁の監督機能</li>
+          <li>企業が求められるセキュリティ体制（CSIRT等）</li>
+          <li>デジタル政策の進展が企業実務（API連携・クラウド設計等）に与える影響</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div> <dt>高</dt> <dd>デジタル庁の司令塔機能、サイバーセキュリティ基本法の役割、企業への影響</dd> </div>
+          <div> <dt>中</dt> <dd>アジャイル調達の特徴、CSIRTの役割</dd> </div>
+          <div> <dt>低</dt> <dd>個別の省令名やISMAPの詳細な基準</dd> </div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>用語</th>
+              <th>一言</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>司令塔機能</td>
+              <td>国・自治体のデジタル政策を統括し、システムの統一・標準化を進める役割</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>アジャイル調達</td>
+              <td>仕様書を固定して丸投げするのではなく、民間と協働しながら小さく作って改善を繰り返す調達方法</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>サイバーセキュリティ基本法</td>
+              <td>デジタル化を進める際に守るべき最低限の安全基準を定めた法律</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>CSIRT</td>
+              <td>企業内などでサイバー攻撃やインシデントに対応する専門組織（Computer Security Incident Response Team）</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>ISMAP</td>
+              <td>政府クラウドサービス等のセキュリティ認証制度（情報システムセキュリティ管理・認証プログラム）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. デジタル庁の司令塔機能とシステム統一・標準化</h2>
+      <p>デジタル庁は、国・自治体のデジタル政策を統括する「司令塔（コントロールタワー）」として設置されました。その中心となる役割は、行政システムの統一・標準化を進め、国全体のデジタル基盤を整えることです。</p>
+
+      <h3>国・自治体の情報システム統括管理</h3>
+      <p>従来、国と自治体はそれぞれが独自にシステムを構築していたため、仕様のバラつきやデータ連携の困難さ、コストの増大が課題でした。デジタル庁はこれを改め、共通仕様の策定やデータ標準化、システムの統一方針の決定を一元的に行います。</p>
+
+      <h3>予算の一括計上とガバメントクラウド移行</h3>
+      <p>従来は各省庁がバラバラにシステム予算を計上していましたが、デジタル庁がデジタル関連予算を一括計上・横串管理することで、重複投資の削減や省庁間の調整コストを削減しています。また、行政システムをガバメントクラウドへ移行し、セキュリティ水準の統一や運用コスト削減、災害時の強靭性向上を図っています。</p>
+
+      <h3>民間企業との協働（アジャイル調達）</h3>
+      <p>デジタル庁は、従来の「仕様書を作って丸投げする調達」ではなく、民間企業と協働しながら作るアジャイル型調達を採用しています。小さく作って改善を繰り返すことで、利用者の声を反映しやすく、開発スピードも向上させます。</p>
+
+      <h2>2. サイバーセキュリティ基本法との関わり</h2>
+      <p>デジタル社会形成基本法とサイバーセキュリティ基本法は、車の両輪として機能しています。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>2つの基本法の役割比較</figcaption>
+        <svg viewBox="0 0 380 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- 左ヘッダー -->
+          <rect x="10" y="10" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="90" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">デジタル社会形成基本法</text>
+          <!-- 右ヘッダー -->
+          <rect x="210" y="10" width="160" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="290" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">サイバーセキュリティ基本法</text>
+          <!-- 中央の vs -->
+          <text x="190" y="33" text-anchor="middle" font-size="14" font-weight="bold" fill="#64748b">vs</text>
+          
+          <!-- 左コンテンツ行 -->
+          <rect x="10" y="56" width="160" height="36" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="90" y="79" text-anchor="middle" font-size="12" fill="#334155">デジタル化の「方向性」</text>
+          <rect x="10" y="98" width="160" height="36" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="90" y="121" text-anchor="middle" font-size="12" fill="#334155">行政サービスのデジタル前提</text>
+          <rect x="10" y="140" width="160" height="36" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="90" y="163" text-anchor="middle" font-size="12" fill="#334155">持続可能な社会の実現</text>
+          
+          <!-- 右コンテンツ行 -->
+          <rect x="210" y="56" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="290" y="79" text-anchor="middle" font-size="12" fill="#334155">デジタル化の「安全基準」</text>
+          <rect x="210" y="98" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="290" y="121" text-anchor="middle" font-size="12" fill="#334155">守るべき最低限のセキュリティ</text>
+          <rect x="210" y="140" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="290" y="163" text-anchor="middle" font-size="12" fill="#334155">国民の安心・安全の確保</text>
+          
+          <!-- 行ラベル -->
+          <text x="90" y="200" text-anchor="middle" font-size="11" fill="#64748b">✔ 攻めのデジタル化</text>
+          <text x="290" y="200" text-anchor="middle" font-size="11" fill="#64748b">✔ 守りのセキュリティ</text>
+        </svg>
+      </figure>
+
+      <h3>デジタル庁のセキュリティ監督機能</h3>
+      <p>サイバーセキュリティ基本法では、国の情報システムのセキュリティ確保について、デジタル庁が中心的な役割を担うことが明記されています。具体的には、セキュリティ方針の策定、行政機関の対策統一、ガバメントクラウドのセキュリティ基準管理、重大インシデント発生時の調整・対応などを行います。</p>
+
+      <h3>企業が求められる最低限の姿勢</h3>
+      <p>サイバーセキュリティ基本法は民間企業にも一定の責務を求めており、特に行政システムと連携する企業は以下の体制整備が求められます。</p>
+      <ul>
+        <li><strong>CSIRTの整備:</strong> 企業内での連絡体制・初動対応の確立。</li>
+        <li><strong>情報共有への参加:</strong> IPA、ISACなどの情報共有組織との連携。</li>
+        <li><strong>重要インフラ企業の対応:</strong> 監督省庁との連携、重大インシデント報告。</li>
+        <li><strong>委託先管理の強化:</strong> 行政システムと連携する企業は特に重要。</li>
+      </ul>
+
+      <h2>3. デジタル政策が企業実務に与える影響</h2>
+      <p>国のデジタル政策が進展することで、民間企業のIT実務にも大きな変化が起きています。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>政策の変化</th>
+              <th>企業実務への影響</th>
+              <th>求められる知識・技術</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>行政手続のデジタル化</td>
+              <td>行政システムと接続するためのAPI連携案件、電子申請システムの開発が増加</td>
+              <td>API設計、データ自動連携を前提とした業務フロー設計</td>
+            </tr>
+            <tr>
+              <td>マイナンバー制度の拡張</td>
+              <td>本人確認（EKYC）を組み込んだシステム、行政データとの照合を前提としたサービス開発</td>
+              <td>厳格な個人情報管理、マイナポータル連携の設計</td>
+            </tr>
+            <tr>
+              <td>ガバメントクラウド移行</td>
+              <td>クラウド前提のアーキテクチャ設計、セキュリティ基準（ISMAP等）を意識した開発</td>
+              <td>クラウドネイティブな設計、自治体向け仕様統一への対応</td>
+            </tr>
+            <tr>
+              <td>セキュリティ関連法の強化</td>
+              <td>CSIRT整備、ログ管理やアクセス制御の強化、委託先管理の徹底</td>
+              <td>インシデント対応体制、セキュリティ監査への備え</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>制度が変わると、企業の仕事も変わる</h3>
+      <p>制度も技術も変わり続けるため、今の細かい仕様を覚えてもすぐ陳腐化します。大事なのは、「制度が何を目指しているか」「それが企業の仕事にどう影響するか」「どんな方向の知識が必要になりそうか」という“つながり”を理解しておくことです。</p>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li>デジタル社会形成基本法は「方向性」、サイバーセキュリティ基本法は「安全基準」を決める法律であり、役割が異なる点。</li>
+        <li>アジャイル調達は「仕様を固定しない」ことが特徴で、従来の「仕様書を作って丸投げする調達」と対極にある点。</li>
+        <li>CSIRTは「インシデント対応組織」であり、単なる予防策ではなく、発生後の初動対応・連絡体制を確立する役割である点。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. デジタル庁が「司令塔（コントロールタワー）」として果たす役割として最も適切なものはどれか。</summary>
+        <p>ア）各省庁のシステムを個別に管理し、独自仕様を許可する<br>イ）国・自治体のデジタル政策を統括し、システムの統一・標準化を進める<br>ウ）民間企業のIT投資を制限し、国営システムのみを許可する<br>エ）地方自治体の予算をすべて国が没収する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — デジタル庁は司令塔として、国・自治体のシステム統一・標準化を一元的に進めます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. デジタル庁が採用している「アジャイル調達」の特徴として正しいものはどれか。</summary>
+        <p>ア）詳細な仕様書を作成し、ベンダーに丸投げする<br>イ）仕様を固定し、完成品を一度に納品させる<br>ウ）民間と協働しながら、小さく作って改善を繰り返す<br>エ）最も安いベンダーを自動的に選定する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — アジャイル調達は、仕様を固定しすぎず、利用者の声を反映しながら改善を繰り返す手法です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. サイバーセキュリティ基本法の目的として最も適切なものはどれか。</summary>
+        <p>ア）行政サービスのデジタル化の方向性を定める<br>イ）デジタル化を進める際に守るべき最低限の安全基準を定める<br>ウ）民間企業のIT売上を向上させる補助金を交付する<br>エ）外国人観光客のサイバー利用を制限する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — サイバーセキュリティ基本法は、デジタル化の「安全基準」を定める法律です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. デジタル社会形成基本法とサイバーセキュリティ基本法の関係として正しいものはどれか。</summary>
+        <p>ア）両者は全く同じ内容であり、どちらか一方があればよい<br>イ）デジタル社会形成基本法が「方向性」を定め、サイバーセキュリティ基本法が「安全基準」を定める<br>ウ）サイバーセキュリティ基本法が「方向性」を定め、デジタル社会形成基本法が「安全基準」を定める<br>エ）両者は互いに矛盾する内容であり、企業が独自に判断する必要がある</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — デジタル社会形成基本法は「攻めのデジタル化（方向性）」、サイバーセキュリティ基本法は「守りのセキュリティ（安全基準）」を担います。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. サイバーセキュリティ基本法において、国の情報システムのセキュリティ確保について中心的な役割を担う機関はどれか。</summary>
+        <p>ア）総務省<br>イ）経済産業省<br>ウ）デジタル庁<br>エ）警察庁</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — デジタル庁がセキュリティ方針の策定や行政機関の対策統一などの中心的役割を担います。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 企業がサイバーセキュリティ基本法に基づいて整備が求められる組織はどれか。</summary>
+        <p>ア）CSIRT（インシデント対応組織）<br>イ）経理部<br>ウ）総務部<br>エ）営業部</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — CSIRT（Computer Security Incident Response Team）は、インシデント発生時の初動対応や連絡体制を確立する組織です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 行政手続のデジタル化が企業実務に与える影響として適切なものはどれか。</summary>
+        <p>ア）紙の書類提出が増える<br>イ）行政システムと接続するためのAPI連携案件が増える<br>ウ）FAXでのやり取りが義務付けられる<br>エ）役所への窓口訪問が必須になる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 行政がデジタル化されることで、企業側もAPI連携や電子申請システムの開発などの仕事が増えます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. ガバメントクラウドへの移行が企業に求める対応として適切なものはどれか。</summary>
+        <p>ア）オンプレミス専用のアーキテクチャ設計<br>イ）クラウド前提のアーキテクチャ設計とISMAP等のセキュリティ基準への対応<br>ウ）紙でのデータ保存の義務化<br>エ）独自プロトコルの開発</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 行政システムがクラウドへ移行するため、企業もクラウド前提の設計やセキュリティ基準への対応が求められます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. デジタル政策の進展において、企業が「つながり」を理解することが重要とされる理由はどれか。</summary>
+        <p>ア）制度や技術は変わり続けるため、細かい仕様よりも方向性を理解する必要があるから<br>イ）国が企業の利益を保証してくれるから<br>ウ）すべての企業に同じシステムが強制されるから<br>エ）デジタル化により企業の業務は完全に消滅するから</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 制度も技術も変わり続けるため、細かい仕様を覚えても陳腐化します。制度が何を目指し、企業の仕事にどう影響するかという“つながり”を理解することが重要です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. デジタル庁が予算の一括計上を行う目的として誤っているものはどれか。</summary>
+        <p>ア）重複投資の削減<br>イ）省庁間の調整コストの削減<br>ウ）各省庁が自由に予算を使い続けることの許可<br>エ）国全体としての最適なシステム投資の実現</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — デジタル庁が横串で管理することで、各省庁がバラバラに予算を使うことを防ぎ、最適化を図ります。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『3_デジタル社会の形成について.pdf』 第3章 9. デジタル庁の司令塔機能とシステム統一・標準化 〜 11. デジタル政策が企業実務に与える影響（p63-p80相当）</p>
+    </section>
+  </main>
+
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

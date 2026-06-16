@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>標準化と規格 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / 標準化</p>
+        <h1>標準化と規格</h1>
+        <p class="lead">ISO/IEC、JIS、W3C、IETF/RFCなど、IT業界で重要な標準化団体と規格を学ぶ。互換性・品質・安全性を確保するための国際的な取り組みを理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#standardization">標準化とは</a>
+        <a href="#iso">ISO/IEC</a>
+        <a href="#jis">JIS</a>
+        <a href="#w3c">W3C</a>
+        <a href="#ietf">IETF/RFC</a>
+        <a href="#frand">FRAND</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">標準化</a>
+      <span>標準化と規格</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>標準化の目的（互換性・品質・安全性・国際取引・技術普及）</li>
+          <li>ISO（国際標準化機構）とIEC（国際電気標準会議）の役割</li>
+          <li>ISO/IEC共同規格（27001、12207、25000など）</li>
+          <li>JIS（日本産業規格）とPマークの基準（JIS Q 15001）</li>
+          <li>W3C（Web標準）と主な標準（HTML、CSS、WCAG）</li>
+          <li>IETFとRFC（インターネット標準）の役割</li>
+          <li>FRAND条件（標準技術の特許ライセンスにおける公正・合理的・非差別的条件）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>ISO/IEC 27001（ISMS）、W3C（HTML/CSS）、IETF/RFC（TCP/IP、HTTP）</dd></div>
+          <div><dt>中</dt><dd>標準化の目的、ISO/IEC 12207（ソフトウェアライフサイクル）、FRAND</dd></div>
+          <div><dt>低</dt><dd>JISの詳細番号、ISO 9001/14001の詳細</dd></div>
+        </dl>
+        <p>読了目安: 約10分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>標準化</td><td>技術や手順を共通化し、誰でも同じように利用できるようにすること</td></tr>
+            <tr><td>2</td><td>ISO</td><td>国際標準化機構。工業製品やマネジメントシステムの国際規格を策定</td></tr>
+            <tr><td>3</td><td>IEC</td><td>国際電気標準会議。電気・電子技術の国際規格を策定</td></tr>
+            <tr><td>4</td><td>ISO/IEC 27001</td><td>情報セキュリティマネジメントシステム（ISMS）の国際規格</td></tr>
+            <tr><td>5</td><td>JIS</td><td>日本産業規格。日本国内の標準規格</td></tr>
+            <tr><td>6</td><td>W3C</td><td>Web技術の標準化を行う国際団体。HTML・CSSなどを策定</td></tr>
+            <tr><td>7</td><td>WCAG</td><td>Webアクセシビリティガイドライン。W3Cが策定</td></tr>
+            <tr><td>8</td><td>IETF</td><td>インターネット技術の標準化を行う組織</td></tr>
+            <tr><td>9</td><td>RFC</td><td>IETFが公開する技術文書。インターネット技術の仕様書</td></tr>
+            <tr><td>10</td><td>FRAND</td><td>標準技術の特許ライセンスにおける公正・合理的・非差別的条件</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="standardization" class="lesson-section">
+      <h2>1. 標準化とは</h2>
+      <p>標準化とは、技術や手順を共通化し、誰でも同じように利用できるようにすることです。</p>
+
+      <h3>標準化の目的</h3>
+      <ul>
+        <li><strong>互換性の確保</strong>（例：USB、Wi-Fi）</li>
+        <li><strong>品質の向上</strong></li>
+        <li><strong>安全性の確保</strong></li>
+        <li><strong>国際的な取引の円滑化</strong></li>
+        <li><strong>技術の普及促進</strong></li>
+      </ul>
+      <p>IT業界では、国際標準が特に重要です。</p>
+    </section>
+
+    <section id="iso" class="lesson-section">
+      <h2>2. ISO / IEC（国際標準化機関）</h2>
+      <p>世界的に最も有名な標準化団体です。</p>
+
+      <h3>ISO（国際標準化機構）</h3>
+      <p>工業製品やマネジメントシステムの国際規格を策定。</p>
+      <ul>
+        <li><strong>ISO 9001</strong>（品質マネジメント）</li>
+        <li><strong>ISO 14001</strong>（環境マネジメント）</li>
+        <li><strong>ISO/IEC 27001</strong>（情報セキュリティマネジメント：ISMS）</li>
+      </ul>
+
+      <h3>IEC（国際電気標準会議）</h3>
+      <p>電気・電子技術の国際規格を策定。</p>
+
+      <h3>ISO/IEC 共同規格</h3>
+      <p>IT分野では ISO と IEC が共同で規格を作ることが多いです。</p>
+      <ul>
+        <li><strong>ISO/IEC 27001</strong>（ISMS）</li>
+        <li><strong>ISO/IEC 12207</strong>（ソフトウェアライフサイクルプロセス）</li>
+        <li><strong>ISO/IEC 25000</strong>（SQuaRE：ソフトウェア品質）</li>
+      </ul>
+    </section>
+
+    <section id="jis" class="lesson-section">
+      <h2>3. JIS（日本産業規格）</h2>
+      <p>日本国内の標準規格で、ISO/IEC と整合性を持つものが多いです。</p>
+      <ul>
+        <li><strong>JIS Q 15001</strong>（個人情報保護マネジメント：Pマークの基準）</li>
+        <li><strong>JIS X 25000</strong>（ソフトウェア品質モデル）</li>
+      </ul>
+    </section>
+
+    <section id="w3c" class="lesson-section">
+      <h2>4. W3C（Web標準）</h2>
+      <p>Web技術の標準化を行う国際団体です。WebブラウザやWebサイトが同じルールで動作するようにするための組織です。</p>
+
+      <h3>主な標準</h3>
+      <ul>
+        <li><strong>HTML</strong></li>
+        <li><strong>CSS</strong></li>
+        <li><strong>XML</strong></li>
+        <li><strong>Webアクセシビリティガイドライン（WCAG）</strong></li>
+      </ul>
+
+      <h3>役割</h3>
+      <ul>
+        <li>Web技術の互換性を確保</li>
+        <li>Webの発展とオープン性を維持</li>
+        <li>アクセシビリティ（誰でも使えるWeb）の推進</li>
+      </ul>
+    </section>
+
+    <section id="ietf" class="lesson-section">
+      <h2>5. IETF と RFC（インターネット標準）</h2>
+      <p>インターネット技術の標準化を行う組織が <strong>IETF（Internet Engineering Task Force）</strong> です。</p>
+
+      <h3>RFC（Request For Comments）とは</h3>
+      <p>IETF が公開する技術文書で、インターネット技術の仕様書として使われます。</p>
+
+      <h3>RFCで定義される主な技術</h3>
+      <ul>
+        <li><strong>TCP / IP</strong></li>
+        <li><strong>HTTP</strong></li>
+        <li><strong>SMTP</strong>（メール）</li>
+        <li><strong>DNS</strong></li>
+        <li><strong>IPアドレス</strong></li>
+      </ul>
+      <p>インターネットの基盤技術はほぼすべて RFC で定義されています。</p>
+    </section>
+
+    <section id="standardization-summary" class="lesson-section">
+      <h2>6. 標準化団体のまとめ</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>分類</th><th>団体名</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>国際標準</td><td>ISO</td><td>工業・管理の国際規格</td></tr>
+            <tr><td>国際標準</td><td>IEC</td><td>電気・電子技術の国際規格</td></tr>
+            <tr><td>国際標準（IT）</td><td>ISO/IEC</td><td>IT分野の共同規格</td></tr>
+            <tr><td>国内標準</td><td>JIS</td><td>日本の産業規格</td></tr>
+            <tr><td>Web標準</td><td>W3C</td><td>HTML・CSSなどWeb技術</td></tr>
+            <tr><td>インターネット標準</td><td>IETF / RFC</td><td>TCP/IP・HTTPなど</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="frand" class="lesson-section">
+      <h2>7. 標準化と知的財産（FRAND）</h2>
+      <p>標準化された技術には、特許が含まれる場合があります。その場合、特許権者は「FRAND条件」でライセンスを提供することが求められます。</p>
+
+      <h3>FRANDとは</h3>
+      <ul>
+        <li><strong>Fair</strong>（公正）</li>
+        <li><strong>Reasonable</strong>（合理的）</li>
+        <li><strong>Non-Discriminatory</strong>（非差別的）</li>
+      </ul>
+      <p>標準技術を誰でも利用できるようにするためのルールです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>FRAND条件の考え方</figcaption>
+        <svg viewBox="0 0 420 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-frand" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 標準技術 -->
+          <rect x="130" y="10" width="160" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="210" y="33" text-anchor="middle" font-size="14" fill="#1e1b4b">標準化された技術</text>
+          <!-- 矢印 -->
+          <line x1="210" y1="46" x2="210" y2="70" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-frand)"/>
+          <!-- 特許の存在 -->
+          <rect x="110" y="72" width="200" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="210" y="95" text-anchor="middle" font-size="13" fill="#92400e">特許が含まれる場合がある</text>
+          <!-- 矢印 -->
+          <line x1="210" y1="108" x2="210" y2="132" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-frand)"/>
+          <!-- FRAND条件 -->
+          <rect x="30" y="134" width="360" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="210" y="159" text-anchor="middle" font-size="13" fill="#14532d">FRAND条件（公正・合理的・非差別的）でライセンス提供</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>ISOとIECの役割を混同しない。</strong> ISOは工業全般・マネジメント、IECは電気・電子技術が専門。IT分野は両者が共同（ISO/IEC）で規格策定することが多い。</li>
+        <li><strong>W3CとIETFの役割を混同しない。</strong> W3CはWeb技術（HTML・CSS）、IETFはインターネット基盤技術（TCP/IP・HTTP）を標準化。</li>
+        <li><strong>RFCは「仕様書」であり「法律」ではない。</strong> しかしインターネットの事実上の標準として広く採用されている。</li>
+        <li><strong>FRANDは「無料」ではない。</strong> 公正・合理的・非差別的という条件でライセンス料を取ることができる。</li>
+        <li><strong>JISはISO/IECと完全に同じではない。</strong> 日本国内向けに調整された規格であり、整合性は保たれているが細部が異なる場合がある。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 標準化の目的として正しくないものはどれか。</summary>
+        <p>ア）互換性の確保　イ）品質の向上　ウ）技術の独占　エ）国際的な取引の円滑化</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 標準化の目的は技術の普及促進であり、独占ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 情報セキュリティマネジメントシステム（ISMS）の国際規格はどれか。</summary>
+        <p>ア）ISO 9001　イ）ISO 14001　ウ）ISO/IEC 27001　エ）ISO/IEC 25000</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ISO/IEC 27001がISMSの国際規格である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 電気・電子技術の国際規格を策定する団体はどれか。</summary>
+        <p>ア）ISO　イ）IEC　ウ）W3C　エ）IETF</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IEC（国際電気標準会議）が電気・電子技術の国際規格を策定する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. Pマークの基準となっているJIS規格はどれか。</summary>
+        <p>ア）JIS Q 15001　イ）JIS X 25000　ウ）JIS Q 27001　エ）JIS X 5080</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — JIS Q 15001が個人情報保護マネジメント（Pマーク）の基準である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. W3Cが策定したWebアクセシビリティのガイドラインはどれか。</summary>
+        <p>ア）HTML　イ）CSS　ウ）WCAG　エ）XML</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — WCAG（Web Content Accessibility Guidelines）がW3C策定のアクセシビリティガイドラインである。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. IETFが公開するインターネット技術の仕様書を何というか。</summary>
+        <p>ア）HTML　イ）RFC　ウ）ISO　エ）JIS</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — RFC（Request For Comments）がIETFが公開する技術文書である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. RFCで定義されていない技術はどれか。</summary>
+        <p>ア）TCP/IP　イ）HTTP　ウ）SMTP　エ）HTML</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — HTMLはW3Cが策定するWeb標準であり、RFCで定義されるのはTCP/IP・HTTP・SMTPなどのインターネット基盤技術である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 標準技術に含まれる特許のライセンス条件として求められるFRANDの意味として正しいものはどれか。</summary>
+        <p>ア）無料で利用できること　イ）公正・合理的・非差別的であること　ウ）特定企業のみが利用できること　エ）特許権者が自由に条件を決められること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — FRANDはFair（公正）・Reasonable（合理的）・Non-Discriminatory（非差別的）の略である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. ソフトウェアライフサイクルプロセスの国際規格はどれか。</summary>
+        <p>ア）ISO/IEC 12207　イ）ISO/IEC 27001　ウ）ISO/IEC 25000　エ）ISO 9001</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — ISO/IEC 12207がソフトウェアライフサイクルプロセスの国際規格である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. W3Cの役割として正しいものはどれか。</summary>
+        <p>ア）インターネットの基盤技術を標準化する　イ）Web技術の互換性を確保する　ウ）電気・電子技術の国際規格を策定する　エ）日本の産業規格を策定する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — W3CはWeb技術の標準化を行い、互換性を確保する団体である。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『2_関連法令・契約.pdf』 第2章 標準化と規格（p21-p27）</p>
+    </section>
+  </main>
+
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

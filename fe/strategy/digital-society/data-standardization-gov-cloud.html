@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>データ標準化・ベースレジストリ・ガバメントクラウド | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Management / Digital-Society</p>
+        <h1>データ標準化・ベースレジストリ・ガバメントクラウド</h1>
+        <p class="lead">行政データの統一管理とクラウド移行による、効率的なデジタル社会の基盤整備について解説します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>データ標準化・ベースレジストリ・ガバメントクラウド</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>データ標準化の目的と5つの統一項目</li>
+          <li>ベースレジストリの定義と4つの具体例</li>
+          <li>ガバメントクラウド移行の理由とメリット</li>
+          <li>GビズIDやEKYCなど、連携技術の役割</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div> <dt>高</dt> <dd>データ標準化、ベースレジストリ、ガバメントクラウドの概念</dd> </div>
+          <div> <dt>中</dt> <dd>GビズID、EKYC、各レジストリの種類</dd> </div>
+          <div> <dt>低</dt> <dd>具体的なAPI仕様や個別のシステム名</dd> </div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>用語</th>
+              <th>一言</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>データ標準化</td>
+              <td>自治体や省庁ごとにバラバラなデータ形式を全国統一する取り組み</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>ベースレジストリ</td>
+              <td>国が一元管理する「正本データ」（基礎データ）の集合体</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>ガバメントクラウド</td>
+              <td>行政システムを移行させる国指定のクラウド基盤（AWS/GCP/Azure等）</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>GビズID</td>
+              <td>法人・個人事業主が行政手続きに使う共通ログインID</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>EKYC</td>
+              <td>オンラインで本人確認を完結させる仕組み（アプリやICチップ利用）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. データ標準化とベースレジストリ整備</h2>
+      <p>従来の行政システムは、自治体や省庁ごとにデータ形式がバラバラで、連携が困難でした。これを解消するため、国は「データ標準化」を推進し、正確な基礎データを一元管理する「ベースレジストリ」を整備しています。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>データ標準化とベースレジストリの概念図</figcaption>
+        <svg viewBox="0 0 400 240" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-up" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
+              <polygon points="0 6, 4 0, 8 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          
+          <!-- 上位レイヤー: 利用サービス -->
+          <rect x="20" y="10" width="360" height="40" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+          <text x="200" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#334155">利用サービス（自治体システム・民間アプリ・他省庁）</text>
+          
+          <!-- 矢印 (API連携) -->
+          <line x1="200" y1="90" x2="200" y2="60" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-up)"/>
+          <text x="210" y="80" font-size="11" fill="#64748b">API連携</text>
+          
+          <!-- 中位レイヤー: API -->
+          <rect x="50" y="90" width="300" height="30" rx="15" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="110" text-anchor="middle" font-size="12" fill="#1e1b4b">APIゲートウェイ</text>
+          
+          <!-- 矢印 (提供) -->
+          <line x1="200" y1="160" x2="200" y2="130" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-up)"/>
+          
+          <!-- 下位レイヤー: ベースレジストリ群 -->
+          <rect x="20" y="160" width="85" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="62" y="185" text-anchor="middle" font-size="11" fill="#1e3a5f">法人</text>
+          <text x="62" y="200" text-anchor="middle" font-size="11" fill="#1e3a5f">レジストリ</text>
+          
+          <rect x="115" y="160" width="85" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="157" y="185" text-anchor="middle" font-size="11" fill="#1e3a5f">不動産</text>
+          <text x="157" y="200" text-anchor="middle" font-size="11" fill="#1e3a5f">レジストリ</text>
+          
+          <rect x="210" y="160" width="85" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="252" y="185" text-anchor="middle" font-size="11" fill="#1e3a5f">事業所</text>
+          <text x="252" y="200" text-anchor="middle" font-size="11" fill="#1e3a5f">レジストリ</text>
+          
+          <rect x="305" y="160" width="85" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="347" y="185" text-anchor="middle" font-size="11" fill="#1e3a5f">地理空間</text>
+          <text x="347" y="200" text-anchor="middle" font-size="11" fill="#1e3a5f">レジストリ</text>
+          
+          <text x="200" y="235" text-anchor="middle" font-size="12" font-weight="bold" fill="#4338ca">ベースレジストリ（国が管理する正本データ）</text>
+        </svg>
+      </figure>
+
+      <h3>データ標準化の5つの項目</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>内容</th>
+              <th>効果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>データ項目の統一</td>
+              <td>住所を「都道府県」「市区町村」等に分割</td>
+              <td>転入転出の連携自動化</td>
+            </tr>
+            <tr>
+              <td>コード体系の統一</td>
+              <td>自治体コード、法人番号の統一</td>
+              <td>法人手続きのワンストップ化</td>
+            </tr>
+            <tr>
+              <td>表記ルールの統一</td>
+              <td>全角/半角、ハイフン有無の統一</td>
+              <td>照合ミスの減少</td>
+            </tr>
+            <tr>
+              <td>データ構造の統一</td>
+              <td>世帯・事業所情報の構造統一</td>
+              <td>システム更新の容易化</td>
+            </tr>
+            <tr>
+              <td>API仕様の統一</td>
+              <td>住民・税・福祉APIの統一</td>
+              <td>全国共通のデータ取得</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. ガバメントクラウドとの関係</h2>
+      <p>データ標準化は、システム基盤である「ガバメントクラウド」とセットで進められます。国が指定したクラウド事業者（AWS, GCP, Azure等）を利用し、全国共通の仕様でシステムを稼働させることで、コスト削減とセキュリティ統一を図ります。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>ガバメントクラウド移行の比較</figcaption>
+        <svg viewBox="0 0 380 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- 左ヘッダー -->
+          <rect x="10" y="10" width="160" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="90" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">Before: 個別システム</text>
+          <!-- 右ヘッダー -->
+          <rect x="210" y="10" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="290" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">After: ガバメントクラウド</text>
+          <!-- 中央の vs -->
+          <text x="190" y="33" text-anchor="middle" font-size="14" font-weight="bold" fill="#64748b">→</text>
+          
+          <!-- 左コンテンツ行 -->
+          <rect x="10" y="56" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="90" y="79" text-anchor="middle" font-size="12" fill="#334155">仕様がバラバラ</text>
+          <rect x="10" y="98" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="90" y="121" text-anchor="middle" font-size="12" fill="#334155">ベンダーロックイン</text>
+          <rect x="10" y="140" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="90" y="163" text-anchor="middle" font-size="12" fill="#334155">セキュリティ水準にばらつき</text>
+          
+          <!-- 右コンテンツ行 -->
+          <rect x="210" y="56" width="160" height="36" rx="2" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="290" y="79" text-anchor="middle" font-size="12" fill="#334155">全国統一仕様</text>
+          <rect x="210" y="98" width="160" height="36" rx="2" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="290" y="121" text-anchor="middle" font-size="12" fill="#334155">マルチクラウド対応</text>
+          <rect x="210" y="140" width="160" height="36" rx="2" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="290" y="163" text-anchor="middle" font-size="12" fill="#334155">国基準のセキュリティ(ISMAP)</text>
+          
+          <!-- 行ラベル -->
+          <text x="90" y="200" text-anchor="middle" font-size="11" fill="#64748b">✘ 非効率・高コスト</text>
+          <text x="290" y="200" text-anchor="middle" font-size="11" fill="#64748b">✔ 効率化・強靭性向上</text>
+        </svg>
+      </figure>
+
+      <h3>主なメリットと連携技術</h3>
+      <ul>
+        <li><strong>マイナンバーカードの多機能化:</strong> 健康保険証廃止（2024〜2025年頃）、運転免許証との一体化。</li>
+        <li><strong>GビズIDの普及:</strong> 法人が補助金申請や許認可手続きをワンストップで行える共通ID。</li>
+        <li><strong>EKYC（オンライン本人確認）:</strong> マイナカードのICチップ読み取り等により、民間サービスとも連携。</li>
+        <li><strong>災害支援の迅速化:</strong> 公金受取口座制度とデータ連携により、給付金を即座に振込可能。</li>
+      </ul>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li>ベースレジストリは「国が管理」するが、利用はAPIを通じて「自治体や民間」も行う点。</li>
+        <li>ガバメントクラウドは「国が独自に作ったクラウド」ではなく、「国が認証した民間クラウド（AWS等）」を利用する仕組みである点。</li>
+        <li>データ標準化は「個人情報の一元管理」ではなく、「基礎データ（ベースレジストリ）の正確性確保」が主目的である点。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. データ標準化の主な目的として最も適切なものはどれか。</summary>
+        <p>ア）すべての行政データをインターネット上で一般公開する<br>イ）自治体や省庁ごとにバラバラなデータ形式を統一し、連携を容易にする<br>ウ）紙の書類をすべてスキャンして画像データとして保存する<br>エ）個人情報を含むすべてのデータを国が一括して暗号化する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 自治体ごとのシステム差による非効率を解消し、データ連携を容易にすることが目的です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. ベースレジストリの説明として正しいものはどれか。</summary>
+        <p>ア）民間企業が独自に収集したマーケティングデータの集合体<br>イ）国が一元管理する、行政手続きの基礎となる正本データ<br>ウ）SNS上の投稿データを解析して作成するトレンドデータ<br>エ）自治体が個別に管理する、住民の趣味・嗜好に関するデータ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 法人、不動産、事業所、地理空間など、行政の基礎データを国が正本として一元管理する仕組みです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. ベースレジストリの具体例として誤っているものはどれか。</summary>
+        <p>ア）法人レジストリ（法人番号・名称・所在地）<br>イ）不動産レジストリ（地番・建物情報）<br>ウ）地理空間レジストリ（位置情報・GIS）<br>エ）行動履歴レジストリ（個人の購買・移動履歴）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 個人のプライバシーに関わる詳細な行動履歴はベースレジストリには含まれません。主に法人、不動産、事業所、地理空間などが該当します。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. ガバメントクラウドの目的として最も適切なものはどれか。</summary>
+        <p>ア）行政システムを国営のデータセンターに強制収容すること<br>イ）自治体システムを国指定のクラウドに移行し、標準化とコスト削減を図ること<br>ウ）インターネット回線をすべて政府専用回線に切り替えること<br>エ）民間企業のクラウド利用を禁止し、紙文化に戻すこと</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 国が指定したクラウド事業者（AWS/GCP/Azure等）を利用し、全国共通の仕様でシステムを稼働させることで、効率化とセキュリティ統一を図ります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. GビズIDの用途として正しいものはどれか。</summary>
+        <p>ア）国民全員に割り振られるマイナンバーの別名<br>イ）法人・個人事業主が行政手続き（補助金・許認可等）を行うための共通ログインID<br>ウ）公務員が庁内ネットワークに接続するためのセキュリティトークン<br>エ）外国人観光客が免税手続きを行うための一時ID</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 法人や個人事業主が、複数の行政サービスに1つのIDでアクセスできる仕組みです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. EKYC（イーケーワイシー）の説明として最も適切なものはどれか。</summary>
+        <p>ア）紙の証明書を目視で確認する従来の本人確認手法<br>イ）スマホやマイナンバーカードを使い、オンラインで本人確認を完結させる仕組み<br>ウ）企業の財務状況をAIで自動監査するシステム<br>エ）暗号通貨の取引を承認するマイニング作業</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — アプリでの書類撮影やICチップ読み取りにより、非対面で本人確認を行う技術です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. ガバメントクラウド移行による自治体のメリットとして誤っているものはどれか。</summary>
+        <p>ア）システム運用コストの削減<br>イ）セキュリティ水準の統一と向上<br>ウ）他自治体や国とのデータ連携の容易化<br>エ）各自治体が独自の仕様を自由に維持・拡張できること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — ガバメントクラウドは「標準化」が目的のため、独自の仕様維持・拡張は制限され、共通仕様に合わせることが求められます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 災害時におけるデータ標準化と公金受取口座制度の連携メリットはどれか。</summary>
+        <p>ア）被災者のSNSアカウントを特定し、DMで励ましを送れる<br>イ）申請書を郵送する手間を省くため、FAXでの受付を義務化する<br>ウ）登録済みの口座へ迅速に支援金を振り込むことが可能になる<br>エ）被災地の地図情報を紙で配布し、アナログな避難誘導を行う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 事前に登録された口座情報とマイナンバー等のデータが連携されることで、申請から振込までの事務処理が大幅に短縮され、迅速な支援が可能になります。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『3_デジタル社会の形成について.pdf』 第3章 1. データ標準化とベースレジストリ整備 〜 2. ガバメントクラウドとの関係（p16-p27相当）</p>
+    </section>
+  </main>
+
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

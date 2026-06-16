@@ -17,16 +17,17 @@ Update rules are defined in `HTMLIZATION-STATUS-RULES.md`.
 | `1_情報セキュリティー.pdf` | done | `fe/technology/security/` | All 22 lesson pages registered. |
 | `1_マネジメント.pdf` | done | `fe/technology/management/` | All 20 lesson pages registered. |
 
+| `コンピュータ概論.pdf` | done | `fe/technology/computer/` | All 15 lesson pages registered. 2026-06-16 |
+| `1_2_AIの_IoTセキュリティー.pdf` | done | `fe/technology/iot-security/` | All 5 lesson pages registered. 2026-06-16 |
+| `3_経営・戦略.pdf` | done | `fe/strategy/business-strategy/` | All 12 lesson pages registered. 2026-06-16 |
+| `1_Webサーバー・データベース概論.pdf` | done | `fe/technology/database/` | All 25 lesson pages registered. 2026-06-16 |
+
 ## Planned
 
 | PDF | Status | Target folder | Notes |
 |---|---|---|---|
-| `コンピュータ概論.pdf` | planned | `fe/technology/computer/` | Split into computer architecture, CPU/memory, OS, software, hardware/peripherals. |
-| `1_2_AIの_IoTセキュリティー.pdf` | planned | `fe/technology/iot-security/` | Keep separate from the main security folder; remove overlap with `1_情報セキュリティー.pdf`. |
-| `3_経営・戦略.pdf` | planned | `fe/strategy/business-strategy/` | Source copy currently exists in this folder. Split into business strategy, technology strategy, information strategy, system strategy, accounting. |
 | `2_関連法令・契約.pdf` | planned | `fe/strategy/legal/` | Split into intellectual property, personal information protection, security laws, contracts. |
 | `3_デジタル社会の形成について.pdf` | planned | `fe/strategy/digital-society/` | Split into Digital Agency, standardization, government cloud, digital society laws. |
-| Database source PDF | not placed yet | `fe/technology/database/` | Add the source PDF here or record its location before HTML generation starts. |
 
 ## Folder Rule
 

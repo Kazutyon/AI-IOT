@@ -1,64 +1,32 @@
 # Pending Lessons
 
-Last updated: 2026-06-12 / Codex
+Last updated: 2026-06-16 / DeepSeek（関連法令・契約 + デジタル社会の形成 HTML化完了・全12教材完了）
 
-## Completed
+## Completed (156 lessons total)
 
-### Algorithm
+| Folder | Lessons | Portal | Source PDF |
+|--------|---------|--------|------------|
+| `fe/technology/basic-theory/` | 11 | `index.html` | `1_基礎理論.pdf` |
+| `fe/technology/algorithm/` | 8 | `index.html` | `2_アルゴリズムとデータ構造.pdf` |
+| `fe/technology/network/` | 12 | `index.html` | `1_ネットワーク基礎.pdf` |
+| `fe/technology/cloud/` | 9 | `index.html` | `2_クラウド基礎.pdf` |
+| `fe/technology/security/` | 22 | `index.html` | `1_情報セキュリティー.pdf` |
+| `fe/technology/database/` | 25 | `index.html` | `1_Webサーバー・データベース概論.pdf` |
+| `fe/technology/computer/` | 15 | `index.html` | `コンピュータ概論.pdf` |
+| `fe/technology/iot-security/` | 5 | `index.html` | `1_2_AIの_IoTセキュリティー.pdf` |
+| `fe/technology/management/` | 20 | `index.html` | `1_マネジメント.pdf` |
+| `fe/strategy/business-strategy/` | 12 | `index.html` | `3_経営・戦略.pdf` |
+| `fe/strategy/legal/` | 11 | `index.html` | `2_関連法令・契約.pdf` |
+| `fe/strategy/digital-society/` | 6 | `index.html` | `3_デジタル社会の形成について.pdf` |
 
-- Folder: `fe/technology/algorithm/`
-- Status: done
-- Done: tree/search, search, sort, recursion/complexity, data structure, graph, basic, control
-- Portal: `fe/technology/algorithm/index.html`
-- Remaining: none for `2_アルゴリズムとデータ構造.pdf`
+## Planned (0 PDFs remaining — all done!)
 
-## Planned
+> All PDFs are now HTMLized. No remaining planned items.
 
-### Database
-
-- Folder: `fe/technology/database/`
-- Portal: `fe/technology/database/index.html`
-- Source PDF: not placed yet
-- Expected split: relational database basics, SQL, normalization, transactions
-
-### Computer Overview
-
-- Folder: `fe/technology/computer/`
-- Portal: `fe/technology/computer/index.html`
-- Source PDF: `D:\vs_code\projects\ai-iot-school\docs\コンピュータ概論.pdf`
-- Expected split: computer architecture, CPU/memory, OS, software, hardware/peripherals
-
-### IoT Security
-
-- Folder: `fe/technology/iot-security/`
-- Portal: `fe/technology/iot-security/index.html`
-- Source PDF: `D:\vs_code\projects\ai-iot-school\docs\1_2_AIの_IoTセキュリティー.pdf`
-- Expected split: AI/IoT threats, IoT vulnerabilities, embedded security, AI security trends
-
-### Strategy: Business Strategy
-
-- Folder: `fe/strategy/business-strategy/`
-- Portal: `fe/strategy/business-strategy/index.html`
-- Source PDF: `fe/strategy/business-strategy/3_経営・戦略.pdf`
-- Expected split: business strategy, technology strategy, information strategy, system strategy, accounting
-
-### Strategy: Legal
-
-- Folder: `fe/strategy/legal/`
-- Portal: `fe/strategy/legal/index.html`
-- Source PDF: `D:\vs_code\projects\ai-iot-school\docs\2_関連法令・契約.pdf`
-- Expected split: intellectual property, personal information protection, security laws, contracts
-
-### Strategy: Digital Society
-
-- Folder: `fe/strategy/digital-society/`
-- Portal: `fe/strategy/digital-society/index.html`
-- Source PDF: `D:\vs_code\projects\ai-iot-school\docs\3_デジタル社会の形成について.pdf`
-- Expected split: Digital Agency, standardization, government cloud, digital society laws
+| Folder | Portal | Source PDF |
+|--------|--------|------------|
+| （なし） | — | — |
 
 ## Notes
 
-- Top portal links now point to planned index pages, so future work can attach pages without changing the first screen again.
-- `fe/technology/strategy/` was the old temporary location. Strategy work should use `fe/strategy/`.
-- PDF-to-folder mapping is centralized in `PDF-FOLDER-MAP.md`.
-- HTMLization status update rules are centralized in `HTMLIZATION-STATUS-RULES.md`.
+- All "Planned" items are ready for HTML generation: folder, portal, and source PDF exist.

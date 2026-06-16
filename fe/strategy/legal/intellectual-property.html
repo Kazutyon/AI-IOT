@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>知的財産権（著作権・産業財産権） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / 法務・セキュリティ</p>
+        <h1>知的財産権（著作権・産業財産権）</h1>
+        <p class="lead">IT業界で特に重要な著作権と産業財産権（特許権・意匠権・商標権など）の基礎を学ぶ。無断利用やOSSライセンス違反を防ぐための実務知識を習得する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#copyright">著作権</a>
+        <a href="#neighboring">著作隣接権</a>
+        <a href="#limitations">著作権の制限</a>
+        <a href="#cc">CCライセンス</a>
+        <a href="#industrial">産業財産権</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">法務・セキュリティ</a>
+      <span>知的財産権</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>知的財産権の3つの区分（著作権・産業財産権・その他の権利）</li>
+          <li>著作権は創作と同時に発生する（無方式主義）</li>
+          <li>著作者人格権と著作権（財産権）の違いと保護期間</li>
+          <li>著作権の制限（私的使用・引用・教育目的など）</li>
+          <li>CCライセンス（クリエイティブ・コモンズ）の種類と条件</li>
+          <li>IT分野別の著作権注意点（Web制作・プログラム・AI・SNS・IoT）</li>
+          <li>産業財産権の4種類（特許権・実用新案権・意匠権・商標権）</li>
+          <li>特許情報の調べ方（J-Platform）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>著作権の定義・保護期間・権利内容、産業財産権の区分（特許・実用新案・意匠・商標）</dd></div>
+          <div><dt>中</dt><dd>著作権の制限（引用・私的使用）、CCライセンス、OSSライセンスの基礎</dd></div>
+          <div><dt>低</dt><dd>著作隣接権、特許情報プラットフォームの詳細な使い方</dd></div>
+        </dl>
+        <p>読了目安: 約25分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>知的財産権</td><td>創作活動で生まれた「形のない財産」を保護する独占的権利</td></tr>
+            <tr><td>2</td><td>著作権</td><td>創作した瞬間に自動発生（無方式主義）。文学・美術・プログラムなど</td></tr>
+            <tr><td>3</td><td>産業財産権</td><td>特許庁への出願が必要。特許・実用新案・意匠・商標の4つ</td></tr>
+            <tr><td>4</td><td>著作者人格権</td><td>公表権・氏名表示権・同一性保持権。譲渡・相続不可</td></tr>
+            <tr><td>5</td><td>著作権（財産権）</td><td>複製権・公衆送信権・翻訳権など。譲渡・相続可能</td></tr>
+            <tr><td>6</td><td>保護期間</td><td>著作者の死後70年（法人著作は公表後70年）</td></tr>
+            <tr><td>7</td><td>著作隣接権</td><td>実演家・放送局など、著作物を伝える人の権利</td></tr>
+            <tr><td>8</td><td>CCライセンス</td><td>作者が利用条件を明示できる国際的な仕組み</td></tr>
+            <tr><td>9</td><td>特許権</td><td>発明（技術面の高度なアイデア）を保護。出願から20年</td></tr>
+            <tr><td>10</td><td>商標権</td><td>ブランド名・ロゴを保護。登録から10年（更新可能）</td></tr>
+            <tr><td>11</td><td>FRAND</td><td>標準技術の特許を公正・合理的・非差別的条件でライセンス</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="copyright" class="lesson-section">
+      <h2>1. 知的財産権とは</h2>
+      <p>絵を描いたり、文章を書いたり、デザインや新しい仕組みを考えたりすることを<strong>知の創作活動</strong>といいます。その結果生まれた「形のない財産」を<strong>知的財産（無体財産）</strong>と呼びます。</p>
+      <p>他人が勝手に利用して利益を得ることを防ぐため、創作者に一定の独占的な権利が与えられます。これが<strong>知的財産権（知的所有権・無体財産権）</strong>です。</p>
+
+      <p>知的財産権は大きく3つに分かれます。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>区分</th><th>内容</th><th>代表例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>著作権</td><td>創作物（文章・画像・音楽・プログラムなど）を保護</td><td>小説、絵画、音楽、動画、ソフトウェアなど</td></tr>
+            <tr><td>産業財産権</td><td>発明や商標などを保護（特許庁へ出願が必要）</td><td>特許権・実用新案権・意匠権・商標権</td></tr>
+            <tr><td>その他の権利</td><td>特殊な分野の創作を保護</td><td>回路配置利用権、育成者権など</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>IT業界では特に<strong>「著作権」</strong>と<strong>「商標権」</strong>が重要です。</p>
+
+      <hr>
+
+      <h3>2. 著作権（定義・目的・範囲）</h3>
+
+      <h4>① 著作権とは何か（定義）</h4>
+      <p>著作権は、創作した瞬間に自動的に発生する権利であり（<strong>無方式主義</strong>）、思想や感情を"創作的に表現したもの"が著作物として保護されます。</p>
+
+      <h4>② 著作権法の目的（なぜ必要なのか）</h4>
+      <p>著作者の権利を守りつつ、著作物の公正な利用を確保し、文化の発展に寄与すること（著作権法 第1条）。</p>
+
+      <h4>③ 何が著作物になるのか（範囲）</h4>
+      <p>小説・音楽・絵画・写真・映画・プログラムなど、<strong>表現として形になったもの</strong>が対象となります。一方で、アイデア・手法・事実そのものは保護されません。</p>
+
+      <h4>④ 誰に権利があるのか（権利の帰属）</h4>
+      <p>原則として<strong>"創作した人"</strong>に著作権が帰属します。企業で作成した場合は、契約や職務著作の規定により、企業が権利者となるケースもあります。</p>
+
+      <h4>⑤ どれくらい保護されるのか（期間）</h4>
+      <p>著作者の死後<strong>70年</strong>（法人著作は公表後70年）。期間が過ぎると<strong>パブリックドメイン</strong>となり、自由に利用できます。</p>
+
+      <h4>⑥ IT分野で重要な理由</h4>
+      <p>IT分野では、文章・画像・コード・UI・データなど、著作物に該当する成果物が多岐にわたります。どの部分が著作物で、どのような権利リスクがあるかを理解することが、Web制作・開発・AI・SNS・IoTの実務で特に重要となります。</p>
+
+      <hr>
+
+      <h3>2-1 著作権の構成</h3>
+      <p>著作権は大きく次の2つに分かれます。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>区分</th><th>内容</th><th>譲渡・相続</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>著作者人格権</td><td>公表や氏名表示、改変を拒むなど、作者の人格を守る</td><td>譲渡・相続できない</td></tr>
+            <tr><td>著作権（財産権）</td><td>複製・上映・配布など、著作物の利用を許可または禁止できる権利</td><td>譲渡・相続・売買が可能</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>（1）著作者人格権</h4>
+      <p>作者としての尊厳を守るための権利です。死後には消滅します。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>権利名</th><th>概要</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>公表権</td><td>公表するかどうかを決める権利</td></tr>
+            <tr><td>氏名表示権</td><td>作者名を表示するかどうかを決める権利</td></tr>
+            <tr><td>同一性保持権</td><td>勝手に改変されない権利（例：絵を一部削除して再投稿など）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>（2）著作権（財産権）</h4>
+      <p>著作物の利用による経済的利益を保護します。著作権者は創作者本人でない場合もあります（企業に譲渡された場合など）。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>権利名</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>複製権</td><td>コピーを作る権利（印刷・スキャン・ダウンロード）</td></tr>
+            <tr><td>上演・演奏・上映権</td><td>公に上演・演奏・上映する権利</td></tr>
+            <tr><td>公衆送信権</td><td>SNSやWebサイトに公開する権利</td></tr>
+            <tr><td>譲渡・貸与権</td><td>本やCDなどを販売・貸与する権利</td></tr>
+            <tr><td>翻訳・翻案権</td><td>翻訳・アレンジ・改変などを行う権利</td></tr>
+            <tr><td>二次的著作物利用権</td><td>原作をもとに作られた作品（二次創作など）に対する権利</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>保護期間</h4>
+      <p>著作者の死後70年（法人著作は公表後70年）。期間満了後はパブリックドメインとなり、誰でも自由に利用できます。</p>
+    </section>
+
+    <section id="neighboring" class="lesson-section">
+      <h3>2-2 著作隣接権</h3>
+      <p>著作物を伝える人にも権利があります（俳優・歌手・放送局など）。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>区分</th><th>例</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>実演家人格権</td><td>俳優・演奏者</td><td>氏名表示・改変拒否</td></tr>
+            <tr><td>録音・録画権</td><td>実演を録音・録画できる権利</td><td>—</td></tr>
+            <tr><td>送信可能化権</td><td>ネットで配信する権利</td><td>—</td></tr>
+            <tr><td>報酬請求権</td><td>再放送・貸与時に報酬を受け取る権利</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="limitations" class="lesson-section">
+      <h3>2-3 著作権の制限（例外規定）</h3>
+      <p>著作物の「公正な利用」を認めるために、以下のような例外があります。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>条文</th><th>内容</th><th>具体例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>第30条 私的使用のための複製</td><td>家庭内・個人利用ならOK</td><td>趣味で音楽を録音、Web記事を自分用に保存</td></tr>
+            <tr><td>第31条 図書館での複製</td><td>公共図書館での一部コピー</td><td>—</td></tr>
+            <tr><td>第32条 引用</td><td>出典を明記し、主従関係が明確ならOK</td><td>論文・Web記事で一部引用</td></tr>
+            <tr><td>第35条 教育機関での利用</td><td>授業目的の複製は可（営利でない場合）</td><td>—</td></tr>
+            <tr><td>第36条 試験問題</td><td>試験で使用するための複製</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr>
+
+      <h3>2-4 著作権侵害の罰則</h3>
+      <p>無断利用は民事責任（損害賠償）と刑事罰の対象になります。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>種類</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>刑事罰</td><td>10年以下の懲役または1,000万円以下の罰金（法人は3億円以下）</td></tr>
+            <tr><td>報告罪</td><td>著作権者の告訴が必要（例外：海賊版配信などは非報告罪）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>著作権の侵害は、基本的には著作権者自身が告訴する必要があります。これを<strong>報告罪</strong>といいます。</p>
+      <p>ただ、映画を無断で複製したもの（海賊版）等をネット配信する行為は<strong>非報告罪</strong>にあたるため、告訴がなくても罰せられます。</p>
+      <p>SNSでの無断転載・リミックス動画・AI生成物の無断利用なども対象になる場合があります。</p>
+      <p><strong>「ネットにある＝自由に使える」ではありません。</strong></p>
+    </section>
+
+    <section id="cc" class="lesson-section">
+      <h3>3. クリエイティブ・コモンズ（CCライセンス）</h3>
+      <p>著作物の利用条件を明示できる国際的な仕組みです。作者が「この条件なら自由に使っていい」と表明することができます。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>表示マーク</th><th>意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>BY（表示）</td><td>● 作者名を表示すれば利用可</td></tr>
+            <tr><td>NC（非営利）</td><td>● 営利目的は禁止</td></tr>
+            <tr><td>ND（改変禁止）</td><td>● 改変（編集・加工）禁止</td></tr>
+            <tr><td>SA（継承）</td><td>● 改変した作品も同じ条件で公開すること</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>CCライセンスの組み合わせには以下のようなパターンがあります。右のものほど制限が緩いです。左側の「C」はすべての権利を主張するマークで、右側の「PD」はパブリックドメインであることを表します。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>CCライセンスの緩やかさの比較</figcaption>
+        <svg viewBox="0 0 500 50" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="5" width="55" height="36" rx="4" fill="#ef4444" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="28" y="29" text-anchor="middle" font-size="14" fill="#fff">C</text>
+          <text x="70" y="29" text-anchor="middle" font-size="14" fill="#64748b">→</text>
+          <rect x="85" y="5" width="80" height="36" rx="4" fill="#f59e0b" stroke="#d97706" stroke-width="1.5"/>
+          <text x="125" y="29" text-anchor="middle" font-size="13" fill="#fff">BY-NC-ND</text>
+          <text x="180" y="29" text-anchor="middle" font-size="14" fill="#64748b">→</text>
+          <rect x="195" y="5" width="65" height="36" rx="4" fill="#3b82f6" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="228" y="29" text-anchor="middle" font-size="13" fill="#fff">BY-NC</text>
+          <text x="275" y="29" text-anchor="middle" font-size="14" fill="#64748b">→</text>
+          <rect x="290" y="5" width="65" height="36" rx="4" fill="#22c55e" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="323" y="29" text-anchor="middle" font-size="13" fill="#fff">BY</text>
+          <text x="370" y="29" text-anchor="middle" font-size="14" fill="#64748b">→</text>
+          <rect x="385" y="5" width="55" height="36" rx="4" fill="#6b7280" stroke="#4b5563" stroke-width="1.5"/>
+          <text x="413" y="29" text-anchor="middle" font-size="14" fill="#fff">PD</text>
+        </svg>
+      </figure>
+
+      <p>また、著作者自身が著作物の再利用を許可するという意思表示をするための契約を、<strong>オープンライセンス</strong>といいます。</p>
+    </section>
+
+    <section id="industrial" class="lesson-section">
+      <h3>5. 産業財産権とは</h3>
+      <p>産業財産権とは、産業に関する新しい技術や製品のデザイン、ブランドなどを保護する権利です。スマートフォンやアプリなど、IT製品においても非常に重要な権利です。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>権利</th><th>概要</th><th>法律</th><th>保護期間</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>特許権</td><td>発明（技術面の高度なアイデア）を保護</td><td>特許法</td><td>出願から20年（延長最大25年）</td></tr>
+            <tr><td>実用新案権</td><td>考案（物の形状・構造などのアイデア）を保護</td><td>実用新案法</td><td>出願から10年</td></tr>
+            <tr><td>意匠権</td><td>物品の形状・模様・色彩などのデザインを保護</td><td>意匠法</td><td>出願から25年</td></tr>
+            <tr><td>商標権</td><td>商品やサービスのブランド・ロゴを保護</td><td>商標法</td><td>登録から10年（更新可能）</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>産業財産権の特徴</h4>
+      <p><strong>方式主義</strong>：特許庁に出願し、審査・登録されて初めて権利が発生します。</p>
+
+      <h4>保護対象の例（IT業界）</h4>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>権利</th><th>IT業界での利用例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>特許権</td><td>スマホの小型化、リチウムイオン電池、新しい通信方式</td></tr>
+            <tr><td>実用新案権</td><td>スマホケースの落下防止設計</td></tr>
+            <tr><td>意匠権</td><td>スマホやUIデザイン、アプリのアイコン</td></tr>
+            <tr><td>商標権</td><td>アプリ名やロゴ、Webサービス名</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr>
+
+      <h4>① 特許権</h4>
+      <p>発明の独占権を認める権利。</p>
+      <ul>
+        <li><strong>保護期間：</strong>出願から20年（医薬品などは最大25年に延長可能）</li>
+        <li><strong>意義：</strong>他人が無断で技術を使えないように保護、特許料による利益獲得、技術の普及促進（例：QRコードは特許取得済みだがライセンスフリー）</li>
+      </ul>
+
+      <h4>② 実用新案権</h4>
+      <p>物の形状や構造に関する考案を保護。</p>
+      <ul>
+        <li><strong>保護期間：</strong>出願から10年</li>
+        <li><strong>特徴：</strong>審査が書類審査のみで、短期間（2～3か月）で登録可能</li>
+        <li><strong>ITの例：</strong>スマホケースの特殊設計、入力デバイスの形状改良</li>
+      </ul>
+
+      <h4>③ 意匠権</h4>
+      <p>デザインの外観（形状・模様・色彩）を保護。</p>
+      <ul>
+        <li><strong>保護期間：</strong>出願から25年</li>
+        <li><strong>ITの例：</strong>スマホ本体の形状、アプリUIのアイコンデザイン</li>
+        <li>他者が模倣すると権利侵害になる</li>
+      </ul>
+
+      <h4>④ 商標権</h4>
+      <p>ブランド名・ロゴ・音・色など、商品やサービスの識別を保護。</p>
+      <ul>
+        <li><strong>保護期間：</strong>登録から10年（更新可能）</li>
+        <li><strong>ITの例：</strong>アプリ名、サービス名、Webサイトのロゴ</li>
+        <li>登録することで、ブランドを長期的に守れる</li>
+      </ul>
+
+      <hr>
+
+      <h3>6. 特許情報を調べる方法</h3>
+      <p>自分のアイデアが既に登録されていないか確認するには、<strong>特許情報プラットフォーム（J-Platform）</strong>を利用します。</p>
+      <p><a href="https://www.j-platform.inpit.go.jp/" target="_blank" rel="noopener">https://www.j-platform.inpit.go.jp/</a></p>
+
+      <ul>
+        <li><strong>検索できる情報：</strong>特許・実用新案、意匠、商標</li>
+        <li><strong>検索方法：</strong>キーワード検索（例：「人工知能」）、出願番号検索（例：「2019-00012X」）、分類や日付で絞り込みも可能</li>
+      </ul>
+
+      <p>IT業界で新しいアプリやデザインを考えるとき、特許・意匠・商標が既に登録されていないか事前確認することは非常に重要です。</p>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「ネットにある画像は自由に使える」は誤り。</strong> ネット上の画像にも著作権があり、無断使用は侵害になります。</li>
+        <li><strong>「少し書き換えれば自分のものになる」は誤り。</strong> 構造・表現が類似していれば侵害となる（プログラム開発でも同様）。</li>
+        <li><strong>著作権は「創作した瞬間」に発生する。</strong> 登録や申請は不要（無方式主義）。一方、産業財産権は特許庁への出願が必要。</li>
+        <li><strong>引用には「主従関係」と「出典明記」が必須。</strong> 単に他人の文章をコピーするだけでは引用にならない。</li>
+        <li><strong>CCライセンスは「すべての権利を放棄」するわけではない。</strong> 条件（BY・NC・ND・SA）に従う必要がある。</li>
+        <li><strong>OSSライセンス（GPLなど）の誤用は著作権侵害になる。</strong> 商用開発では特に注意が必要。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 著作権はどのタイミングで発生するか、正しいものを選べ。</summary>
+        <p>ア）特許庁に登録したとき　イ）創作した瞬間　ウ）公表したとき　エ）著作権者から許可を得たとき</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 著作権は無方式主義により、創作した瞬間に自動的に発生する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 著作権の保護期間は著作者の死後何年か。</summary>
+        <p>ア）30年　イ）50年　ウ）70年　エ）100年</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 著作者の死後70年（法人著作は公表後70年）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 著作者人格権に含まれないものはどれか。</summary>
+        <p>ア）公表権　イ）氏名表示権　ウ）複製権　エ）同一性保持権</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 複製権は著作権（財産権）に含まれる。著作者人格権は公表権・氏名表示権・同一性保持権の3つ。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 著作権法で認められている「引用」の条件として正しいものはどれか。</summary>
+        <p>ア）出典を明記しなくてもよい　イ）出典を明記し、主従関係が明確であること　ウ）営利目的であれば引用できない　エ）全文をコピーしても引用になる</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 引用には「出典明記」と「主従関係が明確」であることが必須。営利目的でも条件を満たせば引用可能。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. CCライセンスの「NC」が意味する条件はどれか。</summary>
+        <p>ア）作者名を表示すること　イ）営利目的を禁止すること　ウ）改変を禁止すること　エ）同じ条件で公開すること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — NC（Non-Commercial）は営利目的の利用を禁止する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 産業財産権に含まれないものはどれか。</summary>
+        <p>ア）特許権　イ）実用新案権　ウ）著作権　エ）商標権</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 著作権は産業財産権ではなく、別の区分（著作権）に属する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 特許権の保護期間は出願から何年か。</summary>
+        <p>ア）10年　イ）15年　ウ）20年　エ）25年</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 特許権の保護期間は出願から20年（医薬品などは最大25年に延長可能）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 著作権の侵害に関する刑事罰の内容として正しいものはどれか。</summary>
+        <p>ア）2年以下の懲役または200万円以下の罰金　イ）5年以下の懲役または500万円以下の罰金　ウ）10年以下の懲役または1,000万円以下の罰金　エ）懲役はなく罰金のみ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 10年以下の懲役または1,000万円以下の罰金（法人は3億円以下）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 著作隣接権の対象となる者はどれか。</summary>
+        <p>ア）小説家　イ）作曲家　ウ）実演家（俳優・演奏者）　エ）プログラマ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 著作隣接権は実演家・放送局など、著作物を伝える人の権利である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 商標権の保護期間は登録から何年か。</summary>
+        <p>ア）5年　イ）10年　ウ）20年　エ）無期限</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 商標権の保護期間は登録から10年で、更新が可能。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『2_関連法令・契約.pdf』 第1章 知的財産権（著作権・産業財産権）（p1-p20）</p>
+    </section>
+  </main>
+
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

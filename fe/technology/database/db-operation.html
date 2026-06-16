@@ -59,16 +59,16 @@
         <table>
           <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
           <tbody>
-            <tr><th>1</th><th>バックアップ</th>とはDBの内容を外部ファイルとして保存すること</th></tr>
-            <tr><th>2</th><th>ダンプ</th>とはDBの内容をSQL形式で書き出したファイル</th></tr>
-            <tr><th>3</th><th>リストア</th>とはダンプファイルを使ってDBを復元すること</th></tr>
-            <tr><th>4</th><th>フルバックアップ</th>那样DB全体を丸ごと保存する方式</th></tr>
-            <tr><th>5</th><th>差分バックアップ</th>とは前回のフルバックアップからの変更部分だけ保存</th></tr>
-            <tr><th>6</th><th>トランザクションログ</th>とは更新履歴を保存するログ</th></tr>
-            <tr><th>7</th><th>容量管理</th>那样DBのデータ量・インデックスサイズ・ログなどを管理</th></tr>
-            <tr><th>8</th><th>接続数</th>那样同時にDBに接続できる最大数</th></tr>
-            <td><th>9</th><th>コネクションプール</th>那样アプリケーションがDB接続を使い回す仕組み</th></tr>
-            <tr><th>10</th><th>タイムアウト</th>那样接続数上限超過などでサービスが応答しなくなる状態</th></tr>
+            <tr><th>1</th><th>バックアップ</th><td>DBの内容を外部ファイルとして保存すること</td></tr>
+            <tr><th>2</th><th>ダンプ</th><td>DBの内容をSQL形式で書き出したファイル</td></tr>
+            <tr><th>3</th><th>リストア</th><td>ダンプファイルを使ってDBを復元すること</td></tr>
+            <tr><th>4</th><th>フルバックアップ</th><td>DB全体を丸ごと保存する方式</td></tr>
+            <tr><th>5</th><th>差分バックアップ</th><td>前回のフルバックアップからの変更部分だけ保存</td></tr>
+            <tr><th>6</th><th>トランザクションログ</th><td>更新履歴を保存するログ</td></tr>
+            <tr><th>7</th><th>容量管理</th><td>DBのデータ量・インデックスサイズ・ログなどを管理</td></tr>
+            <tr><th>8</th><th>接続数</th><td>同時にDBに接続できる最大数</td></tr>
+            <tr><th>9</th><th>コネクションプール</th><td>アプリケーションがDB接続を使い回す仕組み</td></tr>
+            <tr><th>10</th><th>タイムアウト</th><td>接続数上限超過などでサービスが応答しなくなる状態</td></tr>
           </tbody>
         </table>
       </div>
@@ -134,8 +134,8 @@
             <tr><td style="font-weight: bold;">③</th><td>アプリケーション</th><td>DBにユーザーを問い合わせ（SELECT）</th></tr>
             <tr><td style="font-weight: bold;">④</th><td>DB</th><td>ユーザー情報を返す</th></tr>
             <tr><td style="font-weight: bold;">⑤</th><td>アプリケーション</th><td>パスワード検証、Session/Token発行</th></tr>
-            <tr><td style="font-weight: bold;">⑥</th><td>Webサーバー</th>那样レスポンスを返す</th></tr>
-            <tr><td style="font-weight: bold;">⑦</th><td>ブラウザ</th>那样マイページへ遷移 or エラー表示</th></tr>
+            <tr><td style="font-weight: bold;">⑥</td><td>Webサーバー</td><td>レスポンスを返す</td></tr>
+            <tr><td style="font-weight: bold;">⑦</td><td>ブラウザ</td><td>マイページへ遷移 or エラー表示</td></tr>
           </tbody>
         </table>
       </div>
@@ -172,9 +172,9 @@
             <tr><th>種類</th><th>説明</th><th>特徴</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">フルバックアップ</th><td>DB全体を丸ごと保存</th>那樣最も確実、容量は大きい、復元が簡単</th></tr>
-            <tr><td style="font-weight: bold;">差分バックアップ</th>那样前回のフルバックアップからの変更部分だけ保存</th>那樣容量が少ない、復元はフル+差分が必要</th></tr>
-            <tr><td style="font-weight: bold;">トランザクションログ</th>那样更新履歴を保存</th>那樣高度な運用で使用</th></tr>
+            <tr><td style="font-weight: bold;">フルバックアップ</td><td>DB全体を丸ごと保存</td><td>最も確実、容量は大きい、復元が簡単</td></tr>
+            <tr><td style="font-weight: bold;">差分バックアップ</td><td>前回のフルバックアップからの変更部分だけ保存</td><td>容量が少ない、復元はフル+差分が必要</td></tr>
+            <tr><td style="font-weight: bold;">トランザクションログ</td><td>更新履歴を保存</td><td>高度な運用で使用</td></tr>
           </tbody>
         </table>
       </div>
@@ -255,13 +255,13 @@
       </ul>
 
       <div class="table-wrap mobile-card-table">
-        </table>
+        <table>
           <thead>
             <tr><th>管理対象</th><th>問題</th><th>対策</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">容量</th><td>データ増加による検索遅延・ストレージ不足</th><td>不要データ削除、インデックス管理、外部保存</th></tr>
-            <tr><td style="font-weight: bold;">接続数</th>那样上限超過によるサービス停止</th>那样コネクションプール、接続即閉、SQL改善、キャッシュ</th></tr>
+            <tr><td style="font-weight: bold;">容量</td><td>データ増加による検索遅延・ストレージ不足</td><td>不要データ削除、インデックス管理、外部保存</td></tr>
+            <tr><td style="font-weight: bold;">接続数</td><td>上限超過によるサービス停止</td><td>コネクションプール、接続即閉、SQL改善、キャッシュ</td></tr>
           </tbody>
         </table>
       </div>

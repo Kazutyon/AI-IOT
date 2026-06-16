@@ -59,16 +59,16 @@
         <table>
           <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
           <tbody>
-            <tr><th>1</th><th>RDB</th>とは表（テーブル）同士の関係を使ってデータを管理する仕組み</th></tr>
-            <tr><th>2</th><th>テーブル</th>とはデータを項目（列）ごとに整理した表</th></tr>
-            <tr><th>3</th><th>レコード（行）</th>とはテーブルに格納される1件分のデータ</th></tr>
-            <tr><th>4</th><th>カラム（列）</th>とはデータの項目名（id, name, emailなど）</th></tr>
-            <tr><th>5</th><th>SQL</th>とはRDBを操作するための標準言語</th></tr>
-            <tr><th>6</th><th>INT</th>とは整数を扱うデータ型</th></tr>
-            <tr><th>7</th><th>VARCHAR</th>とは可変長文字列を扱うデータ型</th></tr>
-            <tr><th>8</th><th>DECIMAL</th>とは小数（金額など）を正確に扱うデータ型</th></tr>
-            <tr><th>9</th><th>DATE/DATETIME</th>とは日付や時刻を扱うデータ型</th></tr>
-            <tr><th>10</th><th>NULL</th>とは「値が存在しない」を表す特殊な値</th></tr>
+            <tr><th>1</th><th>RDB</th><td>表（テーブル）同士の関係を使ってデータを管理する仕組み</td></tr>
+            <tr><th>2</th><th>テーブル</th><td>データを項目（列）ごとに整理した表</td></tr>
+            <tr><th>3</th><th>レコード（行）</th><td>テーブルに格納される1件分のデータ</td></tr>
+            <tr><th>4</th><th>カラム（列）</th><td>データの項目名（id, name, emailなど）</td></tr>
+            <tr><th>5</th><th>SQL</th><td>RDBを操作するための標準言語</td></tr>
+            <tr><th>6</th><th>INT</th><td>整数を扱うデータ型</td></tr>
+            <tr><th>7</th><th>VARCHAR</th><td>可変長文字列を扱うデータ型</td></tr>
+            <tr><th>8</th><th>DECIMAL</th><td>小数（金額など）を正確に扱うデータ型</td></tr>
+            <tr><th>9</th><th>DATE / DATETIME</th><td>日付や時刻を扱うデータ型</td></tr>
+            <tr><th>10</th><th>NULL</th><td>「値が存在しない」を表す特殊な値</td></tr>
           </tbody>
         </table>
       </div>
@@ -187,9 +187,9 @@
             <tr><th>用語</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">テーブル</th><td>同じ種類のデータをまとめて管理する箱。例：users（ユーザー情報）</th></tr>
-            <tr><td style="font-weight: bold;">レコード（行）</th><td>テーブルに格納される1件分のデータ。例：1人のユーザー情報</th></tr>
-            <tr><td style="font-weight: bold;">カラム（列）</th><td>データの項目名。例：id, name, email, password</th></tr>
+            <tr><td style="font-weight: bold;">テーブル</td><td>同じ種類のデータをまとめて管理する箱。例：users（ユーザー情報）</td></tr>
+            <tr><td style="font-weight: bold;">レコード（行）</td><td>テーブルに格納される1件分のデータ。例：1人のユーザー情報</td></tr>
+            <tr><td style="font-weight: bold;">カラム（列）</td><td>データの項目名。例：id, name, email, password</td></tr>
           </tbody>
         </table>
       </div>
@@ -211,8 +211,8 @@
             <tr><th>種類</th><th>例</th><th>用途</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">INT（整数）</th><td>1, 100, 9999</th><td>ユーザーID、商品ID、在庫数、注文数</th></tr>
-            <tr><td style="font-weight: bold;">DECIMAL（小数）</th><td>1980.50, 0.08</th><td>価格、重量、割引率（誤差が出ない）</th></tr>
+            <tr><td style="font-weight: bold;">INT（整数）</td><td>1, 100, 9999</td><td>ユーザーID、商品ID、在庫数、注文数</td></tr>
+            <tr><td style="font-weight: bold;">DECIMAL（小数）</td><td>1980.50, 0.08</td><td>価格、重量、割引率（誤差が出ない）</td></tr>
           </tbody>
         </table>
       </div>
@@ -225,8 +225,8 @@
             <tr><th>種類</th><th>例</th><th>用途</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">VARCHAR（可変長文字列）</th>那样"山田太郎", "taro@example.com"</th>那样名前、メールアドレス、パスワード（ハッシュ値）</th></tr>
-            <tr><td style="font-weight: bold;">TEXT（長文）</th>那样長い商品説明やコメント</th>那样商品説明、コメント、メモ</th></tr>
+            <tr><td style="font-weight: bold;">VARCHAR（可変長文字列）</td><td>"山田太郎", "taro@example.com"</td><td>名前、メールアドレス、パスワード（ハッシュ値）</td></tr>
+            <tr><td style="font-weight: bold;">TEXT（長文）</td><td>長い商品説明やコメント</td><td>商品説明、コメント、メモ</td></tr>
           </tbody>
         </table>
       </div>
@@ -239,8 +239,8 @@
             <tr><th>種類</th><th>例</th><th>用途</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">DATE</th><td>2026-06-16</th><td>誕生日、登録日</th></tr>
-            <tr><td style="font-weight: bold;">DATETIME / TIMESTAMP</th><td>2026-06-16 12:30:15</th><td>注文日時、更新日時</th></tr>
+            <tr><td style="font-weight: bold;">DATE</td><td>2026-06-16</td><td>誕生日、登録日</td></tr>
+            <tr><td style="font-weight: bold;">DATETIME / TIMESTAMP</td><td>2026-06-16 12:30:15</td><td>注文日時、更新日時</td></tr>
           </tbody>
         </table>
       </div>
@@ -253,7 +253,7 @@
             <tr><th>値</th><th>用途</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">true / false</th><td>有効フラグ（is_active）、削除フラグ（is_deleted）、公開フラグ（is_public）</th></tr>
+            <tr><td style="font-weight: bold;">true / false</td><td>有効フラグ（is_active）、削除フラグ（is_deleted）、公開フラグ（is_public）</td></tr>
           </tbody>
         </table>
       </div>

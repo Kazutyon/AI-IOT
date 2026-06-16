@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>情報セキュリティ関連法規（前半） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / 法務・セキュリティ</p>
+        <h1>情報セキュリティ関連法規（前半：基本法〜不正アクセス禁止法）</h1>
+        <p class="lead">サイバーセキュリティ基本法、不正アクセス禁止法、刑法（不正指令電磁的記録罪・電子計算機損壊等業務妨害罪）を学ぶ。情報システムの安全性を確保するための法的枠組みを理解する。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#overview">全体像</a>
+        <a href="#cyber">サイバーセキュリティ基本法</a>
+        <a href="#unauthorized">不正アクセス禁止法</a>
+        <a href="#penal-code">刑法（情報セキュリティ関連）</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">法務・セキュリティ</a>
+      <span>情報セキュリティ関連法規（前半）</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>情報セキュリティ関連法規の4つの分類</li>
+          <li>サイバーセキュリティ基本法が定める各主体の役割</li>
+          <li>不正アクセス禁止法が禁止する行為（認証情報の不正使用・技術的手段による侵入など）</li>
+          <li>刑法における情報セキュリティ関連規定（不正指令電磁的記録・電子計算機損壊等業務妨害・電子計算機使用詐欺）</li>
+          <li>実務上求められるセキュリティ対策</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>不正アクセス禁止法の禁止行為、刑法の情報セキュリティ関連規定（3つの罪）</dd></div>
+          <div><dt>中</dt><dd>サイバーセキュリティ基本法の各主体の役割、実務上の対応例</dd></div>
+          <div><dt>低</dt><dd>NISCの詳細、各法律の条文番号</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>サイバーセキュリティ基本法</td><td>国・自治体・企業・国民のサイバー攻撃対応の基本方針を定める法律</td></tr>
+            <tr><td>2</td><td>NISC</td><td>内閣サイバーセキュリティセンター。国のサイバーセキュリティ統括機関</td></tr>
+            <tr><td>3</td><td>不正アクセス禁止法</td><td>アクセス権限を持たない者の情報システムへの侵入を禁止する法律</td></tr>
+            <tr><td>4</td><td>不正指令電磁的記録（ウイルス作成罪）</td><td>不正な動作をさせるプログラムの作成・提供・取得・保管を処罰</td></tr>
+            <tr><td>5</td><td>電子計算機損壊等業務妨害罪</td><td>データやシステムを破壊・妨害する行為を処罰</td></tr>
+            <tr><td>6</td><td>電子計算機使用詐欺罪</td><td>不正操作により利益を得る行為を処罰</td></tr>
+            <tr><td>7</td><td>CSIRT</td><td>コンピュータセキュリティインシデント対応チーム</td></tr>
+            <tr><td>8</td><td>多要素認証（MFA）</td><td>複数の認証要素を組み合わせた認証方式</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="overview" class="lesson-section">
+      <h2>1. 情報セキュリティ関連法規の全体像</h2>
+      <p>情報セキュリティに関する法律は、大きく次の4つに分類できます。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>分類</th><th>内容</th><th>主な法律</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>個人情報の保護</td><td>個人データの取り扱いルール</td><td>個人情報保護法</td></tr>
+            <tr><td>不正行為の禁止</td><td>不正アクセス・ウイルス作成などの禁止</td><td>不正アクセス禁止法、刑法（不正指令電磁的記録罪）</td></tr>
+            <tr><td>セキュリティ確保の義務</td><td>国・企業のセキュリティ体制整備</td><td>サイバーセキュリティ基本法</td></tr>
+            <tr><td>電気通信の秘密</td><td>通信内容の保護</td><td>電気通信事業法</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="cyber" class="lesson-section">
+      <h2>2. サイバーセキュリティ基本法</h2>
+      <p>サイバーセキュリティ基本法は、<strong>国・自治体・企業・国民が、サイバー攻撃にどう対応すべきかを定めた基本方針の法律</strong>です。この法律は、社会全体の安全性を確保するために、各主体の役割と責務を明確にしています。</p>
+
+      <p>国は、サイバー攻撃に対する統括機能を担い、政府機関や重要インフラ事業者と連携しながら、国内のサイバーセキュリティ対策を主導します。その中心となるのが<strong>NISC（内閣サイバーセキュリティセンター）</strong>であり、監視、情報共有、政策立案などを行います。</p>
+
+      <p>企業には、自社の情報資産を適切に管理し、サイバー攻撃に備えるための体制を整備する責務があります。これは、セキュリティポリシーの策定、従業員教育、インシデント対応手順の整備など、組織的な取り組みを含みます。</p>
+
+      <p>重要インフラ事業者には、一般企業よりも高度な対策が求められ、政府との情報共有や訓練への参加が義務付けられています。これにより、社会全体の安全性を維持する仕組みが構築されています。</p>
+
+      <p>国民にも、基本的なセキュリティ意識を持ち、危険な行為を避ける責務があります。これは、パスワード管理やソフトウェア更新など、日常的な行動を含みます。</p>
+
+      <h3>サイバーセキュリティ基本法が定める役割</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>主体</th><th>求められること</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>国</td><td>統括・体制整備</td><td>NISCによる監視、情報共有、政策立案</td></tr>
+            <tr><td>自治体</td><td>地域の安全確保</td><td>自治体システムの管理、住民サービスの保護</td></tr>
+            <tr><td>企業</td><td>情報資産の管理</td><td>ポリシー策定、教育、インシデント対応体制</td></tr>
+            <tr><td>重要インフラ事業者</td><td>高度な対策</td><td>政府との連携、訓練参加、リスク評価</td></tr>
+            <tr><td>国民</td><td>基本的なセキュリティ意識</td><td>パスワード管理、更新、危険行為の回避</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>実務上求められる対応例</h3>
+      <ul>
+        <li>セキュリティポリシーの策定と運用</li>
+        <li>アクセス管理・ログ管理の整備</li>
+        <li>インシデント対応体制（CSIRT）の構築</li>
+        <li>従業員教育の継続的な実施</li>
+        <li>政府・業界団体との情報共有</li>
+        <li>重要インフラ事業者は訓練・連携を強化</li>
+      </ul>
+
+      <figure class="wide-diagram">
+        <figcaption>サイバーセキュリティ基本法が定める各主体の役割</figcaption>
+        <svg viewBox="0 0 420 260" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-cyber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 国（中央） -->
+          <rect x="150" y="10" width="120" height="40" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="2"/>
+          <text x="210" y="35" text-anchor="middle" font-size="14" fill="#1e1b4b">国（NISC）</text>
+          <!-- 中央から各主体へ矢印 -->
+          <line x1="210" y1="50" x2="210" y2="72" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-cyber)"/>
+          <line x1="80" y1="72" x2="340" y2="72" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="80" y1="72" x2="80" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-cyber)"/>
+          <line x1="210" y1="72" x2="210" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-cyber)"/>
+          <line x1="340" y1="72" x2="340" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-cyber)"/>
+          <!-- 各主体 -->
+          <rect x="10" y="101" width="140" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="80" y="126" text-anchor="middle" font-size="13" fill="#1e3a5f">自治体</text>
+          <rect x="140" y="101" width="140" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="210" y="126" text-anchor="middle" font-size="13" fill="#92400e">企業</text>
+          <rect x="270" y="101" width="140" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="340" y="126" text-anchor="middle" font-size="13" fill="#14532d">国民</text>
+          <!-- 下段：重要インフラ事業者 -->
+          <line x1="210" y1="141" x2="210" y2="168" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-cyber)"/>
+          <rect x="110" y="169" width="200" height="40" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="210" y="194" text-anchor="middle" font-size="13" fill="#991b1b">重要インフラ事業者</text>
+          <!-- 注釈 -->
+          <text x="210" y="235" text-anchor="middle" font-size="11" fill="#64748b">← 一般企業よりも高度な対策が求められる</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="unauthorized" class="lesson-section">
+      <h2>3. 不正アクセス禁止法</h2>
+      <p>不正アクセス禁止法は、<strong>アクセス権限を持たない者が情報システムに侵入する行為を禁止する法律</strong>です。この法律は、情報システムの安全性を確保し、データの漏えい・改ざん・破壊を防ぐことを目的としています。</p>
+      <p>不正アクセスは、<strong>意図の有無や被害の有無に関係なく、行為そのものが違法</strong>となります。そのため、技術者は「どの行為が不正アクセスに該当するか」を正確に理解しておく必要があります。</p>
+
+      <h3>不正アクセスの分類</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>区分</th><th>内容</th><th>具体例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>他人の認証情報の不正使用</td><td>本人の許可なくID・PWを利用してログインする行為</td><td>他人の業務システムに無断ログイン</td></tr>
+            <tr><td>技術的手段による侵入</td><td>脆弱性を利用してアクセス権限を突破する行為</td><td>SQLインジェクションで管理画面に侵入</td></tr>
+            <tr><td>認証情報の不正取得</td><td>不正な方法でID・PWを入手・提供・保管する行為</td><td>フィッシングで取得したPWを保存</td></tr>
+            <tr><td>アクセス制御の回避</td><td>認証やアクセス制御を迂回して侵入する行為</td><td>認証を回避するURLを直接指定してアクセス</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>不正アクセスが問題となる理由</h3>
+      <p>不正アクセスは、情報システムの <strong>機密性（Confidentiality）・完全性（Integrity）・可用性（Availability）</strong>のいずれか、または複数を損なう可能性があります。</p>
+      <ul>
+        <li><strong>機密性:</strong> 顧客情報・社員情報の漏えい</li>
+        <li><strong>完全性:</strong> データ改ざん、設定変更、不正操作</li>
+        <li><strong>可用性:</strong> サービス停止、業務停止、システム障害</li>
+      </ul>
+      <p>これらは企業の信用失墜、損害賠償、法的責任につながるため、不正アクセスは厳しく規制されています。</p>
+      <p>また、認証情報を不適切に扱った者（提供・保管）も処罰対象となるため、組織全体で認証情報の管理体制を整備する必要があります。</p>
+
+      <h3>実務上求められる対応例</h3>
+      <ul>
+        <li>ID・パスワードの共有禁止</li>
+        <li>多要素認証（MFA）の導入</li>
+        <li>アクセス権限の最小化（RBAC）</li>
+        <li>ログ監視と異常検知の仕組み</li>
+        <li>脆弱性診断の定期実施</li>
+        <li>不審ログインの自動アラート設定</li>
+        <li>認証情報の安全な保管（ハッシュ化、管理ツールの利用）</li>
+      </ul>
+    </section>
+
+    <section id="penal-code" class="lesson-section">
+      <h2>4. 刑法（情報セキュリティ関連）</h2>
+      <p>刑法には、情報システムに対する不正行為を処罰するための規定が複数存在します。これらは、データの破壊・改ざん・不正利用・不正操作といった行為を対象としており、情報システムの安全性を維持するために重要な役割を果たしています。</p>
+
+      <p>情報セキュリティに関連する刑法の主要な規定は、以下の3つに分類できます。</p>
+      <ol>
+        <li><strong>不正指令電磁的記録</strong>（ウイルス作成罪）</li>
+        <li><strong>電子計算機損壊等業務妨害罪</strong></li>
+        <li><strong>電子計算機使用詐欺罪</strong></li>
+      </ol>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>規定名</th><th>内容</th><th>主な対象行為</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>不正指令電磁的記録</td><td>不正な動作をさせるプログラムの作成・提供・取得・保管を処罰</td><td>ウイルス作成、マルウェア配布、バックドア保持</td></tr>
+            <tr><td>電子計算機損壊等業務妨害罪</td><td>データやシステムを破壊・妨害する行為を処罰</td><td>データ削除、DDoS攻撃、ランサムウェアによる暗号化</td></tr>
+            <tr><td>電子計算機使用詐欺罪</td><td>不正操作により利益を得る行為を処罰</td><td>価格改ざん、ポイント不正取得、認証回避による不正利用</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>不正指令電磁的記録（ウイルス作成罪）</h4>
+      <p>不正な動作をさせるプログラム（ウイルス、ランサムウェア、バックドア等）を作成・提供・取得・保管した時点で処罰対象となります。<strong>実際の被害発生は要件ではありません。</strong></p>
+
+      <h4>電子計算機損壊等業務妨害罪</h4>
+      <p>データの破壊、システムの停止、業務の妨害を目的とした行為を処罰します。DDoS攻撃、データ削除、ランサムウェアによる暗号化などが該当します。</p>
+
+      <h4>電子計算機使用詐欺罪</h4>
+      <p>不正な操作によって利益を得る行為を処罰します。ECサイトの価格改ざん、ポイント不正取得、認証回避による有料サービスの無断利用などが対象となります。</p>
+
+      <h3>実務上求められる対応</h3>
+      <ul>
+        <li>マルウェア解析・検証環境を分離（隔離環境の利用）</li>
+        <li>不正プログラムを業務端末に保存しない</li>
+        <li>セキュリティ検証用ツールの管理ルールを明確化</li>
+        <li>不正プログラムの入手・共有を禁止</li>
+        <li>システム破壊につながる操作の権限管理を徹底</li>
+        <li>ログ監視により不正操作を早期検知</li>
+      </ul>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>不正アクセスは「被害が出てから」処罰されるわけではない。</strong> 行為そのものが違法であり、意図や被害の有無は問わない。</li>
+        <li><strong>不正指令電磁的記録罪は「ウイルスを作成した時点」で成立する。</strong> 実際に被害を発生させる必要はない。</li>
+        <li><strong>サイバーセキュリティ基本法は「企業に義務」を課す法律ではない。</strong> 基本方針を示す法律であり、具体的な罰則はない。ただし、実務上の対応が求められる。</li>
+        <li><strong>不正アクセス禁止法と刑法は別物。</strong> 不正アクセス禁止法は「侵入」を、刑法は「その後の不正行為」を規制する。</li>
+        <li><strong>認証情報の「保管」も処罰対象になる。</strong> フィッシングで取得したパスワードを保存するだけでも違法となる場合がある。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. サイバーセキュリティ基本法が定める国の統括機関はどれか。</summary>
+        <p>ア）IPA　イ）JIPDEC　ウ）NISC　エ）総務省</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — NISC（内閣サイバーセキュリティセンター）が国のサイバーセキュリティ統括機関である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 不正アクセス禁止法が禁止する行為として正しくないものはどれか。</summary>
+        <p>ア）他人のID・PWを無断で使用してログインする　イ）脆弱性を利用してシステムに侵入する　ウ）ウイルスを作成する　エ）SQLインジェクションで管理画面に侵入する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ウイルス作成は刑法（不正指令電磁的記録罪）の対象であり、不正アクセス禁止法の直接の対象ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 刑法の「不正指令電磁的記録罪」が成立するタイミングとして正しいものはどれか。</summary>
+        <p>ア）ウイルスが実際に被害を発生させたとき　イ）ウイルスを作成・取得・保管した時点　ウ）ウイルスを実行した時点　エ）ウイルスを配布した時点のみ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 不正指令電磁的記録罪は作成・取得・保管した時点で成立し、実際の被害発生は要件ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 刑法の「電子計算機損壊等業務妨害罪」に該当する行為はどれか。</summary>
+        <p>ア）ECサイトの価格を改ざんする　イ）DDoS攻撃でシステムを停止させる　ウ）フィッシングでパスワードを取得する　エ）認証を回避して有料サービスを利用する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DDoS攻撃によるシステム停止は電子計算機損壊等業務妨害罪に該当する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 刑法の「電子計算機使用詐欺罪」に該当する行為はどれか。</summary>
+        <p>ア）ウイルスを作成する　イ）データを削除する　ウ）ポイントを不正取得する　エ）他人のIDでログインする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ポイント不正取得は電子計算機使用詐欺罪に該当する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. サイバーセキュリティ基本法が定める「企業」の責務として正しくないものはどれか。</summary>
+        <p>ア）セキュリティポリシーの策定　イ）従業員教育の実施　ウ）ウイルスの作成　エ）インシデント対応体制の整備</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ウイルスの作成は企業の責務ではなく、違法行為である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 不正アクセス禁止法の実務上の対応として正しくないものはどれか。</summary>
+        <p>ア）ID・パスワードの共有禁止　イ）多要素認証（MFA）の導入　ウ）パスワードを平文で保存　エ）ログ監視と異常検知の仕組み</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — パスワードの平文保存はセキュリティ上問題があり、不正アクセス防止の対応として不適切である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 情報セキュリティ関連法規の4つの分類に含まれないものはどれか。</summary>
+        <p>ア）個人情報の保護　イ）不正行為の禁止　ウ）著作権の保護　エ）電気通信の秘密</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 著作権の保護は知的財産権の分野であり、情報セキュリティ関連法規の4つの分類には含まれない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. 不正アクセスが問題となる理由として正しくないものはどれか。</summary>
+        <p>ア）機密性の喪失（情報漏えい）　イ）完全性の喪失（データ改ざん）　ウ）可用性の向上　エ）企業の信用失墜</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 不正アクセスは可用性を損なうものであり、向上させるものではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 重要インフラ事業者に求められる対策として正しいものはどれか。</summary>
+        <p>ア）一般企業と同じ対策で十分である　イ）政府との連携や訓練への参加が義務付けられている　ウ）サイバーセキュリティ基本法の適用外である　エ）セキュリティ対策は任意である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 重要インフラ事業者には一般企業よりも高度な対策が求められ、政府との連携や訓練への参加が義務付けられている。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『2_関連法令・契約.pdf』 第5章 情報セキュリティ関連法規（p90-p101）</p>
+    </section>
+  </main>
+
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -59,16 +59,16 @@
         <table>
           <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
           <tbody>
-            <tr><th>1</th><th>主キー（PK）</th>とはテーブル内の1行を一意に識別するためのカラム</th></tr>
-            <tr><th>2</th><th>外部キー（FK）</th>とは他のテーブルの主キーを参照するカラム</th></tr>
-            <tr><th>3</th><th>1対多（one-to-many）</th>とは1つの親レコードに複数の子レコードが紐づく関係</th></tr>
-            <tr><th>4</th><th>参照整合性</th>とは外部キー制約によって保証されるデータの整合性</th></tr>
-            <tr><th>5</th><th>正規化</th>とはデータの重複を排除し、整合性を保つためのテーブル設計</th></tr>
-            <tr><th>6</th><th>第1正規形（1NF）</th>那样繰り返しをなくす（1つのカラムに複数の値を入れない）</th></tr>
-            <tr><th>7</th><th>第2正規形（2NF）</th>那样主キーと関係のない項目を排除する</th></tr>
-            <tr><th>8</th><th>第3正規形（3NF）</th>那样間接的な依存を排除する</th></tr>
-            <tr><th>9</th><th>AUTO_INCREMENT</th>那样主キーを自動で採番する機能</th></tr>
-            <tr><th>10</th><th>CASCADE</th>那样親データ削除時に子データも自動削除する外部キー制約の動作</th></tr>
+            <tr><th>1</th><th>主キー（PK）</th><td>テーブル内の1行を一意に識別するためのカラム</td></tr>
+            <tr><th>2</th><th>外部キー（FK）</th><td>他のテーブルの主キーを参照するカラム</td></tr>
+            <tr><th>3</th><th>1対多（one-to-many）</th><td>1つの親レコードに複数の子レコードが紐づく関係</td></tr>
+            <tr><th>4</th><th>参照整合性</th><td>外部キー制約によって保証されるデータの整合性</td></tr>
+            <tr><th>5</th><th>正規化</th><td>データの重複を排除し、整合性を保つためのテーブル設計</td></tr>
+            <tr><th>6</th><th>第1正規形（1NF）</th><td>繰り返しをなくす（1つのカラムに複数の値を入れない）</td></tr>
+            <tr><th>7</th><th>第2正規形（2NF）</th><td>主キーと関係のない項目を排除する</td></tr>
+            <tr><th>8</th><th>第3正規形（3NF）</th><td>間接的な依存を排除する</td></tr>
+            <tr><th>9</th><th>AUTO_INCREMENT</th><td>主キーを自動で採番する機能</td></tr>
+            <tr><th>10</th><th>CASCADE</th><td>親データ削除時に子データも自動削除する外部キー制約の動作</td></tr>
           </tbody>
         </table>
       </div>
@@ -87,9 +87,9 @@
             <tr><th>主キーの条件</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">重複してはいけない</th><td>unique（一意）</th></tr>
-            <tr><td style="font-weight: bold;">NULLを許可しない</th>那樣not null</th></tr>
-            <tr><td style="font-weight: bold;">1行を確実に特定できる</th>那样識別子として機能</th></tr>
+            <tr><td style="font-weight: bold;">重複してはいけない</td><td>unique（一意）</td></tr>
+            <tr><td style="font-weight: bold;">NULLを許可しない</td><td>not null</td></tr>
+            <tr><td style="font-weight: bold;">1行を確実に特定できる</td><td>識別子として機能</td></tr>
           </tbody>
         </table>
       </div>
@@ -164,14 +164,14 @@
       </figure>
 
       <div class="table-wrap mobile-card-table">
-        </table>
+        <table>
           <thead>
             <tr><th>外部キーの役割</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">関係を表す</th><td>テーブル同士の関係（リレーション）を表す</th></tr>
-            <tr><td style="font-weight: bold;">整合性の保証</th><td>存在しないデータを登録できないようにする</th></tr>
-            <tr><td style="font-weight: bold;">参照整合性</th><td>親データ削除時の動作（CASCADE/RESTRICT）を制御できる</th></tr>
+            <tr><td style="font-weight: bold;">関係を表す</td><td>テーブル同士の関係（リレーション）を表す</td></tr>
+            <tr><td style="font-weight: bold;">整合性の保証</td><td>存在しないデータを登録できないようにする</td></tr>
+            <tr><td style="font-weight: bold;">参照整合性</td><td>親データ削除時の動作（CASCADE/RESTRICT）を制御できる</td></tr>
           </tbody>
         </table>
       </div>

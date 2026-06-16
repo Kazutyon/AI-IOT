@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>アナログ規制の見直しとテクノロジーマップ | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Management / Digital-Society</p>
+        <h1>アナログ規制の見直しとテクノロジーマップ</h1>
+        <p class="lead">デジタル化の妨げとなっていた「紙・押印・対面」などのアナログ規制の見直しと、技術を活用した規制改革の仕組みであるテクノロジーマップについて解説します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>アナログ規制の見直しとテクノロジーマップ</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>アナログ規制の定義と、それがもたらしていた課題</li>
+          <li>アナログ規制の見直しによる最新動向（EKYC、電子処方箋等）</li>
+          <li>テクノロジーマップの定義と役割</li>
+          <li>AI・IoTを活用した具体的な規制緩和の事例</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div> <dt>高</dt> <dd>テクノロジーマップの役割、規制緩和の具体例</dd> </div>
+          <div> <dt>中</dt> <dd>アナログ規制の具体例、見直しの方向性</dd> </div>
+          <div> <dt>低</dt> <dd>個別の省令名や詳細なガイドラインの条文</dd> </div>
+        </dl>
+        <p>読了目安: 約10分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>用語</th>
+              <th>一言</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>アナログ規制</td>
+              <td>紙・押印・対面・FAXなど、アナログ前提で残っているルール</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>テクノロジーマップ</td>
+              <td>どの技術がどの規制の代わりになり得るかを分野ごとに整理したもの</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>実証（PoC）</td>
+              <td>技術が安全に使えるかを確認するための実証事業</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>官民協議会</td>
+              <td>行政と企業が規制の条件や運用方法をすり合わせる場</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. アナログ規制とは</h2>
+      <p>行政手続きや業務において、紙・押印・対面・FAX・現地確認など「アナログ前提」のルールが残っている状態を指します。これらはデジタル化の妨げとなり、住民や企業の負担が大きいという課題がありました。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>アナログ規制からデジタルへの転換</figcaption>
+        <svg viewBox="0 0 380 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- 左ヘッダー -->
+          <rect x="10" y="10" width="160" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="90" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">Before: アナログ規制</text>
+          <!-- 右ヘッダー -->
+          <rect x="210" y="10" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="290" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">After: デジタル転換</text>
+          <!-- 中央の vs -->
+          <text x="190" y="33" text-anchor="middle" font-size="14" font-weight="bold" fill="#64748b">→</text>
+          
+          <!-- 左コンテンツ行 -->
+          <rect x="10" y="56" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="90" y="79" text-anchor="middle" font-size="12" fill="#334155">紙の書類提出・押印必須</text>
+          <rect x="10" y="98" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="90" y="121" text-anchor="middle" font-size="12" fill="#334155">対面・現地確認が義務</text>
+          <rect x="10" y="140" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="90" y="163" text-anchor="middle" font-size="12" fill="#334155">FAX・郵送でのやり取り</text>
+          
+          <!-- 右コンテンツ行 -->
+          <rect x="210" y="56" width="160" height="36" rx="2" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="290" y="79" text-anchor="middle" font-size="12" fill="#334155">オンライン申請・電子署名</text>
+          <rect x="210" y="98" width="160" height="36" rx="2" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="290" y="121" text-anchor="middle" font-size="12" fill="#334155">リモート・遠隔映像で確認</text>
+          <rect x="210" y="140" width="160" height="36" rx="2" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="290" y="163" text-anchor="middle" font-size="12" fill="#334155">API・データ連携で自動化</text>
+          
+          <!-- 行ラベル -->
+          <text x="90" y="200" text-anchor="middle" font-size="11" fill="#64748b">✘ 負担大・非効率</text>
+          <text x="290" y="200" text-anchor="middle" font-size="11" fill="#64748b">✔ 負担減・効率化</text>
+        </svg>
+      </figure>
+
+      <h3>見直しの方向性と最新動向</h3>
+      <p>政府は、デジタル化を妨げるアナログ前提のルールを一括で廃止・緩和し、オンラインで完結できる制度へ転換しています。</p>
+      <ul>
+        <li><strong>オンライン本人確認（EKYC）の行政利用拡大:</strong> マイナポータルでのEKYC利用により、対面確認がオンラインに置き換わっています。</li>
+        <li><strong>電子処方箋・オンライン診療の普及:</strong> 医療の「対面義務」が緩和され、電子処方箋の利用が全国で拡大しています。</li>
+        <li><strong>労務・社会保険手続きの電子化:</strong> 雇用保険・社会保険の手続きが電子申請中心となり、企業の押印・紙提出がほぼ不要になっています。</li>
+        <li><strong>不動産・建築分野のデジタル化:</strong> 建築確認の書面提出が電子申請へ移行し、現地確認の一部が写真・動画で代替されています。</li>
+      </ul>
+
+      <h2>2. テクノロジーマップの役割</h2>
+      <p>政府は「技術を前提に規制を作り替える」方針を掲げています。その際、どの技術がどの規制の代わりになり得るかを分野ごとに整理したものが「テクノロジーマップ」です。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>テクノロジーマップの概念図</figcaption>
+        <svg viewBox="0 0 400 240" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-tm" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- ルートノード -->
+          <rect x="120" y="10" width="160" height="40" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="35" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e1b4b">テクノロジーマップ</text>
+          
+          <!-- 枝線 -->
+          <line x1="200" y1="50" x2="200" y2="70" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="60" y1="70" x2="340" y2="70" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="60" y1="70" x2="60" y2="94" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-tm)"/>
+          <line x1="200" y1="70" x2="200" y2="94" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-tm)"/>
+          <line x1="340" y1="70" x2="340" y2="94" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-tm)"/>
+          
+          <!-- 子ノード × 3 -->
+          <rect x="10" y="95" width="100" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="60" y="115" text-anchor="middle" font-size="12" fill="#1e3a5f">建築物点検</text>
+          <text x="60" y="135" text-anchor="middle" font-size="11" fill="#1e3a5f">ドローン×AI</text>
+          
+          <rect x="150" y="95" width="100" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="115" text-anchor="middle" font-size="12" fill="#1e3a5f">道路巡視</text>
+          <text x="200" y="135" text-anchor="middle" font-size="11" fill="#1e3a5f">IoT×AI</text>
+          
+          <rect x="290" y="95" width="100" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="340" y="115" text-anchor="middle" font-size="12" fill="#1e3a5f">工場保安</text>
+          <text x="340" y="135" text-anchor="middle" font-size="11" fill="#1e3a5f">IoT×AI</text>
+          
+          <!-- 説明文 -->
+          <text x="200" y="190" text-anchor="middle" font-size="12" fill="#64748b">「どの技術が、どの規制の代わりになり得るか」を分野ごとに整理</text>
+          <text x="200" y="210" text-anchor="middle" font-size="12" fill="#64748b">安全性・信頼性が確保できる条件を明示し、規制緩和の根拠とする</text>
+        </svg>
+      </figure>
+
+      <h3>AI・IoTが活用された規制緩和の事例</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>分野</th>
+              <th>従来の規制</th>
+              <th>技術の活用</th>
+              <th>規制緩和の内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>建築物の外壁点検（国交省）</td>
+              <td>足場を組んで人が近接目視</td>
+              <td>ドローン撮影 × AIひび割れ検出</td>
+              <td>ドローン等による遠隔点検を認める</td>
+            </tr>
+            <tr>
+              <td>道路巡視（国交省）</td>
+              <td>定期的に人が巡視すること</td>
+              <td>路側カメラ × IoTセンサー × AI異常検知</td>
+              <td>常時監視が確保されれば巡視頻度を緩和</td>
+            </tr>
+            <tr>
+              <td>工場・プラント保安（経産省）</td>
+              <td>◯年に1回の定期点検が義務</td>
+              <td>IoTセンサー常時監視 × AI予兆検知</td>
+              <td>常時監視があれば検査周期を延長</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>規制改革を支える段階的な仕組み</h3>
+      <p>政府は、いきなり規制を変えるのではなく、次のような段階的な仕組みを使って進めています。</p>
+      <ol>
+        <li><strong>実証（PoC）:</strong> 技術が安全に使えるか、信頼性・コスト・実用性を確認する。</li>
+        <li><strong>ガイドライン作成:</strong> 実証結果を踏まえ、技術を使うための条件（画質・稼働率・誤検知率等）をまとめる。</li>
+        <li><strong>省令・告示の改正:</strong> ガイドラインで条件が整理されたら、規制そのものを改正し、技術利用を正式に認める。</li>
+        <li><strong>モデル事業:</strong> 自治体や企業が先行導入し、運用上の課題を確認する。</li>
+        <li><strong>官民協議会:</strong> 行政と企業が協議し、技術の条件やデータの扱いなどを現実的に運用できる形に整える。</li>
+      </ol>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li>テクノロジーマップは「新しい技術を開発する計画」ではなく、「既存の技術でどの規制を代替できるかを整理したもの」である点。</li>
+        <li>規制緩和は「実証（PoC）→ガイドライン→省令改正」という段階を経て行われるため、いきなり全国で解禁されるわけではない点。</li>
+        <li>規制改革の目的は「手段を固定する規制」から「結果（安全性の確保）が確保されていれば手段は問わない規制」へ転換することである点。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. アナログ規制の具体例として誤っているものはどれか。</summary>
+        <p>ア）紙の書類提出が前提でオンライン化できない<br>イ）押印が必要で、結局窓口に行く必要がある<br>ウ）APIを用いたデータ連携が義務付けられている<br>エ）FAX・郵送が必須の手続きが残っている</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — APIを用いたデータ連携はデジタル化の手段であり、アナログ規制の具体例ではありません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. テクノロジーマップの目的として最も適切なものはどれか。</summary>
+        <p>ア）新しいAI技術を開発するための研究開発計画を策定する<br>イ）どの技術が、どの規制の代わりになり得るかを分野ごとに整理する<br>ウ）民間企業のクラウド利用を制限するためのガイドラインを作る<br>エ）行政職員のITスキル向上のための研修カリキュラムを決定する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — テクノロジーマップは、規制を緩和・見直しする際に、どの技術で代替できるかの根拠として使うために整理されたものです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. 建築物の外壁点検における規制緩和の具体例として適切なものはどれか。</summary>
+        <p>ア）足場を組んで人が近接目視する義務を強化した<br>イ）ドローンで外壁を撮影し、AIがひび割れを自動検出する遠隔点検を認めた<br>ウ）外壁点検を完全に廃止し、建て替えのみを義務付けた<br>エ）紙の点検記録を10年間保存する義務を新設した</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ドローン等による遠隔点検でも可とする規制緩和が行われました。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 道路巡視における規制緩和の前提条件として適切なものはどれか。</summary>
+        <p>ア）人が毎日徒歩で巡視することを義務付ける<br>イ）路側カメラやIoTセンサーによる常時監視が確保されること<br>ウ）巡視の結果をすべて紙の書類で保存すること<br>エ）AIの誤検知率を0%にすること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 常時監視が確保されれば、人の巡視頻度を減らす（緩和する）ことが認められています。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 工場・プラント保安における規制緩和の事例で、従来の規制はどれか。</summary>
+        <p>ア）IoTセンサーによる常時監視の義務付け<br>イ）◯年に1回の定期点検が義務<br>ウ）AIによる予兆検知の導入義務<br>エ）ドローンによる空撮の義務付け</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 従来の規制では「◯年に1回の定期点検が義務」とされていましたが、常時監視があれば検査周期を延長できる緩和が行われました。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 政府が「技術を前提に規制を作り替える」際に、いきなり規制を変えずに行う最初のステップはどれか。</summary>
+        <p>ア）省令・告示の改正<br>イ）実証（PoC: Proof of Concept）<br>ウ）全国展開<br>エ）モデル事業の終了</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — まず、技術が本当に安全に使えるかを確認するため、実証事業（PoC）を行います。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 規制改革において「官民協議会」が果たす役割として最も適切なものはどれか。</summary>
+        <p>ア）技術の条件や運用方法を行政と企業がすり合わせる場<br>イ）民間企業の利益を最優先して規制を撤廃する場<br>ウ）行政機関の予算を削減する決定を行う場<br>エ）新しい技術を開発するための研究開発費を配分する場</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 官民協議会では、技術の条件、運用方法、安全性の担保方法などを議論し、規制を現実的に運用できる形に整えます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. アナログ規制の見直しによって期待される効果として誤っているものはどれか。</summary>
+        <p>ア）住民や企業の窓口訪問負担が軽減される<br>イ）行政手続きの処理時間が短縮される<br>ウ）すべての行政手続きで対面確認が必須になる<br>エ）ペーパーレス化によりコストが削減される</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — アナログ規制の見直しは、対面確認をオンライン（EKYC等）に置き換えることで負担を減らすことが目的です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. テクノロジーマップが規制改革において果たす役割として正しいものはどれか。</summary>
+        <p>ア）「この技術なら安全性が確保できる」と判断するための根拠として使う<br>イ）民間企業に対して特定のクラウド事業者の利用を強制する<br>ウ）行政職員の給与体系を決定する基準として使う<br>エ）外国企業への技術移転を制限するためのリストとして使う</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — テクノロジーマップは、規制を緩和・見直しする際に、技術の代替性を示す根拠として使われます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 政府の規制改革の方針として、従来の「手段を固定する規制」からどのような規制へ転換しているか。</summary>
+        <p>ア）結果（安全性の確保）が確保されていれば手段は問わない規制<br>イ）すべての手続きを紙で行うことを義務付ける規制<br>ウ）特定の企業だけが利用できる特権的な規制<br>エ）技術の進歩を止めて従来の方法を守る規制</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 技術の進展に合わせて、「結果が確保されていれば手段は問わない」規制へ転換しています。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『3_デジタル社会の形成について.pdf』 第3章 3. アナログ規制の見直し 〜 4. テクノロジーマップの役割（p28-p38相当）</p>
+    </section>
+  </main>
+
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

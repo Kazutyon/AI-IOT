@@ -404,10 +404,26 @@
       "id": "computer",
       "title": "コンピュータ概論",
       "category": "technology",
-      "status": "planned",
-      "description": "コンピュータ構成、OS、ソフトウェア、ハードウェア基礎を扱う分野。",
+      "status": "done",
+      "description": "コンピュータ構成、OS、ソフトウェア、ハードウェア基礎を扱う分野。全15教材ページ完成。",
       "href": "fe/technology/computer/index.html",
-      "items": []
+      "items": [
+        { "title": "コンピュータの歴史", "href": "fe/technology/computer/computer-history.html", "status": "done" },
+        { "title": "CPUアーキテクチャ", "href": "fe/technology/computer/cpu-architecture.html", "status": "done" },
+        { "title": "BIOSとOSの種類", "href": "fe/technology/computer/bios-os-types.html", "status": "done" },
+        { "title": "ファイルシステム", "href": "fe/technology/computer/filesystem.html", "status": "done" },
+        { "title": "メモリ管理", "href": "fe/technology/computer/memory-management.html", "status": "done" },
+        { "title": "メモリとキャッシュ", "href": "fe/technology/computer/memory-cache.html", "status": "done" },
+        { "title": "仮想記憶とストレージ", "href": "fe/technology/computer/virtual-memory-storage.html", "status": "done" },
+        { "title": "プロセススケジューリング", "href": "fe/technology/computer/process-scheduling.html", "status": "done" },
+        { "title": "割り込みとI/O", "href": "fe/technology/computer/io-devices-bus.html", "status": "done" },
+        { "title": "I/OスケジューリングとDMA", "href": "fe/technology/computer/io-scheduling-dma.html", "status": "done" },
+        { "title": "ソフトウェア分類", "href": "fe/technology/computer/software-classification.html", "status": "done" },
+        { "title": "技術進化", "href": "fe/technology/computer/tech-evolution.html", "status": "done" },
+        { "title": "仮想化", "href": "fe/technology/computer/virtualization.html", "status": "done" },
+        { "title": "デバイス管理", "href": "fe/technology/computer/device-management.html", "status": "done" },
+        { "title": "クラウド・モバイル・IoT", "href": "fe/technology/computer/cloud-mobile-iot.html", "status": "done" }
+      ]
     },
     {
       "id": "iot-security",
@@ -538,25 +554,107 @@
       "id": "strategy",
       "title": "ストラテジ",
       "category": "strategy",
-      "status": "planned",
-      "description": "経営戦略、法務、標準化、デジタル社会の制度を扱う分野。",
-      "href": "fe/strategy/index.html",
+      "status": "done",
+      "description": "経営戦略・マーケティング・会計・OR・システム戦略・関連法令・デジタル社会。全29教材ページ完成（経営戦略12+関連法令11+デジタル社会6）。",
+      "href": "fe/strategy/business-strategy/index.html",
       "items": [
         {
-          "title": "経営・戦略",
-          "href": "fe/strategy/business-strategy/index.html",
-          "status": "planned"
+          "title": "情報システム戦略",
+          "href": "fe/strategy/business-strategy/info-system-strategy.html",
+          "status": "done"
         },
         {
-          "title": "関連法令・契約",
-          "href": "fe/strategy/legal/index.html",
-          "status": "planned"
+          "title": "リーダーシップとモチベーション",
+          "href": "fe/strategy/business-strategy/leadership-motivation.html",
+          "status": "done"
         },
         {
-          "title": "デジタル社会の形成",
-          "href": "fe/strategy/digital-society/index.html",
-          "status": "planned"
+          "title": "戦略の基礎と分析手法",
+          "href": "fe/strategy/business-strategy/strategy-basic-analysis.html",
+          "status": "done"
+        },
+        {
+          "title": "マーケティング戦略",
+          "href": "fe/strategy/business-strategy/strategy-marketing.html",
+          "status": "done"
+        },
+        {
+          "title": "技術戦略",
+          "href": "fe/strategy/business-strategy/tech-strategy.html",
+          "status": "done"
+        },
+        {
+          "title": "会計・財務（上級）",
+          "href": "fe/strategy/business-strategy/accounting-finance-advanced.html",
+          "status": "done"
+        },
+        {
+          "title": "会計・財務（基礎）",
+          "href": "fe/strategy/business-strategy/accounting-finance-basic.html",
+          "status": "done"
+        },
+        {
+          "title": "経済学基礎",
+          "href": "fe/strategy/business-strategy/economics.html",
+          "status": "done"
+        },
+        {
+          "title": "経営管理と組織構造",
+          "href": "fe/strategy/business-strategy/mgmt-org-structure.html",
+          "status": "done"
+        },
+        {
+          "title": "PDCAとBSC",
+          "href": "fe/strategy/business-strategy/mgmt-pdca-bsc.html",
+          "status": "done"
+        },
+        {
+          "title": "OR（オペレーションズリサーチ）基礎",
+          "href": "fe/strategy/business-strategy/or-basic.html",
+          "status": "done"
+        },
+        {
+          "title": "OR（在庫管理・シミュレーション）",
+          "href": "fe/strategy/business-strategy/or-inventory-sim.html",
+          "status": "done"
         }
+      ]
+    },
+    {
+      "id": "legal",
+      "title": "関連法令・契約",
+      "category": "strategy",
+      "status": "done",
+      "description": "著作権・知的財産・個人情報保護法・セキュリティ関連法規・労働法規・IT契約を扱う分野。全11教材ページ完成。",
+      "href": "fe/strategy/legal/index.html",
+      "items": [
+        { "title": "知的財産権（著作権・産業財産権）", "href": "fe/strategy/legal/intellectual-property.html", "status": "done" },
+        { "title": "標準化と規格", "href": "fe/strategy/legal/standardization.html", "status": "done" },
+        { "title": "個人情報保護法（前半）", "href": "fe/strategy/legal/privacy-law-basic.html", "status": "done" },
+        { "title": "個人情報保護法（後半）", "href": "fe/strategy/legal/privacy-law-tech.html", "status": "done" },
+        { "title": "プライバシーマーク制度", "href": "fe/strategy/legal/privacy-mark.html", "status": "done" },
+        { "title": "セキュリティ関連法規（前半）", "href": "fe/strategy/legal/security-law-basic.html", "status": "done" },
+        { "title": "セキュリティ関連法規（後半）", "href": "fe/strategy/legal/security-law-advanced.html", "status": "done" },
+        { "title": "AI・データ利活用の法制度", "href": "fe/strategy/legal/ai-data-law.html", "status": "done" },
+        { "title": "労働関連法規", "href": "fe/strategy/legal/labor-law.html", "status": "done" },
+        { "title": "IT契約の基礎", "href": "fe/strategy/legal/it-contract.html", "status": "done" },
+        { "title": "電子契約・電子文書", "href": "fe/strategy/legal/electronic-contract.html", "status": "done" }
+      ]
+    },
+    {
+      "id": "digital-society",
+      "title": "デジタル社会の形成",
+      "category": "strategy",
+      "status": "done",
+      "description": "デジタル社会形成基本法・データ標準化・アナログ規制見直し・マイナンバー制度を扱う分野。全6教材ページ完成。",
+      "href": "fe/strategy/digital-society/index.html",
+      "items": [
+        { "title": "デジタル社会形成基本法とデジタル庁", "href": "fe/strategy/digital-society/digital-society-digital-agency.html", "status": "done" },
+        { "title": "データ標準化・ベースレジストリ・ガバメントクラウド", "href": "fe/strategy/digital-society/data-standardization-gov-cloud.html", "status": "done" },
+        { "title": "アナログ規制の見直しとテクノロジーマップ", "href": "fe/strategy/digital-society/analog-regulation-technology-map.html", "status": "done" },
+        { "title": "規制緩和事例と改革を支える仕組み", "href": "fe/strategy/digital-society/regulation-reform-examples.html", "status": "done" },
+        { "title": "マイナンバー制度と公金受取口座制度", "href": "fe/strategy/digital-society/mynumber-public-fund-account.html", "status": "done" },
+        { "title": "デジタル庁の司令塔機能と企業実務", "href": "fe/strategy/digital-society/digital-agency-security-business.html", "status": "done" }
       ]
     }
   ],
@@ -606,8 +704,8 @@
     {
       "title": "コンピュータ概論.pdf",
       "category": "テクノロジ基礎",
-      "status": "未作成",
-      "next": "FE出題範囲に合わせてコンピュータ構成・OS・ソフトウェアへ分割"
+      "status": "HTML化済み",
+      "next": "全196ページ15教材ページHTML化完了。fe/technology/computer/に配置"
     },
     {
       "title": "2_アルゴリズムとデータ構造.pdf",
@@ -624,20 +722,20 @@
     {
       "title": "3_経営・戦略.pdf",
       "category": "ストラテジ",
-      "status": "未作成",
-      "next": "経営戦略、技術戦略、システム戦略、会計へ分割"
+      "status": "HTML化済み",
+      "next": "全232ページ12教材ページHTML化完了。fe/strategy/business-strategy/に配置"
     },
     {
       "title": "2_関連法令・契約.pdf",
       "category": "ストラテジ / 法務",
-      "status": "未作成",
-      "next": "知的財産、個人情報保護、セキュリティ関連法規へ分割"
+      "status": "HTML化済み",
+      "next": "全157ページ11教材ページHTML化完了。fe/strategy/legal/に配置"
     },
     {
       "title": "3_デジタル社会の形成について.pdf",
       "category": "ストラテジ / デジタル社会",
-      "status": "未作成",
-      "next": "デジタル庁、標準化、ガバメントクラウド、法制度を試験向けに整理"
+      "status": "HTML化済み",
+      "next": "全80ページ6教材ページHTML化完了。fe/strategy/digital-society/に配置"
     }
   ]
 }

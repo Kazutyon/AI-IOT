@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>情報セキュリティ関連法規（後半） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / 法務・セキュリティ</p>
+        <h1>情報セキュリティ関連法規（後半：電気通信事業法〜プロバイダ責任制限法〜管理基準）</h1>
+        <p class="lead">電気通信事業法（通信の秘密）、電子計算機使用詐欺、プロバイダ責任制限法、ISMS（ISO/IEC 27001）などの管理基準、サイバー犯罪の分類とログ管理・アクセス管理の法的根拠を学ぶ。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#telecom">電気通信事業法</a>
+        <a href="#computer-fraud">電子計算機使用詐欺</a>
+        <a href="#provider">プロバイダ責任制限法</a>
+        <a href="#isms">ISMS（情報セキュリティ管理基準）</a>
+        <a href="#cybercrime">サイバー犯罪</a>
+        <a href="#log-access">ログ管理・アクセス管理</a>
+        <a href="#incident">セキュリティインシデント</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">法務・セキュリティ</a>
+      <span>情報セキュリティ関連法規（後半）</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>電気通信事業法が保護する「通信の秘密」の範囲（通信内容・通信履歴・通信の事実）</li>
+          <li>電子計算機使用詐欺の対象行為と企業への影響</li>
+          <li>プロバイダ責任制限法の主要項目（損害賠償責任の制限・削除要請・発信者情報開示）</li>
+          <li>ISMS（ISO/IEC 27001 / JIS Q 27001）の概要</li>
+          <li>サイバー犯罪の主な分類</li>
+          <li>ログ管理・アクセス管理の法的根拠</li>
+          <li>セキュリティインシデント発生時の法的責任</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>通信の秘密の範囲、プロバイダ責任制限法の役割、ISMS（ISO/IEC 27001）</dd></div>
+          <div><dt>中</dt><dd>電子計算機使用詐欺、サイバー犯罪の分類、ログ管理の法的根拠</dd></div>
+          <div><dt>低</dt><dd>刑法第246条の2の詳細、各法律の条文番号</dd></div>
+        </dl>
+        <p>読了目安: 約20分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>通信の秘密</td><td>通信内容・通信履歴・通信の事実を保護する権利（電気通信事業法）</td></tr>
+            <tr><td>2</td><td>電子計算機使用詐欺</td><td>コンピュータに不正な情報を入力し利益を得る行為（刑法第246条の2）</td></tr>
+            <tr><td>3</td><td>プロバイダ責任制限法</td><td>インターネット上の権利侵害に対するプロバイダの責任と対応手続を定めた法律</td></tr>
+            <tr><td>4</td><td>発信者情報開示</td><td>権利侵害投稿者の情報を開示する手続</td></tr>
+            <tr><td>5</td><td>ISMS</td><td>情報セキュリティマネジメントシステム（ISO/IEC 27001）</td></tr>
+            <tr><td>6</td><td>クラッキング</td><td>悪意を持ってシステムに侵入し、情報の窃取・破壊・改ざんを行う行為</td></tr>
+            <tr><td>7</td><td>セキュリティインシデント</td><td>情報セキュリティ上の事故や脅威が発生した状態</td></tr>
+            <tr><td>8</td><td>CSIRT</td><td>コンピュータセキュリティインシデント対応チーム</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="telecom" class="lesson-section">
+      <h2>5. 電気通信事業法（通信の秘密）</h2>
+      <p>電気通信事業法は、<strong>通信内容および通信に関する情報を保護するための法律</strong>です。ここで保護される「通信の秘密」とは、通信の内容だけでなく、<strong>「誰が」「誰と」「いつ」「どのように通信したか」</strong>といった通信に付随する情報も含まれます。</p>
+      <p>通信の秘密は、通信事業者だけでなく、<strong>企業内で通信設備を管理する者にも適用</strong>されます。そのため、企業がメールや通信ログを扱う場合、目的・範囲・手続を明確にしなければなりません。</p>
+      <p>通信内容を本人の同意なく閲覧・収集・利用することは、原則として禁止されています。例外として、システム運用上必要な範囲でのログ取得や障害対応など、正当な理由がある場合に限り、必要最小限の範囲で取り扱うことが認められます。</p>
+
+      <h3>通信の秘密が保護する範囲</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>区分</th><th>内容</th><th>具体例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>通信内容</td><td>実際に送受信される情報</td><td>メール本文、チャット内容、通話内容</td></tr>
+            <tr><td>通信履歴</td><td>通信に付随する情報</td><td>送信元・宛先、日時、通信量、IPアドレス</td></tr>
+            <tr><td>通信の事実</td><td>通信が行われたという事実</td><td>誰が誰にメールを送ったか</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>実務上求められる対応</h3>
+      <ul>
+        <li>通信ログの取得目的・範囲を明確化</li>
+        <li>就業規則やポリシーに通信監視の内容を明記</li>
+        <li>ログは必要最小限の範囲で取得・保管</li>
+        <li>通信内容の閲覧は本人同意または正当な理由がある場合に限定</li>
+        <li>管理者権限の利用履歴を記録し、不正利用を防止</li>
+        <li>通信データの取り扱い手順を文書化し、従業員に周知</li>
+        <li>通信事業者として扱う場合は、法令に基づく厳格な管理を実施</li>
+      </ul>
+    </section>
+
+    <section id="computer-fraud" class="lesson-section">
+      <h2>6. 電子計算機使用詐欺</h2>
+      <p>電子計算機使用詐欺は、<strong>コンピュータに不正な情報を入力し、他人を欺いて財産上の利益を得る行為</strong>を処罰する規定です。刑法第246条の2に定められており、オンラインサービスや電子取引の普及に伴い重要性が高まっています。</p>
+      <p>この犯罪は、<strong>「人を欺く」のではなくコンピュータを欺く</strong>点が特徴です。不正なデータ入力やプログラム操作により、本来得られない利益を取得した場合に成立します。</p>
+
+      <h3>電子計算機使用詐欺の対象行為</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>行為</th><th>内容</th><th>例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>不正な情報入力</td><td>本来の処理結果と異なる結果を生じさせる入力</td><td>ポイント不正取得、価格改ざん</td></tr>
+            <tr><td>不正プログラム操作</td><td>プログラムを改変し利益を得る</td><td>決済処理の改変</td></tr>
+            <tr><td>不正な指令実行</td><td>システムを誤作動させ利益を得る</td><td>不正送金</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>電子計算機使用詐欺が企業にもたらす影響</h3>
+      <ul>
+        <li><strong>金銭的損失：</strong>不正送金、ポイント不正取得、価格改ざんなど</li>
+        <li><strong>信用失墜：</strong>不正操作が外部に発覚すると社会的信用が低下</li>
+        <li><strong>システムの信頼性低下：</strong>設計・運用の問題が露呈</li>
+        <li><strong>法的責任の発生：</strong>損害賠償請求や行政処分の可能性</li>
+      </ul>
+
+      <h3>実務上求められる対応</h3>
+      <ul>
+        <li>入力値チェック（バリデーション）</li>
+        <li>不正操作の検知（ログ監査）</li>
+        <li>アクセス権限の適正化</li>
+        <li>内部不正の防止（職務分掌）</li>
+        <li>取引処理の整合性確認</li>
+      </ul>
+      <p>これらは単なる技術的対策ではなく、<strong>不正行為を未然に防ぐための法的責務に近い位置づけ</strong>となっています。</p>
+    </section>
+
+    <section id="provider" class="lesson-section">
+      <h2>7. プロバイダ責任制限法</h2>
+      <p>プロバイダ責任制限法は、<strong>インターネット上の権利侵害に対して、プロバイダが負う責任と対応手続を定めた法律</strong>です。SNS、掲示板、動画サイトなど、ユーザー投稿型サービスを提供する企業が対象となります。</p>
+      <p>この法律は、プロバイダがユーザーの投稿内容に対して無制限の責任を負わないようにしつつ、権利侵害が発生した場合の削除要請や発信者情報開示の手続を定めています。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>損害賠償責任の制限</td><td>一定条件下でプロバイダの責任を軽減</td></tr>
+            <tr><td>削除要請</td><td>権利侵害情報の削除手続</td></tr>
+            <tr><td>発信者情報開示</td><td>投稿者の情報を開示する手続</td></tr>
+            <tr><td>対象サービス</td><td>SNS、掲示板、動画投稿サイトなど</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>プロバイダ責任制限法が企業にとって重要な理由</h3>
+      <ul>
+        <li><strong>不適切な対応は損害賠償責任につながる：</strong>削除要請に応じなかった場合、企業が「権利侵害を放置した」と判断される可能性</li>
+        <li><strong>過剰な削除も違法となる可能性：</strong>削除基準が不適切で正当な投稿を削除した場合、投稿者の権利を侵害するリスク</li>
+        <li><strong>発信者情報開示の手続を誤ると法的トラブル：</strong>開示要件を満たさないまま情報を提供すると、企業がプライバシー侵害で訴えられる可能性</li>
+        <li><strong>企業の社会的信用に直結：</strong>誹謗中傷や違法投稿を放置するとサービス全体の信頼性が低下</li>
+        <li><strong>迅速な対応が求められる：</strong>インターネット上の情報拡散は非常に速く、対応が遅れるほど被害が拡大</li>
+      </ul>
+
+      <h3>プロバイダ責任制限法が果たす役割</h3>
+      <ul>
+        <li>プロバイダの責任範囲を明確化</li>
+        <li>被害者救済のための削除・開示手続を整備</li>
+        <li>プロバイダが過剰な責任を負わないようにする</li>
+        <li>投稿型サービスの健全な運営を支える法的基盤</li>
+      </ul>
+    </section>
+
+    <section id="isms" class="lesson-section">
+      <h2>8. 情報セキュリティ管理基準（ISMS）</h2>
+      <p>基本情報では、法律とセットで<strong>「基準」</strong>も問われます。</p>
+
+      <h3>ISMS（ISO/IEC 27001）</h3>
+      <p>情報セキュリティマネジメントシステムの国際規格です。</p>
+
+      <h3>JIS Q 27001</h3>
+      <p>日本版のISMS規格です。</p>
+
+      <h3>企業が行うべき管理</h3>
+      <ul>
+        <li><strong>組織的管理：</strong>ルール作り</li>
+        <li><strong>人的管理：</strong>教育・誓約書</li>
+        <li><strong>物理的管理：</strong>入退室管理</li>
+        <li><strong>技術的管理：</strong>アクセス制御・暗号化</li>
+      </ul>
+
+      <h3>体系としてのまとめ</h3>
+      <ul>
+        <li><strong>【個人情報の保護】</strong> 個人情報保護法</li>
+        <li><strong>【不正行為の禁止】</strong> 不正アクセス禁止法、刑法（不正指令電磁的記録罪）</li>
+        <li><strong>【セキュリティ確保の義務】</strong> サイバーセキュリティ基本法</li>
+        <li><strong>【通信の秘密】</strong> 電気通信事業法</li>
+        <li><strong>【管理基準（法ではない）】</strong> ISMS（ISO/IEC 27001）、JIS Q 27001</li>
+      </ul>
+    </section>
+
+    <section id="cybercrime" class="lesson-section">
+      <h2>9. サイバー犯罪</h2>
+      <p>サイバー犯罪とは、<strong>情報システムやネットワークを対象として行われる犯罪行為</strong>を指します。</p>
+      <p>日本では、刑法、不正アクセス禁止法、各種特別法により規制されており、攻撃手法や目的に応じて複数の分類が存在します。</p>
+      <p>サイバー犯罪は、情報の窃取、システムの破壊、業務妨害、不正利用など、情報セキュリティの<strong>機密性・完全性・可用性</strong>を損なう行為が中心となります。</p>
+
+      <h3>サイバー犯罪の主な分類</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>分類</th><th>内容</th><th>主な対象行為</th><th>関連法規</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>不正アクセス</td><td>認証を突破してシステムに侵入</td><td>パスワード窃取、IDなりすまし</td><td>不正アクセス禁止法</td></tr>
+            <tr><td>不正指令電磁的記録</td><td>不正なプログラムの作成・提供・使用</td><td>ウイルス作成、マルウェア配布</td><td>刑法</td></tr>
+            <tr><td>データの破壊・改ざん</td><td>データやシステムを破壊・妨害</td><td>データ削除、DDoS攻撃</td><td>刑法（電子計算機損壊等業務妨害）</td></tr>
+            <tr><td>不正利用・詐欺</td><td>不正操作により利益を得る</td><td>価格改ざん、ポイント不正取得</td><td>刑法（電子計算機使用詐欺）</td></tr>
+            <tr><td>情報窃取</td><td>情報を不正に取得</td><td>侵入後のデータ持ち出し</td><td>刑法・不正アクセス禁止法</td></tr>
+            <tr><td>著作物侵害</td><td>著作物の無断利用</td><td>違法コピー、海賊版配布</td><td>著作権法</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>クラッキング（Cracking）</h3>
+      <p>クラッキングとは、<strong>悪意を持ってシステムに侵入し、情報の窃取・破壊・改ざんを行う行為</strong>を指します。一般的には「ハッキング」と混同されることがありますが、法的には悪意を持つ行為をクラッキングとして扱います。</p>
+      <p>クラッキングは単独で行われることは少なく、侵入後に以下の行為が組み合わされることが多いです。</p>
+      <ul>
+        <li>不正アクセス</li>
+        <li>データ窃取</li>
+        <li>マルウェア設置</li>
+        <li>設定改ざん</li>
+        <li>不正利用（詐欺）</li>
+      </ul>
+      <p>そのため、<strong>複数の法律に抵触する可能性</strong>があります。</p>
+
+      <h3>サイバー犯罪がもたらす影響</h3>
+      <ul>
+        <li><strong>情報漏えい：</strong>顧客情報・社員情報・機密情報が流出し、企業の信用失墜や損害賠償につながる</li>
+        <li><strong>システム停止・業務妨害：</strong>DDoS攻撃やランサムウェアによりサービス停止や業務中断が発生</li>
+        <li><strong>経済的損失：</strong>不正送金、ポイント不正取得、ECサイトの価格改ざんなど</li>
+        <li><strong>社会的影響：</strong>重要インフラへの攻撃は社会全体に影響を及ぼす可能性</li>
+        <li><strong>二次被害：</strong>侵入後にマルウェアをばらまくなど、他組織への攻撃の踏み台にされることも</li>
+      </ul>
+    </section>
+
+    <section id="log-access" class="lesson-section">
+      <h2>10. ログ管理・アクセス管理の法的根拠</h2>
+      <p>ログ管理・アクセス管理は、<strong>情報システムに対する不正行為を防止し、事故発生時に原因を特定するために必要な管理措置</strong>です。これらは単なる技術的対策ではなく、複数の法律により企業に実施が求められています。</p>
+      <p>法律は、企業に対して<strong>「安全管理措置」</strong>を義務付けており、その中核となるのが<strong>アクセス制御・ログ取得・ログ監査</strong>です。</p>
+
+      <h3>ログ管理・アクセス管理を求める法的根拠</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>法律</th><th>要求内容</th><th>法的意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>個人情報保護法</td><td>技術的安全管理措置としてアクセス制御・ログ管理を要求</td><td>個人情報漏えい時の企業責任判断に直結</td></tr>
+            <tr><td>不正アクセス禁止法</td><td>不正アクセスの防止・検知が必要</td><td>管理者は侵入防止措置を講じる義務がある</td></tr>
+            <tr><td>サイバーセキュリティ基本法</td><td>事業者の自主的なセキュリティ確保</td><td>ログ管理は「適切な措置」の一部</td></tr>
+            <tr><td>刑法（業務妨害）</td><td>不正行為の立証にログが必要</td><td>捜査協力のための証跡保全が求められる</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ログ管理・アクセス管理が法的に重要となる理由</h3>
+      <ul>
+        <li><strong>不正アクセスの検知・防止：</strong>ログがなければ不正アクセスの発見が遅れ、企業は「適切な管理を怠った」と判断される可能性</li>
+        <li><strong>事故原因の特定：</strong>ログは事故発生時の原因究明に不可欠。原因が特定できない場合、企業の過失が推定されやすい</li>
+        <li><strong>法的責任の判断材料：</strong>ログが存在しない場合、「管理体制が不十分」と判断され、民事・行政責任が重くなる可能性</li>
+        <li><strong>内部不正の抑止：</strong>アクセス権限の適正化とログ監査は内部不正の抑止に直結</li>
+      </ul>
+    </section>
+
+    <section id="incident" class="lesson-section">
+      <h2>11. セキュリティインシデントと法的責任</h2>
+      <p>セキュリティインシデントとは、<strong>情報セキュリティ上の事故や脅威が発生した状態</strong>を指します。インシデントが発生した場合、企業はその内容に応じて<strong>民事・行政・刑事のいずれか、または複数の責任</strong>を負う可能性があります。</p>
+      <p>法的責任は、<strong>「事故そのもの」ではなく事故への対応の適否</strong>によって判断されることが多いです。特に、ログ管理・アクセス管理などの安全管理措置が不十分であった場合、企業の過失が認定されやすいです。</p>
+
+      <h3>セキュリティインシデントが法的に問題となる理由</h3>
+      <ul>
+        <li><strong>情報漏えいによる損害発生：</strong>顧客情報・社員情報の漏えいは企業に重大な損害賠償リスクをもたらす</li>
+        <li><strong>行政処分の対象となる：</strong>個人情報保護委員会は報告義務違反や安全管理措置の不備に対して命令を行う</li>
+        <li><strong>刑事事件に発展する可能性：</strong>内部不正や不正アクセスが関与する場合、刑事責任が問われることがある</li>
+        <li><strong>事故対応の不備が責任を重くする：</strong>事故発生後の対応が遅れたり、ログが不足して原因が特定できない場合、企業の過失が強く認定される</li>
+      </ul>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「通信の秘密」は通信事業者だけでなく企業内の管理者にも適用される。</strong> 社内のメール監視なども対象となる。</li>
+        <li><strong>電子計算機使用詐欺は「人を欺く」のではなく「コンピュータを欺く」犯罪。</strong> 不正なデータ入力やプログラム操作が該当する。</li>
+        <li><strong>プロバイダ責任制限法は「プロバイダの責任を完全に免除」するものではない。</strong> 一定条件下で責任を軽減するものである。</li>
+        <li><strong>ISMS（ISO/IEC 27001）は法律ではないが、実務上非常に重要。</strong> 情報セキュリティ管理の国際的なベンチマークである。</li>
+        <li><strong>クラッキングは「ハッキング」と混同されがちだが、法的には悪意のある行為を指す。</strong></li>
+        <li><strong>ログ管理は「技術的対策」ではなく「法的責務」の一部。</strong> ログがなければ企業の過失が推定されやすい。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. 電気通信事業法が保護する「通信の秘密」の範囲に含まれないものはどれか。</summary>
+        <p>ア）メール本文　イ）送信元・宛先　ウ）通信量　エ）利用者の氏名</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — 通信の秘密には通信内容・通信履歴・通信の事実が含まれる。利用者の氏名は個人情報保護法の対象であり、通信の秘密の直接の対象ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 電子計算機使用詐欺（刑法第246条の2）の特徴として正しいものはどれか。</summary>
+        <p>ア）人を欺くことが要件である　イ）コンピュータを欺くことが特徴である　ウ）実際の被害が発生することが要件である　エ）過失でも成立する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 電子計算機使用詐欺は「人を欺く」のではなく「コンピュータを欺く」ことが特徴である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. プロバイダ責任制限法の主要項目に含まれないものはどれか。</summary>
+        <p>ア）損害賠償責任の制限　イ）削除要請　ウ）発信者情報開示　エ）利用者のパスワード管理</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — パスワード管理はプロバイダ責任制限法の主要項目には含まれない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. ISMSの国際規格はどれか。</summary>
+        <p>ア）ISO 9001　イ）ISO/IEC 27001　ウ）ISO 14001　エ）JIS Q 15001</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — ISMSの国際規格はISO/IEC 27001である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. サイバー犯罪の分類に含まれないものはどれか。</summary>
+        <p>ア）不正アクセス　イ）データの破壊・改ざん　ウ）ソフトウェアの開発　エ）不正利用・詐欺</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ソフトウェアの開発はサイバー犯罪の分類には含まれない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. クラッキングの説明として正しいものはどれか。</summary>
+        <p>ア）システムの脆弱性を発見して報告すること　イ）悪意を持ってシステムに侵入し情報を窃取・破壊・改ざんすること　ウ）オープンソースソフトウェアを開発すること　エ）セキュリティポリシーを策定すること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — クラッキングは悪意を持ってシステムに侵入し、情報の窃取・破壊・改ざんを行う行為である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. ログ管理・アクセス管理を求める法的根拠として正しくないものはどれか。</summary>
+        <p>ア）個人情報保護法　イ）不正アクセス禁止法　ウ）著作権法　エ）サイバーセキュリティ基本法</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 著作権法はログ管理・アクセス管理を直接求める法律ではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. セキュリティインシデント発生時の法的責任に関する説明として正しいものはどれか。</summary>
+        <p>ア）事故そのものが法的責任のすべてを決定する　イ）事故への対応の適否が責任判断に影響する　ウ）ログがなくても責任は軽減される　エ）インシデント報告は任意である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 法的責任は事故への対応の適否によって判断されることが多い。ログが不足すると過失が認定されやすい。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. プロバイダ責任制限法が企業にとって重要な理由として正しくないものはどれか。</summary>
+        <p>ア）不適切な対応は損害賠償責任につながる　イ）過剰な削除も違法となる可能性がある　ウ）発信者情報開示の手続を誤ると法的トラブルになる　エ）すべての投稿を自動的に削除すれば安全である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — すべての投稿を自動的に削除することは過剰な削除となり、投稿者の権利を侵害する可能性がある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. ISMS（ISO/IEC 27001）における企業の管理区分に含まれないものはどれか。</summary>
+        <p>ア）組織的管理　イ）人的管理　ウ）財務的管理　エ）技術的管理</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — ISMSの管理区分は組織的管理・人的管理・物理的管理・技術的管理であり、財務的管理は含まれない。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『2_関連法令・契約.pdf』 第5章 情報セキュリティ関連法規（p102-p125）</p>
+    </section>
+  </main>
+
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

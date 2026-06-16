@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>マイナンバー制度と公金受取口座制度 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Management / Digital-Society</p>
+        <h1>マイナンバー制度と公金受取口座制度</h1>
+        <p class="lead">マイナンバー制度の利用範囲拡大と情報連携の仕組み、および給付金の迅速化を実現する公金受取口座制度について解説します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="index.html">マネジメント</a>
+      <span>マイナンバー制度と公金受取口座制度</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>マイナンバー制度の利用範囲拡大（国家資格・自動車登録等）</li>
+          <li>主務省令による情報連携の迅速化とマイナポータルの役割</li>
+          <li>公金受取口座制度の概要と給付金迅速化の仕組み</li>
+          <li>行政機関経由登録の特例（デジタル弱者対策）</li>
+          <li>API連携・EKYCとの関係</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div> <dt>高</dt> <dd>公金受取口座制度の目的、マイナポータルの連携記録確認機能</dd> </div>
+          <div> <dt>中</dt> <dd>主務省令による情報連携、行政機関経由登録の特例</dd> </div>
+          <div> <dt>低</dt> <dd>個別の省令名やAPIの技術仕様</dd> </div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>用語</th>
+              <th>一言</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>マイナンバー制度</td>
+              <td>税・社会保障・災害対策を目的に、国民全員に番号を割り振る制度</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>主務省令</td>
+              <td>行政機関間の情報連携ルール（どの情報を・いつ・誰が連携するか）を定める省令</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>マイナポータル</td>
+              <td>行政機関間の情報連携記録を本人が確認できるサイト</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>公金受取口座制度</td>
+              <td>給付金受取用の口座を事前登録し、申請なしで自動振込を可能にする制度</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>行政機関経由登録の特例</td>
+              <td>デジタルに不慣れな人のため、市区町村窓口で代理登録を認める仕組み</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1. マイナンバー制度の拡張と情報連携の高度化</h2>
+      <p>マイナンバー制度は、当初の「税・社会保障・災害対策」から利用範囲を段階的に拡大し、行政手続きの効率化を進める仕組みへと発展しています。</p>
+
+      <h3>利用範囲の拡大</h3>
+      <p>主務省令の改正により、次のような分野でも本人確認・情報照会の効率化に利用されるようになっています。</p>
+      <ul>
+        <li><strong>国家資格の登録・更新:</strong> 資格者情報とマイナンバーを紐づけることで、行政機関間の照会が迅速化。</li>
+        <li><strong>自動車登録（車検・所有者情報）:</strong> 所有者情報の確認が効率化。</li>
+        <li><strong>その他の行政分野:</strong> 住民情報との照合が必要な手続きで利用範囲が拡大中。</li>
+      </ul>
+
+      <h3>主務省令による情報連携の迅速化</h3>
+      <p>行政機関同士が情報をやり取りする際のルールは、主務省令で細かく定められています。「どの機関が・どの情報を・どの目的で・どのタイミングで連携できるか」を省令で定めることで、手作業での照会が不要になり、事務処理が大幅に短縮されます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>マイナポータルでの連携記録確認</figcaption>
+        <svg viewBox="0 0 400 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-mp" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 本人 -->
+          <rect x="150" y="10" width="100" height="40" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="35" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e1b4b">本人（国民）</text>
+          
+          <!-- 矢印 -->
+          <line x1="200" y1="50" x2="200" y2="80" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mp)"/>
+          <text x="210" y="70" font-size="11" fill="#64748b">ログイン</text>
+          
+          <!-- マイナポータル -->
+          <rect x="100" y="80" width="200" height="50" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">マイナポータル</text>
+          <text x="200" y="120" text-anchor="middle" font-size="11" fill="#1e3a5f">連携記録の確認</text>
+          
+          <!-- 矢印（双方向） -->
+          <line x1="100" y1="105" x2="50" y2="105" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mp)"/>
+          <line x1="300" y1="105" x2="350" y2="105" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-mp)"/>
+          
+          <!-- 行政機関 -->
+          <rect x="10" y="130" width="80" height="60" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="50" y="155" text-anchor="middle" font-size="11" fill="#14532d">行政機関A</text>
+          <text x="50" y="170" text-anchor="middle" font-size="10" fill="#14532d">（税務署等）</text>
+          
+          <rect x="310" y="130" width="80" height="60" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="350" y="155" text-anchor="middle" font-size="11" fill="#14532d">行政機関B</text>
+          <text x="350" y="170" text-anchor="middle" font-size="10" fill="#14532d">（市区町村等）</text>
+          
+          <!-- 説明文 -->
+          <text x="200" y="210" text-anchor="middle" font-size="12" fill="#64748b">「どの機関が・いつ・どの情報を・何の目的で照会したか」を確認可能</text>
+        </svg>
+      </figure>
+
+      <h3>マイナポータルでの連携記録確認</h3>
+      <p>行政機関同士が情報をやり取りした際の記録を、本人がマイナポータルで確認できる仕組みがあります。これにより、透明性の確保、不正利用の防止、本人によるチェック機能が実現しています。</p>
+
+      <h2>2. 公金受取口座制度と給付金デジタル化</h2>
+      <p>公金受取口座制度は、住民があらかじめ「自分の給付金受取用の口座」を登録しておくことで、給付金や助成金を支給する際に、毎回口座情報を申請させるのではなく、登録済みの口座に自動で振り込めるようにする仕組みです。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>公金受取口座制度による給付金迅速化の比較</figcaption>
+        <svg viewBox="0 0 380 240" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- 左ヘッダー -->
+          <rect x="10" y="10" width="160" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="90" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">Before: 従来方式</text>
+          <!-- 右ヘッダー -->
+          <rect x="210" y="10" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="290" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">After: 公金受取口座制度</text>
+          <!-- 中央の vs -->
+          <text x="190" y="33" text-anchor="middle" font-size="14" font-weight="bold" fill="#64748b">→</text>
+          
+          <!-- 左コンテンツ行 -->
+          <rect x="10" y="56" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="90" y="79" text-anchor="middle" font-size="12" fill="#334155">申請書に口座番号を記入</text>
+          <rect x="10" y="98" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="90" y="121" text-anchor="middle" font-size="12" fill="#334155">役所が目視で確認・入力</text>
+          <rect x="10" y="140" width="160" height="36" rx="2" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+          <text x="90" y="163" text-anchor="middle" font-size="12" fill="#334155">誤記・不備で支給が遅延</text>
+          
+          <!-- 右コンテンツ行 -->
+          <rect x="210" y="56" width="160" height="36" rx="2" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="290" y="79" text-anchor="middle" font-size="12" fill="#334155">事前登録済み口座を使用</text>
+          <rect x="210" y="98" width="160" height="36" rx="2" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="290" y="121" text-anchor="middle" font-size="12" fill="#334155">口座確認作業が不要</text>
+          <rect x="210" y="140" width="160" height="36" rx="2" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="290" y="163" text-anchor="middle" font-size="12" fill="#334155">申請〜振込が大幅に短縮</text>
+          
+          <!-- 行ラベル -->
+          <text x="90" y="200" text-anchor="middle" font-size="11" fill="#64748b">✘ 時間がかかる・ミス発生</text>
+          <text x="290" y="200" text-anchor="middle" font-size="11" fill="#64748b">✔ 迅速・正確・自動化</text>
+          
+          <text x="190" y="230" text-anchor="middle" font-size="12" fill="#64748b">「申請しないと支援金がもらえない」状況が改善される</text>
+        </svg>
+      </figure>
+
+      <h3>行政機関経由登録の特例制度</h3>
+      <p>本来、公金受取口座の登録はマイナポータルから本人が行うのが基本ですが、高齢者やデジタルに不慣れな人もいるため、市区町村などの行政機関が、窓口で本人の申請を受けて代わりに登録できる特例が設けられています。これにより、デジタルが苦手な人も制度の対象から漏れないようにしています。</p>
+
+      <h3>API連携・本人確認（EKYC）との関係</h3>
+      <p>公金受取口座の登録・確認には、金融機関とのAPI連携やオンライン本人確認（EKYC）が関わります。口座名義と本人情報の一致確認、口座の有効性確認をシステム間連携で行うことで、手作業による確認を減らし、誤振込や不正を防ぎます。</p>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li>マイナポータルは「行政手続きを行うサイト」ではなく、「情報連携の記録を確認するサイト」である点。</li>
+        <li>公金受取口座制度は「申請不要で自動振込」が目的であり、口座登録自体は事前に行う必要がある点。</li>
+        <li>行政機関経由登録の特例は「デジタル弱者対策」であり、窓口での代理登録を認める仕組みである点。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. マイナンバー制度の当初の利用目的として正しいものはどれか。</summary>
+        <p>ア）税・社会保障・災害対策<br>イ）国家資格の管理・自動車登録<br>ウ）民間企業の法人番号管理<br>エ）選挙人名簿の作成</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — マイナンバー制度は当初、税・社会保障・災害対策を目的として導入されました。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. 行政機関同士が情報をやり取りする際のルールを定めるものはどれか。</summary>
+        <p>ア）ガイドライン<br>イ）主務省令<br>ウ）テクノロジーマップ<br>エ）官民協議会</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 行政機関間の情報連携ルール（どの情報を・いつ・誰が連携するか）は主務省令で定められています。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. マイナポータルの主な機能として正しいものはどれか。</summary>
+        <p>ア）行政手続きのオンライン申請<br>イ）行政機関間の情報連携記録の確認<br>ウ）公金受取口座の自動登録<br>エ）マイナンバーカードの再発行</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — マイナポータルは、行政機関同士が情報をやり取りした際の記録を本人が確認できるサイトです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. 公金受取口座制度の目的として最も適切なものはどれか。</summary>
+        <p>ア）国民全員の銀行口座を国が管理すること<br>イ）給付金受取用の口座を事前登録し、申請なしで自動振込を可能にすること<br>ウ）民間企業の給与振込口座を統一すること<br>エ）税金の自動引き落としを義務付けること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 公金受取口座制度は、事前登録により給付金の申請〜振込までの事務処理を大幅に短縮することが目的です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 公金受取口座制度の「行政機関経由登録の特例」が設けられた理由はどれか。</summary>
+        <p>ア）行政機関の業務効率化のため<br>イ）デジタルに不慣れな人も制度の対象から漏れないようにするため<br>ウ）金融機関のシステム負荷を分散するため<br>エ）マイナンバーカードの普及率を上げるため</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 高齢者やデジタルに不慣れな人のため、市区町村窓口で代理登録を認める特例が設けられています。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. 公金受取口座の登録・確認に関わる技術として適切なものはどれか。</summary>
+        <p>ア）ブロックチェーンとスマートコントラクト<br>イ）API連携とEKYC（オンライン本人確認）<br>ウ）FAXと郵送による本人確認<br>エ）生体認証とパスワード認証のみ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 金融機関とのAPI連携やEKYCにより、口座名義と本人情報の一致確認をシステム間連携で行います。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. マイナンバー制度の利用範囲が拡大された分野として誤っているものはどれか。</summary>
+        <p>ア）国家資格の登録・更新<br>イ）自動車登録（車検・所有者情報）<br>ウ）民間企業の社内人事評価<br>エ）住民情報との照合が必要な行政手続き</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — マイナンバー制度は行政手続きの効率化が目的であり、民間企業の社内人事評価には利用されません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 公金受取口座制度を導入することで解消される課題はどれか。</summary>
+        <p>ア）行政機関の窓口が混雑すること<br>イ）申請書に口座番号を記入する手間や、誤記による支給遅延<br>ウ）金融機関のシステム障害<br>エ）マイナンバーカードの紛失</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 事前登録により、申請書への記入や目視確認が不要になり、誤記による支給遅延が解消されます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. マイナポータルで確認できる情報として誤っているものはどれか。</summary>
+        <p>ア）どの行政機関が情報を照会したか<br>イ）いつ情報を照会したか<br>ウ）どの情報を・何の目的で照会したか<br>エ）行政機関の職員個人の勤務評価</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — マイナポータルでは情報連携の記録（どの機関が・いつ・どの情報を・何の目的で）を確認できますが、職員個人の勤務評価などは確認できません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 公金受取口座制度の登録方法として正しいものはどれか。</summary>
+        <p>ア）原則としてマイナポータルから本人が登録し、特例として行政機関窓口でも登録可能<br>イ）金融機関の窓口でのみ登録可能<br>ウ）郵送でのみ登録可能<br>エ）行政機関が自動的に全国民の口座を登録する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 原則はマイナポータルからの本人登録ですが、デジタル弱者対策として行政機関経由の特例も設けられています。</p>
+        </details>
+      </details>
+
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『3_デジタル社会の形成について.pdf』 第3章 7. マイナンバー制度の拡張と情報連携の高度化 〜 8. 公金受取口座制度と給付金デジタル化（p52-p62相当）</p>
+    </section>
+  </main>
+
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

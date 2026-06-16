@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI・データ利活用の法制度 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / 法務・セキュリティ</p>
+        <h1>AI・データ利活用の法制度</h1>
+        <p class="lead">AIに関する法制度の全体像、AIに適用される既存の法律（著作権法・個人情報保護法・PL法）、AIの倫理原則、データ利活用に関する法制度（オープンデータ・パーソナルデータ・匿名加工情報）を学ぶ。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#overview">法制度の全体像</a>
+        <a href="#existing-laws">AIに適用される既存の法律</a>
+        <a href="#pl-law">PL法</a>
+        <a href="#ethics">AIの倫理原則</a>
+        <a href="#data-utilization">データ利活用の法制度</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">法務・セキュリティ</a>
+      <span>AI・データ利活用の法制度</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>AIに関する法制度の3つの枠組み（既存法の適用・ガイドライン・新しい法制度の検討）</li>
+          <li>AI学習データと著作権法（情報解析の例外規定）</li>
+          <li>AIと個人情報保護法の関係（本人同意・利用目的の明示・匿名加工情報）</li>
+          <li>PL法（製造物責任法）とAIの誤作動</li>
+          <li>AIの倫理原則（透明性・公平性・安全性・プライバシー保護・説明責任）</li>
+          <li>データ利活用の法制度（オープンデータ・パーソナルデータ・匿名加工情報）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>AIと著作権法の関係（学習データ・生成物の権利）、AIの倫理原則（5つの原則）</dd></div>
+          <div><dt>中</dt><dd>AIと個人情報保護法の関係、PL法とAIの誤作動、オープンデータ</dd></div>
+          <div><dt>低</dt><dd>EU AI Actの詳細、AI原則の各ガイドラインの名称</dd></div>
+        </dl>
+        <p>読了目安: 約10分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>情報解析（著作権法）</td><td>著作物をAI学習に使う場合の例外規定</td></tr>
+            <tr><td>2</td><td>PL法（製造物責任法）</td><td>AI搭載製品の誤作動による事故に適用される可能性がある法律</td></tr>
+            <tr><td>3</td><td>AI原則</td><td>AIに求められる国際的な倫理原則（透明性・公平性・安全性・プライバシー保護・説明責任）</td></tr>
+            <tr><td>4</td><td>オープンデータ</td><td>国や自治体が公開するデータを自由に利用できる仕組み</td></tr>
+            <tr><td>5</td><td>パーソナルデータ</td><td>個人に関するデータで、個人情報保護法の対象</td></tr>
+            <tr><td>6</td><td>EU AI Act</td><td>EUで検討されているAI専用の法律</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="overview" class="lesson-section">
+      <h2>1. AIに関する法制度の全体像</h2>
+      <p>AIに関する法律はまだ発展途上ですが、次の3つの枠組みで整理できます。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>分類</th><th>内容</th><th>例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>既存法の適用</td><td>著作権法・個人情報保護法・PL法などをAIに適用</td><td>AI学習データの著作権、AI誤作動の責任</td></tr>
+            <tr><td>ガイドライン・原則</td><td>国や国際機関が示すAIの利用指針</td><td>AI原則、倫理ガイドライン</td></tr>
+            <tr><td>新しい法制度の検討</td><td>AI専用の法律の議論</td><td>AI責任法、EU AI Act</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="wide-diagram">
+        <figcaption>AIに関する法制度の3つの枠組み</figcaption>
+        <svg viewBox="0 0 420 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-ai" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 中央: AI -->
+          <rect x="150" y="10" width="120" height="40" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="2"/>
+          <text x="210" y="35" text-anchor="middle" font-size="14" fill="#1e1b4b">AI</text>
+          <!-- 矢印 -->
+          <line x1="70" y1="72" x2="150" y2="55" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-ai)"/>
+          <line x1="210" y1="50" x2="210" y2="72" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-ai)"/>
+          <line x1="350" y1="72" x2="270" y2="55" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-ai)"/>
+          <!-- 3つの枠組み -->
+          <rect x="10" y="73" width="120" height="50" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="70" y="95" text-anchor="middle" font-size="12" fill="#1e3a5f">既存法の適用</text>
+          <text x="70" y="112" text-anchor="middle" font-size="10" fill="#64748b">著作権法・個人情報保護法・PL法</text>
+          <rect x="150" y="73" width="120" height="50" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="210" y="95" text-anchor="middle" font-size="12" fill="#92400e">ガイドライン・原則</text>
+          <text x="210" y="112" text-anchor="middle" font-size="10" fill="#64748b">AI原則・倫理ガイドライン</text>
+          <rect x="290" y="73" width="120" height="50" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="350" y="95" text-anchor="middle" font-size="12" fill="#14532d">新しい法制度</text>
+          <text x="350" y="112" text-anchor="middle" font-size="10" fill="#64748b">AI責任法・EU AI Act</text>
+          <!-- 下線 -->
+          <line x1="210" y1="123" x2="210" y2="150" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-ai)"/>
+          <rect x="110" y="151" width="200" height="30" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+          <text x="210" y="171" text-anchor="middle" font-size="11" fill="#334155">※ 発展途上。法整備が進んでいる</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="existing-laws" class="lesson-section">
+      <h2>2. AIに適用される既存の法律</h2>
+      <p>AI専用の法律が整備される前に、既存の法律がAIに適用されます。</p>
+
+      <h3>著作権法（AI学習データ）</h3>
+      <p>AIが学習するデータには著作物が含まれることがあります。</p>
+      <ul>
+        <li><strong>著作物を学習に使う場合</strong> → 著作権法の例外規定（<strong>情報解析</strong>）により一定範囲で利用可能</li>
+        <li><strong>生成物の著作権</strong> → 人間の創作性がある場合のみ発生</li>
+      </ul>
+
+      <h3>個人情報保護法（AIの学習データ）</h3>
+      <p>AIが個人情報を扱う場合は、個人情報保護法が適用されます。</p>
+      <ul>
+        <li>本人同意の原則</li>
+        <li>利用目的の明示</li>
+        <li>匿名加工情報の活用</li>
+      </ul>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>法律</th><th>AIとの関係</th><th>ポイント</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>著作権法</td><td>AI学習データの著作権</td><td>情報解析の例外規定で一定範囲利用可能。生成物は人間の創作性がある場合のみ著作権発生</td></tr>
+            <tr><td>個人情報保護法</td><td>AIの学習データ</td><td>本人同意・利用目的の明示・匿名加工情報の活用が必要</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pl-law" class="lesson-section">
+      <h2>3. PL法（AIの誤作動）</h2>
+      <p>AI搭載製品が誤作動して事故が起きた場合、<strong>PL法（製造物責任法）</strong>が適用される可能性があります。</p>
+      <ul>
+        <li>AIの判断ミス</li>
+        <li>ソフトウェアのバグ</li>
+        <li>セキュリティ脆弱性の放置</li>
+      </ul>
+      <p>これらが原因で事故が発生した場合、製造者・開発者が責任を問われる可能性があります。</p>
+    </section>
+
+    <section id="ethics" class="lesson-section">
+      <h2>4. AIの倫理原則（AI原則）</h2>
+      <p>国際的に、AIには次のような原則が求められています。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>原則</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>透明性</td><td>AIがどのように判断したか説明できること</td></tr>
+            <tr><td>公平性</td><td>差別や偏見を生まないこと</td></tr>
+            <tr><td>安全性</td><td>誤作動や悪用を防ぐこと</td></tr>
+            <tr><td>プライバシー保護</td><td>個人情報を適切に扱うこと</td></tr>
+            <tr><td>説明責任</td><td>開発者・提供者が責任を持つこと</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>日本政府も<strong>「AI利活用ガイドライン」</strong>で同様の原則を示しています。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>AIの倫理原則（5つの柱）</figcaption>
+        <svg viewBox="0 0 420 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- 中央: AI -->
+          <circle cx="210" cy="90" r="45" fill="#e0e7ff" stroke="#4338ca" stroke-width="2"/>
+          <text x="210" y="86" text-anchor="middle" font-size="14" fill="#1e1b4b">AI</text>
+          <text x="210" y="104" text-anchor="middle" font-size="11" fill="#4338ca">倫理原則</text>
+          <!-- 5つの原則（周囲に配置） -->
+          <!-- 透明性（上） -->
+          <rect x="140" y="10" width="140" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="210" y="30" text-anchor="middle" font-size="12" fill="#1e3a5f">🔍 透明性</text>
+          <line x1="210" y1="40" x2="210" y2="47" stroke="#64748b" stroke-width="1"/>
+          <!-- 公平性（右上） -->
+          <rect x="290" y="40" width="120" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="350" y="60" text-anchor="middle" font-size="12" fill="#92400e">⚖️ 公平性</text>
+          <line x1="310" y1="70" x2="270" y2="75" stroke="#64748b" stroke-width="1"/>
+          <!-- 安全性（右下） -->
+          <rect x="290" y="120" width="120" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="350" y="140" text-anchor="middle" font-size="12" fill="#14532d">🛡️ 安全性</text>
+          <line x1="310" y1="120" x2="270" y2="112" stroke="#64748b" stroke-width="1"/>
+          <!-- プライバシー保護（左下） -->
+          <rect x="10" y="120" width="120" height="30" rx="4" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+          <text x="70" y="140" text-anchor="middle" font-size="12" fill="#9d174d">🔒 プライバシー保護</text>
+          <line x1="110" y1="120" x2="150" y2="112" stroke="#64748b" stroke-width="1"/>
+          <!-- 説明責任（左上） -->
+          <rect x="10" y="40" width="120" height="30" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="70" y="60" text-anchor="middle" font-size="12" fill="#991b1b">📋 説明責任</text>
+          <line x1="110" y1="70" x2="150" y2="75" stroke="#64748b" stroke-width="1"/>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="data-utilization" class="lesson-section">
+      <h2>5. データ利活用の法制度</h2>
+      <p>AIの性能はデータ量に依存するため、データの扱いに関する法律も重要です。</p>
+
+      <h3>オープンデータ</h3>
+      <p>国や自治体が公開するデータを自由に利用できる仕組み。</p>
+      <ul>
+        <li>気象データ</li>
+        <li>統計データ</li>
+        <li>地図データ</li>
+      </ul>
+      <p>AIの学習やアプリ開発に活用されます。</p>
+
+      <h3>パーソナルデータ</h3>
+      <p>個人に関するデータで、個人情報保護法の対象。</p>
+      <ul>
+        <li>位置情報</li>
+        <li>購買履歴</li>
+        <li>Web閲覧履歴</li>
+      </ul>
+      <p>AIが扱う場合は、利用目的の明示や本人同意が必要です。</p>
+
+      <h3>匿名加工情報</h3>
+      <p>個人を特定できないように加工したデータで、元の個人情報に戻せない。</p>
+      <ul>
+        <li>人流データ（駅周辺の人数や滞在時間の平均）</li>
+        <li>購買データの統計（年代別の平均購入額、人気商品の傾向）</li>
+        <li>Webアクセスの傾向（時間帯別アクセス数、閲覧ページの集計）</li>
+        <li>アンケート結果の集計（属性別の回答傾向）</li>
+      </ul>
+      <p>AIが扱う場合は、個人が特定されないよう加工されているため、外部提供も可能です。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>区分</th><th>内容</th><th>AIでの活用</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>オープンデータ</td><td>国や自治体が公開するデータ</td><td>AI学習やアプリ開発に活用</td></tr>
+            <tr><td>パーソナルデータ</td><td>個人に関するデータ（個人情報保護法の対象）</td><td>利用目的の明示・本人同意が必要</td></tr>
+            <tr><td>匿名加工情報</td><td>個人を特定できないよう加工したデータ</td><td>外部提供も可能</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「AIが作ったものは全部自由に使える」は誤り。</strong> 生成物が既存作品に似ていれば利用者が責任を負う。人間の創作性がある場合は著作権が発生する。</li>
+        <li><strong>「AI学習データはすべて著作権フリー」ではない。</strong> 情報解析の例外規定はあるが、条件を満たす必要がある。</li>
+        <li><strong>AIの倫理原則は「ガイドライン」であり「法律」ではない。</strong> しかし実務上の指針として非常に重要。</li>
+        <li><strong>オープンデータは「すべて無料で自由に使える」わけではない。</strong> 利用条件が定められている場合がある。</li>
+        <li><strong>匿名加工情報は「個人情報ではない」が、適切に加工する必要がある。</strong> 再識別のリスクに注意。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. AIに関する法制度の3つの枠組みに含まれないものはどれか。</summary>
+        <p>ア）既存法の適用　イ）ガイドライン・原則　ウ）新しい法制度の検討　エ）国際条約の締結</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — AIに関する法制度の枠組みは「既存法の適用」「ガイドライン・原則」「新しい法制度の検討」の3つである。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. AI学習データに著作物を使う場合の著作権法の例外規定は何か。</summary>
+        <p>ア）引用　イ）私的使用　ウ）情報解析　エ）教育目的</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 著作権法の「情報解析」の例外規定により、AI学習に著作物を一定範囲で利用できる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. AI生成物に著作権が発生する条件として正しいものはどれか。</summary>
+        <p>ア）AIが自動生成したものはすべて著作権が発生する　イ）人間の創作性がある場合のみ発生する　ウ）商用利用した場合のみ発生する　エ）著作権は一切発生しない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — AIが自動生成したものは創作性がなければ著作権はなく、人間の創作性がある場合にのみ著作権が発生する。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. AI搭載製品の誤作動による事故に適用される可能性がある法律はどれか。</summary>
+        <p>ア）個人情報保護法　イ）PL法（製造物責任法）　ウ）不正アクセス禁止法　エ）著作権法</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — AI搭載製品の誤作動による事故にはPL法（製造物責任法）が適用される可能性がある。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. AIの倫理原則に含まれないものはどれか。</summary>
+        <p>ア）透明性　イ）公平性　ウ）収益性　エ）説明責任</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — AIの倫理原則は透明性・公平性・安全性・プライバシー保護・説明責任であり、収益性は含まれない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. オープンデータの例として正しいものはどれか。</summary>
+        <p>ア）顧客の購買履歴　イ）気象データ　ウ）従業員の給与情報　エ）メールアドレスリスト</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 気象データは国や自治体が公開するオープンデータの代表例である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. パーソナルデータをAIが扱う際に必要な対応として正しくないものはどれか。</summary>
+        <p>ア）利用目的の明示　イ）本人同意　ウ）自由な外部提供　エ）匿名加工情報の活用</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — パーソナルデータは個人情報保護法の対象であり、自由な外部提供はできない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 匿名加工情報の特徴として正しいものはどれか。</summary>
+        <p>ア）元の個人情報に戻せる　イ）個人情報として扱う　ウ）個人を特定できないよう加工され、元に戻せない　エ）外部提供には本人同意が必要</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 匿名加工情報は個人を特定できないよう加工され、元に戻せないデータである。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. AIに関する法制度の説明として正しいものはどれか。</summary>
+        <p>ア）AI専用の法律はすでに完全に整備されている　イ）既存の法律やガイドラインで対応している段階である　ウ）AIにはどの法律も適用されない　エ）国際的なルールは存在しない</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — AIに関する法制度は発展途上であり、既存の法律やガイドラインで対応している段階である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 日本政府が示したAIに関するガイドラインはどれか。</summary>
+        <p>ア）EU AI Act　イ）AI利活用ガイドライン　ウ）GDPR　エ）ISMSガイドライン</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 日本政府は「AI利活用ガイドライン」を示している。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『2_関連法令・契約.pdf』 第6章 AI・データ利活用の法制度（p126-p131）</p>
+    </section>
+  </main>
+
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

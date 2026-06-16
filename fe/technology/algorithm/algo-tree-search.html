@@ -89,18 +89,32 @@
 
       <figure class="wide-diagram">
         <figcaption>木構造の基本用語</figcaption>
-        <pre>          [A] ←根（root）
-         /   \
-       [B]   [C] ←葉（子を持たない）
-      /   \
-    [D]   [E] ←葉
-   葉      葉
-
-  ・根（root）: A
-  ・親（parent）: AはBとCの親
-  ・子（child）: BとCはAの子
-  ・葉（leaf）: C, D, E（子を持たないノード）
-  ・辺（edge）: ノードをつなぐ線</pre>
+        <svg viewBox="0 0 400 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-tb1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <line x1="200" y1="46" x2="120" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="200" y1="46" x2="280" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="120" y1="120" x2="70" y2="158" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="120" y1="120" x2="170" y2="158" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="160" y="10" width="80" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="13" fill="#1e1b4b">A</text>
+          <text x="246" y="33" font-size="11" fill="#64748b">←根（root）</text>
+          <rect x="80" y="84" width="80" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="120" y="107" text-anchor="middle" font-size="13" fill="#1e3a5f">B</text>
+          <rect x="240" y="84" width="80" height="36" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="280" y="107" text-anchor="middle" font-size="13" fill="#14532d">C</text>
+          <text x="326" y="107" font-size="11" fill="#64748b">←葉</text>
+          <rect x="30" y="158" width="80" height="36" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="70" y="181" text-anchor="middle" font-size="13" fill="#14532d">D</text>
+          <text x="20" y="206" font-size="11" fill="#64748b">←葉</text>
+          <rect x="130" y="158" width="80" height="36" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="170" y="181" text-anchor="middle" font-size="13" fill="#14532d">E</text>
+          <text x="120" y="206" font-size="11" fill="#64748b">←葉</text>
+        </svg>
+        <p>・根（root）: A　・親（parent）: AはBとCの親　・子（child）: BとCはAの子　・葉（leaf）: C, D, E（子を持たないノード）　・辺（edge）: ノードをつなぐ線</p>
       </figure>
     </section>
 
@@ -124,24 +138,71 @@
 
       <figure class="wide-diagram">
         <figcaption>満二分木（左）と完全二分木（右）の比較</figcaption>
-        <pre>【満二分木】                【完全二分木】
-       [A]                          [A]
-      /   \                        /   \
-    [B]   [C]                    [B]   [C]
-   /   \                        /   \
- [D]   [E]                    [D]   [E]
-                            （最下段が左から詰まっている）
-・全ノードが0個か2個の子    ・最下段以外は全て埋まっている
-・1個だけの子は存在しない    ・最下段のノードは左から順に</pre>
+        <svg viewBox="0 0 380 230" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <text x="95" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">【満二分木】</text>
+          <text x="285" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">【完全二分木】</text>
+          <!-- 左: 満二分木 -->
+          <line x1="95" y1="56" x2="55" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="95" y1="56" x2="135" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="55" y1="120" x2="35" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="55" y1="120" x2="75" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="65" y="30" width="60" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="95" y="50" text-anchor="middle" font-size="12" fill="#1e3a5f">A</text>
+          <rect x="25" y="84" width="60" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="55" y="104" text-anchor="middle" font-size="12" fill="#1e3a5f">B</text>
+          <rect x="105" y="84" width="60" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="135" y="104" text-anchor="middle" font-size="12" fill="#1e3a5f">C</text>
+          <rect x="5" y="148" width="60" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="35" y="168" text-anchor="middle" font-size="12" fill="#14532d">D</text>
+          <rect x="45" y="148" width="60" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="75" y="168" text-anchor="middle" font-size="12" fill="#14532d">E</text>
+          <text x="95" y="200" text-anchor="middle" font-size="11" fill="#334155">全ノードが0個か2個の子</text>
+          <text x="95" y="216" text-anchor="middle" font-size="11" fill="#334155">1個だけの子は存在しない</text>
+          <!-- 右: 完全二分木 -->
+          <line x1="285" y1="56" x2="245" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="285" y1="56" x2="325" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="245" y1="120" x2="225" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="245" y1="120" x2="265" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="255" y="30" width="60" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="285" y="50" text-anchor="middle" font-size="12" fill="#92400e">A</text>
+          <rect x="215" y="84" width="60" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="245" y="104" text-anchor="middle" font-size="12" fill="#92400e">B</text>
+          <rect x="295" y="84" width="60" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="325" y="104" text-anchor="middle" font-size="12" fill="#92400e">C</text>
+          <rect x="195" y="148" width="60" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="225" y="168" text-anchor="middle" font-size="12" fill="#14532d">D</text>
+          <rect x="235" y="148" width="60" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="265" y="168" text-anchor="middle" font-size="12" fill="#14532d">E</text>
+          <text x="285" y="196" text-anchor="middle" font-size="11" fill="#334155">最下段以外は全て埋まっている</text>
+          <text x="285" y="212" text-anchor="middle" font-size="11" fill="#334155">最下段のノードは左から順に</text>
+        </svg>
       </figure>
 
       <h3>2-2. 深さと高さ</h3>
       <p>深さ（depth）は<strong>根からの距離</strong>（根を0とする）。高さ（height）は<strong>葉からの距離</strong>（葉を0とする）。この2つはFE試験で混同しやすいので注意。</p>
-      <pre>深さ0: [A] ←根（depth=0, height=2）
-         /   \
-深さ1: [B]   [C] ←葉（depth=1, height=0）
-      /   \
-深さ2:[D] [E] ←葉（depth=2, height=0）</pre>
+      <figure class="wide-diagram">
+        <figcaption>深さと高さの関係</figcaption>
+        <svg viewBox="0 0 380 180" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <line x1="200" y1="46" x2="120" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="200" y1="46" x2="280" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="120" y1="120" x2="70" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="120" y1="120" x2="170" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="160" y="10" width="80" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="13" fill="#1e1b4b">A</text>
+          <text x="250" y="33" font-size="10" fill="#64748b">depth=0, height=2</text>
+          <rect x="80" y="84" width="80" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="120" y="107" text-anchor="middle" font-size="13" fill="#1e3a5f">B</text>
+          <text x="10" y="107" font-size="10" fill="#64748b">depth=1, height=0</text>
+          <rect x="240" y="84" width="80" height="36" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="280" y="107" text-anchor="middle" font-size="13" fill="#14532d">C ←葉</text>
+          <rect x="30" y="148" width="80" height="24" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="70" y="165" text-anchor="middle" font-size="12" fill="#14532d">D ←葉</text>
+          <rect x="130" y="148" width="80" height="24" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="170" y="165" text-anchor="middle" font-size="12" fill="#14532d">E ←葉</text>
+          <text x="280" y="160" font-size="10" fill="#64748b">depth=2, height=0</text>
+        </svg>
+        <p>深さ（depth）は根からの距離（根を0とする）、高さ（height）は葉からの距離（葉を0とする）。</p>
+      </figure>
     </section>
 
     <section id="bst" class="lesson-section">
@@ -150,19 +211,36 @@
 
       <figure class="wide-diagram">
         <figcaption>BSTの例（「左<親<右」が全部分木で成立）</figcaption>
-        <pre>               [8] ←根
-              /    \
-            [3]    [10]
-           /   \       \
-         [1]   [6]     [14]
-              /   \        \
-            [4]   [7]      [16]
-
-・3 の左部分木（1）は3より小さい
-・3 の右部分木（6,4,7）は3より大きい
-・6 の左（4）は6より小さい
-・6 の右（7）は6より大きい
-→ どの部分木を切り取ってもルールが成立！</pre>
+        <svg viewBox="0 0 460 240" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <line x1="230" y1="46" x2="140" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="230" y1="46" x2="340" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="140" y1="120" x2="90" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="140" y1="120" x2="190" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="340" y1="120" x2="380" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="190" y1="184" x2="160" y2="212" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="190" y1="184" x2="220" y2="212" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="380" y1="184" x2="410" y2="212" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="200" y="10" width="60" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="230" y="33" text-anchor="middle" font-size="13" fill="#1e1b4b">8</text>
+          <text x="268" y="33" font-size="10" fill="#64748b">←根</text>
+          <rect x="110" y="84" width="60" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="140" y="107" text-anchor="middle" font-size="13" fill="#1e3a5f">3</text>
+          <rect x="310" y="84" width="60" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="340" y="107" text-anchor="middle" font-size="13" fill="#1e3a5f">10</text>
+          <rect x="60" y="148" width="60" height="36" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="90" y="171" text-anchor="middle" font-size="13" fill="#14532d">1</text>
+          <rect x="160" y="148" width="60" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="171" text-anchor="middle" font-size="13" fill="#1e3a5f">6</text>
+          <rect x="350" y="148" width="60" height="36" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="380" y="171" text-anchor="middle" font-size="13" fill="#14532d">14</text>
+          <rect x="130" y="212" width="60" height="26" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="160" y="230" text-anchor="middle" font-size="12" fill="#14532d">4</text>
+          <rect x="190" y="212" width="60" height="26" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="220" y="230" text-anchor="middle" font-size="12" fill="#14532d">7</text>
+          <rect x="380" y="212" width="60" height="26" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="410" y="230" text-anchor="middle" font-size="12" fill="#14532d">16</text>
+        </svg>
+        <p>3の左部分木（1）は3より小さい。3の右部分木（6,4,7）は3より大きい。6の左（4）は6より小さい。6の右（7）は6より大きい。→ どの部分木を切り取ってもルールが成立！</p>
       </figure>
 
       <h3>3-1. BSTの挿入（insert）</h3>
@@ -170,31 +248,79 @@
 
       <figure class="wide-diagram">
         <figcaption>BST挿入の流れ（8,3,10,1,6,14,4,7,16 の順に挿入）</figcaption>
-        <pre>Step1: insert(8) → 空なので根になる [8]
-
-Step2: insert(3) → 3<8 左へ    [8]
-                              /
-                            [3]
-
-Step3: insert(10) → 10>8 右へ  [8]
-                              /   \
-                            [3]  [10]
-
-Step4-5: insert(1), insert(14)
-        [8]                    [8]
-       /   \          →       /   \
-     [3]  [10]              [3]   [10]
-    /               \       /        \
-  [1]              [14]   [1]       [14]
-
-Step6-9: insert(6,4,7,16) → 最終形:
-               [8]
-              /    \
-            [3]    [10]
-           /   \       \
-         [1]   [6]     [14]
-              /   \        \
-            [4]   [7]      [16]</pre>
+        <svg viewBox="0 0 920 260" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-bstins" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- Step1 -->
+          <text x="55" y="16" text-anchor="middle" font-size="11" fill="#334155">Step1: insert(8)</text>
+          <rect x="25" y="26" width="60" height="32" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="55" y="47" text-anchor="middle" font-size="12" fill="#1e1b4b">8</text>
+          <line x1="95" y1="42" x2="125" y2="42" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-bstins)"/>
+          <!-- Step2 -->
+          <text x="195" y="16" text-anchor="middle" font-size="11" fill="#334155">Step2: insert(3) 3&lt;8 左へ</text>
+          <rect x="165" y="26" width="60" height="32" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="195" y="47" text-anchor="middle" font-size="12" fill="#1e1b4b">8</text>
+          <line x1="180" y1="58" x2="160" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="130" y="84" width="60" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="160" y="105" text-anchor="middle" font-size="12" fill="#1e3a5f">3</text>
+          <line x1="225" y1="42" x2="255" y2="42" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-bstins)"/>
+          <!-- Step3 -->
+          <text x="335" y="16" text-anchor="middle" font-size="11" fill="#334155">Step3: insert(10) 10&gt;8 右へ</text>
+          <rect x="305" y="26" width="60" height="32" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="335" y="47" text-anchor="middle" font-size="12" fill="#1e1b4b">8</text>
+          <line x1="320" y1="58" x2="300" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="350" y1="58" x2="375" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="270" y="84" width="60" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="300" y="105" text-anchor="middle" font-size="12" fill="#1e3a5f">3</text>
+          <rect x="345" y="84" width="60" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="375" y="105" text-anchor="middle" font-size="12" fill="#1e3a5f">10</text>
+          <line x1="365" y1="42" x2="395" y2="42" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-bstins)"/>
+          <!-- Step4-5 -->
+          <text x="490" y="16" text-anchor="middle" font-size="11" fill="#334155">Step4-5: insert(1), insert(14)</text>
+          <rect x="460" y="26" width="60" height="32" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="490" y="47" text-anchor="middle" font-size="12" fill="#1e1b4b">8</text>
+          <line x1="475" y1="58" x2="445" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="505" y1="58" x2="555" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="415" y="84" width="60" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="445" y="105" text-anchor="middle" font-size="12" fill="#1e3a5f">3</text>
+          <rect x="525" y="84" width="60" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="555" y="105" text-anchor="middle" font-size="12" fill="#1e3a5f">10</text>
+          <line x1="430" y1="116" x2="400" y2="138" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="540" y1="116" x2="590" y2="138" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="370" y="142" width="60" height="32" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="400" y="163" text-anchor="middle" font-size="12" fill="#14532d">1</text>
+          <rect x="560" y="142" width="60" height="32" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="590" y="163" text-anchor="middle" font-size="12" fill="#14532d">14</text>
+          <line x1="635" y1="105" x2="665" y2="105" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-bstins)"/>
+          <!-- Step6-9 final -->
+          <text x="795" y="16" text-anchor="middle" font-size="11" fill="#334155">Step6-9: insert(6,4,7,16) 最終形</text>
+          <rect x="765" y="26" width="60" height="32" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="795" y="47" text-anchor="middle" font-size="12" fill="#1e1b4b">8</text>
+          <line x1="780" y1="58" x2="745" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="810" y1="58" x2="860" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="715" y="84" width="60" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="745" y="105" text-anchor="middle" font-size="12" fill="#1e3a5f">3</text>
+          <rect x="830" y="84" width="60" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="860" y="105" text-anchor="middle" font-size="12" fill="#1e3a5f">10</text>
+          <line x1="730" y1="116" x2="710" y2="138" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="760" y1="116" x2="780" y2="138" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="875" y1="116" x2="895" y2="138" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="680" y="142" width="60" height="32" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="710" y="163" text-anchor="middle" font-size="12" fill="#14532d">1</text>
+          <rect x="750" y="142" width="60" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="780" y="163" text-anchor="middle" font-size="12" fill="#1e3a5f">6</text>
+          <rect x="865" y="142" width="60" height="32" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="895" y="163" text-anchor="middle" font-size="12" fill="#14532d">14</text>
+          <line x1="765" y1="174" x2="745" y2="196" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="795" y1="174" x2="815" y2="196" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="715" y="200" width="60" height="26" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="745" y="218" text-anchor="middle" font-size="11" fill="#14532d">4</text>
+          <rect x="785" y="200" width="60" height="26" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="815" y="218" text-anchor="middle" font-size="11" fill="#14532d">7</text>
+        </svg>
       </figure>
 
       <h3>3-2. BSTの探索（search）</h3>
@@ -210,23 +336,32 @@ Step6-9: insert(6,4,7,16) → 最終形:
 
       <figure class="wide-diagram">
         <figcaption>DFS 3種の訪問順（同一木での比較）</figcaption>
-        <pre>           [A]
-          /   \
-        [B]   [C]
-       /   \
-     [D]   [E]
-
-【前順（Preorder）親→左→右】
-  訪問順: A → B → D → E → C
-  用途: 木のコピー作成
-
-【中順（Inorder）左→親→右】
-  訪問順: D → B → E → A → C
-  ★ BSTでは中順 = 昇順ソートになる！（最重要）
-
-【後順（Postorder）左→右→親】
-  訪問順: D → E → B → C → A
-  用途: 木の削除（子から先に処理）</pre>
+        <svg viewBox="0 0 360 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <line x1="180" y1="46" x2="120" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="180" y1="46" x2="240" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="120" y1="120" x2="80" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="120" y1="120" x2="160" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="150" y="10" width="60" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="180" y="33" text-anchor="middle" font-size="13" fill="#1e1b4b">A</text>
+          <rect x="90" y="84" width="60" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="120" y="107" text-anchor="middle" font-size="13" fill="#1e3a5f">B</text>
+          <rect x="210" y="84" width="60" height="36" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="240" y="107" text-anchor="middle" font-size="13" fill="#14532d">C</text>
+          <rect x="50" y="124" width="60" height="26" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="80" y="142" text-anchor="middle" font-size="11" fill="#14532d">D</text>
+          <rect x="130" y="124" width="60" height="26" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="160" y="142" text-anchor="middle" font-size="11" fill="#14532d">E</text>
+        </svg>
+        <div class="table-wrap mobile-card-table">
+          <table>
+            <thead><tr><th>走査</th><th>訪問順</th><th>用途</th></tr></thead>
+            <tbody>
+              <tr><td>前順（親→左→右）</td><td>A → B → D → E → C</td><td>木のコピー作成</td></tr>
+              <tr><td>中順（左→親→右）</td><td>D → B → E → A → C</td><td>★ BSTでは昇順ソートになる！（最重要）</td></tr>
+              <tr><td>後順（左→右→親）</td><td>D → E → B → C → A</td><td>木の削除（子から先に処理）</td></tr>
+            </tbody>
+          </table>
+        </div>
       </figure>
 
       <h3>4-1. DFS（前順）のコード</h3>

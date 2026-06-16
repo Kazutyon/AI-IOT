@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>プライバシーマーク制度（Pマーク） | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Technology / 法務・セキュリティ</p>
+        <h1>プライバシーマーク制度（Pマーク）</h1>
+        <p class="lead">個人情報を適切に取り扱う事業者に与えられる民間認証制度。Pマーク取得のメリット、PMS（個人情報保護マネジメントシステム）の構造、個人情報保護法との違いを学ぶ。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#overview">制度概要</a>
+        <a href="#benefits">メリット</a>
+        <a href="#pms">PMSの構造</a>
+        <a href="#comparison">個人情報保護法との違い</a>
+        <a href="#it-points">IT企業での重要ポイント</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../../index.html">ポータル</a>
+      <a href="../index.html">法務・セキュリティ</a>
+      <span>プライバシーマーク制度</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>プライバシーマーク（Pマーク）制度の概要と運営主体（JIPDEC）</li>
+          <li>Pマーク取得の5つのメリット</li>
+          <li>PMS（個人情報保護マネジメントシステム）の7つの構成要素</li>
+          <li>個人情報保護法とPマーク制度の違い</li>
+          <li>IT企業で特に重要なポイント（アクセス管理・委託先管理・ログ管理など）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>Pマーク制度の目的、PMSの構造、個人情報保護法との違い</dd></div>
+          <div><dt>中</dt><dd>Pマーク取得のメリット、有効期間（2年）、認証基準（JIS Q 15001）</dd></div>
+          <div><dt>低</dt><dd>JIPDECの詳細、審査機関の詳細</dd></div>
+        </dl>
+        <p>読了目安: 約15分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>No.</th><th>用語</th><th>一言説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>プライバシーマーク（Pマーク）</td><td>個人情報を適切に取り扱う事業者に与えられる民間認証制度</td></tr>
+            <tr><td>2</td><td>JIPDEC</td><td>一般財団法人日本情報経済社会推進協会。Pマーク制度を運営</td></tr>
+            <tr><td>3</td><td>PMS</td><td>個人情報保護マネジメントシステム。Pマーク認証の基盤となる仕組み</td></tr>
+            <tr><td>4</td><td>JIS Q 15001</td><td>個人情報保護マネジメントシステムの日本産業規格。Pマークの認証基準</td></tr>
+            <tr><td>5</td><td>内部監査</td><td>部門ごとの運用状況を監査し、不備があれば是正措置を実施</td></tr>
+            <tr><td>6</td><td>マネジメントレビュー</td><td>経営層が運用状況を確認し、改善方針を決定すること</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="overview" class="lesson-section">
+      <h2>1. プライバシーマーク制度とは</h2>
+      <p>個人情報を適切に取り扱う事業者に与えられる<strong>民間の認証制度</strong>です。</p>
+      <p>IT企業では、ユーザー情報や顧客データを扱う機会が多く、個人情報の適切な管理は企業の信頼性に直結します。</p>
+      <p>この制度は、<strong>一般財団法人日本情報経済社会推進協会（JIPDEC）</strong>が運営しています。</p>
+      <p>取得を希望する企業はJIPDECの審査を受ける必要があります。審査では、書類による確認や現地での運用状況のチェックが行われ、個人情報保護マネジメントシステム（<strong>JIS Q 15001</strong>）に基づく社内体制が適切に整備されているか評価されます。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>認証基準</td><td>JIS Q 15001（PMS要求事項）</td></tr>
+            <tr><td>運用主体</td><td>JIPDEC（認定機関）</td></tr>
+            <tr><td>審査機関</td><td>JIPDECが認定した審査機関</td></tr>
+            <tr><td>対象</td><td>個人情報を取り扱う企業・団体</td></tr>
+            <tr><td>有効期間</td><td>2年間（更新審査が必要）</td></tr>
+            <tr><td>審査内容</td><td>文書審査＋現地審査（運用状況の確認）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="benefits" class="lesson-section">
+      <h2>2. 企業がPマークを取得するメリット</h2>
+
+      <h4>① 顧客・取引先からの信頼性向上</h4>
+      <p>個人情報の管理が適切であることを第三者に証明できる。</p>
+
+      <h4>② リスク低減</h4>
+      <p>情報漏えいや不適切利用の防止により、法令違反リスクを減らす。</p>
+
+      <h4>③ 社員教育の体系化</h4>
+      <p>個人情報保護に関する教育や社内ルールを定期的に実施。</p>
+
+      <h4>④ 入札・契約条件での優位性</h4>
+      <p>官公庁・大企業との契約ではPマーク取得が条件になることもある。</p>
+
+      <h4>⑤ ブランド価値の向上</h4>
+      <p>安全にデータを扱う企業として社会的評価が高まる。</p>
+    </section>
+
+    <section id="pms" class="lesson-section">
+      <h2>4. PMS（個人情報保護マネジメントシステム）の構造</h2>
+      <p>PMSは、組織として個人情報を管理するための仕組みであり、以下の要素で構成されます。</p>
+
+      <h4>① 方針（ポリシー）</h4>
+      <ul>
+        <li>個人情報保護方針を策定し、社内外に公表</li>
+        <li>経営層が責任を持つことを明確化</li>
+      </ul>
+
+      <h4>② 個人情報の特定と管理台帳</h4>
+      <ul>
+        <li>どの部門が、どの個人情報を扱うかを明確化</li>
+        <li>管理台帳に「取得目的・保管場所・アクセス権限」を記録</li>
+      </ul>
+
+      <h4>③ リスク分析と対策</h4>
+      <ul>
+        <li>漏えい・紛失・不正アクセスなどのリスクを洗い出し</li>
+        <li>技術的・組織的な対策を実施</li>
+      </ul>
+
+      <h4>④ 運用ルールの整備</h4>
+      <ul>
+        <li>アクセス制御</li>
+        <li>パスワード管理</li>
+        <li>持ち出し管理</li>
+        <li>委託先管理</li>
+        <li>事故対応手順</li>
+      </ul>
+
+      <h4>⑤ 教育（年1回以上）</h4>
+      <ul>
+        <li>全従業員に対して個人情報保護教育を実施</li>
+        <li>受講記録を証跡として保管</li>
+      </ul>
+
+      <h4>⑥ 内部監査（年1回以上）</h4>
+      <ul>
+        <li>部門ごとの運用状況を監査</li>
+        <li>不備があれば是正措置を実施</li>
+      </ul>
+
+      <h4>⑦ マネジメントレビュー</h4>
+      <ul>
+        <li>経営層が運用状況を確認し、改善方針を決定</li>
+      </ul>
+
+      <figure class="wide-diagram">
+        <figcaption>PMS（個人情報保護マネジメントシステム）の構造</figcaption>
+        <svg viewBox="0 0 400 370" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-pms" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 方針 -->
+          <rect x="100" y="10" width="200" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="13" fill="#1e1b4b">① 方針（ポリシー）</text>
+          <!-- 矢印 -->
+          <line x1="200" y1="46" x2="200" y2="64" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-pms)"/>
+          <!-- 個人情報の特定 -->
+          <rect x="100" y="65" width="200" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="88" text-anchor="middle" font-size="13" fill="#1e3a5f">② 個人情報の特定・管理台帳</text>
+          <!-- 矢印 -->
+          <line x1="200" y1="101" x2="200" y2="119" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-pms)"/>
+          <!-- リスク分析 -->
+          <rect x="100" y="120" width="200" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="143" text-anchor="middle" font-size="13" fill="#92400e">③ リスク分析と対策</text>
+          <!-- 矢印 -->
+          <line x1="200" y1="156" x2="200" y2="174" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-pms)"/>
+          <!-- 運用ルール -->
+          <rect x="100" y="175" width="200" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="198" text-anchor="middle" font-size="13" fill="#1e3a5f">④ 運用ルールの整備</text>
+          <!-- 矢印 -->
+          <line x1="200" y1="211" x2="200" y2="229" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-pms)"/>
+          <!-- 教育 -->
+          <rect x="100" y="230" width="200" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="253" text-anchor="middle" font-size="13" fill="#14532d">⑤ 教育（年1回以上）</text>
+          <!-- 矢印 -->
+          <line x1="200" y1="266" x2="200" y2="284" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-pms)"/>
+          <!-- 内部監査 -->
+          <rect x="100" y="285" width="200" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="308" text-anchor="middle" font-size="13" fill="#92400e">⑥ 内部監査（年1回以上）</text>
+          <!-- 矢印 -->
+          <line x1="200" y1="321" x2="200" y2="339" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-pms)"/>
+          <!-- マネジメントレビュー -->
+          <rect x="90" y="340" width="220" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="363" text-anchor="middle" font-size="13" fill="#1e1b4b">⑦ マネジメントレビュー</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="comparison" class="lesson-section">
+      <h2>5. 個人情報保護法との違い</h2>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>個人情報保護法</th><th>Pマーク</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>種類</td><td>法律</td><td>民間の認証制度</td></tr>
+            <tr><td>適用範囲</td><td>すべての企業</td><td>希望する企業のみ</td></tr>
+            <tr><td>目的</td><td>個人情報の保護</td><td>管理体制の整備・信頼性向上</td></tr>
+            <tr><td>要求事項</td><td>法律で定められた最低限の義務</td><td>JIS Q 15001に基づく詳細な管理要求</td></tr>
+            <tr><td>罰則</td><td>行政処分・罰則あり</td><td>認証取り消し・更新不可</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="it-points" class="lesson-section">
+      <h2>6. IT企業で特に重要となるポイント</h2>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead>
+            <tr><th>項目</th><th>理由</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>開発・運用部門のアクセス管理</td><td>顧客データにアクセスする機会が多い</td></tr>
+            <tr><td>委託先管理</td><td>下請け・外部ベンダーが多く、情報共有が発生する</td></tr>
+            <tr><td>ログ管理</td><td>システム操作の証跡が必須</td></tr>
+            <tr><td>持ち出し管理</td><td>ソースコード・データの持ち出しリスク</td></tr>
+            <tr><td>教育の徹底</td><td>エンジニア・非エンジニアの混在</td></tr>
+            <tr><td>事故対応手順</td><td>インシデント発生時の初動が重要</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>Pマークは「法律」ではなく「民間認証制度」。</strong> 個人情報保護法とは異なり、取得は任意だが、取得することで信頼性が向上する。</li>
+        <li><strong>Pマークの有効期間は2年。</strong> 更新審査が必要で、一度取得すれば永続するわけではない。</li>
+        <li><strong>Pマークと個人情報保護法は別物。</strong> Pマークを取得していても個人情報保護法違反にはなり得る。両方を理解する必要がある。</li>
+        <li><strong>PMSの内部監査は年1回以上が必須。</strong> 監査を実施しないと認証が維持できない。</p>
+        <li><strong>教育は全従業員が対象。</strong> エンジニアだけでなく、営業・管理部門も含めて全員が教育を受ける必要がある。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. プライバシーマーク制度を運営する団体はどれか。</summary>
+        <p>ア）経済産業省　イ）JIPDEC　ウ）IPA　エ）総務省</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — JIPDEC（一般財団法人日本情報経済社会推進協会）がPマーク制度を運営している。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. Pマークの認証基準となっているJIS規格はどれか。</summary>
+        <p>ア）JIS Q 15001　イ）JIS X 25000　ウ）JIS Q 27001　エ）JIS X 5080</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — JIS Q 15001が個人情報保護マネジメントシステムの認証基準である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. Pマークの有効期間は何年か。</summary>
+        <p>ア）1年　イ）2年　ウ）3年　エ）5年</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Pマークの有効期間は2年で、更新審査が必要である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. Pマーク取得のメリットとして正しくないものはどれか。</summary>
+        <p>ア）顧客・取引先からの信頼性向上　イ）リスク低減　ウ）罰則の免除　エ）入札・契約条件での優位性</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Pマークを取得しても個人情報保護法の罰則が免除されるわけではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. PMS（個人情報保護マネジメントシステム）に含まれないものはどれか。</summary>
+        <p>ア）方針（ポリシー）　イ）内部監査　ウ）マーケティング戦略　エ）マネジメントレビュー</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — マーケティング戦略はPMSの要素に含まれない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. PMSにおける「内部監査」の頻度として正しいものはどれか。</summary>
+        <p>ア）月1回以上　イ）四半期に1回以上　ウ）年1回以上　エ）3年に1回</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 内部監査は年1回以上の実施が求められる。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. 個人情報保護法とPマーク制度の違いとして正しいものはどれか。</summary>
+        <p>ア）個人情報保護法は任意、Pマークは義務　イ）個人情報保護法は法律、Pマークは民間認証制度　ウ）両者とも罰則がある　エ）両者とも同じ要求事項を持つ</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 個人情報保護法は法律、Pマークは民間の認証制度である。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. PMSにおける「マネジメントレビュー」の説明として正しいものはどれか。</summary>
+        <p>ア）従業員が個人情報保護方針を策定すること　イ）経営層が運用状況を確認し改善方針を決定すること　ウ）外部の審査機関が監査すること　エ）教育の実施状況を確認すること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — マネジメントレビューは経営層が運用状況を確認し、改善方針を決定することである。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. IT企業でPマークに関して特に重要となるポイントとして正しくないものはどれか。</summary>
+        <p>ア）開発・運用部門のアクセス管理　イ）委託先管理　ウ）製品の宣伝活動　エ）ログ管理</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 製品の宣伝活動はPマークの重要ポイントではない。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. Pマーク制度に関する説明として正しいものはどれか。</summary>
+        <p>ア）Pマークを取得すれば個人情報保護法の対象外になる　イ）Pマークの審査では書類審査のみで現地審査はない　ウ）Pマークは個人情報を適切に取り扱う事業者に与えられる認証制度　エ）Pマークは国の法律である</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — Pマークは個人情報を適切に取り扱う事業者に与えられる民間の認証制度である。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『2_関連法令・契約.pdf』 第4章 プライバシーマーク制度（p63-p89）</p>
+    </section>
+  </main>
+
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
