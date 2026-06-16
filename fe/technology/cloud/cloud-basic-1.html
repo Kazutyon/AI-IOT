@@ -107,17 +107,42 @@
       </div>
       <figure class="wide-diagram">
         <figcaption>3形態の構造比較</figcaption>
-        <pre>オンプレミス
-  → 自社で機器保有
-  → 自社施設で運用
+        <svg viewBox="0 0 380 300" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr1a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- オンプレミス -->
+          <rect x="20" y="10" width="150" height="32" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="95" y="31" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e1b4b">オンプレミス</text>
+          <line x1="95" y1="42" x2="95" y2="58" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr1a)"/>
+          <rect x="20" y="60" width="150" height="30" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="95" y="80" text-anchor="middle" font-size="11" fill="#1e3a5f">自社で機器保有</text>
+          <line x1="95" y1="90" x2="95" y2="106" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr1a)"/>
+          <rect x="20" y="108" width="150" height="30" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="95" y="128" text-anchor="middle" font-size="11" fill="#1e3a5f">自社施設で運用</text>
 
-データセンター利用
-  → 自社で機器保有
-  → 施設のみ借りる
+          <!-- データセンター利用 -->
+          <rect x="195" y="10" width="165" height="32" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="277" y="31" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e1b4b">データセンター利用</text>
+          <line x1="277" y1="42" x2="277" y2="58" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr1a)"/>
+          <rect x="195" y="60" width="165" height="30" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="277" y="80" text-anchor="middle" font-size="11" fill="#1e3a5f">自社で機器保有</text>
+          <line x1="277" y1="90" x2="277" y2="106" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr1a)"/>
+          <rect x="195" y="108" width="165" height="30" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="277" y="128" text-anchor="middle" font-size="11" fill="#1e3a5f">施設のみ借りる</text>
 
-クラウド
-  → 事業者から機器を借りる
-  → 事業者が運用</pre>
+          <!-- クラウド -->
+          <rect x="105" y="160" width="170" height="32" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="181" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">クラウド</text>
+          <line x1="190" y1="192" x2="190" y2="208" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr1a)"/>
+          <rect x="105" y="210" width="170" height="30" rx="2" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="230" text-anchor="middle" font-size="11" fill="#14532d">事業者から機器を借りる</text>
+          <line x1="190" y1="240" x2="190" y2="256" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr1a)"/>
+          <rect x="105" y="258" width="170" height="30" rx="2" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="278" text-anchor="middle" font-size="11" fill="#14532d">事業者が運用</text>
+        </svg>
       </figure>
     </section>
 
@@ -140,15 +165,31 @@
       </div>
       <figure class="wide-diagram">
         <figcaption>クラウド発展の流れ</figcaption>
-        <pre>1990年代: データセンター登場
-        ↓
-2000年頃: サーバー集約
-        ↓
-2005年頃: 仮想化技術登場
-        ↓
-2010年代〜: クラウド本格普及
-        ↓
-AWS / Azure / GCP が市場牽引</pre>
+        <svg viewBox="0 0 360 320" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr1b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="40" y="10" width="280" height="38" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="34" text-anchor="middle" font-size="13" fill="#1e3a5f">1990年代: データセンター登場</text>
+          <line x1="180" y1="48" x2="180" y2="68" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr1b)"/>
+
+          <rect x="40" y="70" width="280" height="38" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="94" text-anchor="middle" font-size="13" fill="#1e3a5f">2000年頃: サーバー集約</text>
+          <line x1="180" y1="108" x2="180" y2="128" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr1b)"/>
+
+          <rect x="40" y="130" width="280" height="38" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="154" text-anchor="middle" font-size="13" fill="#1e3a5f">2005年頃: 仮想化技術登場</text>
+          <line x1="180" y1="168" x2="180" y2="188" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr1b)"/>
+
+          <rect x="40" y="190" width="280" height="38" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="214" text-anchor="middle" font-size="13" fill="#1e3a5f">2010年代〜: クラウド本格普及</text>
+          <line x1="180" y1="228" x2="180" y2="248" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr1b)"/>
+
+          <rect x="40" y="250" width="280" height="38" rx="18" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="180" y="274" text-anchor="middle" font-size="13" fill="#14532d">AWS / Azure / GCP が市場牽引</text>
+        </svg>
       </figure>
     </section>
 

@@ -84,19 +84,42 @@
 
       <figure class="wide-diagram">
         <figcaption>バブルソートの動作（[5,3,4,1,2] を昇順に）</figcaption>
-        <pre>初期: [5, 3, 4, 1, 2]
+        <svg viewBox="0 0 560 260" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="初期配列5,3,4,1,2から隣接交換を繰り返し、1周目で最大値5が右端に移動、2周目3周目を経て1,2,3,4,5に整列する">
+          <defs>
+            <marker id="arr-bubble" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <text x="10" y="16" font-size="12" font-weight="bold" fill="#334155">初期: [5, 3, 4, 1, 2]</text>
 
-    1周目: 5と3を交換→[3,5,4,1,2]
-           5と4を交換→[3,4,5,1,2]
-           5と1を交換→[3,4,1,5,2]
-           5と2を交換→[3,4,1,2,5]  ←最大値5が右端に
+          <text x="10" y="40" font-size="11" fill="#1e3a5f">1周目:</text>
+          <text x="70" y="40" font-size="11" fill="#334155">5と3を交換→[3,5,4,1,2]</text>
+          <text x="70" y="58" font-size="11" fill="#334155">5と4を交換→[3,4,5,1,2]</text>
+          <text x="70" y="76" font-size="11" fill="#334155">5と1を交換→[3,4,1,5,2]</text>
+          <text x="70" y="94" font-size="11" fill="#334155">5と2を交換→[3,4,1,2,5]</text>
+          <text x="320" y="94" font-size="10" fill="#16a34a">←最大値5が右端に</text>
 
-    2周目: [3,4,1,2,5] → [3,1,4,2,5] → [3,1,2,4,5]
+          <text x="10" y="124" font-size="11" fill="#1e3a5f">2周目:</text>
+          <text x="70" y="124" font-size="11" fill="#334155">[3,4,1,2,5] → [3,1,4,2,5] → [3,1,2,4,5]</text>
 
-    3周目: [3,1,2,4,5] → [1,3,2,4,5] → [1,2,3,4,5]
+          <text x="10" y="150" font-size="11" fill="#1e3a5f">3周目:</text>
+          <text x="70" y="150" font-size="11" fill="#334155">[3,1,2,4,5] → [1,3,2,4,5] → [1,2,3,4,5]</text>
 
-    結果: [1,2,3,4,5]
-    計算量: O(n²) / 安定 / 実装が最も簡単</pre>
+          <!-- 結果バー -->
+          <rect x="10" y="172" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="40" y="191" text-anchor="middle" font-size="11" fill="#14532d">1</text>
+          <rect x="70" y="172" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="100" y="191" text-anchor="middle" font-size="11" fill="#14532d">2</text>
+          <rect x="130" y="172" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="160" y="191" text-anchor="middle" font-size="11" fill="#14532d">3</text>
+          <rect x="190" y="172" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="220" y="191" text-anchor="middle" font-size="11" fill="#14532d">4</text>
+          <rect x="250" y="172" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="280" y="191" text-anchor="middle" font-size="11" fill="#14532d">5</text>
+          <text x="320" y="191" font-size="11" fill="#14532d">← 結果: [1,2,3,4,5]</text>
+
+          <text x="10" y="225" font-size="12" fill="#334155">計算量: O(n²) / 安定 / 実装が最も簡単</text>
+        </svg>
       </figure>
     </section>
 
@@ -106,15 +129,35 @@
 
       <figure class="wide-diagram">
         <figcaption>選択ソートの動作（[5,3,4,1,2]）</figcaption>
-        <pre>初期: [5, 3, 4, 1, 2]
+        <svg viewBox="0 0 520 230" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="初期配列5,3,4,1,2から未整列部分の最小値を見つけて先頭と交換することを4周繰り返し1,2,3,4,5に整列する">
+          <text x="10" y="16" font-size="12" font-weight="bold" fill="#334155">初期: [5, 3, 4, 1, 2]</text>
 
-    1周目: 最小値1（位置4）を先頭と交換→[1, 3, 4, 5, 2]
-    2周目: 最小値2（位置5）を2番目と交換→[1, 2, 4, 5, 3]
-    3周目: 最小値3（位置5）を3番目と交換→[1, 2, 3, 5, 4]
-    4周目: 最小値4（位置5）を4番目と交換→[1, 2, 3, 4, 5]
+          <text x="10" y="44" font-size="11" fill="#1e3a5f">1周目:</text>
+          <text x="70" y="44" font-size="11" fill="#334155">最小値1（位置4）を先頭と交換 → [1, 3, 4, 5, 2]</text>
 
-    結果: [1,2,3,4,5]
-    計算量: O(n²) / 不安定 / 交換回数が少ない（n-1回）</pre>
+          <text x="10" y="70" font-size="11" fill="#1e3a5f">2周目:</text>
+          <text x="70" y="70" font-size="11" fill="#334155">最小値2（位置5）を2番目と交換 → [1, 2, 4, 5, 3]</text>
+
+          <text x="10" y="96" font-size="11" fill="#1e3a5f">3周目:</text>
+          <text x="70" y="96" font-size="11" fill="#334155">最小値3（位置5）を3番目と交換 → [1, 2, 3, 5, 4]</text>
+
+          <text x="10" y="122" font-size="11" fill="#1e3a5f">4周目:</text>
+          <text x="70" y="122" font-size="11" fill="#334155">最小値4（位置5）を4番目と交換 → [1, 2, 3, 4, 5]</text>
+
+          <rect x="10" y="144" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="40" y="163" text-anchor="middle" font-size="11" fill="#14532d">1</text>
+          <rect x="70" y="144" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="100" y="163" text-anchor="middle" font-size="11" fill="#14532d">2</text>
+          <rect x="130" y="144" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="160" y="163" text-anchor="middle" font-size="11" fill="#14532d">3</text>
+          <rect x="190" y="144" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="220" y="163" text-anchor="middle" font-size="11" fill="#14532d">4</text>
+          <rect x="250" y="144" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="280" y="163" text-anchor="middle" font-size="11" fill="#14532d">5</text>
+          <text x="320" y="163" font-size="11" fill="#14532d">← 結果: [1,2,3,4,5]</text>
+
+          <text x="10" y="200" font-size="12" fill="#334155">計算量: O(n²) / 不安定 / 交換回数が少ない（n-1回）</text>
+        </svg>
       </figure>
     </section>
 
@@ -124,15 +167,35 @@
 
       <figure class="wide-diagram">
         <figcaption>挿入ソートの動作（[5,3,4,1,2]）</figcaption>
-        <pre>初期: [5 | 3, 4, 1, 2]（左側が整列済み）
+        <svg viewBox="0 0 520 230" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="初期状態5の右側に未整列部分3,4,1,2がある状態から、要素を1つずつ整列済み部分の正しい位置へ挿入していき1,2,3,4,5に整列する">
+          <text x="10" y="16" font-size="12" font-weight="bold" fill="#334155">初期: [5 | 3, 4, 1, 2]（左側が整列済み）</text>
 
-    Step1: 3を挿入→[3, 5 | 4, 1, 2]
-    Step2: 4を挿入→[3, 4, 5 | 1, 2]
-    Step3: 1を挿入→[1, 3, 4, 5 | 2]
-    Step4: 2を挿入→[1, 2, 3, 4, 5]
+          <text x="10" y="44" font-size="11" fill="#1e3a5f">Step1:</text>
+          <text x="70" y="44" font-size="11" fill="#334155">3を挿入 → [3, 5 | 4, 1, 2]</text>
 
-    結果: [1,2,3,4,5]
-    計算量: O(n²) / 安定 / ほぼ整列済みで最良O(n)</pre>
+          <text x="10" y="70" font-size="11" fill="#1e3a5f">Step2:</text>
+          <text x="70" y="70" font-size="11" fill="#334155">4を挿入 → [3, 4, 5 | 1, 2]</text>
+
+          <text x="10" y="96" font-size="11" fill="#1e3a5f">Step3:</text>
+          <text x="70" y="96" font-size="11" fill="#334155">1を挿入 → [1, 3, 4, 5 | 2]</text>
+
+          <text x="10" y="122" font-size="11" fill="#1e3a5f">Step4:</text>
+          <text x="70" y="122" font-size="11" fill="#334155">2を挿入 → [1, 2, 3, 4, 5]</text>
+
+          <rect x="10" y="144" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="40" y="163" text-anchor="middle" font-size="11" fill="#14532d">1</text>
+          <rect x="70" y="144" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="100" y="163" text-anchor="middle" font-size="11" fill="#14532d">2</text>
+          <rect x="130" y="144" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="160" y="163" text-anchor="middle" font-size="11" fill="#14532d">3</text>
+          <rect x="190" y="144" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="220" y="163" text-anchor="middle" font-size="11" fill="#14532d">4</text>
+          <rect x="250" y="144" width="60" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="280" y="163" text-anchor="middle" font-size="11" fill="#14532d">5</text>
+          <text x="320" y="163" font-size="11" fill="#14532d">← 結果: [1,2,3,4,5]</text>
+
+          <text x="10" y="200" font-size="12" fill="#334155">計算量: O(n²) / 安定 / ほぼ整列済みで最良O(n)</text>
+        </svg>
       </figure>
     </section>
 
@@ -141,22 +204,89 @@
       <p>マージソートは<strong>分割統治法</strong>を使います。配列を半分に分割→各部分を再帰的に整列→整列済みの2つをマージ（統合）します。安定でO(n log n)ですが、追加メモリが必要です。</p>
 
       <figure class="wide-diagram">
-        <figcaption>マージソートの動作（[5,3,4,1,2]）</figcaption>
-        <pre>           [5, 3, 4, 1, 2]
-           /               \
-      [5, 3, 4]          [1, 2]
-      /        \          /    \
-    [5, 3]    [4]      [1]    [2]
-    /     \
-  [5]     [3]
-    \     /
-    [3, 5] ←マージ
-        \       /
-       [3, 4, 5] ←マージ
-              \         /
-           [1, 2, 3, 4, 5] ←マージ
+        <figcaption>マージソートの動作（[5,3,4,1,2]）：分割フェーズ</figcaption>
+        <svg viewBox="0 0 480 220" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="配列5,3,4,1,2を半分に分割し続け、最終的に単一要素までバラバラに分割する木構造">
+          <!-- root -->
+          <rect x="170" y="10" width="140" height="30" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="240" y="30" text-anchor="middle" font-size="12" fill="#1e1b4b">[5, 3, 4, 1, 2]</text>
+          <!-- level1 -->
+          <line x1="220" y1="40" x2="120" y2="68" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="260" y1="40" x2="380" y2="68" stroke="#94a3b8" stroke-width="1.3"/>
+          <rect x="60" y="70" width="120" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="120" y="90" text-anchor="middle" font-size="12" fill="#1e3a5f">[5, 3, 4]</text>
+          <rect x="340" y="70" width="80" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="380" y="90" text-anchor="middle" font-size="12" fill="#1e3a5f">[1, 2]</text>
+          <!-- level2 -->
+          <line x1="100" y1="100" x2="60" y2="128" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="140" y1="100" x2="190" y2="128" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="360" y1="100" x2="320" y2="128" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="400" y1="100" x2="440" y2="128" stroke="#94a3b8" stroke-width="1.3"/>
+          <rect x="20" y="130" width="80" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="60" y="150" text-anchor="middle" font-size="12" fill="#92400e">[5, 3]</text>
+          <rect x="150" y="130" width="80" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="150" text-anchor="middle" font-size="12" fill="#14532d">[4]</text>
+          <rect x="280" y="130" width="80" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="320" y="150" text-anchor="middle" font-size="12" fill="#14532d">[1]</text>
+          <rect x="400" y="130" width="80" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="440" y="150" text-anchor="middle" font-size="12" fill="#14532d">[2]</text>
+          <!-- level3 -->
+          <line x1="50" y1="160" x2="30" y2="188" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="70" y1="160" x2="90" y2="188" stroke="#94a3b8" stroke-width="1.3"/>
+          <rect x="0" y="190" width="60" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="30" y="209" text-anchor="middle" font-size="12" fill="#14532d">[5]</text>
+          <rect x="60" y="190" width="60" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="90" y="209" text-anchor="middle" font-size="12" fill="#14532d">[3]</text>
+        </svg>
+      </figure>
 
-    計算量: O(n log n) / 安定 / 追加メモリO(n)必要</pre>
+      <figure class="wide-diagram">
+        <figcaption>マージソートの動作（[5,3,4,1,2]）：統合（マージ）フェーズ</figcaption>
+        <svg viewBox="0 0 480 220" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="単一要素[5][3][4][1][2]を整列しながら統合していき、最終的に1,2,3,4,5の整列済み配列にマージする">
+          <defs>
+            <marker id="arr-mergeup" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+            </marker>
+          </defs>
+          <!-- 最下段: 単一要素 -->
+          <rect x="0" y="10" width="60" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="30" y="29" text-anchor="middle" font-size="12" fill="#14532d">[5]</text>
+          <rect x="60" y="10" width="60" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="90" y="29" text-anchor="middle" font-size="12" fill="#14532d">[3]</text>
+          <rect x="150" y="10" width="80" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="29" text-anchor="middle" font-size="12" fill="#14532d">[4]</text>
+          <rect x="280" y="10" width="80" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="320" y="29" text-anchor="middle" font-size="12" fill="#14532d">[1]</text>
+          <rect x="400" y="10" width="80" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="440" y="29" text-anchor="middle" font-size="12" fill="#14532d">[2]</text>
+
+          <!-- [5]+[3] -> [3,5] -->
+          <line x1="30" y1="38" x2="50" y2="66" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arr-mergeup)"/>
+          <line x1="90" y1="38" x2="70" y2="66" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arr-mergeup)"/>
+          <rect x="20" y="70" width="80" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="60" y="90" text-anchor="middle" font-size="12" fill="#92400e">[3, 5]</text>
+          <text x="60" y="112" text-anchor="middle" font-size="10" fill="#92400e">←マージ</text>
+
+          <!-- [3,5]+[4] -> [3,4,5] -->
+          <line x1="60" y1="100" x2="90" y2="128" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arr-mergeup)"/>
+          <line x1="190" y1="38" x2="120" y2="128" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arr-mergeup)"/>
+          <rect x="60" y="132" width="120" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="120" y="152" text-anchor="middle" font-size="12" fill="#1e3a5f">[3, 4, 5]</text>
+          <text x="120" y="174" text-anchor="middle" font-size="10" fill="#1e3a5f">←マージ</text>
+
+          <!-- [1]+[2] -> [1,2] -->
+          <line x1="320" y1="38" x2="400" y2="66" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arr-mergeup)"/>
+          <line x1="440" y1="38" x2="420" y2="66" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arr-mergeup)"/>
+          <rect x="360" y="70" width="80" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="400" y="90" text-anchor="middle" font-size="12" fill="#92400e">[1, 2]</text>
+          <text x="400" y="112" text-anchor="middle" font-size="10" fill="#92400e">←マージ</text>
+
+          <!-- [3,4,5]+[1,2] -> [1,2,3,4,5] -->
+          <line x1="120" y1="162" x2="200" y2="188" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arr-mergeup)"/>
+          <line x1="400" y1="100" x2="280" y2="188" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arr-mergeup)"/>
+          <rect x="160" y="190" width="180" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="250" y="210" text-anchor="middle" font-size="13" fill="#14532d">[1, 2, 3, 4, 5]</text>
+        </svg>
+        <p>計算量: O(n log n) / 安定 / 追加メモリO(n)必要</p>
       </figure>
     </section>
 
@@ -166,19 +296,52 @@
 
       <figure class="wide-diagram">
         <figcaption>クイックソートの動作（ピボット=先頭値）</figcaption>
-        <pre>[5, 3, 4, 1, 2]  ピボット=5
+        <svg viewBox="0 0 460 280" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="配列5,3,4,1,2をピボット5で分割し、再帰的にピボットを選んで分割を繰り返し、最終的に1,2,3,4,5へ統合する">
+          <defs>
+            <marker id="arr-quick" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="10" y="10" width="160" height="30" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="90" y="30" text-anchor="middle" font-size="12" fill="#1e1b4b">[5, 3, 4, 1, 2]</text>
+          <text x="180" y="30" font-size="11" fill="#92400e">ピボット=5</text>
+          <line x1="90" y1="40" x2="90" y2="58" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-quick)"/>
+          <rect x="0" y="60" width="120" height="28" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="60" y="79" text-anchor="middle" font-size="11" fill="#1e3a5f">5より小: [3,4,1,2]</text>
+          <rect x="125" y="60" width="50" height="28" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="150" y="79" text-anchor="middle" font-size="11" fill="#92400e">[5]</text>
+          <rect x="180" y="60" width="100" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="230" y="79" text-anchor="middle" font-size="11" fill="#14532d">5より大: [ ]</text>
 
-    分割: 5より小→[3,4,1,2] / ピボット[5] / 5より大→[]
+          <line x1="60" y1="88" x2="60" y2="106" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-quick)"/>
+          <rect x="0" y="108" width="110" height="28" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="55" y="127" text-anchor="middle" font-size="11" fill="#1e1b4b">[3, 4, 1, 2]</text>
+          <text x="115" y="127" font-size="10" fill="#92400e">ピボット=3</text>
 
-    [3,4,1,2] ピボット=3
-    分割: 3より小→[1,2] / [3] / 3より大→[4]
+          <line x1="40" y1="136" x2="40" y2="154" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-quick)"/>
+          <rect x="0" y="156" width="80" height="26" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="40" y="174" text-anchor="middle" font-size="10" fill="#1e3a5f">3より小: [1,2]</text>
+          <rect x="85" y="156" width="40" height="26" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="105" y="174" text-anchor="middle" font-size="10" fill="#92400e">[3]</text>
+          <rect x="130" y="156" width="70" height="26" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="165" y="174" text-anchor="middle" font-size="10" fill="#14532d">3より大: [4]</text>
 
-    [1,2] ピボット=1
-    分割: [] / [1] / [2]
+          <line x1="40" y1="182" x2="40" y2="200" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-quick)"/>
+          <rect x="0" y="202" width="80" height="26" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="40" y="220" text-anchor="middle" font-size="10" fill="#1e1b4b">[1, 2] ピボット=1</text>
+          <line x1="40" y1="228" x2="40" y2="244" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-quick)"/>
+          <rect x="0" y="246" width="30" height="24" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+          <text x="15" y="262" text-anchor="middle" font-size="9" fill="#334155">[ ]</text>
+          <rect x="32" y="246" width="30" height="24" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="47" y="262" text-anchor="middle" font-size="9" fill="#92400e">[1]</text>
+          <rect x="64" y="246" width="30" height="24" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="79" y="262" text-anchor="middle" font-size="9" fill="#14532d">[2]</text>
 
-    統合: [1,2] + [3] + [4] + [5] = [1,2,3,4,5]
-
-    計算量: 平均O(n log n) / 最悪O(n²) / 不安定</pre>
+          <text x="220" y="220" font-size="11" fill="#334155">統合: [1,2] + [3] + [4] + [5]</text>
+          <rect x="220" y="232" width="180" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="310" y="252" text-anchor="middle" font-size="13" fill="#14532d">= [1, 2, 3, 4, 5]</text>
+        </svg>
+        <p>計算量: 平均O(n log n) / 最悪O(n²) / 不安定</p>
       </figure>
     </section>
 

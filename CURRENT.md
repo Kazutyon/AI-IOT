@@ -1,6 +1,6 @@
 # CURRENT — AI-IOT FE Study Portal
 
-最終更新: 2026-06-16 / Codex（Database教材 用語表・HTML崩れ修正）
+最終更新: 2026-06-16 / Claude（ASCII箱図崩壊・タグ取り違えの教訓をBUGS.md/HTMLIZATION-STATUS-RULES.mdに記録）
 
 ## 状態
 active
@@ -16,6 +16,7 @@ active
 - 2026-06-16: Computer B 5ファイルで `<pre>` 内ASCII図解10件をSVGへ置換。対象: `filesystem.html` / `io-devices-bus.html` / `io-scheduling-dma.html` / `memory-cache.html` / `memory-management.html`。対象5ファイルで `<pre>` 残存なし。
 - 2026-06-16: Computer A 5ファイルで `<pre>` 内ASCII図解12件をSVGへ置換。対象: `bios-os-types.html` / `cloud-mobile-iot.html` / `computer-history.html` / `cpu-architecture.html` / `device-management.html`。対象5ファイルで `<pre>` 残存なし。
 - 2026-06-16: Algorithm / Computer / Management の6ファイルで、日本語入りASCII箱図の崩れを修正。構造図はSVG化し、トレース表はHTML表へ置換済み。
+- 2026-06-16: 上記ASCII箱図崩壊（19件の仕事票で修正・最も時間がかかった作業）とHTML表タグの閉じ忘れ・取り違えを `BUGS.md` に教訓として記録。`HTMLIZATION-STATUS-RULES.md` に予防ルール（ASCII箱図禁止・タグ数一致確認）を追加済み。
 
 ## 次にやること
 1. 既存の別作業差分（Algorithm/Cloud等）が残っているため、担当者の完了・コミット状況を確認する。

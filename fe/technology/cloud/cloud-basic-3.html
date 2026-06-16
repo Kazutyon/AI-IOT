@@ -71,11 +71,41 @@
       <p><strong>パブリッククラウド</strong>は、クラウド事業者が不特定多数の企業・団体・個人に向けてインターネット経由で提供するサービスです。代表的な事業者は<strong>AWS（Amazon）・Azure（Microsoft）・GCP（Google）</strong>の三大メガベンダーです。</p>
       <figure class="wide-diagram">
         <figcaption>パブリッククラウドの構造</figcaption>
-        <pre>インターネット
-  ├── AWS   → 企業A
-  ├── Azure → 企業B
-  └── GCP   → 個人ユーザー
-（事業者リソースを複数利用者で共有）</pre>
+        <svg viewBox="0 0 400 230" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- ルートノード -->
+          <rect x="140" y="10" width="120" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="13" fill="#1e1b4b">インターネット</text>
+          <!-- 枝線 -->
+          <line x1="200" y1="46" x2="200" y2="62" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="60" y1="62" x2="200" y2="62" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="60" y1="62" x2="60" y2="84" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr3a)"/>
+          <line x1="200" y1="62" x2="200" y2="84" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr3a)"/>
+          <line x1="340" y1="62" x2="200" y2="62" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="340" y1="62" x2="340" y2="84" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr3a)"/>
+          <!-- 子ノード：AWS / Azure / GCP -->
+          <rect x="15" y="86" width="90" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="60" y="107" text-anchor="middle" font-size="12" fill="#1e3a5f">AWS</text>
+          <rect x="155" y="86" width="90" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="107" text-anchor="middle" font-size="12" fill="#1e3a5f">Azure</text>
+          <rect x="295" y="86" width="90" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="340" y="107" text-anchor="middle" font-size="12" fill="#1e3a5f">GCP</text>
+          <!-- 利用者への矢印 -->
+          <line x1="60" y1="118" x2="60" y2="140" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3a)"/>
+          <line x1="200" y1="118" x2="200" y2="140" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3a)"/>
+          <line x1="340" y1="118" x2="340" y2="140" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3a)"/>
+          <rect x="15" y="142" width="90" height="32" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="60" y="163" text-anchor="middle" font-size="11" fill="#14532d">企業A</text>
+          <rect x="155" y="142" width="90" height="32" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="163" text-anchor="middle" font-size="11" fill="#14532d">企業B</text>
+          <rect x="295" y="142" width="90" height="32" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="340" y="163" text-anchor="middle" font-size="11" fill="#14532d">個人ユーザー</text>
+          <text x="200" y="206" text-anchor="middle" font-size="11" fill="#64748b">（事業者リソースを複数利用者で共有）</text>
+        </svg>
       </figure>
       <p>特徴: 初期費用なし／低額、従量課金制、拡張性が非常に高い、事業者が運用・保守を担当、<strong>どのサーバーを使っているか「見えない」</strong>（抽象化）。</p>
     </section>
@@ -102,11 +132,28 @@
       <p><strong>ハイブリッドクラウド</strong>は、パブリッククラウドとプライベートクラウド（またはオンプレミス）を組み合わせて利用する形態です。機密データはプライベート、Webサービスはパブリックという使い分けができます。</p>
       <figure class="wide-diagram">
         <figcaption>ハイブリッドクラウド構成</figcaption>
-        <pre>オンプレミス（重要データ・基幹システム）
-        ↕
-プライベートクラウド（社内専用アプリ）
-        ↕
-パブリッククラウド（Webサービス・開発環境）</pre>
+        <svg viewBox="0 0 380 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr3b-down" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+            <marker id="arr3b-up" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+              <polygon points="8 0, 0 3, 8 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="30" y="10" width="320" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="35" text-anchor="middle" font-size="12" fill="#1e3a5f">オンプレミス（重要データ・基幹システム）</text>
+
+          <line x1="190" y1="50" x2="190" y2="86" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3b-down)" marker-start="url(#arr3b-up)"/>
+
+          <rect x="30" y="88" width="320" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="190" y="113" text-anchor="middle" font-size="12" fill="#92400e">プライベートクラウド（社内専用アプリ）</text>
+
+          <line x1="190" y1="128" x2="190" y2="164" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr3b-down)" marker-start="url(#arr3b-up)"/>
+
+          <rect x="30" y="166" width="320" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="191" text-anchor="middle" font-size="12" fill="#14532d">パブリッククラウド（Webサービス・開発環境）</text>
+        </svg>
       </figure>
       <div class="table-wrap mobile-card-table">
         <table>

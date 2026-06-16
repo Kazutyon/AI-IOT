@@ -193,15 +193,44 @@
 
       <figure class="wide-diagram">
         <figcaption>コールスタックの積み上がりと巻き戻し（factorial(3)の例）</figcaption>
-        <pre>【積み上げフェーズ】
-    fact(3) 呼出  →  スタック: [ fact(3) ]
-    fact(2) 呼出  →  スタック: [ fact(3), fact(2) ]
-    fact(1) 呼出  →  スタック: [ fact(3), fact(2), fact(1) ]
-    fact(0) 呼出  →  基底条件！ return 1
+        <svg viewBox="0 0 640 360" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="積み上げフェーズでfact(3),fact(2),fact(1),fact(0)の順にスタックへ積まれ、fact(0)で基底条件に達してreturn 1。巻き戻しフェーズでfact(0)=1からfact(3)=6まで計算しながらスタックが空になる">
+          <defs>
+            <marker id="arr-callstack" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <text x="160" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">【積み上げフェーズ】</text>
+          <!-- スタック視覚化：下から上に積む -->
+          <rect x="20" y="280" width="120" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="80" y="303" text-anchor="middle" font-size="12" fill="#1e3a5f">fact(3) 呼出</text>
+          <rect x="20" y="240" width="120" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="80" y="263" text-anchor="middle" font-size="12" fill="#1e3a5f">fact(2) 呼出</text>
+          <rect x="20" y="200" width="120" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="80" y="223" text-anchor="middle" font-size="12" fill="#1e3a5f">fact(1) 呼出</text>
+          <rect x="20" y="160" width="120" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="80" y="183" text-anchor="middle" font-size="12" fill="#92400e">fact(0) 呼出</text>
+          <text x="80" y="150" text-anchor="middle" font-size="10" fill="#92400e">↑基底条件！return 1</text>
+          <text x="170" y="298" font-size="11" fill="#475569">スタック: [fact(3)]</text>
+          <text x="170" y="258" font-size="11" fill="#475569">スタック: [fact(3), fact(2)]</text>
+          <text x="170" y="218" font-size="11" fill="#475569">スタック: [fact(3), fact(2), fact(1)]</text>
+          <line x1="80" y1="40" x2="80" y2="158" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-callstack)" stroke-dasharray="3,2"/>
+          <text x="95" y="100" font-size="10" fill="#64748b">積む</text>
 
-    【巻き戻しフェーズ】
-    fact(0)=1 → fact(1)=1×1=1 → fact(2)=2×1=2 → fact(3)=3×2=6
-    スタック:  []  ← 空になった</pre>
+          <text x="480" y="18" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">【巻き戻しフェーズ】</text>
+          <rect x="380" y="60" width="100" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="430" y="83" text-anchor="middle" font-size="12" fill="#92400e">fact(0)=1</text>
+          <line x1="480" y1="78" x2="510" y2="78" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-callstack)"/>
+          <rect x="514" y="60" width="110" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="569" y="83" text-anchor="middle" font-size="12" fill="#14532d">fact(1)=1×1=1</text>
+          <line x1="569" y1="96" x2="569" y2="120" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-callstack)"/>
+          <rect x="500" y="124" width="138" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="569" y="147" text-anchor="middle" font-size="12" fill="#14532d">fact(2)=2×1=2</text>
+          <line x1="500" y1="142" x2="430" y2="142" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-callstack)"/>
+          <rect x="320" y="124" width="110" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="375" y="147" text-anchor="middle" font-size="12" fill="#14532d">fact(3)=3×2=6</text>
+          <text x="375" y="190" text-anchor="middle" font-size="12" fill="#334155">スタック: [ ] ← 空になった</text>
+          <line x1="170" y1="190" x2="220" y2="190" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-callstack)"/>
+        </svg>
       </figure>
 
       <h3>2-3. 再帰 vs 反復（ループ）の比較</h3>
@@ -231,17 +260,32 @@
 
       <figure class="wide-diagram">
         <figcaption>factorial(4) の再帰トレース</figcaption>
-        <pre>fact(4) = 4 × fact(3)
-              = 4 × (3 × fact(2))
-              = 4 × (3 × (2 × fact(1)))
-              = 4 × (3 × (2 × (1 × fact(0))))
-              = 4 × (3 × (2 × (1 × 1)))        ← fact(0)=1（基底条件）
-              = 4 × (3 × (2 × 1))
-              = 4 × (3 × 2)
-              = 4 × 6
-              = 24
-
-    計算量: O(n) — n回の再帰呼び出しで済む</pre>
+        <svg viewBox="0 0 520 320" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="fact(4)からfact(0)まで展開し、fact(0)=1の基底条件から24まで巻き戻る計算過程。計算量はO(n)">
+          <defs>
+            <marker id="arr-facttrace" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="10" y="10" width="220" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="120" y="30" text-anchor="middle" font-size="12" fill="#1e3a5f">fact(4) = 4 × fact(3)</text>
+          <line x1="60" y1="40" x2="60" y2="58" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-facttrace)"/>
+          <rect x="35" y="60" width="250" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="160" y="80" text-anchor="middle" font-size="12" fill="#1e3a5f">= 4 × (3 × fact(2))</text>
+          <line x1="85" y1="90" x2="85" y2="108" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-facttrace)"/>
+          <rect x="60" y="110" width="280" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="130" text-anchor="middle" font-size="12" fill="#1e3a5f">= 4 × (3 × (2 × fact(1)))</text>
+          <line x1="110" y1="140" x2="110" y2="158" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-facttrace)"/>
+          <rect x="85" y="160" width="310" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="240" y="180" text-anchor="middle" font-size="12" fill="#1e3a5f">= 4 × (3 × (2 × (1 × fact(0))))</text>
+          <line x1="135" y1="190" x2="135" y2="208" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-facttrace)"/>
+          <rect x="110" y="210" width="340" height="30" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="280" y="230" text-anchor="middle" font-size="12" fill="#92400e">= 4 × (3 × (2 × (1 × 1)))</text>
+          <text x="460" y="230" font-size="10" fill="#92400e">← fact(0)=1（基底条件）</text>
+          <line x1="160" y1="240" x2="160" y2="255" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-facttrace)"/>
+          <rect x="135" y="257" width="120" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="195" y="276" text-anchor="middle" font-size="12" fill="#14532d">= 4 × 6 = 24</text>
+          <text x="135" y="306" font-size="12" fill="#334155">計算量: O(n) — n回の再帰呼び出しで済む</text>
+        </svg>
       </figure>
 
       <h3>3-2. フィボナッチ数列の再帰</h3>
@@ -253,19 +297,64 @@
 
       <figure class="wide-diagram">
         <figcaption>fibonacci(5) の再帰ツリー（二重呼び出し）</figcaption>
-        <pre>                         fib(5)
-                    /                \
-               fib(4)                fib(3)
-            /         \            /        \
-       fib(3)        fib(2)    fib(2)     fib(1)=1
-      /      \      /     \    /     \
-  fib(2)  fib(1) fib(1) fib(0) fib(1) fib(0)
-  /    \    =1     =1    =0     =1    =0
-fib(1) fib(0)
-  =1     =0
-
-★ fib(3) が2回、fib(2) が3回も重複計算されている！
-→ 同じ計算を何度も繰り返すため、計算量は O(2ⁿ)</pre>
+        <svg viewBox="0 0 920 380" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="fib(5)の再帰呼び出しツリー。fib(5)がfib(4)とfib(3)を呼び、さらに分岐していく。fib(3)が2回、fib(2)が3回重複計算され、計算量はO(2のn乗)">
+          <defs>
+            <marker id="arr-fibtree" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+            </marker>
+          </defs>
+          <!-- レベル0: fib(5) -->
+          <rect x="420" y="10" width="80" height="34" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="460" y="32" text-anchor="middle" font-size="13" fill="#1e1b4b">fib(5)</text>
+          <!-- レベル1: fib(4), fib(3) -->
+          <line x1="440" y1="44" x2="260" y2="80" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="480" y1="44" x2="660" y2="80" stroke="#94a3b8" stroke-width="1.3"/>
+          <rect x="220" y="82" width="80" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="260" y="104" text-anchor="middle" font-size="13" fill="#1e3a5f">fib(4)</text>
+          <rect x="620" y="82" width="80" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="660" y="104" text-anchor="middle" font-size="13" fill="#1e3a5f">fib(3)</text>
+          <!-- レベル2: fib(3), fib(2)  (from fib4)  /  fib(2), fib(1)=1 (from fib3) -->
+          <line x1="240" y1="116" x2="100" y2="152" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="280" y1="116" x2="360" y2="152" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="640" y1="116" x2="540" y2="152" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="680" y1="116" x2="800" y2="152" stroke="#94a3b8" stroke-width="1.3"/>
+          <rect x="60" y="154" width="80" height="34" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="100" y="176" text-anchor="middle" font-size="12" fill="#92400e">fib(3)</text>
+          <rect x="320" y="154" width="80" height="34" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="360" y="176" text-anchor="middle" font-size="12" fill="#92400e">fib(2)</text>
+          <rect x="500" y="154" width="80" height="34" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="540" y="176" text-anchor="middle" font-size="12" fill="#92400e">fib(2)</text>
+          <rect x="760" y="154" width="80" height="34" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="800" y="176" text-anchor="middle" font-size="12" fill="#14532d">fib(1)=1</text>
+          <!-- レベル3: fib(2),fib(1) (from fib3@left) / fib(1),fib(0) (from fib2@left mid) / fib(1),fib(0) (from fib2@right mid) -->
+          <line x1="80" y1="188" x2="20" y2="224" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="120" y1="188" x2="180" y2="224" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="340" y1="188" x2="290" y2="224" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="380" y1="188" x2="430" y2="224" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="520" y1="188" x2="470" y2="224" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="560" y1="188" x2="610" y2="224" stroke="#94a3b8" stroke-width="1.3"/>
+          <rect x="0" y="226" width="40" height="30" rx="4" fill="#fae8ff" stroke="#a21caf" stroke-width="1.3"/>
+          <text x="20" y="246" text-anchor="middle" font-size="10" fill="#701a75">fib(2)</text>
+          <rect x="160" y="226" width="40" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.3"/>
+          <text x="180" y="246" text-anchor="middle" font-size="10" fill="#14532d">fib(1)=1</text>
+          <rect x="270" y="226" width="40" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.3"/>
+          <text x="290" y="246" text-anchor="middle" font-size="10" fill="#14532d">fib(1)=1</text>
+          <rect x="410" y="226" width="40" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.3"/>
+          <text x="430" y="246" text-anchor="middle" font-size="10" fill="#14532d">fib(0)=0</text>
+          <rect x="450" y="226" width="40" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.3"/>
+          <text x="470" y="246" text-anchor="middle" font-size="10" fill="#14532d">fib(1)=1</text>
+          <rect x="590" y="226" width="40" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.3"/>
+          <text x="610" y="246" text-anchor="middle" font-size="10" fill="#14532d">fib(0)=0</text>
+          <!-- レベル4: fib(1),fib(0) from fib(2)@far-left -->
+          <line x1="20" y1="256" x2="0" y2="290" stroke="#94a3b8" stroke-width="1.3"/>
+          <line x1="20" y1="256" x2="40" y2="290" stroke="#94a3b8" stroke-width="1.3"/>
+          <rect x="-20" y="292" width="40" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.3"/>
+          <text x="0" y="310" text-anchor="middle" font-size="9" fill="#14532d">fib(1)=1</text>
+          <rect x="20" y="292" width="40" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.3"/>
+          <text x="40" y="310" text-anchor="middle" font-size="9" fill="#14532d">fib(0)=0</text>
+          <text x="460" y="345" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">★ fib(3) が2回、fib(2) が3回も重複計算されている！</text>
+          <text x="460" y="365" text-anchor="middle" font-size="12" fill="#334155">→ 同じ計算を何度も繰り返すため、計算量は O(2ⁿ)</text>
+        </svg>
       </figure>
 
       <div class="table-wrap mobile-card-table">
@@ -295,23 +384,39 @@ fib(1) fib(0)
 
       <figure class="wide-diagram">
         <figcaption>Big-O 6種の増加曲線（nが大きくなると差は圧倒的）</figcaption>
-        <pre>計算量
-  ↑
-  │                                          O(2ⁿ) /
-  │                                               /
-  │                                   O(n²)  /──/
-  │                                /────────/
-  │                       O(n log n) /
-  │                    /───────────/
-  │              O(n) /
-  │           /──────/
-  │    O(log n) /
-  │  /───────/
-  │ O(1) ──────────────────────────────
-  └──────────────────────────────────────→ n
-
-     「定対線準二指」と覚える！
-      O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ)</pre>
+        <svg viewBox="0 0 480 320" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="計算量グラフ。横軸n、縦軸計算量。O(1)が最も平坦、O(log n)、O(n)、O(n log n)、O(n²)の順に急増し、O(2のn乗)が最も急激に立ち上がる">
+          <defs>
+            <marker id="arr-bigo" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#334155"/>
+            </marker>
+          </defs>
+          <!-- 軸 -->
+          <line x1="50" y1="20" x2="50" y2="270" stroke="#334155" stroke-width="1.5" marker-end="url(#arr-bigo)" transform="rotate(180,50,270)"/>
+          <line x1="50" y1="270" x2="50" y2="15" stroke="#334155" stroke-width="1.5" marker-end="url(#arr-bigo)"/>
+          <line x1="50" y1="270" x2="460" y2="270" stroke="#334155" stroke-width="1.5" marker-end="url(#arr-bigo)"/>
+          <text x="35" y="15" font-size="12" fill="#334155">計算量</text>
+          <text x="470" y="280" font-size="12" fill="#334155">n</text>
+          <!-- O(1) 平坦 -->
+          <path d="M 50,255 L 440,255" fill="none" stroke="#16a34a" stroke-width="2"/>
+          <text x="445" y="259" font-size="11" fill="#16a34a">O(1)</text>
+          <!-- O(log n) -->
+          <path d="M 50,255 Q 200,235 440,205" fill="none" stroke="#2563eb" stroke-width="2"/>
+          <text x="445" y="209" font-size="11" fill="#2563eb">O(log n)</text>
+          <!-- O(n) 直線 -->
+          <path d="M 50,255 L 440,90" fill="none" stroke="#0891b2" stroke-width="2"/>
+          <text x="445" y="94" font-size="11" fill="#0891b2">O(n)</text>
+          <!-- O(n log n) -->
+          <path d="M 50,255 Q 250,150 440,40" fill="none" stroke="#d97706" stroke-width="2"/>
+          <text x="380" y="35" font-size="11" fill="#d97706">O(n log n)</text>
+          <!-- O(n^2) -->
+          <path d="M 50,255 Q 300,250 400,30" fill="none" stroke="#dc2626" stroke-width="2"/>
+          <text x="330" y="55" font-size="11" fill="#dc2626">O(n²)</text>
+          <!-- O(2^n) 最も急 -->
+          <path d="M 50,255 Q 360,255 380,20" fill="none" stroke="#9333ea" stroke-width="2"/>
+          <text x="300" y="20" font-size="11" fill="#9333ea">O(2ⁿ)</text>
+          <text x="240" y="300" text-anchor="middle" font-size="12" font-weight="bold" fill="#334155">「定対線準二指」と覚える！</text>
+          <text x="240" y="316" text-anchor="middle" font-size="11" fill="#475569">O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(2ⁿ)</text>
+        </svg>
       </figure>
 
       <h3>4-2. Big-O 早見表</h3>

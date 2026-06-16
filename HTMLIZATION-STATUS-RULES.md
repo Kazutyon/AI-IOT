@@ -67,6 +67,17 @@ Each target folder `README.md` must contain this block near the top:
 - 根拠：basic-theory / cloud / management / network / security すべて 5〜6 個で統一済み
 - 違反例：computer/index.html が当初15個 → 6個に修正（2026-06-12）
 
+## ASCII箱図禁止ルール（2026-06-16追加）
+
+PDF→HTML化で図解を作る際、`│日本語テキスト│`形式のASCII箱図を**新規に作らない**こと。
+
+- 根拠：ASCII罫線文字（`│`等）は表示幅1、日本語文字は表示幅2のため、スマホ・PCどちらでも右端がズレて崩壊する。
+- 過去の失敗：この崩れを直すために19件の仕事票（`docs\ai-team-queue\done\task-2026-06-16-svg-*`）が発生し、HTML化作業全体の中で最も時間がかかった修正になった（詳細: `BUGS.md`）。
+- ルール：
+  - 構造図・フロー図・状態遷移図は最初から `<svg viewBox="..." width="100%">` で作成する。
+  - 単純な縦リスト・ツリー（箱なし・日本語を箱の中に入れない形）はASCII可。
+  - 図は `<figure class="wide-diagram"><figcaption>タイトル</figcaption>` で囲む。
+
 ## Done Checklist
 
 A PDF is not `done` until all are true:
@@ -76,6 +87,7 @@ A PDF is not `done` until all are true:
 - `data/curriculum.json` and `assets/app.js` include the same items.
 - Top portal links to the section when appropriate.
 - QC passed: quiz cards, answer toggles, source notes, duplicate IDs, local links, and no banned inline style patterns.
+- `<tr>`/`</tr>` と `<table>`/`</table>` の出現数が一致している（タグの閉じ忘れ・取り違えがない）。
 - Commit hash is recorded in the folder README, `PDF-FOLDER-MAP.md`, `LOG.md`, and `CURRENT.md`.
 - Changes are pushed to GitHub.
 

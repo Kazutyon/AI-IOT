@@ -389,23 +389,64 @@
       <p>BFSは「<strong>横に広がりながら進む</strong>」探索方法です。DFSが「深く潜る」のに対し、BFSはレベル（階層）ごとに探索します。</p>
 
       <figure class="wide-diagram">
-        <figcaption>BFS レベル順訪問（キュー動作つき）</figcaption>
-        <pre>           [A] ←レベル0
-          /   \
-        [B]   [C] ←レベル1
-       /   \
-     [D]   [E] ←レベル2
+        <figcaption>BFS レベル順訪問の木構造（A→B→C→D→E）</figcaption>
+        <svg viewBox="0 0 360 160" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="根Aの下に子BとC、Bの下に子DとEがある木構造。BFSはレベル0のA、レベル1のBとC、レベル2のDとEの順に訪問する">
+          <line x1="180" y1="46" x2="120" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="180" y1="46" x2="240" y2="84" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="120" y1="120" x2="80" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="120" y1="120" x2="160" y2="148" stroke="#94a3b8" stroke-width="1.5"/>
+          <rect x="150" y="10" width="60" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="180" y="33" text-anchor="middle" font-size="13" fill="#1e1b4b">A</text>
+          <text x="280" y="33" font-size="11" fill="#64748b">←レベル0</text>
+          <rect x="90" y="84" width="60" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="120" y="107" text-anchor="middle" font-size="13" fill="#1e3a5f">B</text>
+          <rect x="210" y="84" width="60" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="240" y="107" text-anchor="middle" font-size="13" fill="#1e3a5f">C</text>
+          <text x="280" y="107" font-size="11" fill="#64748b">←レベル1</text>
+          <rect x="50" y="124" width="60" height="26" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="80" y="142" text-anchor="middle" font-size="12" fill="#14532d">D</text>
+          <rect x="130" y="124" width="60" height="26" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="160" y="142" text-anchor="middle" font-size="12" fill="#14532d">E</text>
+          <text x="280" y="142" font-size="11" fill="#64748b">←レベル2</text>
+        </svg>
+        <p>BFS訪問順: A → B → C → D → E（上から下へ、左から右へ）</p>
+      </figure>
 
-BFS訪問順: A → B → C → D → E
-（上から下へ、左から右へ）
+      <figure class="wide-diagram">
+        <figcaption>BFSのキュー動作（FIFO）</figcaption>
+        <svg viewBox="0 0 480 260" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="キューにAが入った初期状態から、各ノードを取り出して訪問し子をキューに追加していく過程。最終的にキューが空になり終了する">
+          <defs>
+            <marker id="arr-bfsqueue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <text x="10" y="18" font-size="12" fill="#334155">初期: キュー = [A]</text>
 
-キュー動作:
-  初期: [A]
-  A取出→訪問→B,C追加: [B,C]
-  B取出→訪問→D,E追加: [C,D,E]
-  C取出→訪問: [D,E]
-  D取出→訪問: [E]
-  E取出→訪問: [] →終了</pre>
+          <rect x="10" y="28" width="200" height="28" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="110" y="47" text-anchor="middle" font-size="11" fill="#1e3a5f">A取出→訪問→B,C追加</text>
+          <line x1="10" y1="56" x2="10" y2="56" stroke="none"/>
+          <text x="220" y="47" font-size="11" fill="#334155">キュー: [B, C]</text>
+
+          <line x1="110" y1="56" x2="110" y2="74" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-bfsqueue)"/>
+          <rect x="10" y="76" width="200" height="28" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="110" y="95" text-anchor="middle" font-size="11" fill="#1e3a5f">B取出→訪問→D,E追加</text>
+          <text x="220" y="95" font-size="11" fill="#334155">キュー: [C, D, E]</text>
+
+          <line x1="110" y1="104" x2="110" y2="122" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-bfsqueue)"/>
+          <rect x="10" y="124" width="200" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="110" y="143" text-anchor="middle" font-size="11" fill="#14532d">C取出→訪問</text>
+          <text x="220" y="143" font-size="11" fill="#334155">キュー: [D, E]</text>
+
+          <line x1="110" y1="152" x2="110" y2="170" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-bfsqueue)"/>
+          <rect x="10" y="172" width="200" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="110" y="191" text-anchor="middle" font-size="11" fill="#14532d">D取出→訪問</text>
+          <text x="220" y="191" font-size="11" fill="#334155">キュー: [E]</text>
+
+          <line x1="110" y1="200" x2="110" y2="218" stroke="#64748b" stroke-width="1.3" marker-end="url(#arr-bfsqueue)"/>
+          <rect x="10" y="220" width="200" height="28" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+          <text x="110" y="239" text-anchor="middle" font-size="11" fill="#14532d">E取出→訪問</text>
+          <text x="220" y="239" font-size="11" fill="#14532d">キュー: [] → 終了</text>
+        </svg>
       </figure>
 
       <h3>5-1. BFSがキューを使う理由</h3>

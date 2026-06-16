@@ -1,5 +1,14 @@
 # LOG — AI-IOT FE Study Portal
 
+## 2026-06-16 Claude — ASCII箱図崩壊・タグ取り違えを教訓として記録
+
+- 背景: HTML化作業全体で最も時間がかかった修正（ASCII箱図のスマホ崩壊、19件の仕事票でSVG化）と、頻発していたHTML表タグの閉じ忘れ・取り違えが、どこにも予防ルールとして記録されていなかった。
+- 内容:
+  - `BUGS.md` に2件の教訓エントリを追加（ASCII箱図崩壊の症状・原因・規模19件、表タグ崩れの頻発パターン）。
+  - `HTMLIZATION-STATUS-RULES.md` に「ASCII箱図禁止ルール」セクションを追加し、次回PDF→HTML化では図解を最初からSVG/HTML表で作ることを明記。
+  - 同ファイルの `Done Checklist` に「`<tr>`/`</tr>`、`<table>`/`</table>` の出現数一致確認」を追加。
+- 目的: Markdownルールファイルは全AI（Claude/Codex/DeepSeek）が共通で読めるため、Claude専用のSkillではなくこの形式で再発防止を仕込んだ。
+
 ## 2026-06-16 Codex — Database教材 用語表・比較表の中国語混入とHTML崩れ修正
 
 - 対象: `fe/technology/database/page-generation-1.html` 以降のDatabase教材12ファイル。

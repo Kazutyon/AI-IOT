@@ -111,13 +111,42 @@
       <h2>クラウド導入のメリット（運用視点）</h2>
       <figure class="wide-diagram">
         <figcaption>従来方式とクラウドの比較</figcaption>
-        <pre>【従来方式】
-機器購入 → 設置 → 設定 → 運用監視 → 故障対応
-（全て自社対応）
+        <svg viewBox="0 0 380 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr2a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 従来方式 -->
+          <text x="10" y="18" font-size="13" font-weight="bold" fill="#1e3a5f">【従来方式】</text>
+          <rect x="10" y="26" width="62" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="41" y="46" text-anchor="middle" font-size="10" fill="#1e3a5f">機器購入</text>
+          <line x1="72" y1="42" x2="86" y2="42" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2a)"/>
+          <rect x="88" y="26" width="50" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="113" y="46" text-anchor="middle" font-size="10" fill="#1e3a5f">設置</text>
+          <line x1="138" y1="42" x2="152" y2="42" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2a)"/>
+          <rect x="154" y="26" width="50" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="179" y="46" text-anchor="middle" font-size="10" fill="#1e3a5f">設定</text>
+          <line x1="204" y1="42" x2="218" y2="42" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2a)"/>
+          <rect x="220" y="26" width="68" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="254" y="46" text-anchor="middle" font-size="10" fill="#1e3a5f">運用監視</text>
+          <line x1="288" y1="42" x2="302" y2="42" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2a)"/>
+          <rect x="304" y="26" width="68" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="338" y="46" text-anchor="middle" font-size="10" fill="#1e3a5f">故障対応</text>
+          <text x="10" y="78" font-size="11" fill="#64748b">（全て自社対応）</text>
 
-【クラウド】
-Web申込み → すぐ使える → 事業者が運用
-（インフラ管理は事業者に任せる）</pre>
+          <!-- クラウド -->
+          <text x="10" y="118" font-size="13" font-weight="bold" fill="#14532d">【クラウド】</text>
+          <rect x="10" y="126" width="84" height="32" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="52" y="146" text-anchor="middle" font-size="10" fill="#14532d">Web申込み</text>
+          <line x1="94" y1="142" x2="108" y2="142" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2a)"/>
+          <rect x="110" y="126" width="84" height="32" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="152" y="146" text-anchor="middle" font-size="10" fill="#14532d">すぐ使える</text>
+          <line x1="194" y1="142" x2="208" y2="142" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr2a)"/>
+          <rect x="210" y="126" width="100" height="32" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="260" y="146" text-anchor="middle" font-size="10" fill="#14532d">事業者が運用</text>
+          <text x="10" y="178" font-size="11" fill="#64748b">（インフラ管理は事業者に任せる）</text>
+        </svg>
       </figure>
 
       <div class="table-wrap mobile-card-table">
