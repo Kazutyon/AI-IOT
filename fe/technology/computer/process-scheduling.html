@@ -163,36 +163,36 @@
       <h3>プロセスの状態遷移</h3>
       <figure class="wide-diagram">
         <figcaption>プロセスの状態遷移図</figcaption>
-        <pre>
-【プロセスの状態遷移】
+        <svg viewBox="0 0 760 430" width="100%" role="img" aria-labelledby="process-state-title process-state-desc">
+          <title id="process-state-title">プロセスの状態遷移</title>
+          <desc id="process-state-desc">実行状態、実行可能状態、待ち状態の3状態と、タイムアウト、I/O完了、イベント発生による遷移を示す。</desc>
+          <defs>
+            <marker id="process-state-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"></path>
+            </marker>
+          </defs>
+          <rect x="260" y="32" width="240" height="94" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="380" y="64" text-anchor="middle" font-size="20" font-weight="700" fill="#1e3a8a">実行状態</text>
+          <text x="380" y="90" text-anchor="middle" font-size="15" fill="#1e40af">(Running)</text>
+          <text x="380" y="112" text-anchor="middle" font-size="15" fill="#1f2937">CPUを使っている</text>
 
-                +-----------------+
-                |                 |
-                |   実行状態      |
-                |   (Running)     |
-                | CPUを使っている |
-                +-----------------+
-                       |
-                       | タイムアウト
-                       | (時間切れ)
-                       v
-                +-----------------+
-                |                 |
-                |  実行可能状態   |
-                |    (Ready)      |
-                | CPUを待っている |
-                +-----------------+
-                       ^
-                       | I/O完了
-                       | イベント発生
-                       |
-                +-----------------+
-                |                 |
-                |    待ち状態     |
-                |   (Waiting)     |
-                | I/Oなど完了待ち |
-                +-----------------+
-        </pre>
+          <rect x="260" y="182" width="240" height="94" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"></rect>
+          <text x="380" y="214" text-anchor="middle" font-size="20" font-weight="700" fill="#065f46">実行可能状態</text>
+          <text x="380" y="240" text-anchor="middle" font-size="15" fill="#047857">(Ready)</text>
+          <text x="380" y="262" text-anchor="middle" font-size="15" fill="#1f2937">CPUを待っている</text>
+
+          <rect x="260" y="332" width="240" height="70" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"></rect>
+          <text x="380" y="360" text-anchor="middle" font-size="20" font-weight="700" fill="#9a3412">待ち状態</text>
+          <text x="380" y="384" text-anchor="middle" font-size="15" fill="#c2410c">(Waiting) I/Oなど完了待ち</text>
+
+          <line x1="380" y1="126" x2="380" y2="176" stroke="#2563eb" stroke-width="3" marker-end="url(#process-state-arrow)"></line>
+          <text x="410" y="150" font-size="15" fill="#1f2937">タイムアウト</text>
+          <text x="410" y="170" font-size="14" fill="#4b5563">(時間切れ)</text>
+
+          <line x1="380" y1="332" x2="380" y2="282" stroke="#2563eb" stroke-width="3" marker-end="url(#process-state-arrow)"></line>
+          <text x="410" y="308" font-size="15" fill="#1f2937">I/O完了</text>
+          <text x="410" y="328" font-size="15" fill="#1f2937">イベント発生</text>
+        </svg>
       </figure>
 
       <h3>プロセスの3つの状態</h3>
@@ -276,7 +276,7 @@
             <tr>
               <th>保存・復元する情報</th>
               <th>説明</th>
-            </td>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -294,27 +294,35 @@
             <tr>
               <td>メモリ情報</td>
               <td>ページテーブル情報など</td>
-            <tr>
+            </tr>
           </tbody>
         </table>
       </div>
 
       <figure class="wide-diagram">
         <figcaption>コンテキストスイッチの流れ</figcaption>
-        <pre>
-【コンテキストスイッチの流れ】
+        <svg viewBox="0 0 760 300" width="100%" role="img" aria-labelledby="context-switch-title context-switch-desc">
+          <title id="context-switch-title">コンテキストスイッチの流れ</title>
+          <desc id="context-switch-desc">プロセスA実行中から、タイマー割り込みまたはI/O要求、OSカーネル割り込み処理、プロセスB実行開始へ切り替わる流れを示す。</desc>
+          <defs>
+            <marker id="context-switch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"></path>
+            </marker>
+          </defs>
+          <rect x="245" y="24" width="270" height="58" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="380" y="60" text-anchor="middle" font-size="20" font-weight="700" fill="#1e3a8a">プロセスA実行中</text>
 
-  プロセスA実行中
-        |
-        | タイマー割り込み or I/O要求
-        v
-  OSカーネル割り込み処理
-        |
-        | プロセスAの状態を保存
-        | プロセスBの状態を復元
-        v
-  プロセスB実行開始
-        </pre>
+          <line x1="380" y1="82" x2="380" y2="125" stroke="#2563eb" stroke-width="3" marker-end="url(#context-switch-arrow)"></line>
+          <text x="405" y="110" font-size="15" fill="#1f2937">タイマー割り込み or I/O要求</text>
+
+          <rect x="215" y="130" width="330" height="76" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"></rect>
+          <text x="380" y="160" text-anchor="middle" font-size="20" font-weight="700" fill="#9a3412">OSカーネル割り込み処理</text>
+          <text x="380" y="186" text-anchor="middle" font-size="15" fill="#1f2937">Aの状態を保存 / Bの状態を復元</text>
+
+          <line x1="380" y1="206" x2="380" y2="245" stroke="#2563eb" stroke-width="3" marker-end="url(#context-switch-arrow)"></line>
+          <rect x="245" y="250" width="270" height="42" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"></rect>
+          <text x="380" y="277" text-anchor="middle" font-size="20" font-weight="700" fill="#065f46">プロセスB実行開始</text>
+        </svg>
       </figure>
     </section>
 

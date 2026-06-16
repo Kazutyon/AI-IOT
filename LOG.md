@@ -1,5 +1,25 @@
 # LOG — AI-IOT FE Study Portal
 
+## 2026-06-16 Codex — FE教材 ASCII図解→SVG変換 Computer C
+
+- 対象仕事票: `docs/ai-team-queue/active/task-2026-06-16-svg-convert-computer-c-codex.md`
+- 対象ファイル5件の `<pre>` 図解を全確認し、状態遷移・層構造・フロー・比較・分類を表すASCII図11件をSVGへ置換。
+- 修正ファイル:
+  - `fe/technology/computer/process-scheduling.html`
+  - `fe/technology/computer/software-classification.html`
+  - `fe/technology/computer/tech-evolution.html`
+  - `fe/technology/computer/virtual-memory-storage.html`
+  - `fe/technology/computer/virtualization.html`
+- 補修:
+  - `process-scheduling.html` のコンテキストスイッチ表にあった誤った `</td>` / `<tr>` を修正。
+  - `tech-evolution.html` のIC用語表とLSI/VLSI時代表のタグ崩れを修正。
+  - `virtualization.html` のVM表・組込みコンピュータ表の閉じタグ漏れを修正。
+- 検証:
+  - 対象5ファイルで `<pre>` / `</pre>` / Mermaid / `flowchart` / `timeline` / `<style>` は検出なし。
+  - 対象5ファイルで既知のタグ崩れパターンは検出なし。
+  - `git diff --check` OK。
+- 補足: in-app Browser確認は Node REPL 側の `windows sandbox failed: spawn setup refresh` で実施できず。ローカル静的検査と差分確認で代替。
+
 ## 2026-06-16 Codex — FE教材 ASCII図解→SVG変換 Computer B
 
 - 対象仕事票: `docs/ai-team-queue/active/task-2026-06-16-svg-convert-computer-b-codex.md`

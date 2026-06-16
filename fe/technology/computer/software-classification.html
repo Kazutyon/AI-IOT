@@ -140,29 +140,30 @@
 
       <figure class="wide-diagram">
         <figcaption>ソフトウェアの3層構造</figcaption>
-        <pre>
-【ソフトウェアの3層構造】
+        <svg viewBox="0 0 820 430" width="100%" role="img" aria-labelledby="software-layer-title software-layer-desc">
+          <title id="software-layer-title">ソフトウェアの3層構造</title>
+          <desc id="software-layer-desc">アプリケーション層、ミドルウェア層、システムソフトウェア層がハードウェア層の上で連携して動作する構造を示す。</desc>
+          <rect x="70" y="32" width="680" height="78" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="410" y="62" text-anchor="middle" font-size="21" font-weight="700" fill="#1e3a8a">アプリケーション層</text>
+          <text x="410" y="87" text-anchor="middle" font-size="15" fill="#1f2937">業務アプリ / Webアプリ / モバイルアプリ / AIアプリなど</text>
+          <text x="410" y="105" text-anchor="middle" font-size="13" fill="#4b5563">ユーザの目的に応じて動作</text>
 
-  +-----------------------------------------------------------+
-  |                   アプリケーション層                      |
-  | 業務アプリ / Webアプリ / モバイルアプリ / AIアプリなど    |
-  |             （ユーザの目的に応じて動作）                  |
-  +-----------------------------------------------------------+
-  |                       ミドルウェア層                      |
-  | DBMS / Webサーバ / APIゲートウェイ / MQTT / AIミドルウェア|
-  |           （OSとアプリの間で共通機能を提供）              |
-  +-----------------------------------------------------------+
-  |                    システムソフトウェア層                 |
-  |       OS / デバイスドライバ / ファームウェア / RTOS       |
-  |            （コンピュータを動作させる基盤）               |
-  +-----------------------------------------------------------+
-  |                      ハードウェア層                       |
-  |           CPU / メモリ / ストレージ / I/Oデバイス         |
-  +-----------------------------------------------------------+
+          <rect x="70" y="120" width="680" height="78" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"></rect>
+          <text x="410" y="150" text-anchor="middle" font-size="21" font-weight="700" fill="#065f46">ミドルウェア層</text>
+          <text x="410" y="175" text-anchor="middle" font-size="15" fill="#1f2937">DBMS / Webサーバ / APIゲートウェイ / MQTT / AIミドルウェア</text>
+          <text x="410" y="193" text-anchor="middle" font-size="13" fill="#4b5563">OSとアプリの間で共通機能を提供</text>
 
-  各層が連携して動作することで、アプリケーションはハードウェアの詳細を
-  意識せずに動作できる。
-        </pre>
+          <rect x="70" y="208" width="680" height="78" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"></rect>
+          <text x="410" y="238" text-anchor="middle" font-size="21" font-weight="700" fill="#9a3412">システムソフトウェア層</text>
+          <text x="410" y="263" text-anchor="middle" font-size="15" fill="#1f2937">OS / デバイスドライバ / ファームウェア / RTOS</text>
+          <text x="410" y="281" text-anchor="middle" font-size="13" fill="#4b5563">コンピュータを動作させる基盤</text>
+
+          <rect x="70" y="296" width="680" height="62" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"></rect>
+          <text x="410" y="324" text-anchor="middle" font-size="21" font-weight="700" fill="#334155">ハードウェア層</text>
+          <text x="410" y="348" text-anchor="middle" font-size="15" fill="#1f2937">CPU / メモリ / ストレージ / I/Oデバイス</text>
+
+          <text x="410" y="394" text-anchor="middle" font-size="15" fill="#1f2937">各層が連携することで、アプリケーションはハードウェアの詳細を意識せずに動作できる。</text>
+        </svg>
       </figure>
     </section>
 

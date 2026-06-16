@@ -82,7 +82,7 @@
             </tr>
             <tr>
               <td>IC（集積回路）</td>
-               Warsaw複数のトランジスタを小さな基板上に集積。第3世代コンピュータで使用</th>
+              <td>複数のトランジスタを小さな基板上に集積。第3世代コンピュータで使用</td>
               <td>さらに小型化・高速化。汎用性が向上</td>
             </tr>
             <tr>
@@ -154,7 +154,7 @@
               <td>IC（集積回路）</td>
               <td>複数のトランジスタを集積。さらに小型化・高速化</td>
             </tr>
-            </tr>
+            <tr>
               <td>LSI/VLSI時代</td>
               <td>LSI/VLSI</td>
               <td>複雑な処理も1枚のチップで可能に。パーソナルコンピュータやスマートフォンの基礎</td>
@@ -165,25 +165,45 @@
 
       <figure class="wide-diagram">
         <figcaption>素子の進化とコンピュータの変遷</figcaption>
-        <pre>
-【素子の進化の流れ】
+        <svg viewBox="0 0 820 430" width="100%" role="img" aria-labelledby="element-evolution-title element-evolution-desc">
+          <title id="element-evolution-title">素子の進化の流れ</title>
+          <desc id="element-evolution-desc">リレー、真空管、トランジスタ、IC/LSI、VLSIへ進化し、日常業務や個人利用にも対応可能になった流れを示す。</desc>
+          <defs>
+            <marker id="element-evolution-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"></path>
+            </marker>
+          </defs>
+          <rect x="70" y="55" width="120" height="78" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"></rect>
+          <text x="130" y="86" text-anchor="middle" font-size="18" font-weight="700" fill="#334155">リレー</text>
+          <text x="130" y="112" text-anchor="middle" font-size="13" fill="#4b5563">大きくて遅い</text>
 
-  リレー（大きくて遅い）
-      |
-      v
-  真空管（速いが不安定・大消費電力）
-      |
-      v
-  トランジスタ（小型・高信頼・低消費電力）
-      |
-      v
-  IC / LSI（高集積化）
-      |
-      v
-  VLSI（超高集積化）
+          <rect x="230" y="55" width="130" height="78" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"></rect>
+          <text x="295" y="86" text-anchor="middle" font-size="18" font-weight="700" fill="#9a3412">真空管</text>
+          <text x="295" y="108" text-anchor="middle" font-size="13" fill="#4b5563">速いが不安定</text>
+          <text x="295" y="126" text-anchor="middle" font-size="13" fill="#4b5563">大消費電力</text>
 
-  この流れにより、計算機は大規模計算だけでなく日常業務や個人利用にも対応可能に。
-        </pre>
+          <rect x="400" y="55" width="150" height="78" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"></rect>
+          <text x="475" y="83" text-anchor="middle" font-size="18" font-weight="700" fill="#065f46">トランジスタ</text>
+          <text x="475" y="108" text-anchor="middle" font-size="13" fill="#4b5563">小型・高信頼</text>
+          <text x="475" y="126" text-anchor="middle" font-size="13" fill="#4b5563">低消費電力</text>
+
+          <rect x="590" y="55" width="150" height="78" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="665" y="86" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">IC / LSI</text>
+          <text x="665" y="112" text-anchor="middle" font-size="13" fill="#4b5563">高集積化</text>
+
+          <rect x="335" y="215" width="150" height="78" rx="10" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"></rect>
+          <text x="410" y="246" text-anchor="middle" font-size="18" font-weight="700" fill="#3730a3">VLSI</text>
+          <text x="410" y="272" text-anchor="middle" font-size="13" fill="#4b5563">超高集積化</text>
+
+          <line x1="190" y1="94" x2="224" y2="94" stroke="#2563eb" stroke-width="3" marker-end="url(#element-evolution-arrow)"></line>
+          <line x1="360" y1="94" x2="394" y2="94" stroke="#2563eb" stroke-width="3" marker-end="url(#element-evolution-arrow)"></line>
+          <line x1="550" y1="94" x2="584" y2="94" stroke="#2563eb" stroke-width="3" marker-end="url(#element-evolution-arrow)"></line>
+          <path d="M 665 133 C 665 185 515 254 492 254" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#element-evolution-arrow)"></path>
+
+          <rect x="95" y="335" width="630" height="52" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"></rect>
+          <text x="410" y="357" text-anchor="middle" font-size="15" fill="#1f2937">この流れにより、計算機は大規模計算だけでなく</text>
+          <text x="410" y="379" text-anchor="middle" font-size="15" fill="#1f2937">日常業務や個人利用にも対応可能になった。</text>
+        </svg>
       </figure>
     </section>
 
@@ -332,25 +352,39 @@
 
       <figure class="wide-diagram">
         <figcaption>コンピュータ普及の流れ</figcaption>
-        <pre>
-【コンピュータ普及のイメージ】
+        <svg viewBox="0 0 820 430" width="100%" role="img" aria-labelledby="computer-spread-title computer-spread-desc">
+          <title id="computer-spread-title">コンピュータ普及のイメージ</title>
+          <desc id="computer-spread-desc">研究機関・軍事から商用コンピュータ、汎用コンピュータ、PC、スマートフォン・タブレットへ普及した流れを示す。</desc>
+          <defs>
+            <marker id="computer-spread-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"></path>
+            </marker>
+          </defs>
+          <rect x="250" y="28" width="320" height="48" rx="10" fill="#f8fafc" stroke="#64748b" stroke-width="2"></rect>
+          <text x="410" y="59" text-anchor="middle" font-size="18" font-weight="700" fill="#334155">研究機関・軍事</text>
+          <line x1="410" y1="76" x2="410" y2="112" stroke="#2563eb" stroke-width="3" marker-end="url(#computer-spread-arrow)"></line>
 
-  研究機関・軍事
-        |
-        v
-  商用コンピュータ（UNIVAC、IBM）
-        |
-        v
-  汎用コンピュータ（IBM 360）
-        |
-        v
-  パーソナルコンピュータ（Apple II、IBM PC）
-        |
-        v
-  スマートフォン・タブレット（現代）
+          <rect x="250" y="118" width="320" height="54" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"></rect>
+          <text x="410" y="140" text-anchor="middle" font-size="18" font-weight="700" fill="#9a3412">商用コンピュータ</text>
+          <text x="410" y="161" text-anchor="middle" font-size="13" fill="#4b5563">UNIVAC、IBM</text>
+          <line x1="410" y1="172" x2="410" y2="208" stroke="#2563eb" stroke-width="3" marker-end="url(#computer-spread-arrow)"></line>
 
-  個人や中小企業でもコンピュータを利用可能に。
-        </pre>
+          <rect x="250" y="214" width="320" height="54" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"></rect>
+          <text x="410" y="236" text-anchor="middle" font-size="18" font-weight="700" fill="#065f46">汎用コンピュータ</text>
+          <text x="410" y="257" text-anchor="middle" font-size="13" fill="#4b5563">IBM 360</text>
+          <line x1="410" y1="268" x2="410" y2="304" stroke="#2563eb" stroke-width="3" marker-end="url(#computer-spread-arrow)"></line>
+
+          <rect x="250" y="310" width="320" height="54" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="410" y="332" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">パーソナルコンピュータ</text>
+          <text x="410" y="353" text-anchor="middle" font-size="13" fill="#4b5563">Apple II、IBM PC</text>
+
+          <path d="M 570 337 C 650 337 650 95 570 95" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="6 6"></path>
+          <rect x="596" y="194" width="170" height="66" rx="10" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"></rect>
+          <text x="681" y="220" text-anchor="middle" font-size="16" font-weight="700" fill="#3730a3">現代</text>
+          <text x="681" y="242" text-anchor="middle" font-size="13" fill="#4b5563">スマートフォン</text>
+          <text x="681" y="258" text-anchor="middle" font-size="13" fill="#4b5563">タブレット</text>
+          <text x="410" y="404" text-anchor="middle" font-size="15" fill="#1f2937">個人や中小企業でもコンピュータを利用可能に。</text>
+        </svg>
       </figure>
     </section>
 
@@ -457,19 +491,35 @@
 
       <figure class="wide-diagram">
         <figcaption>高速化の変遷</figcaption>
-        <pre>
-【コンピュータ高速化の変遷】
+        <svg viewBox="0 0 820 390" width="100%" role="img" aria-labelledby="speedup-title speedup-desc">
+          <title id="speedup-title">コンピュータ高速化の変遷</title>
+          <desc id="speedup-desc">1980-2000年代のクロック周波数向上から、2000年代後半以降のマルチコア、GPU、NPUによる並列処理へ移った流れを示す。</desc>
+          <defs>
+            <marker id="speedup-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"></path>
+            </marker>
+          </defs>
+          <rect x="60" y="44" width="260" height="105" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"></rect>
+          <text x="190" y="73" text-anchor="middle" font-size="18" font-weight="700" fill="#9a3412">1980-2000年代</text>
+          <text x="190" y="104" text-anchor="middle" font-size="16" fill="#1f2937">クロック周波数向上</text>
+          <text x="190" y="130" text-anchor="middle" font-size="14" fill="#4b5563">発熱・消費電力が限界に</text>
 
-  1980-2000年代：
-    [クロック周波数向上] → 発熱・消費電力が限界に
+          <line x1="320" y1="96" x2="395" y2="96" stroke="#2563eb" stroke-width="3" marker-end="url(#speedup-arrow)"></line>
+          <text x="357" y="83" text-anchor="middle" font-size="13" fill="#4b5563">転換</text>
 
-  2000年代後半以降：
-    [マルチコア化] → 複数コアで並列処理
-    [GPU活用] → 数千コアで並列処理（AI・画像処理）
-    [NPU登場] → AI処理に特化（省電力）
+          <rect x="405" y="30" width="345" height="160" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"></rect>
+          <text x="578" y="60" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">2000年代後半以降</text>
+          <rect x="435" y="82" width="285" height="28" rx="6" fill="#ffffff" stroke="#bfdbfe"></rect>
+          <text x="578" y="102" text-anchor="middle" font-size="14" fill="#1f2937">マルチコア化: 複数コアで並列処理</text>
+          <rect x="435" y="116" width="285" height="28" rx="6" fill="#ffffff" stroke="#bfdbfe"></rect>
+          <text x="578" y="136" text-anchor="middle" font-size="14" fill="#1f2937">GPU活用: 数千コアで並列処理</text>
+          <rect x="435" y="150" width="285" height="28" rx="6" fill="#ffffff" stroke="#bfdbfe"></rect>
+          <text x="578" y="170" text-anchor="middle" font-size="14" fill="#1f2937">NPU登場: AI処理に特化、省電力</text>
 
-  現代の高速化は「CPUの高速化」＋「並列処理の活用」の二本柱。
-        </pre>
+          <rect x="125" y="250" width="570" height="72" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"></rect>
+          <text x="410" y="280" text-anchor="middle" font-size="18" font-weight="700" fill="#065f46">現代の高速化</text>
+          <text x="410" y="306" text-anchor="middle" font-size="15" fill="#1f2937">「CPUの高速化」＋「並列処理の活用」の二本柱</text>
+        </svg>
       </figure>
     </section>
 
