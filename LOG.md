@@ -1,5 +1,28 @@
 # LOG — AI-IOT FE Study Portal
 
+## 2026-06-16 Codex — Database教材 中国語混入語の一括修正
+
+- 対象: `fe/technology/database/*.html`
+- 内容: databaseセクションの用語説明テーブルに混入していた中国語文字列 `的那样` を `とは` に置換。
+- 対象ファイル: 12件
+  - `db-basic-1.html`
+  - `db-basic-2.html`
+  - `db-operation.html`
+  - `db-performance.html`
+  - `rest-api.html`
+  - `security-1.html`
+  - `security-3.html`
+  - `sql-basic.html`
+  - `webapp-link-1.html`
+  - `webserver-2.html`
+  - `webserver-3.html`
+  - `webserver-4.html`
+- 置換件数: 86件。
+- 検証:
+  - `rg -n "的那样" fe` で残存0件。
+  - database配下の差分は86 insertions / 86 deletionsで、混入語置換のみ。
+- 補足: 既存のAlgorithm/Cloud等の未コミット差分は別作業由来のため未変更。
+
 ## 2026-06-16 Codex — FE教材 ASCII図解→SVG変換 Computer C
 
 - 対象仕事票: `docs/ai-team-queue/active/task-2026-06-16-svg-convert-computer-c-codex.md`
