@@ -153,24 +153,31 @@
 
       <figure class="wide-diagram">
         <figcaption>計算機の発展の流れ</figcaption>
-        <pre>
-【計算機発展のイメージ】
-
-  指・石・棒
-    ↓
-  そろばん
-    ↓
-  計算尺
-    ↓
-  歯車式計算機
-    ↓
-  機械式計算機
-    ↓
-  ホレリス統計機
-
-  これらの計算機は、いずれも「特定の計算を効率化する道具」として発展。
-  計算方法は人間の延長であり、限界も明確だった。
-        </pre>
+        <svg viewBox="0 0 560 400" width="100%" role="img" aria-label="指、石、棒からそろばん、計算尺、歯車式計算機、機械式計算機、ホレリス統計機へ発展する流れ">
+          <defs>
+            <marker id="history-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="180" y="20" width="200" height="40" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="280" y="45" text-anchor="middle" font-size="13" fill="#1e3a5f">指・石・棒</text>
+          <line x1="280" y1="60" x2="280" y2="88" stroke="#64748b" stroke-width="1.5" marker-end="url(#history-arr)"/>
+          <rect x="180" y="90" width="200" height="40" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="280" y="115" text-anchor="middle" font-size="13" fill="#1e3a5f">そろばん</text>
+          <line x1="280" y1="130" x2="280" y2="158" stroke="#64748b" stroke-width="1.5" marker-end="url(#history-arr)"/>
+          <rect x="180" y="160" width="200" height="40" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="280" y="185" text-anchor="middle" font-size="13" fill="#1e3a5f">計算尺</text>
+          <line x1="280" y1="200" x2="280" y2="228" stroke="#64748b" stroke-width="1.5" marker-end="url(#history-arr)"/>
+          <rect x="180" y="230" width="200" height="40" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="280" y="255" text-anchor="middle" font-size="13" fill="#1e1b4b">歯車式計算機</text>
+          <line x1="280" y1="270" x2="280" y2="298" stroke="#64748b" stroke-width="1.5" marker-end="url(#history-arr)"/>
+          <rect x="180" y="300" width="200" height="40" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="280" y="325" text-anchor="middle" font-size="13" fill="#1e1b4b">機械式計算機</text>
+          <line x1="380" y1="320" x2="428" y2="320" stroke="#64748b" stroke-width="1.5" marker-end="url(#history-arr)"/>
+          <rect x="430" y="300" width="115" height="40" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="487" y="325" text-anchor="middle" font-size="12" fill="#14532d">ホレリス統計機</text>
+          <text x="280" y="380" text-anchor="middle" font-size="12" fill="#334155">特定の計算を効率化する道具として発展した</text>
+        </svg>
       </figure>
     </section>
 
@@ -207,59 +214,65 @@
       <h3>チューリングマシンの概要</h3>
       <figure class="wide-diagram">
         <figcaption>チューリングマシンのイメージ</figcaption>
-        <pre>
-【チューリングマシン】
-
-  [ヘッド]
-     |
-     v
-  +---+
-  | 0 |
-  +---+
-  | 1 |
-  +---+
-  | 0 |
-  +---+
-  | 0 |
-  +---+
-  | 1 |
-  +---+
-  |...|  無限テープ
-  +---+
-
-  ポイント
-  - テープ上の文字を書き換えながら計算する
-  - 理論上、現代コンピュータと同等の計算が可能
-  - 「計算できるとは何か」を考える基礎になる
-        </pre>
+        <svg viewBox="0 0 620 310" width="100%" role="img" aria-label="ヘッドが無限テープ上の0と1を読み書きするチューリングマシンの図">
+          <defs>
+            <marker id="turing-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="250" y="25" width="120" height="48" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="310" y="54" text-anchor="middle" font-size="14" fill="#92400e">ヘッド</text>
+          <line x1="310" y1="73" x2="310" y2="112" stroke="#64748b" stroke-width="1.5" marker-end="url(#turing-arr)"/>
+          <rect x="55" y="115" width="85" height="54" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="97" y="148" text-anchor="middle" font-size="18" fill="#1e3a5f">0</text>
+          <rect x="145" y="115" width="85" height="54" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="187" y="148" text-anchor="middle" font-size="18" fill="#1e3a5f">1</text>
+          <rect x="235" y="115" width="85" height="54" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="2"/>
+          <text x="277" y="148" text-anchor="middle" font-size="18" fill="#1e1b4b">0</text>
+          <rect x="325" y="115" width="85" height="54" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="367" y="148" text-anchor="middle" font-size="18" fill="#1e3a5f">0</text>
+          <rect x="415" y="115" width="85" height="54" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="457" y="148" text-anchor="middle" font-size="18" fill="#1e3a5f">1</text>
+          <rect x="505" y="115" width="60" height="54" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+          <text x="535" y="148" text-anchor="middle" font-size="16" fill="#334155">...</text>
+          <text x="310" y="195" text-anchor="middle" font-size="13" fill="#334155">無限テープ上の文字を読み書きしながら計算する</text>
+          <rect x="80" y="225" width="460" height="58" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="310" y="249" text-anchor="middle" font-size="12" fill="#14532d">理論上、現代コンピュータと同等の計算が可能</text>
+          <text x="310" y="268" text-anchor="middle" font-size="12" fill="#14532d">「計算できるとは何か」を考える基礎になる</text>
+        </svg>
       </figure>
 
       <h3>ノイマン型コンピュータ</h3>
       <figure class="wide-diagram">
         <figcaption>プログラム内蔵方式のイメージ</figcaption>
-        <pre>
-【プログラム内蔵方式（ノイマン型）】
-
-  外部プログラム方式
-  （ENIACなど）
-    ↓
-  計算を変えるたびに
-  配線・スイッチを変更
-    ↓
-  汎用性が低く、手間がかかる
-
-  プログラム内蔵方式
-  （ノイマン型）
-    ↓
-  計算手順をメモリに格納
-    ↓
-  CPUが順に読み取って実行
-    ↓
-  同じハードウェアで
-  別の計算をしやすくなる
-
-  これが現代コンピュータの基本アーキテクチャ。
-        </pre>
+        <svg viewBox="0 0 620 330" width="100%" role="img" aria-label="外部プログラム方式とプログラム内蔵方式を比較する図">
+          <defs>
+            <marker id="von-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="40" y="30" width="240" height="54" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="160" y="53" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">外部プログラム方式</text>
+          <text x="160" y="72" text-anchor="middle" font-size="12" fill="#92400e">ENIACなど</text>
+          <line x1="160" y1="84" x2="160" y2="118" stroke="#64748b" stroke-width="1.5" marker-end="url(#von-arr)"/>
+          <rect x="40" y="120" width="240" height="64" rx="8" fill="#fffbeb" stroke="#fde68a" stroke-width="1.5"/>
+          <text x="160" y="145" text-anchor="middle" font-size="12" fill="#334155">計算を変えるたびに</text>
+          <text x="160" y="164" text-anchor="middle" font-size="12" fill="#334155">配線・スイッチを変更</text>
+          <line x1="160" y1="184" x2="160" y2="218" stroke="#64748b" stroke-width="1.5" marker-end="url(#von-arr)"/>
+          <rect x="40" y="220" width="240" height="54" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="160" y="251" text-anchor="middle" font-size="12" fill="#7f1d1d">汎用性が低く、手間がかかる</text>
+          <rect x="340" y="30" width="240" height="54" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="460" y="53" text-anchor="middle" font-size="13" font-weight="700" fill="#1e3a5f">プログラム内蔵方式</text>
+          <text x="460" y="72" text-anchor="middle" font-size="12" fill="#1e3a5f">ノイマン型</text>
+          <line x1="460" y1="84" x2="460" y2="118" stroke="#64748b" stroke-width="1.5" marker-end="url(#von-arr)"/>
+          <rect x="340" y="120" width="240" height="54" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="460" y="151" text-anchor="middle" font-size="12" fill="#1e1b4b">計算手順をメモリに格納</text>
+          <line x1="460" y1="174" x2="460" y2="208" stroke="#64748b" stroke-width="1.5" marker-end="url(#von-arr)"/>
+          <rect x="340" y="210" width="240" height="54" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="460" y="232" text-anchor="middle" font-size="12" fill="#14532d">CPUが順に読み取って実行</text>
+          <text x="460" y="251" text-anchor="middle" font-size="12" fill="#14532d">別の計算をしやすくなる</text>
+          <text x="310" y="310" text-anchor="middle" font-size="12" fill="#334155">プログラム内蔵方式が現代コンピュータの基本アーキテクチャ</text>
+        </svg>
       </figure>
 
       <h3>エニグマとコロッサス</h3>
@@ -363,23 +376,22 @@
 
       <figure class="wide-diagram">
         <figcaption>ABCマシンとENIACの比較</figcaption>
-        <pre>
-【初期電子計算機の比較】
-
-  ABCマシン
-  - 完成年: 1939年（試作）
-  - 開発者: アタナソフ＆ベリー
-  - 目的  : 連立方程式
-  - 真空管: 約300本
-  - 評価  : 世界初の電子式デジタル計算機
-
-  ENIAC
-  - 完成年: 1946年
-  - 開発者: モークリー＆エッカート
-  - 目的  : 弾道計算
-  - 真空管: 18,000本
-  - 評価  : 世界初の実用的電子計算機
-        </pre>
+        <svg viewBox="0 0 620 300" width="100%" role="img" aria-label="ABCマシンとENIACの完成年、開発者、目的、真空管数、評価を比較する図">
+          <rect x="45" y="25" width="245" height="230" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="167" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a5f">ABCマシン</text>
+          <text x="167" y="92" text-anchor="middle" font-size="12" fill="#334155">完成年: 1939年（試作）</text>
+          <text x="167" y="120" text-anchor="middle" font-size="12" fill="#334155">開発者: アタナソフ＆ベリー</text>
+          <text x="167" y="148" text-anchor="middle" font-size="12" fill="#334155">目的: 連立方程式</text>
+          <text x="167" y="176" text-anchor="middle" font-size="12" fill="#334155">真空管: 約300本</text>
+          <text x="167" y="210" text-anchor="middle" font-size="12" fill="#1e3a5f">世界初の電子式デジタル計算機</text>
+          <rect x="330" y="25" width="245" height="230" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="452" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#14532d">ENIAC</text>
+          <text x="452" y="92" text-anchor="middle" font-size="12" fill="#334155">完成年: 1946年</text>
+          <text x="452" y="120" text-anchor="middle" font-size="12" fill="#334155">開発者: モークリー＆エッカート</text>
+          <text x="452" y="148" text-anchor="middle" font-size="12" fill="#334155">目的: 弾道計算</text>
+          <text x="452" y="176" text-anchor="middle" font-size="12" fill="#334155">真空管: 18,000本</text>
+          <text x="452" y="210" text-anchor="middle" font-size="12" fill="#14532d">世界初の実用的電子計算機</text>
+        </svg>
       </figure>
     </section>
 

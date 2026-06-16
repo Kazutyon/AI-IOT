@@ -128,27 +128,31 @@
 
       <figure class="wide-diagram">
         <figcaption>SoCのイメージ</figcaption>
-        <pre>
-【SoC（System on a Chip）】
-
-  +---------------------------------------------------+
-  |                                                   |
-  |   +---------+  +---------+  +-------------------+ |
-  |   |   CPU   |  |   GPU   |  |メモリコントローラ | |
-  |   +---------+  +---------+  +-------------------+ |
-  |                                                   |
-  |   +---------+  +-----------+  +-----------------+ |
-  |   |   NPU   |  | 通信機能  |  |   映像処理      | |
-  |   | (AI処理)|  |(Wi-Fi/5G) |  |   エンジン      | |
-  |   +---------+  +-----------+  +-----------------+ |
-  |                                                   |
-  |   +-------------------+-------------------------+ |
-  |   |   センサー制御    |    その他機能           | |
-  |   +-------------------+-------------------------+ |
-  |                                                   |
-  |   1つのチップに複数の機能を統合                   |
-  +---------------------------------------------------+
-        </pre>
+        <svg viewBox="0 0 620 360" width="100%" role="img" aria-label="SoCにCPU、GPU、メモリコントローラ、NPU、通信機能、映像処理、センサー制御、その他機能が統合される図">
+          <rect x="35" y="25" width="550" height="300" rx="22" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+          <text x="310" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#334155">SoC（System on a Chip）</text>
+          <rect x="75" y="85" width="130" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="140" y="120" text-anchor="middle" font-size="14" fill="#1e3a5f">CPU</text>
+          <rect x="245" y="85" width="130" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="310" y="120" text-anchor="middle" font-size="14" fill="#1e3a5f">GPU</text>
+          <rect x="415" y="85" width="130" height="58" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="480" y="111" text-anchor="middle" font-size="13" fill="#1e3a5f">メモリ</text>
+          <text x="480" y="129" text-anchor="middle" font-size="13" fill="#1e3a5f">コントローラ</text>
+          <rect x="75" y="170" width="130" height="58" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="140" y="194" text-anchor="middle" font-size="14" fill="#1e1b4b">NPU</text>
+          <text x="140" y="213" text-anchor="middle" font-size="12" fill="#1e1b4b">AI処理</text>
+          <rect x="245" y="170" width="130" height="58" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="310" y="194" text-anchor="middle" font-size="14" fill="#1e1b4b">通信機能</text>
+          <text x="310" y="213" text-anchor="middle" font-size="12" fill="#1e1b4b">Wi-Fi / 5G</text>
+          <rect x="415" y="170" width="130" height="58" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="480" y="194" text-anchor="middle" font-size="14" fill="#1e1b4b">映像処理</text>
+          <text x="480" y="213" text-anchor="middle" font-size="12" fill="#1e1b4b">エンジン</text>
+          <rect x="75" y="255" width="215" height="46" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="182" y="283" text-anchor="middle" font-size="13" fill="#14532d">センサー制御</text>
+          <rect x="330" y="255" width="215" height="46" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="437" y="283" text-anchor="middle" font-size="13" fill="#14532d">その他機能</text>
+          <text x="310" y="345" text-anchor="middle" font-size="12" fill="#334155">1つのチップに複数の機能を統合する</text>
+        </svg>
       </figure>
 
       <div class="table-wrap mobile-card-table">
@@ -228,25 +232,21 @@
 
       <figure class="wide-diagram">
         <figcaption>クラウドの特徴</figcaption>
-        <pre>
-【クラウドの主な特徴】
-
-  +---------------------------------------------------+
-  |                                                   |
-  |  ✓ 必要なときに必要なだけ使える(スケーラビリティ)|
-  |                                                   |
-  |  ✓ 初期費用が少ない（サーバ購入不要）            |
-  |                                                   |
-  |  ✓ 世界中どこからでも利用可能                    |
-  |                                                   |
-  |  ✓ 自動バックアップ・自動更新で管理が容易        |
-  |                                                   |
-  |  ✓ 大規模データ処理やAI処理に向いている          |
-  |                                                   |
-  +---------------------------------------------------+
-
-  特にAIやビッグデータ分析は、クラウドの計算資源が不可欠。
-        </pre>
+        <svg viewBox="0 0 620 310" width="100%" role="img" aria-label="クラウドの主な特徴を5項目で示す図">
+          <rect x="45" y="24" width="530" height="248" rx="16" fill="#f8fafc" stroke="#64748b" stroke-width="1.5"/>
+          <text x="310" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#334155">クラウドの主な特徴</text>
+          <rect x="85" y="82" width="450" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
+          <text x="310" y="104" text-anchor="middle" font-size="13" fill="#1e3a5f">必要なときに必要なだけ使える（スケーラビリティ）</text>
+          <rect x="85" y="122" width="450" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
+          <text x="310" y="144" text-anchor="middle" font-size="13" fill="#1e3a5f">初期費用が少ない（サーバ購入不要）</text>
+          <rect x="85" y="162" width="450" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
+          <text x="310" y="184" text-anchor="middle" font-size="13" fill="#1e3a5f">世界中どこからでも利用可能</text>
+          <rect x="85" y="202" width="450" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
+          <text x="310" y="224" text-anchor="middle" font-size="13" fill="#1e3a5f">自動バックアップ・自動更新で管理が容易</text>
+          <rect x="85" y="242" width="450" height="34" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.2"/>
+          <text x="310" y="264" text-anchor="middle" font-size="13" fill="#1e3a5f">大規模データ処理やAI処理に向いている</text>
+          <text x="310" y="300" text-anchor="middle" font-size="12" fill="#334155">AIやビッグデータ分析にはクラウドの計算資源が不可欠</text>
+        </svg>
       </figure>
     </section>
 
@@ -323,25 +323,28 @@
 
       <figure class="wide-diagram">
         <figcaption>IoTの構造イメージ</figcaption>
-        <pre>
-【IoTの基本構造】
-
-  センサー（温度・湿度・加速度など）
-        |
-        | データ収集
-        v
-  IoTデバイス（マイコン＋通信機能）
-        |
-        | 無線通信（Wi-Fi / BLE / 5G / LoRa）
-        v
-  クラウド / エッジサーバ
-        |
-        | データ分析・AI処理
-        v
-  フィードバック（制御・通知・可視化）
-
-  人が操作しなくても、機器同士が連携して動作するのが特徴。
-        </pre>
+        <svg viewBox="0 0 560 360" width="100%" role="img" aria-label="センサー、IoTデバイス、クラウドまたはエッジサーバ、フィードバックへ進むIoTの基本構造">
+          <defs>
+            <marker id="iot-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="135" y="20" width="290" height="48" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="280" y="49" text-anchor="middle" font-size="13" fill="#1e3a5f">センサー（温度・湿度・加速度など）</text>
+          <line x1="280" y1="68" x2="280" y2="108" stroke="#64748b" stroke-width="1.5" marker-end="url(#iot-arr)"/>
+          <text x="292" y="94" font-size="11" fill="#64748b">データ収集</text>
+          <rect x="135" y="110" width="290" height="48" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="280" y="139" text-anchor="middle" font-size="13" fill="#1e1b4b">IoTデバイス（マイコン＋通信機能）</text>
+          <line x1="280" y1="158" x2="280" y2="198" stroke="#64748b" stroke-width="1.5" marker-end="url(#iot-arr)"/>
+          <text x="292" y="184" font-size="11" fill="#64748b">Wi-Fi / BLE / 5G / LoRa</text>
+          <rect x="135" y="200" width="290" height="48" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="280" y="229" text-anchor="middle" font-size="13" fill="#92400e">クラウド / エッジサーバ</text>
+          <line x1="280" y1="248" x2="280" y2="288" stroke="#64748b" stroke-width="1.5" marker-end="url(#iot-arr)"/>
+          <text x="292" y="274" font-size="11" fill="#64748b">データ分析・AI処理</text>
+          <rect x="135" y="290" width="290" height="48" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="280" y="319" text-anchor="middle" font-size="13" fill="#14532d">フィードバック（制御・通知・可視化）</text>
+          <text x="280" y="352" text-anchor="middle" font-size="12" fill="#334155">人が操作しなくても機器同士が連携して動作する</text>
+        </svg>
       </figure>
     </section>
 
@@ -375,24 +378,21 @@
 
       <figure class="wide-diagram">
         <figcaption>GPUとNPUの比較</figcaption>
-        <pre>
-【GPU vs NPU】
-
-  GPU：
-    [並列処理に強い]
-    数千のコアで大量の計算を同時実行
-    主に「学習」フェーズで活躍
-    例：NVIDIA H100、AMD Radeon
-
-  NPU：
-    [AI推論に特化]
-    行列計算に最適化された専用回路
-    主に「推論」フェーズで活躍（省電力）
-    例：Apple Neural Engine、Google TPU
-
-  大規模学習はクラウド（GPU）
-  推論は端末内（NPU）→ オンデバイスAI
-        </pre>
+        <svg viewBox="0 0 620 300" width="100%" role="img" aria-label="GPUとNPUの比較。GPUは並列処理と学習、NPUはAI推論と省電力に強い">
+          <rect x="45" y="25" width="235" height="210" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="162" y="58" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a5f">GPU</text>
+          <text x="162" y="88" text-anchor="middle" font-size="13" fill="#1e3a5f">並列処理に強い</text>
+          <text x="162" y="116" text-anchor="middle" font-size="12" fill="#334155">数千のコアで大量計算を同時実行</text>
+          <text x="162" y="144" text-anchor="middle" font-size="12" fill="#334155">主に「学習」フェーズで活躍</text>
+          <text x="162" y="174" text-anchor="middle" font-size="12" fill="#334155">例: NVIDIA H100 / AMD Radeon</text>
+          <rect x="340" y="25" width="235" height="210" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="457" y="58" text-anchor="middle" font-size="18" font-weight="700" fill="#14532d">NPU</text>
+          <text x="457" y="88" text-anchor="middle" font-size="13" fill="#14532d">AI推論に特化</text>
+          <text x="457" y="116" text-anchor="middle" font-size="12" fill="#334155">行列計算に最適化された専用回路</text>
+          <text x="457" y="144" text-anchor="middle" font-size="12" fill="#334155">主に「推論」で活躍、省電力</text>
+          <text x="457" y="174" text-anchor="middle" font-size="12" fill="#334155">例: Apple Neural Engine / Google TPU</text>
+          <text x="310" y="265" text-anchor="middle" font-size="13" fill="#334155">大規模学習はクラウド（GPU）、推論は端末内（NPU）でオンデバイスAIへ</text>
+        </svg>
       </figure>
 
       <h3>AI時代のコンピューティングの変化</h3>

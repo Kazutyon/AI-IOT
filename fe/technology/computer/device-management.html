@@ -135,25 +135,27 @@
 
       <figure class="wide-diagram">
         <figcaption>デバイスドライバの位置づけ</figcaption>
-        <pre>
-【デバイスドライバの役割】
-
-  アプリケーション
-         |
-         | I/O要求
-         v
-        OS
-         |
-         | デバイスドライバに依頼
-         v
-  デバイスドライバ
-         |
-         | デバイス固有の命令に変換
-         v
-   ハードウェア（I/Oデバイス）
-
-  OSはデバイスの詳細を知らずに、統一された方法でI/Oを扱える。
-        </pre>
+        <svg viewBox="0 0 560 350" width="100%" role="img" aria-label="アプリケーションからOS、デバイスドライバ、ハードウェアへI/O要求が渡る流れ">
+          <defs>
+            <marker id="driver-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="160" y="20" width="240" height="48" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="280" y="49" text-anchor="middle" font-size="14" fill="#1e3a5f">アプリケーション</text>
+          <line x1="280" y1="68" x2="280" y2="108" stroke="#64748b" stroke-width="1.5" marker-end="url(#driver-arr)"/>
+          <text x="292" y="94" font-size="11" fill="#64748b">I/O要求</text>
+          <rect x="160" y="110" width="240" height="48" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="280" y="139" text-anchor="middle" font-size="14" fill="#1e1b4b">OS</text>
+          <line x1="280" y1="158" x2="280" y2="198" stroke="#64748b" stroke-width="1.5" marker-end="url(#driver-arr)"/>
+          <text x="292" y="184" font-size="11" fill="#64748b">デバイスドライバに依頼</text>
+          <rect x="160" y="200" width="240" height="48" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="280" y="229" text-anchor="middle" font-size="14" fill="#92400e">デバイスドライバ</text>
+          <line x1="280" y1="248" x2="280" y2="288" stroke="#64748b" stroke-width="1.5" marker-end="url(#driver-arr)"/>
+          <text x="292" y="274" font-size="11" fill="#64748b">デバイス固有の命令に変換</text>
+          <rect x="150" y="290" width="260" height="48" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="280" y="319" text-anchor="middle" font-size="14" fill="#14532d">ハードウェア（I/Oデバイス）</text>
+        </svg>
       </figure>
 
       <div class="table-wrap mobile-card-table">
@@ -284,22 +286,27 @@
 
       <figure class="wide-diagram">
         <figcaption>スプーリングの流れ</figcaption>
-        <pre>
-【スプーリングの流れ】
-
-  1. アプリケーションが印刷要求をOSに送る
-         |
-         v
-  2. OSがデータをスプール領域（ストレージ）に保存する
-         |
-         v
-  3. スプーラ（Spooler）がキューを管理し、順番にプリンタへ送信
-         |
-         v
-  4. プリンタが処理している間、アプリは待たずに次の作業を続行できる
-
-  例：WindowsのPrint Spooler
-        </pre>
+        <svg viewBox="0 0 620 390" width="100%" role="img" aria-label="アプリケーションの印刷要求をOSがスプール領域へ保存し、スプーラがプリンタへ順番に送信する流れ">
+          <defs>
+            <marker id="spool-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="115" y="20" width="390" height="50" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="310" y="50" text-anchor="middle" font-size="13" fill="#1e3a5f">1. アプリケーションが印刷要求をOSに送る</text>
+          <line x1="310" y1="70" x2="310" y2="108" stroke="#64748b" stroke-width="1.5" marker-end="url(#spool-arr)"/>
+          <rect x="115" y="110" width="390" height="56" rx="8" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="310" y="134" text-anchor="middle" font-size="13" fill="#1e1b4b">2. OSがデータをスプール領域に保存する</text>
+          <text x="310" y="153" text-anchor="middle" font-size="12" fill="#1e1b4b">ストレージ上の一時保存領域</text>
+          <line x1="310" y1="166" x2="310" y2="204" stroke="#64748b" stroke-width="1.5" marker-end="url(#spool-arr)"/>
+          <rect x="115" y="206" width="390" height="56" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="310" y="230" text-anchor="middle" font-size="13" fill="#92400e">3. スプーラがキューを管理する</text>
+          <text x="310" y="249" text-anchor="middle" font-size="12" fill="#92400e">順番にプリンタへ送信</text>
+          <line x1="310" y1="262" x2="310" y2="300" stroke="#64748b" stroke-width="1.5" marker-end="url(#spool-arr)"/>
+          <rect x="115" y="302" width="390" height="58" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="310" y="326" text-anchor="middle" font-size="13" fill="#14532d">4. プリンタ処理中もアプリは待たずに作業できる</text>
+          <text x="310" y="347" text-anchor="middle" font-size="12" fill="#14532d">例: WindowsのPrint Spooler</text>
+        </svg>
       </figure>
 
       <div class="table-wrap mobile-card-table">
