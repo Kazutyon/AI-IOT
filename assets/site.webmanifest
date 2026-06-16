@@ -1,0 +1,26 @@
+{
+  "name": "FE試験対策ノート",
+  "short_name": "FE対策",
+  "description": "AI・IoT DXエンジニア養成科 復習ノート集",
+  "start_url": "/AI-IOT/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d9488",
+  "icons": [
+    {
+      "src": "icon-192x192.ico",
+      "sizes": "192x192",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "favicon-32x32.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "favicon-16x16.ico",
+      "sizes": "16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
