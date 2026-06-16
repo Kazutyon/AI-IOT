@@ -1,5 +1,22 @@
 # LOG — AI-IOT FE Study Portal
 
+## 2026-06-16 Codex — FE教材 ASCII図解→SVG変換 Computer B
+
+- 対象仕事票: `docs/ai-team-queue/active/task-2026-06-16-svg-convert-computer-b-codex.md`
+- 対象ファイル5件の `<pre>` 図解を全確認し、構造・フロー・比較を表すASCII図10件をSVGへ置換。
+- 修正ファイル:
+  - `fe/technology/computer/filesystem.html`
+  - `fe/technology/computer/io-devices-bus.html`
+  - `fe/technology/computer/io-scheduling-dma.html`
+  - `fe/technology/computer/memory-cache.html`
+  - `fe/technology/computer/memory-management.html`
+- 補修: `filesystem.html` のアクセス権対象表にあった誤った `<td><td>` を `<tr><td>` へ修正。
+- 検証:
+  - 対象5ファイルで `<pre>` / `</pre>` / Mermaid / `flowchart` / `timeline` / `<style>` は検出なし。
+  - `git diff --check` OK。
+  - 各ページの `quiz-card` / `answer-toggle` 数は維持。
+- 補足: 各ページ末尾の学習済みボタンに既存 `style=""` が残るが、今回追加ではないため未変更。
+
 ## 2026-06-16 Codex — FE教材 ASCII図解→SVG変換 Computer A
 
 - 対象仕事票: `docs/ai-team-queue/active/task-2026-06-16-svg-convert-computer-a-codex.md`
