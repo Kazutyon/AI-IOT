@@ -1,5 +1,32 @@
 # LOG — AI-IOT FE Study Portal
 
+## 2026-06-16 Codex — Database教材 用語表・比較表の中国語混入とHTML崩れ修正
+
+- 対象: `fe/technology/database/page-generation-1.html` 以降のDatabase教材12ファイル。
+- 内容:
+  - `那样` / `那樣` / `了一样` / `-than` / 既存置換後の `とは` が表セル外に残っていた箇所を、意味文を削らず `<td>説明</td>` として復元。
+  - 「試験に出る用語」表を `No. / 用語 / 一言` の3列構造に統一。
+  - 同じページ内の比較表・説明表に残っていた `<td style="font-weight: bold;">... </th>`、`<td><td>`、`</table><th>`、`<tr>` と `<table>` の取り違え、`</tr>` 漏れを補修。
+- 修正ファイル:
+  - `page-generation-1.html`
+  - `page-generation-2.html`
+  - `rest-api.html`
+  - `security-1.html`
+  - `security-2.html`
+  - `security-3.html`
+  - `sql-basic.html`
+  - `webapp-link-1.html`
+  - `webserver-1.html`
+  - `webserver-2.html`
+  - `webserver-3.html`
+  - `webserver-4.html`
+- 検証:
+  - 対象12ファイルで `rg -n "那样|那樣|了一样|-than|的那样"` 残存0件。
+  - 対象12ファイルで `<tr>` / `</tr>`、`<table>` / `</table>` の件数一致。
+  - 対象12ファイルで既知の崩れパターン（`<td><th>` / `</table><th>` / `</th></td>` / `</th><tr>` / `<td>... </th>`）残存0件。
+  - `git diff --check` OK。
+- 補足: in-app Browser確認は Node REPL 側の `windows sandbox failed: spawn setup refresh` で実施できず。静的HTML検査で代替。
+
 ## 2026-06-16 Codex — Database教材 中国語混入語の一括修正
 
 - 対象: `fe/technology/database/*.html`

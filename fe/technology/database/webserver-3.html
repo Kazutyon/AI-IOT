@@ -61,16 +61,16 @@
         <table>
           <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
           <tbody>
-            <tr><th>1</th><th>仮想ホスト</th>とは1台のサーバーで複数のWebサイトを公開する仕組み</th></tr>
-            <tr><th>2</th><th>Hostヘッダ</th>とはブラウザがリクエスト先のドメイン名を伝えるヘッダ</th></tr>
-            <tr><th>3</th><th>DocumentRoot</th>とはWebサーバーが公開するファイルを探す起点ディレクトリ</th></tr>
-            <tr><th>4</th><th>public_html</th>とはレンタルサーバーでユーザーごとに与えられる公開ディレクトリ</th></tr>
-            <tr><th>5</th><th>ErrorDocument</th>とはApacheでカスタムエラーページを設定するディレクティブ</th></tr>
-            <tr><th>6</th><th>error_page</th>とはNginxでカスタムエラーページを設定するディレクティブ</th></tr>
-            <tr><th>7</th><th>access.log</th>とはすべてのリクエストを記録するアクセスログ</th></tr>
-            <tr><th>8</th><th>error.log</th>とはエラーを記録するエラーログ</th></tr>
-            <tr><th>9</th><th>リファラ</th>とはどのページから遷移してきたかを示す情報</th></tr>
-            <tr><th>10</th><th>User-Agent</th>とはブラウザやOSの情報を示すヘッダ</th></tr>
+            <tr><th>1</th><th>仮想ホスト</th><td>1台のサーバーで複数のWebサイトを公開する仕組み</td></tr>
+            <tr><th>2</th><th>Hostヘッダ</th><td>ブラウザがリクエスト先のドメイン名を伝えるヘッダ</td></tr>
+            <tr><th>3</th><th>DocumentRoot</th><td>Webサーバーが公開するファイルを探す起点ディレクトリ</td></tr>
+            <tr><th>4</th><th>public_html</th><td>レンタルサーバーでユーザーごとに与えられる公開ディレクトリ</td></tr>
+            <tr><th>5</th><th>ErrorDocument</th><td>Apacheでカスタムエラーページを設定するディレクティブ</td></tr>
+            <tr><th>6</th><th>error_page</th><td>Nginxでカスタムエラーページを設定するディレクティブ</td></tr>
+            <tr><th>7</th><th>access.log</th><td>すべてのリクエストを記録するアクセスログ</td></tr>
+            <tr><th>8</th><th>error.log</th><td>エラーを記録するエラーログ</td></tr>
+            <tr><th>9</th><th>リファラ</th><td>どのページから遷移してきたかを示す情報</td></tr>
+            <tr><th>10</th><th>User-Agent</th><td>ブラウザやOSの情報を示すヘッダ</td></tr>
           </tbody>
         </table>
       </div>
@@ -128,15 +128,15 @@
       <p>ブラウザはリクエスト時にHostヘッダを送る。例：GET / HTTP/1.1 Host: example.com。WebサーバーはHostヘッダを確認し、example.comに一致する仮想ホストを探し、その仮想ホストのDocumentRootを使ってレスポンスを返す。これにより、同じIPアドレスでも複数サイトを公開できる。</p>
 
       <div class="table-wrap mobile-card-table">
-        <tr>
+        <table>
           <thead>
             <tr><th>項目</th><th>Apache（VirtualHost）</th><th>Nginx（serverブロック）</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">仮想ホスト定義</th>那样&lt;VirtualHost *:80&gt;</th><td>server { listen 80; }</th></tr>
-            <tr><td style="font-weight: bold;">ドメイン指定</th><td>ServerName example.com</th><td>server_name example.com;</th></tr>
-            <tr><td style="font-weight: bold;">公開ディレクトリ</th><td>DocumentRoot /var/www/example</th><td>root /var/www/example;</th></tr>
-            <tr><td style="font-weight: bold;">設定の上書き</th>那样.htaccess可能</th>那样不可（一括管理）</th></tr>
+            <tr><td style="font-weight: bold;">仮想ホスト定義</td><td>&lt;VirtualHost *:80&gt;</td><td>server { listen 80; }</td></tr>
+            <tr><td style="font-weight: bold;">ドメイン指定</td><td>ServerName example.com</td><td>server_name example.com;</td></tr>
+            <tr><td style="font-weight: bold;">公開ディレクトリ</td><td>DocumentRoot /var/www/example</td><td>root /var/www/example;</td></tr>
+            <tr><td style="font-weight: bold;">設定の上書き</td><td>.htaccess可能</td><td>不可（一括管理）</td></tr>
           </tbody>
         </table>
       </div>
@@ -153,9 +153,9 @@
             <tr><th>URL</th><th>実際のファイルパス（DocumentRoot=/var/www/example）</th></tr>
           </thead>
           <tbody>
-            <td><td style="font-weight: bold;">/</th><td>/var/www/example/index.html</th></tr>
-            <tr><td style="font-weight: bold;">/img/a.png</th><td>/var/www/example/img/a.png</th></tr>
-            <tr><td style="font-weight: bold;">/css/style.css</th><td>/var/www/example/css/style.css</th></tr>
+            <tr><td style="font-weight: bold;">/</td><td>/var/www/example/index.html</td></tr>
+            <tr><td style="font-weight: bold;">/img/a.png</td><td>/var/www/example/img/a.png</td></tr>
+            <tr><td style="font-weight: bold;">/css/style.css</td><td>/var/www/example/css/style.css</td></tr>
           </tbody>
         </table>
       </div>
@@ -169,10 +169,10 @@
             <tr><th>項目</th><th>DocumentRoot</th><th>public_html</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">単位</th><td>サイト単位</th><td>ユーザー単位</th></tr>
-            <tr><td style="font-weight: bold;">設定場所</th><td>仮想ホスト</th><td>UserDir（Apache）</th></tr>
-            <tr><td style="font-weight: bold;">URL</th><td>/ から始まる</th><td>/~ユーザー名/</th></tr>
-            <tr><td style="font-weight: bold;">用途</th><td>通常のWebサイト公開</th><td>共有サーバーでの個人公開</th></tr>
+            <tr><td style="font-weight: bold;">単位</td><td>サイト単位</td><td>ユーザー単位</td></tr>
+            <tr><td style="font-weight: bold;">設定場所</td><td>仮想ホスト</td><td>UserDir（Apache）</td></tr>
+            <tr><td style="font-weight: bold;">URL</td><td>/ から始まる</td><td>/~ユーザー名/</td></tr>
+            <tr><td style="font-weight: bold;">用途</td><td>通常のWebサイト公開</td><td>共有サーバーでの個人公開</td></tr>
           </tbody>
         </table>
       </div>
@@ -219,8 +219,8 @@
             <tr><th>エラーページのポイント</th><th>内容</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">404ページ</th><td>「ページが見つかりません」、トップページへのリンク、検索フォーム、サイトマップへの導線</th></tr>
-            <tr><td style="font-weight: bold;">500ページ</th><td>「サーバーエラーが発生しました」、時間を置いて再度アクセスする案内、問い合わせ先の提示（必要に応じて）</th></tr>
+            <tr><td style="font-weight: bold;">404ページ</td><td>「ページが見つかりません」、トップページへのリンク、検索フォーム、サイトマップへの導線</td></tr>
+            <tr><td style="font-weight: bold;">500ページ</td><td>「サーバーエラーが発生しました」、時間を置いて再度アクセスする案内、問い合わせ先の提示（必要に応じて）</td></tr>
           </tbody>
         </table>
       </div>
@@ -253,13 +253,13 @@
             <tr><th>項目</th><th>例</th><th>意味</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">アクセス元IP</th><td>192.168.1.10</th><td>どこからアクセスされたか</th></tr>
-            <tr><td style="font-weight: bold;">日時</th><td>[10/Jun/2026:12:30:15 +0900]</th><td>アクセス時刻</th></tr>
-            <tr><td style="font-weight: bold;">リクエスト内容</th>那样"GET /index.html HTTP/1.1"</th><td>どのURLにアクセスしたか</th></td>
-            <tr><td style="font-weight: bold;">ステータスコード</th><td>200</th><td>成功/失敗の判定</th></td>
-            <tr><td style="font-weight: bold;">レスポンスサイズ</th><td>532</th><td>返したデータ量（バイト）</th></tr>
-            <tr><td style="font-weight: bold;">リファラ</th>那样"https://example.com/search"</th><td>どのページから来たか</th></tr>
-            <tr><td style="font-weight: bold;">User-Agent</th>那样"Mozilla/5.0 (iPhone...)"</th><td>端末・ブラウザ情報</th></tr>
+            <tr><td style="font-weight: bold;">アクセス元IP</td><td>192.168.1.10</td><td>どこからアクセスされたか</td></tr>
+            <tr><td style="font-weight: bold;">日時</td><td>[10/Jun/2026:12:30:15 +0900]</td><td>アクセス時刻</td></tr>
+            <tr><td style="font-weight: bold;">リクエスト内容</td><td>"GET /index.html HTTP/1.1"</td><td>どのURLにアクセスしたか</td></tr>
+            <tr><td style="font-weight: bold;">ステータスコード</td><td>200</td><td>成功/失敗の判定</td></tr>
+            <tr><td style="font-weight: bold;">レスポンスサイズ</td><td>532</td><td>返したデータ量（バイト）</td></tr>
+            <tr><td style="font-weight: bold;">リファラ</td><td>"https://example.com/search"</td><td>どのページから来たか</td></tr>
+            <tr><td style="font-weight: bold;">User-Agent</td><td>"Mozilla/5.0 (iPhone...)"</td><td>端末・ブラウザ情報</td></tr>
           </tbody>
         </table>
       </div>
@@ -282,9 +282,9 @@
             <tr><th>項目</th><th>意味</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">[error]</th><td>エラーレベル</th></tr>
-            <tr><td style="font-weight: bold;">File does not exist</th><td>エラー内容</th></tr>
-            <tr><td style="font-weight: bold;">/var/www/example/img/logo.png</th><td>問題のファイル</th></tr>
+            <tr><td style="font-weight: bold;">[error]</td><td>エラーレベル</td></tr>
+            <tr><td style="font-weight: bold;">File does not exist</td><td>エラー内容</td></tr>
+            <tr><td style="font-weight: bold;">/var/www/example/img/logo.png</td><td>問題のファイル</td></tr>
           </tbody>
         </table>
       </div>
@@ -296,8 +296,8 @@
             <tr><th>Webサーバー</th><th>設定場所</th><th>設定例</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">Apache</th><td>VirtualHost内</th><td>ErrorLog "error.log"<br>CustomLog "access.log" combined</th></tr>
-            <tr><td style="font-weight: bold;">Nginx</th><td>serverブロック内</th><td>access_log /var/log/nginx/access.log main;<br>error_log /var/log/nginx/error.log;</th></tr>
+            <tr><td style="font-weight: bold;">Apache</td><td>VirtualHost内</td><td>ErrorLog "error.log"<br>CustomLog "access.log" combined</td></tr>
+            <tr><td style="font-weight: bold;">Nginx</td><td>serverブロック内</td><td>access_log /var/log/nginx/access.log main;<br>error_log /var/log/nginx/error.log;</td></tr>
           </tbody>
         </table>
       </div>

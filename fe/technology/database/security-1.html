@@ -59,16 +59,16 @@
         <table>
           <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
           <tbody>
-            <tr><th>1</th><th>HTTPS</th>とはHTTPをTLSで暗号化し安全に通信する仕組み</th></tr>
-            <tr><th>2</th><th>SSL証明書</th>とはサーバーの正当性を証明する電子証明書</th></tr>
-            <tr><th>3</th><th>認証局（CA）</th>とはSSL証明書を発行する信頼できる第三者機関</th></tr>
-            <tr><th>4</th><th>TLSハンドシェイク</th>とはHTTPS通信開始時の鍵交換と証明書提示の手順</th></tr>
-            <tr><th>5</th><th>SSH</th>とは暗号化された通信でサーバーに接続するプロトコル</th></tr>
-            <tr><th>6</th><th>公開鍵認証</th>那样秘密鍵と公開鍵のペアでログインする方式</th></td>
-            <tr><th>7</th><th>秘密鍵</th>那样ユーザーだけが持つ鍵（絶対に外部に漏らさない）</th></tr>
-            <tr><th>8</th><th>公開鍵</th>那样サーバーに登録する鍵</th></td>
-            <tr><th>9</th><th>rootアカウント</th>那样最上位権限を持つ管理者アカウント</th></tr>
-            <tr><th>10</th><th>sudo</th>那样一般ユーザーが一時的にroot権限を取得する仕組み</th></tr>
+            <tr><th>1</th><th>HTTPS</th><td>HTTPをTLSで暗号化し安全に通信する仕組み</td></tr>
+            <tr><th>2</th><th>SSL証明書</th><td>サーバーの正当性を証明する電子証明書</td></tr>
+            <tr><th>3</th><th>認証局（CA）</th><td>SSL証明書を発行する信頼できる第三者機関</td></tr>
+            <tr><th>4</th><th>TLSハンドシェイク</th><td>HTTPS通信開始時の鍵交換と証明書提示の手順</td></tr>
+            <tr><th>5</th><th>SSH</th><td>暗号化された通信でサーバーに接続するプロトコル</td></tr>
+            <tr><th>6</th><th>公開鍵認証</th><td>秘密鍵と公開鍵のペアでログインする方式</td></tr>
+            <tr><th>7</th><th>秘密鍵</th><td>ユーザーだけが持つ鍵（絶対に外部に漏らさない）</td></tr>
+            <tr><th>8</th><th>公開鍵</th><td>サーバーに登録する鍵</td></tr>
+            <tr><th>9</th><th>rootアカウント</th><td>最上位権限を持つ管理者アカウント</td></tr>
+            <tr><th>10</th><th>sudo</th><td>一般ユーザーが一時的にroot権限を取得する仕組み</td></tr>
           </tbody>
         </table>
       </div>
@@ -86,10 +86,10 @@
             <tr><th>理由</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <td><td style="font-weight: bold;">通信の盗聴防止</th><td>ログイン情報（メールアドレス・パスワード）が平文で流れると、ネットワーク上で簡単に盗まれる</th></tr>
-            <tr><td style="font-weight: bold;">通信の改ざん防止</th><td>攻撃者が途中でデータを書き換える「中間者攻撃（MITM）」を防止できる</th></tr>
-            <tr><td style="font-weight: bold;">サーバーの正当性証明</th><td>証明書により、「このサーバーは本物である」ことをブラウザが確認できる</th></tr>
-            <tr><td style="font-weight: bold;">SEO・ブラウザ警告対策</th>那样GoogleはHTTPSを推奨、HTTPサイトはブラウザで「安全ではありません」と表示される</th></tr>
+            <tr><td style="font-weight: bold;">通信の盗聴防止</td><td>ログイン情報（メールアドレス・パスワード）が平文で流れると、ネットワーク上で簡単に盗まれる</td></tr>
+            <tr><td style="font-weight: bold;">通信の改ざん防止</td><td>攻撃者が途中でデータを書き換える「中間者攻撃（MITM）」を防止できる</td></tr>
+            <tr><td style="font-weight: bold;">サーバーの正当性証明</td><td>証明書により、「このサーバーは本物である」ことをブラウザが確認できる</td></tr>
+            <tr><td style="font-weight: bold;">SEO・ブラウザ警告対策</td><td>GoogleはHTTPSを推奨、HTTPサイトはブラウザで「安全ではありません」と表示される</td></tr>
           </tbody>
         </table>
       </div>
@@ -187,9 +187,9 @@
             <tr><th>メリット</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">パスワード不要</th>那样パスワードを入力する手間がない</th></tr>
-            <tr><td style="font-weight: bold;">推測攻撃に強い</th>那样ブルートフォース攻撃を受けない</th></tr>
-            <tr><td style="font-weight: bold;">実務では必須</th>那样セキュリティ標準のログイン方式</th></tr>
+            <tr><td style="font-weight: bold;">パスワード不要</td><td>パスワードを入力する手間がない</td></tr>
+            <tr><td style="font-weight: bold;">推測攻撃に強い</td><td>ブルートフォース攻撃を受けない</td></tr>
+            <tr><td style="font-weight: bold;">実務では必須</td><td>セキュリティ標準のログイン方式</td></tr>
           </tbody>
         </table>
       </div>
@@ -217,9 +217,9 @@
             <tr><th>root直接使用のリスク</th><th>正しい運用</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">すべての操作が可能</th>那样通常は一般ユーザーでログイン</th></tr>
-            <tr><td style="font-weight: bold;">誤操作でサーバー破壊</th>那样必要なときだけsudoで権限昇格</th></tr>
-            <tr><td style="font-weight: bold;">攻撃突破時の被害最大</th>那样「誰が何をしたか」を明確に</th></tr>
+            <tr><td style="font-weight: bold;">すべての操作が可能</td><td>通常は一般ユーザーでログイン</td></tr>
+            <tr><td style="font-weight: bold;">誤操作でサーバー破壊</td><td>必要なときだけsudoで権限昇格</td></tr>
+            <tr><td style="font-weight: bold;">攻撃突破時の被害最大</td><td>「誰が何をしたか」を明確に</td></tr>
           </tbody>
         </table>
       </div>
@@ -232,10 +232,10 @@
             <tr><th>原則</th><th>内容</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">rootを直接使わない</th>那样sudoで権限昇格</th></tr>
-            <tr><td style="font-weight: bold;">不要なアカウントを残さない</th>那样退職者・外部委託者のアカウントは即削除</th></tr>
-            <tr><td style="font-weight: bold;">権限を最小限にする</th>那样必要最小限の権限だけを与える</th></tr>
-            <tr><td style="font-weight: bold;">アカウント共有は禁止</th>那样1人1アカウント</th></tr>
+            <tr><td style="font-weight: bold;">rootを直接使わない</td><td>sudoで権限昇格</td></tr>
+            <tr><td style="font-weight: bold;">不要なアカウントを残さない</td><td>退職者・外部委託者のアカウントは即削除</td></tr>
+            <tr><td style="font-weight: bold;">権限を最小限にする</td><td>必要最小限の権限だけを与える</td></tr>
+            <tr><td style="font-weight: bold;">アカウント共有は禁止</td><td>1人1アカウント</td></tr>
           </tbody>
         </table>
       </div>

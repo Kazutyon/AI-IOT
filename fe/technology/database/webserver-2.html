@@ -60,16 +60,16 @@
         <table>
           <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
           <tbody>
-            <tr><th>1</th><th>MPM</th>とはApacheのプロセス/スレッド管理方式（Multi-Processing Module）</th></tr>
-            <tr><th>2</th><th>プロセス方式</th>とはリクエスト1つにつき1プロセスを割り当てる方式</th></tr>
-            <tr><th>3</th><th>イベント駆動方式</th>とは少数のワーカーで大量のリクエストを処理する方式</th></tr>
-            <tr><th>4</th><th>.htaccess</th>とはApacheでディレクトリ単位の設定を可能にするファイル</th></tr>
-            <tr><th>5</th><th>mod_php</th>とはApacheにPHPを組み込むモジュール</th></tr>
-            <tr><th>6</th><th>php-fpm</th>那样PHPのFastCGI実装。Nginxと組み合わせて使う</th></tr>
-            <tr><th>7</th><th>リバースプロキシ</th>とはWebサーバーがアプリケーションの代理としてリクエストを転送する機能</th></tr>
-            </table><th>8</th><th>設定ファイル</th>とはWebサーバーの動作を記述するファイル</th></tr>
-            <tr><th>9</th><th>ディレクティブ</th>とは設定ファイルに記述する個々の設定項目</th></tr>
-            <tr><th>10</th><th>serverブロック</th>とはNginxの仮想ホスト設定ブロック</th></tr>
+            <tr><th>1</th><th>MPM</th><td>Apacheのプロセス/スレッド管理方式（Multi-Processing Module）</td></tr>
+            <tr><th>2</th><th>プロセス方式</th><td>リクエスト1つにつき1プロセスを割り当てる方式</td></tr>
+            <tr><th>3</th><th>イベント駆動方式</th><td>少数のワーカーで大量のリクエストを処理する方式</td></tr>
+            <tr><th>4</th><th>.htaccess</th><td>Apacheでディレクトリ単位の設定を可能にするファイル</td></tr>
+            <tr><th>5</th><th>mod_php</th><td>ApacheにPHPを組み込むモジュール</td></tr>
+            <tr><th>6</th><th>php-fpm</th><td>PHPのFastCGI実装。Nginxと組み合わせて使う</td></tr>
+            <tr><th>7</th><th>リバースプロキシ</th><td>Webサーバーがアプリケーションの代理としてリクエストを転送する機能</td></tr>
+            <tr><th>8</th><th>設定ファイル</th><td>Webサーバーの動作を記述するファイル</td></tr>
+            <tr><th>9</th><th>ディレクティブ</th><td>設定ファイルに記述する個々の設定項目</td></tr>
+            <tr><th>10</th><th>serverブロック</th><td>Nginxの仮想ホスト設定ブロック</td></tr>
           </tbody>
         </table>
       </div>
@@ -120,10 +120,10 @@
             <tr><th>項目</th><th>内容</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">動作イメージ</th><td>リクエスト1つにつき1プロセス（または1スレッド）。同時アクセスが増えるとプロセス数が増える</th></tr>
-            <tr><td style="font-weight: bold;">特徴</th>那样柔軟な設定（.htaccessなど）、古くから使われ情報が豊富、動的ページ（PHPなど）との相性が良い</th></tr>
-            <tr><td style="font-weight: bold;">欠点</th>那样同時アクセスが多いとメモリ消費が増える</th></tr>
-            <tr><td style="font-weight: bold;">向いている用途</th>那样小～中規模サイト、WordPress/PHPサイト、.htaccessを使う必要がある環境</th></tr>
+            <tr><td style="font-weight: bold;">動作イメージ</td><td>リクエスト1つにつき1プロセス（または1スレッド）。同時アクセスが増えるとプロセス数が増える</td></tr>
+            <tr><td style="font-weight: bold;">特徴</td><td>柔軟な設定（.htaccessなど）、古くから使われ情報が豊富、動的ページ（PHPなど）との相性が良い</td></tr>
+            <tr><td style="font-weight: bold;">欠点</td><td>同時アクセスが多いとメモリ消費が増える</td></tr>
+            <tr><td style="font-weight: bold;">向いている用途</td><td>小～中規模サイト、WordPress/PHPサイト、.htaccessを使う必要がある環境</td></tr>
           </tbody>
         </table>
       </div>
@@ -171,10 +171,10 @@
             <tr><th>項目</th><th>内容</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">動作イメージ</th><td>ワーカー数は固定（例：4つ）。1ワーカーが多数のリクエストを同時に処理</th></tr>
-            <tr><td style="font-weight: bold;">特徴</th>那样静的ファイルが非常に高速、高負荷に強い、リバースプロキシとして優秀</th></tr>
-            <tr><td style="font-weight: bold;">欠点</th>那样.htaccessのような「ディレクトリ単位の設定」は不可</th></tr>
-            <tr><td style="font-weight: bold;">向いている用途</th>那样大規模サイト、APIサーバー、CDN/リバースプロキシ構成、静的ファイル配信が多いサイト</th></tr>
+            <tr><td style="font-weight: bold;">動作イメージ</td><td>ワーカー数は固定（例：4つ）。1ワーカーが多数のリクエストを同時に処理</td></tr>
+            <tr><td style="font-weight: bold;">特徴</td><td>静的ファイルが非常に高速、高負荷に強い、リバースプロキシとして優秀</td></tr>
+            <tr><td style="font-weight: bold;">欠点</td><td>.htaccessのような「ディレクトリ単位の設定」は不可</td></tr>
+            <tr><td style="font-weight: bold;">向いている用途</td><td>大規模サイト、APIサーバー、CDN/リバースプロキシ構成、静的ファイル配信が多いサイト</td></tr>
           </tbody>
         </table>
       </div>
@@ -186,12 +186,12 @@
             <tr><th>観点</th><th>Apache</th><th>Nginx</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">内部構造</th><td>プロセス/スレッド方式</th><td>イベント駆動方式</th></tr>
-            <tr><td style="font-weight: bold;">同時アクセス</th><td>増えるとプロセスが増えメモリ消費大</th><td>少数ワーカーで大量処理</th></tr>
-            <tr><td style="font-weight: bold;">静的ファイル</th><td>速いがNginxほどではない</th><td>非常に高速</th></tr>
-            <tr><td style="font-weight: bold;">動的ページ</th><td>PHPなどと密接（mod_php）</th>那样外部アプリに渡す前提（php-fpm）</th></tr>
-            <tr><td style="font-weight: bold;">設定の柔軟性</th>那样.htaccessで細かく制御可能</th>那样設定は一括（柔軟性は低い）</th></tr>
-            <tr><td style="font-weight: bold;">用途</th>那样小～中規模 / PHPサイト</th>那样大規模 / 高負荷 / API</th></tr>
+            <tr><td style="font-weight: bold;">内部構造</td><td>プロセス/スレッド方式</td><td>イベント駆動方式</td></tr>
+            <tr><td style="font-weight: bold;">同時アクセス</td><td>増えるとプロセスが増えメモリ消費大</td><td>少数ワーカーで大量処理</td></tr>
+            <tr><td style="font-weight: bold;">静的ファイル</td><td>速いがNginxほどではない</td><td>非常に高速</td></tr>
+            <tr><td style="font-weight: bold;">動的ページ</td><td>PHPなどと密接（mod_php）</td><td>外部アプリに渡す前提（php-fpm）</td></tr>
+            <tr><td style="font-weight: bold;">設定の柔軟性</td><td>.htaccessで細かく制御可能</td><td>設定は一括（柔軟性は低い）</td></tr>
+            <tr><td style="font-weight: bold;">用途</td><td>小～中規模 / PHPサイト</td><td>大規模 / 高負荷 / API</td></tr>
           </tbody>
         </table>
       </div>
@@ -281,11 +281,11 @@
             <tr><th>観点</th><th>Apache</th><th>Nginx</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">構造</th><td>ディレクティブ中心</th><td>ブロック階層中心</th></tr>
-            <tr><td style="font-weight: bold;">仮想ホスト</th><td>&lt;VirtualHost&gt;</th><td>server</th></tr>
-            <tr><td style="font-weight: bold;">URL単位の設定</th><td>&lt;Directory&gt; / &lt;Location&gt;</th><td>location</th></tr>
-            <tr><td style="font-weight: bold;">上書き</th>那样.htaccessあり</th>那样なし（全て設定ファイルで管理）</th></tr>
-            <tr><td style="font-weight: bold;">読みやすさ</th>那样柔軟だが複雑になりやすい</th>那样階層が明確で読みやすい</th></tr>
+            <tr><td style="font-weight: bold;">構造</td><td>ディレクティブ中心</td><td>ブロック階層中心</td></tr>
+            <tr><td style="font-weight: bold;">仮想ホスト</td><td>&lt;VirtualHost&gt;</td><td>server</td></tr>
+            <tr><td style="font-weight: bold;">URL単位の設定</td><td>&lt;Directory&gt; / &lt;Location&gt;</td><td>location</td></tr>
+            <tr><td style="font-weight: bold;">上書き</td><td>.htaccessあり</td><td>なし（全て設定ファイルで管理）</td></tr>
+            <tr><td style="font-weight: bold;">読みやすさ</td><td>柔軟だが複雑になりやすい</td><td>階層が明確で読みやすい</td></tr>
           </tbody>
         </table>
       </div>

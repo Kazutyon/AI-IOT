@@ -56,19 +56,19 @@
     <section id="terms" class="lesson-section">
       <h2>試験に出る用語</h2>
       <div class="table-wrap mobile-card-table">
-        <tr>
+        <table>
           <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
           <tbody>
-            <tr><th>1</th><th>REST API</th>とはHTTPを使ってデータをやり取りするAPIの設計方式</th></tr>
-            <tr><th>2</th><th>JSON</th>とは軽量で読みやすいデータ形式。APIの標準形式</th></tr>
-            <tr><th>3</th><th>リソース</th>那样APIで扱うデータの単位（ユーザー、商品など）</th></tr>
-            <tr><th>4</th><th>エンドポイント</th>那样APIのURL（/api/users, /api/itemsなど）</th></tr>
-            <tr><th>5</th><th>Cookie</th>とはブラウザが保存し自動送信するデータ</th></tr>
-            <tr><th>6</th><th>Session</th>とはWebサーバー側に保存されるユーザー情報</th></tr>
-            <tr><th>7</th><th>Token（JWT）</th>とはAPIで使用される認証方式</th></tr>
-            <tr><th>8</th><th>400 Bad Request</th>とは入力エラー（バリデーションエラー）</th></tr>
-            <tr><th>9</th><th>401 Unauthorized</th>とは認証エラー（ログインが必要）</th></tr>
-            <tr><th>10</th><th>502 Bad Gateway</th>那样アプリが応答しない場合にWebサーバーが返すエラー</th></tr>
+            <tr><th>1</th><th>REST API</th><td>HTTPを使ってデータをやり取りするAPIの設計方式</td></tr>
+            <tr><th>2</th><th>JSON</th><td>軽量で読みやすいデータ形式。APIの標準形式</td></tr>
+            <tr><th>3</th><th>リソース</th><td>APIで扱うデータの単位（ユーザー、商品など）</td></tr>
+            <tr><th>4</th><th>エンドポイント</th><td>APIのURL（/api/users, /api/itemsなど）</td></tr>
+            <tr><th>5</th><th>Cookie</th><td>ブラウザが保存し自動送信するデータ</td></tr>
+            <tr><th>6</th><th>Session</th><td>Webサーバー側に保存されるユーザー情報</td></tr>
+            <tr><th>7</th><th>Token（JWT）</th><td>APIで使用される認証方式</td></tr>
+            <tr><th>8</th><th>400 Bad Request</th><td>入力エラー（バリデーションエラー）</td></tr>
+            <tr><th>9</th><th>401 Unauthorized</th><td>認証エラー（ログインが必要）</td></tr>
+            <tr><th>10</th><th>502 Bad Gateway</th><td>アプリが応答しない場合にWebサーバーが返すエラー</td></tr>
           </tbody>
         </table>
       </div>
@@ -127,11 +127,11 @@
             <tr><th>操作</th><th>HTTPメソッド</th><th>URL</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">商品一覧を取得</th><td>GET</th><td>/api/items</th></tr>
-            <tr><td style="font-weight: bold;">商品詳細を取得</th><td>GET</th><td>/api/items/10</th></tr>
-            <tr><td style="font-weight: bold;">商品を登録</th><td>POST</th><td>/api/items</th></tr>
-            <tr><td style="font-weight: bold;">商品を更新</th><td>PUT</th><td>/api/items/10</th></tr>
-            <tr><td style="font-weight: bold;">商品を削除</th><td>DELETE</th><td>/api/items/10</th></tr>
+            <tr><td style="font-weight: bold;">商品一覧を取得</td><td>GET</td><td>/api/items</td></tr>
+            <tr><td style="font-weight: bold;">商品詳細を取得</td><td>GET</td><td>/api/items/10</td></tr>
+            <tr><td style="font-weight: bold;">商品を登録</td><td>POST</td><td>/api/items</td></tr>
+            <tr><td style="font-weight: bold;">商品を更新</td><td>PUT</td><td>/api/items/10</td></tr>
+            <tr><td style="font-weight: bold;">商品を削除</td><td>DELETE</td><td>/api/items/10</td></tr>
           </tbody>
         </table>
       </div>
@@ -186,12 +186,12 @@
       <h3>JSONの成功/失敗の標準形</h3>
       
       <div class="table-wrap mobile-card-table">
-        </table>
+        <table>
           <thead>
             <tr><th>ケース</th><th>レスポンス例</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">成功時</th>
+            <tr><td style="font-weight: bold;">成功時</td>
             <td>{
   "status": "ok",
   "data": {
@@ -199,15 +199,15 @@
     "name": "Tシャツ",
     "price": 1980
   }
-}</th>
-            <td>status: okで成功を明示、dataに実際のデータ</th>
+}</td>
+            <td>status: okで成功を明示、dataに実際のデータ</td>
           </tr>
-          <tr><td style="font-weight: bold;">失敗時</th>
+          <tr><td style="font-weight: bold;">失敗時</td>
             <td>{
   "status": "error",
   "message": "無効なパラメータです"
-}</th>
-            <td>status: errorで失敗を明示、messageにエラー内容</th>
+}</td>
+            <td>status: errorで失敗を明示、messageにエラー内容</td>
           </tr>
         </tbody>
       </table>
@@ -238,13 +238,13 @@
             <tr><th>領域</th><th>Webサーバー（Apache）</th><th>アプリ（PHP/Python/Node）</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">入口</th><td>ドメイン/HTTPS</th><td>触れない</th></tr>
-            <tr><td style="font-weight: bold;">静的ファイル</th><td>高速に返す</th><td>返さない</th></tr>
-            <tr><td style="font-weight: bold;">動的処理</th><td>アプリへ転送</th><td>実行する</th></tr>
-            <tr><td style="font-weight: bold;">DB</th><td>触れない</th><td>アクセスする</th></tr>
-            <tr><td style="font-weight: bold;">ログ</th><td>access.log/error.log</th><td>アプリログ</th></tr>
-            <tr><td style="font-weight: bold;">認証</th><td>Basic認証</th><td>ログイン処理</th></tr>
-            <tr><td style="font-weight: bold;">API</th>那样入口として受ける</th>那样JSONを生成</th></tr>
+            <tr><td style="font-weight: bold;">入口</td><td>ドメイン/HTTPS</td><td>触れない</td></tr>
+            <tr><td style="font-weight: bold;">静的ファイル</td><td>高速に返す</td><td>返さない</td></tr>
+            <tr><td style="font-weight: bold;">動的処理</td><td>アプリへ転送</td><td>実行する</td></tr>
+            <tr><td style="font-weight: bold;">DB</td><td>触れない</td><td>アクセスする</td></tr>
+            <tr><td style="font-weight: bold;">ログ</td><td>access.log/error.log</td><td>アプリログ</td></tr>
+            <tr><td style="font-weight: bold;">認証</td><td>Basic認証</td><td>ログイン処理</td></tr>
+            <tr><td style="font-weight: bold;">API</td><td>入口として受ける</td><td>JSONを生成</td></tr>
           </tbody>
         </table>
       </div>
@@ -257,9 +257,9 @@
             <tr><th>領域</th><th>役割</th><th>内容</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">ブラウザ</th><td>Cookieの保存</th><td>Session IDやTokenを保持</th></tr>
-            <tr><td style="font-weight: bold;">Webサーバー（Apache）</th><td>入口</th><td>Cookie/Tokenを「転送するだけ」</th></tr>
-            <tr><td style="font-weight: bold;">アプリケーション</th><td>認証処理の本体</th><td>Session管理/Token検証/ログイン処理</th></tr>
+            <tr><td style="font-weight: bold;">ブラウザ</td><td>Cookieの保存</td><td>Session IDやTokenを保持</td></tr>
+            <tr><td style="font-weight: bold;">Webサーバー（Apache）</td><td>入口</td><td>Cookie/Tokenを「転送するだけ」</td></tr>
+            <tr><td style="font-weight: bold;">アプリケーション</td><td>認証処理の本体</td><td>Session管理/Token検証/ログイン処理</td></tr>
           </tbody>
         </table>
       </div>
@@ -289,21 +289,21 @@
             <tr><th>領域</th><th>返すエラー</th><th>意味</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">Webサーバー（Apache）</th><td>403 / 404 / 413 / 502 / 503</th><td>入口・静的ファイル・プロキシの問題</th></tr>
-            <tr><td style="font-weight: bold;">アプリケーション</th><td>400 / 401 / 404 / 500</th><td>入力・認証・データ・内部処理の問題</th></tr>
+            <tr><td style="font-weight: bold;">Webサーバー（Apache）</td><td>403 / 404 / 413 / 502 / 503</td><td>入口・静的ファイル・プロキシの問題</td></tr>
+            <tr><td style="font-weight: bold;">アプリケーション</td><td>400 / 401 / 404 / 500</td><td>入力・認証・データ・内部処理の問題</td></tr>
           </tbody>
         </table>
       </div>
 
       <h4>404の違い（重要）</h4>
       <div class="table-wrap mobile-card-table">
-        <tr>
+        <table>
           <thead>
             <tr><th>発生元</th><th>意味</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">Apacheの404</th><td>ファイルが存在しない、ルーティングに到達していない、URLが間違っている</th></tr>
-            <tr><td style="font-weight: bold;">APIの404</th><td>データが存在しない、商品IDが見つからない、ユーザーが存在しない</th></tr>
+            <tr><td style="font-weight: bold;">Apacheの404</td><td>ファイルが存在しない、ルーティングに到達していない、URLが間違っている</td></tr>
+            <tr><td style="font-weight: bold;">APIの404</td><td>データが存在しない、商品IDが見つからない、ユーザーが存在しない</td></tr>
           </tbody>
         </table>
       </div>

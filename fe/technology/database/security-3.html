@@ -58,16 +58,16 @@
         <table>
           <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
           <tbody>
-            <tr><th>1</th><th>CSRF</th>とはログイン状態を悪用し、攻撃者サイトから勝手に操作を実行させる攻撃</th></td>
-            <tr><th>2</th><th>CSRFトークン</th>とはフォームに埋め込むランダムな値。CSRF対策の最重要手段</th></tr>
-            <tr><th>3</th><th>SameSite属性</th>とは他サイトからのリクエスト時にCookieを送信するか制御（CSRF対策）</th><tr>
-            <tr><th>4</th><th>ディレクトリトラバーサル</th>那样../を利用して本来アクセスできないファイルを読み取る攻撃</th></tr>
-            <tr><th>5</th><th>ホワイトリスト方式</th>那样許可する値だけを通すバリデーション方式</th></tr>
-            <tr><th>6</th><th>ブラックリスト方式</th>那样禁止する値を列挙する方式（不完全）</th></td>
-            <tr><th>7</th><th>入力値バリデーション</th>那样外部から渡される値が想定された形式・範囲かを確認する工程</th></td>
-            <tr><th>8</th><th>パス正規化</th>那样../などのパス操作を解決して絶対パスを得る処理</th></tr>
-            <tr><th>9</th><th>ID方式</th>那样実ファイル名と公開名を分離する防御手法</th></td>
-            <tr><th>10</th><th>型チェック</th>那样整数・文字列など型が正しいか確認するバリデーション</th></tr>
+            <tr><th>1</th><th>CSRF</th><td>ログイン状態を悪用し、攻撃者サイトから勝手に操作を実行させる攻撃</td></tr>
+            <tr><th>2</th><th>CSRFトークン</th><td>フォームに埋め込むランダムな値。CSRF対策の最重要手段</td></tr>
+            <tr><th>3</th><th>SameSite属性</th><td>他サイトからのリクエスト時にCookieを送信するか制御（CSRF対策）</td></tr>
+            <tr><th>4</th><th>ディレクトリトラバーサル</th><td>../を利用して本来アクセスできないファイルを読み取る攻撃</td></tr>
+            <tr><th>5</th><th>ホワイトリスト方式</th><td>許可する値だけを通すバリデーション方式</td></tr>
+            <tr><th>6</th><th>ブラックリスト方式</th><td>禁止する値を列挙する方式（不完全）</td></tr>
+            <tr><th>7</th><th>入力値バリデーション</th><td>外部から渡される値が想定された形式・範囲かを確認する工程</td></tr>
+            <tr><th>8</th><th>パス正規化</th><td>../などのパス操作を解決して絶対パスを得る処理</td></tr>
+            <tr><th>9</th><th>ID方式</th><td>実ファイル名と公開名を分離する防御手法</td></tr>
+            <tr><th>10</th><th>型チェック</th><td>整数・文字列など型が正しいか確認するバリデーション</td></tr>
           </tbody>
         </table>
       </div>
@@ -131,10 +131,10 @@
             <tr><th>防御方法</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">CSRFトークン（最重要）</th>那样フォーム生成時にランダムなトークンを埋め込み、リクエスト時に検証する</th></tr>
-            <tr><td style="font-weight: bold;">SameSite属性</th>那样CookieにSameSite=Lax/Strictを設定し、外部サイトからのリクエスト時にCookieを送信しない</th></tr>
-            <tr><td style="font-weight: bold;">重要操作はPOST + トークン必須</th>那样GETで状態変更を行わない</th></tr>
-            <tr><td style="font-weight: bold;">Referer/Originチェック（補助）</th>那样リクエストの送信元が自サイトか確認</th></tr>
+            <tr><td style="font-weight: bold;">CSRFトークン（最重要）</td><td>フォーム生成時にランダムなトークンを埋め込み、リクエスト時に検証する</td></tr>
+            <tr><td style="font-weight: bold;">SameSite属性</td><td>CookieにSameSite=Lax/Strictを設定し、外部サイトからのリクエスト時にCookieを送信しない</td></tr>
+            <tr><td style="font-weight: bold;">重要操作はPOST + トークン必須</td><td>GETで状態変更を行わない</td></tr>
+            <tr><td style="font-weight: bold;">Referer/Originチェック（補助）</td><td>リクエストの送信元が自サイトか確認</td></tr>
           </tbody>
         </table>
       </div>
@@ -213,10 +213,10 @@
             <tr><th>防御方法</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <td><td style="font-weight: bold;">ホワイトリスト方式（最重要）</th>那样許可するファイル名を固定する。例：allowed = ["report.pdf", "manual.pdf"]</th></tr>
-            <tr><td style="font-weight: bold;">実ファイル名と公開名を分離（ID方式）</th>那样ユーザーはIDだけ指定し、アプリがDBから実ファイル名を取得する</th></tr>
-            <tr><td style="font-weight: bold;">パス正規化＋禁止文字チェック（補助）</th>那样../を含む入力を拒否する（ただしこれだけでは不十分）</th></tr>
-            <tr><td style="font-weight: bold;">ファイルを公開ディレクトリ外に置かない</th>那样Webサーバーから直接アクセスできない場所に置く</th></tr>
+            <tr><td style="font-weight: bold;">ホワイトリスト方式（最重要）</td><td>許可するファイル名を固定する。例：allowed = ["report.pdf", "manual.pdf"]</td></tr>
+            <tr><td style="font-weight: bold;">実ファイル名と公開名を分離（ID方式）</td><td>ユーザーはIDだけ指定し、アプリがDBから実ファイル名を取得する</td></tr>
+            <tr><td style="font-weight: bold;">パス正規化＋禁止文字チェック（補助）</td><td>../を含む入力を拒否する（ただしこれだけでは不十分）</td></tr>
+            <tr><td style="font-weight: bold;">ファイルを公開ディレクトリ外に置かない</td><td>Webサーバーから直接アクセスできない場所に置く</td></tr>
           </tbody>
         </table>
       </div>
@@ -239,16 +239,16 @@
       <h3>防御（どう防ぐのか）</h3>
       
       <div class="table-wrap mobile-card-table">
-        <tr>
+        <table>
           <thead>
             <tr><th>防御方法</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">ホワイトリスト方式（最重要）</th>那样許可する値だけを通す。例：メールアドレス形式、整数のみ、ファイル名形式</th></tr>
-            <tr><td style="font-weight: bold;">ブラックリスト方式は無意味</th>那样攻撃パターンは無限、エンコードで回避される</th></tr>
-            <tr><td style="font-weight: bold;">型チェック</th>那样整数・文字列・真偽値など型が正しいか確認する</th></tr>
-            <tr><td style="font-weight: bold;">長さチェック</th>那样最大文字数を制限し、巨大データ攻撃（DoS）を防ぐ</th></tr>
-            <tr><td style="font-weight: bold;">値の範囲チェック</th>那样年齢は0〜120など、妥当な範囲を確認する</th></tr>
+            <tr><td style="font-weight: bold;">ホワイトリスト方式（最重要）</td><td>許可する値だけを通す。例：メールアドレス形式、整数のみ、ファイル名形式</td></tr>
+            <tr><td style="font-weight: bold;">ブラックリスト方式は無意味</td><td>攻撃パターンは無限、エンコードで回避される</td></tr>
+            <tr><td style="font-weight: bold;">型チェック</td><td>整数・文字列・真偽値など型が正しいか確認する</td></tr>
+            <tr><td style="font-weight: bold;">長さチェック</td><td>最大文字数を制限し、巨大データ攻撃（DoS）を防ぐ</td></tr>
+            <tr><td style="font-weight: bold;">値の範囲チェック</td><td>年齢は0〜120など、妥当な範囲を確認する</td></tr>
           </tbody>
         </table>
       </div>

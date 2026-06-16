@@ -58,16 +58,16 @@
         <table>
           <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
           <tbody>
-            <tr><th>1</th><th>SQLインジェクション</th>那样アプリがユーザー入力をSQL文の一部として扱ってしまう攻撃</th></tr>
-            <tr><th>2</th><th>プレースホルダ</th>那样SQL文と値を分離してDBに送信する方式</th></tr>
-            <tr><th>3</th><th>プリペアドステートメント</th>那样プレースホルダを使ったSQL実行方式</th></tr>
-            <tr><th>4</th><th>XSS</th>那样攻撃者のJavaScriptが他ユーザーのブラウザ上で実行される攻撃</th></tr>
-            <tr><th>5</th><th>エスケープ</th>那样特殊文字を無害化して出力する処理</th></tr>
-            <tr><th>6</th><th>HttpOnly</th>那样JavaScriptからCookieを読み取れなくする属性（XSS対策）</th></td>
-            <tr><th>7</th><th>.envファイル</th>那样環境変数を保存するファイル</th></tr>
-            <tr><th>8</th><th>ブルートフォース攻撃</th>那样パスワードを総当たりで試す攻撃</th></tr>
-            <tr><th>9</th><th>中間者攻撃（MITM）</th>那样通信途中でデータを盗聴・改ざんする攻撃</th></td>
-            <tr><th>10</th><th>ハッシュ化</th>那样パスワードを元に戻せない形式で保存する方式</th></tr>
+            <tr><th>1</th><th>SQLインジェクション</th><td>アプリがユーザー入力をSQL文の一部として扱ってしまう攻撃</td></tr>
+            <tr><th>2</th><th>プレースホルダ</th><td>SQL文と値を分離してDBに送信する方式</td></tr>
+            <tr><th>3</th><th>プリペアドステートメント</th><td>プレースホルダを使ったSQL実行方式</td></tr>
+            <tr><th>4</th><th>XSS</th><td>攻撃者のJavaScriptが他ユーザーのブラウザ上で実行される攻撃</td></tr>
+            <tr><th>5</th><th>エスケープ</th><td>特殊文字を無害化して出力する処理</td></tr>
+            <tr><th>6</th><th>HttpOnly</th><td>JavaScriptからCookieを読み取れなくする属性（XSS対策）</td></tr>
+            <tr><th>7</th><th>.envファイル</th><td>環境変数を保存するファイル</td></tr>
+            <tr><th>8</th><th>ブルートフォース攻撃</th><td>パスワードを総当たりで試す攻撃</td></tr>
+            <tr><th>9</th><th>中間者攻撃（MITM）</th><td>通信途中でデータを盗聴・改ざんする攻撃</td></tr>
+            <tr><th>10</th><th>ハッシュ化</th><td>パスワードを元に戻せない形式で保存する方式</td></tr>
           </tbody>
         </table>
       </div>
@@ -100,10 +100,10 @@
             <tr><th>正しい管理方法</th><th>NG例</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">.envファイルに保存</th>那样ソースコードに直書き</th></tr>
-            <tr><td style="font-weight: bold;">サーバー内のみに置く</th>那样GitHubにアップロード</th></tr>
-            <tr><td style="font-weight: bold;">権限は600に設定</th>那样共有フォルダに保存</th></tr>
-            <tr><td style="font-weight: bold;">デプロイ時に環境変数として設定</th>那样—</th></tr>
+            <tr><td style="font-weight: bold;">.envファイルに保存</td><td>ソースコードに直書き</td></tr>
+            <tr><td style="font-weight: bold;">サーバー内のみに置く</td><td>GitHubにアップロード</td></tr>
+            <tr><td style="font-weight: bold;">権限は600に設定</td><td>共有フォルダに保存</td></tr>
+            <tr><td style="font-weight: bold;">デプロイ時に環境変数として設定</td><td>—</td></tr>
           </tbody>
         </table>
       </div>
@@ -161,9 +161,9 @@
             <tr><th>防御方法</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">プレースホルダ（プリペアドステートメント）</th>那样SQL文と値が別々のパケットでDBに送られる。値は絶対にSQLとして解釈されない</th></tr>
-            <tr><td style="font-weight: bold;">構造の分離が本質</th>那样エスケープではなく「SQLと入力値の境界を強制的に分離」することが重要</th></tr>
-            <tr><td style="font-weight: bold;">DBユーザーの権限最小化</th>那样アプリ用ユーザーはSELECTのみ、DROP/DELETE/UPDATEを禁止</th></tr>
+            <tr><td style="font-weight: bold;">プレースホルダ（プリペアドステートメント）</td><td>SQL文と値が別々のパケットでDBに送られる。値は絶対にSQLとして解釈されない</td></tr>
+            <tr><td style="font-weight: bold;">構造の分離が本質</td><td>エスケープではなく「SQLと入力値の境界を強制的に分離」することが重要</td></tr>
+            <tr><td style="font-weight: bold;">DBユーザーの権限最小化</td><td>アプリ用ユーザーはSELECTのみ、DROP/DELETE/UPDATEを禁止</td></tr>
           </tbody>
         </table>
       </div>
@@ -234,15 +234,15 @@
       <h3>防御（どう防ぐのか）</h3>
       
       <div class="table-wrap mobile-card-table">
-        <tr>
+        <table>
           <thead>
             <tr><th>防御方法</th><th>説明</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">出力時エスケープ</th>那样HTMLとして解釈される特殊文字を変換する</th></tr>
-            <tr><td style="font-weight: bold;">コンテキストに応じたエスケープ</th>那样HTML本文・属性値・JavaScript内・URL内で適切なエスケープが必要</th></tr>
-            <tr><td style="font-weight: bold;">CookieにHttpOnly属性</th>那样JavaScriptからCookieを読めなくする（セッション奪取防止）</th></tr>
-            <tr><td style="font-weight: bold;">入力値をHTMLとして扱わない設計</th>那样Markdown変換やテキストとして保存</th></tr>
+            <tr><td style="font-weight: bold;">出力時エスケープ</td><td>HTMLとして解釈される特殊文字を変換する</td></tr>
+            <tr><td style="font-weight: bold;">コンテキストに応じたエスケープ</td><td>HTML本文・属性値・JavaScript内・URL内で適切なエスケープが必要</td></tr>
+            <tr><td style="font-weight: bold;">CookieにHttpOnly属性</td><td>JavaScriptからCookieを読めなくする（セッション奪取防止）</td></tr>
+            <tr><td style="font-weight: bold;">入力値をHTMLとして扱わない設計</td><td>Markdown変換やテキストとして保存</td></tr>
           </tbody>
         </table>
       </div>

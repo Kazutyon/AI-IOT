@@ -56,19 +56,19 @@
     <section id="terms" class="lesson-section">
       <h2>試験に出る用語</h2>
       <div class="table-wrap mobile-card-table">
-        </table>
+        <table>
           <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
           <tbody>
-            <tr><th>1</th><th>CGI</th>とはWebサーバーがアプリケーションを呼び出す方式（リクエストごとに起動）</th></tr>
-            <tr><th>2</th><th>FastCGI</th>とはアプリを常駐させて呼び出す方式（php-fpmなど）</th></tr>
-            <tr><th>3</th><th>php-fpm</th>とはPHPのFastCGI実装。現代のPHP実行の標準</th></tr>
-            <tr><th>4</th><th>リバースプロキシ</th>とはWebサーバーがアプリケーションの代理としてリクエストを転送する仕組み</th></td>
-            <tr><th>5</th><th>ProxyPass</th>とはApacheでリバースプロキシを設定するディレクティブ</th></tr>
-            <tr><th>6</th><th>WSGI</th>とはPythonのWebアプリケーション連携方式</th></tr>
-            <tr><th>7</th><th>常駐プロセス</th>那样起動しっぱなしで動作し続けるプログラム</th></tr>
-            <tr><th>8</th><th>mod_php</th>那样ApacheにPHPを組み込むモジュール方式</th></td>
-            <tr><th>9</th><th>localhost</th>那样自分自身を指すIPアドレス（127.0.0.1）</th></td>
-            <tr><th>10</th><th>ポート番号</th>那样同じIPの中でどのサービスに通信を届けるかを決める番号</th></tr>
+            <tr><th>1</th><th>CGI</th><td>Webサーバーがアプリケーションを呼び出す方式（リクエストごとに起動）</td></tr>
+            <tr><th>2</th><th>FastCGI</th><td>アプリを常駐させて呼び出す方式（php-fpmなど）</td></tr>
+            <tr><th>3</th><th>php-fpm</th><td>PHPのFastCGI実装。現代のPHP実行の標準</td></tr>
+            <tr><th>4</th><th>リバースプロキシ</th><td>Webサーバーがアプリケーションの代理としてリクエストを転送する仕組み</td></tr>
+            <tr><th>5</th><th>ProxyPass</th><td>Apacheでリバースプロキシを設定するディレクティブ</td></tr>
+            <tr><th>6</th><th>WSGI</th><td>PythonのWebアプリケーション連携方式</td></tr>
+            <tr><th>7</th><th>常駐プロセス</th><td>起動しっぱなしで動作し続けるプログラム</td></tr>
+            <tr><th>8</th><th>mod_php</th><td>ApacheにPHPを組み込むモジュール方式</td></tr>
+            <tr><th>9</th><th>localhost</th><td>自分自身を指すIPアドレス（127.0.0.1）</td></tr>
+            <tr><th>10</th><th>ポート番号</th><td>同じIPの中でどのサービスに通信を届けるかを決める番号</td></tr>
           </tbody>
         </table>
       </div>
@@ -152,9 +152,9 @@
             <tr><th>項目</th><th>内容</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">動作イメージ</th><td>Webサーバーがリクエストを受け取る → アプリケーションを新しく起動 → 入力（クエリ文字列、POSTデータ）を渡す → アプリがHTML/JSONを生成 → Webサーバーがその結果を返す</th></tr>
-            <tr><td style="font-weight: bold;">特徴</th><td>仕組みが単純でわかりやすい</th></tr>
-            <tr><td style="font-weight: bold;">欠点</th><td>リクエストごとにプロセスを起動するため非常に遅い。現代のWebのアクセス量には耐えられない</th></tr>
+            <tr><td style="font-weight: bold;">動作イメージ</td><td>Webサーバーがリクエストを受け取る → アプリケーションを新しく起動 → 入力（クエリ文字列、POSTデータ）を渡す → アプリがHTML/JSONを生成 → Webサーバーがその結果を返す</td></tr>
+            <tr><td style="font-weight: bold;">特徴</td><td>仕組みが単純でわかりやすい</td></tr>
+            <tr><td style="font-weight: bold;">欠点</td><td>リクエストごとにプロセスを起動するため非常に遅い。現代のWebのアクセス量には耐えられない</td></tr>
           </tbody>
         </table>
       </div>
@@ -206,10 +206,10 @@
             <tr><th>言語</th><th>従来方式</th><th>現代の標準方式</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">PHP</th><td>CGI</th><td>FastCGI（php-fpm）</th></tr>
-            <tr><td style="font-weight: bold;">Python</th><td>CGI</th><td>WSGI（Gunicorn / uWSGI）</th></tr>
-            <tr><td style="font-weight: bold;">Ruby</th><td>CGI</th><td>Rack / Puma / Unicorn</th></tr>
-            <tr><td style="font-weight: bold;">Node.js</th>那样CGIという概念自体を使わない</th><td>アプリサーバーとして常駐</th></tr>
+            <tr><td style="font-weight: bold;">PHP</td><td>CGI</td><td>FastCGI（php-fpm）</td></tr>
+            <tr><td style="font-weight: bold;">Python</td><td>CGI</td><td>WSGI（Gunicorn / uWSGI）</td></tr>
+            <tr><td style="font-weight: bold;">Ruby</td><td>CGI</td><td>Rack / Puma / Unicorn</td></tr>
+            <tr><td style="font-weight: bold;">Node.js</td><td>CGIという概念自体を使わない</td><td>アプリサーバーとして常駐</td></tr>
           </tbody>
         </table>
       </div>
@@ -281,8 +281,8 @@
             <tr><th>方式</th><th>主に使う言語</th><th>仕組み</th></tr>
           </thead>
           <tbody>
-            <tr><td style="font-weight: bold;">FastCGI（php-fpm）</th><td>PHP</th><td>Apache → php-fpm（FastCGI）</th></tr>
-            <tr><td style="font-weight: bold;">リバースプロキシ</th><td>Node.js / Python / Ruby</th><td>Apache → アプリ（HTTP）</th></tr>
+            <tr><td style="font-weight: bold;">FastCGI（php-fpm）</td><td>PHP</td><td>Apache → php-fpm（FastCGI）</td></tr>
+            <tr><td style="font-weight: bold;">リバースプロキシ</td><td>Node.js / Python / Ruby</td><td>Apache → アプリ（HTTP）</td></tr>
           </tbody>
         </table>
       </div>
