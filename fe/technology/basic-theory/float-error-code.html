@@ -98,13 +98,23 @@
       <div class="formula-box">
         <article>
           <h4>固定小数点 計算例（16ビット）</h4>
-          <pre>
- 00000001  10000000
- ────────  ────────
-  整数部    小数部
-    1     +  2⁻¹ = 0.5
-
-→ 全体の値: 1 + 0.5 = 1.5</pre>
+          <figure class="wide-diagram">
+            <figcaption>16ビット固定小数点：整数部と小数部の区切り</figcaption>
+            <svg viewBox="0 0 320 110" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="16ビットを整数部00000001と小数部10000000に区切り、値1+2の-1乗=1.5を求める図">
+              <!-- 整数部 -->
+              <rect x="10" y="10" width="140" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="80" y="33" text-anchor="middle" font-size="13" fill="#1e3a5f">00000001</text>
+              <!-- 小数部 -->
+              <rect x="160" y="10" width="140" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+              <text x="230" y="33" text-anchor="middle" font-size="13" fill="#14532d">10000000</text>
+              <!-- ラベル -->
+              <text x="80" y="62" text-anchor="middle" font-size="11" fill="#1e3a5f">整数部</text>
+              <text x="230" y="62" text-anchor="middle" font-size="11" fill="#14532d">小数部</text>
+              <text x="80" y="82" text-anchor="middle" font-size="11" fill="#1e3a5f">1</text>
+              <text x="230" y="82" text-anchor="middle" font-size="11" fill="#14532d">2⁻¹ = 0.5</text>
+              <text x="160" y="102" text-anchor="middle" font-size="12" fill="#334155">→ 全体の値: 1 + 0.5 = 1.5</text>
+            </svg>
+          </figure>
         </article>
       </div>
 
@@ -224,13 +234,27 @@
       <h3>丸め誤差のメカニズム</h3>
       <figure class="wide-diagram">
         <figcaption>0.1 を2進数で表すと無限循環になる</figcaption>
-        <pre>
-0.1 を2進数に変換すると:
-0.0001100110011001100110011… （無限循環）
-         ←── 仮数部23ビット ──→
-         ↓ ここで打ち切る
-→ 0.1 は内部では近似値として保存される
-→ 0.1 + 0.2 = 0.30000000000000004 ≠ 0.3</pre>
+        <svg viewBox="0 0 460 130" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="0.1を2進数に変換した無限循環ビット列のうち仮数部23ビット分だけを使い、その先で打ち切ることを示す図">
+          <defs>
+            <marker id="arrBit" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+            <marker id="arrBitStart" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+              <polygon points="8 0, 0 3, 8 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <text x="230" y="16" text-anchor="middle" font-size="11" fill="#334155">0.1 を2進数に変換すると（無限循環）:</text>
+          <text x="230" y="36" text-anchor="middle" font-size="12" fill="#1e3a5f">0.0001100110011001100110011…</text>
+          <!-- 範囲（仮数部23ビット） -->
+          <line x1="70" y1="55" x2="330" y2="55" stroke="#2563eb" stroke-width="1.5" marker-start="url(#arrBitStart)" marker-end="url(#arrBit)"/>
+          <text x="200" y="48" text-anchor="middle" font-size="10" fill="#1e3a5f">仮数部23ビット</text>
+          <!-- 打ち切り位置 -->
+          <line x1="330" y1="60" x2="330" y2="80" stroke="#d97706" stroke-width="1.5" marker-end="url(#arrBit)"/>
+          <text x="330" y="93" text-anchor="middle" font-size="10" fill="#92400e">ここで打ち切る</text>
+          <!-- 結論 -->
+          <text x="230" y="112" text-anchor="middle" font-size="11" fill="#334155">→ 0.1 は内部では近似値として保存される</text>
+          <text x="230" y="128" text-anchor="middle" font-size="11" fill="#334155">→ 0.1 + 0.2 = 0.30000000000000004 ≠ 0.3</text>
+        </svg>
       </figure>
 
       <h3>誤差の判定手順</h3>
@@ -306,14 +330,25 @@
 
       <figure class="wide-diagram">
         <figcaption>「あ」（U+3042）の UTF-8 エンコード例</figcaption>
-        <pre>
-U+3042 = 0011 0000 0100 0010₂
-
-UTF-8 3バイト形式: 1110xxxx 10xxxxxx 10xxxxxx
-ビットを埋め込む:
-  1110{0011} 10{000001} 10{000010}
-= 1110 0011  1000 0001  1000 0010
-= 0xE3       0x81       0x82</pre>
+        <svg viewBox="0 0 460 170" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="U+3042のビット列をUTF-8の3バイト形式1110xxxx 10xxxxxx 10xxxxxxに埋め込み、0xE3 0x81 0x82になる図">
+          <text x="230" y="16" text-anchor="middle" font-size="12" fill="#1e3a5f">U+3042 = 0011 0000 0100 0010₂</text>
+          <text x="230" y="38" text-anchor="middle" font-size="11" fill="#334155">UTF-8 3バイト形式: 1110xxxx 10xxxxxx 10xxxxxx</text>
+          <!-- 3 byte boxes with embedded bits -->
+          <rect x="20" y="55" width="130" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="85" y="79" text-anchor="middle" font-size="12" fill="#1e3a5f">1110 0011</text>
+          <rect x="165" y="55" width="130" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="230" y="79" text-anchor="middle" font-size="12" fill="#14532d">1000 0001</text>
+          <rect x="310" y="55" width="130" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="375" y="79" text-anchor="middle" font-size="12" fill="#92400e">1000 0010</text>
+          <!-- 埋め込み元 -->
+          <text x="85" y="112" text-anchor="middle" font-size="10" fill="#1e3a5f">1110{0011}</text>
+          <text x="230" y="112" text-anchor="middle" font-size="10" fill="#14532d">10{000001}</text>
+          <text x="375" y="112" text-anchor="middle" font-size="10" fill="#92400e">10{000010}</text>
+          <!-- 16進数結果 -->
+          <text x="85" y="140" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">0xE3</text>
+          <text x="230" y="140" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">0x81</text>
+          <text x="375" y="140" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">0x82</text>
+        </svg>
       </figure>
 
       <h3>間違えやすいポイント</h3>

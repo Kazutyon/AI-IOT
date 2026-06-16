@@ -76,22 +76,37 @@
 
       <figure class="wide-diagram">
         <figcaption>発注点（ROP）とリードタイムの関係</figcaption>
-        <pre>
-  [ 在庫量 ]
-    ▲
-    │ \
- 最 │  \  発注点 (ROP) に達したら発注
- 高 │   \  ────────●───────────────
- 庫 │    \        │ リードタイム中に消費
- 存 │     \       │
- 量 │      \      ●─────────────── 到着
-    │       \     /
- 安 │        \   / 安全在庫
- 全 │         \ /
- 庫 │          ●
- 存 │
-    └────────────────────────────▶ [ 時間 ]
-        </pre>
+        <svg viewBox="0 0 440 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrInv" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 軸 -->
+          <line x1="60" y1="230" x2="60" y2="20" stroke="#334155" stroke-width="1.5"/>
+          <polygon points="60,12 55,22 65,22" fill="#334155"/>
+          <text x="30" y="40" font-size="11" fill="#334155">在庫量</text>
+          <line x1="60" y1="230" x2="410" y2="230" stroke="#334155" stroke-width="1.5"/>
+          <polygon points="418,230 408,225 408,235" fill="#334155"/>
+          <text x="370" y="250" font-size="11" fill="#334155">時間</text>
+          <!-- 在庫減少の折れ線 -->
+          <polyline points="70,50 230,140 230,140 300,170 370,200" fill="none" stroke="#2563eb" stroke-width="2"/>
+          <!-- 発注点ライン -->
+          <line x1="60" y1="140" x2="410" y2="140" stroke="#d97706" stroke-width="1.5" stroke-dasharray="5,4"/>
+          <circle cx="230" cy="140" r="5" fill="#d97706"/>
+          <text x="240" y="135" font-size="11" fill="#92400e">発注点(ROP)に達したら発注</text>
+          <!-- リードタイム中の消費区間 -->
+          <line x1="230" y1="145" x2="230" y2="225" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <line x1="300" y1="145" x2="300" y2="225" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <text x="245" y="160" font-size="10" fill="#64748b">リードタイム中に消費</text>
+          <!-- 到着で補充 -->
+          <circle cx="300" cy="170" r="5" fill="#16a34a"/>
+          <text x="310" y="166" font-size="11" fill="#166534">到着（補充）</text>
+          <!-- 安全在庫 -->
+          <line x1="300" y1="170" x2="370" y2="200" stroke="#16a34a" stroke-width="2" stroke-dasharray="0"/>
+          <text x="305" y="215" font-size="10" fill="#166534">安全在庫</text>
+          <circle cx="370" cy="200" r="5" fill="#64748b"/>
+        </svg>
       </figure>
     </section>
 
@@ -103,22 +118,32 @@
 
       <figure class="wide-diagram">
         <figcaption>モンテカルロ法の手順</figcaption>
-        <pre>
-  [ 1. モデル化 ]
-  現実のビジネスルール（在庫の増減など）を定義
-          │
-  [ 2. 乱数生成 ]
-  需要やリードタイムなどの不確実な要素を乱数で再現
-          │
-  [ 3. 試行計算 ]
-  モデルに乱数を当てはめて、1回分の結果を算出
-          │
-  [ 4. 繰り返し ]
-  数百〜数万回繰り返し、結果の分布を集計
-          │
-  [ 5. 統計的分析 ]
-  欠品確率や平均在庫などを求め、意思決定に活用
-        </pre>
+        <svg viewBox="0 0 380 440" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrMc" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="20" y="10" width="340" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="33" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">1. モデル化</text>
+          <text x="190" y="55" text-anchor="middle" font-size="11" fill="#334155">現実のビジネスルール（在庫の増減など）を定義</text>
+          <line x1="190" y1="70" x2="190" y2="98" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrMc)"/>
+          <rect x="20" y="99" width="340" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="122" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">2. 乱数生成</text>
+          <text x="190" y="144" text-anchor="middle" font-size="11" fill="#334155">需要やリードタイムなどの不確実な要素を乱数で再現</text>
+          <line x1="190" y1="159" x2="190" y2="187" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrMc)"/>
+          <rect x="20" y="188" width="340" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="211" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">3. 試行計算</text>
+          <text x="190" y="233" text-anchor="middle" font-size="11" fill="#334155">モデルに乱数を当てはめて、1回分の結果を算出</text>
+          <line x1="190" y1="248" x2="190" y2="276" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrMc)"/>
+          <rect x="20" y="277" width="340" height="60" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="300" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">4. 繰り返し</text>
+          <text x="190" y="322" text-anchor="middle" font-size="11" fill="#334155">数百〜数万回繰り返し、結果の分布を集計</text>
+          <line x1="190" y1="337" x2="190" y2="365" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrMc)"/>
+          <rect x="20" y="366" width="340" height="60" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="389" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">5. 統計的分析</text>
+          <text x="190" y="411" text-anchor="middle" font-size="11" fill="#334155">欠品確率や平均在庫などを求め、意思決定に活用</text>
+        </svg>
       </figure>
     </section>
 

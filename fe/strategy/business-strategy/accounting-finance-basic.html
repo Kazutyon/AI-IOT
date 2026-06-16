@@ -85,24 +85,49 @@
 
       <figure class="wide-diagram">
         <figcaption>PL（損益計算書）の利益の段階構造</figcaption>
-        <pre>
-  [ 売上高 ]
-     │ (－売上原価)
-     ▼
-  [ 粗利益 ] ← 商品そのものの儲け
-     │ (－販売費および一般管理費)
-     ▼
-  [ 営業利益 ] ← 本業の儲け（最重要指標）
-     │ (＋/－営業外収益・費用)
-     ▼
-  [ 経常利益 ] ← 経常的な活動の儲け
-     │ (＋/－特別利益・特別損失)
-     ▼
-  [ 税引前当期純利益 ]
-     │ (－法人税等)
-     ▼
-  [ 当期純利益 ] ← 最終的な儲け（手元に残る利益）
-        </pre>
+        <svg viewBox="0 0 380 430" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="pl-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="110" y="10" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="33" text-anchor="middle" font-size="13" fill="#1e3a5f">売上高</text>
+
+          <line x1="190" y1="46" x2="190" y2="78" stroke="#64748b" stroke-width="1.5" marker-end="url(#pl-arr)"/>
+          <text x="200" y="65" font-size="11" fill="#64748b">（－売上原価）</text>
+
+          <rect x="110" y="80" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="103" text-anchor="middle" font-size="13" fill="#1e3a5f">粗利益</text>
+          <text x="280" y="103" font-size="11" fill="#334155">← 商品そのものの儲け</text>
+
+          <line x1="190" y1="116" x2="190" y2="148" stroke="#64748b" stroke-width="1.5" marker-end="url(#pl-arr)"/>
+          <text x="200" y="135" font-size="11" fill="#64748b">（－販売費および一般管理費）</text>
+
+          <rect x="110" y="150" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="173" text-anchor="middle" font-size="13" fill="#1e3a5f">営業利益</text>
+          <text x="280" y="173" font-size="11" fill="#334155">← 本業の儲け（最重要指標）</text>
+
+          <line x1="190" y1="186" x2="190" y2="218" stroke="#64748b" stroke-width="1.5" marker-end="url(#pl-arr)"/>
+          <text x="200" y="205" font-size="11" fill="#64748b">（＋/－営業外収益・費用）</text>
+
+          <rect x="110" y="220" width="160" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="243" text-anchor="middle" font-size="13" fill="#1e3a5f">経常利益</text>
+          <text x="280" y="243" font-size="11" fill="#334155">← 経常的な活動の儲け</text>
+
+          <line x1="190" y1="256" x2="190" y2="288" stroke="#64748b" stroke-width="1.5" marker-end="url(#pl-arr)"/>
+          <text x="200" y="275" font-size="11" fill="#64748b">（＋/－特別利益・特別損失）</text>
+
+          <rect x="90" y="290" width="200" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="313" text-anchor="middle" font-size="13" fill="#1e3a5f">税引前当期純利益</text>
+
+          <line x1="190" y1="326" x2="190" y2="358" stroke="#64748b" stroke-width="1.5" marker-end="url(#pl-arr)"/>
+          <text x="200" y="345" font-size="11" fill="#64748b">（－法人税等）</text>
+
+          <rect x="90" y="360" width="200" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="383" text-anchor="middle" font-size="13" fill="#14532d">当期純利益</text>
+          <text x="190" y="412" text-anchor="middle" font-size="11" fill="#334155">← 最終的な儲け（手元に残る利益）</text>
+        </svg>
       </figure>
     </section>
 
@@ -112,22 +137,21 @@
       <p>費用は大きく<strong>固定費</strong>（家賃や減価償却費など、売上に左右されない費用）と<strong>変動費</strong>（材料費など、売上に比例して増える費用）に分かれます。売上高から変動費を引いた残りを<strong>限界利益</strong>と呼び、この限界利益が固定費を回収し切った時点が損益分岐点です。</p>
       <p>損益分岐点を下げる（＝少ない売上で黒字化できる）ためには、固定費を削減するか、変動費率を下げる（利益率を高める）かの2つのアプローチがあります。</p>
 
+      <p><strong>【費用の分類】</strong><br>
+      ・固定費：売上に関係なく一定（家賃、減価償却費など）<br>
+      ・変動費：売上に比例して増える（材料費、外注費など）</p>
+      <p><strong>【限界利益率の計算】</strong><br>
+      限界利益率 ＝ １ － 変動費率<br>
+      （売上高のうち、固定費の回収に使える割合）</p>
+
       <figure class="wide-diagram">
         <figcaption>損益分岐点売上高の公式</figcaption>
-        <pre>
-  【費用の分類】
-  ・固定費：売上に関係なく一定（家賃、減価償却費など）
-  ・変動費：売上に比例して増える（材料費、外注費など）
-
-  【限界利益率の計算】
-  限界利益率 ＝ １ － 変動費率
-  （売上高のうち、固定費の回収に使える割合）
-
-  【損益分岐点の公式】
-               固定費
-  損益分岐点売上高 ＝ ─────────────
-               １ － 変動費率
-        </pre>
+        <svg viewBox="0 0 360 110" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <text x="20" y="60" font-size="14" fill="#1e3a5f">損益分岐点売上高 ＝</text>
+          <text x="270" y="38" text-anchor="middle" font-size="13" fill="#1e3a5f">固定費</text>
+          <line x1="195" y1="50" x2="345" y2="50" stroke="#334155" stroke-width="1.5"/>
+          <text x="270" y="72" text-anchor="middle" font-size="13" fill="#1e3a5f">１ － 変動費率</text>
+        </svg>
       </figure>
     </section>
 

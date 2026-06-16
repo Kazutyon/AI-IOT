@@ -98,17 +98,53 @@
       <div class="diagram-grid">
         <figure>
           <figcaption>トポロジー前半</figcaption>
-          <pre>ライン型 ──→ リング型 ──→ スター型
-ライン型 → 途中故障で全体に影響
-リング型 → 1ノード故障で全体停止
-スター型 → 中心装置故障で全体停止</pre>
+          <svg viewBox="0 0 360 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="topo1-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+              </marker>
+            </defs>
+            <rect x="10" y="10" width="100" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="60" y="32" text-anchor="middle" font-size="12" fill="#1e3a5f">ライン型</text>
+            <line x1="110" y1="27" x2="130" y2="27" stroke="#64748b" stroke-width="1.5" marker-end="url(#topo1-arr)"/>
+            <rect x="130" y="10" width="100" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="180" y="32" text-anchor="middle" font-size="12" fill="#1e3a5f">リング型</text>
+            <line x1="230" y1="27" x2="250" y2="27" stroke="#64748b" stroke-width="1.5" marker-end="url(#topo1-arr)"/>
+            <rect x="250" y="10" width="100" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="300" y="32" text-anchor="middle" font-size="12" fill="#1e3a5f">スター型</text>
+
+            <rect x="10" y="64" width="340" height="30" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="180" y="84" text-anchor="middle" font-size="11" fill="#334155">ライン型 → 途中故障で全体に影響</text>
+            <rect x="10" y="100" width="340" height="30" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="180" y="120" text-anchor="middle" font-size="11" fill="#334155">リング型 → 1ノード故障で全体停止</text>
+            <rect x="10" y="136" width="340" height="30" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="180" y="156" text-anchor="middle" font-size="11" fill="#334155">スター型 → 中心装置故障で全体停止</text>
+          </svg>
         </figure>
         <figure>
           <figcaption>トポロジー後半</figcaption>
-          <pre>バス型 ──→ ツリー型 ──→ メッシュ型
-バス型 → 衝突が起こりやすい
-ツリー型 → DNSやディレクトリ構造
-メッシュ型 → 耐障害性が高い（フルメッシュ）</pre>
+          <svg viewBox="0 0 360 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="topo2-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+              </marker>
+            </defs>
+            <rect x="10" y="10" width="100" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="60" y="32" text-anchor="middle" font-size="12" fill="#1e3a5f">バス型</text>
+            <line x1="110" y1="27" x2="130" y2="27" stroke="#64748b" stroke-width="1.5" marker-end="url(#topo2-arr)"/>
+            <rect x="130" y="10" width="100" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="180" y="32" text-anchor="middle" font-size="12" fill="#1e3a5f">ツリー型</text>
+            <line x1="230" y1="27" x2="250" y2="27" stroke="#64748b" stroke-width="1.5" marker-end="url(#topo2-arr)"/>
+            <rect x="250" y="10" width="100" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="300" y="32" text-anchor="middle" font-size="12" fill="#1e3a5f">メッシュ型</text>
+
+            <rect x="10" y="64" width="340" height="30" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="180" y="84" text-anchor="middle" font-size="11" fill="#334155">バス型 → 衝突が起こりやすい</text>
+            <rect x="10" y="100" width="340" height="30" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="180" y="120" text-anchor="middle" font-size="11" fill="#334155">ツリー型 → DNSやディレクトリ構造</text>
+            <rect x="10" y="136" width="340" height="30" rx="2" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+            <text x="180" y="156" text-anchor="middle" font-size="11" fill="#334155">メッシュ型 → 耐障害性が高い（フルメッシュ）</text>
+          </svg>
         </figure>
       </div>
     </section>
@@ -152,12 +188,36 @@
       <div class="diagram-grid">
         <figure>
           <figcaption>伝送方式の分類</figcaption>
-          <pre>データ伝送
- └── シリアル伝送（1本の信号線で1ビットずつ）
-      ├── 非同期通信（スタート/ストップビット）
-      │    └── 低速通信向き
-      └── 同期通信（クロック信号）
-           └── 大量データ向き</pre>
+          <svg viewBox="0 0 380 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="trans-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+              </marker>
+            </defs>
+            <rect x="130" y="8" width="120" height="34" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+            <text x="190" y="30" text-anchor="middle" font-size="12" fill="#1e1b4b">データ伝送</text>
+
+            <line x1="190" y1="42" x2="190" y2="64" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#trans-arr)"/>
+            <rect x="80" y="65" width="220" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="190" y="87" text-anchor="middle" font-size="11" fill="#1e3a5f">シリアル伝送（1本の信号線で1ビットずつ）</text>
+
+            <line x1="190" y1="99" x2="190" y2="115" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="100" y1="115" x2="280" y2="115" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="100" y1="115" x2="100" y2="131" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#trans-arr)"/>
+            <line x1="280" y1="115" x2="280" y2="131" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#trans-arr)"/>
+
+            <rect x="20" y="132" width="160" height="34" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="100" y="150" text-anchor="middle" font-size="10" fill="#14532d">非同期通信</text>
+            <text x="100" y="162" text-anchor="middle" font-size="10" fill="#14532d">（スタート/ストップビット）</text>
+            <rect x="200" y="132" width="160" height="34" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="280" y="150" text-anchor="middle" font-size="10" fill="#14532d">同期通信</text>
+            <text x="280" y="162" text-anchor="middle" font-size="10" fill="#14532d">（クロック信号）</text>
+
+            <line x1="100" y1="166" x2="100" y2="180" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#trans-arr)"/>
+            <text x="100" y="195" text-anchor="middle" font-size="10" fill="#334155">低速通信向き</text>
+            <line x1="280" y1="166" x2="280" y2="180" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#trans-arr)"/>
+            <text x="280" y="195" text-anchor="middle" font-size="10" fill="#334155">大量データ向き</text>
+          </svg>
         </figure>
       </div>
     </section>
@@ -167,19 +227,47 @@
       <div class="diagram-grid">
         <figure>
           <figcaption>伝送時間の計算手順</figcaption>
-          <pre>ステップ1: データ量（バイト）
-    ↓ ×8
-ステップ2: データ量（ビット）
-    ↓ ÷伝送速度（bps）
-ステップ3: 伝送時間（秒）</pre>
+          <svg viewBox="0 0 320 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="calc1-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+              </marker>
+            </defs>
+            <rect x="60" y="10" width="200" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="160" y="33" text-anchor="middle" font-size="12" fill="#1e3a5f">ステップ1: データ量（バイト）</text>
+            <line x1="160" y1="46" x2="160" y2="74" stroke="#64748b" stroke-width="1.5" marker-end="url(#calc1-arr)"/>
+            <text x="170" y="64" font-size="11" fill="#64748b">×8</text>
+
+            <rect x="60" y="75" width="200" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="160" y="98" text-anchor="middle" font-size="12" fill="#1e3a5f">ステップ2: データ量（ビット）</text>
+            <line x1="160" y1="111" x2="160" y2="149" stroke="#64748b" stroke-width="1.5" marker-end="url(#calc1-arr)"/>
+            <text x="170" y="135" font-size="11" fill="#64748b">÷伝送速度（bps）</text>
+
+            <rect x="60" y="150" width="200" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="160" y="173" text-anchor="middle" font-size="12" fill="#14532d">ステップ3: 伝送時間（秒）</text>
+          </svg>
         </figure>
         <figure>
           <figcaption>伝送効率の計算手順</figcaption>
-          <pre>ステップ1: 有効データ量
-    ÷
-ステップ2: 総データ量（ヘッダ込み）
-    =
-ステップ3: 伝送効率（%）</pre>
+          <svg viewBox="0 0 320 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="calc2-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+              </marker>
+            </defs>
+            <rect x="40" y="10" width="240" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="160" y="33" text-anchor="middle" font-size="12" fill="#1e3a5f">ステップ1: 有効データ量</text>
+            <line x1="160" y1="46" x2="160" y2="74" stroke="#64748b" stroke-width="1.5" marker-end="url(#calc2-arr)"/>
+            <text x="170" y="64" font-size="12" fill="#64748b">÷</text>
+
+            <rect x="40" y="75" width="240" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="160" y="98" text-anchor="middle" font-size="12" fill="#1e3a5f">ステップ2: 総データ量（ヘッダ込み）</text>
+            <line x1="160" y1="111" x2="160" y2="139" stroke="#64748b" stroke-width="1.5" marker-end="url(#calc2-arr)"/>
+            <text x="170" y="130" font-size="12" fill="#64748b">=</text>
+
+            <rect x="40" y="140" width="240" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="160" y="163" text-anchor="middle" font-size="12" fill="#14532d">ステップ3: 伝送効率（%）</text>
+          </svg>
         </figure>
       </div>
       <article class="formula-box">

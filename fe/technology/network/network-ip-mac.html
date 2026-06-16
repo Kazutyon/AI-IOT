@@ -98,11 +98,26 @@
 
       <figure class="wide-diagram">
         <figcaption>IPv4アドレスの構造（32ビット→4オクテット）</figcaption>
-        <pre>IPv4アドレス: 32ビット
-  └── 8ビット×4 = 4オクテットに分割
-       └── 各オクテットを10進数に変換
-            └── ピリオドで区切る
-                 → 例: 192.168.0.1</pre>
+        <svg viewBox="0 0 360 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-ipv4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="80" y="10" width="200" height="40" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="180" y="34" text-anchor="middle" font-size="13" fill="#1e1b4b">IPv4アドレス：32ビット</text>
+          <line x1="180" y1="50" x2="180" y2="74" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-ipv4)"/>
+          <rect x="50" y="75" width="260" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="99" text-anchor="middle" font-size="13" fill="#1e3a5f">8ビット×4＝4オクテットに分割</text>
+          <line x1="180" y1="115" x2="180" y2="139" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-ipv4)"/>
+          <rect x="50" y="140" width="260" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="164" text-anchor="middle" font-size="13" fill="#1e3a5f">各オクテットを10進数に変換</text>
+          <line x1="180" y1="180" x2="180" y2="204" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-ipv4)"/>
+          <rect x="50" y="205" width="260" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="229" text-anchor="middle" font-size="13" fill="#1e3a5f">ピリオドで区切る</text>
+          <line x1="180" y1="245" x2="180" y2="255" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-ipv4)"/>
+          <text x="180" y="272" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">例: 192.168.0.1</text>
+        </svg>
       </figure>
 
       <h3>グローバルIPアドレスとプライベートIPアドレス</h3>
@@ -111,10 +126,24 @@
 
       <figure class="wide-diagram">
         <figcaption>グローバルIPとプライベートIPの使い分け</figcaption>
-        <pre>PC（プライベートIP）
-  └── NAT/NAPT（アドレス変換）
-       └── インターネット（グローバルIP）
-            └── Webサーバー</pre>
+        <svg viewBox="0 0 360 255" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-natflow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="80" y="10" width="200" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="34" text-anchor="middle" font-size="13" fill="#1e3a5f">PC（プライベートIP）</text>
+          <line x1="180" y1="50" x2="180" y2="74" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-natflow)"/>
+          <rect x="60" y="75" width="240" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="180" y="99" text-anchor="middle" font-size="13" fill="#92400e">NAT/NAPT（アドレス変換）</text>
+          <line x1="180" y1="115" x2="180" y2="139" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-natflow)"/>
+          <rect x="60" y="140" width="240" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="164" text-anchor="middle" font-size="13" fill="#1e3a5f">インターネット（グローバルIP）</text>
+          <line x1="180" y1="180" x2="180" y2="204" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-natflow)"/>
+          <rect x="80" y="205" width="200" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="180" y="229" text-anchor="middle" font-size="13" fill="#14532d">Webサーバー</text>
+        </svg>
       </figure>
 
       <h3>IPv6</h3>
@@ -152,9 +181,27 @@
 
       <figure class="wide-diagram">
         <figcaption>MACアドレスの構造（48ビット→OUI＋ノード番号）</figcaption>
-        <pre>MACアドレス: 48ビット
-  ├── 上位24ビット: OUI（IEEEが管理）→ メーカーを識別
-  └── 下位24ビット: ノード番号（メーカーが管理）→ 機器ごとに割当</pre>
+        <svg viewBox="0 0 400 190" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-mac" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+            </marker>
+          </defs>
+          <rect x="140" y="10" width="120" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="33" text-anchor="middle" font-size="13" fill="#1e1b4b">MACアドレス 48ビット</text>
+          <line x1="200" y1="46" x2="200" y2="64" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="100" y1="64" x2="300" y2="64" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="100" y1="64" x2="100" y2="84" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-mac)"/>
+          <line x1="300" y1="64" x2="300" y2="84" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-mac)"/>
+          <rect x="20" y="85" width="160" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="100" y="104" text-anchor="middle" font-size="12" fill="#1e3a5f">上位24ビット</text>
+          <text x="100" y="119" text-anchor="middle" font-size="11" fill="#1e3a5f">OUI（IEEEが管理）</text>
+          <rect x="220" y="85" width="160" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="300" y="104" text-anchor="middle" font-size="12" fill="#1e3a5f">下位24ビット</text>
+          <text x="300" y="119" text-anchor="middle" font-size="11" fill="#1e3a5f">ノード番号（メーカー管理）</text>
+          <text x="100" y="148" text-anchor="middle" font-size="11" fill="#64748b">→ メーカーを識別</text>
+          <text x="300" y="148" text-anchor="middle" font-size="11" fill="#64748b">→ 機器ごとに割当</text>
+        </svg>
       </figure>
 
       <h3>特別なMACアドレス</h3>
@@ -179,12 +226,28 @@
 
       <figure class="wide-diagram">
         <figcaption>ARPの動作フロー</figcaption>
-        <pre>① 送信元: ARP要求（ブロードキャスト FF:FF:FF:FF:FF:FF）
-    └── 「このIPのMACアドレスを知りたい」
-② 該当機器: ARP応答（ユニキャスト）
-    └── 自分のMACアドレスを返信
-③ 送信元: MACアドレス取得
-    └── ARPテーブルにキャッシュ保存</pre>
+        <svg viewBox="0 0 380 250" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-arp" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="40" y="10" width="300" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="29" text-anchor="middle" font-size="12" fill="#1e3a5f">①送信元: ARP要求（ブロードキャスト</text>
+          <text x="190" y="44" text-anchor="middle" font-size="12" fill="#1e3a5f">FF:FF:FF:FF:FF:FF）</text>
+          <line x1="190" y1="50" x2="190" y2="69" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-arp)"/>
+          <text x="190" y="65" text-anchor="middle" font-size="11" fill="#64748b">「このIPのMACアドレスを知りたい」</text>
+          <line x1="190" y1="70" x2="190" y2="94" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-arp)"/>
+          <rect x="40" y="95" width="300" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="119" text-anchor="middle" font-size="12" fill="#1e3a5f">②該当機器: ARP応答（ユニキャスト）</text>
+          <line x1="190" y1="135" x2="190" y2="154" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-arp)"/>
+          <text x="190" y="150" text-anchor="middle" font-size="11" fill="#64748b">自分のMACアドレスを返信</text>
+          <line x1="190" y1="155" x2="190" y2="179" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-arp)"/>
+          <rect x="40" y="180" width="300" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="204" text-anchor="middle" font-size="12" fill="#14532d">③送信元: MACアドレス取得</text>
+          <line x1="190" y1="220" x2="190" y2="239" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-arp)"/>
+          <text x="190" y="235" text-anchor="middle" font-size="11" fill="#64748b">ARPテーブルにキャッシュ保存</text>
+        </svg>
       </figure>
     </section>
 
@@ -199,12 +262,34 @@
 
       <figure class="wide-diagram">
         <figcaption>ポート番号の役割イメージ</figcaption>
-        <pre>クライアント（送信元ポート: 50000番台）
-  └── パケット送信
-       └── サーバー（宛先ポートでアプリ振り分け）
-            ├── ポート80 → Webアプリ
-            ├── ポート25 → メールアプリ
-            └── ポート53 → DNSアプリ</pre>
+        <svg viewBox="0 0 400 260" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-port" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="60" y="10" width="280" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="34" text-anchor="middle" font-size="12" fill="#1e3a5f">クライアント（送信元ポート: 50000番台）</text>
+          <line x1="200" y1="50" x2="200" y2="69" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-port)"/>
+          <text x="200" y="65" text-anchor="middle" font-size="11" fill="#64748b">パケット送信</text>
+          <line x1="200" y1="70" x2="200" y2="94" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-port)"/>
+          <rect x="50" y="95" width="300" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="119" text-anchor="middle" font-size="12" fill="#92400e">サーバー（宛先ポートでアプリ振り分け）</text>
+          <line x1="200" y1="135" x2="200" y2="150" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="90" y1="150" x2="310" y2="150" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="90" y1="150" x2="90" y2="170" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-port)"/>
+          <line x1="200" y1="150" x2="200" y2="170" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-port)"/>
+          <line x1="310" y1="150" x2="310" y2="170" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-port)"/>
+          <rect x="30" y="171" width="120" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="90" y="191" text-anchor="middle" font-size="11" fill="#14532d">ポート80</text>
+          <text x="90" y="205" text-anchor="middle" font-size="11" fill="#14532d">→ Webアプリ</text>
+          <rect x="140" y="171" width="120" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="191" text-anchor="middle" font-size="11" fill="#14532d">ポート25</text>
+          <text x="200" y="205" text-anchor="middle" font-size="11" fill="#14532d">→ メールアプリ</text>
+          <rect x="250" y="171" width="120" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="310" y="191" text-anchor="middle" font-size="11" fill="#14532d">ポート53</text>
+          <text x="310" y="205" text-anchor="middle" font-size="11" fill="#14532d">→ DNSアプリ</text>
+        </svg>
       </figure>
 
       <h3>暗記必須のウェルノウンポート</h3>

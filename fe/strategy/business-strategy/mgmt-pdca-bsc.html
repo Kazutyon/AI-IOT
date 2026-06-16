@@ -77,22 +77,28 @@
 
       <figure class="wide-diagram">
         <figcaption>戦略・KGI・KPI・PDCAの関係</figcaption>
-        <pre>
-  [ 経営戦略 (方向性) ]
-  「顧客満足度を高め、解約を減らす」
-          │
-          ▼
-  [ KGI (最終目標) ]
-  「解約率を 8% → 5% にする（半年以内）」
-          │
-          ▼
-  [ KPI (途中指標) ]
-  「一次解決率 90%」「平均対応時間 5分以内」
-          │
-          ▼
-  [ PDCA (実行プロセス) ]
-  Plan(計画) → Do(実行) → Check(KPI測定) → Act(改善)
-        </pre>
+        <svg viewBox="0 0 380 335" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrPdca1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="40" y="10" width="300" height="56" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="32" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">経営戦略（方向性）</text>
+          <text x="190" y="52" text-anchor="middle" font-size="11" fill="#334155">「顧客満足度を高め、解約を減らす」</text>
+          <line x1="190" y1="66" x2="190" y2="94" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrPdca1)"/>
+          <rect x="40" y="95" width="300" height="56" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="117" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">KGI（最終目標）</text>
+          <text x="190" y="137" text-anchor="middle" font-size="11" fill="#334155">「解約率を 8% → 5% にする（半年以内）」</text>
+          <line x1="190" y1="151" x2="190" y2="179" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrPdca1)"/>
+          <rect x="40" y="180" width="300" height="56" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="190" y="202" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">KPI（途中指標）</text>
+          <text x="190" y="222" text-anchor="middle" font-size="11" fill="#334155">「一次解決率 90%」「平均対応時間 5分以内」</text>
+          <line x1="190" y1="236" x2="190" y2="264" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrPdca1)"/>
+          <rect x="20" y="265" width="340" height="56" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="190" y="287" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e1b4b">PDCA（実行プロセス）</text>
+          <text x="190" y="307" text-anchor="middle" font-size="11" fill="#334155">Plan(計画)→Do(実行)→Check(KPI測定)→Act(改善)</text>
+        </svg>
       </figure>
     </section>
 
@@ -104,22 +110,31 @@
 
       <figure class="wide-diagram">
         <figcaption>BSCの4つの視点と因果関係</figcaption>
-        <pre>
-  [ 財務の視点 (KGI) ]
-  売上高、利益、ROE （最終成果）
-          ▲
-          │ 因果関係（顧客が満足すれば売上が上がる）
-  [ 顧客の視点 (KPI) ]
-  顧客満足度(CS)、NPS、シェア （顧客価値）
-          ▲
-          │ 因果関係（プロセスが改善すれば顧客は満足する）
-  [ 内部プロセスの視点 (PDCA) ]
-  対応フロー遵守率、生産性、不良率 （業務プロセス）
-          ▲
-          │ 因果関係（人材が成長すればプロセスは改善する）
-  [ 学習と成長の視点 (組織能力) ]
-  研修実施数、スキル習得率、従業員満足度 （基盤）
-        </pre>
+        <svg viewBox="0 0 420 335" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrBsc" markerWidth="8" markerHeight="6" refX="4" refY="0" orient="auto">
+              <polygon points="0 6, 8 6, 4 0" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="30" y="10" width="360" height="56" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="210" y="32" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">財務の視点（KGI）― 最終成果</text>
+          <text x="210" y="52" text-anchor="middle" font-size="11" fill="#334155">売上高、利益、ROE</text>
+          <line x1="210" y1="94" x2="210" y2="68" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrBsc)"/>
+          <text x="225" y="84" font-size="10" fill="#475569">因果関係（顧客が満足すれば売上が上がる）</text>
+          <rect x="30" y="95" width="360" height="56" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="210" y="117" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">顧客の視点（KPI）― 顧客価値</text>
+          <text x="210" y="137" text-anchor="middle" font-size="11" fill="#334155">顧客満足度(CS)、NPS、シェア</text>
+          <line x1="210" y1="179" x2="210" y2="153" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrBsc)"/>
+          <text x="225" y="169" font-size="10" fill="#475569">因果関係（プロセスが改善すれば顧客は満足する）</text>
+          <rect x="30" y="180" width="360" height="56" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="210" y="202" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">内部プロセスの視点（PDCA）― 業務プロセス</text>
+          <text x="210" y="222" text-anchor="middle" font-size="11" fill="#334155">対応フロー遵守率、生産性、不良率</text>
+          <line x1="210" y1="264" x2="210" y2="238" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrBsc)"/>
+          <text x="225" y="254" font-size="10" fill="#475569">因果関係（人材が成長すればプロセスは改善する）</text>
+          <rect x="30" y="265" width="360" height="56" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="210" y="287" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e1b4b">学習と成長の視点（組織能力）― 基盤</text>
+          <text x="210" y="307" text-anchor="middle" font-size="11" fill="#334155">研修実施数、スキル習得率、従業員満足度</text>
+        </svg>
       </figure>
     </section>
 

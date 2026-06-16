@@ -119,40 +119,60 @@
         <article>
           <h3>AND（論理積：P・Q）</h3>
           <p>両方が1のときだけ1。「PかつQ」</p>
-          <figure class="wide-diagram"><pre><code>P Q | P・Q
----------
-0 0 |  0
-0 1 |  0
-1 0 |  0
-1 1 |  1</code></pre></figure>
+          <div class="table-wrap mobile-card-table">
+            <table>
+              <thead><tr><th>P</th><th>Q</th><th>P・Q</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td></tr>
+              </tbody>
+            </table>
+          </div>
         </article>
         <article>
           <h3>OR（論理和：P+Q）</h3>
           <p>どちらか1なら1。「PまたはQ」</p>
-          <figure class="wide-diagram"><pre><code>P Q | P+Q
----------
-0 0 |  0
-0 1 |  1
-1 0 |  1
-1 1 |  1</code></pre></figure>
+          <div class="table-wrap mobile-card-table">
+            <table>
+              <thead><tr><th>P</th><th>Q</th><th>P+Q</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td></tr>
+              </tbody>
+            </table>
+          </div>
         </article>
         <article>
           <h3>NOT（否定：¬P）</h3>
           <p>入力を反転。「Pでない」</p>
-          <figure class="wide-diagram"><pre><code>P | ¬P
-------
-0 |  1
-1 |  0</code></pre></figure>
+          <div class="table-wrap mobile-card-table">
+            <table>
+              <thead><tr><th>P</th><th>¬P</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td></tr>
+              </tbody>
+            </table>
+          </div>
         </article>
         <article>
           <h3>XOR（排他的論理和：P⊕Q）</h3>
           <p>異なるとき1。一致比較やビット演算で重要</p>
-          <figure class="wide-diagram"><pre><code>P Q | P⊕Q
----------
-0 0 |  0
-0 1 |  1
-1 0 |  1
-1 1 |  0</code></pre></figure>
+          <div class="table-wrap mobile-card-table">
+            <table>
+              <thead><tr><th>P</th><th>Q</th><th>P⊕Q</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td></tr>
+              </tbody>
+            </table>
+          </div>
         </article>
       </div>
 
@@ -222,49 +242,117 @@
       <h3>基本ゲート一覧</h3>
       <figure class="wide-diagram">
         <figcaption>ANDゲート（両方1で1）</figcaption>
-        <pre><code>     ┌───┐
-P ──┤ & ├── P・Q
-Q ──┤   │
-     └───┘
-P Q | P・Q
-0 0 |  0
-0 1 |  0
-1 0 |  0
-1 1 |  1</code></pre>
+        <svg viewBox="0 0 280 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="lg-arr1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <line x1="20" y1="35" x2="90" y2="35" stroke="#64748b" stroke-width="1.5"/>
+          <text x="10" y="39" font-size="13" fill="#334155">P</text>
+          <line x1="20" y1="65" x2="90" y2="65" stroke="#64748b" stroke-width="1.5"/>
+          <text x="10" y="69" font-size="13" fill="#334155">Q</text>
+          <rect x="90" y="20" width="60" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="120" y="54" text-anchor="middle" font-size="16" fill="#1e3a5f">&amp;</text>
+          <line x1="150" y1="50" x2="230" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#lg-arr1)"/>
+          <text x="200" y="42" font-size="13" fill="#1e3a5f">P・Q</text>
+        </svg>
       </figure>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>P</th><th>Q</th><th>P・Q</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
       <figure class="wide-diagram">
         <figcaption>ORゲート（どちらか1で1）</figcaption>
-        <pre><code>     ┌───┐
-P ──┤ ≥1├── P+Q
-Q ──┤   │
-     └───┘
-P Q | P+Q
-0 0 |  0
-0 1 |  1
-1 0 |  1
-1 1 |  1</code></pre>
+        <svg viewBox="0 0 280 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="lg-arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <line x1="20" y1="35" x2="90" y2="35" stroke="#64748b" stroke-width="1.5"/>
+          <text x="10" y="39" font-size="13" fill="#334155">P</text>
+          <line x1="20" y1="65" x2="90" y2="65" stroke="#64748b" stroke-width="1.5"/>
+          <text x="10" y="69" font-size="13" fill="#334155">Q</text>
+          <path d="M 90,20 Q 130,20 150,50 Q 130,80 90,80 Q 105,50 90,20 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="115" y="54" text-anchor="middle" font-size="13" fill="#1e3a5f">≥1</text>
+          <line x1="150" y1="50" x2="230" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#lg-arr2)"/>
+          <text x="200" y="42" font-size="13" fill="#1e3a5f">P+Q</text>
+        </svg>
       </figure>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>P</th><th>Q</th><th>P+Q</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td></tr>
+            <tr><td>1</td><td>1</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
       <figure class="wide-diagram">
         <figcaption>NOTゲート（入力を反転）</figcaption>
-        <pre><code>     ┌───┐
-P ──┤ 1 │○── ¬P
-     └───┘
-P | ¬P
-0 |  1
-1 |  0</code></pre>
+        <svg viewBox="0 0 280 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="lg-arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <line x1="20" y1="50" x2="90" y2="50" stroke="#64748b" stroke-width="1.5"/>
+          <text x="10" y="44" font-size="13" fill="#334155">P</text>
+          <polygon points="90,20 90,80 150,50" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <circle cx="156" cy="50" r="6" fill="#fff" stroke="#2563eb" stroke-width="1.5"/>
+          <line x1="162" y1="50" x2="230" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#lg-arr3)"/>
+          <text x="200" y="42" font-size="13" fill="#1e3a5f">¬P</text>
+        </svg>
       </figure>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>P</th><th>¬P</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>1</td></tr>
+            <tr><td>1</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
       <figure class="wide-diagram">
         <figcaption>XORゲート（異なるとき1）</figcaption>
-        <pre><code>     ┌───┐
-P ──┤ =1├── P⊕Q
-Q ──┤   │
-     └───┘
-P Q | P⊕Q
-0 0 |  0
-0 1 |  1
-1 0 |  1
-1 1 |  0</code></pre>
+        <svg viewBox="0 0 280 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="lg-arr4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <line x1="20" y1="35" x2="86" y2="35" stroke="#64748b" stroke-width="1.5"/>
+          <text x="10" y="39" font-size="13" fill="#334155">P</text>
+          <line x1="20" y1="65" x2="86" y2="65" stroke="#64748b" stroke-width="1.5"/>
+          <text x="10" y="69" font-size="13" fill="#334155">Q</text>
+          <path d="M 80,16 Q 86,50 80,84" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+          <path d="M 90,20 Q 130,20 150,50 Q 130,80 90,80 Q 105,50 90,20 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="115" y="54" text-anchor="middle" font-size="13" fill="#1e3a5f">=1</text>
+          <line x1="150" y1="50" x2="230" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#lg-arr4)"/>
+          <text x="195" y="42" font-size="13" fill="#1e3a5f">P⊕Q</text>
+        </svg>
       </figure>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>P</th><th>Q</th><th>P⊕Q</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>0</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td></tr>
+            <tr><td>1</td><td>1</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3>万能ゲート（NAND / NOR）</h3>
       <p>NAND（ANDの否定）とNOR（ORの否定）は、この1種だけでAND・OR・NOT・XORなどすべての論理回路を構成できます。そのため「万能ゲート」と呼ばれます。</p>
@@ -272,39 +360,100 @@ P Q | P⊕Q
       <div class="compare-grid">
         <article>
           <h3>NAND</h3>
-          <figure class="wide-diagram"><pre><code>     ┌───┐
-P ──┤ & │○── ¬(P・Q)
-Q ──┤   │
-     └───┘
-P Q | ¬(P・Q)
-0 0 |   1
-0 1 |   1
-1 0 |   1
-1 1 |   0</code></pre></figure>
+          <figure class="wide-diagram">
+            <svg viewBox="0 0 280 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="lg-arr5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+                </marker>
+              </defs>
+              <line x1="20" y1="35" x2="90" y2="35" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="39" font-size="13" fill="#334155">P</text>
+              <line x1="20" y1="65" x2="90" y2="65" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="69" font-size="13" fill="#334155">Q</text>
+              <rect x="90" y="20" width="60" height="60" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+              <text x="120" y="54" text-anchor="middle" font-size="16" fill="#92400e">&amp;</text>
+              <circle cx="156" cy="50" r="6" fill="#fff" stroke="#d97706" stroke-width="1.5"/>
+              <line x1="162" y1="50" x2="230" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#lg-arr5)"/>
+              <text x="178" y="42" font-size="12" fill="#1e3a5f">¬(P・Q)</text>
+            </svg>
+          </figure>
+          <div class="table-wrap mobile-card-table">
+            <table>
+              <thead><tr><th>P</th><th>Q</th><th>¬(P・Q)</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td></tr>
+                <tr><td>1</td><td>0</td><td>1</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td></tr>
+              </tbody>
+            </table>
+          </div>
         </article>
         <article>
           <h3>NOR</h3>
-          <figure class="wide-diagram"><pre><code>     ┌───┐
-P ──┤ ≥1│○── ¬(P+Q)
-Q ──┤   │
-     └───┘
-P Q | ¬(P+Q)
-0 0 |   1
-0 1 |   0
-1 0 |   0
-1 1 |   0</code></pre></figure>
+          <figure class="wide-diagram">
+            <svg viewBox="0 0 280 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="lg-arr6" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+                </marker>
+              </defs>
+              <line x1="20" y1="35" x2="86" y2="35" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="39" font-size="13" fill="#334155">P</text>
+              <line x1="20" y1="65" x2="86" y2="65" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="69" font-size="13" fill="#334155">Q</text>
+              <path d="M 90,20 Q 130,20 150,50 Q 130,80 90,80 Q 105,50 90,20 Z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+              <text x="115" y="54" text-anchor="middle" font-size="13" fill="#92400e">≥1</text>
+              <circle cx="156" cy="50" r="6" fill="#fff" stroke="#d97706" stroke-width="1.5"/>
+              <line x1="162" y1="50" x2="230" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#lg-arr6)"/>
+              <text x="178" y="42" font-size="12" fill="#1e3a5f">¬(P+Q)</text>
+            </svg>
+          </figure>
+          <div class="table-wrap mobile-card-table">
+            <table>
+              <thead><tr><th>P</th><th>Q</th><th>¬(P+Q)</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td><td>0</td></tr>
+              </tbody>
+            </table>
+          </div>
         </article>
         <article>
           <h3>XNOR</h3>
-          <figure class="wide-diagram"><pre><code>     ┌───┐
-P ──┤ =1│○── XNOR
-Q ──┤   │
-     └───┘
-P Q | XNOR
-0 0 |  1
-0 1 |  0
-1 0 |  0
-1 1 |  1</code></pre></figure>
+          <figure class="wide-diagram">
+            <svg viewBox="0 0 280 100" width="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="lg-arr7" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+                </marker>
+              </defs>
+              <line x1="20" y1="35" x2="82" y2="35" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="39" font-size="13" fill="#334155">P</text>
+              <line x1="20" y1="65" x2="82" y2="65" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="69" font-size="13" fill="#334155">Q</text>
+              <path d="M 76,16 Q 82,50 76,84" fill="none" stroke="#d97706" stroke-width="1.5"/>
+              <path d="M 90,20 Q 130,20 150,50 Q 130,80 90,80 Q 105,50 90,20 Z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+              <text x="115" y="54" text-anchor="middle" font-size="13" fill="#92400e">=1</text>
+              <circle cx="156" cy="50" r="6" fill="#fff" stroke="#d97706" stroke-width="1.5"/>
+              <line x1="162" y1="50" x2="230" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#lg-arr7)"/>
+              <text x="178" y="42" font-size="12" fill="#1e3a5f">XNOR</text>
+            </svg>
+          </figure>
+          <div class="table-wrap mobile-card-table">
+            <table>
+              <thead><tr><th>P</th><th>Q</th><th>XNOR</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>0</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>0</td></tr>
+                <tr><td>1</td><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td><td>1</td></tr>
+              </tbody>
+            </table>
+          </div>
         </article>
       </div>
 
@@ -335,11 +484,30 @@ P Q | XNOR
         <article>
           <h3>例題1: Y = (P・Q) + R</h3>
           <p>PとQをAND → その結果をRとOR</p>
-          <figure class="wide-diagram"><pre><code>P ──┐
-     ├─[AND]─┐
-Q ──┘        ├─[OR]── Y
-             │
-R ──────────┘</code></pre></figure>
+          <figure class="wide-diagram">
+            <svg viewBox="0 0 300 140" width="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="lg-arr8" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+                </marker>
+              </defs>
+              <line x1="10" y1="20" x2="60" y2="20" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="14" font-size="12" fill="#334155">P</text>
+              <line x1="10" y1="50" x2="60" y2="50" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="44" font-size="12" fill="#334155">Q</text>
+              <line x1="60" y1="20" x2="60" y2="50" stroke="#64748b" stroke-width="1.5"/>
+              <rect x="60" y="20" width="70" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="95" y="40" text-anchor="middle" font-size="12" fill="#1e3a5f">AND</text>
+              <line x1="130" y1="35" x2="170" y2="35" stroke="#64748b" stroke-width="1.5"/>
+              <line x1="10" y1="100" x2="170" y2="100" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="94" font-size="12" fill="#334155">R</text>
+              <line x1="170" y1="35" x2="170" y2="100" stroke="#64748b" stroke-width="1.5"/>
+              <rect x="170" y="50" width="70" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="205" y="70" text-anchor="middle" font-size="12" fill="#1e3a5f">OR</text>
+              <line x1="240" y1="65" x2="280" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#lg-arr8)"/>
+              <text x="285" y="69" font-size="13" fill="#1e3a5f">Y</text>
+            </svg>
+          </figure>
           <div class="table-wrap mobile-card-table">
             <table>
               <thead><tr><th>P</th><th>Q</th><th>R</th><th>Y</th></tr></thead>
@@ -359,22 +527,74 @@ R ──────────┘</code></pre></figure>
         <article>
           <h3>例題2: Y = ¬P・(Q+R)</h3>
           <p>PをNOT → QとRをOR → 両結果をAND</p>
-          <figure class="wide-diagram"><pre><code>P ──[NOT]──┐
-             ├─[AND]── Y
-Q ──┐        │
-     ├─[OR]──┘
-R ──┘</code></pre></figure>
+          <figure class="wide-diagram">
+            <svg viewBox="0 0 300 140" width="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="lg-arr9" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+                </marker>
+              </defs>
+              <line x1="10" y1="20" x2="60" y2="20" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="14" font-size="12" fill="#334155">P</text>
+              <rect x="60" y="5" width="70" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="95" y="25" text-anchor="middle" font-size="12" fill="#1e3a5f">NOT</text>
+              <line x1="130" y1="20" x2="170" y2="20" stroke="#64748b" stroke-width="1.5"/>
+              <line x1="10" y1="65" x2="60" y2="65" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="59" font-size="12" fill="#334155">Q</text>
+              <line x1="10" y1="100" x2="60" y2="100" stroke="#64748b" stroke-width="1.5"/>
+              <text x="10" y="94" font-size="12" fill="#334155">R</text>
+              <line x1="60" y1="65" x2="60" y2="100" stroke="#64748b" stroke-width="1.5"/>
+              <rect x="60" y="65" width="70" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="95" y="85" text-anchor="middle" font-size="12" fill="#1e3a5f">OR</text>
+              <line x1="130" y1="80" x2="170" y2="80" stroke="#64748b" stroke-width="1.5"/>
+              <line x1="170" y1="20" x2="170" y2="80" stroke="#64748b" stroke-width="1.5"/>
+              <rect x="170" y="35" width="70" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+              <text x="205" y="55" text-anchor="middle" font-size="12" fill="#1e3a5f">AND</text>
+              <line x1="240" y1="50" x2="280" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#lg-arr9)"/>
+              <text x="285" y="54" font-size="13" fill="#1e3a5f">Y</text>
+            </svg>
+          </figure>
         </article>
       </div>
 
       <article class="formula-box">
         <h3>例題3: XORをAND+OR+NOTで構成</h3>
         <p>XORは (P+Q)・¬(P・Q) で構成できます。これは「PまたはQ」かつ「PかつQの否定」という意味です。</p>
-        <figure class="wide-diagram"><pre><code>P ──┬─[OR]──┐
-Q ──┘        ├─[AND]── P⊕Q
-              │
-P ──┬─[AND]─[NOT]─┘
-Q ──┘</code></pre></figure>
+        <figure class="wide-diagram">
+          <svg viewBox="0 0 340 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="lg-arr10" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+              </marker>
+            </defs>
+            <line x1="10" y1="20" x2="50" y2="20" stroke="#64748b" stroke-width="1.5"/>
+            <text x="10" y="14" font-size="12" fill="#334155">P</text>
+            <line x1="10" y1="40" x2="50" y2="40" stroke="#64748b" stroke-width="1.5"/>
+            <text x="10" y="34" font-size="12" fill="#334155">Q</text>
+            <line x1="50" y1="20" x2="50" y2="40" stroke="#64748b" stroke-width="1.5"/>
+            <rect x="50" y="10" width="60" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="80" y="30" text-anchor="middle" font-size="12" fill="#1e3a5f">OR</text>
+            <line x1="110" y1="25" x2="220" y2="25" stroke="#64748b" stroke-width="1.5"/>
+
+            <line x1="10" y1="100" x2="50" y2="100" stroke="#64748b" stroke-width="1.5"/>
+            <text x="10" y="94" font-size="12" fill="#334155">P</text>
+            <line x1="10" y1="120" x2="50" y2="120" stroke="#64748b" stroke-width="1.5"/>
+            <text x="10" y="114" font-size="12" fill="#334155">Q</text>
+            <line x1="50" y1="100" x2="50" y2="120" stroke="#64748b" stroke-width="1.5"/>
+            <rect x="50" y="90" width="60" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="80" y="110" text-anchor="middle" font-size="12" fill="#1e3a5f">AND</text>
+            <line x1="110" y1="105" x2="140" y2="105" stroke="#64748b" stroke-width="1.5"/>
+            <rect x="140" y="90" width="60" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="170" y="110" text-anchor="middle" font-size="12" fill="#1e3a5f">NOT</text>
+            <line x1="200" y1="105" x2="220" y2="105" stroke="#64748b" stroke-width="1.5"/>
+
+            <line x1="220" y1="25" x2="220" y2="105" stroke="#64748b" stroke-width="1.5"/>
+            <rect x="220" y="50" width="60" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="250" y="70" text-anchor="middle" font-size="12" fill="#1e3a5f">AND</text>
+            <line x1="280" y1="65" x2="320" y2="65" stroke="#64748b" stroke-width="1.5" marker-end="url(#lg-arr10)"/>
+            <text x="295" y="57" font-size="12" fill="#1e3a5f">P⊕Q</text>
+          </svg>
+        </figure>
         <div class="table-wrap mobile-card-table">
           <table>
             <thead><tr><th>P</th><th>Q</th><th>P+Q</th><th>P・Q</th><th>¬(P・Q)</th><th>P⊕Q</th></tr></thead>

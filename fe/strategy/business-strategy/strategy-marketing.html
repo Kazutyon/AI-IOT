@@ -77,19 +77,27 @@
 
       <figure class="wide-diagram">
         <figcaption>STP分析の3ステップ</figcaption>
-        <pre>
-  [ 1. セグメンテーション (S) ]
-  市場を属性（年齢・性別）、行動、ニーズなどでグループ分け
-  例：10代動画視聴層 / 30代ビジネス層 / 美容室経営者
-          │
-  [ 2. ターゲティング (T) ]
-  細分化したグループの中から、最も勝てる（注力する）層を選ぶ
-  例：「10代の動画視聴が多い層」を狙うと決定
-          │
-  [ 3. ポジショニング (P) ]
-  ターゲットの中で、自社製品の立ち位置（差別化ポイント）を明確にする
-  例：「最もUIが使いやすい動画SNS」として認知させる
-        </pre>
+        <svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrStp" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="20" y="10" width="360" height="76" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="32" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">1. セグメンテーション (S)</text>
+          <text x="200" y="52" text-anchor="middle" font-size="11" fill="#334155">市場を属性（年齢・性別）、行動、ニーズなどでグループ分け</text>
+          <text x="200" y="70" text-anchor="middle" font-size="10" fill="#64748b">例：10代動画視聴層 / 30代ビジネス層 / 美容室経営者</text>
+          <line x1="200" y1="86" x2="200" y2="114" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrStp)"/>
+          <rect x="20" y="115" width="360" height="76" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="137" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">2. ターゲティング (T)</text>
+          <text x="200" y="157" text-anchor="middle" font-size="11" fill="#334155">細分化したグループの中から、最も勝てる（注力する）層を選ぶ</text>
+          <text x="200" y="175" text-anchor="middle" font-size="10" fill="#64748b">例：「10代の動画視聴が多い層」を狙うと決定</text>
+          <line x1="200" y1="191" x2="200" y2="219" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrStp)"/>
+          <rect x="20" y="220" width="360" height="76" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="242" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">3. ポジショニング (P)</text>
+          <text x="200" y="262" text-anchor="middle" font-size="11" fill="#334155">ターゲットの中で、自社製品の立ち位置（差別化ポイント）を明確にする</text>
+          <text x="200" y="280" text-anchor="middle" font-size="10" fill="#64748b">例：「最もUIが使いやすい動画SNS」として認知させる</text>
+        </svg>
       </figure>
     </section>
 
@@ -118,19 +126,30 @@
 
       <figure class="wide-diagram">
         <figcaption>製品ライフサイクル（PLC）の4段階</figcaption>
-        <pre>
-  売上・利益
-       ▲
-       │            /───────\  [ 成熟期 ]
-       │           /                \  競合増加、価格競争、コスト最適化
-       │          /                  \
-       │         / [ 成長期 ]         \
-       │        /  シェア獲得          \ [ 衰退期 ]
-       │       /   機能追加             \ 撤退 or ニッチ化
-       │      /                          \
-       │     / [ 導入期 ]                 \
-       │──/──認知拡大───────────────▶ 時間
-        </pre>
+        <svg viewBox="0 0 460 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrPlc" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#334155"/>
+            </marker>
+          </defs>
+          <!-- 軸 -->
+          <line x1="50" y1="20" x2="50" y2="230" stroke="#334155" stroke-width="1.5"/>
+          <polygon points="50,12 45,22 55,22" fill="#334155"/>
+          <text x="50" y="10" text-anchor="middle" font-size="11" fill="#334155">売上・利益</text>
+          <line x1="50" y1="230" x2="430" y2="230" stroke="#334155" stroke-width="1.5" marker-end="url(#arrPlc)"/>
+          <text x="420" y="250" text-anchor="middle" font-size="11" fill="#334155">時間</text>
+          <!-- S字カーブ：導入期(緩やか上昇)→成長期(急上昇)→成熟期(平坦)→衰退期(下降) -->
+          <path d="M 50,225 C 90,225 110,210 130,190 C 160,150 190,90 240,75 C 290,62 330,65 360,85 C 390,105 405,140 420,180"
+                fill="none" stroke="#2563eb" stroke-width="2.5"/>
+          <text x="75" y="220" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a5f">導入期</text>
+          <text x="75" y="208" text-anchor="middle" font-size="9" fill="#64748b">認知拡大</text>
+          <text x="170" y="135" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a5f">成長期</text>
+          <text x="170" y="150" text-anchor="middle" font-size="9" fill="#64748b">シェア獲得・機能追加</text>
+          <text x="300" y="55" text-anchor="middle" font-size="11" font-weight="bold" fill="#92400e">成熟期</text>
+          <text x="300" y="42" text-anchor="middle" font-size="9" fill="#64748b">競合増加、価格競争、コスト最適化</text>
+          <text x="395" y="160" text-anchor="middle" font-size="11" font-weight="bold" fill="#475569">衰退期</text>
+          <text x="395" y="200" text-anchor="middle" font-size="9" fill="#64748b">撤退 or ニッチ化</text>
+        </svg>
       </figure>
     </section>
 

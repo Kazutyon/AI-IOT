@@ -252,15 +252,20 @@
         </article>
       </div>
 
-      <figure class="wide-diagram">
-        <figcaption>集合演算と論理演算の対応</figcaption>
-        <pre><code>集合演算           論理演算       記号
-───────────────────────────────────
-和集合 A∪B  ←→  OR（論理和）   ∪ vs +
-積集合 A∩B  ←→  AND（論理積）  ∩ vs ・
-補集合 A^c  ←→  NOT（否定）    ^c vs ¬
-差集合 A−B  ←→  (A AND NOT B)   − （複合）</code></pre>
-      </figure>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <caption>集合演算と論理演算の対応</caption>
+          <thead>
+            <tr><th>集合演算</th><th>論理演算</th><th>記号</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>和集合 A∪B</td><td>OR（論理和）</td><td>∪ vs +</td></tr>
+            <tr><td>積集合 A∩B</td><td>AND（論理積）</td><td>∩ vs ・</td></tr>
+            <tr><td>補集合 A^c</td><td>NOT（否定）</td><td>^c vs ¬</td></tr>
+            <tr><td>差集合 A−B</td><td>(A AND NOT B)</td><td>−（複合）</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section id="relation" class="lesson-section">
@@ -322,14 +327,48 @@
 
       <figure class="wide-diagram">
         <figcaption>関係の3性質 判定チャート</figcaption>
-        <pre><code>反射律チェック: 全a∈Aについて(a,a)∈Rあるか？
-    ある → 反射的 ／ ない → 非反射的
+        <svg viewBox="0 0 360 280" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="sr-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 反射律 -->
+          <rect x="20" y="6" width="320" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="26" text-anchor="middle" font-size="12" fill="#1e3a5f">反射律: 全a∈Aで(a,a)∈Rか？</text>
+          <line x1="100" y1="36" x2="100" y2="56" stroke="#64748b" stroke-width="1.5" marker-end="url(#sr-arr)"/>
+          <text x="60" y="50" font-size="11" fill="#64748b">ある</text>
+          <rect x="30" y="58" width="140" height="26" rx="13" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="100" y="76" text-anchor="middle" font-size="12" fill="#14532d">反射的</text>
+          <line x1="260" y1="36" x2="260" y2="56" stroke="#64748b" stroke-width="1.5" marker-end="url(#sr-arr)"/>
+          <text x="280" y="50" font-size="11" fill="#64748b">ない</text>
+          <rect x="190" y="58" width="140" height="26" rx="13" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="260" y="76" text-anchor="middle" font-size="12" fill="#7f1d1d">非反射的</text>
 
-対称律チェック: (a,b)∈Rなら(b,a)∈Rあるか？
-    ある → 対称的 ／ ない → 非対称的
+          <!-- 対称律 -->
+          <rect x="20" y="100" width="320" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="120" text-anchor="middle" font-size="12" fill="#1e3a5f">対称律: (a,b)∈Rなら(b,a)∈Rか？</text>
+          <line x1="100" y1="130" x2="100" y2="150" stroke="#64748b" stroke-width="1.5" marker-end="url(#sr-arr)"/>
+          <text x="60" y="144" font-size="11" fill="#64748b">ある</text>
+          <rect x="30" y="152" width="140" height="26" rx="13" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="100" y="170" text-anchor="middle" font-size="12" fill="#14532d">対称的</text>
+          <line x1="260" y1="130" x2="260" y2="150" stroke="#64748b" stroke-width="1.5" marker-end="url(#sr-arr)"/>
+          <text x="280" y="144" font-size="11" fill="#64748b">ない</text>
+          <rect x="190" y="152" width="140" height="26" rx="13" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="260" y="170" text-anchor="middle" font-size="12" fill="#7f1d1d">非対称的</text>
 
-推移律チェック: (a,b)∈Rかつ(b,c)∈Rなら(a,c)∈Rあるか？
-    ある → 推移的 ／ ない → 非推移的</code></pre>
+          <!-- 推移律 -->
+          <rect x="20" y="194" width="320" height="30" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="210" text-anchor="middle" font-size="11" fill="#1e3a5f">推移律: (a,b)∈Rかつ(b,c)∈Rなら(a,c)∈Rか？</text>
+          <line x1="100" y1="224" x2="100" y2="244" stroke="#64748b" stroke-width="1.5" marker-end="url(#sr-arr)"/>
+          <text x="60" y="238" font-size="11" fill="#64748b">ある</text>
+          <rect x="30" y="246" width="140" height="26" rx="13" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="100" y="264" text-anchor="middle" font-size="12" fill="#14532d">推移的</text>
+          <line x1="260" y1="224" x2="260" y2="244" stroke="#64748b" stroke-width="1.5" marker-end="url(#sr-arr)"/>
+          <text x="280" y="238" font-size="11" fill="#64748b">ない</text>
+          <rect x="190" y="246" width="140" height="26" rx="13" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+          <text x="260" y="264" text-anchor="middle" font-size="12" fill="#7f1d1d">非推移的</text>
+        </svg>
       </figure>
     </section>
 

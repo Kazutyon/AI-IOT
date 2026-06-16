@@ -94,20 +94,38 @@
 
       <figure class="wide-diagram">
         <figcaption>不況時の経済政策（拡張政策）</figcaption>
-        <pre>
-  [ 不況 (景気が悪い) ]
-  民間の需要が不足している
-          │
-          ├─▶ 【金融政策】 (主体: 日本銀行)
-          │    ・政策金利を下げる (借りやすくする)
-          │    ・公開市場操作で国債を買う (市場にお金を供給)
-          │    ・預金準備率を下げる (銀行の貸し出しを増やす)
-          │
-          └─▶ 【財政政策】 (主体: 政府)
-               ・公共事業を増やす
-               ・減税を行う
-               ・補助金・給付金を支給する
-        </pre>
+        <svg viewBox="0 0 420 270" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="eco-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="80" y="10" width="220" height="44" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="190" y="29" text-anchor="middle" font-size="13" fill="#92400e">不況（景気が悪い）</text>
+          <text x="190" y="45" text-anchor="middle" font-size="11" fill="#92400e">民間の需要が不足している</text>
+
+          <line x1="190" y1="54" x2="190" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="100" y1="80" x2="300" y2="80" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="100" y1="80" x2="100" y2="100" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#eco-arr)"/>
+          <line x1="300" y1="80" x2="300" y2="100" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#eco-arr)"/>
+
+          <rect x="20" y="102" width="160" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="100" y="126" text-anchor="middle" font-size="13" fill="#1e3a5f">金融政策（日本銀行）</text>
+
+          <rect x="220" y="102" width="160" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="300" y="126" text-anchor="middle" font-size="13" fill="#1e3a5f">財政政策（政府）</text>
+
+          <text x="25" y="162" font-size="11" fill="#334155">・政策金利を下げる</text>
+          <text x="25" y="178" font-size="11" fill="#334155">　（借りやすくする）</text>
+          <text x="25" y="196" font-size="11" fill="#334155">・公開市場操作で国債を買う</text>
+          <text x="25" y="212" font-size="11" fill="#334155">　（市場にお金を供給）</text>
+          <text x="25" y="230" font-size="11" fill="#334155">・預金準備率を下げる</text>
+          <text x="25" y="246" font-size="11" fill="#334155">　（銀行の貸し出しを増やす）</text>
+
+          <text x="225" y="162" font-size="11" fill="#334155">・公共事業を増やす</text>
+          <text x="225" y="180" font-size="11" fill="#334155">・減税を行う</text>
+          <text x="225" y="198" font-size="11" fill="#334155">・補助金・給付金を支給する</text>
+        </svg>
       </figure>
     </section>
 

@@ -111,9 +111,35 @@
 
       <figure class="wide-diagram">
         <figcaption>サブネットマスクの考え方</figcaption>
-        <pre>IPアドレス 32ビット
-  ├── ネットワーク部 → サブネットマスク: 1 → CIDR: /24 など
-  └── ホスト部 → サブネットマスク: 0 → ホスト数: 2^n - 2</pre>
+        <svg viewBox="0 0 380 170" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="mask-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="120" y="8" width="140" height="34" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="190" y="30" text-anchor="middle" font-size="12" fill="#1e1b4b">IPアドレス 32ビット</text>
+
+          <line x1="190" y1="42" x2="190" y2="58" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="90" y1="58" x2="290" y2="58" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="90" y1="58" x2="90" y2="74" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#mask-arr)"/>
+          <line x1="290" y1="58" x2="290" y2="74" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#mask-arr)"/>
+
+          <rect x="20" y="75" width="140" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="90" y="97" text-anchor="middle" font-size="12" fill="#1e3a5f">ネットワーク部</text>
+          <rect x="220" y="75" width="140" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="290" y="97" text-anchor="middle" font-size="12" fill="#1e3a5f">ホスト部</text>
+
+          <line x1="90" y1="109" x2="90" y2="125" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#mask-arr)"/>
+          <rect x="10" y="126" width="160" height="36" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="90" y="142" text-anchor="middle" font-size="10" fill="#14532d">サブネットマスク: 1</text>
+          <text x="90" y="156" text-anchor="middle" font-size="10" fill="#14532d">CIDR: /24 など</text>
+
+          <line x1="290" y1="109" x2="290" y2="125" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#mask-arr)"/>
+          <rect x="210" y="126" width="160" height="36" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="290" y="142" text-anchor="middle" font-size="10" fill="#14532d">サブネットマスク: 0</text>
+          <text x="290" y="156" text-anchor="middle" font-size="10" fill="#14532d">ホスト数: 2^n - 2</text>
+        </svg>
       </figure>
 
       <h3>サブネットマスク早見表</h3>

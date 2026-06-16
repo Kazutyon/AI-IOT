@@ -116,11 +116,27 @@
       <p>データは<strong>ヘッダー</strong>（封筒の宛名）と<strong>ペイロード</strong>（手紙の中身）で構成されます。階層を下るごとに各層のヘッダーが付加されます。この仕組みを<strong>カプセル化</strong>と呼びます。</p>
       <figure class="wide-diagram">
         <figcaption>カプセル化フロー（送信時）</figcaption>
-        <pre>アプリケーション層: データ作成
-  └── トランスポート層: TCPヘッダー追加
-       └── ネットワーク層: IPヘッダー追加
-            └── データリンク層: MACヘッダー+FCS追加
-                 └── 物理層: ビット信号に変換して伝送</pre>
+        <svg viewBox="0 0 380 296" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-encap" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="40" y="10" width="300" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="33" text-anchor="middle" font-size="12" fill="#1e3a5f">アプリケーション層: データ作成</text>
+          <line x1="190" y1="46" x2="190" y2="69" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-encap)"/>
+          <rect x="40" y="70" width="300" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="93" text-anchor="middle" font-size="12" fill="#1e3a5f">トランスポート層: TCPヘッダー追加</text>
+          <line x1="190" y1="106" x2="190" y2="129" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-encap)"/>
+          <rect x="40" y="130" width="300" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="153" text-anchor="middle" font-size="12" fill="#1e3a5f">ネットワーク層: IPヘッダー追加</text>
+          <line x1="190" y1="166" x2="190" y2="189" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-encap)"/>
+          <rect x="40" y="190" width="300" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="213" text-anchor="middle" font-size="12" fill="#1e3a5f">データリンク層: MACヘッダー+FCS追加</text>
+          <line x1="190" y1="226" x2="190" y2="249" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-encap)"/>
+          <rect x="40" y="250" width="300" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="273" text-anchor="middle" font-size="12" fill="#14532d">物理層: ビット信号に変換して伝送</text>
+        </svg>
       </figure>
       <p class="hint">試験対策：「下位層が付加する制御情報を何と呼ぶか」→ <strong>ヘッダー</strong>。「上位層のデータを下位層が包み込むことを何と呼ぶか」→ <strong>カプセル化</strong></p>
     </section>
@@ -150,13 +166,33 @@
 
       <figure class="wide-diagram">
         <figcaption>OSI参照モデル7層 役割早見</figcaption>
-        <pre>第7層 アプリケーション層: 通信処理
-  └── 第6層 プレゼンテーション層: 変換・暗号化
-       └── 第5層 セッション層: 接続管理
-            └── 第4層 トランスポート層: 分割・再送制御
-                 └── 第3層 ネットワーク層: 経路決定
-                      └── 第2層 データリンク層: LAN内通信
-                           └── 第1層 物理層: 信号伝送</pre>
+        <svg viewBox="0 0 380 420" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-osi7" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="30" y="10" width="320" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="33" text-anchor="middle" font-size="12" fill="#1e3a5f">第7層 アプリケーション層: 通信処理</text>
+          <line x1="190" y1="46" x2="190" y2="69" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-osi7)"/>
+          <rect x="30" y="70" width="320" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="93" text-anchor="middle" font-size="12" fill="#1e3a5f">第6層 プレゼンテーション層: 変換・暗号化</text>
+          <line x1="190" y1="106" x2="190" y2="129" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-osi7)"/>
+          <rect x="30" y="130" width="320" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="153" text-anchor="middle" font-size="12" fill="#1e3a5f">第5層 セッション層: 接続管理</text>
+          <line x1="190" y1="166" x2="190" y2="189" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-osi7)"/>
+          <rect x="30" y="190" width="320" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="213" text-anchor="middle" font-size="12" fill="#1e3a5f">第4層 トランスポート層: 分割・再送制御</text>
+          <line x1="190" y1="226" x2="190" y2="249" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-osi7)"/>
+          <rect x="30" y="250" width="320" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="190" y="273" text-anchor="middle" font-size="12" fill="#92400e">第3層 ネットワーク層: 経路決定</text>
+          <line x1="190" y1="286" x2="190" y2="309" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-osi7)"/>
+          <rect x="30" y="310" width="320" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="190" y="333" text-anchor="middle" font-size="12" fill="#1e3a5f">第2層 データリンク層: LAN内通信</text>
+          <line x1="190" y1="346" x2="190" y2="369" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-osi7)"/>
+          <rect x="30" y="370" width="320" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="190" y="393" text-anchor="middle" font-size="12" fill="#14532d">第1層 物理層: 信号伝送</text>
+        </svg>
       </figure>
     </section>
 
@@ -229,21 +265,48 @@
       <p class="hint">頻出：「信頼性の高い通信を提供するプロトコルは？」→ <strong>TCP</strong>。「受信確認や再送処理を行わないプロトコルは？」→ <strong>UDP</strong>。「ベストエフォート型で経路決定のみ行うプロトコルは？」→ <strong>IP</strong></p>
 
       <div class="diagram-grid">
-        <figure>
+        <figure class="wide-diagram">
           <figcaption>IP・UDP・TCPの特徴</figcaption>
-          <pre>IP（経路決定のみ）
-  └── ベストエフォート型
-UDP（軽量・高速）
-  └── データグラム・再送なし
-TCP（信頼性重視）
-  └── 3ウェイハンドシェイク</pre>
+          <svg viewBox="0 0 320 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr-iptcp" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+              </marker>
+            </defs>
+            <rect x="20" y="10" width="280" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="160" y="33" text-anchor="middle" font-size="12" fill="#1e3a5f">IP（経路決定のみ）</text>
+            <line x1="160" y1="46" x2="160" y2="60" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-iptcp)"/>
+            <text x="160" y="58" text-anchor="middle" font-size="11" fill="#64748b">ベストエフォート型</text>
+            <rect x="20" y="74" width="280" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+            <text x="160" y="97" text-anchor="middle" font-size="12" fill="#92400e">UDP（軽量・高速）</text>
+            <line x1="160" y1="110" x2="160" y2="124" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-iptcp)"/>
+            <text x="160" y="122" text-anchor="middle" font-size="11" fill="#64748b">データグラム・再送なし</text>
+            <rect x="20" y="138" width="280" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+            <text x="160" y="161" text-anchor="middle" font-size="12" fill="#14532d">TCP（信頼性重視）</text>
+            <line x1="160" y1="174" x2="160" y2="188" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-iptcp)"/>
+            <text x="160" y="186" text-anchor="middle" font-size="11" fill="#64748b">3ウェイハンドシェイク</text>
+          </svg>
         </figure>
-        <figure>
+        <figure class="wide-diagram">
           <figcaption>TCPの3ウェイハンドシェイク</figcaption>
-          <pre>① クライアント ──SYN──→ サーバー
-② クライアント ←──SYN+ACK── サーバー
-③ クライアント ──ACK──→ サーバー
-    → 接続確立・データ通信開始</pre>
+          <svg viewBox="0 0 320 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr-3way" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+              </marker>
+            </defs>
+            <text x="60" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a5f">クライアント</text>
+            <text x="260" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">サーバー</text>
+            <line x1="60" y1="28" x2="60" y2="190" stroke="#cbd5e1" stroke-width="1.5"/>
+            <line x1="260" y1="28" x2="260" y2="190" stroke="#cbd5e1" stroke-width="1.5"/>
+            <line x1="60" y1="55" x2="260" y2="55" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-3way)"/>
+            <text x="160" y="48" text-anchor="middle" font-size="11" fill="#334155">① SYN</text>
+            <line x1="260" y1="95" x2="60" y2="95" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-3way)"/>
+            <text x="160" y="88" text-anchor="middle" font-size="11" fill="#334155">② SYN+ACK</text>
+            <line x1="60" y1="135" x2="260" y2="135" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-3way)"/>
+            <text x="160" y="128" text-anchor="middle" font-size="11" fill="#334155">③ ACK</text>
+            <text x="160" y="170" text-anchor="middle" font-size="11" fill="#14532d">→ 接続確立・データ通信開始</text>
+          </svg>
         </figure>
       </div>
     </section>

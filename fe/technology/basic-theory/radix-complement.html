@@ -161,19 +161,61 @@
       </div>
       <figure class="wide-diagram">
         <figcaption>2の補数による負数表現</figcaption>
-        <pre><code>+5: 00000101
-    ↓ 全ビット反転
-    11111010
-    ↓ 1を加える
--5: 11111011</code></pre>
+        <svg viewBox="0 0 240 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="rc-arr1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <rect x="20" y="10" width="200" height="34" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="120" y="32" text-anchor="middle" font-size="13" fill="#1e3a5f">+5: 00000101</text>
+          <line x1="120" y1="44" x2="120" y2="70" stroke="#64748b" stroke-width="1.5" marker-end="url(#rc-arr1)"/>
+          <text x="160" y="62" font-size="11" fill="#64748b">全ビット反転</text>
+          <rect x="20" y="72" width="200" height="34" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="120" y="94" text-anchor="middle" font-size="13" fill="#92400e">11111010</text>
+          <line x1="120" y1="106" x2="120" y2="132" stroke="#64748b" stroke-width="1.5" marker-end="url(#rc-arr1)"/>
+          <text x="160" y="124" font-size="11" fill="#64748b">1を加える</text>
+          <rect x="20" y="134" width="200" height="34" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="120" y="156" text-anchor="middle" font-size="13" fill="#14532d">-5: 11111011</text>
+        </svg>
       </figure>
       <figure class="wide-diagram">
         <figcaption>MSBとLSB</figcaption>
-        <pre><code>bit7 bit6 bit5 bit4 bit3 bit2 bit1 bit0
-  1    0    1    1    0    1    0    0
-  ↑                                      ↑
- MSB                                    LSB
-符号ビット                             最小単位</code></pre>
+        <svg viewBox="0 0 400 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="rc-arr2" markerWidth="8" markerHeight="6" refX="4" refY="6" orient="auto">
+              <polygon points="0 6, 4 0, 8 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <g font-size="11" fill="#475569" text-anchor="middle">
+            <text x="30" y="14">bit7</text><text x="80" y="14">bit6</text><text x="130" y="14">bit5</text><text x="180" y="14">bit4</text>
+            <text x="230" y="14">bit3</text><text x="280" y="14">bit2</text><text x="330" y="14">bit1</text><text x="380" y="14">bit0</text>
+          </g>
+          <g font-size="14" font-weight="bold" fill="#1e3a5f" text-anchor="middle">
+            <rect x="10" y="22" width="40" height="30" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+            <text x="30" y="43">1</text>
+            <rect x="60" y="22" width="40" height="30" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+            <text x="80" y="43">0</text>
+            <rect x="110" y="22" width="40" height="30" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+            <text x="130" y="43">1</text>
+            <rect x="160" y="22" width="40" height="30" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+            <text x="180" y="43">1</text>
+            <rect x="210" y="22" width="40" height="30" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+            <text x="230" y="43">0</text>
+            <rect x="260" y="22" width="40" height="30" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+            <text x="280" y="43">1</text>
+            <rect x="310" y="22" width="40" height="30" fill="#f8fafc" stroke="#94a3b8" stroke-width="1"/>
+            <text x="330" y="43">0</text>
+            <rect x="360" y="22" width="40" height="30" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+            <text x="380" y="43">0</text>
+          </g>
+          <line x1="30" y1="58" x2="30" y2="78" stroke="#64748b" stroke-width="1.5" marker-end="url(#rc-arr2)"/>
+          <text x="30" y="92" text-anchor="middle" font-size="12" fill="#92400e">MSB</text>
+          <text x="30" y="108" text-anchor="middle" font-size="11" fill="#64748b">符号ビット</text>
+          <line x1="380" y1="58" x2="380" y2="78" stroke="#64748b" stroke-width="1.5" marker-end="url(#rc-arr2)"/>
+          <text x="380" y="92" text-anchor="middle" font-size="12" fill="#1e3a5f">LSB</text>
+          <text x="380" y="108" text-anchor="middle" font-size="11" fill="#64748b">最小単位</text>
+        </svg>
       </figure>
     </section>
 
@@ -189,17 +231,28 @@
       </article>
       <article class="formula-box">
         <h3>補数による減算</h3>
-        <pre><code>9 - 6 を8ビットで計算する
-+9 = 00001001
-+6 = 00000110
--6 = 11111010
-
-  00001001
-+ 11111010
-=1 00000011
-
-左端のキャリーを捨てる
-00000011 = 3</code></pre>
+        <p>9 - 6 を8ビットで計算する</p>
+        <div class="table-wrap mobile-card-table">
+          <table>
+            <thead><tr><th>項目</th><th>値</th></tr></thead>
+            <tbody>
+              <tr><td>+9</td><td>00001001</td></tr>
+              <tr><td>+6</td><td>00000110</td></tr>
+              <tr><td>-6（2の補数）</td><td>11111010</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <figure class="wide-diagram">
+          <figcaption>筆算: 00001001 + 11111010</figcaption>
+          <svg viewBox="0 0 280 110" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <text x="20" y="24" font-size="15" font-family="monospace" fill="#334155">  00001001</text>
+            <text x="20" y="48" font-size="15" font-family="monospace" fill="#334155">+ 11111010</text>
+            <line x1="10" y1="58" x2="270" y2="58" stroke="#64748b" stroke-width="1.5"/>
+            <text x="20" y="80" font-size="15" font-family="monospace" fill="#92400e">=1 00000011</text>
+            <text x="20" y="100" font-size="12" fill="#64748b">左端のキャリー（桁あふれ）は捨てる</text>
+          </svg>
+        </figure>
+        <p>00000011 = <strong>3</strong></p>
       </article>
       <div class="table-wrap mobile-card-table">
         <table>

@@ -172,17 +172,21 @@
 
       <figure class="wide-diagram">
         <figcaption>加法法則のイメージ（重複を引く理由）</figcaption>
-        <pre><code>     A = {2,4,6}        B = {3,6}
-    ┌───┐             ┌───┐
-    │ 2 │             │ 3 │
-    │ 4 │    ┌───┐    │   │
-    │   │    │ 6 │    │   │
-    └───┘    └───┘    └───┘
-              ↑
-          A∩B = {6}
-          ← 2回数えてしまうので1回分を引く
-
-P(A∪B) = 3/6 + 2/6 − 1/6 = 4/6 = 2/3</code></pre>
+        <svg viewBox="0 0 360 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <text x="90" y="18" text-anchor="middle" font-size="13" fill="#334155">A = {2,4,6}</text>
+          <text x="270" y="18" text-anchor="middle" font-size="13" fill="#334155">B = {3,6}</text>
+          <rect x="20" y="28" width="140" height="80" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="55" y="55" text-anchor="middle" font-size="14" fill="#1e3a5f">2</text>
+          <text x="55" y="85" text-anchor="middle" font-size="14" fill="#1e3a5f">4</text>
+          <rect x="200" y="28" width="140" height="80" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="305" y="55" text-anchor="middle" font-size="14" fill="#92400e">3</text>
+          <rect x="120" y="48" width="100" height="40" rx="6" fill="#fde68a" stroke="#b45309" stroke-width="2"/>
+          <text x="170" y="73" text-anchor="middle" font-size="14" font-weight="bold" fill="#7c2d12">6</text>
+          <line x1="170" y1="92" x2="170" y2="120" stroke="#64748b" stroke-width="1.5"/>
+          <text x="170" y="135" text-anchor="middle" font-size="12" fill="#475569">A∩B = {6}</text>
+          <text x="170" y="152" text-anchor="middle" font-size="11" fill="#64748b">2回数えてしまうので1回分を引く</text>
+          <text x="170" y="182" text-anchor="middle" font-size="13" fill="#1e3a5f">P(A∪B) = 3/6 + 2/6 − 1/6 = 4/6 = 2/3</text>
+        </svg>
       </figure>
 
       <div class="table-wrap mobile-card-table">
@@ -216,18 +220,23 @@ P(A∪B) = 3/6 + 2/6 − 1/6 = 4/6 = 2/3</code></pre>
         <p>内部動作: ①起こりうる結果を列挙 ②それぞれに確率を掛ける ③すべて足し合わせる</p>
       </article>
 
-      <figure class="wide-diagram">
-        <figcaption>期待値の計算構造（サイコロの例）</figcaption>
-        <pre><code>  結果   確率    結果×確率
-  1   ×  1/6  =  1/6
-  2   ×  1/6  =  2/6
-  3   ×  1/6  =  3/6
-  4   ×  1/6  =  4/6
-  5   ×  1/6  =  5/6
-  6   ×  1/6  =  6/6
-                ─────
-         合計 = 21/6 = 3.5  ← 期待値（長期的な平均）</code></pre>
-      </figure>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <caption>期待値の計算構造（サイコロの例）</caption>
+          <thead>
+            <tr><th>結果</th><th>確率</th><th>結果×確率</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>1/6</td><td>1/6</td></tr>
+            <tr><td>2</td><td>1/6</td><td>2/6</td></tr>
+            <tr><td>3</td><td>1/6</td><td>3/6</td></tr>
+            <tr><td>4</td><td>1/6</td><td>4/6</td></tr>
+            <tr><td>5</td><td>1/6</td><td>5/6</td></tr>
+            <tr><td>6</td><td>1/6</td><td>6/6</td></tr>
+            <tr><td colspan="2"><strong>合計（期待値）</strong></td><td><strong>21/6 = 3.5</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <div class="table-wrap mobile-card-table">
         <table>

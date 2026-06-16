@@ -105,19 +105,35 @@
       </div>
       <figure class="wide-diagram">
         <figcaption>情報理論の応用5領域 概念図</figcaption>
-        <pre><code>情報理論（エントロピー）
-
-  ┌── 情報の圧縮と伝送
-  │    ・データ圧縮
-  │    ・誤り訂正符号
-  │    ・通信路容量
-  │
-  └── 不確実性の評価
-       ・暗号安全性
-       ・情報漏洩量
-       ・モデル選択
-
-5領域: 圧縮 / 通信 / 暗号 / AI / 統計</code></pre>
+        <svg viewBox="0 0 420 230" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="情報理論（エントロピー）を頂点に、情報の圧縮と伝送（データ圧縮・誤り訂正符号・通信路容量）と、不確実性の評価（暗号安全性・情報漏洩量・モデル選択）の2つに分かれる階層図">
+          <defs>
+            <marker id="arrApp" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- ルート -->
+          <rect x="120" y="10" width="180" height="36" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="210" y="33" text-anchor="middle" font-size="13" fill="#1e1b4b">情報理論（エントロピー）</text>
+          <!-- 枝線 -->
+          <line x1="210" y1="46" x2="210" y2="64" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="105" y1="64" x2="315" y2="64" stroke="#94a3b8" stroke-width="1.5"/>
+          <line x1="105" y1="64" x2="105" y2="84" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrApp)"/>
+          <line x1="315" y1="64" x2="315" y2="84" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrApp)"/>
+          <!-- 左：情報の圧縮と伝送 -->
+          <rect x="20" y="85" width="170" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="105" y="108" text-anchor="middle" font-size="12" fill="#1e3a5f">情報の圧縮と伝送</text>
+          <text x="105" y="138" text-anchor="middle" font-size="10" fill="#334155">・データ圧縮</text>
+          <text x="105" y="156" text-anchor="middle" font-size="10" fill="#334155">・誤り訂正符号</text>
+          <text x="105" y="174" text-anchor="middle" font-size="10" fill="#334155">・通信路容量</text>
+          <!-- 右：不確実性の評価 -->
+          <rect x="230" y="85" width="170" height="36" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="315" y="108" text-anchor="middle" font-size="12" fill="#14532d">不確実性の評価</text>
+          <text x="315" y="138" text-anchor="middle" font-size="10" fill="#334155">・暗号安全性</text>
+          <text x="315" y="156" text-anchor="middle" font-size="10" fill="#334155">・情報漏洩量</text>
+          <text x="315" y="174" text-anchor="middle" font-size="10" fill="#334155">・モデル選択</text>
+          <!-- 凡例 -->
+          <text x="210" y="210" text-anchor="middle" font-size="11" fill="#64748b">5領域: 圧縮 / 通信 / 暗号 / AI / 統計</text>
+        </svg>
       </figure>
     </section>
 
@@ -155,20 +171,59 @@
       </div>
 
       <figure class="wide-diagram">
-        <figcaption>可逆圧縮と非可逆圧縮の比較</figcaption>
-        <pre><code>可逆 vs 非可逆
+        <figcaption>可逆圧縮と非可逆圧縮の比較：元データ→圧縮→展開の流れ</figcaption>
+        <svg viewBox="0 0 460 230" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="可逆圧縮（文字列・画像）は展開すると完全一致するが、非可逆圧縮（画像・音声）は展開すると劣化して元と異なることを示す比較図">
+          <defs>
+            <marker id="arrCv" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <text x="230" y="14" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e293b">可逆 vs 非可逆：元データ → 圧縮 → 展開</text>
 
-元データ ──→ 圧縮 ──→ 展開 ──→ ??
+          <!-- 可逆圧縮 見出し -->
+          <text x="20" y="42" font-size="11" font-weight="bold" fill="#1e3a5f">[可逆圧縮]</text>
+          <!-- row1: 文字列 -->
+          <text x="20" y="64" font-size="11" fill="#334155">文字列</text>
+          <line x1="65" y1="60" x2="93" y2="60" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <text x="98" y="64" font-size="11" fill="#334155">ZIP</text>
+          <line x1="123" y1="60" x2="151" y2="60" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <text x="156" y="64" font-size="11" fill="#334155">解凍</text>
+          <line x1="186" y1="60" x2="214" y2="60" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <rect x="218" y="48" width="100" height="26" rx="3" fill="#dcfce7" stroke="#16a34a" stroke-width="1.3"/>
+          <text x="268" y="65" text-anchor="middle" font-size="10" fill="#14532d">元の文字列＝完全一致</text>
+          <!-- row2: 画像（可逆） -->
+          <text x="20" y="92" font-size="11" fill="#334155">画像</text>
+          <line x1="65" y1="88" x2="93" y2="88" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <text x="98" y="92" font-size="11" fill="#334155">PNG</text>
+          <line x1="128" y1="88" x2="156" y2="88" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <text x="161" y="92" font-size="11" fill="#334155">表示</text>
+          <line x1="191" y1="88" x2="219" y2="88" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <rect x="223" y="76" width="100" height="26" rx="3" fill="#dcfce7" stroke="#16a34a" stroke-width="1.3"/>
+          <text x="273" y="93" text-anchor="middle" font-size="10" fill="#14532d">元の画像＝完全一致</text>
 
-[可逆圧縮]
-文字列 ──→ ZIP ──→ 解凍 ──→ 元の文字列  ←完全一致
-画像   ──→ PNG ──→ 表示 ──→ 元の画像    ←完全一致
+          <!-- 非可逆圧縮 見出し -->
+          <text x="20" y="134" font-size="11" font-weight="bold" fill="#92400e">[非可逆圧縮]</text>
+          <!-- row3: 画像（非可逆） -->
+          <text x="20" y="156" font-size="11" fill="#334155">画像</text>
+          <line x1="65" y1="152" x2="93" y2="152" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <text x="98" y="156" font-size="11" fill="#334155">JPEG</text>
+          <line x1="133" y1="152" x2="161" y2="152" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <text x="166" y="156" font-size="11" fill="#334155">表示</text>
+          <line x1="196" y1="152" x2="224" y2="152" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <rect x="228" y="140" width="110" height="26" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+          <text x="283" y="157" text-anchor="middle" font-size="10" fill="#92400e">近いけど違う＝劣化有</text>
+          <!-- row4: 音声（非可逆） -->
+          <text x="20" y="184" font-size="11" fill="#334155">音声</text>
+          <line x1="65" y1="180" x2="93" y2="180" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <text x="98" y="184" font-size="11" fill="#334155">MP3</text>
+          <line x1="128" y1="180" x2="156" y2="180" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <text x="161" y="184" font-size="11" fill="#334155">再生</text>
+          <line x1="191" y1="180" x2="219" y2="180" stroke="#64748b" stroke-width="1.3" marker-end="url(#arrCv)"/>
+          <rect x="223" y="168" width="110" height="26" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+          <text x="278" y="185" text-anchor="middle" font-size="10" fill="#92400e">近いけど違う＝劣化有</text>
 
-[非可逆圧縮]
-画像   ──→ JPEG ──→ 表示 ──→ 近いけど違う ←劣化有
-音声   ──→ MP3  ──→ 再生 ──→ 近いけど違う ←劣化有
-
-ポイント: 削る情報の基準にエントロピーが使われる</code></pre>
+          <text x="230" y="218" text-anchor="middle" font-size="11" fill="#475569">ポイント: 削る情報の基準にエントロピーが使われる</text>
+        </svg>
       </figure>
     </section>
 
@@ -194,22 +249,31 @@
 
       <figure class="wide-diagram">
         <figcaption>誤り訂正符号の仕組み</figcaption>
-        <pre><code>誤り訂正符号の仕組み
-
-送信側: データ 1011
-  └─ 符号化（冗長ビット追加）
-       1011 → 10110（偶数パリティ）
-          ↓
-通信路（ノイズでビット反転）
-          ↓
-受信側: 復号（誤り訂正）
-  10100 → 検出 → 10110 に訂正
-  └─ データ 1011 を復元
-
-方式           検出  訂正  使用例
-パリティ        ○    ×   RAM
-ハミング符号    ○    ○   メモリ
-LDPC/ターボ    ○    ○   Wi-Fi/5G/衛星</code></pre>
+        <svg viewBox="0 0 360 226" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="送信側でデータ1011を符号化して10110にし、通信路でノイズによりビット反転、受信側で誤りを検出・訂正してデータ1011を復元する流れ">
+          <defs>
+            <marker id="arrEc" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 送信側 -->
+          <rect x="30" y="10" width="300" height="56" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="180" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e3a5f">送信側: データ 1011</text>
+          <text x="180" y="48" text-anchor="middle" font-size="11" fill="#1e3a5f">符号化（冗長ビット追加）</text>
+          <text x="180" y="62" text-anchor="middle" font-size="11" fill="#1e3a5f">1011 → 10110（偶数パリティ）</text>
+          <!-- 矢印 -->
+          <line x1="180" y1="66" x2="180" y2="92" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrEc)"/>
+          <!-- 通信路 -->
+          <rect x="30" y="93" width="300" height="40" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="180" y="117" text-anchor="middle" font-size="12" fill="#92400e">通信路（ノイズでビット反転）</text>
+          <!-- 矢印 -->
+          <line x1="180" y1="133" x2="180" y2="159" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrEc)"/>
+          <!-- 受信側 -->
+          <rect x="30" y="160" width="300" height="56" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="180" y="180" text-anchor="middle" font-size="12" font-weight="bold" fill="#14532d">受信側: 復号（誤り訂正）</text>
+          <text x="180" y="198" text-anchor="middle" font-size="11" fill="#14532d">10100 → 検出 → 10110 に訂正</text>
+          <text x="180" y="212" text-anchor="middle" font-size="11" fill="#14532d">データ 1011 を復元</text>
+        </svg>
+      </figure>
       </figure>
 
       <h3>通信路容量</h3>
@@ -261,17 +325,38 @@ LDPC/ターボ    ○    ○   Wi-Fi/5G/衛星</code></pre>
 
       <figure class="wide-diagram">
         <figcaption>AIの学習とクロスエントロピー</figcaption>
-        <pre><code>AIの学習とクロスエントロピー
-
-画像入力（犬の写真）
-  └── モデル
-       └── 予測分布: 犬 0.7 / 猫 0.2 / 鳥 0.1
-            └── 正解ラベル: 犬 1.0 / 猫 0.0 / 鳥 0.0
-                 └── クロスエントロピー = 予測と正解のズレの量
-                      └── パラメータ調整 ← 損失を小さくする
-
-ポイント: AIは「不確実性を減らす」ように学習する</code></pre>
+        <svg viewBox="0 0 400 320" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="画像入力からモデル、予測分布、正解ラベル、クロスエントロピー計算、パラメータ調整へと続く5段階のフロー">
+          <defs>
+            <marker id="arrAi" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- 1. 画像入力 -->
+          <rect x="60" y="10" width="280" height="32" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="31" text-anchor="middle" font-size="12" fill="#14532d">画像入力（犬の写真）</text>
+          <line x1="200" y1="42" x2="200" y2="60" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrAi)"/>
+          <!-- 2. モデル -->
+          <rect x="60" y="61" width="280" height="32" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="82" text-anchor="middle" font-size="12" fill="#1e3a5f">モデル</text>
+          <line x1="200" y1="93" x2="200" y2="111" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrAi)"/>
+          <!-- 3. 予測分布 -->
+          <rect x="40" y="112" width="320" height="36" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="200" y="134" text-anchor="middle" font-size="11" fill="#1e3a5f">予測分布: 犬0.7 / 猫0.2 / 鳥0.1</text>
+          <line x1="200" y1="148" x2="200" y2="166" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrAi)"/>
+          <!-- 4. 正解ラベル -->
+          <rect x="40" y="167" width="320" height="36" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="200" y="189" text-anchor="middle" font-size="11" fill="#92400e">正解ラベル: 犬1.0 / 猫0.0 / 鳥0.0</text>
+          <line x1="200" y1="203" x2="200" y2="221" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrAi)"/>
+          <!-- 5. クロスエントロピー -->
+          <rect x="20" y="222" width="360" height="32" rx="4" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+          <text x="200" y="243" text-anchor="middle" font-size="11" fill="#1e1b4b">クロスエントロピー = 予測と正解のズレの量</text>
+          <line x1="200" y1="254" x2="200" y2="272" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrAi)"/>
+          <!-- 6. パラメータ調整 -->
+          <rect x="40" y="273" width="320" height="32" rx="16" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="200" y="294" text-anchor="middle" font-size="11" fill="#14532d">パラメータ調整 ← 損失を小さくする</text>
+        </svg>
       </figure>
+      <p>ポイント: AIは「不確実性を減らす」ように学習する</p>
     </section>
 
     <section id="statistics" class="lesson-section">
