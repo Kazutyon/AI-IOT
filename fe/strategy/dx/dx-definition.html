@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DXの定義と本質 | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Strategy / DX</p>
+        <h1>DXの定義と本質</h1>
+        <p class="lead">DX（デジタルトランスフォーメーション）の定義、IT化との違い、変革の対象レイヤー、失敗原因、前提条件を解説します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../index.html">ポータル</a>
+      <a href="index.html">DX</a>
+      <span>DXの定義と本質</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>DX（デジタルトランスフォーメーション）の公式定義</li>
+          <li>IT化（デジタル化）とDXの本質的な違い</li>
+          <li>DXが変革する4つのレイヤー（業務・組織・顧客体験・ビジネスモデル）</li>
+          <li>DXのプロセス（見える化 → データ化 → 分析 → 変革 → 価値創出）</li>
+          <li>DXの目的（競争力維持・環境適応・新価値創出）</li>
+          <li>DXが失敗する3つの典型パターン</li>
+          <li>DXの前提条件（データ基盤の整備）</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>DXの定義とIT化との違い / DXが変革する4つのレイヤー</dd></div>
+          <div><dt>中</dt><dd>DXのプロセス / DXの目的 / DXの失敗原因</dd></div>
+          <div><dt>低</dt><dd>DXの前提条件（データ基盤の詳細）</dd></div>
+        </dl>
+        <p>読了目安: 約12分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>DX（デジタルトランスフォーメーション）</td><td>デジタル技術でビジネスモデル・組織・文化を変革すること</td></tr>
+            <tr><td>2</td><td>IT化（デジタル化）</td><td>既存業務をデジタル技術で効率化すること（DXとは別物）</td></tr>
+            <tr><td>3</td><td>BPR（ビジネスプロセス・リエンジニアリング）</td><td>業務プロセスを根本から再設計すること</td></tr>
+            <tr><td>4</td><td>データ基盤</td><td>データを一元化・標準化・リアルタイム化するための土台</td></tr>
+            <tr><td>5</td><td>データ駆動型経営</td><td>データに基づいて意思決定を行う経営スタイル</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>1-1 DXの定義</h2>
+      <p>DX（デジタルトランスフォーメーション）とは、経済産業省「DX推進ガイドライン」において次のように定義されています。</p>
+      <blockquote>
+        <p><strong>「企業がビジネス環境の激しい変化に対応し、データとデジタル技術を活用して、製品・サービス・ビジネスモデルを変革するとともに、業務そのものや組織、プロセス、企業文化・風土を変革すること」</strong></p>
+      </blockquote>
+      <p>つまり、デジタル技術を活用して企業や社会の仕組み、働き方、ビジネスモデルを変革することを指します。</p>
+      <div class="callout warning">
+        <p><strong>よくある誤解：</strong>「ITシステムを導入すること＝DX」と考えられがちですが、単なるシステム導入やデジタル化だけではDXとは言えません。それは単なるIT化です。</p>
+      </div>
+
+      <h3>DXの本質とIT化との違い</h3>
+      <p>DXの本質は、ビジネスや社会に新しい価値を生み出すことにあります。DXが生み出す「価値」とは、業務の効率化、顧客体験の向上、新しいサービス・ビジネスの創出など、企業や社会にとってプラスの変化をもたらすことです。</p>
+      <p>DXを正しく理解するためには、「何を変えるのか」「どこまで変えるのか」を明確にする必要があります。</p>
+
+      <h3>DXが変革する対象（4つのレイヤー）</h3>
+      <p>DXは次の4つのレイヤーを変革します。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>レイヤー</th><th>内容</th><th>具体例</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>1. 業務プロセスの変革</strong><br>（オペレーション）</td>
+              <td>紙・Excel中心の作業をデジタル化。手作業や属人化を排除し、効率化・標準化を実現</td>
+              <td>IoTで現場データを自動収集、AIで作業を最適化</td>
+            </tr>
+            <tr>
+              <td><strong>2. 組織・働き方の変革</strong><br>（マネジメント）</td>
+              <td>データに基づく意思決定。リモートワークや柔軟な働き方</td>
+              <td>クラウドで情報共有、AIで判断支援</td>
+            </tr>
+            <tr>
+              <td><strong>3. 顧客体験の変革</strong><br>（サービス）</td>
+              <td>顧客ごとに最適化されたサービス提供</td>
+              <td>AIによるレコメンド、チャットボット対応</td>
+            </tr>
+            <tr>
+              <td><strong>4. ビジネスモデルの変革</strong><br>（経営）</td>
+              <td>製品販売からサービス提供へ。データを活用した新しい価値創出</td>
+              <td>サブスクモデル、データ駆動型サービス</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>→ DXとは「業務」だけでなく、組織・顧客体験・ビジネスモデルまで変える取り組みです。</p>
+
+      <h3>IT化とDXの違い（構造的な比較）</h3>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>観点</th><th>IT化（デジタル化）</th><th>DX（変革）</th></tr></thead>
+          <tbody>
+            <tr><td>目的</td><td>作業の効率化</td><td>価値創出・競争力強化</td></tr>
+            <tr><td>対象</td><td>既存業務</td><td>業務・組織・文化・ビジネスモデル</td></tr>
+            <tr><td>ゴール</td><td>現状の改善</td><td>将来の姿から逆算した変革</td></tr>
+            <tr><td>技術の役割</td><td>作業を自動化する道具</td><td>変革を実現する手段</td></tr>
+            <tr><td>変化の範囲</td><td>部署単位</td><td>企業全体・社会全体</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>→ IT化は"手段の改善"、DXは"仕組みの変革"です。</p>
+
+      <h3>DXのプロセス（変革の流れ）</h3>
+      <p>DXは次のステップで進みます。</p>
+
+      <figure class="wide-diagram">
+        <figcaption>DXのプロセス（5ステップ）</figcaption>
+        <svg viewBox="0 0 580 200" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-dx" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- ステップ1 -->
+          <rect x="10" y="10" width="96" height="80" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="58" y="40" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">見える化</text>
+          <text x="58" y="60" text-anchor="middle" font-size="10" fill="#475569">課題を明確化</text>
+          <text x="58" y="76" text-anchor="middle" font-size="10" fill="#475569">属人化・非効率を把握</text>
+          <!-- 矢印1 -->
+          <line x1="106" y1="50" x2="141" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-dx)"/>
+          <!-- ステップ2 -->
+          <rect x="144" y="10" width="106" height="80" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="197" y="40" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">データ化</text>
+          <text x="197" y="60" text-anchor="middle" font-size="10" fill="#475569">IoT・クラウドで</text>
+          <text x="197" y="76" text-anchor="middle" font-size="10" fill="#475569">データを収集・蓄積</text>
+          <!-- 矢印2 -->
+          <line x1="250" y1="50" x2="285" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-dx)"/>
+          <!-- ステップ3 -->
+          <rect x="288" y="10" width="96" height="80" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="336" y="40" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">分析</text>
+          <text x="336" y="60" text-anchor="middle" font-size="10" fill="#475569">AIでデータ分析</text>
+          <text x="336" y="76" text-anchor="middle" font-size="10" fill="#475569">予測・最適化</text>
+          <!-- 矢印3 -->
+          <line x1="384" y1="50" x2="419" y2="50" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-dx)"/>
+          <!-- ステップ4 -->
+          <rect x="422" y="10" width="96" height="80" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="470" y="40" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">変革</text>
+          <text x="470" y="60" text-anchor="middle" font-size="10" fill="#475569">業務・組織を</text>
+          <text x="470" y="76" text-anchor="middle" font-size="10" fill="#475569">再設計</text>
+          <!-- 矢印3.5（ステップ4→5） -->
+          <line x1="470" y1="90" x2="470" y2="100" stroke="#64748b" stroke-width="1.5"/>
+          <!-- ステップ5（下段） -->
+          <rect x="200" y="110" width="106" height="80" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="253" y="140" text-anchor="middle" font-size="13" font-weight="bold" fill="#14532d">価値創出</text>
+          <text x="253" y="160" text-anchor="middle" font-size="10" fill="#14532d">新サービス・</text>
+          <text x="253" y="176" text-anchor="middle" font-size="10" fill="#14532d">顧客体験向上</text>
+          <!-- 矢印4（ステップ4→5） -->
+          <path d="M 470,100 L 470,105 L 253,105 L 253,110" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-dx)"/>
+        </svg>
+      </figure>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>1. 現状の可視化（見える化）</td><td>課題を明確にする。属人化・紙業務・非効率を把握する。</td></tr>
+            <tr><td>2. データ化（IoT・クラウド）</td><td>現場の情報をデータとして収集。クラウドで蓄積・共有。</td></tr>
+            <tr><td>3. 分析（AI）</td><td>データを分析し、予測・最適化。判断の質を高める。</td></tr>
+            <tr><td>4. 業務・組織の変革（DX）</td><td>プロセスを再設計。標準化・自動化・高度化。</td></tr>
+            <tr><td>5. 新しい価値の創出</td><td>顧客体験の向上。新サービス・新事業の創出。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>→ IoT → クラウド → AI → DX は製造業などで典型的なパターン。既存の業務データや顧客データだけを使ったDXも多い。</p>
+
+      <h3>DXの目的（なぜ企業はDXを進めるのか）</h3>
+      <p>企業がDXに取り組む目的は、大きく3つに整理できます。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>目的</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>① 競争力の維持・強化</strong><br>（生き残りのため）</td>
+              <td>市場環境は急速に変化。顧客ニーズの多様化・デジタル競争の激化・海外企業との競争。従来のやり方のままでは競争力を維持できない。→ DXは「企業が生き残るための戦略」でもある。</td>
+            </tr>
+            <tr>
+              <td><strong>② 環境変化への適応</strong><br>（変化に強い組織づくり）</td>
+              <td>少子高齢化・働き方改革・AI・IoTの普及・顧客行動のデジタル化。これらの変化に対応するために、業務・組織・ビジネスモデルを柔軟に変えられる体制が必要。</td>
+            </tr>
+            <tr>
+              <td><strong>③ 新しい価値の創出</strong><br>（成長のため）</td>
+              <td>DXは効率化だけではない。新サービスの創出・データを活用した新ビジネス・顧客体験の向上。→ DXは企業の成長戦略でもある。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>DXが失敗する理由（典型パターン）</h3>
+      <p>DXは多くの企業が取り組んでいますが、思うような成果を出せていない企業も少なくありません。その理由は次の3つに集約されます。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>失敗パターン</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>① 技術導入が目的化している</strong><br>（AIを入れたい病）</td>
+              <td>「AIを使いたい」「IoTを導入したい」「クラウドに移行したい」など"技術ありき"のDXは必ず失敗する。DXの目的は技術導入ではなく、価値創出・変革だから。</td>
+            </tr>
+            <tr>
+              <td><strong>② 業務プロセスを変えない</strong><br>（仕組みが旧態依然）</td>
+              <td>紙のまま・属人化のまま・部署ごとにバラバラ・データが共有されない状態でAIやIoTを入れても効果は出ない。→ DXは業務の再設計（BPR）が前提。</td>
+            </tr>
+            <tr>
+              <td><strong>③ データが整備されていない</strong><br>（DXの材料不足）</td>
+              <td>DXの材料は「データ」。データが散在・Excelが乱立・システムが連携していない・データ形式がバラバラな状態では、AIもIoTも機能しない。→ データ基盤がないDXは成立しない。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>DXの前提条件（データ基盤の整備）</h3>
+      <p>DXを成功させるためには、技術よりも先にデータを扱える土台（データ基盤）が必要です。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>前提条件</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>① データの一元化</strong><br>（サイロ化の解消）</td>
+              <td>部署ごとにバラバラに管理されているデータを統合し、企業全体で共有できる状態にする。例：顧客データ・在庫データ・現場データなど</td>
+            </tr>
+            <tr>
+              <td><strong>② データの標準化</strong><br>（形式を揃える）</td>
+              <td>Excel・紙・システムごとに形式が違う状態では分析できない。→ データ形式を統一し、分析可能な形に整える。</td>
+            </tr>
+            <tr>
+              <td><strong>③ データのリアルタイム化</strong><br>（IoT・クラウド）</td>
+              <td>IoTで現場データを自動収集し、クラウドで即時共有。これにより「現場の状況を見ながら判断する」DXの基盤が整う。</td>
+            </tr>
+            <tr>
+              <td><strong>④ データ活用文化の醸成</strong><br>（人と組織の変革）</td>
+              <td>データがあっても使わなければ意味がない。データに基づく意思決定・現場がデータを使いこなす文化・データを共有する組織風土。→ DXは技術だけでなく「人と組織の変革」でもある。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「IT化＝DX」と誤解しないこと。</strong> IT化は「手段の改善」、DXは「仕組みの変革」です。システム導入自体が目的ではなく、ビジネスモデルや組織文化まで変えることがDXの本質です。</li>
+        <li><strong>「技術ありき」で始めないこと。</strong> AIやIoTを導入したいという動機だけでは失敗します。まず「何を変えたいのか」「どんな価値を生み出したいのか」を明確にしましょう。</li>
+        <li><strong>データ基盤を整備せずに技術導入しないこと。</strong> データがバラバラで品質が悪い状態では、AIもIoTも効果を発揮できません。データ基盤の整備がDXの前提条件です。</li>
+        <li><strong>業務プロセスを変えずにデジタル技術だけ入れても効果は出ないこと。</strong> 紙業務や属人化が残ったままでは、せっかくのシステムも活かせません。BPR（業務再設計）とセットで進める必要があります。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. DX（デジタルトランスフォーメーション）の定義として、最も適切なものはどれか。</summary>
+        <p>ア）新しいITシステムを導入して業務を効率化すること</p>
+        <p>イ）デジタル技術を活用して、ビジネスモデル・組織・文化を変革すること</p>
+        <p>ウ）紙の書類をすべて電子化すること</p>
+        <p>エ）AIやIoTなどの最新技術を導入すること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DXは単なるシステム導入やデジタル化ではなく、デジタル技術を活用してビジネスモデル・組織・企業文化まで変革する取り組みです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. DXとIT化（デジタル化）の違いに関する説明として、正しいものはどれか。</summary>
+        <p>ア）IT化は組織全体の変革を目指し、DXは部署単位の効率化を目指す</p>
+        <p>イ）IT化は"手段の改善"であり、DXは"仕組みの変革"である</p>
+        <p>ウ）IT化とDXは同じ意味であり、どちらも技術導入を指す</p>
+        <p>エ）DXは既存業務の効率化のみを目的とし、IT化は新事業創出を目的とする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — IT化は既存業務の効率化（手段の改善）にとどまるのに対し、DXは業務・組織・ビジネスモデルを変革する（仕組みの変革）ものです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. DXが変革する4つのレイヤーに含まれないものはどれか。</summary>
+        <p>ア）業務プロセス（オペレーション）</p>
+        <p>イ）組織・働き方（マネジメント）</p>
+        <p>ウ）ハードウェア（サーバ機器）</p>
+        <p>エ）ビジネスモデル（経営）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — DXが変革する4つのレイヤーは、「業務プロセス」「組織・働き方」「顧客体験」「ビジネスモデル」です。ハードウェア（サーバ機器）はDXの対象ではなく、あくまで手段です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. DXのプロセス（変革の流れ）として正しい順序はどれか。</summary>
+        <p>ア）データ化 → 見える化 → 分析 → 価値創出 → 変革</p>
+        <p>イ）見える化 → データ化 → 分析 → 変革 → 価値創出</p>
+        <p>ウ）変革 → 見える化 → データ化 → 分析 → 価値創出</p>
+        <p>エ）分析 → 見える化 → データ化 → 価値創出 → 変革</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — 正しい順序は「見える化（課題把握）→ データ化（収集・蓄積）→ 分析（AIで予測・最適化）→ 変革（業務・組織の再設計）→ 価値創出（新サービス・顧客体験向上）」です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. 企業がDXに取り組む目的として、正しくないものはどれか。</summary>
+        <p>ア）競争力の維持・強化（生き残りのため）</p>
+        <p>イ）環境変化への適応（変化に強い組織づくり）</p>
+        <p>ウ）最新技術の導入自体を目的とする</p>
+        <p>エ）新しい価値の創出（成長のため）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — DXの目的はあくまで「競争力維持」「環境適応」「新価値創出」であり、技術導入自体が目的になることはありません。技術はあくまで変革を実現する手段です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. DXが失敗する典型パターンとして、正しいものはどれか。</summary>
+        <p>ア）現場の意見を十分に反映させてシステムを導入する</p>
+        <p>イ）データ基盤を整備してからAIを導入する</p>
+        <p>ウ）技術導入が目的化し、「AIを入れたい」という理由で始める</p>
+        <p>エ）業務プロセスを再設計（BPR）してからDXに取り組む</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 「技術ありき」のDXは失敗します。DXの目的は価値創出・変革であり、技術はその手段に過ぎません。ア・イ・エはすべて成功のための正しいアプローチです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. DXの前提条件（データ基盤の整備）に関する説明として、正しいものはどれか。</summary>
+        <p>ア）データは部署ごとにバラバラに管理した方が活用しやすい</p>
+        <p>イ）データの一元化・標準化・リアルタイム化がDXの土台となる</p>
+        <p>ウ）データ基盤がなくてもAIさえ導入すればDXは成功する</p>
+        <p>エ）データ活用文化はDXが完了してから整備すればよい</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — データの一元化（サイロ化解消）・標準化（形式統一）・リアルタイム化（IoT・クラウド）がDXの前提条件です。データ基盤がないとAIもIoTも機能しません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. DXとIT化の変化の範囲に関する説明として、正しいものはどれか。</summary>
+        <p>ア）IT化は企業全体を対象とし、DXは部署単位を対象とする</p>
+        <p>イ）IT化もDXもどちらも企業全体を対象とする</p>
+        <p>ウ）IT化は部署単位、DXは企業全体・社会全体を対象とする</p>
+        <p>エ）IT化は社会全体、DXは部署単位を対象とする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — IT化は部署単位の効率化であるのに対し、DXは企業全体や社会全体を対象とした変革です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. DXのプロセスにおいて、「データを分析し、予測・最適化を行う」段階はどれか。</summary>
+        <p>ア）見える化</p>
+        <p>イ）データ化</p>
+        <p>ウ）分析</p>
+        <p>エ）変革</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — 「分析」の段階では、AIなどを用いてデータを分析し、予測や最適化を行い、判断の質を高めます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. 「業務プロセスを変えずにデジタル技術だけ導入しても効果が出ない」という問題に対して、DXでは何が前提とされているか。</summary>
+        <p>ア）最新のAIモデルの導入</p>
+        <p>イ）業務の再設計（BPR）</p>
+        <p>ウ）クラウド環境の整備</p>
+        <p>エ）社内の勉強会の開催</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — DXは業務の再設計（BPR）が前提です。紙業務や属人化が残ったままでは、デジタル技術を導入しても効果は発揮されません。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『DX概論.pdf』 第1章 DXとは何か（1-1: p2-p11）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

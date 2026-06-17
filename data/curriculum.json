@@ -656,6 +656,25 @@
         { "title": "マイナンバー制度と公金受取口座制度", "href": "fe/strategy/digital-society/mynumber-public-fund-account.html", "status": "done" },
         { "title": "デジタル庁の司令塔機能と企業実務", "href": "fe/strategy/digital-society/digital-agency-security-business.html", "status": "done" }
       ]
+    },
+    {
+      "id": "dx",
+      "title": "DX（デジタルトランスフォーメーション）概論",
+      "category": "strategy",
+      "status": "done",
+      "description": "DXの定義・事例・最新技術・戦略・データガバナンスを扱う分野。全9教材ページ完成。",
+      "href": "fe/strategy/dx/index.html",
+      "items": [
+        { "title": "DXの定義と本質", "href": "fe/strategy/dx/dx-definition.html", "status": "done" },
+        { "title": "DXの背景・政策・人材育成", "href": "fe/strategy/dx/dx-background-policy.html", "status": "done" },
+        { "title": "DXの種類・分類・技術関係・経営影響", "href": "fe/strategy/dx/dx-types-impact.html", "status": "done" },
+        { "title": "国内のDX事例", "href": "fe/strategy/dx/dx-domestic-cases.html", "status": "done" },
+        { "title": "海外のDX事例", "href": "fe/strategy/dx/dx-overseas-cases.html", "status": "done" },
+        { "title": "海外事例から学ぶ・DXセレクション・失敗事例・人材", "href": "fe/strategy/dx/dx-lessons-failures.html", "status": "done" },
+        { "title": "DXを支える最新技術", "href": "fe/strategy/dx/dx-technologies.html", "status": "done" },
+        { "title": "DX戦略の考え方", "href": "fe/strategy/dx/dx-strategy.html", "status": "done" },
+        { "title": "DXを支えるデータ活用とガバナンス", "href": "fe/strategy/dx/dx-data-governance.html", "status": "done" }
+      ]
     }
   ],
   "sources": [
@@ -736,6 +755,12 @@
       "category": "ストラテジ / デジタル社会",
       "status": "HTML化済み",
       "next": "全80ページ6教材ページHTML化完了。fe/strategy/digital-society/に配置"
+    },
+    {
+      "title": "DX概論.pdf",
+      "category": "ストラテジ / DX",
+      "status": "HTML化済み",
+      "next": "全129ページ9教材ページHTML化完了。fe/strategy/dx/に配置"
     }
   ]
 }

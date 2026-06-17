@@ -21,6 +21,7 @@ Update rules are defined in `HTMLIZATION-STATUS-RULES.md`.
 | `1_2_AIの_IoTセキュリティー.pdf` | done | `fe/technology/iot-security/` | All 5 lesson pages registered. 2026-06-16 |
 | `3_経営・戦略.pdf` | done | `fe/strategy/business-strategy/` | All 12 lesson pages registered. 2026-06-16 |
 | `1_Webサーバー・データベース概論.pdf` | done | `fe/technology/database/` | All 25 lesson pages registered. 2026-06-16 |
+| `DX概論.pdf` | done | `fe/strategy/dx/` | All 9 lesson pages registered. QC PASS (quiz:10 ans:10, no pre, no cn). 2026-06-17 / DeepSeek |
 
 ## Planned
 

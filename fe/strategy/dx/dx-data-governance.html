@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DXを支えるデータ活用とガバナンス | 基本情報技術者試験 対策ポータル</title>
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="site-header lesson-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">Strategy / DX</p>
+        <h1>DXを支えるデータ活用とガバナンス</h1>
+        <p class="lead">データドリブン経営の重要性、データ基盤の整備、データガバナンスとセキュリティ、AI倫理とプライバシー保護、継続的DXを支えるルールと文化を解説します。</p>
+      </div>
+      <nav class="study-map" aria-label="ページ内メニュー">
+        <a href="#terms">用語</a>
+        <a href="#main">解説</a>
+        <a href="#pitfalls">注意点</a>
+        <a href="#quiz">問題</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="lesson-page">
+    <nav class="breadcrumb" aria-label="パンくず">
+      <a href="../../index.html">ポータル</a>
+      <a href="index.html">DX</a>
+      <span>DXを支えるデータ活用とガバナンス</span>
+    </nav>
+
+    <section class="lesson-summary">
+      <div>
+        <h2>このページで覚えること</h2>
+        <ul class="check-list">
+          <li>データドリブン経営の定義と重要性</li>
+          <li>データ基盤（Data Platform）の整備要素</li>
+          <li>データガバナンスとセキュリティ対策</li>
+          <li>AI倫理とプライバシー保護（公平性・説明責任・透明性）</li>
+          <li>継続的DXを支えるルールと組織文化</li>
+        </ul>
+      </div>
+      <aside class="priority-box">
+        <h2>出題優先度</h2>
+        <dl>
+          <div><dt>高</dt><dd>データドリブン経営の定義 / データガバナンスの要素 / AI倫理の観点</dd></div>
+          <div><dt>中</dt><dd>データ基盤の整備要素 / セキュリティ対策</dd></div>
+          <div><dt>低</dt><dd>CDO（Chief Data Officer）の役割 / データ活用文化の詳細</dd></div>
+        </dl>
+        <p>読了目安: 約8分</p>
+      </aside>
+    </section>
+
+    <section id="terms" class="lesson-section">
+      <h2>試験に出る用語</h2>
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>No.</th><th>用語</th><th>一言</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>データドリブン経営</td><td>勘や経験ではなくデータに基づいて意思決定する経営スタイル</td></tr>
+            <tr><td>2</td><td>データ基盤（Data Platform）</td><td>データの収集・蓄積・加工・共有・分析を支える仕組み</td></tr>
+            <tr><td>3</td><td>データレイク</td><td>生データをそのまま保存する大規模ストレージ</td></tr>
+            <tr><td>4</td><td>データウェアハウス</td><td>分析用に加工・統合されたデータを保存するデータベース</td></tr>
+            <tr><td>5</td><td>データガバナンス</td><td>データの品質・信頼性・セキュリティを管理する統制仕組み</td></tr>
+            <tr><td>6</td><td>CDO（Chief Data Officer）</td><td>データ活用を統括する最高データ責任者</td></tr>
+            <tr><td>7</td><td>Explainable AI（XAI）</td><td>AIの判断根拠を人間が理解できる形で説明する技術</td></tr>
+            <tr><td>8</td><td>GDPR</td><td>EUの一般データ保護規則（個人情報保護に関する厳格な規制）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="main" class="lesson-section">
+      <h2>5-1 データドリブン経営の重要性</h2>
+      <p>DXの中心にあるのは「データの活用」です。これまでの経験や勘（いわゆる"KKD：勘・経験・度胸"）に基づく意思決定から、データに基づいた科学的・客観的な意思決定へと移行することが、企業の競争力を左右します。</p>
+
+      <p><strong>データドリブン経営とは</strong><br>
+      経営判断・業務改善・新規事業などを、リアルタイムに得られるデータを分析して行う経営スタイル。AIやBIツール（Business Intelligence）、ダッシュボードによる可視化がその基盤を支えます。</p>
+
+      <p><strong>事例（概要）</strong></p>
+      <ul>
+        <li><strong>小売業</strong>：POSデータを分析して在庫や仕入れを最適化</li>
+        <li><strong>製造業</strong>：IoTセンサーで稼働データを収集し、予防保全や品質管理に活用</li>
+        <li><strong>行政</strong>：オープンデータを分析して地域課題を可視化、政策立案に反映</li>
+      </ul>
+
+      <h3>データ活用のための基盤整備</h3>
+      <p>データを有効に使うには、収集・蓄積・加工・共有・分析を支える仕組みが必要です。この基盤を<strong>データ基盤（Data Platform）</strong>と呼びます。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>項目</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>データ収集</strong></td>
+              <td>IoTセンサー・業務システム・SNS・顧客接点などから多様なデータを収集</td>
+            </tr>
+            <tr>
+              <td><strong>データ蓄積</strong></td>
+              <td>クラウド上のデータレイクやデータウェアハウスに保存・統合</td>
+            </tr>
+            <tr>
+              <td><strong>データ加工</strong></td>
+              <td>異なる形式のデータを整理・変換し、AI学習やBI分析に使える形に整備</td>
+            </tr>
+            <tr>
+              <td><strong>データ共有</strong></td>
+              <td>部門や外部パートナーと安全に共有できる仕組みを整備</td>
+            </tr>
+            <tr>
+              <td><strong>分析・活用</strong></td>
+              <td>BIツール、AI分析、ダッシュボードなどを活用して可視化・意思決定へ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>特に<strong>クラウド技術</strong>は、スケーラブルでコスト効率の高いデータ基盤としてDXを支える要素となっています。</p>
+
+      <h2>5-2 データガバナンスとセキュリティ</h2>
+      <p>データを「資産」として扱うためには、ガバナンス（統制と管理の仕組み）が欠かせません。データの品質・信頼性・セキュリティを確保し、適切に扱うルールと体制を整える必要があります。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>観点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>データ品質管理</strong></td>
+              <td>正確性・完全性・一貫性を維持するためのチェック体制</td>
+            </tr>
+            <tr>
+              <td><strong>権限管理</strong></td>
+              <td>データへのアクセス権限を明確化し、不正利用を防止</td>
+            </tr>
+            <tr>
+              <td><strong>セキュリティ対策</strong></td>
+              <td>暗号化、アクセスログ管理、クラウド設定の適正化</td>
+            </tr>
+            <tr>
+              <td><strong>コンプライアンス</strong></td>
+              <td>個人情報保護法、GDPRなど法令を遵守</td>
+            </tr>
+            <tr>
+              <td><strong>データ責任者（CDO）</strong></td>
+              <td>Chief Data Officer（データ責任者）を中心に統括管理を行う</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>DX推進と同時にガバナンスを強化することが、企業の信頼性と持続的成長の両立につながります。</p>
+
+      <h2>5-3 AI倫理とプライバシー保護</h2>
+      <p>AIやデータ分析を活用する際には、技術的な精度だけでなく、社会的・倫理的側面も重要です。</p>
+
+      <div class="table-wrap mobile-card-table">
+        <table>
+          <thead><tr><th>観点</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>公平性</strong></td>
+              <td>AIの判断が偏見や差別を生まないようデータやアルゴリズムを点検</td>
+            </tr>
+            <tr>
+              <td><strong>説明責任</strong></td>
+              <td>AIの出力結果の根拠を説明できるようにする（Explainable AI）</td>
+            </tr>
+            <tr>
+              <td><strong>プライバシー保護</strong></td>
+              <td>個人情報や行動履歴の取り扱いを透明化し、同意を明確にする</td>
+            </tr>
+            <tr>
+              <td><strong>倫理ガイドライン</strong></td>
+              <td>政府・業界団体のAI倫理原則（例：信頼できるAI、透明性）に準拠</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>AI倫理の遵守は、単なるリスク回避ではなく、「社会的信頼を得るDX」を実現するための前提条件です。</p>
+
+      <h2>5-4 継続的DXを支えるルールと文化</h2>
+      <p>DXは一度の導入で終わるものではなく、改善・進化を続けるプロセスです。そのためには、データ活用・情報共有・挑戦を支える組織文化とルール作りが重要です。</p>
+
+      <p><strong>データ文化の醸成</strong></p>
+      <ul>
+        <li>部門を超えてデータを共有・分析する風土をつくる</li>
+        <li>「データに基づく対話と意思決定」を日常業務に組み込む</li>
+      </ul>
+
+      <p><strong>ルールと体制</strong></p>
+      <ul>
+        <li>データ活用ポリシー、セキュリティガイドライン、AI倫理規範を整備</li>
+        <li>DX推進委員会などの継続的なフォーラムを設け、改善を継続</li>
+      </ul>
+      <p>DXの成功は、最終的に<strong>「データを信頼し、共に使いこなす組織文化」</strong>にかかっています。</p>
+
+      <!-- データ活用とガバナンスの全体関係図 -->
+      <figure class="wide-diagram">
+        <figcaption>データ活用とガバナンスの全体像</figcaption>
+        <svg viewBox="0 0 460 300" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-dg" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+            </marker>
+          </defs>
+          <!-- データドリブン経営（最上位） -->
+          <rect x="110" y="10" width="240" height="40" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+          <text x="230" y="35" text-anchor="middle" font-size="14" font-weight="bold" fill="#14532d">データドリブン経営</text>
+          <!-- 矢印 -->
+          <line x1="230" y1="50" x2="230" y2="80" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-dg)"/>
+          <!-- データ基盤 -->
+          <rect x="60" y="85" width="340" height="45" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+          <text x="230" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e3a5f">データ基盤（Data Platform）</text>
+          <text x="230" y="123" text-anchor="middle" font-size="10" fill="#475569">収集・蓄積・加工・共有・分析</text>
+          <!-- 矢印（分岐） -->
+          <line x1="230" y1="130" x2="230" y2="160" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="80" y1="160" x2="380" y2="160" stroke="#64748b" stroke-width="1.5"/>
+          <line x1="80" y1="160" x2="80" y2="190" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-dg)"/>
+          <line x1="230" y1="160" x2="230" y2="190" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-dg)"/>
+          <line x1="380" y1="160" x2="380" y2="190" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr-dg)"/>
+          <!-- 下段3要素 -->
+          <rect x="10" y="195" width="140" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="80" y="218" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">データガバナンス</text>
+          <text x="80" y="235" text-anchor="middle" font-size="10" fill="#92400e">品質・権限・セキュリティ</text>
+
+          <rect x="160" y="195" width="140" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="230" y="218" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">AI倫理・プライバシー</text>
+          <text x="230" y="235" text-anchor="middle" font-size="10" fill="#92400e">公平性・説明責任・透明性</text>
+
+          <rect x="310" y="195" width="140" height="50" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+          <text x="380" y="218" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">組織文化・ルール</text>
+          <text x="380" y="235" text-anchor="middle" font-size="10" fill="#92400e">データ文化・継続的改善</text>
+          <!-- 下段中央下に注記 -->
+          <text x="230" y="280" text-anchor="middle" font-size="11" fill="#64748b">→ 継続的DXを支える基盤</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section id="pitfalls" class="lesson-section">
+      <h2>間違えやすいポイント</h2>
+      <ul class="mistake-list">
+        <li><strong>「データドリブン経営」と「データ活用」を混同しないこと。</strong> データドリブン経営は経営判断の中心にデータを据えるスタイルであり、単なるデータ活用（分析・可視化）とは異なります。経営層のコミットメントが不可欠です。</li>
+        <li><strong>データ基盤とデータガバナンスは別物であること。</strong> データ基盤は技術的インフラ、データガバナンスは管理体制・ルールです。両方を整備して初めてデータが有効に活用できます。</li>
+        <li><strong>AI倫理は「オプション」ではなく「必須」であること。</strong> 公平性・説明責任・プライバシー保護を考慮しないAI導入は、社会的信頼を損ない、結果的にDXの失敗につながります。</li>
+        <li><strong>CDO（Chief Data Officer）はIT部門の責任者ではないこと。</strong> CDOはデータ活用全体を統括する経営層のポジションであり、データ戦略・ガバナンス・文化醸成を担います。CIO（情報システム責任者）とは役割が異なります。</li>
+        <li><strong>DXは「導入して終わり」ではないこと。</strong> DXは継続的な改善プロセスです。データ活用文化の醸成やルールの見直しを継続的に行うことが成功の鍵です。</li>
+      </ul>
+    </section>
+
+    <section id="quiz" class="lesson-section">
+      <h2>確認問題</h2>
+
+      <details class="quiz-card">
+        <summary>Q1. データドリブン経営に関する説明として、正しいものはどれか。</summary>
+        <p>ア）経験や勘に基づいて経営判断を行うスタイル</p>
+        <p>イ）リアルタイムのデータを分析して経営判断・業務改善を行うスタイル</p>
+        <p>ウ）すべての意思決定をAIに委ねるスタイル</p>
+        <p>エ）データを収集すること自体が目的のスタイル</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — データドリブン経営はリアルタイムのデータを分析して経営判断・業務改善を行うスタイルです。アは従来のKKD（勘・経験・度胸）経営、ウやエは誤りです。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q2. データ基盤（Data Platform）の整備要素として、正しくないものはどれか。</summary>
+        <p>ア）データ収集</p>
+        <p>イ）データ蓄積</p>
+        <p>ウ）データの廃棄</p>
+        <p>エ）データ共有</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — データ基盤の整備要素は「収集・蓄積・加工・共有・分析」です。「データの廃棄」は整備要素には含まれません（データライフサイクルの一部ではありますが）。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q3. データガバナンスの構成要素として、正しくないものはどれか。</summary>
+        <p>ア）データ品質管理</p>
+        <p>イ）権限管理</p>
+        <p>ウ）データ量の最大化</p>
+        <p>エ）コンプライアンス（法令遵守）</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — データガバナンスの構成要素は「データ品質管理」「権限管理」「セキュリティ対策」「コンプライアンス」「データ責任者の設置」です。データ量の最大化はガバナンスの目的ではありません。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q4. CDO（Chief Data Officer）の役割として、正しいものはどれか。</summary>
+        <p>ア）システム開発の実装を担当する</p>
+        <p>イ）データ活用全体を統括し、データ戦略・ガバナンスを担う</p>
+        <p>ウ）社内のネットワーク管理を担当する</p>
+        <p>エ）AIモデルのプログラミングを担当する</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — CDOはデータ活用全体を統括する経営層のポジションで、データ戦略・ガバナンス・文化醸成を担います。CIO（情報システム責任者）とは役割が異なります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q5. AI倫理の観点として、正しくないものはどれか。</summary>
+        <p>ア）公平性（偏見や差別を生まない）</p>
+        <p>イ）説明責任（判断根拠を説明できる）</p>
+        <p>ウ）プライバシー保護（個人情報の適切な取り扱い）</p>
+        <p>エ）AIの判断をすべてブラックボックスにする</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>エ</strong> — AI倫理では「説明責任（Explainable AI）」が重視され、判断根拠を説明できるようにすることが求められます。ブラックボックス化は倫理的課題です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q6. GDPR（一般データ保護規則）に関する説明として、正しいものはどれか。</summary>
+        <p>ア）日本の個人情報保護法の通称である</p>
+        <p>イ）EUの厳格な個人情報保護規制である</p>
+        <p>ウ）アメリカのデータ保護法である</p>
+        <p>エ）AIの倫理ガイドラインである</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — GDPR（General Data Protection Regulation）はEUの一般データ保護規則で、個人情報保護に関する厳格な規制です。日本の個人情報保護法とは別物です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q7. Explainable AI（XAI）の目的として、正しいものはどれか。</summary>
+        <p>ア）AIの処理速度を向上させること</p>
+        <p>イ）AIの判断根拠を人間が理解できる形で説明すること</p>
+        <p>ウ）AIの精度を最大化すること</p>
+        <p>エ）AIの開発コストを削減すること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — Explainable AI（XAI）はAIの判断根拠を人間が理解できる形で説明することを目的としています。説明責任を果たすための重要な概念です。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q8. 継続的DXを支えるために必要な組織文化として、正しいものはどれか。</summary>
+        <p>ア）部門を超えてデータを共有・分析する文化</p>
+        <p>イ）データは一部の専門家だけが扱う文化</p>
+        <p>ウ）一度決めたルールは絶対に変更しない文化</p>
+        <p>エ）新しい技術の導入をすべて拒否する文化</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ア</strong> — 継続的DXを支えるには「部門を超えてデータを共有・分析する文化」と「データに基づく対話と意思決定」が重要です。情報を閉じず、改善を継続する姿勢が求められます。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q9. データガバナンスを強化する目的として、正しいものはどれか。</summary>
+        <p>ア）データを無制限に収集すること</p>
+        <p>イ）データの品質・信頼性・セキュリティを確保し、適切に管理すること</p>
+        <p>ウ）すべてのデータを公開すること</p>
+        <p>エ）データの分析を禁止すること</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>イ</strong> — データガバナンスはデータの品質・信頼性・セキュリティを確保し、適切に管理するための統制仕組みです。DX推進と同時にガバナンスを強化することが信頼性と持続的成長につながります。</p>
+        </details>
+      </details>
+
+      <details class="quiz-card">
+        <summary>Q10. DXの成功が最終的にかかっている要素として、最も適切なものはどれか。</summary>
+        <p>ア）最新のAIモデルの導入</p>
+        <p>イ）大規模なデータセンターの構築</p>
+        <p>ウ）「データを信頼し、共に使いこなす組織文化」</p>
+        <p>エ）多額のIT投資予算</p>
+        <details class="answer-toggle">
+          <summary>答えを見る ▼</summary>
+          <p>答え: <strong>ウ</strong> — DXの成功は最終的に「データを信頼し、共に使いこなす組織文化」にかかっています。技術や予算だけでなく、人と組織の変革が最も重要です。</p>
+        </details>
+      </details>
+    </section>
+
+    <section id="sources" class="source-note">
+      <h2>出典PDF・対応ページ</h2>
+      <p>『DX概論.pdf』 第5章 DXを支えるデータ活用とガバナンス（5-1〜5-4: p125-p129）</p>
+    </section>
+  </main>
+  <script data-goatcounter="https://kazutyon.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

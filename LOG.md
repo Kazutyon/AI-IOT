@@ -1,5 +1,21 @@
 # LOG — AI-IOT FE Study Portal
 
+## 2026-06-17 DeepSeek — DX概論教材 HTML化・AI-IOTプロジェクト統合
+
+- 内容:
+  - `D:\vs_code\DX概論\` の9つのHTMLファイル（01.html〜09.html）をAI-IOTプロジェクトへ組み込み
+  - ファイル名を分割.txtの推奨名に変換（dx-definition, dx-background-policy, dx-types-impact, dx-domestic-cases, dx-overseas-cases, dx-lessons-failures, dx-technologies, dx-strategy, dx-data-governance）
+  - 配置先: `fe/strategy/dx/`
+  - CSSパス修正: `../../../assets/style.css` → `../../assets/style.css`
+  - パンくずパス修正: `../../../index.html` → `../../index.html`
+  - `index.html`（セクションポータル）を作成
+  - `README.md`（Statusブロック付き）を作成
+  - `data/curriculum.json` にDXセクション（id: dx, strategyカテゴリ, 9教材）を追加
+  - `data/curriculum.json` のsourcesに DX概論.pdf を追加
+  - `PDF-FOLDER-MAP.md` にDX概論.pdfを追加
+- QC: 全9ファイル PASS（`<tr>`/`</tr>`数一致, `<table>`/`</table>`数一致, quiz:10 ans:10, `<pre>`なし, 中国語混入なし, 重複idなし）
+- 再発防止: `AI-RULES.md` に「execute_commandで複数ファイルの一括処理・長いインラインスクリプトを実行しない」ルールを追加（PowerShellワンライナー固まり事故の教訓）
+
 ## 2026-06-16 Claude — ASCII箱図崩壊・タグ取り違えを教訓として記録
 
 - 背景: HTML化作業全体で最も時間がかかった修正（ASCII箱図のスマホ崩壊、19件の仕事票でSVG化）と、頻発していたHTML表タグの閉じ忘れ・取り違えが、どこにも予防ルールとして記録されていなかった。
