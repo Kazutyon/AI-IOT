@@ -21,14 +21,15 @@ Update rules are defined in `HTMLIZATION-STATUS-RULES.md`.
 | `1_2_AIの_IoTセキュリティー.pdf` | done | `fe/technology/iot-security/` | All 5 lesson pages registered. 2026-06-16 |
 | `3_経営・戦略.pdf` | done | `fe/strategy/business-strategy/` | All 12 lesson pages registered. 2026-06-16 |
 | `1_Webサーバー・データベース概論.pdf` | done | `fe/technology/database/` | All 25 lesson pages registered. 2026-06-16 |
+| `2_関連法令・契約.pdf` | done | `fe/strategy/legal/` | All 11 lesson pages registered. 2026-06-16 |
+| `3_デジタル社会の形成について.pdf` | done | `fe/strategy/digital-society/` | All 6 lesson pages registered. 2026-06-16 |
 | `DX概論.pdf` | done | `fe/strategy/dx/` | All 9 lesson pages registered. QC PASS (quiz:10 ans:10, no pre, no cn). 2026-06-17 / DeepSeek |
 
 ## Planned
 
 | PDF | Status | Target folder | Notes |
 |---|---|---|---|
-| `2_関連法令・契約.pdf` | planned | `fe/strategy/legal/` | Split into intellectual property, personal information protection, security laws, contracts. |
-| `3_デジタル社会の形成について.pdf` | planned | `fe/strategy/digital-society/` | Split into Digital Agency, standardization, government cloud, digital society laws. |
+| （なし） | — | — | — |
 
 ## Folder Rule
 

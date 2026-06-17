@@ -16,6 +16,11 @@ $sectionMap = @{
     'computer'          = 'コンピュータ概論'
     'management'        = 'マネジメント'
     'business-strategy' = 'ストラテジ'
+    'database'          = 'データベース'
+    'iot-security'      = 'IoTセキュリティ'
+    'legal'             = '法令・契約'
+    'digital-society'   = 'デジタル社会'
+    'dx'                = 'DX概論'
 }
 
 # スキップする見出し（汎用すぎて検索に不要なもの）

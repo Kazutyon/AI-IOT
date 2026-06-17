@@ -256,6 +256,1750 @@
     ]
   },
   {
+    "term": "アナログ規制とは",
+    "summary": "行政手続きや業務において、紙・押印・対面・FAX・現地確認など「アナログ前提」のルールが残っている状態を指します。これらはデジタル化の妨げとなり、住民や企業の負担が大きいという課題がありました。",
+    "url": "fe/strategy/digital-society/analog-regulation-technology-map.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "見直しの方向性と最新動向",
+    "summary": "政府は、デジタル化を妨げるアナログ前提のルールを一括で廃止・緩和し、オンラインで完結できる制度へ転換しています。",
+    "url": "fe/strategy/digital-society/analog-regulation-technology-map.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "テクノロジーマップの役割",
+    "summary": "政府は「技術を前提に規制を作り替える」方針を掲げています。その際、どの技術がどの規制の代わりになり得るかを分野ごとに整理したものが「テクノロジーマップ」です。",
+    "url": "fe/strategy/digital-society/analog-regulation-technology-map.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "AI・IoTが活用された規制緩和の事例",
+    "summary": "政府は、いきなり規制を変えるのではなく、次のような段階的な仕組みを使って進めています。",
+    "url": "fe/strategy/digital-society/analog-regulation-technology-map.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "規制改革を支える段階的な仕組み",
+    "summary": "政府は、いきなり規制を変えるのではなく、次のような段階的な仕組みを使って進めています。",
+    "url": "fe/strategy/digital-society/analog-regulation-technology-map.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "データ標準化とベースレジストリ整備",
+    "summary": "従来の行政システムは、自治体や省庁ごとにデータ形式がバラバラで、連携が困難でした。これを解消するため、国は「データ標準化」を推進し、正確な基礎データを一元管理する「ベースレジストリ」を整備しています。",
+    "url": "fe/strategy/digital-society/data-standardization-gov-cloud.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "データ標準化の5つの項目",
+    "summary": "データ標準化は、システム基盤である「ガバメントクラウド」とセットで進められます。国が指定したクラウド事業者（AWS, GCP, Azure等）を利用し、全国共通の仕様でシステムを稼働させることで...",
+    "url": "fe/strategy/digital-society/data-standardization-gov-cloud.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "ガバメントクラウドとの関係",
+    "summary": "データ標準化は、システム基盤である「ガバメントクラウド」とセットで進められます。国が指定したクラウド事業者（AWS, GCP, Azure等）を利用し、全国共通の仕様でシステムを稼働させることで...",
+    "url": "fe/strategy/digital-society/data-standardization-gov-cloud.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "主なメリットと連携技術",
+    "summary": "ア）すべての行政データをインターネット上で一般公開するイ）自治体や省庁ごとにバラバラなデータ形式を統一し、連携を容易にするウ）紙の書類をすべてスキャンして画像データとして保存するエ）個人情報を含...",
+    "url": "fe/strategy/digital-society/data-standardization-gov-cloud.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "デジタル庁の司令塔機能とシステム統一・標準化",
+    "summary": "デジタル庁は、国・自治体のデジタル政策を統括する「司令塔（コントロールタワー）」として設置されました。その中心となる役割は、行政システムの統一・標準化を進め、国全体のデジタル基盤を整えることです。",
+    "url": "fe/strategy/digital-society/digital-agency-security-business.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "国・自治体の情報システム統括管理",
+    "summary": "従来、国と自治体はそれぞれが独自にシステムを構築していたため、仕様のバラつきやデータ連携の困難さ、コストの増大が課題でした。デジタル庁はこれを改め、共通仕様の策定やデータ標準化、システムの統一方...",
+    "url": "fe/strategy/digital-society/digital-agency-security-business.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "予算の一括計上とガバメントクラウド移行",
+    "summary": "従来は各省庁がバラバラにシステム予算を計上していましたが、デジタル庁がデジタル関連予算を一括計上・横串管理することで、重複投資の削減や省庁間の調整コストを削減しています。また、行政システムをガバ...",
+    "url": "fe/strategy/digital-society/digital-agency-security-business.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "民間企業との協働（アジャイル調達）",
+    "summary": "デジタル庁は、従来の「仕様書を作って丸投げする調達」ではなく、民間企業と協働しながら作るアジャイル型調達を採用しています。小さく作って改善を繰り返すことで、利用者の声を反映しやすく、開発スピード...",
+    "url": "fe/strategy/digital-society/digital-agency-security-business.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "サイバーセキュリティ基本法との関わり",
+    "summary": "デジタル社会形成基本法とサイバーセキュリティ基本法は、車の両輪として機能しています。",
+    "url": "fe/strategy/digital-society/digital-agency-security-business.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "デジタル庁のセキュリティ監督機能",
+    "summary": "サイバーセキュリティ基本法では、国の情報システムのセキュリティ確保について、デジタル庁が中心的な役割を担うことが明記されています。具体的には、セキュリティ方針の策定、行政機関の対策統一、ガバメン...",
+    "url": "fe/strategy/digital-society/digital-agency-security-business.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "企業が求められる最低限の姿勢",
+    "summary": "サイバーセキュリティ基本法は民間企業にも一定の責務を求めており、特に行政システムと連携する企業は以下の体制整備が求められます。",
+    "url": "fe/strategy/digital-society/digital-agency-security-business.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "デジタル政策が企業実務に与える影響",
+    "summary": "国のデジタル政策が進展することで、民間企業のIT実務にも大きな変化が起きています。",
+    "url": "fe/strategy/digital-society/digital-agency-security-business.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "制度が変わると、企業の仕事も変わる",
+    "summary": "制度も技術も変わり続けるため、今の細かい仕様を覚えてもすぐ陳腐化します。大事なのは、「制度が何を目指しているか」「それが企業の仕事にどう影響するか」「どんな方向の知識が必要になりそうか」という“...",
+    "url": "fe/strategy/digital-society/digital-agency-security-business.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "国民への具体的なメリット",
+    "summary": "ア）すべての行政手続きを完全無人化するイ）社会全体をデジタル化し、安全・便利で持続可能な社会を作ることウ）民間企業のIT投資を国が全額負担することエ）紙の書類を完全に廃止し、デジタルのみを合法と...",
+    "url": "fe/strategy/digital-society/digital-society-digital-agency.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "マイナンバー制度の拡張と情報連携の高度化",
+    "summary": "マイナンバー制度は、当初の「税・社会保障・災害対策」から利用範囲を段階的に拡大し、行政手続きの効率化を進める仕組みへと発展しています。",
+    "url": "fe/strategy/digital-society/mynumber-public-fund-account.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "利用範囲の拡大",
+    "summary": "主務省令の改正により、次のような分野でも本人確認・情報照会の効率化に利用されるようになっています。",
+    "url": "fe/strategy/digital-society/mynumber-public-fund-account.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "主務省令による情報連携の迅速化",
+    "summary": "行政機関同士が情報をやり取りする際のルールは、主務省令で細かく定められています。「どの機関が・どの情報を・どの目的で・どのタイミングで連携できるか」を省令で定めることで、手作業での照会が不要にな...",
+    "url": "fe/strategy/digital-society/mynumber-public-fund-account.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "マイナポータルでの連携記録確認",
+    "summary": "行政機関同士が情報をやり取りした際の記録を、本人がマイナポータルで確認できる仕組みがあります。これにより、透明性の確保、不正利用の防止、本人によるチェック機能が実現しています。",
+    "url": "fe/strategy/digital-society/mynumber-public-fund-account.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "公金受取口座制度と給付金デジタル化",
+    "summary": "公金受取口座制度は、住民があらかじめ「自分の給付金受取用の口座」を登録しておくことで、給付金や助成金を支給する際に、毎回口座情報を申請させるのではなく、登録済みの口座に自動で振り込めるようにする...",
+    "url": "fe/strategy/digital-society/mynumber-public-fund-account.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "行政機関経由登録の特例制度",
+    "summary": "本来、公金受取口座の登録はマイナポータルから本人が行うのが基本ですが、高齢者やデジタルに不慣れな人もいるため、市区町村などの行政機関が、窓口で本人の申請を受けて代わりに登録できる特例が設けられて...",
+    "url": "fe/strategy/digital-society/mynumber-public-fund-account.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "API連携・本人確認（EKYC）との関係",
+    "summary": "公金受取口座の登録・確認には、金融機関とのAPI連携やオンライン本人確認（EKYC）が関わります。口座名義と本人情報の一致確認、口座の有効性確認をシステム間連携で行うことで、手作業による確認を減...",
+    "url": "fe/strategy/digital-society/mynumber-public-fund-account.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "AI・IoTが活用され、実際に規制が緩和された事例",
+    "summary": "政府は「技術を前提に規制を作り替える」方針のもと、AI・IoTを活用して安全性が確保できる場合は、従来の規制を緩和しています。代表的な3つの事例を紹介します。",
+    "url": "fe/strategy/digital-society/regulation-reform-examples.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "各ステップの詳細",
+    "summary": "ア）足場を組んで人が近接目視する義務を強化したイ）ドローンで外壁を撮影し、AIがひび割れを自動検出する遠隔点検を認めたウ）外壁点検を完全に廃止し、建て替えのみを義務付けたエ）紙の点検記録を10年...",
+    "url": "fe/strategy/digital-society/regulation-reform-examples.html",
+    "tags": [
+      "デジタル社会"
+    ]
+  },
+  {
+    "term": "1-2 DXが注目される背景",
+    "summary": "近年、企業や国がDXに注目する背景には、いくつかの社会的・技術的要因があります。",
+    "url": "fe/strategy/dx/dx-background-policy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "社会的背景",
+    "summary": "これらの変化に対応するため、企業はデジタル技術を活用して業務やサービスを変革する必要があります。",
+    "url": "fe/strategy/dx/dx-background-policy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "技術的背景",
+    "summary": "これらの変化に対応するため、企業はデジタル技術を活用して業務やサービスを変革する必要があります。",
+    "url": "fe/strategy/dx/dx-background-policy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1-3 国のDX推進政策",
+    "summary": "日本ではDX推進のためにデジタル庁が設立され、行政や企業のデジタル化を加速させています。",
+    "url": "fe/strategy/dx/dx-background-policy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1-3-1 行政手続きのオンライン化",
+    "summary": "日本ではDX推進のためにデジタル庁が設立され、行政や企業のデジタル化を加速させています。",
+    "url": "fe/strategy/dx/dx-background-policy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1-3-2 経済産業省による企業DX推進施策",
+    "summary": "日本では、行政のデジタル化（デジタル庁）だけでなく、企業のDXを後押しする制度も整備されています。その中心となるのが、経済産業省が実施する DX認定制度 と DXセレクション です。",
+    "url": "fe/strategy/dx/dx-background-policy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1-4 デジタル人材の育成",
+    "summary": "社会人や企業の従業員がDXに必要なスキルを身につけるための施策。具体例として 「第四次産業革命スキル習得講座（Reスキル講座）」 があります。",
+    "url": "fe/strategy/dx/dx-background-policy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1-5 民間教育機関の活用例",
+    "summary": "例えば、まなクルの「IoT・AIエンジニア養成講座」は、経済産業省の第四次産業革命スキル習得講座（Reスキル講座）の認定コースの一つです。",
+    "url": "fe/strategy/dx/dx-background-policy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1-6 官民連携によるDX事例の創出",
+    "summary": "DXを進めるには、国や自治体だけでなく、民間企業と連携することも重要です。代表的な事例として以下があります。",
+    "url": "fe/strategy/dx/dx-background-policy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "データ活用のための基盤整備",
+    "summary": "データを有効に使うには、収集・蓄積・加工・共有・分析を支える仕組みが必要です。この基盤をデータ基盤（Data Platform）と呼びます。",
+    "url": "fe/strategy/dx/dx-data-governance.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "5-2 データガバナンスとセキュリティ",
+    "summary": "データを「資産」として扱うためには、ガバナンス（統制と管理の仕組み）が欠かせません。データの品質・信頼性・セキュリティを確保し、適切に扱うルールと体制を整える必要があります。",
+    "url": "fe/strategy/dx/dx-data-governance.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "5-3 AI倫理とプライバシー保護",
+    "summary": "AIやデータ分析を活用する際には、技術的な精度だけでなく、社会的・倫理的側面も重要です。",
+    "url": "fe/strategy/dx/dx-data-governance.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "5-4 継続的DXを支えるルールと文化",
+    "summary": "DXは一度の導入で終わるものではなく、改善・進化を続けるプロセスです。そのためには、データ活用・情報共有・挑戦を支える組織文化とルール作りが重要です。",
+    "url": "fe/strategy/dx/dx-data-governance.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1-1 DXの定義",
+    "summary": "DX（デジタルトランスフォーメーション）とは、経済産業省「DX推進ガイドライン」において次のように定義されています。",
+    "url": "fe/strategy/dx/dx-definition.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "DXの本質とIT化との違い",
+    "summary": "DXの本質は、ビジネスや社会に新しい価値を生み出すことにあります。DXが生み出す「価値」とは、業務の効率化、顧客体験の向上、新しいサービス・ビジネスの創出など、企業や社会にとってプラスの変化をも...",
+    "url": "fe/strategy/dx/dx-definition.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "DXが変革する対象（4つのレイヤー）",
+    "summary": "DXは次の4つのレイヤーを変革します。",
+    "url": "fe/strategy/dx/dx-definition.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "IT化とDXの違い（構造的な比較）",
+    "summary": "→ IT化は\"手段の改善\"、DXは\"仕組みの変革\"です。",
+    "url": "fe/strategy/dx/dx-definition.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "DXのプロセス（変革の流れ）",
+    "summary": "DXは次のステップで進みます。",
+    "url": "fe/strategy/dx/dx-definition.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "DXの目的（なぜ企業はDXを進めるのか）",
+    "summary": "企業がDXに取り組む目的は、大きく3つに整理できます。",
+    "url": "fe/strategy/dx/dx-definition.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "DXが失敗する理由（典型パターン）",
+    "summary": "DXは多くの企業が取り組んでいますが、思うような成果を出せていない企業も少なくありません。その理由は次の3つに集約されます。",
+    "url": "fe/strategy/dx/dx-definition.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "DXの前提条件（データ基盤の整備）",
+    "summary": "DXを成功させるためには、技術よりも先にデータを扱える土台（データ基盤）が必要です。",
+    "url": "fe/strategy/dx/dx-definition.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "第2章 DXの国内外事例",
+    "summary": "デジタルトランスフォーメーション（DX）は、単に新しい技術を導入するだけでなく、「ビジネスモデルの変革」「社会課題の解決」「働き方の改善」など、さまざまな分野に広がっています。",
+    "url": "fe/strategy/dx/dx-domestic-cases.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "2-1 国内のDX事例",
+    "summary": "日本でも、さまざまな業界でDXが進んでいます。ここでは、製造業・金融業・小売業・自治体の4つの代表的な分野を見ていきましょう。",
+    "url": "fe/strategy/dx/dx-domestic-cases.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "国内事例の共通点",
+    "summary": "日本のDX事例には、いくつかの共通した特徴があります。",
+    "url": "fe/strategy/dx/dx-domestic-cases.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "国内事例の総括",
+    "summary": "①日本企業がDXで直面している共通課題",
+    "url": "fe/strategy/dx/dx-domestic-cases.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "2-4 海外事例から学べること",
+    "summary": "海外のDX事例からは、日本が今後DXを進めるうえで重要となる次のポイントがあると思われます。",
+    "url": "fe/strategy/dx/dx-lessons-failures.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "2-5 国が選定するDX優良事例（DXセレクション）",
+    "summary": "ここまで見てきたように、大企業ではDXを通じて生産性向上や新しいビジネスモデルの創出が進んでいます。一方で、日本の多くを占める中堅・中小企業でも、自社の課題に向き合い、デジタルを使って\"仕事のや...",
+    "url": "fe/strategy/dx/dx-lessons-failures.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "事例①：グランプリ受賞企業 株式会社後藤組（建設業）",
+    "summary": "— 現場の属人化を「見える化」と「標準化」で崩したDX",
+    "url": "fe/strategy/dx/dx-lessons-failures.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "事例②：準グランプリ受賞企業 株式会社バラコーポレーション（サービス業）",
+    "summary": "— 属人化した業務をAIで可視化し、サービス品質を底上げしたDX",
+    "url": "fe/strategy/dx/dx-lessons-failures.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "2-6 DXによる変化",
+    "summary": "DX（デジタルトランスフォーメーション）は、単にIT技術を導入することではありません。組織や社会の「仕組み」そのものを変える取り組みです。ここでは、DXがもたらした主な変化を6つの視点で整理します。",
+    "url": "fe/strategy/dx/dx-lessons-failures.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "2-7 DXの失敗事例とそこからの学び",
+    "summary": "事例：セブン＆アイ・ホールディングス（日本）",
+    "url": "fe/strategy/dx/dx-lessons-failures.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "■失敗事例① 大手小売業：システム刷新が現場と乖離",
+    "summary": "事例：セブン＆アイ・ホールディングス（日本）",
+    "url": "fe/strategy/dx/dx-lessons-failures.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "■失敗事例② 地方自治体：データ連携基盤の乱立",
+    "summary": "事例：複数自治体（日本）",
+    "url": "fe/strategy/dx/dx-lessons-failures.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "■失敗事例③ 製造業：PoC止まりのAI導入",
+    "summary": "事例：GE（ゼネラル・エレクトリック／米国）",
+    "url": "fe/strategy/dx/dx-lessons-failures.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "■失敗事例④ 金融業界：レガシーシステムの壁",
+    "summary": "事例：三菱UFJ銀行（日本）",
+    "url": "fe/strategy/dx/dx-lessons-failures.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "2-8 DXによる変化に対応するために必要なスキル・人材像",
+    "summary": "DX（デジタルトランスフォーメーション）の進展により、企業や行政の仕組みが大きく変化しています。これに伴い、従来の「ITツールを使いこなす人材」だけでなく、デジタル技術を活用して変革を生み出す人...",
+    "url": "fe/strategy/dx/dx-lessons-failures.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "2-2 海外のDX事例",
+    "summary": "世界では、日本とは異なる社会課題や産業構造を背景に、国家レベルでDXが進められています。",
+    "url": "fe/strategy/dx/dx-overseas-cases.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "（1）韓国：行政DXと住民サービスの高度化",
+    "summary": "■背景 韓国は日本と同じく、高齢化や都市集中、行政の非効率化といった課題を抱えながら、2000年代初頭から政府主導でDXを推進してきました。特に「電子政府法」の整備によって、行政のデジタル化を国...",
+    "url": "fe/strategy/dx/dx-overseas-cases.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "（2）アメリカ：企業によるデータ駆動型経営の推進",
+    "summary": "■背景 アメリカでは、GAFA（Google・Apple・Facebook・Amazon）を中心に、データを活用したビジネスモデルが急速に発展しました。広大な市場規模と多様な消費者行動を背景に、...",
+    "url": "fe/strategy/dx/dx-overseas-cases.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "（3）中国：社会全体のデジタル化",
+    "summary": "■背景 中国は急速な都市化、人口増加、交通渋滞、行政手続きの複雑化など多くの社会課題を抱えています。これらの解決のため、政府は「一帯一路」政策の一環として、社会全体のデジタル化を国家戦略として推...",
+    "url": "fe/strategy/dx/dx-overseas-cases.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "（4）フィンランド：教育DXとオープンデータ",
+    "summary": "■背景 フィンランドは教育大国として知られていますが、同時に「国全体のデジタルリテラシーを底上げすること」を国家戦略として位置づけています。急速なデジタル化やAIの普及に対応するため、政府・大学...",
+    "url": "fe/strategy/dx/dx-overseas-cases.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "（5）シンガポール：スマートネーション構想",
+    "summary": "■背景 シンガポールは国土が狭く、資源も限られているため、「デジタル技術で国家全体を最適化する」ことを早くから国家戦略として掲げてきました。2014年に「Smart Nation（スマートネーシ...",
+    "url": "fe/strategy/dx/dx-overseas-cases.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "2-3 国内と海外のDX比較",
+    "summary": "■国内：",
+    "url": "fe/strategy/dx/dx-overseas-cases.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1 DX推進に必要な組織・人材・マインドセット",
+    "summary": "DX推進組織のあり方 DXを成功させるためには、「担当部署まかせ」ではなく、経営層から現場までが一体となった組織体制が欠かせません。",
+    "url": "fe/strategy/dx/dx-strategy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "4-2 DXを進める組織体制と役割",
+    "summary": "DXはIT部門だけでは進みません。企業全体が役割を分担し、同じ方向を向いて進めることが不可欠です。DXは「技術導入のプロジェクト」ではなく、組織全体の変革活動であるためです。",
+    "url": "fe/strategy/dx/dx-strategy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "4-3 DXによる変化に対応するために必要なスキル・人材像",
+    "summary": "DXによって企業・行政の仕組みが大きく変化する中で、求められる人材像も進化しています。単にデジタルツールを使えるだけではなく、「変革を牽引できる人材」が必要です。",
+    "url": "fe/strategy/dx/dx-strategy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "4-4 DXロードマップの作り方",
+    "summary": "DXを成功させるには、「何を」「どの順で」「どう実行するか」を明確にすることが不可欠です。思いつきや単発のIT導入ではなく、中長期的な視点での戦略と段階的な実行計画（ロードマップ）が必要になります。",
+    "url": "fe/strategy/dx/dx-strategy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "4-5 デジタル技術導入のステップ（実装・運用の具体フェーズ）",
+    "summary": "DXの戦略やロードマップを策定した後は、いよいよ実行段階です。しかし、いきなりシステムを導入すると、現場の混乱やコストの無駄が発生することも少なくありません。デジタル技術の導入には、段階的・検証...",
+    "url": "fe/strategy/dx/dx-strategy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "4-6 社内外でのDXコミュニケーション（組織風土と情報発信）",
+    "summary": "1. DX成功のカギは「コミュニケーション」にあり DXは単なるITプロジェクトではなく、「組織全体の変革」を伴う取り組みです。そのため、関係者間の理解・共感・連携を生み出すコミュニケーションが...",
+    "url": "fe/strategy/dx/dx-strategy.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "3-1 AI（人工知能）と機械学習",
+    "summary": "概要 AI（Artificial Intelligence：人工知能）は、人間の知的活動（判断・学習・推論など）をコンピュータ上で再現する技術の総称です。かつては「人間のように考えるコンピュータ...",
+    "url": "fe/strategy/dx/dx-technologies.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "3-2 Web3・ブロックチェーン",
+    "summary": "Webの進化とWeb3の登場 インターネットはこれまで、大きく3つの段階を経て発展してきました。",
+    "url": "fe/strategy/dx/dx-technologies.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "3-3 xR（VR/AR/MR）とメタバース",
+    "summary": "概要 xR（クロスリアリティ）とは、「VR（仮想現実）」「AR（拡張現実）」「MR（複合現実）」といった、現実とデジタル空間を融合する技術の総称です。これらの技術は、ゲームやエンタメの世界だけで...",
+    "url": "fe/strategy/dx/dx-technologies.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "3-4 IoT・センサー・クラウド",
+    "summary": "IoT（Internet of Things）とは IoT（アイ・オー・ティー）とは「モノのインターネット」という意味で、コンピュータだけでなく、あらゆる\"モノ\"がインターネットに接続され、情報...",
+    "url": "fe/strategy/dx/dx-technologies.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "3-5 データ活用・分析の基礎",
+    "summary": "概要 DX（デジタルトランスフォーメーション）の基盤となるのが「データの活用」です。企業や自治体、医療・教育などあらゆる分野で、膨大なデータを収集・分析し、意思決定やサービス改善につなげる動きが...",
+    "url": "fe/strategy/dx/dx-technologies.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1-7 DXの種類・分類",
+    "summary": "DXは一言で言っても、その目的によっていくつかのタイプに分けられます。企業がDXで何を実現したいのか（効率化・顧客価値・新規事業・データ活用）という\"目的の違い\"に基づき、次の4つに分類できます。",
+    "url": "fe/strategy/dx/dx-types-impact.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1-8 DXの「レイヤー」と「タイプ」の違い",
+    "summary": "DXには、理解を助けるための2つの異なる分類軸があります。",
+    "url": "fe/strategy/dx/dx-types-impact.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1-9 DXを支える技術の関係（IoT→クラウド→AI→DX）",
+    "summary": "DXを実現するための技術は、それぞれが役割を分担しています。",
+    "url": "fe/strategy/dx/dx-types-impact.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "1-10 DXの経営への影響",
+    "summary": "DXは、デジタル技術を活用して業務や組織の仕組みを変えることで、企業の経営に次のような変化をもたらします。ここでは、DXの取り組み（原因）と、その結果として生まれる経営効果（結果）をセットで整理...",
+    "url": "fe/strategy/dx/dx-types-impact.html",
+    "tags": [
+      "DX概論"
+    ]
+  },
+  {
+    "term": "AIに関する法制度の全体像",
+    "summary": "AIに関する法律はまだ発展途上ですが、次の3つの枠組みで整理できます。",
+    "url": "fe/strategy/legal/ai-data-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "AIに適用される既存の法律",
+    "summary": "AI専用の法律が整備される前に、既存の法律がAIに適用されます。",
+    "url": "fe/strategy/legal/ai-data-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "著作権法（AI学習データ）",
+    "summary": "AIが学習するデータには著作物が含まれることがあります。",
+    "url": "fe/strategy/legal/ai-data-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "個人情報保護法（AIの学習データ）",
+    "summary": "AIが個人情報を扱う場合は、個人情報保護法が適用されます。",
+    "url": "fe/strategy/legal/ai-data-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "PL法（AIの誤作動）",
+    "summary": "AI搭載製品が誤作動して事故が起きた場合、PL法（製造物責任法）が適用される可能性があります。",
+    "url": "fe/strategy/legal/ai-data-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "AIの倫理原則（AI原則）",
+    "summary": "国際的に、AIには次のような原則が求められています。",
+    "url": "fe/strategy/legal/ai-data-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "データ利活用の法制度",
+    "summary": "AIの性能はデータ量に依存するため、データの扱いに関する法律も重要です。",
+    "url": "fe/strategy/legal/ai-data-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "オープンデータ",
+    "summary": "国や自治体が公開するデータを自由に利用できる仕組み。",
+    "url": "fe/strategy/legal/ai-data-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "パーソナルデータ",
+    "summary": "個人に関するデータで、個人情報保護法の対象。",
+    "url": "fe/strategy/legal/ai-data-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "匿名加工情報",
+    "summary": "個人を特定できないように加工したデータで、元の個人情報に戻せない。",
+    "url": "fe/strategy/legal/ai-data-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子契約とは",
+    "summary": "契約書を紙ではなく電子データ（PDF・電子フォームなど）で作成し、電子署名などを用いて締結する契約方式です。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子契約のメリット",
+    "summary": "電子契約は、紙の契約書と同じく法的に有効です。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "法的効力",
+    "summary": "電子契約は、紙の契約書と同じく法的に有効です。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子署名と本人性の確認",
+    "summary": "電子契約では、契約当事者が本当に本人であるかを確認する必要があります。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子署名の種類",
+    "summary": "企業が作成する帳簿・書類を電子データで保存する際のルールを定めた法律です。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子文書の保存（電子帳簿保存法）",
+    "summary": "企業が作成する帳簿・書類を電子データで保存する際のルールを定めた法律です。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子保存が認められる文書",
+    "summary": "IT企業ではクラウド会計システムと組み合わせて利用されることが多いです。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子保存の条件",
+    "summary": "IT企業ではクラウド会計システムと組み合わせて利用されることが多いです。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子文書の法的効力",
+    "summary": "電子文書は、紙の文書と同様に証拠として利用可能です。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "証拠力を高める要素",
+    "summary": "これらが整っていれば、裁判でも証拠として認められます。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子契約サービスの仕組み",
+    "summary": "クラウド型電子契約サービス（例：クラウドサイン、DocuSignなど）は次のように動作します。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "証跡データの例",
+    "summary": "これらが「本人が署名した」ことを裏付けます。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子契約とセキュリティ",
+    "summary": "電子契約は便利ですが、セキュリティ対策が不可欠です。",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子契約と紙の契約の比較",
+    "summary": "ア）印紙税が不要 イ）契約締結が迅速 ウ）紙の保管が必要 エ）テレワークでも契約可能",
+    "url": "fe/strategy/legal/electronic-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "知的財産権とは",
+    "summary": "絵を描いたり、文章を書いたり、デザインや新しい仕組みを考えたりすることを知の創作活動といいます。その結果生まれた「形のない財産」を知的財産（無体財産）と呼びます。",
+    "url": "fe/strategy/legal/intellectual-property.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "著作権（定義・目的・範囲）",
+    "summary": "著作権は、創作した瞬間に自動的に発生する権利であり（無方式主義）、思想や感情を\"創作的に表現したもの\"が著作物として保護されます。",
+    "url": "fe/strategy/legal/intellectual-property.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "2-1 著作権の構成",
+    "summary": "著作権は大きく次の2つに分かれます。",
+    "url": "fe/strategy/legal/intellectual-property.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "2-2 著作隣接権",
+    "summary": "著作物を伝える人にも権利があります（俳優・歌手・放送局など）。",
+    "url": "fe/strategy/legal/intellectual-property.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "2-3 著作権の制限（例外規定）",
+    "summary": "著作物の「公正な利用」を認めるために、以下のような例外があります。",
+    "url": "fe/strategy/legal/intellectual-property.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "2-4 著作権侵害の罰則",
+    "summary": "無断利用は民事責任（損害賠償）と刑事罰の対象になります。",
+    "url": "fe/strategy/legal/intellectual-property.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "クリエイティブ・コモンズ（CCライセンス）",
+    "summary": "著作物の利用条件を明示できる国際的な仕組みです。作者が「この条件なら自由に使っていい」と表明することができます。",
+    "url": "fe/strategy/legal/intellectual-property.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "産業財産権とは",
+    "summary": "産業財産権とは、産業に関する新しい技術や製品のデザイン、ブランドなどを保護する権利です。スマートフォンやアプリなど、IT製品においても非常に重要な権利です。",
+    "url": "fe/strategy/legal/intellectual-property.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "特許情報を調べる方法",
+    "summary": "自分のアイデアが既に登録されていないか確認するには、特許情報プラットフォーム（J-Platform）を利用します。",
+    "url": "fe/strategy/legal/intellectual-property.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "IT契約とは",
+    "summary": "システム開発・運用・保守などのIT業務では、企業と開発者（または開発会社）の間で契約を結びます。",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "請負契約と準委任契約",
+    "summary": "請負契約 準委任契約 成果物の完成が条件 作業の実施が義務 完成で報酬発生 作業実施で報酬発生 契約不適合責任あり 結果責任はなし vs 3. 契約不適合責任（旧：瑕疵担保責任） 2020年の民...",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "請負契約の特徴",
+    "summary": "請負契約 準委任契約 成果物の完成が条件 作業の実施が義務 完成で報酬発生 作業実施で報酬発生 契約不適合責任あり 結果責任はなし vs 3. 契約不適合責任（旧：瑕疵担保責任） 2020年の民...",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "準委任契約の特徴",
+    "summary": "請負契約 準委任契約 成果物の完成が条件 作業の実施が義務 完成で報酬発生 作業実施で報酬発生 契約不適合責任あり 結果責任はなし vs 3. 契約不適合責任（旧：瑕疵担保責任） 2020年の民...",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "契約不適合責任（旧：瑕疵担保責任）",
+    "summary": "2020年の民法改正で「瑕疵担保責任」は契約不適合責任に統一されました。",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "契約不適合とは",
+    "summary": "IT開発では特に重要で、トラブルの多くがここに関係します。",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "発生した場合の対応",
+    "summary": "IT開発では特に重要で、トラブルの多くがここに関係します。",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "秘密保持契約（NDA）",
+    "summary": "システム開発では、企業の機密情報（顧客データ、設計書、ソースコードなど）を扱います。",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "NDAで守るべき情報の例",
+    "summary": "違反すると損害賠償の対象になります。",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "ソフトウェアライセンス契約",
+    "summary": "ソフトウェアやライブラリを利用する際には、ライセンス条件を守る必要があります。",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "主なライセンスの種類",
+    "summary": "IT業界では OSS の誤用がトラブルになりやすいため、契約と同じくらい重要です。",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "5-1. OSSライセンスの例",
+    "summary": "IT業界では OSS の誤用がトラブルになりやすいため、契約と同じくらい重要です。",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "再委託（下請け）に関するルール",
+    "summary": "システム開発では、一次請け → 二次請け → 三次請け… と多重構造になることがあります。",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "クラウド契約の特徴（なぜ法務対応が必要か）",
+    "summary": "クラウドサービスは、利用者が設備を所有せず、事業者の提供する環境を\"契約に基づいて利用する\"形態です。そのため、契約内容がサービス品質や責任範囲を大きく左右します。",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "SLA（サービスレベル合意）",
+    "summary": "SLA (Service Level Agreement) は、クラウド事業者が提供するサービス品質の基準を契約として明確に定めたものです。可用性、応答時間、サポート体制など、利用者が期待するサ...",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "SLAとは何か（定義）",
+    "summary": "SLA (Service Level Agreement) は、クラウド事業者が提供するサービス品質の基準を契約として明確に定めたものです。可用性、応答時間、サポート体制など、利用者が期待するサ...",
+    "url": "fe/strategy/legal/it-contract.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "労働基準法（労基法）",
+    "summary": "労働基準法は、労働条件の最低基準を定めた法律です。企業はこの基準を下回る条件で労働者を働かせることはできません。",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "労働時間・休憩・休日",
+    "summary": "企業が労働者に法定時間を超えて働かせるには、労使協定（36協定）を結び、労基署に届け出る必要があります。",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "1-1. 時間外労働（残業）と36協定",
+    "summary": "企業が労働者に法定時間を超えて働かせるには、労使協定（36協定）を結び、労基署に届け出る必要があります。",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "残業の上限",
+    "summary": "法定労働時間内 時間外労働（残業） 割増賃金 25% 以上 深夜労働（22時～5時） 割増賃金 25% 以上 休日労働 割増賃金 35% 以上 36協定（労使協定） 残業の上限：月45h／年36...",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "深夜・休日労働の割増賃金",
+    "summary": "法定労働時間内 時間外労働（残業） 割増賃金 25% 以上 深夜労働（22時～5時） 割増賃金 25% 以上 休日労働 割増賃金 35% 以上 36協定（労使協定） 残業の上限：月45h／年36...",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "1-2. 有給休暇",
+    "summary": "労働者の安全と健康を守るための法律です。",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "労働安全衛生法（安衛法）",
+    "summary": "労働者の安全と健康を守るための法律です。",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "事業者の義務",
+    "summary": "IT企業ではPC作業が中心となるため、以下のような配慮が求められます。",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "2-1. VDT作業（PC作業）に関する配慮",
+    "summary": "IT企業ではPC作業が中心となるため、以下のような配慮が求められます。",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "労働者派遣法",
+    "summary": "IT業界では派遣エンジニアが多いため、この法律も重要です。",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "労働契約法",
+    "summary": "労働者と企業の契約関係を定める法律です。",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "主な内容",
+    "summary": "企業はハラスメントを防止するための措置を取る義務があります。",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "ハラスメント防止（パワハラ・セクハラ）",
+    "summary": "企業はハラスメントを防止するための措置を取る義務があります。",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "パワハラの例",
+    "summary": "ア）1日6時間・週30時間 イ）1日8時間・週40時間 ウ）1日10時間・週50時間 エ）1日12時間・週60時間",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "セクハラの例",
+    "summary": "ア）1日6時間・週30時間 イ）1日8時間・週40時間 ウ）1日10時間・週50時間 エ）1日12時間・週60時間",
+    "url": "fe/strategy/legal/labor-law.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "個人情報保護法の目的",
+    "summary": "個人情報保護法は、「個人の権利・利益を守りながら、個人情報を適切に扱うためのルールを定めた法律」です。",
+    "url": "fe/strategy/legal/privacy-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "個人情報の定義",
+    "summary": "個人情報とは、「特定の個人を識別できる情報」または「他の情報と組み合わせることで個人を識別できる情報」のことを指します。",
+    "url": "fe/strategy/legal/privacy-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "個人情報の分類",
+    "summary": "個人情報は種類によって",
+    "url": "fe/strategy/legal/privacy-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "単体で個人を特定できる\"の例",
+    "summary": "個人情報保護法では、「個人情報をどう管理するか」を考えるために、データの保存方法や検索性に着目して分類しています。",
+    "url": "fe/strategy/legal/privacy-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "個人データ・保有個人データ",
+    "summary": "個人情報保護法では、「個人情報をどう管理するか」を考えるために、データの保存方法や検索性に着目して分類しています。",
+    "url": "fe/strategy/legal/privacy-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "4-1 個人データとは？",
+    "summary": "データベース化され、「システムで検索できる個人情報」のこと。",
+    "url": "fe/strategy/legal/privacy-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "4-2 保有個人データとは？",
+    "summary": "事業者が「開示・訂正・利用停止」などの請求に応じる義務を負う個人データ。",
+    "url": "fe/strategy/legal/privacy-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "個人データと保有個人データの違い",
+    "summary": "個人情報（最も広い概念） 個人データ （検索可能な個人情報） 保有個人データ （権利行使の対象） 間違えやすいポイント 「個人情報＝氏名・住所だけ」ではない。 メールアドレス・電話番号・SNSア...",
+    "url": "fe/strategy/legal/privacy-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "匿名加工情報・仮名加工情報",
+    "summary": "現代のITサービスでは、AI学習・データ分析・マーケティング・サービス改善などの目的で大量のデータを活用する必要があります。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "6-1 匿名加工情報とは",
+    "summary": "個人を特定できないように加工し、元に戻せないようにしたデータ。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "6-2 仮名加工情報とは（元に戻せる加工）",
+    "summary": "個人を直接識別できないように加工したデータ。ただし、元に戻すことは可能。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "IoT (Internet of Things) と個人情報",
+    "summary": "センサーを搭載した機器が、環境・行動・状態を自動的に収集する仕組み。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "なぜ個人情報になるのか",
+    "summary": "IoTデータは単体では匿名に見えても、行動パターン・生活習慣・健康状態が推測できます。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "AI（人工知能）と個人情報",
+    "summary": "AIは大量のデータを学習し、パターンを抽出して推論する技術。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "ログ（アクセスログ・操作ログ）と個人情報",
+    "summary": "ログとは、システムが自動的に記録するアクセス履歴・操作履歴・エラー情報のこと。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "Cookie・広告IDと個人情報",
+    "summary": "CookieとはWebサイトがブラウザに保存する識別子のこと。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "位置情報と個人情報",
+    "summary": "位置情報とは、GPSや基地局情報から取得される現在地・移動経路のデータのこと。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "クラウドと個人情報",
+    "summary": "クラウドとは、データを外部のサーバーに保存する仕組みのこと。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "海外移転",
+    "summary": "個人情報保護法は、日本国内の事業者が日本国内で個人情報を扱うことを前提に作られています。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "海外移転で何が問題なのか（リスク）",
+    "summary": "つまり、日本と同じレベルで個人情報が守られない可能性があります。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "海外移転を行う場合の要件",
+    "summary": "海外移転を行う場合、事業者は以下のどちらかを満たす必要があります。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "個人情報を扱うときの原則",
+    "summary": "IT企業では、個人情報を扱う場面が多岐にわたります。そのため、「何をしてよいのか／してはいけないのか」を判断するための基準が必要になります。",
+    "url": "fe/strategy/legal/privacy-law-tech.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "プライバシーマーク制度とは",
+    "summary": "個人情報を適切に取り扱う事業者に与えられる民間の認証制度です。",
+    "url": "fe/strategy/legal/privacy-mark.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "企業がPマークを取得するメリット",
+    "summary": "個人情報の管理が適切であることを第三者に証明できる。",
+    "url": "fe/strategy/legal/privacy-mark.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "PMS（個人情報保護マネジメントシステム）の構造",
+    "summary": "PMSは、組織として個人情報を管理するための仕組みであり、以下の要素で構成されます。",
+    "url": "fe/strategy/legal/privacy-mark.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "個人情報保護法との違い",
+    "summary": "ア）経済産業省 イ）JIPDEC ウ）IPA エ）総務省",
+    "url": "fe/strategy/legal/privacy-mark.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電気通信事業法（通信の秘密）",
+    "summary": "電気通信事業法は、通信内容および通信に関する情報を保護するための法律です。ここで保護される「通信の秘密」とは、通信の内容だけでなく、「誰が」「誰と」「いつ」「どのように通信したか」といった通信に...",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "通信の秘密が保護する範囲",
+    "summary": "電子計算機使用詐欺は、コンピュータに不正な情報を入力し、他人を欺いて財産上の利益を得る行為を処罰する規定です。刑法第246条の2に定められており、オンラインサービスや電子取引の普及に伴い重要性が...",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "実務上求められる対応",
+    "summary": "電子計算機使用詐欺は、コンピュータに不正な情報を入力し、他人を欺いて財産上の利益を得る行為を処罰する規定です。刑法第246条の2に定められており、オンラインサービスや電子取引の普及に伴い重要性が...",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子計算機使用詐欺",
+    "summary": "電子計算機使用詐欺は、コンピュータに不正な情報を入力し、他人を欺いて財産上の利益を得る行為を処罰する規定です。刑法第246条の2に定められており、オンラインサービスや電子取引の普及に伴い重要性が...",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子計算機使用詐欺の対象行為",
+    "summary": "これらは単なる技術的対策ではなく、不正行為を未然に防ぐための法的責務に近い位置づけとなっています。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "電子計算機使用詐欺が企業にもたらす影響",
+    "summary": "これらは単なる技術的対策ではなく、不正行為を未然に防ぐための法的責務に近い位置づけとなっています。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "プロバイダ責任制限法",
+    "summary": "プロバイダ責任制限法は、インターネット上の権利侵害に対して、プロバイダが負う責任と対応手続を定めた法律です。SNS、掲示板、動画サイトなど、ユーザー投稿型サービスを提供する企業が対象となります。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "プロバイダ責任制限法が果たす役割",
+    "summary": "基本情報では、法律とセットで「基準」も問われます。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "情報セキュリティ管理基準（ISMS）",
+    "summary": "基本情報では、法律とセットで「基準」も問われます。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "ISMS（ISO/IEC 27001）",
+    "summary": "情報セキュリティマネジメントシステムの国際規格です。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "JIS Q 27001",
+    "summary": "日本版のISMS規格です。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "企業が行うべき管理",
+    "summary": "サイバー犯罪とは、情報システムやネットワークを対象として行われる犯罪行為を指します。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "サイバー犯罪",
+    "summary": "サイバー犯罪とは、情報システムやネットワークを対象として行われる犯罪行為を指します。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "サイバー犯罪の主な分類",
+    "summary": "クラッキングとは、悪意を持ってシステムに侵入し、情報の窃取・破壊・改ざんを行う行為を指します。一般的には「ハッキング」と混同されることがありますが、法的には悪意を持つ行為をクラッキングとして扱います。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "クラッキング（Cracking）",
+    "summary": "クラッキングとは、悪意を持ってシステムに侵入し、情報の窃取・破壊・改ざんを行う行為を指します。一般的には「ハッキング」と混同されることがありますが、法的には悪意を持つ行為をクラッキングとして扱います。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "サイバー犯罪がもたらす影響",
+    "summary": "ログ管理・アクセス管理は、情報システムに対する不正行為を防止し、事故発生時に原因を特定するために必要な管理措置です。これらは単なる技術的対策ではなく、複数の法律により企業に実施が求められています。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "ログ管理・アクセス管理の法的根拠",
+    "summary": "ログ管理・アクセス管理は、情報システムに対する不正行為を防止し、事故発生時に原因を特定するために必要な管理措置です。これらは単なる技術的対策ではなく、複数の法律により企業に実施が求められています。",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "ログ管理・アクセス管理を求める法的根拠",
+    "summary": "セキュリティインシデントとは、情報セキュリティ上の事故や脅威が発生した状態を指します。インシデントが発生した場合、企業はその内容に応じて民事・行政・刑事のいずれか、または複数の責任を負う可能性が...",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "セキュリティインシデントと法的責任",
+    "summary": "セキュリティインシデントとは、情報セキュリティ上の事故や脅威が発生した状態を指します。インシデントが発生した場合、企業はその内容に応じて民事・行政・刑事のいずれか、または複数の責任を負う可能性が...",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "セキュリティインシデントが法的に問題となる理由",
+    "summary": "ア）メール本文 イ）送信元・宛先 ウ）通信量 エ）利用者の氏名",
+    "url": "fe/strategy/legal/security-law-advanced.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "情報セキュリティ関連法規の全体像",
+    "summary": "情報セキュリティに関する法律は、大きく次の4つに分類できます。",
+    "url": "fe/strategy/legal/security-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "サイバーセキュリティ基本法",
+    "summary": "サイバーセキュリティ基本法は、国・自治体・企業・国民が、サイバー攻撃にどう対応すべきかを定めた基本方針の法律です。この法律は、社会全体の安全性を確保するために、各主体の役割と責務を明確にしています。",
+    "url": "fe/strategy/legal/security-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "サイバーセキュリティ基本法が定める役割",
+    "summary": "国（NISC） 自治体 企業 国民 重要インフラ事業者 ← 一般企業よりも高度な対策が求められる 3. 不正アクセス禁止法 不正アクセス禁止法は、アクセス権限を持たない者が情報システムに侵入する...",
+    "url": "fe/strategy/legal/security-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "実務上求められる対応例",
+    "summary": "国（NISC） 自治体 企業 国民 重要インフラ事業者 ← 一般企業よりも高度な対策が求められる 3. 不正アクセス禁止法 不正アクセス禁止法は、アクセス権限を持たない者が情報システムに侵入する...",
+    "url": "fe/strategy/legal/security-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "不正アクセス禁止法",
+    "summary": "不正アクセス禁止法は、アクセス権限を持たない者が情報システムに侵入する行為を禁止する法律です。この法律は、情報システムの安全性を確保し、データの漏えい・改ざん・破壊を防ぐことを目的としています。",
+    "url": "fe/strategy/legal/security-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "不正アクセスの分類",
+    "summary": "不正アクセスは、情報システムの 機密性（Confidentiality）・完全性（Integrity）・可用性（Availability）のいずれか、または複数を損なう可能性があります。",
+    "url": "fe/strategy/legal/security-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "不正アクセスが問題となる理由",
+    "summary": "不正アクセスは、情報システムの 機密性（Confidentiality）・完全性（Integrity）・可用性（Availability）のいずれか、または複数を損なう可能性があります。",
+    "url": "fe/strategy/legal/security-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "刑法（情報セキュリティ関連）",
+    "summary": "刑法には、情報システムに対する不正行為を処罰するための規定が複数存在します。これらは、データの破壊・改ざん・不正利用・不正操作といった行為を対象としており、情報システムの安全性を維持するために重...",
+    "url": "fe/strategy/legal/security-law-basic.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "標準化とは",
+    "summary": "標準化とは、技術や手順を共通化し、誰でも同じように利用できるようにすることです。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "標準化の目的",
+    "summary": "IT業界では、国際標準が特に重要です。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "ISO / IEC（国際標準化機関）",
+    "summary": "世界的に最も有名な標準化団体です。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "ISO（国際標準化機構）",
+    "summary": "工業製品やマネジメントシステムの国際規格を策定。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "IEC（国際電気標準会議）",
+    "summary": "電気・電子技術の国際規格を策定。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "ISO/IEC 共同規格",
+    "summary": "IT分野では ISO と IEC が共同で規格を作ることが多いです。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "JIS（日本産業規格）",
+    "summary": "日本国内の標準規格で、ISO/IEC と整合性を持つものが多いです。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "W3C（Web標準）",
+    "summary": "Web技術の標準化を行う国際団体です。WebブラウザやWebサイトが同じルールで動作するようにするための組織です。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "主な標準",
+    "summary": "インターネット技術の標準化を行う組織が IETF（Internet Engineering Task Force） です。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "IETF と RFC（インターネット標準）",
+    "summary": "インターネット技術の標準化を行う組織が IETF（Internet Engineering Task Force） です。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "RFC（Request For Comments）とは",
+    "summary": "IETF が公開する技術文書で、インターネット技術の仕様書として使われます。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "RFCで定義される主な技術",
+    "summary": "インターネットの基盤技術はほぼすべて RFC で定義されています。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "標準化と知的財産（FRAND）",
+    "summary": "標準化された技術には、特許が含まれる場合があります。その場合、特許権者は「FRAND条件」でライセンスを提供することが求められます。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
+    "term": "FRANDとは",
+    "summary": "標準技術を誰でも利用できるようにするためのルールです。",
+    "url": "fe/strategy/legal/standardization.html",
+    "tags": [
+      "法令・契約"
+    ]
+  },
+  {
     "term": "アルゴリズムとは何か",
     "summary": "アルゴリズムとは、問題を解くための手順を明確に定めたものです。料理のレシピのように「何を、どの順番で、どう処理するか」を定義します。プログラムはアルゴリズムをコンピュータが実行できる形にしたものです。",
     "url": "fe/technology/algorithm/algo-basic.html",
@@ -385,7 +2129,7 @@
   },
   {
     "term": "配列の長所と短所",
-    "summary": "【挿入前】 [10] [20] [30] [40] [50] [ ] 添字: 0 1 2 3 4 5 Step1: A[4]→A[5], A[3]→A[4], A[2]→A[3], A[1]→A...",
+    "summary": "連結リストは、各ノードがデータと次のノードへのポインタを持つデータ構造です。メモリ上に分散して配置され、ポインタでつながっています。",
     "url": "fe/technology/algorithm/algo-data-structure.html",
     "tags": [
       "アルゴリズム"
@@ -401,7 +2145,7 @@
   },
   {
     "term": "連結リストの長所と短所",
-    "summary": "【挿入前】 [10]→[20]→[30]→[40] 【挿入】 新ノード[25]を作成 [25].next = [20].next（= [30]） [20].next = [25] 【挿入後】 [...",
+    "summary": "【挿入前】 10203040 【挿入】新ノード[25]を作成 [25].next = [20].next（= [30]） [20].next = [25] 【挿入後】 102030 25 ↑ポイ...",
     "url": "fe/technology/algorithm/algo-data-structure.html",
     "tags": [
       "アルゴリズム"
@@ -521,7 +2265,7 @@
   },
   {
     "term": "5-1. ダイクストラ法の条件",
-    "summary": "グラフ: [A]────2────[B] │ ╲ ╱ │ 5│ 4╲ ╱1 │3 │ ╲ ╱ │ [C]────3────[D] Aから各頂点への最短距離を求める: 初期: dist[A]=0,...",
+    "summary": "Aから各頂点への最短距離を求める: 初期: dist[A]=0, 他=∞, 未確定={A,B,C,D} Step1: Aを確定(距離0) 更新: dist[B]=min(∞,0+2)=2 dis...",
     "url": "fe/technology/algorithm/algo-graph.html",
     "tags": [
       "アルゴリズム"
@@ -569,7 +2313,7 @@
   },
   {
     "term": "1-1. 基本記号一覧",
-    "summary": "┌──────────────┐ │ START/END │ ←端子記号（角丸長方形）: 開始・終了 └──────────────┘ ┌──────────────┐ │ x = x + 1 ...",
+    "summary": "START / END 端子記号（角丸長方形）: 開始・終了 x = x + 1 処理記号（長方形）: 代入・計算 ? 判断記号（ひし形）: 条件分岐 Yes / No Yes No for 〜...",
     "url": "fe/technology/algorithm/algo-recursion.html",
     "tags": [
       "アルゴリズム"
@@ -681,7 +2425,7 @@
   },
   {
     "term": "擬似コード",
-    "summary": "function linear_search(a, n, x): i = 0 while i 線形探索の動作追跡（値7を探す場合） 配列 A = [ 3, 8, 5, 7, 2 ], n = 5...",
+    "summary": "function linear_search(a, n, x): i = 0 while i 線形探索の動作追跡（値7を探す場合 / 値9を探す場合） 配列 A = [ 3, 8, 5, 7, ...",
     "url": "fe/technology/algorithm/algo-search.html",
     "tags": [
       "アルゴリズム"
@@ -777,7 +2521,7 @@
   },
   {
     "term": "2-1. 満二分木 vs 完全二分木",
-    "summary": "【満二分木】 【完全二分木】 [A] [A] / \\ / \\ [B] [C] [B] [C] / \\ / \\ [D] [E] [D] [E] （最下段が左から詰まっている） ・全ノードが0個か2...",
+    "summary": "深さ（depth）は根からの距離（根を0とする）。高さ（height）は葉からの距離（葉を0とする）。この2つはFE試験で混同しやすいので注意。",
     "url": "fe/technology/algorithm/algo-tree-search.html",
     "tags": [
       "アルゴリズム"
@@ -897,7 +2641,7 @@
   },
   {
     "term": "規則 → 言語 → 判定 の流れ",
-    "summary": "① 規則を決める 例:「01 を含む文字列」 ↓ ② 言語が定まる 例: {01, 1010, 0011, 001100, …} ↓ ③ 判定する 例: 1101 → 01 を含む → 受理 ✅...",
+    "summary": "① 規則を決める 例:「01 を含む文字列」 ② 言語が定まる 例: {01, 1010, 0011, 001100, …} ③ 判定する 1101 → 01 を含む → 受理 ✅ 110 → ...",
     "url": "fe/technology/basic-theory/automaton-regex.html",
     "tags": [
       "基礎理論"
@@ -953,7 +2697,7 @@
   },
   {
     "term": "判定の手順（例: 入力 = 1101）",
-    "summary": "開始: q0 1 を読む → δ(q0, 1) = q1 1 を読む → δ(q1, 1) = q0 0 を読む → δ(q0, 0) = q0 1 を読む → δ(q0, 1) = q1 最終...",
+    "summary": "q0 1 q1 1 q0 0 q0 1 q1 最終（拒否） 最終状態: q1 ← 受理状態ではない。「1101」の1の出現回数は3回（奇数）→ 拒否 ✗",
     "url": "fe/technology/basic-theory/automaton-regex.html",
     "tags": [
       "基礎理論"
@@ -1073,7 +2817,7 @@
   },
   {
     "term": "丸め誤差のメカニズム",
-    "summary": "0.1 を2進数に変換すると: 0.0001100110011001100110011… （無限循環） │← 仮数部23ビット →│ ↓ ここで打ち切る → 0.1 は内部では近似値として保存さ...",
+    "summary": "0.1 を2進数に変換すると（無限循環）: 0.0001100110011001100110011… 仮数部23ビット ここで打ち切る → 0.1 は内部では近似値として保存される → 0.1 ...",
     "url": "fe/technology/basic-theory/float-error-code.html",
     "tags": [
       "基礎理論"
@@ -1137,7 +2881,7 @@
   },
   {
     "term": "構築アルゴリズム（6ステップ）",
-    "summary": "Step1: 頻度を並べる A:40 B:30 C:20 D:10 Step2: C+D → CD:30 CD(30) / \\ C(20) D(10) Step3: B+CD → BCD:60 ...",
+    "summary": "Step1: 頻度を並べる — A:40 B:30 C:20 D:10",
     "url": "fe/technology/basic-theory/huffman-channel.html",
     "tags": [
       "基礎理論"
@@ -1489,7 +3233,7 @@
   },
   {
     "term": "基本ゲート一覧",
-    "summary": "┌───┐ P ──┤ & ├── P・Q Q ──┤ │ └───┘ P Q | P・Q 0 0 | 0 0 1 | 0 1 0 | 0 1 1 | 1 ORゲート（どちらか1で1） ┌───...",
+    "summary": "P Q P・Q PQP・Q 000 010 100 111 ORゲート（どちらか1で1） P Q ≥1 P+Q PQP+Q 000 011 101 111 NOTゲート（入力を反転） P ¬P ...",
     "url": "fe/technology/basic-theory/logic-circuit.html",
     "tags": [
       "基礎理論"
@@ -1505,7 +3249,7 @@
   },
   {
     "term": "NAND",
-    "summary": "┌───┐ P ──┤ & │○── ¬(P・Q) Q ──┤ │ └───┘ P Q | ¬(P・Q) 0 0 | 1 0 1 | 1 1 0 | 1 1 1 | 0 NOR ┌───┐ P ...",
+    "summary": "P Q ¬(P・Q) PQ¬(P・Q) 001 011 101 110 NOR P Q ≥1 ¬(P+Q) PQ¬(P+Q) 001 010 100 110 XNOR P Q =1 XNOR P...",
     "url": "fe/technology/basic-theory/logic-circuit.html",
     "tags": [
       "基礎理論"
@@ -1513,7 +3257,7 @@
   },
   {
     "term": "XNOR",
-    "summary": "┌───┐ P ──┤ =1│○── XNOR Q ──┤ │ └───┘ P Q | XNOR 0 0 | 1 0 1 | 0 1 0 | 0 1 1 | 1 ゲート基本構成真理値表の特徴用途...",
+    "summary": "P Q =1 XNOR PQXNOR 001 010 100 111 ゲート基本構成真理値表の特徴用途 NANDAND + NOTANDの出力を反転万能ゲート（半導体回路の基本） NOROR +...",
     "url": "fe/technology/basic-theory/logic-circuit.html",
     "tags": [
       "基礎理論"
@@ -1705,7 +3449,7 @@
   },
   {
     "term": "計算・手順",
-    "summary": "8ビットで -12 を表す +12 = 00001100 反転 = 11110011 +1 = 11110100 よって -12 は 11110100 補数による減算 9 - 6 を8ビットで計...",
+    "summary": "8ビットで -12 を表す +12 = 00001100 反転 = 11110011 +1 = 11110100 よって -12 は 11110100 補数による減算 9 - 6 を8ビットで計算する",
     "url": "fe/technology/basic-theory/radix-complement.html",
     "tags": [
       "基礎理論"
@@ -1713,7 +3457,7 @@
   },
   {
     "term": "2の補数の求め方",
-    "summary": "8ビットで -12 を表す +12 = 00001100 反転 = 11110011 +1 = 11110100 よって -12 は 11110100 補数による減算 9 - 6 を8ビットで計...",
+    "summary": "8ビットで -12 を表す +12 = 00001100 反転 = 11110011 +1 = 11110100 よって -12 は 11110100 補数による減算 9 - 6 を8ビットで計算する",
     "url": "fe/technology/basic-theory/radix-complement.html",
     "tags": [
       "基礎理論"
@@ -1721,7 +3465,7 @@
   },
   {
     "term": "補数による減算",
-    "summary": "9 - 6 を8ビットで計算する +9 = 00001001 +6 = 00000110 -6 = 11111010 00001001 + 11111010 =1 00000011 左端のキャリ...",
+    "summary": "9 - 6 を8ビットで計算する",
     "url": "fe/technology/basic-theory/radix-complement.html",
     "tags": [
       "基礎理論"
@@ -1833,7 +3577,7 @@
   },
   {
     "term": "和集合 A∪B（全部）",
-    "summary": "┌───────────────────┐ │ 全体集合 U │ │ ┌───┐ ┌───┐ │ │ │ A │███│ B │ │ │ │ │███│ │ │ │ └───┘ └───┘ │ ...",
+    "summary": "集合を学ぶ目的のひとつは、「要素同士の対応（つながり）を扱えるようにすること」です。その対応を数学的に表したものが関係（relation）です。",
     "url": "fe/technology/basic-theory/sets-relations.html",
     "tags": [
       "基礎理論"
@@ -1841,7 +3585,7 @@
   },
   {
     "term": "積集合 A∩B（重なり）",
-    "summary": "┌───────────────────┐ │ 全体集合 U │ │ ┌───┐ ┌───┐ │ │ │ │███│ │ │ │ │ A │███│ B │ │ │ └───┘ └───┘ │ ...",
+    "summary": "集合を学ぶ目的のひとつは、「要素同士の対応（つながり）を扱えるようにすること」です。その対応を数学的に表したものが関係（relation）です。",
     "url": "fe/technology/basic-theory/sets-relations.html",
     "tags": [
       "基礎理論"
@@ -1849,7 +3593,7 @@
   },
   {
     "term": "差集合 A−B（Aだけ）",
-    "summary": "┌───────────────────┐ │ 全体集合 U │ │ ┌───┐ ┌───┐ │ │ │███│ │ │ │ │ │███│ │ B │ │ │ └───┘ └───┘ │ │ ...",
+    "summary": "集合を学ぶ目的のひとつは、「要素同士の対応（つながり）を扱えるようにすること」です。その対応を数学的に表したものが関係（relation）です。",
     "url": "fe/technology/basic-theory/sets-relations.html",
     "tags": [
       "基礎理論"
@@ -1857,7 +3601,7 @@
   },
   {
     "term": "補集合 A^c（Aの外側）",
-    "summary": "┌───────────────────┐ │███████████████████│ │███┌───┐███████████│ │███│ A │███████████│ │███│ │██...",
+    "summary": "集合を学ぶ目的のひとつは、「要素同士の対応（つながり）を扱えるようにすること」です。その対応を数学的に表したものが関係（relation）です。",
     "url": "fe/technology/basic-theory/sets-relations.html",
     "tags": [
       "基礎理論"
@@ -1961,7 +3705,7 @@
   },
   {
     "term": "分散と標準偏差の違い",
-    "summary": "① 平均を求める μ = E(X) ② 各データのズレ X − μ ③ ズレ²の平均 Var(X) = E[(X−μ)²] ← 分散 ④ 平方根を取る σ = √Var(X) ← 標準偏差 サイ...",
+    "summary": "① 平均を求める μ = E(X) ② 各データのズレ X − μ ③ ズレ²の平均（分散） Var(X) = E[(X−μ)²] ④ 平方根を取る（標準偏差） σ = √Var(X) サイコロ...",
     "url": "fe/technology/basic-theory/variance-statistics.html",
     "tags": [
       "基礎理論"
@@ -1969,7 +3713,7 @@
   },
   {
     "term": "標準偏差の算出4ステップ",
-    "summary": "① 平均を求める μ = E(X) ② 各データのズレ X − μ ③ ズレ²の平均 Var(X) = E[(X−μ)²] ← 分散 ④ 平方根を取る σ = √Var(X) ← 標準偏差 サイ...",
+    "summary": "① 平均を求める μ = E(X) ② 各データのズレ X − μ ③ ズレ²の平均（分散） Var(X) = E[(X−μ)²] ④ 平方根を取る（標準偏差） σ = √Var(X) サイコロ...",
     "url": "fe/technology/basic-theory/variance-statistics.html",
     "tags": [
       "基礎理論"
@@ -2001,7 +3745,7 @@
   },
   {
     "term": "頻度分布表の例（テスト30人の点数）",
-    "summary": "区間 人数（頻度） 40〜49 1 50〜59 8 ████████ 60〜69 10 ██████████ 70〜79 4 ████ 80〜89 4 ████ 90〜99 3 ███ 分布の種...",
+    "summary": "左右対称の山型。平均の周りにデータが集まる。多くの自然現象がこの形に。",
     "url": "fe/technology/basic-theory/variance-statistics.html",
     "tags": [
       "基礎理論"
@@ -2113,7 +3857,7 @@
   },
   {
     "term": "クラウド導入のメリット（運用視点）",
-    "summary": "flowchart TD subgraph 従来[従来方式] A1[機器購入] --> A2[設置] A2 --> A3[設定] A3 --> A4[運用監視] A4 --> A5[故障対応] ...",
+    "summary": "【従来方式】 機器購入 設置 設定 運用監視 故障対応 （全て自社対応） 【クラウド】 Web申込み すぐ使える 事業者が運用 （インフラ管理は事業者に任せる） 項目従来（オンプレミス）クラウド...",
     "url": "fe/technology/cloud/cloud-basic-2.html",
     "tags": [
       "クラウド"
@@ -2193,7 +3937,7 @@
   },
   {
     "term": "サーバーの形状",
-    "summary": "flowchart TD T[タワー型 単体設置・小規模向け] --> R[ラックマウント型 ラック収納・DC主力] R --> D[高密度型 省電力・小型化] ストレージの種類 ストレージ分類...",
+    "summary": "タワー型（単体設置・小規模向け）ラックマウント型（ラック収納・DC主力）高密度型（省電力・小型化） ストレージの種類 ストレージ分類DAS（サーバー直結・ブロック・SATA/SAS）高速化SAN...",
     "url": "fe/technology/cloud/cloud-basic-6.html",
     "tags": [
       "クラウド"
@@ -2201,7 +3945,7 @@
   },
   {
     "term": "ストレージの種類",
-    "summary": "flowchart TD D1[DAS サーバー直結 ブロック SATA/SAS] D2[SAN 専用ネットワーク ブロック FC/iSCSI] D3[NAS LAN経由 ファイル CIFS/N...",
+    "summary": "DAS（サーバー直結・ブロック・SATA/SAS）高速化SAN（専用ネットワーク・ブロック・FC/iSCSI）共有化NAS（LAN経由・ファイル・CIFS/NFS）大規模化オブジェクト（HTTP...",
     "url": "fe/technology/cloud/cloud-basic-6.html",
     "tags": [
       "クラウド"
@@ -2249,7 +3993,7 @@
   },
   {
     "term": "リージョンとアベイラビリティゾーン（AZ）",
-    "summary": "flowchart TD subgraph 東京リージョン AZ1[AZ1 データセンターA] AZ2[AZ2 データセンターB] AZ3[AZ3 データセンターC] end AZ1 AZ2 A...",
+    "summary": "東京リージョンAZ1（DC-A）AZ2（DC-B）AZ3（DC-C）AZ間は高速専用回線で相互接続 概念説明例 リージョン地理的に独立した地域。複数AZで構成東京、大阪、バージニア北部 AZリー...",
     "url": "fe/technology/cloud/cloud-basic-7.html",
     "tags": [
       "クラウド"
@@ -2257,7 +4001,7 @@
   },
   {
     "term": "冗長化の3方式",
-    "summary": "flowchart TD A[冗長化方式] --> B[ホットスタンバイ] A --> C[ウォームスタンバイ] A --> D[コールドスタンバイ] B -->|常時同期・即時切替| E[コス...",
+    "summary": "冗長化方式ホットスタンバイウォームスタンバイコールドスタンバイ常時同期即時切替コスト最高最小稼働切替数分コスト中停止待機切替数十分コスト最低 方式待機系状態切替時間コスト ホット常時稼働・同期即...",
     "url": "fe/technology/cloud/cloud-basic-7.html",
     "tags": [
       "クラウド"
@@ -2321,7 +4065,7 @@
   },
   {
     "term": "クラウド導入のメリットと課題",
-    "summary": "flowchart TD A[オンプレミス] -->|大きな初期投資| B[CAPEX 設備投資] B -->|減価償却| C[複数年で費用化] D[クラウド移行] -->|月額利用料| E[O...",
+    "summary": "【オンプレミス】大きな初期投資CAPEX（設備投資）減価償却複数年で費用化【クラウド移行】月額利用料OPEX（運用費用）その期の費用として処理費用平準化柔軟性向上 主要クラウド事業者の比較 項目...",
     "url": "fe/technology/cloud/cloud-basic-9.html",
     "tags": [
       "クラウド"
@@ -2329,7 +4073,7 @@
   },
   {
     "term": "メリット",
-    "summary": "flowchart TD A[オンプレミス] -->|大きな初期投資| B[CAPEX 設備投資] B -->|減価償却| C[複数年で費用化] D[クラウド移行] -->|月額利用料| E[O...",
+    "summary": "【オンプレミス】大きな初期投資CAPEX（設備投資）減価償却複数年で費用化【クラウド移行】月額利用料OPEX（運用費用）その期の費用として処理費用平準化柔軟性向上 主要クラウド事業者の比較 項目...",
     "url": "fe/technology/cloud/cloud-basic-9.html",
     "tags": [
       "クラウド"
@@ -2337,7 +4081,7 @@
   },
   {
     "term": "経済性評価（TCO/ROI/CAPEX/OPEX）",
-    "summary": "flowchart TD A[オンプレミス] -->|大きな初期投資| B[CAPEX 設備投資] B -->|減価償却| C[複数年で費用化] D[クラウド移行] -->|月額利用料| E[O...",
+    "summary": "【オンプレミス】大きな初期投資CAPEX（設備投資）減価償却複数年で費用化【クラウド移行】月額利用料OPEX（運用費用）その期の費用として処理費用平準化柔軟性向上 主要クラウド事業者の比較 項目...",
     "url": "fe/technology/cloud/cloud-basic-9.html",
     "tags": [
       "クラウド"
@@ -2369,7 +4113,7 @@
   },
   {
     "term": "BIOS / UEFI の役割",
-    "summary": "【コンピュータ起動の流れ】 電源投入 | v BIOS / UEFI 起動 | +---> ハードウェア初期化 +---> POST（自己診断テスト） | v ブートローダの検索と起動 （Win...",
+    "summary": "電源投入 BIOS / UEFI 起動 ハードウェア 初期化 POST 自己診断テスト ブートローダの検索と起動 Windows Boot Manager / GRUB / U-Boot OSの...",
     "url": "fe/technology/computer/bios-os-types.html",
     "tags": [
       "コンピュータ概論"
@@ -2377,7 +4121,7 @@
   },
   {
     "term": "BIOSとUEFIの違い",
-    "summary": "【コンピュータ起動の流れ】 電源投入 | v BIOS / UEFI 起動 | +---> ハードウェア初期化 +---> POST（自己診断テスト） | v ブートローダの検索と起動 （Win...",
+    "summary": "電源投入 BIOS / UEFI 起動 ハードウェア 初期化 POST 自己診断テスト ブートローダの検索と起動 Windows Boot Manager / GRUB / U-Boot OSの...",
     "url": "fe/technology/computer/bios-os-types.html",
     "tags": [
       "コンピュータ概論"
@@ -2489,7 +4233,7 @@
   },
   {
     "term": "10 モバイルとIoTの時代",
-    "summary": "【IoTの基本構造】 センサー（温度・湿度・加速度など） | | データ収集 v IoTデバイス（マイコン＋通信機能） | | 無線通信（Wi-Fi / BLE / 5G / LoRa） v ク...",
+    "summary": "センサー（温度・湿度・加速度など） データ収集 IoTデバイス（マイコン＋通信機能） Wi-Fi / BLE / 5G / LoRa クラウド / エッジサーバ データ分析・AI処理 フィードバ...",
     "url": "fe/technology/computer/cloud-mobile-iot.html",
     "tags": [
       "コンピュータ概論"
@@ -2497,7 +4241,7 @@
   },
   {
     "term": "モバイルコンピューティングの発展",
-    "summary": "【IoTの基本構造】 センサー（温度・湿度・加速度など） | | データ収集 v IoTデバイス（マイコン＋通信機能） | | 無線通信（Wi-Fi / BLE / 5G / LoRa） v ク...",
+    "summary": "センサー（温度・湿度・加速度など） データ収集 IoTデバイス（マイコン＋通信機能） Wi-Fi / BLE / 5G / LoRa クラウド / エッジサーバ データ分析・AI処理 フィードバ...",
     "url": "fe/technology/computer/cloud-mobile-iot.html",
     "tags": [
       "コンピュータ概論"
@@ -2505,7 +4249,7 @@
   },
   {
     "term": "IoT（Internet of Things）",
-    "summary": "【IoTの基本構造】 センサー（温度・湿度・加速度など） | | データ収集 v IoTデバイス（マイコン＋通信機能） | | 無線通信（Wi-Fi / BLE / 5G / LoRa） v ク...",
+    "summary": "センサー（温度・湿度・加速度など） データ収集 IoTデバイス（マイコン＋通信機能） Wi-Fi / BLE / 5G / LoRa クラウド / エッジサーバ データ分析・AI処理 フィードバ...",
     "url": "fe/technology/computer/cloud-mobile-iot.html",
     "tags": [
       "コンピュータ概論"
@@ -2545,7 +4289,7 @@
   },
   {
     "term": "ノイマン型コンピュータ",
-    "summary": "【プログラム内蔵方式（ノイマン型）】 外部プログラム方式（ENIACなど）： 計算を変えたい場合 → 配線を組み直し、スイッチやジャックを操作 → 汎用性が低く、時間と手間がかかる プログラム内...",
+    "summary": "外部プログラム方式 ENIACなど 計算を変えるたびに 配線・スイッチを変更 汎用性が低く、手間がかかる プログラム内蔵方式 ノイマン型 計算手順をメモリに格納 CPUが順に読み取って実行 別の...",
     "url": "fe/technology/computer/computer-history.html",
     "tags": [
       "コンピュータ概論"
@@ -2553,7 +4297,7 @@
   },
   {
     "term": "エニグマとコロッサス",
-    "summary": "【初期電子計算機の比較】 +------------------+------------------+-------------------------+ | | ABCマシン | ENIAC...",
+    "summary": "ア）実際に製造された世界初の電子計算機 イ）無限に長いテープ上で計算する理論的な計算機モデル ウ）プログラム内蔵方式を提案した理論 エ）2進数による計算を提案した理論",
     "url": "fe/technology/computer/computer-history.html",
     "tags": [
       "コンピュータ概論"
@@ -2561,7 +4305,7 @@
   },
   {
     "term": "3 初期の電子計算機",
-    "summary": "【初期電子計算機の比較】 +------------------+------------------+-------------------------+ | | ABCマシン | ENIAC...",
+    "summary": "ア）実際に製造された世界初の電子計算機 イ）無限に長いテープ上で計算する理論的な計算機モデル ウ）プログラム内蔵方式を提案した理論 エ）2進数による計算を提案した理論",
     "url": "fe/technology/computer/computer-history.html",
     "tags": [
       "コンピュータ概論"
@@ -2569,7 +4313,7 @@
   },
   {
     "term": "ABCマシン（1939年）",
-    "summary": "【初期電子計算機の比較】 +------------------+------------------+-------------------------+ | | ABCマシン | ENIAC...",
+    "summary": "ア）実際に製造された世界初の電子計算機 イ）無限に長いテープ上で計算する理論的な計算機モデル ウ）プログラム内蔵方式を提案した理論 エ）2進数による計算を提案した理論",
     "url": "fe/technology/computer/computer-history.html",
     "tags": [
       "コンピュータ概論"
@@ -2577,7 +4321,7 @@
   },
   {
     "term": "ENIAC（1946年）",
-    "summary": "【初期電子計算機の比較】 +------------------+------------------+-------------------------+ | | ABCマシン | ENIAC...",
+    "summary": "ア）実際に製造された世界初の電子計算機 イ）無限に長いテープ上で計算する理論的な計算機モデル ウ）プログラム内蔵方式を提案した理論 エ）2進数による計算を提案した理論",
     "url": "fe/technology/computer/computer-history.html",
     "tags": [
       "コンピュータ概論"
@@ -2593,7 +4337,7 @@
   },
   {
     "term": "命令実行サイクル",
-    "summary": "【命令実行サイクル】 [フェッチ] --> [デコード] --> [エグゼキュート] --> [ライトバック] (命令取り出し) (命令解析) (演算実行) (結果書き戻し) CPUはこのサイク...",
+    "summary": "1. フェッチ 命令を取り出す 2. デコード 命令を解析 3. 実行 ALUで処理 4. ライトバック: 結果をレジスタや主記憶へ書き戻す CPUはこのサイクルを毎秒数十億回繰り返す パイプラ...",
     "url": "fe/technology/computer/cpu-architecture.html",
     "tags": [
       "コンピュータ概論"
@@ -2905,7 +4649,7 @@
   },
   {
     "term": "参照の局所性とキャッシュの関係",
-    "summary": "【キャッシュヒット vs キャッシュミス】 キャッシュヒット： CPU「このデータほしい！」 キャッシュ「はい、ここにあります！」 → 主記憶に行かなくていいので高速 キャッシュミス： CPU「...",
+    "summary": "ア）DRAMは不揮発性、SRAMは揮発性 イ）DRAMはリフレッシュが必要、SRAMは不要 ウ）DRAMは高速・高コスト、SRAMは低速・低コスト エ）DRAMはキャッシュ用、SRAMは主記憶用",
     "url": "fe/technology/computer/memory-cache.html",
     "tags": [
       "コンピュータ概論"
@@ -2985,7 +4729,7 @@
   },
   {
     "term": "プロセスとは",
-    "summary": "【プロセスの状態遷移】 +-----------------+ | | | 実行状態 | | (Running) | | CPUを使っている | +-----------------+ | | ...",
+    "summary": "実行状態 (Running) CPUを使っている 実行可能状態 (Ready) CPUを待っている 待ち状態 (Waiting) I/Oなど完了待ち タイムアウト (時間切れ) I/O完了 イベ...",
     "url": "fe/technology/computer/process-scheduling.html",
     "tags": [
       "コンピュータ概論"
@@ -2993,7 +4737,7 @@
   },
   {
     "term": "プロセスの状態遷移",
-    "summary": "【プロセスの状態遷移】 +-----------------+ | | | 実行状態 | | (Running) | | CPUを使っている | +-----------------+ | | ...",
+    "summary": "実行状態 (Running) CPUを使っている 実行可能状態 (Ready) CPUを待っている 待ち状態 (Waiting) I/Oなど完了待ち タイムアウト (時間切れ) I/O完了 イベ...",
     "url": "fe/technology/computer/process-scheduling.html",
     "tags": [
       "コンピュータ概論"
@@ -3089,7 +4833,7 @@
   },
   {
     "term": "6 商用コンピュータとPCの登場",
-    "summary": "【コンピュータ普及のイメージ】 研究機関・軍事 | v 商用コンピュータ（UNIVAC、IBM） | v 汎用コンピュータ（IBM 360） | v パーソナルコンピュータ（Apple II、I...",
+    "summary": "研究機関・軍事 商用コンピュータ UNIVAC、IBM 汎用コンピュータ IBM 360 パーソナルコンピュータ Apple II、IBM PC 現代 スマートフォン タブレット 個人や中小企業...",
     "url": "fe/technology/computer/tech-evolution.html",
     "tags": [
       "コンピュータ概論"
@@ -3097,7 +4841,7 @@
   },
   {
     "term": "世界初の商用コンピュータ：UNIVAC（1951年）",
-    "summary": "【コンピュータ普及のイメージ】 研究機関・軍事 | v 商用コンピュータ（UNIVAC、IBM） | v 汎用コンピュータ（IBM 360） | v パーソナルコンピュータ（Apple II、I...",
+    "summary": "研究機関・軍事 商用コンピュータ UNIVAC、IBM 汎用コンピュータ IBM 360 パーソナルコンピュータ Apple II、IBM PC 現代 スマートフォン タブレット 個人や中小企業...",
     "url": "fe/technology/computer/tech-evolution.html",
     "tags": [
       "コンピュータ概論"
@@ -3105,7 +4849,7 @@
   },
   {
     "term": "IBMの商用コンピュータ",
-    "summary": "【コンピュータ普及のイメージ】 研究機関・軍事 | v 商用コンピュータ（UNIVAC、IBM） | v 汎用コンピュータ（IBM 360） | v パーソナルコンピュータ（Apple II、I...",
+    "summary": "研究機関・軍事 商用コンピュータ UNIVAC、IBM 汎用コンピュータ IBM 360 パーソナルコンピュータ Apple II、IBM PC 現代 スマートフォン タブレット 個人や中小企業...",
     "url": "fe/technology/computer/tech-evolution.html",
     "tags": [
       "コンピュータ概論"
@@ -3113,7 +4857,7 @@
   },
   {
     "term": "パーソナルコンピュータ（PC）の登場",
-    "summary": "【コンピュータ普及のイメージ】 研究機関・軍事 | v 商用コンピュータ（UNIVAC、IBM） | v 汎用コンピュータ（IBM 360） | v パーソナルコンピュータ（Apple II、I...",
+    "summary": "研究機関・軍事 商用コンピュータ UNIVAC、IBM 汎用コンピュータ IBM 360 パーソナルコンピュータ Apple II、IBM PC 現代 スマートフォン タブレット 個人や中小企業...",
     "url": "fe/technology/computer/tech-evolution.html",
     "tags": [
       "コンピュータ概論"
@@ -3137,7 +4881,7 @@
   },
   {
     "term": "クロック周波数の向上とその限界",
-    "summary": "【コンピュータ高速化の変遷】 1980-2000年代： [クロック周波数向上] → 発熱・消費電力が限界に 2000年代後半以降： [マルチコア化] → 複数コアで並列処理 [GPU活用] → ...",
+    "summary": "1980-2000年代 クロック周波数向上 発熱・消費電力が限界に 転換 2000年代後半以降 マルチコア化: 複数コアで並列処理 GPU活用: 数千コアで並列処理 NPU登場: AI処理に特化...",
     "url": "fe/technology/computer/tech-evolution.html",
     "tags": [
       "コンピュータ概論"
@@ -3145,7 +4889,7 @@
   },
   {
     "term": "GPU・NPUによる並列処理の時代",
-    "summary": "【コンピュータ高速化の変遷】 1980-2000年代： [クロック周波数向上] → 発熱・消費電力が限界に 2000年代後半以降： [マルチコア化] → 複数コアで並列処理 [GPU活用] → ...",
+    "summary": "1980-2000年代 クロック周波数向上 発熱・消費電力が限界に 転換 2000年代後半以降 マルチコア化: 複数コアで並列処理 GPU活用: 数千コアで並列処理 NPU登場: AI処理に特化...",
     "url": "fe/technology/computer/tech-evolution.html",
     "tags": [
       "コンピュータ概論"
@@ -3161,7 +4905,7 @@
   },
   {
     "term": "仮想記憶の動作（簡単な流れ）",
-    "summary": "【仮想記憶の動作フロー】 1. CPUが仮想アドレスでデータを要求する | v 2. MMUがページテーブルを参照して物理アドレスに変換する | v 3. ページが主記憶にあれば（ページテーブル...",
+    "summary": "1. CPUが仮想アドレスでデータを要求 2. MMUがページテーブルを参照して物理アドレスに変換 3. ページは主記憶にあるか 存在ビット=1 / 0 あり そのままアクセス 高速に完了 なし...",
     "url": "fe/technology/computer/virtual-memory-storage.html",
     "tags": [
       "コンピュータ概論"
@@ -3177,7 +4921,7 @@
   },
   {
     "term": "外部記憶装置の種類と比較",
-    "summary": "【HDD vs SSD 比較】 HDD（ハードディスク）： +-------------------+ | 磁気ディスク | ← 回転（5400rpm / 7200rpm） | [====] |...",
+    "summary": "磁気ディスクが回転（5400rpm / 7200rpm） 磁気ヘッドは移動が必要 大容量・低コスト・アクセス遅い・衝撃に弱い SSD（ソリッドステートドライブ） フラッシュメモリ 電子記憶（可動...",
     "url": "fe/technology/computer/virtual-memory-storage.html",
     "tags": [
       "コンピュータ概論"
@@ -3185,7 +4929,7 @@
   },
   {
     "term": "主記憶装置と外部記憶装置の違い",
-    "summary": "【HDD vs SSD 比較】 HDD（ハードディスク）： +-------------------+ | 磁気ディスク | ← 回転（5400rpm / 7200rpm） | [====] |...",
+    "summary": "磁気ディスクが回転（5400rpm / 7200rpm） 磁気ヘッドは移動が必要 大容量・低コスト・アクセス遅い・衝撃に弱い SSD（ソリッドステートドライブ） フラッシュメモリ 電子記憶（可動...",
     "url": "fe/technology/computer/virtual-memory-storage.html",
     "tags": [
       "コンピュータ概論"
@@ -3193,7 +4937,7 @@
   },
   {
     "term": "アクセス方法（ランダムアクセス vs シーケンシャルアクセス）",
-    "summary": "【HDD vs SSD 比較】 HDD（ハードディスク）： +-------------------+ | 磁気ディスク | ← 回転（5400rpm / 7200rpm） | [====] |...",
+    "summary": "磁気ディスクが回転（5400rpm / 7200rpm） 磁気ヘッドは移動が必要 大容量・低コスト・アクセス遅い・衝撃に弱い SSD（ソリッドステートドライブ） フラッシュメモリ 電子記憶（可動...",
     "url": "fe/technology/computer/virtual-memory-storage.html",
     "tags": [
       "コンピュータ概論"
@@ -3201,7 +4945,7 @@
   },
   {
     "term": "性能指標",
-    "summary": "【HDD vs SSD 比較】 HDD（ハードディスク）： +-------------------+ | 磁気ディスク | ← 回転（5400rpm / 7200rpm） | [====] |...",
+    "summary": "磁気ディスクが回転（5400rpm / 7200rpm） 磁気ヘッドは移動が必要 大容量・低コスト・アクセス遅い・衝撃に弱い SSD（ソリッドステートドライブ） フラッシュメモリ 電子記憶（可動...",
     "url": "fe/technology/computer/virtual-memory-storage.html",
     "tags": [
       "コンピュータ概論"
@@ -3245,6 +4989,2094 @@
     "url": "fe/technology/computer/virtualization.html",
     "tags": [
       "コンピュータ概論"
+    ]
+  },
+  {
+    "term": "RDBとは",
+    "summary": "RDB（Relational DataBase：リレーショナルデータベース）は、「表（テーブル）同士の関係（リレーション）を使ってデータを管理する仕組み」である。現在のWebアプリケーションの多...",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "RDBの3つの特徴",
+    "summary": "表（テーブル） Excelのような 行と列の形式 関係 テーブル同士を 関連付け SQL データを 操作 この3つがRDBの本質 特徴説明 ① 表（テーブル）として管理データをExcelのような...",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "なぜRDBがWebアプリで使われるのか",
+    "summary": "RDBの基本単位はテーブル（表）とレコード（行）である。Webアプリケーションが扱うデータは、すべてこのテーブルとレコードの組み合わせで管理される。",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "テーブル / レコード",
+    "summary": "RDBの基本単位はテーブル（表）とレコード（行）である。Webアプリケーションが扱うデータは、すべてこのテーブルとレコードの組み合わせで管理される。",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "テーブル（表）とは",
+    "summary": "テーブルは、データを項目（列）ごとに整理した表のこと。テーブル名＝データの種類を表す名前。",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "テーブル設計の基本ルール",
+    "summary": "RDBでは、テーブルの各カラムに「どの種類のデータを入れるか」を明確にする必要がある。この「データの種類」をデータ型（Data Type）と呼ぶ。データ型は、データの正しさ、検索性能、ストレージ...",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "データ型",
+    "summary": "RDBでは、テーブルの各カラムに「どの種類のデータを入れるか」を明確にする必要がある。この「データの種類」をデータ型（Data Type）と呼ぶ。データ型は、データの正しさ、検索性能、ストレージ...",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "数値型（整数/小数）",
+    "summary": "ポイント：IDは整数型で管理する。金額は誤差が出ないDECIMALを使う（浮動小数点は使わない）。",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "文字列型（短文/長文）",
+    "summary": "ポイント：VARCHARは必要な分だけ保存できる。長文はTEXTを使う。",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "日付・時刻型",
+    "summary": "ポイント：日付を文字列で保存すると検索が遅くなる。日付型を使うことで範囲検索が高速になる。",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "真偽値（Boolean）",
+    "summary": "ポイント：0/1で管理されることが多い。状態管理に必須。",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "NULL（値が存在しない）",
+    "summary": "ポイント：NULLは「空文字」や「0」とは異なる概念。NULLを許可するかどうかは設計で決める。検索条件でNULLは特別扱いになる（=では比較できない）。",
+    "url": "fe/technology/database/db-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "主キー / 外部キー",
+    "summary": "RDBでは、テーブル同士の関係を正しく管理するために主キー（Primary Key）と外部キー（Foreign Key）が重要な役割を持つ。この2つを理解することで、データの整合性・検索性能・テ...",
+    "url": "fe/technology/database/db-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "主キー（Primary Key：PK）",
+    "summary": "主キーは、テーブル内の1行を一意に識別するためのカラム。",
+    "url": "fe/technology/database/db-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "外部キー（Foreign Key：FK）",
+    "summary": "外部キーは、他のテーブルの主キーを参照するカラム。",
+    "url": "fe/technology/database/db-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "主キーと外部キーの関係（1対多）",
+    "summary": "RDBの基本的な関係は1対多（one-to-many）。例：1人のユーザー → 複数の注文、1つの商品 → 複数の注文。この関係を表すために、親テーブル：主キー、子テーブル：外部キーという構造になる。",
+    "url": "fe/technology/database/db-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "主キー/外部キーの設計ルール",
+    "summary": "正規化（Normalization）は、データの重複を排除し、整合性を保つためのテーブル設計の考え方。",
+    "url": "fe/technology/database/db-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "正規化とは何か",
+    "summary": "「1つのテーブルに複数の意味を混ぜない」という設計思想。目的：データの重複をなくす、更新時の不整合を防ぐ、テーブル同士の関係を明確にする。",
+    "url": "fe/technology/database/db-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "第1正規形（1NF）：繰り返しをなくす",
+    "summary": "1つのカラムに複数の値を入れない。",
+    "url": "fe/technology/database/db-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "第2正規形（2NF）：主キーと関係のない項目を排除",
+    "summary": "主キーと直接関係しないカラムを同じテーブルに置かない。",
+    "url": "fe/technology/database/db-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "第3正規形（3NF）：間接的な依存を排除",
+    "summary": "カラム同士が間接的に依存している場合は分離する。",
+    "url": "fe/technology/database/db-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "正規化が必要な理由",
+    "summary": "ア）重複してはいけない イ）NULLを許可する ウ）1行を一意に識別できる エ）テーブルに1つ設定する",
+    "url": "fe/technology/database/db-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "WebアプリとDBの連携",
+    "summary": "Webアプリケーションは、ユーザー情報・商品情報・注文情報などをDBに保存し、必要なときに取り出すことで動作している。その中でも、最も基本的で重要な処理がログイン処理である。",
+    "url": "fe/technology/database/db-operation.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ログイン処理の流れ（4層の連携）",
+    "summary": "ブラウザ ① Webサーバー ② アプリ ③ DB ログイン処理の詳細 ① ブラウザがログイン情報（email/password）を送信 ② Webサーバーは受け取ったリクエストをアプリに転送 ...",
+    "url": "fe/technology/database/db-operation.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "バックアップ（ダンプ）",
+    "summary": "データベースは、Webアプリケーションの最も重要な資産である。障害・誤操作・サーバートラブルが発生した場合でも、データを確実に復旧できるようにするためにバックアップ（ダンプ）が必要となる。",
+    "url": "fe/technology/database/db-operation.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "バックアップとは何か",
+    "summary": "バックアップとは、DBの内容を外部ファイルとして保存すること。目的：障害発生時にデータを復旧する、誤削除・誤更新からの復元、サーバー移行時のデータ移行、開発環境・本番環境の同期。",
+    "url": "fe/technology/database/db-operation.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ダンプ（Dump）とは",
+    "summary": "ダンプとは、DBの内容をSQL形式で書き出したファイルのこと。テーブルのデータ、テーブル構造（CREATE TABLE）、INSERT文によるデータ書き出しなどが含まれる。ダンプファイルはテキス...",
+    "url": "fe/technology/database/db-operation.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "リストア（Restore）とは",
+    "summary": "リストアとは、ダンプファイルを使ってDBを復元すること。新しいサーバーにデータを移行する、誤削除したデータを戻す、テスト環境を本番と同じ状態にする。",
+    "url": "fe/technology/database/db-operation.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "バックアップの種類",
+    "summary": "データベースは、Webアプリケーションの利用が増えるほどデータ量（容量）とアクセス数（接続数）が増加する。これらを適切に管理しないと、アプリの動作が遅くなったり、最悪の場合サービス停止に至る。",
+    "url": "fe/technology/database/db-operation.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "運用基礎（容量/接続数）",
+    "summary": "データベースは、Webアプリケーションの利用が増えるほどデータ量（容量）とアクセス数（接続数）が増加する。これらを適切に管理しないと、アプリの動作が遅くなったり、最悪の場合サービス停止に至る。",
+    "url": "fe/technology/database/db-operation.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "容量（データ量）の考え方",
+    "summary": "DBの容量は、テーブルのデータ量、インデックスのサイズ、ログファイルなどによって増加する。",
+    "url": "fe/technology/database/db-operation.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "接続数（同時アクセス数）の考え方",
+    "summary": "接続数とは、同時にDBに接続できる最大数のこと。例：1ユーザーがページを開く → DBに1接続、APIが複数同時に呼ばれる → 接続数が増える。接続数には上限があり、上限を超えると新しい接続が拒...",
+    "url": "fe/technology/database/db-operation.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "JOIN",
+    "summary": "JOIN（ジョイン）は、複数のテーブルを結合して1つの結果として取得する仕組みである。RDBは「テーブルを分けて正規化する」ことが前提のため、実際のアプリケーションではJOINを使って必要な情報...",
+    "url": "fe/technology/database/db-performance.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "JOINが必要になる理由",
+    "summary": "正規化されたテーブルは、users（ユーザー）、orders（注文）、items（商品）のように意味ごとに分割されている。しかし、Webアプリでは「ユーザー名と注文内容をまとめて表示したい」「商...",
+    "url": "fe/technology/database/db-performance.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "INNER JOIN（内部結合）",
+    "summary": "両方のテーブルに存在するデータだけを取得する。Webアプリの一覧表示で最もよく使われる。",
+    "url": "fe/technology/database/db-performance.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "LEFT JOIN（左外部結合）",
+    "summary": "左側のテーブルを基準に、対応するデータがなくても取得する。「存在しないデータも含めて取得したい」場合に使う。",
+    "url": "fe/technology/database/db-performance.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "インデックス",
+    "summary": "インデックス（Index）は、データ検索を高速化するための仕組みである。RDBのテーブルは行数が増えるほど検索に時間がかかるため、Webアプリの性能を保つためにはインデックスの理解が不可欠。",
+    "url": "fe/technology/database/db-performance.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "インデックスとは何か",
+    "summary": "インデックスは、特定のカラムに対して作成する「検索用の目次」のようなもの。例：users.emailにインデックスを貼る、items.nameにインデックスを貼る。インデックスがあると、テーブル...",
+    "url": "fe/technology/database/db-performance.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "インデックスが必要になる場面",
+    "summary": "Webアプリでは以下のような検索が頻繁に行われる：ログイン（emailで検索）、商品検索（nameで検索）、注文履歴（user_idで検索）、詳細ページ（idで検索）。これらのカラムにインデック...",
+    "url": "fe/technology/database/db-performance.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "インデックスを貼るべきカラム",
+    "summary": "インデックスは、「正しく貼れば高速化、誤って貼れば逆効果」という性質を持つため、概念理解が非常に重要。",
+    "url": "fe/technology/database/db-performance.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "フォーム送信の流れ",
+    "summary": "HTMLのフォームは、ユーザーが入力した内容をHTTPリクエストとしてWebサーバーに送信する仕組み。フォーム送信では、method（GET/POST）、action（送信先URL）、入力項目（...",
+    "url": "fe/technology/database/form-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "フォームの基本構造",
+    "summary": "① ユーザーがフォームに入力 ② 送信ボタンを押す ③ ブラウザがHTTPリクエストを送信 ④ Webサーバーがリクエストを受信 ⑤ アプリケーションが処理 ⑥ Webサーバーがレスポンスを返却...",
+    "url": "fe/technology/database/form-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "フォーム送信の流れ（POSTの場合）",
+    "summary": "① ユーザーがフォームに入力 ② 送信ボタンを押す ③ ブラウザがHTTPリクエストを送信 ④ Webサーバーがリクエストを受信 ⑤ アプリケーションが処理 ⑥ Webサーバーがレスポンスを返却...",
+    "url": "fe/technology/database/form-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "リダイレクト",
+    "summary": "リダイレクトとは、Webサーバーが「別のURLに移動してください」とブラウザに指示する仕組み。ブラウザはリダイレクトを受け取ると、自動的に次のURLへアクセスし直す。",
+    "url": "fe/technology/database/form-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Cookieの基礎",
+    "summary": "Cookie（クッキー）とは、Webサーバーがブラウザに保存させる小さなデータのこと。ブラウザはCookieを保存し、同じサイトにアクセスするときに自動で送り返す。これにより、Webサーバーは「...",
+    "url": "fe/technology/database/form-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "URLの構造",
+    "summary": "URLは、Webサーバーに「どのプロトコルで」「どのサーバーに」「どのリソースを要求するか」を伝えるための情報。",
+    "url": "fe/technology/database/http-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "HTTPリクエスト",
+    "summary": "HTTPは「リクエスト→レスポンス」の1往復で成り立つ。ブラウザからWebサーバーに送信される要求。",
+    "url": "fe/technology/database/http-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "HTTPレスポンス",
+    "summary": "Webサーバーからブラウザに返される応答。",
+    "url": "fe/technology/database/http-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "HTTPメソッド",
+    "summary": "HTTPメソッドは、ブラウザ（またはクライアント）がWebサーバーに「何をしたいか」を伝えるための指示。URLだけでは「どのリソースか」しか分からない。メソッドがあることで「どう扱うか」が決まる。",
+    "url": "fe/technology/database/http-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "HTTPヘッダ",
+    "summary": "HTTPヘッダとは、HTTPリクエスト/レスポンスに付けられる「追加情報」であり、Webサーバーが処理内容を判断するための指示書のようなもの。ヘッダがないと、Webサーバーは「誰から来たのか」「...",
+    "url": "fe/technology/database/http-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "主要なHTTPヘッダ",
+    "summary": "GET /api/user?id=10 HTTP/1.1 Host: example.com Cookie: sessionid=abc123 Webサーバーの判断 • Host: exampl...",
+    "url": "fe/technology/database/http-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webサーバーはヘッダをどう使っているか",
+    "summary": "GET /api/user?id=10 HTTP/1.1 Host: example.com Cookie: sessionid=abc123 Webサーバーの判断 • Host: exampl...",
+    "url": "fe/technology/database/http-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ステータスコード",
+    "summary": "ステータスコードは、Webサーバーが「リクエストをどう処理したか」をブラウザに伝えるための結果コード。HTTPレスポンスの1行目に必ず含まれる。",
+    "url": "fe/technology/database/http-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "代表的なステータスコード",
+    "summary": "HTTPSとは、HTTPの通信内容をTLSによって暗号化し、Webサーバーとブラウザ間の通信を安全にする仕組み。",
+    "url": "fe/technology/database/http-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "リダイレクトの種類",
+    "summary": "HTTPSとは、HTTPの通信内容をTLSによって暗号化し、Webサーバーとブラウザ間の通信を安全にする仕組み。",
+    "url": "fe/technology/database/http-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "HTTPS（Webサーバーが安全に通信するための仕組み）",
+    "summary": "HTTPSとは、HTTPの通信内容をTLSによって暗号化し、Webサーバーとブラウザ間の通信を安全にする仕組み。",
+    "url": "fe/technology/database/http-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "SSL証明書",
+    "summary": "SSL証明書は、TLSハンドシェイクの工程でWebサーバーがブラウザに提示する「身分証明書」。ブラウザは証明書を見て、このサーバーは本物か、信頼できるCAが発行しているか、有効期限内かを確認する。",
+    "url": "fe/technology/database/http-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "HTTPS導入の流れ",
+    "summary": "ユーザーが http://example.com にアクセスする場合がある。そのためWebサーバーは：",
+    "url": "fe/technology/database/http-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "HTTPからHTTPSへの誘導",
+    "summary": "ユーザーが http://example.com にアクセスする場合がある。そのためWebサーバーは：",
+    "url": "fe/technology/database/http-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "HTTPボディ",
+    "summary": "HTTPボディは、POST/PUTなどのメソッドで、ブラウザがWebサーバーに送る「データ本体」のこと。URLやヘッダだけでは伝えられないユーザー入力・フォーム内容・JSONデータ・ファイルなど...",
+    "url": "fe/technology/database/http-details.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ボディの3つの形式",
+    "summary": "① ブラウザがフォーム送信 ② Webサーバーがメソッド確認 ③ Content-Typeを確認し解析方法決定 ④ ボディを読み取る ⑤ キーと値に分解（username=hiroなど） ⑥ ア...",
+    "url": "fe/technology/database/http-details.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ログイン処理の流れ（ボディ解析）",
+    "summary": "① ブラウザがフォーム送信 ② Webサーバーがメソッド確認 ③ Content-Typeを確認し解析方法決定 ④ ボディを読み取る ⑤ キーと値に分解（username=hiroなど） ⑥ ア...",
+    "url": "fe/technology/database/http-details.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "CookieとSession",
+    "summary": "HTTPはステートレス（stateless）なプロトコルである。ステートレスとは、Webサーバーが「前回のリクエストの情報」を一切覚えない性質のこと。つまりWebサーバーは、毎回のリクエストを「...",
+    "url": "fe/technology/database/http-details.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Cookieの属性",
+    "summary": "HTTPのキャッシュ制御とは、ブラウザや中間サーバー（プロキシ）が、Webサーバーから取得したデータを再利用する仕組み。キャッシュを正しく制御しないと、更新されない、古い画像が表示される、CSS...",
+    "url": "fe/technology/database/http-details.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "キャッシュ制御",
+    "summary": "HTTPのキャッシュ制御とは、ブラウザや中間サーバー（プロキシ）が、Webサーバーから取得したデータを再利用する仕組み。キャッシュを正しく制御しないと、更新されない、古い画像が表示される、CSS...",
+    "url": "fe/technology/database/http-details.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ETagによるキャッシュ検証",
+    "summary": "初回アクセス レスポンス: ETag: \"abc123\" 次回アクセス リクエスト: If-None-Match: \"abc123\" 一致 → 304 Not Modified 4. Keep-...",
+    "url": "fe/technology/database/http-details.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Keep-Alive",
+    "summary": "HTTP/1.1では、1つのTCP接続を複数のリクエストで使い回す（Keep-Alive）という仕組みが標準になっている。これにより、Webサーバーは高速に応答できる。",
+    "url": "fe/technology/database/http-details.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "なぜWebサーバーにネットワークの知識が必要なのか",
+    "summary": "Webサーバーは、ネットワークを通じてクライアント（ブラウザ）と通信する仕組みで動いている。そのため、Webサーバーを理解するには次の知識が必須：WebサーバーがどのIPで待ち受けているのか、ブ...",
+    "url": "fe/technology/database/network-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webサーバーはどこに存在し、どのIPで公開されるのか（WAN/LAN/NATの構造）",
+    "summary": "Webサーバーは、インターネット（WAN）と内部ネットワーク（LAN）の境界にある機器を通して公開される。そのためWebサーバーは次の2種類のIPを使う：外側（WAN）→グローバルIP、内側（L...",
+    "url": "fe/technology/database/network-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "WANとLANとIPの役割",
+    "summary": "Webサーバーの実態：Webサーバーが持っているのはプライベートIP。つまり、WebサーバーはLANの中にいるサーバーであり、インターネットから直接は届かない位置にいる。",
+    "url": "fe/technology/database/network-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "NAT（Network Address Translation）の仕組み",
+    "summary": "Webサーバーをインターネットから利用できるようにするには、WANとLANの境界にある装置（ルータ/ファイアウォール/ロードバランサー）がNATを行う。外側から見えるのはグローバルIP、実際に処...",
+    "url": "fe/technology/database/network-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "なぜWebサーバーはプライベートIPでLAN内に置くのか",
+    "summary": "グローバルIPを直接サーバーに付与すると危険：世界中から直接攻撃される、ファイアウォールより内側にむき出しで置くことになる。LAN内に置き、プライベートIPで動かすことで守れる：外側からは直接届...",
+    "url": "fe/technology/database/network-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "DNS（ドメイン名をIPに変換する仕組み）",
+    "summary": "ブラウザ ローカルDNSに問い合わせ 権威DNSからIPを取得 IPアドレスを取得して接続 IP返却 権威DNS 工程DNSが何をするか返す情報 ① ブラウザがURLを入力DNSはまだ動かない—...",
+    "url": "fe/technology/database/network-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "DNSレコードの種類",
+    "summary": "ブラウザ ローカルDNSに問い合わせ 権威DNSからIPを取得 IPアドレスを取得して接続 IP返却 権威DNS 工程DNSが何をするか返す情報 ① ブラウザがURLを入力DNSはまだ動かない—...",
+    "url": "fe/technology/database/network-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ポート番号",
+    "summary": "ポート番号とは、同じIPの中で、どのサービスに通信を届けるかを決める番号。",
+    "url": "fe/technology/database/network-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "TCP（Webサーバーが通信路を作る仕組み）",
+    "summary": "WebサーバーはHTTP/HTTPSを使って通信するが、HTTP/HTTPSはTCPの上で動くプロトコル。つまり、WebサーバーはTCPが作った通信路の上でしか動けない。",
+    "url": "fe/technology/database/network-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ファイアウォールが関わる工程",
+    "summary": "Webサーバーに通信が届くまでの工程：",
+    "url": "fe/technology/database/network-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "OS（オペレーティングシステム）とは何か",
+    "summary": "OS（Operating System）は、コンピュータのハードウェアとアプリケーションの間に入り、両者を仲介する基盤ソフトウェア。Webサーバーを理解するためには、OSがどのように「ファイル」...",
+    "url": "fe/technology/database/os-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "サーバーOSの特徴",
+    "summary": "WebサーバーはWindowsでもLinuxでも動作するが、世界のWebサーバーの大半はLinux上で動いている。",
+    "url": "fe/technology/database/os-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Linuxの種類（ディストリビューション）",
+    "summary": "Linuxは1つのOSではなく、共通のLinuxカーネルをもとに、さまざまな組織が独自に構成した「種類」が存在する。これをディストリビューション（Distribution）と呼ぶ。",
+    "url": "fe/technology/database/os-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "開発環境を構築するためのパッケージ",
+    "summary": "Webサーバーの学習では、本番サーバー（Linux）とは別に、ローカルPC上で動作する開発環境を用意することが多い。開発環境では、Webサーバー・データベース・PHPなどをまとめてインストールで...",
+    "url": "fe/technology/database/os-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "本番環境（Linux）との違い",
+    "summary": "ア）ファイル イ）プロセス ウ）ブラウザ エ）権限",
+    "url": "fe/technology/database/os-basic-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ディレクトリ構造の概念",
+    "summary": "Webサーバーは、OSのファイルシステムからファイルを読み取る。そのため、ディレクトリ構造の概念を理解する必要がある。",
+    "url": "fe/technology/database/os-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "DocumentRoot（ドキュメントルート）とは",
+    "summary": "DocumentRootとは、Webサーバーが「公開するファイルを探す場所」のこと。例：/var/www/html/index.html ブラウザが https://example.com/ に...",
+    "url": "fe/technology/database/os-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "public_htmlとは",
+    "summary": "レンタルサーバーでよく使われる構造。ユーザーごとに公開領域が分かれており、public_htmlに置いたファイルだけが公開される。例：/home/user/public_html/index.html",
+    "url": "fe/technology/database/os-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "index.htmlの役割",
+    "summary": "ブラウザで https://example.com/ と入力すると、index.htmlが自動で表示される。これはWebサーバーが次のように動作するため。",
+    "url": "fe/technology/database/os-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webサーバーが動き続ける仕組み（サービス）",
+    "summary": "WebサーバーはOSの上で常に動き続ける必要がある。ブラウザからのアクセスはいつ来るか分からないため、WebサーバーはOSによって次のように管理されている：OS起動時に自動で立ち上がる、24時間...",
+    "url": "fe/technology/database/os-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webサーバーのログ",
+    "summary": "Webサーバーは、受け取ったリクエスト・返したレスポンス・エラー・攻撃の痕跡をすべてログに記録する。",
+    "url": "fe/technology/database/os-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ファイル権限",
+    "summary": "Webサーバーが静的ファイルを返すには、そのファイルに対してr（read：読み取り）権限が必要。もし権限が不足していると、Webサーバーはファイルを読み取れず、結果として403 Forbidde...",
+    "url": "fe/technology/database/os-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "権限が間違っているとどうなるか",
+    "summary": "実務で最も多いトラブル：ファイルを置いたのに表示されない、画像だけ403になる、CSSが読み込まれずデザインが崩れる、アプリが設定ファイルを読めず500エラーになる、ログが書けず原因調査ができな...",
+    "url": "fe/technology/database/os-basic-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webページ生成の全体像",
+    "summary": "Webページが表示されるまでには、ブラウザ → Webサーバー → アプリケーション → データベースという複数の層が、決められた順序で連携して動作している。",
+    "url": "fe/technology/database/page-generation-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "静的ページ",
+    "summary": "静的ページとは、サーバー上に「ファイルとして存在する内容」を、そのまま返す仕組みのこと。例：index.html、style.css、logo.png、script.js。これらは、Webサーバ...",
+    "url": "fe/technology/database/page-generation-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "静的ページが返るまでの流れ",
+    "summary": "① リクエスト受信 ② DocumentRootからファイルを探す ③ ファイル存在確認 Yes ④ Content-Typeを決定 ⑤ レスポンスとして返す No 404 静的ページの特徴 項...",
+    "url": "fe/technology/database/page-generation-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "静的ページの特徴",
+    "summary": "動的ページとは、リクエストを受けてからアプリケーションが「その場で内容を生成する」ページのこと。例：ログイン後のマイページ、商品検索結果、投稿一覧、APIが返すJSON。静的ページと異なり、ユー...",
+    "url": "fe/technology/database/page-generation-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "静的ページが使われる場面",
+    "summary": "動的ページとは、リクエストを受けてからアプリケーションが「その場で内容を生成する」ページのこと。例：ログイン後のマイページ、商品検索結果、投稿一覧、APIが返すJSON。静的ページと異なり、ユー...",
+    "url": "fe/technology/database/page-generation-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "動的ページ",
+    "summary": "動的ページとは、リクエストを受けてからアプリケーションが「その場で内容を生成する」ページのこと。例：ログイン後のマイページ、商品検索結果、投稿一覧、APIが返すJSON。静的ページと異なり、ユー...",
+    "url": "fe/technology/database/page-generation-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "動的ページが返るまでの流れ",
+    "summary": "① ブラウザがリクエスト送信 ② Webサーバーがリクエスト受信 ③ Webサーバーがアプリに処理を渡す ④ アプリがDBからデータを取得 ⑤ アプリがHTML/JSONを生成 ⑥ Webサーバ...",
+    "url": "fe/technology/database/page-generation-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "動的ページの特徴",
+    "summary": "ア）リクエストごとにアプリケーションがHTMLを生成する イ）サーバー上にファイルとして存在する内容をそのまま返す ウ）ユーザーごとに表示内容が変わる エ）必ずデータベースと連携する",
+    "url": "fe/technology/database/page-generation-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "動的ページが使われる場面",
+    "summary": "ア）リクエストごとにアプリケーションがHTMLを生成する イ）サーバー上にファイルとして存在する内容をそのまま返す ウ）ユーザーごとに表示内容が変わる エ）必ずデータベースと連携する",
+    "url": "fe/technology/database/page-generation-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "静的 vs 動的 比較",
+    "summary": "ア）リクエストごとにアプリケーションがHTMLを生成する イ）サーバー上にファイルとして存在する内容をそのまま返す ウ）ユーザーごとに表示内容が変わる エ）必ずデータベースと連携する",
+    "url": "fe/technology/database/page-generation-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webサーバーのレスポンスの中身",
+    "summary": "Webサーバーは、ブラウザからのリクエストに対してHTTPレスポンスを返すことでWebページを表示させる。レスポンスは次の2つで構成される：レスポンスヘッダ（HTTPの情報）、レスポンスボディ（...",
+    "url": "fe/technology/database/page-generation-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "レスポンスボディの種類",
+    "summary": "Content-Typeは、レスポンスボディの種類（形式）をブラウザに伝えるヘッダ。ブラウザはContent-Typeを見て、HTMLとして表示するのか、CSSとして適用するのか、JavaScr...",
+    "url": "fe/technology/database/page-generation-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Content-TypeとMIMEタイプ",
+    "summary": "Content-Typeは、レスポンスボディの種類（形式）をブラウザに伝えるヘッダ。ブラウザはContent-Typeを見て、HTMLとして表示するのか、CSSとして適用するのか、JavaScr...",
+    "url": "fe/technology/database/page-generation-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "URLパラメータ（?id=10の仕組み）",
+    "summary": "URLパラメータとは、URLの末尾に「?」以降で付ける追加情報のこと。例：https://example.com/item?id=10sort=asc",
+    "url": "fe/technology/database/page-generation-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "GETとPOST",
+    "summary": "HTTPには複数のメソッドがあるが、Webページ生成で最も重要なのはGETとPOSTの2つ。GETはデータ取得（URLにパラメータ）、POSTはデータ送信（ボディにデータ）。",
+    "url": "fe/technology/database/page-generation-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "REST API / JSON",
+    "summary": "現代のWebアプリケーションは、HTMLを直接生成するのではなく、API（データ）とフロントエンド（画面）を分離して構築する。その中心となる仕組みがREST APIとJSON。",
+    "url": "fe/technology/database/rest-api.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "なぜREST API / JSONが必要なのか",
+    "summary": "従来のWeb（LAMP時代）はPHPがHTMLを生成、サーバー側で画面を作る、ブラウザは表示するだけという構造だった。しかし現代はSPA（React/Vue）、モバイルアプリ、外部サービス連携、...",
+    "url": "fe/technology/database/rest-api.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "REST APIとは",
+    "summary": "REST APIは、HTTPを使ってデータをやり取りするAPIの設計方式。特徴：URLが「リソース」を表す、HTTPメソッド（GET/POST/PUT/DELETE）で操作を表す、レスポンスはJ...",
+    "url": "fe/technology/database/rest-api.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "JSONとは",
+    "summary": "JSON（JavaScript Object Notation）は、軽量で読みやすいデータ形式。特徴：人間が読める、JavaScriptと相性が良い、ほぼすべての言語で扱える、APIの標準形式。",
+    "url": "fe/technology/database/rest-api.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "JSONの成功/失敗の標準形",
+    "summary": "Webサーバーとアプリケーションは役割が明確に分かれている。この役割分担を理解しないと、Webサーバーに不要な処理をさせてしまう、アプリ側に負荷が集中する、セキュリティが弱くなる、設計が破綻する...",
+    "url": "fe/technology/database/rest-api.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "役割分担",
+    "summary": "Webサーバーとアプリケーションは役割が明確に分かれている。この役割分担を理解しないと、Webサーバーに不要な処理をさせてしまう、アプリ側に負荷が集中する、セキュリティが弱くなる、設計が破綻する...",
+    "url": "fe/technology/database/rest-api.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webサーバーの役割",
+    "summary": "Webサーバーとアプリケーションは、返すべきエラーの種類が明確に分かれている。",
+    "url": "fe/technology/database/rest-api.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "アプリケーションの役割",
+    "summary": "Webサーバーとアプリケーションは、返すべきエラーの種類が明確に分かれている。",
+    "url": "fe/technology/database/rest-api.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "認証の役割分担（Cookie / Session / Token）",
+    "summary": "Webサーバーとアプリケーションは、返すべきエラーの種類が明確に分かれている。",
+    "url": "fe/technology/database/rest-api.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "エラーハンドリングの役割分担",
+    "summary": "Webサーバーとアプリケーションは、返すべきエラーの種類が明確に分かれている。",
+    "url": "fe/technology/database/rest-api.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "HTTPS（通信の暗号化）",
+    "summary": "Webサーバーとブラウザの通信は、盗聴・改ざん・なりすましのリスクに常にさらされている。これを防ぐために使用されるのがHTTPS（HTTP Secure）である。HTTPSは、通信内容を暗号化し...",
+    "url": "fe/technology/database/security-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "HTTPSが必要な理由",
+    "summary": "HTTPSは以下の2つの技術で成り立つ：①暗号化（SSL/TLSにより通信内容を暗号化）、②証明書（サーバーの正当性を保証）。",
+    "url": "fe/technology/database/security-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "HTTPSの仕組み",
+    "summary": "HTTPSは以下の2つの技術で成り立つ：①暗号化（SSL/TLSにより通信内容を暗号化）、②証明書（サーバーの正当性を保証）。",
+    "url": "fe/technology/database/security-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "SSH（安全なサーバー接続）",
+    "summary": "SSH（Secure Shell）は、サーバーに安全に接続するための仕組みである。Webサーバーの運用では、ファイル操作、設定変更、アプリのデプロイ、ログ確認など、サーバーへ直接アクセスする作業...",
+    "url": "fe/technology/database/security-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "SSHとは何か",
+    "summary": "SSHは、暗号化された通信でサーバーに接続するためのプロトコル。特徴：通信内容が暗号化される、パスワードが盗まれない、公開鍵認証により安全にログインできる。",
+    "url": "fe/technology/database/security-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "公開鍵認証",
+    "summary": "公開鍵認証は、秘密鍵（手元）と公開鍵（サーバー）のペアでログインする方式。仕組み：ユーザーだけが持つ秘密鍵、サーバーに登録する公開鍵。サーバーは、「秘密鍵を持っている人だけがログインできる」とい...",
+    "url": "fe/technology/database/security-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "SSHの安全な運用",
+    "summary": "Webサーバーには、SSH接続、ファイル操作、設定変更、デプロイなど、重要な操作を行うためのユーザーアカウントが存在する。このアカウント管理が適切でないと、不正ログイン・権限濫用・サーバー乗っ取...",
+    "url": "fe/technology/database/security-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "アカウント管理",
+    "summary": "Webサーバーには、SSH接続、ファイル操作、設定変更、デプロイなど、重要な操作を行うためのユーザーアカウントが存在する。このアカウント管理が適切でないと、不正ログイン・権限濫用・サーバー乗っ取...",
+    "url": "fe/technology/database/security-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "アカウント管理の目的",
+    "summary": "「必要な人だけが、必要な範囲でサーバーを操作できる状態を維持する」こと。これにより、不正アクセスの防止、誤操作の防止、権限の乱用防止、退職者・外部委託者のアクセス遮断といった安全性が確保される。",
+    "url": "fe/technology/database/security-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "アカウント管理の基本原則",
+    "summary": "アカウント管理はログ監視とセットで運用する。誰がログインしたか、どのIPからアクセスしたか、何のコマンドを実行したかを記録することで、不正アクセスや内部不正を検知できる。",
+    "url": "fe/technology/database/security-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "アカウント管理とログ監視の関係",
+    "summary": "アカウント管理はログ監視とセットで運用する。誰がログインしたか、どのIPからアクセスしたか、何のコマンドを実行したかを記録することで、不正アクセスや内部不正を検知できる。",
+    "url": "fe/technology/database/security-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "パスワード管理",
+    "summary": "Webサーバー・アプリケーション・データベースには、運用者・アプリ・サービス間で使用される複数のパスワードが存在する。これらが適切に管理されていないと、サーバー侵入、DB乗っ取り、アプリ改ざん、...",
+    "url": "fe/technology/database/security-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "サーバー側パスワードの種類",
+    "summary": "SSHではパスワードログインを禁止する。理由：パスワード推測攻撃（ブルートフォース）が大量に行われる、公開鍵認証に比べて圧倒的に弱い。設定方針：PasswordAuthentication no...",
+    "url": "fe/technology/database/security-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "SSHのパスワード管理",
+    "summary": "SSHではパスワードログインを禁止する。理由：パスワード推測攻撃（ブルートフォース）が大量に行われる、公開鍵認証に比べて圧倒的に弱い。設定方針：PasswordAuthentication no...",
+    "url": "fe/technology/database/security-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "DBパスワード管理",
+    "summary": "DBのパスワードは、アプリケーションが接続するための最重要情報。管理の原則：推測されにくい長いパスワードを使用、アプリケーションユーザーは必要最小限の権限のみにする、root（superuser...",
+    "url": "fe/technology/database/security-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "アプリケーションのパスワード管理（環境変数）",
+    "summary": "アプリケーションは、DB接続パスワード、メールサーバーパスワード、外部APIキーなどを使用する。",
+    "url": "fe/technology/database/security-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "SQLインジェクション",
+    "summary": "SQLインジェクションとは、アプリケーションが本来「データ」として扱うべきユーザー入力を、誤って「SQL文の一部」として扱ってしまうことで、攻撃者が任意のSQLを実行できてしまう攻撃。",
+    "url": "fe/technology/database/security-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "攻撃の本質",
+    "summary": "「アプリがSQL文とユーザー入力の境界を管理できていない」→攻撃者がSQL文を「書き換えられる」。",
+    "url": "fe/technology/database/security-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "何が起きるのか",
+    "summary": "アプリ内部コード: \"SELECT * FROM users WHERE email = '\" + input + \"';\" 攻撃者の入力: ' OR 1=1 -- 最終的にDBに送られるSQL...",
+    "url": "fe/technology/database/security-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "攻撃の例",
+    "summary": "アプリ内部コード: \"SELECT * FROM users WHERE email = '\" + input + \"';\" 攻撃者の入力: ' OR 1=1 -- 最終的にDBに送られるSQL...",
+    "url": "fe/technology/database/security-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "防御（どう防ぐのか）",
+    "summary": "SELECT * FROM users WHERE email = ? 値: ' OR 1=1 -- ✅ SQLと値が分離 → 攻撃無効 3. XSS（クロスサイトスクリプティング） XSSとは...",
+    "url": "fe/technology/database/security-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "XSS（クロスサイトスクリプティング）",
+    "summary": "XSSとは、攻撃者が入力した悪意あるJavaScriptが、他ユーザーのブラウザ上で実行されてしまう攻撃。",
+    "url": "fe/technology/database/security-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "CSRF（クロスサイトリクエストフォージェリ）",
+    "summary": "CSRFとは、ユーザーがログイン中であることを悪用し、攻撃者が用意した別サイトから「勝手に操作を実行させる攻撃」。",
+    "url": "fe/technology/database/security-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "攻撃の仕組み",
+    "summary": "被害者 攻撃者サイト 正規サイト 攻撃者のサイトに埋め込まれた悪意あるタグ img src=\"https://example.com/transfer?amount=10000\" form ac...",
+    "url": "fe/technology/database/security-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ディレクトリトラバーサル",
+    "summary": "ディレクトリトラバーサルとは、ユーザー入力に含まれる ../ を利用して、本来アクセスできないディレクトリ階層へ移動し、機密ファイルを読み取る攻撃。",
+    "url": "fe/technology/database/security-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "入力値バリデーション",
+    "summary": "入力値バリデーションは、Webアプリに渡されるすべての値が「想定された形式・範囲」に収まっているかを確認する工程である。Web攻撃（SQLインジェクション・XSS・CSRF・ディレクトリトラバー...",
+    "url": "fe/technology/database/security-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "バリデーション不足による被害",
+    "summary": "ユーザー入力 ' OR 1=1 -- バリデーション ホワイトリスト方式 許可する値だけを通す ✅ 想定外の値 → 拒否 例：数字のみ許可 → ' OR 1=1 -- は拒否 間違えやすいポイン...",
+    "url": "fe/technology/database/security-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "SQLとは",
+    "summary": "SQL（Structured Query Language）は、RDBを操作するための標準言語である。Webアプリケーションは、ユーザー登録・ログイン・商品一覧・注文処理など、ほぼすべての機能で...",
+    "url": "fe/technology/database/sql-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "SELECT（検索）",
+    "summary": "SELECTはデータを取得するためのSQL。",
+    "url": "fe/technology/database/sql-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "INSERT（登録）",
+    "summary": "INSERTは新しいデータを追加するためのSQL。",
+    "url": "fe/technology/database/sql-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "UPDATE（更新）",
+    "summary": "UPDATEは既存データを変更するためのSQL。",
+    "url": "fe/technology/database/sql-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "DELETE（削除）",
+    "summary": "DELETEはデータを削除するためのSQL。",
+    "url": "fe/technology/database/sql-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "CRUDとWebアプリの関係",
+    "summary": "SQLの4操作は、Webアプリの基本機能と完全に対応している。",
+    "url": "fe/technology/database/sql-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "論理削除とは",
+    "summary": "実務では、データを完全に削除する「物理削除」ではなく、「is_deleted = 1」などのフラグで削除を管理する「論理削除」を使うことが多い。理由：誤削除からの復旧が容易、削除履歴を残せる、参...",
+    "url": "fe/technology/database/sql-basic.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webシステムとは何か",
+    "summary": "Webシステムとは、利用者がブラウザを使って送った要求（リクエスト）に対し、サーバーが応答（レスポンス）を返すことで動作する仕組みを指す。Webページが表示されるとき、ブラウザ・Webサーバー・...",
+    "url": "fe/technology/database/web-system-overview.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "クライアントとは何か",
+    "summary": "クライアントとは、Webシステムに対して「処理を依頼する側」を指す。「スマホ」「PC」などのデバイスを指すのではなく、ブラウザを中心としたソフトウェアの役割を指す。",
+    "url": "fe/technology/database/web-system-overview.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webサーバーとは何か",
+    "summary": "Webサーバーとは、クライアントから送られたリクエストを受け取り、適切なレスポンスを返すソフトウェア。代表例はApacheとNginx。",
+    "url": "fe/technology/database/web-system-overview.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "静的コンテンツと動的コンテンツ",
+    "summary": "ア）データベースを管理する イ）HTTPリクエストを生成し送信する ウ）アプリケーションの実行環境を提供する エ）ファイルシステムを管理する",
+    "url": "fe/technology/database/web-system-overview.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webシステムの処理の流れ（12工程）",
+    "summary": "ア）データベースを管理する イ）HTTPリクエストを生成し送信する ウ）アプリケーションの実行環境を提供する エ）ファイルシステムを管理する",
+    "url": "fe/technology/database/web-system-overview.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "CGI / FastCGI",
+    "summary": "Webサーバー（Apache/Nginx）は、静的ファイルは自分で返せるが、動的ページ（商品一覧、ログイン処理など）はアプリケーションに処理を渡す必要がある。その「アプリケーションの呼び出し方式...",
+    "url": "fe/technology/database/webapp-link-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webサーバーとアプリをつなぐ仕組み",
+    "summary": "WebサーバーはHTMLや画像などの静的ファイルしか返せない。しかし現代のWebでは、ログイン処理、DBから商品一覧を取得、注文処理、JSONの生成（API）など動的処理が必要。これらはWebサ...",
+    "url": "fe/technology/database/webapp-link-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "CGI（Common Gateway Interface）",
+    "summary": "CGIは、リクエストごとにアプリケーションを新しく起動して実行する方式。",
+    "url": "fe/technology/database/webapp-link-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "FastCGI（常駐方式）",
+    "summary": "FastCGIは、アプリを常駐プロセスとして起動し、Webサーバーはリクエストを渡すだけ。プロセス起動のオーバーヘッドがゼロに近い。CGIの欠点（毎回起動）を完全に解消した方式。",
+    "url": "fe/technology/database/webapp-link-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "現代のWebの言語別連携方式",
+    "summary": "リバースプロキシとは、ApacheやNginxがアプリケーションの「代理」としてリクエストを受け取り、内部のアプリケーションへ転送する仕組み。",
+    "url": "fe/technology/database/webapp-link-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "リバースプロキシ",
+    "summary": "リバースプロキシとは、ApacheやNginxがアプリケーションの「代理」としてリクエストを受け取り、内部のアプリケーションへ転送する仕組み。",
+    "url": "fe/technology/database/webapp-link-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "なぜリバースプロキシが必要なのか",
+    "summary": "PHPならApache + php-fpm（FastCGI）で動くが、Node.js / Python / RubyはApacheだけでは動かない。理由：Apacheはアプリケーションを直接実行...",
+    "url": "fe/technology/database/webapp-link-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Apacheのリバースプロキシ設定例",
+    "summary": "Node.jsやPythonアプリをApacheが受ける例：example.comへのアクセスはApacheが受け取り、内部のlocalhost:3000（アプリ）に転送する。",
+    "url": "fe/technology/database/webapp-link-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "リバースプロキシのメリット",
+    "summary": "ア）アプリケーションが常駐できない イ）リクエストごとにプロセスを起動するため遅い ウ）HTTPしか使えない エ）セキュリティが弱い",
+    "url": "fe/technology/database/webapp-link-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "FastCGIとリバースプロキシの違い",
+    "summary": "ア）アプリケーションが常駐できない イ）リクエストごとにプロセスを起動するため遅い ウ）HTTPしか使えない エ）セキュリティが弱い",
+    "url": "fe/technology/database/webapp-link-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webサーバーソフトウェアの全体像",
+    "summary": "Webページは、ブラウザ → Webサーバー → アプリケーションという流れで処理される。実際にリクエストを受け取り、ファイルを返したり、アプリケーションに処理を渡したりしている「本体」がWeb...",
+    "url": "fe/technology/database/webserver-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Webサーバーソフトウェアが提供する主な機能",
+    "summary": "Apache / Nginxは、次のような機能を設定できる。",
+    "url": "fe/technology/database/webserver-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Apache / Nginxが扱う「対象」の一覧",
+    "summary": "Webサーバーソフトウェアは、次のような「対象」を設定することで動作を制御する。",
+    "url": "fe/technology/database/webserver-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Apache / Nginxの設定でできること",
+    "summary": "/ にアクセスされたら /var/www/html/index.html を返す、/img/ は /var/www/html/img/ を返す、といったURL → ファイルの対応を設定する。",
+    "url": "fe/technology/database/webserver-1.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ApacheとNginxの違い",
+    "summary": "ApacheとNginxはどちらもWebサーバーソフトウェアだが、内部構造（リクエスト処理方式）が大きく異なる。この構造の違いが、同時アクセス数、メモリ使用量、静的ファイルの速度、アプリ連携の方...",
+    "url": "fe/technology/database/webserver-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Apache: プロセス/スレッド方式（MPM）",
+    "summary": "Apacheはプロセス（またはスレッド）を増やして処理する方式。",
+    "url": "fe/technology/database/webserver-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Nginx: イベント駆動方式（非同期）",
+    "summary": "Nginxは少数のワーカーで大量のリクエストを捌く方式。",
+    "url": "fe/technology/database/webserver-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "構造の違い→動作の違い",
+    "summary": "実務では、Nginx（フロント）＋ Apache（バックエンド）という構成もよく使われる。理由：Nginxが静的ファイルと大量アクセスを高速処理、ApacheがPHPなどの動的処理を担当。両者の...",
+    "url": "fe/technology/database/webserver-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ApacheとNginxの組み合わせ",
+    "summary": "実務では、Nginx（フロント）＋ Apache（バックエンド）という構成もよく使われる。理由：Nginxが静的ファイルと大量アクセスを高速処理、ApacheがPHPなどの動的処理を担当。両者の...",
+    "url": "fe/technology/database/webserver-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "設定ファイルの構造",
+    "summary": "Apache / Nginxの設定ファイルは、「どのURLに対して、どのディレクトリを公開し、どの動作を行うか」を記述するためのファイルである。設定ファイルは「階層構造（ブロック）」と「ディレク...",
+    "url": "fe/technology/database/webserver-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Apacheの設定ファイルの構造",
+    "summary": "Apacheはディレクティブ（設定項目）を並べる形式。特徴：VirtualHostでドメインごとに設定、Directoryでディレクトリ単位の設定、.htaccessによる上書きが可能、モジュー...",
+    "url": "fe/technology/database/webserver-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Nginxの設定ファイルの構造",
+    "summary": "Nginxはブロック（server / location）で階層化する形式。特徴：serverブロックでドメインごとに設定、locationブロックでURLパスごとに設定、.htaccessのよ...",
+    "url": "fe/technology/database/webserver-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ApacheとNginxの設定構造の違い",
+    "summary": "ア）イベント駆動方式 イ）プロセス/スレッド方式 ウ）シングルスレッド方式 エ）非同期I/O方式",
+    "url": "fe/technology/database/webserver-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "設定ファイルで扱う主な項目",
+    "summary": "ア）イベント駆動方式 イ）プロセス/スレッド方式 ウ）シングルスレッド方式 エ）非同期I/O方式",
+    "url": "fe/technology/database/webserver-2.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "仮想ホスト",
+    "summary": "仮想ホスト（Virtual Host / Server Block）とは、1台のサーバーで複数のWebサイトを公開するための仕組み。例：example.com、shop.example.com、...",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "なぜ仮想ホストが必要なのか",
+    "summary": "Webサーバーは通常、1つのIPアドレスで動作する。しかし実際の運用では：1台のサーバーで複数のサイトを公開したい、サイトごとに公開ディレクトリを分けたい、サイトごとにログを分けたい、サイトごと...",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "仮想ホストの構造（3階層）",
+    "summary": "ブラウザはリクエスト時にHostヘッダを送る。例：GET / HTTP/1.1 Host: example.com。WebサーバーはHostヘッダを確認し、example.comに一致する仮想ホ...",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "仮想ホストの仕組み",
+    "summary": "ブラウザはリクエスト時にHostヘッダを送る。例：GET / HTTP/1.1 Host: example.com。WebサーバーはHostヘッダを確認し、example.comに一致する仮想ホ...",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ファイル配置（DocumentRoot / public_html）",
+    "summary": "Webサーバー（Apache/Nginx）は、「どのディレクトリをWeb公開するか」を設定する必要がある。その公開ディレクトリをDocumentRoot（ドキュメントルート）と呼ぶ。",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "DocumentRootの役割",
+    "summary": "DocumentRootは、URLの「/」に対応するフォルダ。URL → ファイルパスの変換の起点になる。",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ファイル配置の基本ルール",
+    "summary": "WebサーバーはDocumentRoot以下のファイルだけを公開する。DocumentRootの外のファイルは公開されない。セキュリティ上、公開領域と非公開領域を分ける。アプリケーションのソース...",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "カスタムエラーページ（404 / 500）",
+    "summary": "Webサーバーは、リクエストされたファイルが存在しない場合（404）やアプリケーションがエラーを返した場合（500）に、エラーページを返す。このエラーページは、Webサーバー側で自由に差し替える...",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "なぜカスタムエラーページが必要なのか",
+    "summary": "デフォルトのエラーページは、デザインが統一されていない、サイトの世界観と合わない、ユーザーが次に何をすべきかわからない、セキュリティ上内部情報が表示される場合がある。",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ログ（access.log / error.log）",
+    "summary": "Webサーバー（Apache/Nginx）は、すべてのアクセスとエラーをログとして記録する。ログは、障害調査、性能分析、不正アクセス検知、運用改善に不可欠な情報源である。",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "なぜログが必要なのか",
+    "summary": "Webサイトを運用する側は、サーバー内部で何が起きているかをブラウザから直接知ることができない。そのため、サーバー側では次の情報をログとして記録しておく必要がある：どのURLにアクセスされたか、...",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "access.log（アクセスログ）",
+    "summary": "access.logは、すべてのリクエストを記録するログ。記録される主な情報：アクセス元IPアドレス、アクセスされたURL、ステータスコード（200/404/500など）、レスポンスサイズ、レス...",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "error.log（エラーログ）",
+    "summary": "error.logは、Webサーバー内部で発生したエラーを記録するログ。記録される主な情報：ファイルが存在しない（404）、権限エラー（403）、アプリケーションのエラー（500）、設定ミス、サ...",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "ApacheとNginxのログ設定",
+    "summary": "どちらも仮想ホスト（server）単位でログを分けられる。",
+    "url": "fe/technology/database/webserver-3.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "公開手順",
+    "summary": "Webサーバーをインターネット上に公開するには、ドメイン名 → DNS → Aレコード → Webサーバーという一連の仕組みを正しく設定する必要がある。Webサーバーの設定（Apache/Ngi...",
+    "url": "fe/technology/database/webserver-4.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "公開手順の全体像（4ステップ）",
+    "summary": "① ドメインを取得 ② DNSにAレコード設定 ③ Webサーバー起動 ④ 仮想ホスト設定 ① ドメインを取得する お名前.com、Google Domains、AWS Route53などで取得。",
+    "url": "fe/technology/database/webserver-4.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "性能概念",
+    "summary": "Webサーバーの性能は、ネットワーク・圧縮・キャッシュ・配信経路といった複数の要素で決まる。Apache/Nginxは、これらの性能要素を設定ファイルで制御できる。",
+    "url": "fe/technology/database/webserver-4.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "Keep-Alive（接続の再利用）",
+    "summary": "HTTPは本来、リクエストごとにTCP接続を張り直す仕組み。接続確立には時間がかかるため、画像・CSS・JSなど多数のファイルを読み込むページでは毎回接続を張り直すと遅くなる。",
+    "url": "fe/technology/database/webserver-4.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "gzip（レスポンスの圧縮）",
+    "summary": "HTML/CSS/JSはテキストなので、圧縮すると大幅にサイズが小さくなる。Webサーバーがレスポンスをgzip圧縮し、ブラウザが解凍して表示する。",
+    "url": "fe/technology/database/webserver-4.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "キャッシュ（再利用による高速化）",
+    "summary": "同じファイルを毎回ダウンロードすると遅い。ロゴ画像、CSS、JavaScriptなど頻繁に変わらないファイルはキャッシュが効果的。Webサーバーがレスポンスにキャッシュ有効期限（Expires/...",
+    "url": "fe/technology/database/webserver-4.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "CDN（地理的に近いサーバーから配信）",
+    "summary": "ユーザーが世界中にいる場合、距離が遠いほど通信が遅くなる。例：日本のサーバー → アメリカのユーザー、物理距離が長い → レイテンシが大きい。",
+    "url": "fe/technology/database/webserver-4.html",
+    "tags": [
+      "データベース"
+    ]
+  },
+  {
+    "term": "なぜAIが攻撃されるのか（背景）",
+    "summary": "AIは「守る側」として活用される一方で、AI自体が攻撃される側にもなる。AIは従来のシステムにはなかった「学習データ」「モデル」「推論結果」という新しい攻撃面を持つため、攻撃者にとって格好の標的...",
+    "url": "fe/technology/iot-security/ai-defense-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "AIが攻撃される主な手法（4つの分類）",
+    "summary": "AIへの攻撃手法 データ汚染 （バックドア攻撃） 学習データ工程 モデル汚染 学習/作成工程 ＋配布工程 敵対的サンプル （回避攻撃） 設置工程 データ・モデル搾取 設置工程 （推論攻撃） ◆ ...",
+    "url": "fe/technology/iot-security/ai-defense-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "◆ データ汚染（バックドア攻撃）",
+    "summary": "狙う工程：学習データの収集/作成工程",
+    "url": "fe/technology/iot-security/ai-defense-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "◆ モデル汚染",
+    "summary": "狙う工程：モデルの学習/作成工程 + 配布工程",
+    "url": "fe/technology/iot-security/ai-defense-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "◆ 敵対的サンプル（回避攻撃）",
+    "summary": "狙う工程：モデルの設置工程",
+    "url": "fe/technology/iot-security/ai-defense-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "◆ データ・モデル搾取（メンバーシップ推論攻撃）",
+    "summary": "狙う工程：モデルの設置工程",
+    "url": "fe/technology/iot-security/ai-defense-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "AIを守るために必要な考え方",
+    "summary": "AIを守るには、従来のセキュリティとは異なる視点が必要になる。",
+    "url": "fe/technology/iot-security/ai-defense-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "AIとIoTの融合による新しいリスク",
+    "summary": "近年はIoT機器にAIを組み込むケースが増えている。例えば、AI監視カメラ、自動運転支援、スマート工場、顔認証システム、医療AI機器などである。これにより、IoTは単に「データを送る機器」ではな...",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "日本の法制度とAI犯罪",
+    "summary": "AISI（AI Safety Institute Japan）は、日本政府が2024年にIPA（情報処理推進機構）内に設置した「AIの安全性を国家として評価する専門機関」である。AISIは研究所...",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "1 AISIとは何か",
+    "summary": "AISI（AI Safety Institute Japan）は、日本政府が2024年にIPA（情報処理推進機構）内に設置した「AIの安全性を国家として評価する専門機関」である。AISIは研究所...",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "2 AISIが設立された背景",
+    "summary": "AISIは国内の危機、国際情勢、政治判断の3つが重なって誕生した。",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "3 AISIの役割",
+    "summary": "AI犯罪は既存の刑法・特別法を前提にしているが、AI特有の行為・責任主体・因果関係を想定していないため、以下の領域で明確な限界がある。",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "現行法の限界",
+    "summary": "AI犯罪は既存の刑法・特別法を前提にしているが、AI特有の行為・責任主体・因果関係を想定していないため、以下の領域で明確な限界がある。",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "現行法での対処（どこまで対応できているか）",
+    "summary": "AI犯罪は急速に高度化しているが、現行法でも対処できる領域は存在する。ただし、対応できる範囲は「人間が意図してAIを使った場合」に限定されることが多く、AIが自律的に生成した行為への対応は不十分...",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "法整備の動き（未来：どこに向かっているか）",
+    "summary": "EUは世界で初めて包括的なAI規制法（AI ACT）を制定し、高リスクAIの厳格規制、生成AIの透明性義務、ディープフェイクの明示義務を導入した。日本もこの流れを踏まえ、リスクベースの規制を検討...",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "1 国際潮流：EU AI ACTを中心としたリスクベース規制",
+    "summary": "EUは世界で初めて包括的なAI規制法（AI ACT）を制定し、高リスクAIの厳格規制、生成AIの透明性義務、ディープフェイクの明示義務を導入した。日本もこの流れを踏まえ、リスクベースの規制を検討...",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "2 日本の法整備の方向性",
+    "summary": "日本は「ソフトロー中心」から「ハードロー併用」へ移行しつつある。2025年には日本版AI法（AI基本法）が成立し、AIの研究開発・利用に関する国家方針が法制化された。",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "3 検討中の新しい法体系",
+    "summary": "AISIは法制度の根拠となるリスク評価、悪用可能性分析、技術的限界の提示、国際基準との整合を担う。つまり、AISIの評価結果が今後の法整備の基盤になる。",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "4 AISIを中心とした技術に基づく法制度アップデート",
+    "summary": "AISIは法制度の根拠となるリスク評価、悪用可能性分析、技術的限界の提示、国際基準との整合を担う。つまり、AISIの評価結果が今後の法整備の基盤になる。",
+    "url": "fe/technology/iot-security/ai-iot-legal-framework.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "なぜAIが攻撃に使われるのか（背景）",
+    "summary": "攻撃者がAIを悪用する側面も持つ。攻撃者がAIを使うことで、攻撃の質（精度）と量（自動化）が大きく変化している。",
+    "url": "fe/technology/iot-security/ai-powered-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "AIが使われる主な攻撃手法",
+    "summary": "手法の本質：AIを使って本人そっくりの音声・映像を「生成・合成」し、なりすます攻撃。「本物のように見える／聞こえる偽物」を作り、送金指示・詐欺・信用失墜に使う。",
+    "url": "fe/technology/iot-security/ai-powered-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "◆ ディープフェイク（AIを使った音声・映像の偽造）",
+    "summary": "手法の本質：AIを使って本人そっくりの音声・映像を「生成・合成」し、なりすます攻撃。「本物のように見える／聞こえる偽物」を作り、送金指示・詐欺・信用失墜に使う。",
+    "url": "fe/technology/iot-security/ai-powered-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "◆ AI生成フィッシングメール（AIを使った文章の偽造）",
+    "summary": "手法の本質：AIを使って自然な文章の詐欺メールを大量生成する攻撃。従来の「怪しい日本語」が消え、見抜くのが難しくなる。",
+    "url": "fe/technology/iot-security/ai-powered-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "◆ 攻撃の自動化・最適化（AIによる攻撃作業の高速化）",
+    "summary": "手法の本質：AIを使って攻撃の準備・実行・調整を自動化する攻撃。人間が手作業でやっていたことをAIが24時間・大規模に実行する。",
+    "url": "fe/technology/iot-security/ai-powered-attacks.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "AIとセキュリティの背景",
+    "summary": "近年、ディープラーニングをはじめとする機械学習技術の発展により、AIは社会のあらゆる領域に急速に浸透している。日本国内でも、顔認証システム、防犯システム、自動運転、チャットボット、医療診断支援な...",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "AIとセキュリティの3つの視点",
+    "summary": "AI技術が社会に広く使われるようになり、情報セキュリティの考え方は大きく変化している。AIは「守るための技術」であると同時に、「攻撃される対象」にもなり、さらに「攻撃に悪用される技術」にもなる。...",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "AIを活用したセキュリティ（AI＝守る側）",
+    "summary": "AIを防御に活用する視点である。従来のセキュリティは「既知の攻撃パターン」に依存していたため、新しい攻撃や変化した攻撃に弱かった。AIは大量のデータを分析し、「いつもと違う動き」を見つけることで...",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "AIを守るセキュリティ（AI＝攻撃される側）",
+    "summary": "AI自体が攻撃対象になる視点である。AIは「学習データ」「モデル」「AIの判断結果（推論結果）」という新しい攻撃面を持つため、従来のセキュリティでは守りきれない。",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "AIを使った攻撃（AI＝攻撃に利用する側）",
+    "summary": "攻撃者がAIを悪用する視点である。AIにより、攻撃の質と量が急速に変化している。",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "AIを活用したセキュリティ製品の詳細",
+    "summary": "従来のセキュリティ製品は「既知の攻撃パターン（シグネチャ）」に依存していた。しかし現在は以下の問題が生じている：",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "1 なぜAIを使う必要があるのか（背景）",
+    "summary": "従来のセキュリティ製品は「既知の攻撃パターン（シグネチャ）」に依存していた。しかし現在は以下の問題が生じている：",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "2 振る舞い分析（マルウェアの行動パターンを見つける）",
+    "summary": "マルウェアは名前を変えても、やること（振る舞い）は似ている。AIはこうした行動パターンを学習し、未知のマルウェアでも検知できる。",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "3 リスクスコアリング（危険度を数値化）",
+    "summary": "AIは検知した異常に対して「どれくらい危険か」を数値化する。これにより管理者は優先順位をつけて対応できる。",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "4 自動対処（隔離・遮断）",
+    "summary": "AIは異常を検知した後、以下のような自動対処を行う。「見つける」だけでなく「止める」ところまで担当する。",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "5 守る対象と検知する兆候",
+    "summary": "守る対象：企業や組織の重要な資産（端末・サーバ・ネットワーク・アカウント・データ）",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "6 具体的なAIセキュリティ製品",
+    "summary": "ア）AIを活用したセキュリティ（守る側） イ）AIを守るセキュリティ（攻撃される側） ウ）AIを無視したセキュリティ（放置する側） エ）AIを使った攻撃（悪用する側）",
+    "url": "fe/technology/iot-security/ai-security-basics.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "IoTが構造的に脆弱になりやすい理由",
+    "summary": "結論：IoTは「やるべきことをやっていない」のではなく、技術的・运用的な制約の中で「やり切れない部分が残りやすい」ため、結果として脆弱性が表に出やすい領域である。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "IoTの脆弱性が攻撃に使われる流れ",
+    "summary": "ステップ1：侵入 ステップ2：支配・永続化 ステップ3：悪用 ステップ4：組織全体へ波及 初期パスワード 開いたポート 古いファームウェア 更新機能なし ボット化・DDoS 盗聴・踏み台 横移動...",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "実際のIoT関連事件",
+    "summary": "何が起きたか：世界中のIoT機器（監視カメラ・ルーターなど）がマルウェア「Mirai」に感染。60万台以上がボット化し、大規模DDoS攻撃に利用された。Twitter、Netflix、GitHu...",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "◆ Miraiボットネット（2016年）",
+    "summary": "何が起きたか：世界中のIoT機器（監視カメラ・ルーターなど）がマルウェア「Mirai」に感染。60万台以上がボット化し、大規模DDoS攻撃に利用された。Twitter、Netflix、GitHu...",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "◆ Jeep Cherokee遠隔操作事件（2015年）",
+    "summary": "何が起きたか：研究者がJeep Cherokeeを遠隔からハッキングし、走行中の車のブレーキ・ハンドル・エンジンを操作できることを実証。メーカーは約140万台をリコール。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "◆ ベビーモニター乗っ取り事件（2017年）",
+    "summary": "何が起きたか：一部メーカーのベビーモニターが外部からアクセス可能になっており、赤ちゃんの映像・音声が第三者に見られる／話しかけられる事例が世界中で報告された。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "IoTセキュリティ対策（基本）",
+    "summary": "IoTは「守るべき入口が明確」なので、入口を閉じるだけで劇的に安全になる。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "入口を守る（認証・公開範囲の最適化）",
+    "summary": "IoTは「守るべき入口が明確」なので、入口を閉じるだけで劇的に安全になる。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "更新を確保する（ファームウェア・ライフサイクル管理）",
+    "summary": "IoTは「完全に安全にする」のではなく、「侵害されても被害が広がらない構造」を作ることが現実的な対策。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "IoTをネットワークの中心に置かない（分離・監視）",
+    "summary": "IoTは「完全に安全にする」のではなく、「侵害されても被害が広がらない構造」を作ることが現実的な対策。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "IoTセキュリティ対策（応用・デバイス対策）",
+    "summary": "IoTが「正しいソフトウェアだけで起動する」ことを保証する仕組み。起動の最初から最後まで署名を検証し、正規ソフトウェア以外を一切起動させない。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "セキュアブート（Secure Boot）",
+    "summary": "IoTが「正しいソフトウェアだけで起動する」ことを保証する仕組み。起動の最初から最後まで署名を検証し、正規ソフトウェア以外を一切起動させない。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "TPM / Secure Element",
+    "summary": "秘密鍵を「絶対に外に出さない」ハードウェア基盤。IoTの秘密鍵が漏れると偽デバイス登録・クラウド乗っ取りが可能になる。TPM/Secure Elementは秘密鍵を外に出さず内部で暗号処理を完結...",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "OTA更新基盤",
+    "summary": "更新を「安全に届ける」ための仕組み。IoTの更新は攻撃者に狙われやすい。OTAは更新ファイルの正当性・完全性・安全な適用を保証する。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "SBOM（ソフトウェア構成管理）",
+    "summary": "Software Bill of Materialsの略。IoT機器にはOS、OSS、外部ライブラリ、通信モジュールなど多くのソフトウェア部品が含まれる。SBOMでソフトウェア構成を一覧管理する...",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "デバッグ端子（UART/JTAG）の無効化",
+    "summary": "物理攻撃によるファームウェア吸い出しを防ぐ。IoTは物理的に触れられると弱い。UART/JTAGが生きているとファームウェア吸い出し→秘密鍵抽出→全台乗っ取りが可能になる。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "ネットワーク対策",
+    "summary": "IoTを「信用しない」前提で設計。IoTは侵害されやすいため、侵害されても広がらない構造を作る。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "ゼロトラスト型IoTネットワーク",
+    "summary": "IoTを「信用しない」前提で設計。IoTは侵害されやすいため、侵害されても広がらない構造を作る。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "IoTゲートウェイ方式",
+    "summary": "IoTを直接インターネットに出さない。IoTのIPを外部に晒さず、ゲートウェイが代理で通信する方式。ゲートウェイが暗号化・更新・監視を担当する。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "マイクロセグメンテーション",
+    "summary": "IoTを用途ごとに細かく分離する。用途別にVLAN/SSIDを分離し、通信ルールを用途ごとに最小化する。これにより工場ライン全停止のような連鎖被害を防ぐ。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "異常検知（Behavior Monitoring）",
+    "summary": "IoTの「いつもと違う動き」を検知する。IoTの通信は一定なので異常検知が非常に有効。通信量・宛先・頻度を監視し、異常（例：深夜の海外通信）を検知する。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "クラウド連携対策",
+    "summary": "IoTとクラウドが「互いに正しい相手」であることを確認する。IoTが証明書でクラウドを認証し、クラウドが証明書でIoTを認証する。不正デバイスは接続拒否。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "mTLS（相互TLS）",
+    "summary": "IoTとクラウドが「互いに正しい相手」であることを確認する。IoTが証明書でクラウドを認証し、クラウドが証明書でIoTを認証する。不正デバイスは接続拒否。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "データ完全性（Integrity）",
+    "summary": "IoTのデータが「改ざんされていない」ことを保証する。IoTがデータに署名し、クラウドが署名を検証する。センサー値の改ざんを防ぐ。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "クラウド側のIAM最小権限",
+    "summary": "IoT1台の侵害が全体に広がらないようにする。デバイスごとに権限を分離し、IoT→DBへの直接アクセスを禁止する。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
+    ]
+  },
+  {
+    "term": "データライフサイクル管理",
+    "summary": "IoTデータの保存・削除・鍵管理を体系化する。保存期間を定義し、自動削除を設定する。",
+    "url": "fe/technology/iot-security/iot-vulnerability.html",
+    "tags": [
+      "IoTセキュリティ"
     ]
   },
   {
@@ -3689,7 +7521,7 @@
   },
   {
     "term": "課題特定の良い例と悪い例",
-    "summary": "[課題管理表 テンプレート] +----+------------------+--------+------------+------------------+--------+------+...",
+    "summary": "[課題管理表 テンプレート] No.1 課題 : テスト環境未構築 影響 : 3日遅延 原因 : 作業遅延 対策 : 優先度を上げて依頼 担当 : インフラ 期限 : 6/05 状況 : 対応中...",
     "url": "fe/technology/management/issue-management.html",
     "tags": [
       "マネジメント"
@@ -3697,7 +7529,7 @@
   },
   {
     "term": "影響の書き方テンプレート",
-    "summary": "[課題管理表 テンプレート] +----+------------------+--------+------------+------------------+--------+------+...",
+    "summary": "[課題管理表 テンプレート] No.1 課題 : テスト環境未構築 影響 : 3日遅延 原因 : 作業遅延 対策 : 優先度を上げて依頼 担当 : インフラ 期限 : 6/05 状況 : 対応中...",
     "url": "fe/technology/management/issue-management.html",
     "tags": [
       "マネジメント"
@@ -3705,7 +7537,7 @@
   },
   {
     "term": "原因の書き方テンプレート",
-    "summary": "[課題管理表 テンプレート] +----+------------------+--------+------------+------------------+--------+------+...",
+    "summary": "[課題管理表 テンプレート] No.1 課題 : テスト環境未構築 影響 : 3日遅延 原因 : 作業遅延 対策 : 優先度を上げて依頼 担当 : インフラ 期限 : 6/05 状況 : 対応中...",
     "url": "fe/technology/management/issue-management.html",
     "tags": [
       "マネジメント"
@@ -3713,7 +7545,7 @@
   },
   {
     "term": "2-12-5. 課題管理表",
-    "summary": "[課題管理表 テンプレート] +----+------------------+--------+------------+------------------+--------+------+...",
+    "summary": "[課題管理表 テンプレート] No.1 課題 : テスト環境未構築 影響 : 3日遅延 原因 : 作業遅延 対策 : 優先度を上げて依頼 担当 : インフラ 期限 : 6/05 状況 : 対応中...",
     "url": "fe/technology/management/issue-management.html",
     "tags": [
       "マネジメント"
@@ -4073,7 +7905,7 @@
   },
   {
     "term": "2-9-1. 品質管理の目的",
-    "summary": "【品質管理の3つの柱】 +-----------------------------------------------------------+ | | | ① 品質計画（Quality Pl...",
+    "summary": "品質計画（QP） どの品質を目指すか どの工程で確認するか レビュー・テスト計画 利用ツールを決める 品質作り込み（QA） レビュー コーディング規約の遵守 静的解析・単体テスト自動化 不具合を...",
     "url": "fe/technology/management/quality-management-qc-tools.html",
     "tags": [
       "マネジメント"
@@ -4081,7 +7913,7 @@
   },
   {
     "term": "2-9-2. 品質管理の3つの柱",
-    "summary": "【品質管理の3つの柱】 +-----------------------------------------------------------+ | | | ① 品質計画（Quality Pl...",
+    "summary": "品質計画（QP） どの品質を目指すか どの工程で確認するか レビュー・テスト計画 利用ツールを決める 品質作り込み（QA） レビュー コーディング規約の遵守 静的解析・単体テスト自動化 不具合を...",
     "url": "fe/technology/management/quality-management-qc-tools.html",
     "tags": [
       "マネジメント"
@@ -4241,7 +8073,7 @@
   },
   {
     "term": "2-4-3-2. ガントチャートの構造",
-    "summary": "【ガントチャート例】 No. 作業名 | 4/1 | 4/2 | 4/3 | 4/4 | 4/5 | 4/6 | 4/7 | 4/8 ----+-------------+-----+-----...",
+    "summary": "【ガントチャート例】 4/1-4/3 [===] 要件ヒアリング 4/1-4/5 [=====] 要件定義書作成 4/5-4/6 [==] 要件定義書レビュー 4/4-4/8 [=====] 画...",
     "url": "fe/technology/management/schedule-gantt.html",
     "tags": [
       "マネジメント"
@@ -4825,7 +8657,7 @@
   },
   {
     "term": "回線交換方式との比較",
-    "summary": "flowchart TD subgraph パケット交換 P1[データ分割] --> P2[各パケット独立転送] P2 --> P3[複数通信が混在] P3 --> P4[宛先で再構成] end...",
+    "summary": "データ分割 各パケット独立転送 複数通信が混在 宛先で再構成 回線交換方式 通信前に回線確保 1対1の専有回線 安定した通信 同時通信不可 比較項目パケット交換方式回線交換方式 回線の使い方複数...",
     "url": "fe/technology/network/network-devices-switching.html",
     "tags": [
       "ネットワーク"

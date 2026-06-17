@@ -1,8 +1,8 @@
 # Pending Lessons
 
-Last updated: 2026-06-16 / DeepSeek（関連法令・契約 + デジタル社会の形成 HTML化完了・全12教材完了）
+Last updated: 2026-06-17 / Claude（DX概論 追記・全13分野165ページ完了）
 
-## Completed (156 lessons total)
+## Completed (165 lessons total)
 
 | Folder | Lessons | Portal | Source PDF |
 |--------|---------|--------|------------|
@@ -18,6 +18,7 @@ Last updated: 2026-06-16 / DeepSeek（関連法令・契約 + デジタル社会
 | `fe/strategy/business-strategy/` | 12 | `index.html` | `3_経営・戦略.pdf` |
 | `fe/strategy/legal/` | 11 | `index.html` | `2_関連法令・契約.pdf` |
 | `fe/strategy/digital-society/` | 6 | `index.html` | `3_デジタル社会の形成について.pdf` |
+| `fe/strategy/dx/` | 9 | `index.html` | `DX概論.pdf` |
 
 ## Planned (0 PDFs remaining — all done!)
 
