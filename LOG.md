@@ -1,5 +1,18 @@
 # LOG — AI-IOT FE Study Portal
 
+## 2026-06-17 Claude — 検索インデックス初回生成・favicon全ページ適用・ドキュメント整合修正
+
+- **検索インデックス初回生成（commit `cdea133`）**
+  - `tools/generate-search-index.ps1` の `$sectionMap` に5分野を追加（database / iot-security / legal / digital-society / dx）。未登録のまま放置するとこれら5分野の見出しがすべて「その他」タグになる問題。
+  - スクリプト実行 → `assets/search-index.json` を初回生成（**1229エントリ**、全13分野カバー）。
+  - `PDF-FOLDER-MAP.md`: `2_関連法令・契約.pdf` / `3_デジタル社会の形成について.pdf` を planned→done に修正。
+  - `PENDING-LESSONS.md`: `fe/strategy/dx/`（9ページ）を追記。合計165ページに更新。
+
+- **favicon 全ページ適用（commit `71ec45b`）**
+  - `fe/` 配下のHTMLファイル180件にfavicon link タグが未設定だった（ポータル `index.html` のみ設定済み）。
+  - `tools/add-favicon.ps1` を新規作成し一括追加。深さに応じてパスを自動調整（深さ2: `../../`、深さ3: `../../../`）。
+  - 対象: 全180ファイル更新、スキップ0。
+
 ## 2026-06-17 DeepSeek — DX概論教材 HTML化・AI-IOTプロジェクト統合
 
 - 内容:
