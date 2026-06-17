@@ -19,15 +19,15 @@ active
 - 2026-06-16: 上記ASCII箱図崩壊（19件の仕事票で修正・最も時間がかかった作業）とHTML表タグの閉じ忘れ・取り違えを `BUGS.md` に教訓として記録。`HTMLIZATION-STATUS-RULES.md` に予防ルール（ASCII箱図禁止・タグ数一致確認）を追加済み。
 
 ## 次にやること
-1. DX教材のcommit・push（GitHub Pages反映）
-2. 既存の別作業差分（Algorithm/Cloud等）が残っているため、担当者の完了・コミット状況を確認する。
-3. スマホ実機またはブラウザでSVG図・Database表の横幅・文字収まりを確認する。
+1. 既存の別作業差分（Algorithm/Cloud等）が残っているため、担当者の完了・コミット状況を確認する。
+2. スマホ実機またはブラウザでSVG図・Database表の横幅・文字収まりを確認する。
+3. DX教材のブラウザ表示確認（CSS適用・リンク切れ・スマホ表示）
 
 ## 前回AIが残した次の一手
-- DX概論教材9ページのHTML化とAI-IOTプロジェクト統合が完了。全9ファイルQC PASS（quizカード10問/ans10件、タグ一致、中国語混入なし、preなし、重複idなし）。
-- `curriculum.json` にDXセクション登録済み、`PDF-FOLDER-MAP.md` にDX概論.pdf追加済み。
-- `AI-RULES.md` に「execute_commandで複数ファイル一括処理禁止」ルールを追加（PowerShellワンライナー固まり事故の再発防止）。
-- 未commitのため、commit & pushが必要。
+- DX概論教材9ページのHTML化・統合・commit & push すべて完了（`06b3ca5` feat, `e137fc8` fix CSS）。
+- `curriculum.json` DXセクション登録済み、`PDF-FOLDER-MAP.md` DX概論.pdf追加済み、ポータルトップカード追加済み。
+- `AI-RULES.md` 一括処理禁止ルール追加済み。
+- ブラウザでCSS適用・リンク切れ・スマホ表示を確認すること。
 
 ## 触るな
 - `data/curriculum.json` と `assets/app.js` は今回のSVG化では更新不要。教材追加・ステータス変更がある場合のみ触る。

@@ -6,8 +6,8 @@
   - `D:\vs_code\DX概論\` の9つのHTMLファイル（01.html〜09.html）をAI-IOTプロジェクトへ組み込み
   - ファイル名を分割.txtの推奨名に変換（dx-definition, dx-background-policy, dx-types-impact, dx-domestic-cases, dx-overseas-cases, dx-lessons-failures, dx-technologies, dx-strategy, dx-data-governance）
   - 配置先: `fe/strategy/dx/`
-  - CSSパス修正: `../../../assets/style.css` → `../../assets/style.css`
-  - パンくずパス修正: `../../../index.html` → `../../index.html`
+  - CSSパス・パンくずパス修正（fe/strategy/dx/ はルートから3階層目 → `../../../` で正しい）
+  - commit `06b3ca5` で初期配置、commit `e137fc8` でCSSパス修正（初回誤って `../../` にしてしまい、再修正）
   - `index.html`（セクションポータル）を作成
   - `README.md`（Statusブロック付き）を作成
   - `data/curriculum.json` にDXセクション（id: dx, strategyカテゴリ, 9教材）を追加
