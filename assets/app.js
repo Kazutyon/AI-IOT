@@ -168,6 +168,11 @@ const SECTIONS = [
   { id: 'computer',          label: 'コンピュータ概論', total: 15 },
   { id: 'management',        label: 'マネジメント',     total: 20 },
   { id: 'business-strategy', label: 'ストラテジ',       total: 12 },
+  { id: 'legal',             label: '関連法令・契約',   total: 11 },
+  { id: 'digital-society',   label: 'デジタル社会の形成', total: 6 },
+  { id: 'dx',                label: 'DX概論',           total: 9 },
+  { id: 'iot-security',      label: 'IoTセキュリティ',  total: 5 },
+  { id: 'database',          label: 'データベース',      total: 25 },
 ];
 
 function renderProgress() {
