@@ -160,13 +160,14 @@ function initSearch() {
 // ── 進捗ページ ───────────────────────────────
 
 const SECTIONS = [
-  { id: 'basic-theory',  label: '基礎理論',      total: 6 },
-  { id: 'network',       label: 'ネットワーク',   total: 6 },
-  { id: 'cloud',         label: 'クラウド',       total: 5 },
-  { id: 'algorithm',     label: 'アルゴリズム',   total: 8 },
-  { id: 'security',      label: 'セキュリティ',   total: 8 },
-  { id: 'computer',      label: 'コンピュータ概論', total: 15 },
-  { id: 'management',    label: 'マネジメント',   total: 7 },
+  { id: 'basic-theory',      label: '基礎理論',        total: 11 },
+  { id: 'network',           label: 'ネットワーク',     total: 12 },
+  { id: 'cloud',             label: 'クラウド',         total: 9 },
+  { id: 'algorithm',         label: 'アルゴリズム',     total: 8 },
+  { id: 'security',          label: 'セキュリティ',     total: 23 },
+  { id: 'computer',          label: 'コンピュータ概論', total: 15 },
+  { id: 'management',        label: 'マネジメント',     total: 20 },
+  { id: 'business-strategy', label: 'ストラテジ',       total: 12 },
 ];
 
 function renderProgress() {
